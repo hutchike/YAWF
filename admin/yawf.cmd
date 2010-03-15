@@ -21,7 +21,7 @@ class YAWF_admin
 
     function __construct()
     {
-        $this->root = $_ENV['YAWF_ROOT'];
+        $this->root = $_SERVER['YAWF_ROOT'];
         if (!$this->root) $this->error("Please set the YAWF_ROOT environment variable\nto the folder name where YAWF may be found on\nyour computer, e.g. ~/Sites/YAWF");
 
         global $argv;
