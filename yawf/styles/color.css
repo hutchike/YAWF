@@ -1,0 +1,126 @@
+body {
+    background: url(/yawf/images/back.gif) #d0e0f0 repeat-x left top;
+}
+
+#container {
+    background-color: #fff;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #ddd;
+    border-right: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+}
+
+#header #login a,
+#listings a,
+#aside a,
+#menu li a:hover {
+	color: #93c;
+}
+
+#listings {
+	color: #222;
+}
+
+#menu {
+	border-bottom: 4px solid #93c;
+}
+
+#menu a {
+	color: black;
+}
+
+#menu li.active {
+	/* border-bottom: 2px solid #9933cc; */
+}
+
+#menu li a {
+	background-color: #bdf;
+}
+
+#menu #add-listing a {
+	background-color: #ffffbf;
+}
+
+#menu li.active a {
+	background-color: #93c;
+	color: white;
+}
+
+#widgets {
+	background-color: #eee;
+}
+
+#status {
+	background-color: #ffffbf;
+	border: 1px solid #ffff03;
+}
+
+#body {
+    background-color: #eee;
+}
+
+#article {
+	border-top: 2px solid #ada;
+	border-left: 2px solid #ada;
+	border-bottom: 2px solid #ada;
+    background-color: #fff;
+}
+
+#listings li {
+	border-bottom: 1px dashed #ada;
+}
+
+#listings li.first {
+	color: black;
+}
+
+#listings li:hover {
+	background-color: #ffffbf;
+}
+
+#listings li .summary a {
+    color: #00c;
+}
+
+/* #listings li h3 a, */
+#listings li .details a,
+#listings li a.details {
+	color: black;
+}
+
+#listings li .url a {
+    color: #393;
+}
+
+#aside {
+	background-color: #eee;
+	border-left: 5px solid #ada;
+	border-top: 5px solid #eee;
+	border-bottom: 5px solid #eee;
+}
+
+#aside #search {
+	border-bottom: 1px dashed dimgray;
+}
+
+#aside #account {
+	background-color: #ffffbf;
+	border: 2px solid #fff;
+}
+
+#footer {
+	color: #999;
+    background-color: #eee;
+}
+
+#footer a {
+    color: #66f;
+}
+
+#flash, .validation_message {
+    color: #f00;
+}
+
+.standout {
+    background-color: #f00;
+}

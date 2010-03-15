@@ -1,0 +1,9 @@
+RewriteEngine on
+RewriteCond $1 !^(app/|yawf/|favicon\.ico|index\.php|robots\.txt)
+RewriteRule ^(.*)$ /index.php/$1 [L]
+ErrorDocument 404 /not/found
+
+<FilesMatch "\.(db|sql|yaml)$">
+    order allow,deny
+    deny from all
+</FilesMatch>

@@ -1,0 +1,50 @@
+# Application settings in YAML format (see http://www.yaml.org/ for details)
+
+# For a full list of timezones, see http://www.php.net/manual/en/timezones.php
+
+ini:
+    date.timezone: America/Mexico_City
+    log_errors: true
+    track_errors: true
+    display_errors: true
+
+settings:
+    testing_enabled: true
+    logging_enabled: true
+    benchmarking_on: true
+    exception_redirect: NULL
+    default_log_level: info
+    params_trim_whitespace: true
+    params_format_as_html: true
+    params_strip_slashes: true
+    supported_languages: [en]
+    default_language: en
+    cookie_domain: .yawf.org
+    cache_expiry_secs: 3600
+
+testing:
+    contact_email: kevin.hutchinson@guanoo.com  # PLEASE CHANGE THIS
+    webmaster_email: webmaster@yawf.org         # PLEASE CHANGE THIS
+    app_name: YAWF - Yet Another Web Framework
+    app_test_controller_list: [Admin, Project]
+    app_test_view_path_list: [/, admin/login, admin/signup, project/terms, project/contact]
+
+database:
+    connector: SQLite2                      # SQLite2, SQLite3, MySQL or MySQLi
+    hostname: localhost                     # For MySQL, provide a hostname
+    username: root                          # For MySQL, provide a username
+    password:                               # For MySQL, provide a password
+    database_live: yawf/data/YAWF_live.db   # For MySQL, use a database *name*
+    database_test: yawf/data/YAWF_test.db   # For MySQL, use a database *name*
+
+content:
+    file_url_prefix: /
+    view_url_prefix: /
+    default_content_type: html
+    default_controller: App
+    default_folder: default
+    default_file: index
+    default_extension: .php
+    file_not_found: not_found
+
+# End of app.yaml
