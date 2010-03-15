@@ -14,15 +14,15 @@
 
 class YAWF_admin
 {
-    protected $home;    // home directory from $YAWF_ROOT environment variable
+    protected $root;    // root directory from $YAWF_ROOT environment variable
     protected $prog;    // the name of this program (e.g. "./admin/yawf")
     protected $cmd;     // the command to run (e.g. "app")
     protected $args;    // arguments to the command (e.g. "my_new_app")
 
     function __construct()
     {
-        $this->home = $_ENV['YAWF_ROOT'];
-        if (!$this->home) $this->error("Please set the YAWF_ROOT environment variable\nto the folder name where YAWF may be found on\nyour computer, e.g. ~/Sites/YAWF");
+        $this->root = $_ENV['YAWF_ROOT'];
+        if (!$this->root) $this->error("Please set the YAWF_ROOT environment variable\nto the folder name where YAWF may be found on\nyour computer, e.g. ~/Sites/YAWF");
 
         global $argv;
         $this->prog = array_shift($argv);
@@ -36,11 +36,11 @@ class YAWF_admin
     {
         if ($cmd && $message) die("\nusage: $cmd\n\n$message\n\n");
         $usage = <<<End_of_usage
-usage: yawf CMD [arg1 arg2 ...]
+usage: yawf.cmd ACTION [arg1 arg2 ...]
 
-where CMD is one of:
-* app   : Create a new YAWF application
-* help  : Display this help message
+where ACTION is one of:
+* create : Create a new YAWF application
+* help   : Display this help message
 End_of_usage;
         die("\n$usage\n\n");
     }
@@ -54,11 +54,18 @@ End_of_usage;
 
     // Create a new YAWF app with a name
 
-    function app($name)
+    function create($name)
     {
-        if (!$name) $this->usage('yawf app myapp.com', 'You need to choose a name for your new app, e.g. "myapp.com"');
-        chdir($this->home . '/apps');
-        if (file_exists($name)) $this->error("Sorry but the app \"$name\" already exists in this folder:\n$this->home/apps/$name");
+        if (!$name) $this->usage('yawf.cmd create foo.org', 'You need to choose a name for your new app, e.g. "foo.org"');
+
+        $template = "$this->root/apps/template.app";
+        $new_app = "$this->root/apps/$name";
+        if (file_exists("$new_app")) $this->error("Sorry but the app \"$name\" already exists in this folder:\n$new_app");
+
+        mkdir("$new_app");
+        copy("$template/index.php", "$new_app/index.php");
+        $this->recurse_copy("$template/app", "$new_app/app");
+        symlink("$this->root/yawf", "$new_app/yawf");
     }
 
     // Run the chosen command
@@ -67,14 +74,30 @@ End_of_usage;
     {
         switch (strtolower($this->cmd))
         {
-            case 'app':
-                $this->app($this->args[0]);
+            case 'create':
+                $this->create($this->args[0]);
                 break;
 
             default:
                 $this->usage();
         }
     }
+
+    private function recurse_copy($src, $dst)
+    {
+        $dir = opendir($src);
+        mkdir($dst);
+        while( FALSE !== ($file = readdir($dir)) )
+        {
+            if (($file != '.') && ($file != '..'))
+            {
+                is_dir("$src/$file") ?
+                    $this->recurse_copy("$src/$file", "$dst/$file") :
+                    copy("$src/$file", "$dst/$file");
+            }
+        }
+        closedir($dir);
+    } 
 }
 
 $admin = new YAWF_admin();

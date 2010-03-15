@@ -3,7 +3,7 @@ Welcome to YAWF - Yet Another Web Framework
 
 Here's a quick 1, 2, 3 to get you started:
 1) Set your "YAWF_ROOT" environment variable to this directory
-2) Run "./scripts/yawf app yawf.org" to create a YAWF web site
+2) Run "./admin/yawf.cmd app foo.org" to create a YAWF web site
 3) Restart your Apache(?) web server with a command like this:
    > sudo apachectl restart
    > sudo apache2ctl restart
