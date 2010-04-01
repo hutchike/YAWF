@@ -1,7 +1,7 @@
 <?
 class YawfIssue extends Model
 {
-    public function set_up()
+    public function setup()
     {
         $this->set_timestamp('created_at', 'modified_at');
     }

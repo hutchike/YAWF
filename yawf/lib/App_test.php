@@ -140,7 +140,7 @@ class TestRun
     public function run_tests()
     {
         $methods = get_class_methods($this->controller);
-        if (in_array('set_up', $methods)) $this->controller->set_up();
+        if (in_array('setup', $methods)) $this->controller->setup();
         foreach ($methods as $test_method)
         {
             // Only run controller methods that end with "_test"
@@ -157,7 +157,7 @@ class TestRun
                 $this->add_test_case($should, FALSE, $exception, $test_method);
             }
         }
-        if (in_array('tear_down', $methods)) $this->controller->tear_down();
+        if (in_array('teardown', $methods)) $this->controller->teardown();
     }
 
     public function get_controller_name()

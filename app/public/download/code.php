@@ -13,20 +13,16 @@
 
 // Use the path info to view code
 
-if (isset($_SERVER['PATH_INFO']))
+if (isset($_SERVER['QUERY_STRING']))
 {
-    $file = '.' . $_SERVER['PATH_INFO'];
-    if (file_exists($file))
-    {
-        highlight_file($file);
-    }
-    else // file not found
-    {
-        echo "File <code><b>$file</b></code> not found";
-    }
+    $yawf_file = '../../../yawf/' . $_SERVER['QUERY_STRING'];
+    $app_file = '../../../app/' . $_SERVER['QUERY_STRING'];
+    if (file_exists($yawf_file)) highlight_file($yawf_file);
+    else if (file_exists($app_file)) highlight_file($app_file);
+    else echo "Files <code><b>$yawf_file, $app_file</b></code> not found";
 }
 else // no file provided
 {
-    echo "Usage: <code>/yawf/code.php<b>/lib/App.php</b></code> or other YAWF file";
+    echo "Usage: <code>code.php<b>/lib/App.php</b></code> or other YAWF file";
 }
 ?>

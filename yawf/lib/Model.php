@@ -31,7 +31,7 @@ class Model extends YAWF
     private $limit;
     private $offset;
 
-    public function set_up()
+    public function setup()
     {
         // Subclass in your models like this:
 

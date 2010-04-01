@@ -94,7 +94,7 @@ class App extends YAWF
 
         $class .= '_controller'; // mandatory suffix
         $this->controller = new $class();
-        $this->controller->set_up_for_app($this, $render);
+        $this->controller->setup_for_app($this, $render);
         return $this->controller;
     }
 
@@ -149,7 +149,7 @@ class App extends YAWF
 
         // Setup the render data and the view file path
 
-        $this->controller->set_up_render_data($render);
+        $this->controller->setup_render_data($render);
         $path = $this->get_view_path($view, $options);
         if (is_null($path)) return NULL; // no view?
 

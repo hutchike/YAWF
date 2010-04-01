@@ -21,7 +21,7 @@ class Controller extends YAWF
 
     // Set up this new Controller object (with optional render data)
 
-    public function set_up_for_app($app, &$render = array())
+    public function setup_for_app($app, &$render = array())
     {
         $this->app = $app;
         $this->view = $app->get_file(); // "faq" from "www.yawf.org/project/faq"
@@ -51,7 +51,7 @@ class Controller extends YAWF
 
     // Set up render data defaults (called by $this->app)
 
-    public function set_up_render_data(&$render = array())
+    public function setup_render_data(&$render = array())
     {
         $render['app'] = $this->app;
         $render['view'] = $this->view;

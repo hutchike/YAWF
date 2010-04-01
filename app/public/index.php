@@ -23,7 +23,6 @@ class YAWF // Yet Another Web Framework
 
     public static function run()
     {
-        chdir('../..');
         self::hook('default', 'self::unknown'); // Set the default hook method
         error_reporting(E_ALL | E_STRICT);      // Report all errors (strict)
         ini_set('include_path', 'app:yawf:.');  // Prefer your app then YAWF
@@ -90,6 +89,7 @@ class YAWF // Yet Another Web Framework
 
 // Run YAWF!
 
+chdir('../..');
 YAWF::run();
 
 // Benchmark

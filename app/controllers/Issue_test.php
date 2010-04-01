@@ -15,12 +15,12 @@ load_controller('Issue');
 
 class Issue_test_controller extends Issue_controller
 {
-    public function set_up()
+    public function setup()
     {
         // TODO
     }
 
-    public function tear_down()
+    public function teardown()
     {
         // TODO
     }

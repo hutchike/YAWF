@@ -18,7 +18,7 @@ class App_test_controller extends App_controller
     private $controllers;
     private $view_paths;
 
-    public function set_up()
+    public function setup()
     {
         $this->controllers = split_list(APP_TEST_CONTROLLER_LIST);
         $this->view_paths = split_list(APP_TEST_VIEW_PATH_LIST);

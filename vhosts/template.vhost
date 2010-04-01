@@ -1,13 +1,13 @@
 # [DOMAIN]
 
 <VirtualHost [IP]:[PORT]>
-    DocumentRoot [YAWF_ROOT]/apps/[APP]
+    DocumentRoot [YAWF_ROOT]/apps/[APP]/public
     ServerName [DOMAIN]
     ErrorLog [APACHE_LOGS_DIR]/[DOMAIN]-error_log
     CustomLog [APACHE_LOGS_DIR]/[DOMAIN]-access_log common
 </VirtualHost>
 
-<Directory "[YAWF_ROOT]/apps/[APP]">
+<Directory "[YAWF_ROOT]/apps/[APP]/public">
     Options All
     AllowOverride All
 </Directory>

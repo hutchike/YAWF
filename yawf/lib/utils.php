@@ -129,7 +129,7 @@ function load_models() // list of models
     foreach ($models as $model)
     {
         $object = new $model();
-        $object->set_up();
+        $object->setup();
     }
 }
 

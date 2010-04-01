@@ -15,12 +15,12 @@ load_controller('Admin');
 
 class Admin_test_controller extends Admin_controller
 {
-    public function set_up()
+    public function setup()
     {
         $this->database_filename = Model::get_database();
     }
 
-    public function tear_down()
+    public function teardown()
     {
         if (file_exists($this->database_filename))
         {
