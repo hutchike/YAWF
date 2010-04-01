@@ -13,7 +13,7 @@
 ?>
 <html>
 <head>
-  <link rel="stylesheet" href="/yawf/styles/test/browser.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/test/browser.css" type="text/css" />
   <script type="text/javascript">
     function setup() {
       top.YAWF.browser = document.forms.browser;

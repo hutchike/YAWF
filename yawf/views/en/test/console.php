@@ -13,8 +13,8 @@
 ?>
 <html>
 <head>
-  <link rel="stylesheet" href="/yawf/styles/test/console.css" type="text/css" />
-  <link rel="stylesheet" href="/yawf/styles/test/runner.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/test/console.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/test/runner.css" type="text/css" />
 </head>
 <body onload="top.YAWF.console = document.getElementById('console')">
   <p><?= HTML::link('test/console.part', 'Clear') ?></p>
