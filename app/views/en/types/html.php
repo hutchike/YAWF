@@ -6,9 +6,9 @@
     <meta name="description" content="YAWF - Yet Another Web Framework" />
     <meta name="keywords" content="YAWF, PHP, MySQL, MVC, Web, Framework" />
     <meta name="robots" content="index, follow" />
-    <?= HTML::link_tag('yawf/images/y.jpg', array('rel' => 'shortcut icon', 'type' => 'image/jpg')) ?>
-    <?= HTML::link_tag('yawf/styles/base.css' ) ?>
-    <script type="text/javascript" src="/yawf/scripts/ext-core.js"></script>
+    <?= HTML::link_tag('images/y.jpg', array('rel' => 'shortcut icon', 'type' => 'image/jpg')) ?>
+    <?= HTML::link_tag('styles/base.css' ) ?>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
 </head>
 <body>
 <?= $content ?>

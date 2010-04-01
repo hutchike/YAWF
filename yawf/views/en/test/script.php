@@ -15,7 +15,7 @@
 
 $contents = highlight_string('<?' . file_get_contents($file_path), TRUE);
 $php_errormsg = NULL; // to remove a strange error saying it found \'\\\'
-$contents = str_replace('<span style="color: #0000BB">&lt;?</span>', '', $contents);
+$contents = preg_replace('/&lt;\?/', '', $contents, 1);
 ?>
 <html>
     <body>

@@ -1,6 +1,6 @@
 <div id="container">
     <div id="header">
-        <?= HTML::img('yawf/images/yawf-240x50.png', array('width' => 240, 'height' => 50)) ?>
+        <?= HTML::img('images/yawf-240x50.png', array('width' => 240, 'height' => 50)) ?>
 
         <div id="login">
             <p><strong><?= $greeting ?></strong> <?= HTML::link('admin/log_in', 'Log in') ?> or <?= HTML::link('admin/sign_up', 'sign up') ?> to get involved.</p>
