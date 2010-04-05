@@ -17,7 +17,7 @@ class App extends YAWF
     protected $controller;  // a controller to render the view
     protected $folder;      // views folder name e.g. "default"
     protected $file;        // the view file name e.g. "index"
-    protected $silent;      // "TRUE" after we've redirected
+    protected $is_silent;   // "TRUE" after we've redirected
     protected $is_testing;
     protected $error_messages;
 
@@ -145,7 +145,7 @@ class App extends YAWF
 
     public function render_view($view, $render = array(), $options = array())
     {
-        if ($this->silent) return ''; // after redirect
+        if ($this->is_silent) return ''; // if redirect
 
         // Setup the render data and the view file path
 
@@ -188,7 +188,7 @@ class App extends YAWF
     {
         if ($this->content_type !== DEFAULT_CONTENT_TYPE) $url .= '.' . $this->content_type;
         header('Location: ' . AppView::url($url));
-        $this->silent = TRUE;
+        $this->is_silent = TRUE;
         if ($exit) exit; // it stops our logging!
     }
 
