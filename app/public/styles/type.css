@@ -70,6 +70,10 @@ p.justified {
     text-align: justify;
 }
 
+img {
+    border: 0;
+}
+
 div.label, div.button {
     padding-top: 5px;
 }
