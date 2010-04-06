@@ -7,8 +7,8 @@
     <meta name="keywords" content="YAWF, PHP, SQLite, MySQL, MVC, Web, Framework" />
     <meta name="robots" content="index, follow" />
     <?= HTML::link_tag('images/y.jpg', array('rel' => 'shortcut icon', 'type' => 'image/jpg')) ?>
-    <?= HTML::link_tag('styles/base.css' ) ?>
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <?= HTML::link_tag('styles/base.css') ?>
+    <?= HTML::script('scripts/jquery.js') ?>
 </head>
 <body>
 <?= $content ?>
