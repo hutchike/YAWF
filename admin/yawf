@@ -19,7 +19,7 @@ class YAWF_admin
     protected $cmd;     // the command to run (e.g. "app")
     protected $args;    // arguments to the command (e.g. "my_new_app")
 
-    function __construct()
+    public function __construct()
     {
         $this->root = $_SERVER['YAWF_ROOT'];
         if (!$this->root) $this->error("Please set the YAWF_ROOT environment variable\nto the folder name where YAWF may be found on\nyour computer, e.g. ~/Sites/YAWF");
@@ -30,9 +30,24 @@ class YAWF_admin
         $this->args = $argv;
     }
 
+    // Run the chosen command
+
+    public function run()
+    {
+        switch (strtolower($this->cmd))
+        {
+            case 'create':
+                $this->create($this->args[0]);
+                break;
+
+            default:
+                $this->usage();
+        }
+    }
+
     // Display a usage message, defaulting to the standard help message
 
-    function usage($cmd = '', $message = '')
+    private function usage($cmd = '', $message = '')
     {
         if ($cmd && $message) die("\nusage: $cmd\n\n$message\n\n");
         $usage = <<<End_of_usage
@@ -45,16 +60,9 @@ End_of_usage;
         die("\n$usage\n\n");
     }
 
-    // Display an error message
-
-    function error($message)
-    {
-        die("\n$message\n\n");
-    }
-
     // Create a new YAWF app with a name
 
-    function create($name)
+    private function create($name)
     {
         if (!$name) $this->usage('yawf.cmd create foo.org', 'You need to choose a name for your new app, e.g. "foo.org"');
 
@@ -66,21 +74,6 @@ End_of_usage;
         copy("$template/index.php", "$new_app/index.php");
         $this->recurse_copy("$template/app", "$new_app/app");
         symlink("$this->root/yawf", "$new_app/yawf");
-    }
-
-    // Run the chosen command
-
-    function run()
-    {
-        switch (strtolower($this->cmd))
-        {
-            case 'create':
-                $this->create($this->args[0]);
-                break;
-
-            default:
-                $this->usage();
-        }
     }
 
     private function recurse_copy($src, $dst)
@@ -98,9 +91,16 @@ End_of_usage;
         }
         closedir($dir);
     } 
+
+    // Display an error message
+
+    private function error($message)
+    {
+        die("\n$message\n\n");
+    }
 }
 
 $admin = new YAWF_admin();
 $admin->run();
 
-// End of "bin/yawf"
+// End of "admin/yawf"
