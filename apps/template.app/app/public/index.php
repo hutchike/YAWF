@@ -89,6 +89,7 @@ class YAWF // Yet Another Web Framework
 
 // Run YAWF!
 
+chdir('../..');
 YAWF::run();
 
 // Benchmark
