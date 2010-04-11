@@ -14,7 +14,7 @@
 class Test_controller extends App_controller
 {
     const SCRIPT_RUNNER = 'runner.js';
-    const SCRIPT_PATH = 'app/scripts/test';
+    const SCRIPT_DIR = 'app/public/scripts/test';
     protected $url;
     protected $script;
 
@@ -54,7 +54,7 @@ class Test_controller extends App_controller
     public function browser()
     {
         $scripts = array();
-        $dir = opendir(self::SCRIPT_PATH);
+        $dir = opendir(self::SCRIPT_DIR);
         while ($script = readdir($dir))
         {
             if (preg_match('/\.js$/', $script)) $scripts[] = $script;
@@ -62,12 +62,12 @@ class Test_controller extends App_controller
         closedir($dir);
         $this->render['scripts'] = $scripts;
 
-        $file_path = self::SCRIPT_PATH . '/' . $this->script;
+        $file_path = self::SCRIPT_DIR . '/' . $this->script;
         if (!file_exists($file_path))
             $this->render['flash'] = 'Test script "' . $file_path . '" does not exist?';
 
         if (!count($scripts))
-            $this->render['flash'] = 'Folder "' . self::SCRIPT_PATH . '" is empty?';
+            $this->render['flash'] = 'Folder "' . self::SCRIPT_DIR . '" is empty?';
     }
 
     public function console()
@@ -77,7 +77,7 @@ class Test_controller extends App_controller
 
     public function script()
     {
-        $this->render['file_path'] = self::SCRIPT_PATH . '/' . $this->script;
+        $this->render['file_path'] = self::SCRIPT_DIR . '/' . $this->script;
     }
 }
 

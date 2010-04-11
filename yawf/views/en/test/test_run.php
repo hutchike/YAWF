@@ -20,7 +20,7 @@
 if (!method_exists($app, 'run_tests')) $app->redirect('', TRUE);
 ?>
 <tests controller="<?= $controller_name ?>">
-  <link rel="stylesheet" href="/yawf/styles/test/runner.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/test/runner.css" type="text/css" />
   <div class="test_controller">
     <div class="test_controller_header">Testing <?= $controller_name ?></div>
 

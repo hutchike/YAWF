@@ -140,15 +140,15 @@ class Lib_test_controller extends Controller
 
     public function set_params_test()
     {
-        $this->set_params(array(
-                        'test' => '   "nice"', // should be trimmed
-                        ), FALSE); // don't format as HTML
+        $this->set_params(array('test' => '   "nice"'), // to be trimmed
+                          array('trim_whitespace' => TRUE,
+                                'format_as_html' => FALSE));
         $this->should('auto-trim the params',
                       $this->params->test === '"nice"', $this->params);
 
-        $this->set_params(array(
-                        'test' => '"nice"', // should be HTML-formatted
-                        ), TRUE); // do format as HTML
+        $this->set_params(array('test' => '"nice"'), // to be HTML-formatted
+                          array('trim_whitespace' => FALSE,
+                                'format_as_html' => TRUE));
         $this->should('HTML-format the params',
                       $this->params->test === '&quot;nice&quot;', $this->params);
     }
