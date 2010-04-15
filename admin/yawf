@@ -71,7 +71,6 @@ End_of_usage;
         if (file_exists("$new_app")) $this->error("Sorry but the app \"$name\" already exists in this folder:\n$new_app");
 
         mkdir("$new_app");
-        copy("$template/index.php", "$new_app/index.php");
         $this->recurse_copy("$template/app", "$new_app/app");
         symlink("$this->root/yawf", "$new_app/yawf");
     }
