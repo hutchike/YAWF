@@ -30,7 +30,7 @@ class YAWF_admin
     public function __construct()
     {
         $this->root = $_SERVER['YAWF_ROOT'];
-        if (!$this->root) $this->error("Please set the YAWF_ROOT environment variable\nto the folder name where YAWF may be found on\nyour computer, e.g. ~/Sites/YAWF");
+        if (!$this->root) $this->quit("Please set the YAWF_ROOT environment variable\nto the folder name where YAWF may be found on\nyour computer, e.g. ~/Sites/YAWF");
 
         global $argv;
         $this->prog = array_shift($argv);
@@ -81,7 +81,7 @@ End_of_usage;
 
         $template = "$this->root/apps/template.app";
         $new_app = "$this->root/apps/$name";
-        if (file_exists("$new_app")) $this->error("Sorry but the app \"$name\" already exists in this folder:\n$new_app");
+        if (file_exists("$new_app")) $this->quit("Sorry but the app \"$name\" already exists in this folder:\n$new_app");
 
         mkdir("$new_app");
         copy("$template/index.php", "$new_app/index.php");
@@ -107,7 +107,9 @@ End_of_usage;
         $patterns = array('/{ADDRESS1}/', '/{ADDRESS2}/', '/{APACHE_LOGS_DIR}/', '/{APP}/', '/{DOMAIN}/', '/{YAWF_ROOT}/', '/{#}/');
         $replacements = array($address1, $address2, "$this->root/logs", $app_name, $domain_name, $this->root, $comment);
         $config = preg_replace($patterns, $replacements, $template);
-print $config;
+        $vhost_file = "$this->root/vhosts/$domain_name";
+        file_put_contents($vhost_file, $config);
+        $this->quit("A new vhost file has been created here:\n$vhost_file");
     }
 
     private function recurse_copy($src, $dst)
@@ -126,9 +128,9 @@ print $config;
         closedir($dir);
     } 
 
-    // Display an error message
+    // Display a message and quit
 
-    private function error($message)
+    private function quit($message)
     {
         die("\n$message\n\n");
     }

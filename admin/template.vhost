@@ -1,0 +1,24 @@
+# {DOMAIN}
+
+<VirtualHost {ADDRESS1}>
+    ServerAdmin webmaster@{DOMAIN}
+    DocumentRoot {YAWF_ROOT}/apps/{APP}/app/public
+    ServerName {DOMAIN}
+    ServerAlias *.{DOMAIN}
+    ErrorLog {APACHE_LOGS_DIR}/{DOMAIN}-error_log
+    CustomLog {APACHE_LOGS_DIR}/{DOMAIN}-access_log common
+</VirtualHost>
+
+{#}<VirtualHost {ADDRESS2}>
+{#}    ServerAdmin webmaster@{DOMAIN}
+{#}    DocumentRoot {YAWF_ROOT}/apps/{APP}/app/public
+{#}    ServerName {DOMAIN}
+{#}    ServerAlias *.{DOMAIN}
+{#}    ErrorLog {APACHE_LOGS_DIR}/{DOMAIN}-error_log
+{#}    CustomLog {APACHE_LOGS_DIR}/{DOMAIN}-access_log common
+{#}</VirtualHost>
+
+<Directory "{YAWF_ROOT}/apps/{APP}/app/public">
+    Options All
+    AllowOverride All
+</Directory>
