@@ -14,10 +14,18 @@
 
 class YAWF_admin
 {
+    # Constants
+
+    const DEFAULT_ADDRESS = '127.0.0.1:80';
+
+    # Properties
+
     protected $root;    // root directory from $YAWF_ROOT environment variable
     protected $prog;    // the name of this program (e.g. "./admin/yawf")
     protected $cmd;     // the command to run (e.g. "app")
     protected $args;    // arguments to the command (e.g. "my_new_app")
+
+    # Methods
 
     public function __construct()
     {
@@ -36,8 +44,12 @@ class YAWF_admin
     {
         switch (strtolower($this->cmd))
         {
-            case 'create':
-                $this->create($this->args[0]);
+            case 'app':
+                $this->create_app($this->args[0]);
+                break;
+
+            case 'vhost':
+                $this->create_vhost_file($this->args);
                 break;
 
             default:
@@ -51,10 +63,11 @@ class YAWF_admin
     {
         if ($cmd && $message) die("\nusage: $cmd\n\n$message\n\n");
         $usage = <<<End_of_usage
-usage: yawf.cmd ACTION [arg1 arg2 ...]
+usage: yawf ACTION [arg1 arg2 ...]
 
 where ACTION is one of:
-* create : Create a new YAWF application
+* app    : Create a new YAWF application
+* vhost  : Create a virtual host file
 * help   : Display this help message
 End_of_usage;
         die("\n$usage\n\n");
@@ -62,9 +75,9 @@ End_of_usage;
 
     // Create a new YAWF app with a name
 
-    private function create($name)
+    private function create_app($name)
     {
-        if (!$name) $this->usage('yawf.cmd create foo.org', 'You need to choose a name for your new app, e.g. "foo.org"');
+        if (!$name) $this->usage('yawf app myapp.org', 'You need to choose a name for your new app, e.g. "myapp.org"');
 
         $template = "$this->root/apps/template.app";
         $new_app = "$this->root/apps/$name";
@@ -74,6 +87,27 @@ End_of_usage;
         copy("$template/index.php", "$new_app/index.php");
         $this->recurse_copy("$template/app", "$new_app/app");
         symlink("$this->root/yawf", "$new_app/yawf");
+    }
+
+    // Create a new YAWF virtual host file
+
+    private function create_vhost_file($args)
+    {
+        list ($domain_name, $app_name, $address1, $address2) = $args;
+        if (!$app_name) $app_name = $domain_name;
+        if (!file_exists("$this->root/apps/$app_name")) $this->usage('yawf vhost myapp.org myapp', "App \"$app_name\" does not exist in the apps directory here:\n$this->root/apps");
+        if (!$address1) $address1 = self::DEFAULT_ADDRESS;
+        if (!$address2) $address2 = $address1;
+        $comment = ($address1 == $address2 ? '# ' : '');
+
+        if (!$domain_name) $this->usage('yawf vhost myapp.org', 'You need to choose a domain name for your new vhost file, e.g. "myapp.org"');
+
+        $template_file = "$this->root/admin/template.vhost";
+        $template = file_get_contents($template_file);
+        $patterns = array('/{ADDRESS1}/', '/{ADDRESS2}/', '/{APACHE_LOGS_DIR}/', '/{APP}/', '/{DOMAIN}/', '/{YAWF_ROOT}/', '/{#}/');
+        $replacements = array($address1, $address2, "$this->root/logs", $app_name, $domain_name, $this->root, $comment);
+        $config = preg_replace($patterns, $replacements, $template);
+print $config;
     }
 
     private function recurse_copy($src, $dst)
