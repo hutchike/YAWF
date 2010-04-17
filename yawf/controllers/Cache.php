@@ -79,7 +79,7 @@ class Cache_controller extends App_controller
         if (!$uri) $uri = $_SERVER['REQUEST_URI'];
         if (array_key($options, 'no_query')) $uri = preg_replace('/\?.*$/', '', $uri);
         if (array_key($options, 'no_anchor')) $uri = preg_replace('/#.*$/', '', $uri);
-        $path = file_exists('app/cache') ? 'app/cache' : 'yawf/cache';
+        $path = file_exists('app/tmp/cache') ? 'app/tmp/cache' : 'yawf/tmp/cache';
         $this->cache_path = $path . '/' . md5($uri);
         return $this->cache_path; // for testing
     }
