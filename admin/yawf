@@ -83,10 +83,16 @@ End_of_usage;
         $new_app = "$this->root/apps/$name";
         if (file_exists("$new_app")) $this->quit("Sorry but the app \"$name\" already exists in this folder:\n$new_app");
 
+        # Prepare the application directory tree
+
         mkdir("$new_app");
-        copy("$template/index.php", "$new_app/index.php");
         $this->recurse_copy("$template/app", "$new_app/app");
         symlink("$this->root/yawf", "$new_app/yawf");
+
+        # Make some directories writable
+
+        $writable_dirs = array('logs', 'tmp/cache', 'tmp/queue', 'tmp/sessions', 'tmp/uploads');
+        foreach ($writable_dirs as $dir) chmod("$new_app/app/$dir", 0777);
     }
 
     // Create a new YAWF virtual host file
