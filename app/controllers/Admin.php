@@ -47,7 +47,7 @@ class Admin_controller extends App_controller
         // TODO
     }
 
-    public function log_in()
+    public function login()
     {
         // TODO
     }

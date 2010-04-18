@@ -18,6 +18,7 @@ class YAWF_edit_daemon extends Daemon
 {
     function run()
     {
+        // TODO
     }
 }
 
