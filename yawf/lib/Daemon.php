@@ -13,7 +13,17 @@
 
 class Daemon
 {
-    // TODO
+    public function setup($path)
+    {
+        chdir(dirname($path) . '/..');
+        print getcwd() . "\n";
+    }
+
+    protected function quit($message)
+    {
+        print "\n$message\n\n";
+        exit;
+    }
 }
 
 // End of Daemon.php
