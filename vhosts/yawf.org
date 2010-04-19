@@ -1,0 +1,19 @@
+# yawf.org
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@yawf.org
+    DocumentRoot /home/hutchike/cloud/projects/YAWF/app/public
+    ServerName yawf.org
+    ServerAlias *.yawf.org
+    ErrorLog /home/hutchike/cloud/projects/YAWF/logs/yawf.org-error_log
+    CustomLog /home/hutchike/cloud/projects/YAWF/logs/yawf.org-access_log common
+</VirtualHost>
+
+<VirtualHost *:8080>
+    ServerAdmin webmaster@yawf.org
+    DocumentRoot /home/hutchike/cloud/projects/YAWF/app/public
+    ServerName yawf.org
+    ServerAlias *.yawf.org
+    ErrorLog /home/hutchike/cloud/projects/YAWF/logs/yawf.org-error_log
+    CustomLog /home/hutchike/cloud/projects/YAWF/logs/yawf.org-access_log common
+</VirtualHost>
