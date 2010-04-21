@@ -94,6 +94,21 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return $html . '</select>';
     }
 
+    public static function textarea($name, $attrs = array())
+    {
+        $object_name = null;
+        if (strstr($name, '->')) // special case for "object->field"
+        {
+            list($object_name, $field) = preg_split('/\->/', $name);
+            $object = AppView::get($object_name);
+            $text = $object->$field;
+            $attrs['id'] = $object_name . '_' . $field;
+        }
+        $attrs['id'] = str_replace('->', '_', $name);
+        $attrs['name'] = h($name);
+        return '<textarea ' . self::attrs($attrs) . ">$text</textarea>\n";
+    }
+
     public static function translate($message)
     {
         return Translate::into(AppView::get('lang'), $message);
