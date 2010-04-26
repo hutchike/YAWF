@@ -37,11 +37,11 @@ class Sure
         return $this;
     }
 
-    public function match()
+    public function match($memory = NULL)
     {
         // Remember facts into memory
 
-        $memory = new Object();
+        if (!$memory) $memory = new Object();
         foreach ($this->parsed_facts as $fact)
         {
             $fact->remember($memory);
@@ -53,6 +53,8 @@ class Sure
         {
             if ($rule->match($memory)) $rule->fire($memory);
         }
+
+        // Don't lose our memory
 
         $this->memory = $memory;
         return $this;
