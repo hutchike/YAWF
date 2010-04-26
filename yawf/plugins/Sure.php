@@ -136,8 +136,8 @@ class SureParser
     private function trim($line)
     {
         $line = trim($line);
-        $line = preg_replace('/#.*$/', '', $line);
-        $line = preg_replace('/\/\/.*$/', '', $line);
+        $regexp_comments = '/(#|\/\/).*$/';
+        $line = preg_replace($regexp_comments, '', $line);
         return $line;
     }
 }
