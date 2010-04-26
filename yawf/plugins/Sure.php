@@ -10,12 +10,14 @@
    */
 class Sure
 {
+    private $memory;
     private $parser;
     private $parsed_rules;
     private $parsed_facts;
 
     public function __construct()
     {
+        $this->memory = NULL;
         $this->parser = new SureParser();
         $this->parsed_rules = array();
         $this->parsed_facts = array();
@@ -51,6 +53,14 @@ class Sure
         {
             if ($rule->match($memory)) $rule->fire($memory);
         }
+
+        $this->memory = $memory;
+        return $this;
+    }
+
+    public function memory()
+    {
+        return $this->memory;
     }
 
     // Private functions
