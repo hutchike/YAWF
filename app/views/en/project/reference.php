@@ -1,4 +1,4 @@
-<?= $parent ? HTML::link("project/reference?folder=$parent", "&lt;&lt; Back to <b>$parent</b> folder") : '' ?>
+<?= $parent ? HTML::link("$path?folder=$parent", "&lt;&lt; Back to <b>$parent</b> folder") : '' ?>
 
 <p>YAWF framework code in <b><?= $folder ?></b> folder:</p>
 
@@ -12,7 +12,7 @@ foreach ($files as $file)
     }
     elseif (preg_match('/^\w/', $file))
     {
-        $items .= HTML::list_item(HTML::link("project/reference?folder=$file", $file));
+        $items .= HTML::list_item(HTML::link("$path?folder=$file", $file));
     }
 }
 print HTML::bullet_list($items);

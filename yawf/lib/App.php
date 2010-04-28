@@ -226,12 +226,12 @@ class AppView extends YAWF
 
     // Render the view path by extracting the render array
 
-    public static function render($path, &$render = array())
+    public static function render($__path, &$render = array())
     {
         self::$render = $render;
         ob_start();
         extract($render); // got to love PHP
-        include $path;  // how cool is that?
+        include $__path;  // how cool is that?
         if (isset($php_errormsg) && isset($app) && $app instanceof App)
             $app->add_error_message($php_errormsg);
         return ob_get_clean();

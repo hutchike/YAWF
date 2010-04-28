@@ -55,6 +55,7 @@ class Controller extends YAWF
     {
         $render['app'] = $this->app;
         $render['view'] = $this->view;
+        $render['path'] = $this->path;
         $render['lang'] = $this->lang;
         $render['params'] = $this->params;
     }

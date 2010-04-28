@@ -68,7 +68,7 @@ class Project_controller extends App_controller
         $this->render['folder'] = $folder;
         $this->render['parent'] = ($folder != 'yawf' ? dirname($folder) : '');
         $this->render['files'] = $files;
-        return array($folder, $parent, $files);
+        return $this->render;
     }
 
     public function terms()
