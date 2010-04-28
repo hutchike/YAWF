@@ -15,11 +15,14 @@
 
 if (isset($_SERVER['QUERY_STRING']))
 {
-    $yawf_file = '../../../yawf/' . $_SERVER['QUERY_STRING'];
-    $app_file = '../../../app/' . $_SERVER['QUERY_STRING'];
-    if (file_exists($yawf_file)) highlight_file($yawf_file);
-    else if (file_exists($app_file)) highlight_file($app_file);
-    else echo "Files <code><b>$yawf_file, $app_file</b></code> not found";
+    $query = $_SERVER['QUERY_STRING'];
+    $absolute_file = "../../../$query";
+    $yawf_file = "../../../yawf/$query";
+    $app_file = "../../../app/$query";
+    if (file_exists($absolute_file)) highlight_file($absolute_file);
+    elseif (file_exists($yawf_file)) highlight_file($yawf_file);
+    elseif (file_exists($app_file)) highlight_file($app_file);
+    else echo "Filess <code><b>$absolute_file, $yawf_file, $app_file</b></code> not found";
 }
 else // no file provided
 {

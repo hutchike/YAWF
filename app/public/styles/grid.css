@@ -145,3 +145,10 @@ body {
     padding: 10px;
     padding-bottom: 25px;
 }
+
+#code_frame {
+    width: 720px;
+    height: 500px;
+    border: 1px solid #999;
+    margin-bottom: 20px;
+}

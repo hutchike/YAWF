@@ -74,6 +74,21 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return '<link ' . self::attrs($attrs) . ' />' . "\n";
     }
 
+    public static function bullet_list($items)
+    {
+        return "<ul>\n$items\n</ul>\n";
+    }
+
+    public static function number_list($items)
+    {
+        return "<ol>\n$items\n</ol>\n";
+    }
+
+    public static function list_item($text)
+    {
+        return "\t<li>$text</li>\n";
+    }
+
     public static function script($url, $attrs = array())
     {
         $attrs['src'] = AppView::url($url, array_key($attrs, 'prefix', FILE_URL_PREFIX));

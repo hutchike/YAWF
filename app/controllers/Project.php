@@ -51,7 +51,24 @@ class Project_controller extends App_controller
 
     public function reference()
     {
-        // Nothing to do
+        // Get a list of files in the folder
+
+        $folder = $this->params->folder;
+        if (!$folder) $folder = 'yawf';
+        $dir = opendir($folder);
+        $files = array();
+        while ($file = readdir($dir))
+        {
+            if (preg_match('/^\./', $file)) continue;
+            if ($folder) $file = "$folder/$file";
+            $files[] = $file;
+        }
+        closedir($dir);
+
+        $this->render['folder'] = $folder;
+        $this->render['parent'] = ($folder != 'yawf' ? dirname($folder) : '');
+        $this->render['files'] = $files;
+        return array($folder, $parent, $files);
     }
 
     public function terms()
