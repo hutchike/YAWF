@@ -1,7 +1,7 @@
 <?php
 /**
    * Sure -- Simple User-defined Rule Engine (SURE)
-   * @version 0.1
+   * @version 0.2
    * @author Kevin Hutchinson <kevin@guanoo.org>
    * @link http://github.com/hutchike/YAWF
    * @copyright Copyright 2010 Kevin Hutchinson
@@ -10,6 +10,8 @@
    */
 class Sure
 {
+    const MAX_INFERENCE_LOOPS = 100;
+
     private $memory;
     private $parser;
     private $parsed_rules;
@@ -37,27 +39,42 @@ class Sure
         return $this;
     }
 
-    public function match($memory = NULL)
+    public function infer($data = NULL, $repeat = self::MAX_INFERENCE_LOOPS)
     {
         // Remember facts into memory
 
-        if (!$memory) $memory = new Object();
+        $memory = new SureMemory($data);
         foreach ($this->parsed_facts as $fact)
         {
             $fact->remember($memory);
         }
 
-        // Fire all rules that match
+        // Infer while memory changes
 
-        foreach ($this->parsed_rules as $rule)
+        $change = FALSE;
+        do
         {
-            if ($rule->match($memory)) $rule->fire($memory);
+            // Fire all rules that match, and look for any changes
+
+            $before = var_export($memory, TRUE);
+            foreach ($this->parsed_rules as $rule)
+            {
+                if ($rule->match($memory)) $rule->fire($memory);
+            }
+            $after = var_export($memory, TRUE);
+            $change = ($before != $after);
         }
+        while ($change && $repeat-- && !$memory->finish);
 
         // Don't lose our memory
 
         $this->memory = $memory;
         return $this;
+    }
+
+    public function match($data = NULL)
+    {
+        return $self->infer($data, 1);
     }
 
     public function memory()
@@ -92,24 +109,24 @@ class SureParser
         foreach ($lines as $line)
         {
             $line = $this->trim($line);
-            if (!$line) continue;
-
-            if (preg_match('/^rule:/i', $line))
+            if (preg_match('/^rule:\s*(.*)/i', $line, $matches))
             {
                 if ($rule) array_push($rules, $rule);
-                $rule = new SureRule();
-                continue;
+                $name = $matches[1];
+                $rule = new SureRule($name);
+                $line = '';
             }
-            elseif (preg_match('/^(if|when):/i', $line))
+            elseif (preg_match('/^(if|when):\s*(.*)/i', $line, $matches))
             {
                 $parsing = self::CONDITIONS;
-                continue;
+                $line = $matches[2];
             }
-            elseif (preg_match('/^then:/i', $line))
+            elseif (preg_match('/^then:\s*(.*)/i', $line, $matches))
             {
                 $parsing = self::ACTIONS;
-                continue;
+                $line = $matches[1];
             }
+            if (!$line) continue;
 
             switch ($parsing)
             {
@@ -156,13 +173,20 @@ class SureParser
 
 class SureRule
 {
+    private $name;
     private $conditions;
     private $actions;
 
-    public function __construct()
+    public function __construct($name)
     {
+        $this->name = $name;
         $this->conditions = array();
         $this->actions = array();
+    }
+
+    public function name()
+    {
+        return $this->name;
     }
 
     public function condition($condition)
@@ -217,7 +241,7 @@ class SureRule
     {
         if (FALSE === strpos($cond, '(')) // don't over-ride user brackets
         {
-            $cond = preg_replace('/(.*)([<>])(.*)/', '($1)$2($3)', $cond);
+            $cond = preg_replace('/(.*\s)([<>])(\s.*)/', '($1)$2($3)', $cond);
         }
 
         $cond = preg_replace('/\$(\w+)/', '$memory->$1', $cond);
@@ -239,6 +263,24 @@ class SureFact
     {
         $fact = preg_replace('/\$(\w+)/', '$memory->$1', $this->fact);
         eval("$fact;");
+    }
+}
+
+class SureMemory
+{
+    function __construct($data = NULL)
+    {
+        if (!$data) $data = array();
+        foreach ($data as $field => $value)
+        {
+            $this->$field = $value;
+        }
+    }
+
+    function __get($var)
+    {
+        if ($this->$var === NULL) $this->$var = new SureMemory();
+        return $this->$var;
     }
 }
 
