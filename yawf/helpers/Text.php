@@ -33,7 +33,7 @@ class Text extends YAWF
 
         // Intelligently(?) add "mailto:" or "http://"
 
-        if (!strpos($link, '/') && strpos($link, '@'))
+        if (FALSE === strpos($link, '/') && strpos($link, '@') > 0)
             $link = 'mailto:' . $link;
         elseif (!preg_match('/^http/', $link))
             $link = 'http://' . $link;

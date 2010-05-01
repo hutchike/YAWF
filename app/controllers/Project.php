@@ -49,7 +49,7 @@ class Project_controller extends App_controller
         // Nothing to do
     }
 
-    public function reference()
+    public function code()
     {
         // Get a list of files in the folder
 
@@ -68,7 +68,7 @@ class Project_controller extends App_controller
         $this->render->folder = $folder;
         $this->render->parent = ($folder != 'yawf' ? dirname($folder) : '');
         $this->render->files = $files;
-        return $this->render->to_array();
+        return (array)$this->render;
     }
 
     public function terms()

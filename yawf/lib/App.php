@@ -85,7 +85,7 @@ class App extends YAWF
         // Require the controller's subclass
 
         if (!$class) $class = ucfirst($this->folder);
-        if ($this->is_testing && !strpos($class, '_test')) $class .= '_test';
+        if ($this->is_testing && FALSE === strpos($class, '_test')) $class .= '_test';
         $path = 'controllers/' . $class . '.php';
         if (!file_found($path))
         {

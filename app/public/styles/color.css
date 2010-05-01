@@ -11,14 +11,9 @@ body {
 }
 
 #header #login a,
-#listings a,
-#aside a,
+#side_col a,
 #menu li a:hover {
 	color: #93c;
-}
-
-#listings {
-	color: #222;
 }
 
 #menu {
@@ -35,10 +30,6 @@ body {
 
 #menu li a {
 	background-color: #bdf;
-}
-
-#menu #add-listing a {
-	background-color: #ffffbf;
 }
 
 #menu li.active a {
@@ -59,51 +50,25 @@ body {
     background-color: #eee;
 }
 
-#article {
+#main_col {
 	border-top: 2px solid #ada;
 	border-left: 2px solid #ada;
 	border-bottom: 2px solid #ada;
     background-color: #fff;
 }
 
-#listings li {
-	border-bottom: 1px dashed #ada;
-}
-
-#listings li.first {
-	color: black;
-}
-
-#listings li:hover {
-	background-color: #ffffbf;
-}
-
-#listings li .summary a {
-    color: #00c;
-}
-
-/* #listings li h3 a, */
-#listings li .details a,
-#listings li a.details {
-	color: black;
-}
-
-#listings li .url a {
-    color: #393;
-}
-
-#aside {
+#side_col {
 	background-color: #eee;
 	border-left: 5px solid #ada;
 	border-top: 5px solid #eee;
 	border-bottom: 5px solid #eee;
 }
 
-#aside #search {
+#side_col #search {
 	border-bottom: 1px dashed dimgray;
 }
 
-#aside #account {
+#side_col #account {
 	background-color: #ffffbf;
 	border: 2px solid #fff;
 }

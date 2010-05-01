@@ -22,23 +22,6 @@ h1, h2, h3 {
 }
 */
 
- * #listings li.format_P a.details {
-    font-weight: bold; 
-}
-
-#listings li .summary a {
-    font-size: 16px;
-}
-
-#listings li .details a,
-#listings li a.details, .url a {
-    text-decoration: none;
-}
-
-#listings .meta, #listings .meta * {
-    font-size: 10px;
-}
-
 #menu a {
     font-family: Lucida Sans Unicode, Lucida Grande, Arial, Helvetica;
     font-weight: bold;
@@ -46,7 +29,7 @@ h1, h2, h3 {
     text-decoration: none;
 }
 
-#aside h2 {
+#side_col h2 {
     line-height: 22px;
 }
 
