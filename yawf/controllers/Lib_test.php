@@ -65,7 +65,7 @@ class Lib_test_controller extends Controller
     public function setup_render_data_test()
     {
         $render = new Object();
-        $this->setup_render_data(&$render);
+        $this->setup_render_data($render);
 
         $this->should('have an "App_test" object called $render->app',
                       $render->app instanceof App_test, $render->app);
