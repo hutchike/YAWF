@@ -100,7 +100,7 @@ class Lib_test_controller extends Controller
 
     protected function get_state() // for before_test() and after_test() above
     {
-        return serialize($this) . ' '. serialize($_COOKIE) . ' ' . serialize($_SESSION);
+        return serialize($this) . ' ' . serialize($_COOKIE) . ' ' . serialize($_SESSION);
     }
 
     // Test that we can set cookie and session variables (requires a redirect)
