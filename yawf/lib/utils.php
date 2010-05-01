@@ -15,17 +15,30 @@
 
 class Object
 {
-    function __construct($data = array())
+    public function __construct($data = NULL)
     {
-        foreach ($data as $field => $value)
-        {
-            $this->$field = $value;
-        }
+        $data = (array)$data;
+        foreach ($data as $field => $value) $this->$field = $value;
     }
 
-    function __get($var)
+    public function __get($field)
     {
-        return isset($this->$var) ? $this->$var : NULL;
+        return isset($this->$field) ? $this->$field : NULL;
+    }
+
+    public function __set($field, $value)
+    {
+        return $this->$field = $value;
+    }
+
+    public function merge($other, $override = FALSE)
+    {
+        $other = (array)$other;
+        foreach ($other as $field => $value)
+        {
+            if (!$override && isset($this->$field)) continue;
+            $this->$field = $value;
+        }
     }
 }
 
@@ -43,13 +56,13 @@ function array_rand_value($array)
     return $array[array_rand($array)];
 }
 
-// Use the argument list to return a default value
+// Return the first non-null value in the argument list
 
-function default_value()
+function first()
 {
     $args = func_get_args();
     foreach ($args as $arg)
-        if ($arg) return $arg;
+        if (!is_null($arg)) return $arg;
     return NULL;
 }
 

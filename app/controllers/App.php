@@ -26,10 +26,10 @@ class App_controller extends Controller
     {
         // Put code here that should be performed by every controller
 
-        $this->render['title'] = 'YAWF - Yet Another Web Framework';
-        $this->render['layout'] = 'purple';
-        $this->render['greeting'] = array_rand_value(self::$greetings);
-        $this->render['active_tab'] = array($this->path => ' class="active"');
+        $this->render->title = 'YAWF - Yet Another Web Framework';
+        $this->render->layout = 'purple';
+        $this->render->greeting = array_rand_value(self::$greetings);
+        $this->render->active_tab = array($this->path => ' class="active"');
     }
 
     // After the controller's view method runs...

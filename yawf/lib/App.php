@@ -70,8 +70,10 @@ class App extends YAWF
 
     // Create a new controller and return it
 
-    public function new_controller($class = NULL, $render = array())
+    public function new_controller($class = NULL, $render = NULL)
     {
+        $render = new Object($render);
+
         // Require the Controller base class
         // ...and the Application controller
 
@@ -120,8 +122,8 @@ class App extends YAWF
 
         $ext = array_key($options, 'ext', DEFAULT_EXTENSION);
         $must_find = array_key($options, 'must_find', FALSE);
-        $lang = default_value(array_key($options, 'lang'), $this->controller->get_lang());
-        $folder = default_value(array_key($options, 'folder'), $this->folder);
+        $lang = first(array_key($options, 'lang'), $this->controller->get_lang());
+        $folder = first(array_key($options, 'folder'), $this->folder);
 
         // Create an array of paths to look for a view file
 
@@ -143,9 +145,10 @@ class App extends YAWF
 
     // Render a view file
 
-    public function render_view($view, $render = array(), $options = array())
+    public function render_view($view, $render = NULL, $options = array())
     {
         if ($this->is_silent) return ''; // if redirect
+        $render = new Object($render);
 
         // Setup the render data and the view file path
 
@@ -160,18 +163,18 @@ class App extends YAWF
 
     // Render a content-type file in the "types" folder
 
-    public function render_type($type, $render = array(), $options = array())
+    public function render_type($type, $render, $options = array())
     {
         $options['must_find'] = TRUE;
 
         // Optionally render the content in some layout
 
-        $layout = array_key($render, 'layout');
+        $layout = $render->layout;
         if ($layout)
         {
             $options['folder'] = 'layouts';
             $content = $this->render_view("$layout.$type", $render, $options);
-            if (isset($content)) $render['content'] = $content;
+            if (isset($content)) $render->content = $content;
         }
 
         // Render the content in a content-type wrapper
@@ -194,13 +197,14 @@ class App extends YAWF
 
     // Send some mail (this depends on the Mail helper)
 
-    public function send_mail($file, $render = array())
+    public function send_mail($file, $render = NULL)
     {
+        $render = new Object($render);
         load_helper('Mail');
         $text = $this->render_view($file, $render, array('ext' => '.mail.txt', 'must_find' => TRUE));
         $html = $this->render_view($file, $render, array('ext' => '.mail.html', 'must_find' => TRUE));
-        $render['text'] = $text;
-        $render['html'] = $html;
+        $render->text = $text;
+        $render->html = $html;
         return Mail::send($render, $this->is_testing);
     }
 
@@ -226,12 +230,12 @@ class AppView extends YAWF
 
     // Render the view path by extracting the render array
 
-    public static function render($__path, &$render = array())
+    public static function render($__path_to_the_view_file, &$render)
     {
         self::$render = $render;
         ob_start();
-        extract($render); // got to love PHP
-        include $__path;  // how cool is that?
+        extract((array)$render);
+        include $__path_to_the_view_file;
         if (isset($php_errormsg) && isset($app) && $app instanceof App)
             $app->add_error_message($php_errormsg);
         return ob_get_clean();
@@ -242,14 +246,14 @@ class AppView extends YAWF
     public static function url($url, $prefix = NULL)
     {
         if (preg_match('/^\w+:/', $url)) return $url; // coz it's absolute
-        return default_value($prefix, VIEW_URL_PREFIX) . $url; // or local
+        return first($prefix, VIEW_URL_PREFIX) . $url; // or it's local
     }
 
-    // Get data from the $render array
+    // Get data from the render object
 
     public static function get($field)
     {
-        return array_key(self::$render, $field);
+        return self::$render->$field;
     }
 }
 

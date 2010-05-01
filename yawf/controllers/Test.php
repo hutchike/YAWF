@@ -20,9 +20,9 @@ class Test_controller extends App_controller
 
     public function before()
     {
-        $this->url = $this->render['url'] = default_value($this->params->url, '/');
-        $this->script = $this->render['script'] = default_value($this->params->script, self::SCRIPT_RUNNER);
-        $this->render['flash'] = '';
+        $this->url = $this->render->url = first($this->params->url, '/');
+        $this->script = $this->render->script = first($this->params->script, self::SCRIPT_RUNNER);
+        $this->render->flash = '';
     }
 
     public function runner()
@@ -48,7 +48,7 @@ class Test_controller extends App_controller
                 $count++;
             }
         }
-        $this->render['count_lines_logged'] = $count;
+        $this->render->count_lines_logged = $count;
     }
 
     public function browser()
@@ -60,14 +60,14 @@ class Test_controller extends App_controller
             if (preg_match('/\.js$/', $script)) $scripts[] = $script;
         }
         closedir($dir);
-        $this->render['scripts'] = $scripts;
+        $this->render->scripts = $scripts;
 
         $file_path = self::SCRIPT_DIR . '/' . $this->script;
         if (!file_exists($file_path))
-            $this->render['flash'] = 'Test script "' . $file_path . '" does not exist?';
+            $this->render->flash = 'Test script "' . $file_path . '" does not exist?';
 
         if (!count($scripts))
-            $this->render['flash'] = 'Folder "' . self::SCRIPT_DIR . '" is empty?';
+            $this->render->flash = 'Folder "' . self::SCRIPT_DIR . '" is empty?';
     }
 
     public function console()
@@ -77,7 +77,7 @@ class Test_controller extends App_controller
 
     public function script()
     {
-        $this->render['file_path'] = self::SCRIPT_DIR . '/' . $this->script;
+        $this->render->file_path = self::SCRIPT_DIR . '/' . $this->script;
     }
 }
 

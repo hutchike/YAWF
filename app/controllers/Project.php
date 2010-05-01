@@ -16,7 +16,7 @@ class Project_controller extends App_controller
     public function before()
     {
         parent::before();
-        $this->render['title'] = 'The YAWF Project';
+        $this->render->title = 'The YAWF Project';
     }
 
     public function contact()
@@ -65,10 +65,10 @@ class Project_controller extends App_controller
         }
         closedir($dir);
 
-        $this->render['folder'] = $folder;
-        $this->render['parent'] = ($folder != 'yawf' ? dirname($folder) : '');
-        $this->render['files'] = $files;
-        return $this->render;
+        $this->render->folder = $folder;
+        $this->render->parent = ($folder != 'yawf' ? dirname($folder) : '');
+        $this->render->files = $files;
+        return $this->render->to_array();
     }
 
     public function terms()

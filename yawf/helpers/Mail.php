@@ -15,17 +15,18 @@ class Mail extends YAWF
 {
     public static function send($render, $is_testing = FALSE)
     {
-        $render_defaults = array('from' => CONTACT_EMAIL ,'to' => NULL, 'subject' => NULL,
+        $render_defaults = array('from' => CONTACT_EMAIL, 'to' => NULL,
+                                 'subject' => NULL,
                                  'text' => NULL, 'html' => NULL);
-        $render = array_merge($render_defaults, $render);
+        $render->merge($render_defaults);
 
         // Get the message parameters
 
-        $from = $render['from'];
-        $to = $render['to']; if (!$to) throw new Exception('no "to" email');
-        $subject = $render['subject']; if (is_null($subject)) throw new Exception('no email "subject"');
-        $text = $render['text']; if (is_null($text)) throw new Exception('no email message text');
-        $html = $render['html'];
+        $from = $render->from;
+        $to = $render->to; if (!$to) throw new Exception('no "to" email');
+        $subject = $render->subject; if (is_null($subject)) throw new Exception('no email "subject"');
+        $text = $render->text; if (is_null($text)) throw new Exception('no email message text');
+        $html = $render->html;
 
         // Create the message headers and email simple text
 

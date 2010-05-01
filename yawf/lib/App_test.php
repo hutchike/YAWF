@@ -48,8 +48,9 @@ class App_test extends App
 
     // A variation of the regular "render_view" that will insert test results
 
-    public function render_view($file, $render = array(), $options = array())
+    public function render_view($file, $render = NULL, $options = array())
     {
+        $render = new Object($render);
         if (array_key($options, 'folder') === 'types')
             $this->render_test_run($render);
 
@@ -63,13 +64,13 @@ class App_test extends App
         if ($this->test_run) return; // so we don't repeat the tests
         $test_run = $this->test_run = new TestRun($this->controller);
         $test_run->run_tests();
-        $render['test_run_output'] = $test_run->get_output();
-        $render['test_cases'] = $test_run->get_test_cases();
-        $render['count_passed'] = $test_run->count_test_cases_that_passed();
-        $render['count_failed'] = $test_run->count_test_cases_that_failed();
-        $render['controller_name'] = $test_run->get_controller_name();
-        $render['title'] = 'Testing "' . $test_run->get_controller_name() . '"';
-        $render['content'] = parent::render_view('test_run', $render, array('folder' => 'test'));
+        $render->test_run_output = $test_run->get_output();
+        $render->test_cases = $test_run->get_test_cases();
+        $render->count_passed = $test_run->count_test_cases_that_passed();
+        $render->count_failed = $test_run->count_test_cases_that_failed();
+        $render->controller_name = $test_run->get_controller_name();
+        $render->title = 'Testing "' . $test_run->get_controller_name() . '"';
+        $render->content = parent::render_view('test_run', $render, array('folder' => 'test'));
     }
 
     // The testing controller runs test cases by calling this method on its $app

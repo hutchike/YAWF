@@ -18,10 +18,11 @@ class Controller extends YAWF
     protected $lang;    // the two character language code e.g. "en"
     protected $render;  // array of data to be rendered inside views
     protected $params;  // a copy of all the request parameters sent
+    protected $session; // an object to get & set $_SESSION variable
 
-    // Set up this new Controller object (with optional render data)
+    // Set up this new Controller object for an app with render data
 
-    public function setup_for_app($app, &$render = array())
+    public function setup_for_app($app, &$render)
     {
         $this->app = $app;
         $this->view = $app->get_file(); // "faq" from "www.yawf.org/project/faq"
@@ -30,6 +31,7 @@ class Controller extends YAWF
         $this->set_params();            // request parameters passed in
         $this->set_lang();              // the browser language setting
         @session_start();               // start a session for the user
+        $this->session = new Controller_session();
     }
 
     // Render the requested view
@@ -45,19 +47,19 @@ class Controller extends YAWF
 
         // Render the view with a data array
 
-        $this->render['content'] = $this->app->render_view($this->view, $this->render);
+        $this->render->content = $this->app->render_view($this->view, $this->render);
         return $this->app->render_type($this->app->get_content_type(), $this->render);
     }
 
     // Set up render data defaults (called by $this->app)
 
-    public function setup_render_data(&$render = array())
+    public function setup_render_data(&$render)
     {
-        $render['app'] = $this->app;
-        $render['view'] = $this->view;
-        $render['path'] = $this->path;
-        $render['lang'] = $this->lang;
-        $render['params'] = $this->params;
+        $render->app = $this->app;
+        $render->view = $this->view;
+        $render->path = $this->path;
+        $render->lang = $this->lang;
+        $render->params = $this->params;
     }
 
     // Before just start a session
@@ -72,22 +74,6 @@ class Controller extends YAWF
     protected function after()
     {
         // Override in controllers
-    }
-
-    // Get/set a cookie
-
-    protected function cookie($name, $value = NULL, $expires = 0, $path = '/', $domain = COOKIE_DOMAIN, $secure = FALSE)
-    {
-        if (!is_null($value)) setcookie($name, $value, $expires, $path, $domain, $secure);
-        return array_key($_COOKIE, $name);
-    }
-
-    // Get/set a session variable
-
-    protected function session($name, $value = NULL)
-    {
-        if (!is_null($value)) $_SESSION[$name] = $value;
-        return array_key($_SESSION, $name);
     }
 
     // Change the view to be rendered
@@ -150,6 +136,14 @@ class Controller extends YAWF
         return $this->lang;
     }
 
+    // Get or set a cookie
+
+    protected function cookie($name, $value = NULL, $expires = 0, $path = '/', $domain = COOKIE_DOMAIN, $secure = FALSE)
+    {
+        if (!is_null($value)) setcookie($name, $value, $expires, $path, $domain, $secure);
+        return array_key($_COOKIE, $name);
+    }
+
     // Redirect to another URL
 
     protected function redirect($url, $exit = FALSE)
@@ -180,7 +174,7 @@ class Controller extends YAWF
 
     // Send some mail as text & HTML multipart (depends on the MailHelper)
 
-    protected function send_mail($file, $render = array())
+    protected function send_mail($file, $render)
     {
         return $this->app->send_mail($file, $render);
     }
@@ -197,6 +191,19 @@ class Controller extends YAWF
     protected function should_not($desc, $failed = TRUE, $test_data = NULL)
     {
         $this->app->test_case('not ' . $desc, !$failed, $test_data);
+    }
+}
+
+class Controller_session
+{
+    public function __get($key)
+    {
+        return array_key($_SESSION, $key);
+    }
+
+    public function __set($key, $value = NULL)
+    {
+        $_SESSION[$key] = $value;
     }
 }
 
