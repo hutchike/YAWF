@@ -35,7 +35,7 @@ class User_test_controller extends User_controller
                         ));
         list($user) = $this->login();
         $this->should('find a matching user', $user && $user->email === $this->test_user->email, $user);
-        $this->should('start a user session', $user->get_id() > 0 && $user->get_id() === $this->session('user_id'), $user);
+        $this->should('start a user session', $user->get_id() > 0 && $user->get_id() === $this->session->user_id, $user);
 
         // Test that we cannot login with the wrong details
 
@@ -51,7 +51,7 @@ class User_test_controller extends User_controller
     {
         list($user) = $this->logout();
         $this->should('find the user to logout', $user && $user->email === $this->test_user->email, $user);
-        $this->should_not('be any user session left over', $this->session('user_id', $user);
+        $this->should_not('be any user session left over', $this->session->user_id, $user);
     }
 }
 

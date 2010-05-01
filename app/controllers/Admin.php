@@ -21,7 +21,7 @@ class Admin_controller extends App_controller
 
         if (file_exists(Model::get_database())) return;
         $issue = new YawfIssue();
-        $sql = file_get_contents('yawf/data/YAWF_' . DB_CONNECTOR . '.sql');
+        $sql = file_get_contents('app/data/YAWF_' . DB_CONNECTOR . '.sql');
         $issue->query($sql);
     }
 

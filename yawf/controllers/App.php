@@ -17,7 +17,7 @@ class App_controller extends Controller
 
     function before()
     {
-        $this->render['title'] = 'Welcome to YAWF';
+        $this->render->title = 'Welcome to YAWF';
     }
 }
 

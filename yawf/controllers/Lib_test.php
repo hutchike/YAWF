@@ -17,20 +17,22 @@ class Lib_test_controller extends Controller
 {
     const TEST_VIEW = 'test_view'; // in the "default" folder so we can find it
     const TEST_TEXT = 'Just some text to test things';
-    const IDENTIFIER = 'YAWF_Lib_test_controller'; // for cookies and sessions
     const STALE_SECS = 10;
 
     // Test that we can set up this controller for the application
 
     public function setup_for_app_test()
     {
-        $this->setup_for_app($this->app);
+        $render = new Object();
+        $this->setup_for_app($this->app, $render);
         $this->should('have an "App_test" object called $this->app',
                       $this->app instanceof App_test, $this->app);
         $this->should('have "index" in $this->view',
                       $this->view === 'index', $this->view);
-        $this->should('have an empty array called $this->render',
-                      is_array($this->render) && count($this->render) === 0, $this->render);
+        $this->should('have an "Object" called $this->render',
+                      $this->render instanceof Object, $this->render);
+        $this->should('be able to cast $this->render into an empty array',
+                      is_array((array)$this->render) && count((array)$this->render) === 0, $this->render);
         $this->should('have an "Object" called $this->params',
                       $this->params instanceof Object, $this->params);
         $this->should('have "' . DEFAULT_LANGUAGE . '" set as $this->lang',
@@ -55,22 +57,22 @@ class Lib_test_controller extends Controller
 
     protected function test_view() // for render_test() above
     {
-        $this->render['text'] = Lib_test_controller::TEST_TEXT;
+        $this->render->text = Lib_test_controller::TEST_TEXT;
     }
 
     // Test that we can setup render data with "app", "view" and "params" data
 
     public function setup_render_data_test()
     {
-        $render = array();
+        $render = new Object();
         $this->setup_render_data(&$render);
 
-        $this->should('have an "App_test" object called $render[\'app\']',
-                      $render['app'] instanceof App_test, $render['app']);
-        $this->should('have "index" in $render[\'view\']',
-                      $render['view'] === 'index', $render['view']);
-        $this->should('have an "Object" called $render[\'params\']',
-                      $render['params'] instanceof Object, $render['params']);
+        $this->should('have an "App_test" object called $render->app',
+                      $render->app instanceof App_test, $render->app);
+        $this->should('have "index" in $render->view',
+                      $render->view === 'index', $render->view);
+        $this->should('have an "Object" called $render->params',
+                      $render->params instanceof Object, $render->params);
     }
 
     // Test that the default "before()" method doesn't change our state
@@ -104,15 +106,15 @@ class Lib_test_controller extends Controller
 
     public function cookie_and_session_test()
     {
-        $time_in_cookie = $this->cookie(self::IDENTIFIER);
-        $time_in_session = $this->session(self::IDENTIFIER);
+        $time_in_cookie = $this->cookie->remember_the_time_now;
+        $time_in_session = $this->session->remember_the_time_now;
         $time_now = time();
         $cookie_is_stale = $time_now - $time_in_cookie > self::STALE_SECS;
         $session_is_stale = $time_now - $time_in_session > self::STALE_SECS;
         if ($cookie_is_stale || $session_is_stale)
         {
-            $this->cookie(self::IDENTIFIER, $time_now);
-            $this->session(self::IDENTIFIER, $time_now);
+            $this->cookie->remember_the_time_now = $time_now;
+            $this->session->remember_the_time_now = $time_now;
             $type = $this->app->get_content_type();
             header('Location: ' . VIEW_URL_PREFIX . "lib_test.$type?$time_now");
             exit;

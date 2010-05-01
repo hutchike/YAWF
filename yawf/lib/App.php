@@ -72,6 +72,8 @@ class App extends YAWF
 
     public function new_controller($class = NULL, $render = NULL)
     {
+        // Allow render data to be passed in
+
         $render = new Object($render);
 
         // Require the Controller base class
