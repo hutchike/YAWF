@@ -329,7 +329,7 @@ class SureRule
     {
         if (FALSE === strpos($cond, '(')) // don't over-ride user brackets
         {
-            $cond = preg_replace('/(.*\s)([<>])(\s.*)/', '($1)$2($3)', $cond);
+            $cond = preg_replace('/(.*\s)([<>]=?)(\s.*)/', '($1)$2($3)', $cond);
         }
 
         $cond = preg_replace('/\$(\w+)/', '$memory->$1', $cond);
