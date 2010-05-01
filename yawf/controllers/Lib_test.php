@@ -25,6 +25,7 @@ class Lib_test_controller extends Controller
     {
         $render = new Object();
         $this->setup_for_app($this->app, $render);
+
         $this->should('have an "App_test" object called $this->app',
                       $this->app instanceof App_test, $this->app);
         $this->should('have "index" in $this->view',
