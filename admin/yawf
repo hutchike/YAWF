@@ -48,6 +48,10 @@ class YAWF_admin
                 $this->create_app($this->args[0]);
                 break;
 
+            case 'doc':
+                $this->create_docs();
+                break;
+
             case 'vhost':
                 $this->create_vhost_file($this->args);
                 break;
@@ -93,6 +97,13 @@ End_of_usage;
 
         $writable_dirs = array('logs', 'tmp/cache', 'tmp/queue', 'tmp/sessions', 'tmp/uploads');
         foreach ($writable_dirs as $dir) chmod("$new_app/app/$dir", 0777);
+    }
+
+    // Create doc files using "phpdoc"
+
+    private function create_docs()
+    {
+        system("phpdoc -o HTML:frames:earthli -d $this->root/yawf -t $this->root/app/public/docs");
     }
 
     // Create a new YAWF virtual host file

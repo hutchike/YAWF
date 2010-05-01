@@ -5,21 +5,24 @@
  * "Sure" is a simple way to embed an expert system in your PHP web application.
  * Here's a simple example:
  *
+ * <code>
  * $sure = new Sure();
  * $sure->with('rules.sure')->given('facts.sure')->infer();
+ * </code>
  * 
- * ...where "rules.sure" and "facts.sure" are files written like this:
+ * ...where "rules.sure" and "facts.sure" are the filenames for files written
+ * like this:
  *
  * rules.sure:
  * <code>
- *   rule: Relax on the weekend
- *   when: $today == 'Sat' or $today == 'Sun'
- *   then: print "I'm relaxing today, thanks"
+ * rule: Relax on the weekend
+ * when: $today == 'Sat' or $today == 'Sun'
+ * then: print "I'm relaxing today, thanks"
  * </code>
  *
  * facts.sure:
  * <code>
- *   $today = date('D')
+ * $today = date('D')
  * </code>
  *
  * The syntax for the rules and the facts is regular PHP code, except that you
@@ -44,8 +47,8 @@
  * Sure object constructor like this:
  *
  * <code>
- * $sure = new Sure(array('bank' => $bank_object));
- * $sure->with('rules.sure')->given('facts.sure')->infer();
+ * $sure = new Sure();
+ * $sure->with('rules.sure')->given('facts.sure')->infer(array('bank' => $bank_object));
  * </code>
  *
  * This way, the Sure rules engine can be used to orchestrate your other PHP
