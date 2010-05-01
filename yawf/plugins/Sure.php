@@ -16,8 +16,12 @@
  * rules.sure:
  * <code>
  * rule: Relax on the weekend
- * when: $today == 'Sat' or $today == 'Sun'
+ * when: $is_weekend or $is_holiday
  * then: print "I'm relaxing today, thanks"
+ *
+ * rule: Is it the weekend yet?
+ * when: $today == 'Sat' or $today == 'Sun'
+ * then: $is_weekend = TRUE
  * </code>
  *
  * facts.sure:
@@ -56,6 +60,15 @@
  * "facts.sure" may be replaced with string values if you prefer to pass the
  * rules and facts directly, for example if you store them in a database.
  *
+ * PS The "infer()" method will loop up to 1000 times until the state of the
+ * memory is unchaged. If you just want to match the rules once, then use the
+ * "match()" method instead. Conversely if you need to loop more or less than
+ * 1000 times then pass a different limit as the second parameter to "infer()"
+ * like this:
+ * <code>
+ * $sure->with('rules.sure')->given('facts.sure')->infer(array('bank' => $bank_object), 500);
+ * </code>
+ *
  * @version 0.2
  * @author Kevin Hutchinson <kevin@guanoo.org>
  * @link http://github.com/hutchike/YAWF
@@ -73,7 +86,7 @@ class Sure
     /**
      * Limit the maximum number of inference iterations through the rules
      */
-    const MAX_INFERENCE_LOOPS = 100;
+    const MAX_INFERENCE_LOOPS = 1000;
 
     private $memory;
     private $parser;
