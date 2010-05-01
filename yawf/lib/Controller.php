@@ -18,6 +18,7 @@ class Controller extends YAWF
     protected $lang;    // the two character language code e.g. "en"
     protected $render;  // array of data to be rendered inside views
     protected $params;  // a copy of all the request parameters sent
+    protected $cookie;  // an object to get & set $_COOKIE variable,
     protected $session; // an object to get & set $_SESSION variable
 
     // Set up this new Controller object for an app with render data
@@ -31,6 +32,7 @@ class Controller extends YAWF
         $this->set_params();            // request parameters passed in
         $this->set_lang();              // the browser language setting
         @session_start();               // start a session for the user
+        $this->cookie = new Controller_cookie();
         $this->session = new Controller_session();
     }
 
@@ -140,8 +142,8 @@ class Controller extends YAWF
 
     protected function cookie($name, $value = NULL, $expires = 0, $path = '/', $domain = COOKIE_DOMAIN, $secure = FALSE)
     {
-        if (!is_null($value)) setcookie($name, $value, $expires, $path, $domain, $secure);
-        return array_key($_COOKIE, $name);
+        if (!is_null($value)) $this->cookie->set($name, $value, $expires, $path, $domain, $secure);
+        return $this->cookie->$name;
     }
 
     // Redirect to another URL
@@ -194,6 +196,24 @@ class Controller extends YAWF
     }
 }
 
+class Controller_cookie
+{
+    public function __get($name)
+    {
+        return array_key($_COOKIE, $name);
+    }
+
+    public function __set($name, $value)
+    {
+        return $this->set($name, $value);
+    }
+
+    public function set($name, $value = NULL, $expires = 0, $path = '/', $domain = COOKIE_DOMAIN, $secure = FALSE)
+    {
+        setcookie($name, $value, $expires, $path, $domain, $secure);
+    }
+}
+
 class Controller_session
 {
     public function __get($key)
@@ -201,7 +221,7 @@ class Controller_session
         return array_key($_SESSION, $key);
     }
 
-    public function __set($key, $value = NULL)
+    public function __set($key, $value)
     {
         $_SESSION[$key] = $value;
     }
