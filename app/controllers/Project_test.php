@@ -11,6 +11,8 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+load_controller('Project');
+
 class Project_test_controller extends Project_controller
 {
     public function index_test()
