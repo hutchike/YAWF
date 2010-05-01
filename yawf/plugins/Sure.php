@@ -56,18 +56,22 @@
  * </code>
  *
  * This way, the Sure rules engine can be used to orchestrate your other PHP
- * code according to flexible rules. Finally, the filenames "rules.sure" and
+ * code according to flexible rules. Note that the filenames "rules.sure" and
  * "facts.sure" may be replaced with string values if you prefer to pass the
  * rules and facts directly, for example if you store them in a database.
  *
- * PS The "infer()" method will loop up to 1000 times until the state of the
- * memory is unchaged. If you just want to match the rules once, then use the
- * "match()" method instead. Conversely if you need to loop more or less than
- * 1000 times then pass a different limit as the second parameter to "infer()"
- * like this:
+ * The "infer()" method will iterate up to 1000 times until the state of the
+ * facts memory is unchaged. If you need to iterate more or less than 1000
+ * times then call the "limit()" getter/setter method like this:
  * <code>
- * $sure->with('rules.sure')->given('facts.sure')->infer(array('bank' => $bank_object), 500);
+ * $sure = new Sure();
+ * $sure->limit(1); // only match the rules against the facts once
  * </code>
+ * ...or just pass the iteration limit to the constructor like this:
+ * <code>
+ * $sure = new Sure(1);
+ * </code>
+ * ...but this is less readable code, so a call to "limit()" is preferred.
  *
  * @version 0.2
  * @author Kevin Hutchinson <kevin@guanoo.org>
@@ -86,8 +90,9 @@ class Sure
     /**
      * Limit the maximum number of inference iterations through the rules
      */
-    const MAX_INFERENCE_LOOPS = 1000;
+    const MAX_INFERENCE_LIMIT = 1000;
 
+    private $limit;
     private $memory;
     private $parser;
     private $parsed_rules;
@@ -96,14 +101,32 @@ class Sure
     /**
      * Create a new Sure object to infer from rules and facts
      */
-    public function __construct()
+    public function __construct($limit = self::MAX_INFERENCE_LIMIT)
     {
+        $this->limit($limit);
         $this->memory = NULL;
         $this->parser = new SureParser();
         $this->parsed_rules = array();
         $this->parsed_facts = array();
     }
 
+    /**
+     * Get/set the maximum number of iterations allowed when <var>infer()</var>
+     * is called to make inferences from the rules and facts.
+     * @param integer $limit The maximum number of iterations allowed (optional)
+     * @return integer
+     */
+    public function limit($limit = NULL)
+    {
+        if (!is_null($limit)) $this->limit = $limit;
+        return $this->limit;
+    }
+
+    /**
+     * Provide a rules file or a string of rules to be parsed by this object
+     * @param string $rules A filename or a string of rules code in pseudo-PHP
+     * @return Sure
+     */
     public function with($rules)
     {
         $rules = $this->read($rules);
@@ -111,6 +134,11 @@ class Sure
         return $this;
     }
 
+    /**
+     * Provide a facts file or a string of facts to be parsed by this object
+     * @param string $facts A filename or a string of facts code in pseudo-PHP
+     * @return Sure
+     */
     public function given($facts)
     {
         $facts = $this->read($facts);
@@ -118,7 +146,13 @@ class Sure
         return $this;
     }
 
-    public function infer($data = NULL, $repeat = self::MAX_INFERENCE_LOOPS)
+    /**
+     * Infer new facts from our original facts, given our rules, and iterating
+     * no more than <var>$this->limit</var> times.
+     * @param array $data An optional array of fact data to mix with other facts
+     * @return Sure
+     */
+    public function infer($data = NULL)
     {
         // Remember facts into memory
 
@@ -131,6 +165,7 @@ class Sure
         // Infer while memory changes
 
         $change = FALSE;
+        $repeat = $self->limit;
         do
         {
             // Fire all rules that match, and look for any changes
@@ -151,11 +186,10 @@ class Sure
         return $this;
     }
 
-    public function match($data = NULL)
-    {
-        return $self->infer($data, 1);
-    }
-
+    /**
+     * Return the memory object that holds the current state of all the facts
+     * @return SureMemory
+     */
     public function memory()
     {
         return $this->memory;
@@ -163,15 +197,14 @@ class Sure
 
     // Private functions
 
+    /**
+     * Read a file if the file exists, or otherwise assume it's a literal string
+     * @param string $file The filename or a literal string of pseudo-PHP code
+     * @return string
+     */
     private function read($file)
     {
         return file_exists($file) ? file_get_contents($file) : $file;
-    }
-
-    private function quit($message)
-    {
-        print "error: $message\n";
-        exit;
     }
 }
 
@@ -184,6 +217,11 @@ class SureParser
     const CONDITIONS = 1;
     const ACTIONS = 2;
 
+    /**
+     * Parse a string of rules by returning an array of rule objects
+     * @param string $rules A string of rules to be parsed (see formatting guide)
+     * @return array
+     */
     public function parse_rules($rules)
     {
         $lines = preg_split("/\r?\n/", $rules);
@@ -229,6 +267,11 @@ class SureParser
         return $rules;
     }
 
+    /**
+     * Parse a string of facts by returning an array of fact objects
+     * @param string $facts A string of facts to be parsed, listed one per line
+     * @return array
+     */
     public function parse_facts($facts)
     {
         $lines = preg_split("/\r?\n/", $facts);
@@ -245,6 +288,11 @@ class SureParser
 
     // Private functions
 
+    /**
+     * Trim a line by removing whitespace and comments
+     * @param string $line A line of pseudo-PHP code
+     * @return string
+     */
     private function trim($line)
     {
         $line = trim($line);
@@ -256,7 +304,7 @@ class SureParser
 
 /**
  * A rule has a name, a list of conditions and a list of actions to take
- * when all the conditions are met.
+ * when all the conditions are met
  * @package Sure
  */
 class SureRule
@@ -265,6 +313,10 @@ class SureRule
     private $conditions;
     private $actions;
 
+    /**
+     * Create a new rule object with a name
+     * @param string $name The name of the rule
+     */
     public function __construct($name)
     {
         $this->name = $name;
@@ -272,21 +324,37 @@ class SureRule
         $this->actions = array();
     }
 
+    /**
+     * Get the name of this rule, as specified in its "rule: name" definition
+     * @return string
+     */
     public function name()
     {
         return $this->name;
     }
 
+    /**
+     * Add a condition to this rule
+     * @param string $condition A condition to add, written as pseudo-PHP code
+     */
     public function condition($condition)
     {
         array_push($this->conditions, $condition);
     }
 
+    /**
+     * Add an action to this rule
+     * @param string $action An action to add, written as pseudo-PHP code
+     */
     public function action($action)
     {
         array_push($this->actions, $action);
     }
 
+    /**
+     * Match this rule's conditions against the facts held in a memory object
+     * @param SureMemory &$memory The memory object with facts to match against
+     */
     public function match(&$memory)
     {
         foreach ($this->conditions as $cond)
@@ -314,6 +382,10 @@ class SureRule
         return TRUE;
     }
 
+    /**
+     * Fire this rule's actions by eval'ing them as pseudo-PHP code
+     * @param SureMemory &$memory The memory object with facts to match against
+     */
     public function fire(&$memory)
     {
         foreach ($this->actions as $action)
@@ -325,6 +397,12 @@ class SureRule
 
     // Private functions
 
+    /**
+     * Match a condition according to the state of the facts in a memory object
+     * @param string $cond A condition written as pseudo-PHP code
+     * @param SureMemory &$memory The memory object with facts to match against
+     * @return boolean
+     */
     private function match_condition($cond, &$memory)
     {
         if (FALSE === strpos($cond, '(')) // don't over-ride user brackets
@@ -346,11 +424,19 @@ class SureFact
 {
     private $fact;
 
+    /**
+     * Create a new fact object with some pseudo-PHP code
+     * @param string $fact Some pseudo-PHP fact definition code
+     */
     public function __construct($fact)
     {
         $this->fact = $fact;
     }
 
+    /**
+     * Remember this fact in a memory object by eval'ing the pseudo-PHP code
+     * @param SureMemory &$memory The memory object reference to update
+     */
     public function remember(&$memory)
     {
         $fact = preg_replace('/\$(\w+)/', '$memory->$1', $this->fact);
@@ -364,6 +450,10 @@ class SureFact
  */
 class SureMemory
 {
+    /**
+     * Create a new memory object, and optionally populate it with some data
+     * @param array $data An optional array of data to initialize the object
+     */
     function __construct($data = NULL)
     {
         if (!$data) $data = array();
@@ -373,6 +463,14 @@ class SureMemory
         }
     }
 
+    /**
+     * Get a property from this memory object, and create a new memory object
+     * as a side-effect if the property does not exist. This allows for chained
+     * property getters like <var>$some->other->thing</var> to work without any
+     * errors.
+     * @param string $var The property name
+     * @return various
+     */
     function __get($var)
     {
         if ($this->$var === NULL) $this->$var = new SureMemory();
