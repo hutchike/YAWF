@@ -105,7 +105,7 @@ class Sure
     {
         $this->limit($limit);
         $this->memory = NULL;
-        $this->parser = new SureParser();
+        $this->parser = $this->create_parser();
         $this->parsed_rules = array();
         $this->parsed_facts = array();
     }
@@ -195,6 +195,17 @@ class Sure
         return $this->memory;
     }
 
+    // Protected functions
+
+    /**
+     * Create a new parser
+     * @return SureParser
+     */
+    protected function create_parser()
+    {
+        return new SureParser();
+    }
+
     // Private functions
 
     /**
@@ -234,7 +245,7 @@ class SureParser
             {
                 if ($rule) array_push($rules, $rule);
                 $name = $matches[1];
-                $rule = new SureRule($name);
+                $rule = $this->create_rule($name);
                 $line = '';
             }
             elseif (preg_match('/^(if|when):\s*(.*)/i', $line, $matches))
@@ -281,9 +292,31 @@ class SureParser
             $line = $this->trim($line);
             if (!$line) continue;
 
-            array_push($facts, new SureFact($line));
+            array_push($facts, $this->create_fact($line));
         }
         return $facts;
+    }
+
+    // Protected functions
+
+    /**
+     * Create a new rule
+     * @param string $name The name of the rule
+     * @return SureRule
+     */
+    protected function create_rule($name)
+    {
+        return new SureRule($name);
+    }
+
+    /**
+     * Create a new fact
+     * @param string $line The fact written as a line of pseudo-PHP
+     * @return SureFact
+     */
+    protected function create_fact($line)
+    {
+        return new SureFact($line);
     }
 
     // Private functions
@@ -461,6 +494,7 @@ class SureMemory
         {
             $this->$field = $value;
         }
+        $this->memory = $this;
     }
 
     /**

@@ -14,18 +14,18 @@
 
 class YAWF_admin
 {
-    # Constants
+    // Constants
 
     const DEFAULT_ADDRESS = '127.0.0.1:80';
 
-    # Properties
+    // Properties
 
     protected $root;    // root directory from $YAWF_ROOT environment variable
     protected $prog;    // the name of this program (e.g. "./admin/yawf")
     protected $cmd;     // the command to run (e.g. "app")
     protected $args;    // arguments to the command (e.g. "my_new_app")
 
-    # Methods
+    // Methods
 
     public function __construct()
     {
@@ -45,7 +45,7 @@ class YAWF_admin
         switch (strtolower($this->cmd))
         {
             case 'app':
-                $this->create_app($this->args[0]);
+                $this->create_app($this->args(1));
                 break;
 
             case 'doc':
@@ -53,12 +53,21 @@ class YAWF_admin
                 break;
 
             case 'vhost':
-                $this->create_vhost_file($this->args);
+                $this->create_vhost_file($this->args(4));
                 break;
 
             default:
                 $this->usage();
         }
+    }
+
+    // Return a single argument or an args array of a particular length
+
+    private function args($length)
+    {
+        $args = $this->args;
+        while (count($args) < $length) array_push($args, '');
+        return ($length == 1 ? $args[0] : $args);
     }
 
     // Display a usage message, defaulting to the standard help message
@@ -71,6 +80,7 @@ usage: yawf ACTION [arg1 arg2 ...]
 
 where ACTION is one of:
 * app    : Create a new YAWF application
+* doc    : Create fresh YAWF documentation
 * vhost  : Create a virtual host file
 * help   : Display this help message
 End_of_usage;
@@ -87,13 +97,13 @@ End_of_usage;
         $new_app = "$this->root/apps/$name";
         if (file_exists("$new_app")) $this->quit("Sorry but the app \"$name\" already exists in this folder:\n$new_app");
 
-        # Prepare the application directory tree
+        // Prepare the application directory tree
 
         mkdir("$new_app");
         $this->recurse_copy("$template/app", "$new_app/app");
         symlink("$this->root/yawf", "$new_app/yawf");
 
-        # Make some directories writable
+        // Make some directories writable
 
         $writable_dirs = array('logs', 'tmp/cache', 'tmp/queue', 'tmp/sessions', 'tmp/uploads');
         foreach ($writable_dirs as $dir) chmod("$new_app/app/$dir", 0777);
@@ -117,7 +127,7 @@ End_of_usage;
         if (!$address2) $address2 = $address1;
         $comment = ($address1 == $address2 ? '# ' : '');
 
-        if (!$domain_name) $this->usage('yawf vhost myapp.org', 'You need to choose a domain name for your new vhost file, e.g. "myapp.org"');
+        if (!$domain_name) $this->usage('yawf vhost myapp.org [app_name] [host_ip:port] [host_ip2:port2]', 'You need to choose a domain name for your new vhost file, e.g. "myapp.org"');
 
         $template_file = "$this->root/admin/template.vhost";
         $template = file_get_contents($template_file);
@@ -128,6 +138,8 @@ End_of_usage;
         file_put_contents($vhost_file, $config);
         $this->quit("A new vhost file has been created here:\n$vhost_file");
     }
+
+    // Recursively copy a directory
 
     private function recurse_copy($src, $dst)
     {

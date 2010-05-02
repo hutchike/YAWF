@@ -12,9 +12,9 @@
             <li<?= array_key($active_tab, 'default/index') ?>><?= HTML::link("default", 'Welcome') ?></li>
             <li<?= array_key($active_tab, 'project/news') ?>><?= HTML::link("project/news", 'News') ?></li>
             <li<?= array_key($active_tab, 'project/faq') ?>><?= HTML::link("project/faq", 'FAQ') ?></li>
-            <li<?= array_key($active_tab, 'project/forum') ?>><?= HTML::link("project/forum", 'Forum') ?></li>
             <li<?= array_key($active_tab, 'project/cookbook') ?>><?= HTML::link("project/cookbook", 'Cookbook') ?></li>
-            <li<?= array_key($active_tab, 'project/reference') ?>><?= HTML::link("project/reference", 'Reference') ?></li>
+            <li<?= array_key($active_tab, 'project/code') ?>><?= HTML::link("project/code", 'Code browser') ?></li>
+            <li<?= array_key($active_tab, 'docs') ?>><?= HTML::link("docs", 'Docs', array('target' => 'code')) ?></li>
             <li<?= array_key($active_tab, 'project/download') ?>><?= HTML::link("project/download", 'Download') ?></li>
         </ul>
     </div>
@@ -24,16 +24,13 @@
     </div>
 
     <div id="body">
-        <div id="article">
+        <div id="main_col">
             <div id="content">
                 <h2 id="title"><?= $title ?></h2>
 <?= $content ?>
             </div>
-            <ul id="listings">
-                <!-- TODO -->
-            </ul>
         </div>
-        <div id="aside">
+        <div id="side_col">
             <div id="account">
                 <!-- TODO -->
             </div>
