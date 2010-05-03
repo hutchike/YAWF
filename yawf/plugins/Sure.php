@@ -164,20 +164,34 @@ class Sure
 
         $change = FALSE;
         $repeat = $this->limit;
-        $memory->finish = FALSE;
+        $memory->BREAK = FALSE;
+        $debug = new SureDebug($memory->DEBUG);
         do
         {
+            $debug->info('Matching ' . count($this->parsed_rules) . ' rules:');
+
             // Fire all rules that match, and look for any changes
 
             $before = serialize($memory);
             foreach ($this->parsed_rules as $rule)
             {
-                if ($rule->match($memory)) $rule->fire($memory);
+                $debug->info('  Matching rule "' . $rule->name() . '"');
+                if ($rule->match($memory))
+                {
+                    $debug->info('    Matched!');
+                    $rule->fire($memory);
+                    if ($memory->BREAK)
+                    {
+                        $debug->info('    Breaking here');
+                        break;
+                    }
+                }
             }
             $after = serialize($memory);
             $change = ($before != $after);
+            $debug->info('Finished matching rules');
         }
-        while ($change && $repeat-- && !$memory->finish);
+        while ($change && $repeat-- && !$memory->BREAK);
 
         // Don't lose our memory
 
@@ -474,6 +488,34 @@ class SureFact
     {
         $fact = preg_replace('/\$(\w+)/', '$memory->$1', $this->fact);
         eval("$fact;");
+    }
+}
+
+/**
+ * A debug object displays debug information when $DEBUG is set in the memory
+ * @package Sure
+ */
+class SureDebug
+{
+    protected $is_active;
+
+    /**
+     * Create a new debug object, specifying whether it's active or not
+     * @param boolean $is_active Whether we're actively debugging or not
+     */
+    public function __construct($is_active)
+    {
+        $this->is_active = $is_active;
+    }
+
+    /**
+     * Display a line of debug info
+     * @param string $line A line of debug info
+     */
+    public function info($line)
+    {
+        if (!$this->is_active) return;
+        print "<pre>$line</pre>\n";
     }
 }
 
