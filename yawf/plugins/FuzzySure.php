@@ -28,12 +28,14 @@
  *
  * facts.fuzzy:
  * <code>
- * $today = new FuzzyObject(array('temp' => 85))
- * $hot = new FuzzyMatch('temp', array(80, 90, 100, 110)
+ * $today = new FuzzyObject(array('temp' => 85, 'day_of_week' => 'Sun'))
+ * $hot = new FuzzyMatch('temp', array(80, 90, 100, 110))
  * </code>
  *
  * The syntax for the rules and the facts is regular PHP code, except that you
- * may also use FuzzyObject and FuzzyMatch objects. The rules should include
+ * may also use FuzzyObject and FuzzyMatch objects. Note that a FuzzyMatch has
+ * an array of 4 numbers specifying the values on a fuzzy "_/*\_" curve so that
+ * partial matches still give a truth between 0 and 1. The rules should include
  * "rule:", "when:" and "then:" prefix labels at the start of lines to define
  * the rules. (You can replace "when:" with "if:" if you prefer).
  *
@@ -184,6 +186,9 @@ class FuzzyObject extends Object
  */
 class FuzzyMatch
 {
+    const ONE = 1.0;
+    const ZERO = 0.0;
+
     private $field, $match;
 
     /**
@@ -205,11 +210,12 @@ class FuzzyMatch
     public function truth($object)
     {
         $field = $this->field;
-        if (!property_exists($object, $field)) return 0.0;
+        if (!property_exists($object, $field)) return self::ZERO;
         $value = $object->$field;
 
-        return is_array($this->match) ? $this->fuzzy_match($value)
-                                      : ($value == $this->match ? 1.0 : 0.0);
+        if (is_array($this->match)) return $this->fuzzy_match($value);
+        if (is_object($this->match)) return $this->match->fuzzy_match($value);
+        return $value == $this->match ? self::ONE : self::ZERO;
     }
 
     /**
@@ -220,8 +226,8 @@ class FuzzyMatch
     private function fuzzy_match($value)
     {
         list ($a, $b, $c, $d) = $this->match;
-        if ($a >= $value || $d <= $value) return 0.0;
-        if ($b <= $value && $c >= $value) return 1.0;
+        if ($a >= $value || $d <= $value) return self::ZERO;
+        if ($b <= $value && $c >= $value) return self::ONE;
         if ($a < $value && $value < $b) return $this->fuzzy_truth($value, $a, $b);
         if ($c < $value && $value < $d) return $this->fuzzy_truth($value, $d, $c);
     }
