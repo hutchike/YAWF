@@ -19,9 +19,9 @@ class App_test extends App
 
     // Construct a new App_test object
 
-    public function __construct()
+    public function __construct($uri = NULL)
     {
-        parent::__construct();
+        parent::__construct($uri);
         if (TESTING_ENABLED !== TRUE) parent::redirect('', TRUE); // exit!
         $this->reset_folder();
         $this->test_run = NULL;

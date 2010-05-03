@@ -13,10 +13,41 @@
 
 class Daemon
 {
-    public function setup($path)
+    private $app;
+    private $args;
+
+    public function setup()
     {
-        chdir(dirname($path) . '/..');
-        print getcwd() . "\n";
+        $file = basename($_SERVER['SCRIPT_FILENAME']);
+        $path = $_SERVER['PWD'] . '/' . $_SERVER['SCRIPT_FILENAME'];
+        chdir(dirname($path) . '/../..');
+        error_reporting(E_ALL | E_STRICT);
+        ini_set('include_path', 'app:yawf:.');
+        require_once('lib/utils.php');
+        $this->parse_command_line_args();
+        $this->app = $this->arg('test') ? new App_test($file) : new App($file);
+    }
+
+    public function arg($name)
+    {
+        return array_key($this->args, $name);
+    }
+
+    protected function parse_command_line_args()
+    {
+        $this->args = array();
+        if (!array_key($_SERVER, 'argv')) return;
+
+        $args = $_SERVER['argv'];
+        array_shift($args); // remove the script name
+        foreach ($args as $arg)
+        {
+            $arg = ltrim($arg, '-'); // remove dashes
+            if (preg_match('/^(\w+)=(.+)$/', $arg, $matches))
+                $this->args[$matches[1]] = $matches[2];
+            else
+                $this->args[$arg] = TRUE;
+        }
     }
 
     protected function quit($message)
@@ -24,6 +55,10 @@ class Daemon
         print "\n$message\n\n";
         exit;
     }
+}
+
+class YAWF
+{
 }
 
 // End of Daemon.php

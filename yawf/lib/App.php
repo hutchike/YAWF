@@ -23,7 +23,7 @@ class App extends YAWF
 
     // Construct a new App object
 
-    public function __construct()
+    public function __construct($uri = NULL)
     {
         // Setup the config, HTML, log file & errors
 
@@ -33,7 +33,8 @@ class App extends YAWF
 
         // Get the content type, URI folder and file
 
-        $uri_no_fluff = preg_replace('/[\?#].*/', '', $_SERVER['REQUEST_URI']);
+        if (is_null($uri)) $uri = $_SERVER['REQUEST_URI'];
+        $uri_no_fluff = preg_replace('/[\?#].*/', '', $uri);
         $content_type = preg_match('/\.([^\/]+)$/', $uri_no_fluff, $matches) ? $matches[1] : DEFAULT_CONTENT_TYPE;
         if ($content_type === 'test' && !TESTING_ENABLED) $content_type = DEFAULT_CONTENT_TYPE;
         if (substr($uri_no_fluff, 0, strlen(VIEW_URL_PREFIX)) === VIEW_URL_PREFIX) $uri_no_fluff = substr($uri_no_fluff, strlen(VIEW_URL_PREFIX));
