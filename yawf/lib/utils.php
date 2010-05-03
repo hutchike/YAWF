@@ -74,6 +74,17 @@ function file_found($path)
     return file_exists('app/' . $path) || file_exists('yawf/' . $path);
 }
 
+// Find a file in the "app" or "yawf" folders, and return its contents
+
+function file_contents($path)
+{
+    if (substr($path, 0, 1) === '/')
+        return file_exists($path) ? file_get_contents($path) : NULL;
+    if (file_exists("app/$path")) return file_get_contents("app/$path");
+    if (file_exists("yawf/$path")) return file_get_contents("yawf/$path");
+    return NULL;
+}
+
 // Get the contents at a URL
 
 function url_get_contents($url, $options = array())
