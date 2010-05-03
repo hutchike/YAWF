@@ -498,6 +498,7 @@ class SureFact
 class SureDebug
 {
     protected $is_active;
+    protected $is_html;
 
     /**
      * Create a new debug object, specifying whether it's active or not
@@ -506,16 +507,17 @@ class SureDebug
     public function __construct($is_active)
     {
         $this->is_active = $is_active;
+        $this->is_html = $_SERVER['HTTP_USER_AGENT'] ? TRUE : FALSE;
     }
 
     /**
-     * Display a line of debug info
+     * Display a line of debug info, either as HTML or plain text
      * @param string $line A line of debug info
      */
     public function info($line)
     {
         if (!$this->is_active) return;
-        print "<pre>$line</pre>\n";
+        print $this->is_html ? "<pre>$line</pre>\n" : "$line\n";
     }
 }
 
