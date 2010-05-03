@@ -99,9 +99,9 @@ class Sure
      * Create a new Sure object to infer from rules and facts
      * @param integer $limit Optional if you want to override the default limit
      */
-    public function __construct($limit = self::MAX_INFERENCE_LIMIT)
+    public function __construct($limit = NULL)
     {
-        $this->limit($limit);
+        $this->limit($limit ? $limit : self::MAX_INFERENCE_LIMIT);
         $this->memory = NULL;
         $this->parser = $this->create_parser();
         $this->parsed_rules = array();
@@ -189,9 +189,10 @@ class Sure
             }
             $after = serialize($memory);
             $change = ($before != $after);
+            $repeat--;
             $debug->info('Finished matching rules');
         }
-        while ($change && $repeat-- && !$memory->BREAK);
+        while ($change && $repeat > 0 && !$memory->BREAK);
 
         // Don't lose our memory
 
@@ -507,7 +508,7 @@ class SureDebug
     public function __construct($is_active)
     {
         $this->is_active = $is_active;
-        $this->is_html = $_SERVER['HTTP_USER_AGENT'] ? TRUE : FALSE;
+        $this->is_html = array_key($_SERVER, 'HTTP_USER_AGENT') ? TRUE : FALSE;
     }
 
     /**

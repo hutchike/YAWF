@@ -12,9 +12,9 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-require '../../yawf/lib/Daemon.php';
+require getenv('YAWF_ROOT') . '/yawf/lib/Command.php';
 
-class YAWF_edit_daemon extends Daemon
+class YAWF_edit_daemon extends Command
 {
     function run()
     {
@@ -22,4 +22,4 @@ class YAWF_edit_daemon extends Daemon
     }
 }
 
-// End of "daemons/edit.php"
+// End of "yawf_edit"

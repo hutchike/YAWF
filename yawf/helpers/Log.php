@@ -21,10 +21,16 @@ class Log extends YAWF
     const TEST = 5;
     private static $level_names = array('DEBUG', 'INFO', 'WARN', 'ERROR', 'ALERT', 'TEST');
     private static $level;
+    private static $type;
 
     public static function level($level)
     {
         self::$level = $level;
+    }
+
+    public static function type($type)
+    {
+        self::$type = $type;
     }
 
     public static function level_name($level)
@@ -40,7 +46,8 @@ class Log extends YAWF
         if ($level < self::$level) return;
         $path = file_exists('app/logs') ? 'app/logs' : 'yawf/logs';
         $date = date('Ymd');
-        $fh = fopen("$path/$date.log", 'a'); // append
+        $type = self::$type ? '.' . self::$type : '';
+        $fh = fopen("$path/$date$type.log", 'a'); // append
         $time = date('H:i:s');
         $level = self::level_name($level);
         fwrite($fh, "$time $level $line\n");
