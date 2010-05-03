@@ -16,9 +16,9 @@
  *
  * rules.fuzzy:
  * <code>
- * rule: Relax when it's hot and on holidays
+ * rule: Relax when it is hot, also on holidays
  * when: $is_a_hot_day or $is_holiday
- * then: if ($TRUTH >= 0.5) print "I'm relaxing today, thanks"
+ * then: if ($TRUTH >= 0.5) print "Relaxing today, thanks!"
  * // Note that you can use the $TRUTH variable to read fuzzy truths like this
  *
  * rule: Is it hot today?
@@ -125,14 +125,12 @@ class FuzzyParser extends SureParser
 
 /**
  * A fuzzy rule has a name, a list of conditions and a list of actions to take
- * when *any* of the conditions are met (yes it sounds strange but it's true)
  * @package Sure
  */
 class FuzzyRule extends SureRule
 {
     /**
      * Match this rule's conditions against the facts held in a memory object
-     * but using fuzzy logic to return the maximum (OR) or minimum (AND) value
      * @param Object &$memory The memory object with facts to match against
      * @global integer &$memory->TRUTH (available just as $TRUTH in your rules)
      */
