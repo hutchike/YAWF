@@ -176,7 +176,7 @@ class FuzzyObject extends Object
      */
     public function is($match)
     {
-        return $match->truth($this);
+        return $match->matches($this);
     }
 }
 
@@ -203,18 +203,18 @@ class FuzzyMatch
     }
 
     /**
-     * Return the degree of truth when we are matched with an object field
+     * Return the degree of truth when we are matched with an object's field
      * @param Object &$object An object with a field to match
      * @return float
      */
-    public function truth($object)
+    public function matches($object)
     {
         $field = $this->field;
         if (!property_exists($object, $field)) return self::ZERO;
         $value = $object->$field;
 
         if (is_array($this->match)) return $this->fuzzy_match($value);
-        if (is_object($this->match)) return $this->match->fuzzy_match($value);
+        if (is_object($this->match)) return $this->match->matches($value);
         return $value == $this->match ? self::ONE : self::ZERO;
     }
 
