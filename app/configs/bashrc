@@ -1,0 +1,5 @@
+configs=`dirname $0`
+app=`dirname $configs`
+project=`dirname $app`
+project=`basename $project`
+export PATH=$PATH:$CLOUD_ROOT/projects/$project/app/commands
