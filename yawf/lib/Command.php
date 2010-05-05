@@ -16,8 +16,8 @@ error_reporting(E_ALL | E_STRICT);
 class Command
 {
     private $app;
-    private $name;
     private $path;
+    private $name;
     public  $args;
 
     public function __construct()
@@ -36,8 +36,8 @@ class Command
 
         // Create an App object, optionally for testing
 
-        $this->app = $this->args->test ? new App_test($this->name)
-                                       : new App($this->name);
+        $this->app = $this->args->test ? new App_test($this->path)
+                                       : new App($this->path);
 
         // Log output to a log file named "YYYYMMDD.command.log"
 
@@ -78,6 +78,7 @@ class Command
             else
                 $args[$arg] = TRUE;
         }
+        $this->args = $args;
     }
 
     protected function quit($message)
