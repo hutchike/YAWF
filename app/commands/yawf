@@ -129,7 +129,7 @@ End_of_usage;
 
         if (!$domain_name) $this->usage('yawf vhost myapp.org [app_name] [host_ip:port] [host_ip2:port2]', 'You need to choose a domain name for your new vhost file, e.g. "myapp.org"');
 
-        $template_file = "$this->root/admin/template.vhost";
+        $template_file = "$this->root/app/configs/template.vhost";
         $template = file_get_contents($template_file);
         $patterns = array('/{ADDRESS1}/', '/{ADDRESS2}/', '/{APACHE_LOGS_DIR}/', '/{APP}/', '/{DOMAIN}/', '/{YAWF_ROOT}/', '/{#}/');
         $replacements = array($address1, $address2, "$this->root/logs", $app_name, $domain_name, $this->root, $comment);
