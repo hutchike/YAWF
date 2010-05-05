@@ -11,28 +11,45 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+error_reporting(E_ALL | E_STRICT);
+
 class Command
 {
     private $app;
     private $name;
+    private $path;
     public  $args;
 
     public function __construct()
     {
-        $file = basename($_SERVER['SCRIPT_FILENAME']);
-        $path = $_SERVER['PWD'] . '/' . $_SERVER['SCRIPT_FILENAME'];
-        chdir(dirname($path) . '/../..');
-        error_reporting(E_ALL | E_STRICT);
+        $this->parse_command_line();
+        chdir(dirname($this->path) . '/../..');
+
+        // Include from "app" before "yawf"
+
         ini_set('include_path', 'app:yawf:.');
         require_once('lib/utils.php');
-        $this->parse_command_line();
-        $this->app = $this->args->test ? new App_test($file) : new App($file);
+
+        // Convert the args to an Object
+
+        $this->args = new Object($this->args);
+
+        // Create an App object, optionally for testing
+
+        $this->app = $this->args->test ? new App_test($this->name)
+                                       : new App($this->name);
+
+        // Log output to a log file named "YYYYMMDD.command.log"
+
         Log::type('command');
+
         return $this;
     }
 
     public function __destruct()
     {
+        // Log the time it took to run the command given the arguments
+
         $name = $this->name;
         $args = json_encode((array)$this->args);
         YAWF::benchmark("\"$name\" command completed with args $args");
@@ -45,10 +62,12 @@ class Command
 
     protected function parse_command_line()
     {
-        if (!array_key($_SERVER, 'argv')) return;
+        if (!array_key_exists('argv', $_SERVER))
+            $this->quit("Cannot parse the command line");
 
         $args_list = $_SERVER['argv'];
-        $this->name = basename(array_shift($args_list));
+        $this->path = array_shift($args_list);
+        $this->name = basename($this->path);
         $args = array();
         foreach ($args_list as $arg)
         {
@@ -59,7 +78,6 @@ class Command
             else
                 $args[$arg] = TRUE;
         }
-        $this->args = new Object($args);
     }
 
     protected function quit($message)
