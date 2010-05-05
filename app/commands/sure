@@ -10,14 +10,14 @@ class Sure_command extends Command
     {
         load_plugin('Sure');
 
-        $rules = $this->args->rules;
-        $facts = $this->args->facts;
+        $rules = $this->opts->rules;
+        $facts = $this->opts->facts;
         if (!$rules || !$facts) $this->quit(self::USAGE);
 
-        $memory = $this->args->debug ? array('DEBUG' => TRUE) : NULL;
-        $sure = new Sure($this->args->limit);
+        $memory = $this->opts->debug ? array('DEBUG' => TRUE) : NULL;
+        $sure = new Sure($this->opts->limit);
         $sure->with($rules)->given($facts)->infer($memory);
-        if ($this->args->dump) print json_encode((array)$sure->memory());
+        if ($this->opts->dump) print json_encode((array)$sure->memory());
     }
 }
 

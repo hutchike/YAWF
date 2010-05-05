@@ -18,6 +18,7 @@ class Command
     private $app;
     private $path;
     private $name;
+    public  $opts;
     public  $args;
 
     public function __construct()
@@ -30,13 +31,13 @@ class Command
         ini_set('include_path', 'app:yawf:.');
         require_once('lib/utils.php');
 
-        // Convert the args to an Object
+        // Convert the opts to an Object
 
-        $this->args = new Object($this->args);
+        $this->opts = new Object($this->opts);
 
         // Create an App object, optionally for testing
 
-        $this->app = $this->args->test ? new App_test($this->path)
+        $this->app = $this->opts->test ? new App_test($this->path)
                                        : new App($this->path);
 
         // Log output to a log file named "YYYYMMDD.command.log"
@@ -68,16 +69,19 @@ class Command
         $args_list = $_SERVER['argv'];
         $this->path = array_shift($args_list);
         $this->name = basename($this->path);
+        $opts = array();
         $args = array();
         foreach ($args_list as $arg)
         {
             $arg = strtolower($arg);
-            $arg = ltrim($arg, '-'); // remove dashes
-            if (preg_match('/^(\w+)=(.+)$/', $arg, $matches))
-                $args[$matches[1]] = $matches[2];
+            if (preg_match('/^\-+(\w+)$/', $arg, $matches))
+                $opts[$matches[1]] = TRUE;
+            elseif (preg_match('/^\-+(\w+)=(.+)$/', $arg, $matches))
+                $opts[$matches[1]] = $matches[2];
             else
-                $args[$arg] = TRUE;
+                array_push($args, $arg);
         }
+        $this->opts = $opts;
         $this->args = $args;
     }
 
