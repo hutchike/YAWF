@@ -10,13 +10,12 @@ Here's a quick 1, 2, 3 to get you started:
 or > sudo apache2ctl restart
 
 In the YAWF directory (i.e. the $YAWF_ROOT directory) you'll see:
-* admin: This directory holds useful commands like "yawf"
 * app: This folder holds the YAWF application, not the framework
 * apps: This directory holds all *your* web applications
 * logs: This directory *may* hold Apache log files for your apps
 * vhosts: This directory holds the virtual host files for Apache
 * yawf: This directory holds the YAWF framework, used by apps
 
-YAWF is released under the terms of the GNU Public Licence 3.
-If you've got any questions about YAWF, please email me here:
-Kevin Hutchinson <kevin@guanoo.com>
+YAWF is released under the terms of the GNU Lesser General
+Public Licence V3. If you've got any questions about YAWF,
+please email me here: Kevin Hutchinson <kevin@guanoo.com>
