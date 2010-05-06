@@ -73,7 +73,6 @@ class Command
         $args = array();
         foreach ($args_list as $arg)
         {
-            $arg = strtolower($arg);
             if (preg_match('/^\-+(\w+)$/', $arg, $matches))
                 $opts[$matches[1]] = TRUE;
             elseif (preg_match('/^\-+(\w+)=(.+)$/', $arg, $matches))
