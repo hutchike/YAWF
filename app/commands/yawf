@@ -12,37 +12,29 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-class YAWF_admin
+$YAWF_ROOT = getenv('YAWF_ROOT');
+if (!$YAWF_ROOT || !is_dir($YAWF_ROOT) || !is_dir("$YAWF_ROOT/yawf"))
+{
+    print "\nPlease set the YAWF_ROOT environment variable\nto the folder name where YAWF may be found on\nyour computer, e.g. ~/cloud/projects/YAWF\n\n";
+    exit;
+}
+
+require getenv('YAWF_ROOT') . '/yawf/lib/Command.php';
+
+class YAWF_command extends Command
 {
     // Constants
 
     const DEFAULT_ADDRESS = '127.0.0.1:80';
 
-    // Properties
-
-    protected $root;    // root directory from $YAWF_ROOT environment variable
-    protected $prog;    // the name of this program (e.g. "./admin/yawf")
-    protected $cmd;     // the command to run (e.g. "app")
-    protected $args;    // arguments to the command (e.g. "my_new_app")
-
     // Methods
-
-    public function __construct()
-    {
-        $this->root = $_SERVER['YAWF_ROOT'];
-        if (!$this->root) $this->quit("Please set the YAWF_ROOT environment variable\nto the folder name where YAWF may be found on\nyour computer, e.g. ~/Sites/YAWF");
-
-        global $argv;
-        $this->prog = array_shift($argv);
-        $this->cmd = array_shift($argv);
-        $this->args = $argv;
-    }
 
     // Run the chosen command
 
     public function run()
     {
-        switch (strtolower($this->cmd))
+        $cmd = array_shift($this->args);
+        switch (strtolower($cmd))
         {
             case 'app':
                 $this->create_app($this->args(1));
@@ -91,17 +83,18 @@ End_of_usage;
 
     private function create_app($name)
     {
+        global $YAWF_ROOT;
         if (!$name) $this->usage('yawf app myapp.org', 'You need to choose a name for your new app, e.g. "myapp.org"');
 
-        $template = "$this->root/apps/template.app";
-        $new_app = "$this->root/apps/$name";
+        $template = "$YAWF_ROOT/apps/template.app";
+        $new_app = "$YAWF_ROOT/apps/$name";
         if (file_exists("$new_app")) $this->quit("Sorry but the app \"$name\" already exists in this folder:\n$new_app");
 
         // Prepare the application directory tree
 
         mkdir("$new_app");
         $this->recurse_copy("$template/app", "$new_app/app");
-        symlink("$this->root/yawf", "$new_app/yawf");
+        symlink("$YAWF_ROOT/yawf", "$new_app/yawf");
 
         // Make some directories writable
 
@@ -113,28 +106,31 @@ End_of_usage;
 
     private function create_docs()
     {
-        system("phpdoc -o HTML:frames:earthli -d $this->root/yawf -t $this->root/app/public/docs");
+        global $YAWF_ROOT;
+        system("phpdoc -o HTML:frames:earthli -d $YAWF_ROOT/yawf -t $YAWF_ROOT/app/public/docs");
     }
 
     // Create a new YAWF virtual host file
 
     private function create_vhost_file($args)
     {
+        global $YAWF_ROOT;
         list ($domain_name, $app_name, $address1, $address2) = $args;
+
         if (!$app_name) $app_name = $domain_name;
-        if (!file_exists("$this->root/apps/$app_name")) $this->usage('yawf vhost myapp.org myapp', "App \"$app_name\" does not exist in the apps directory here:\n$this->root/apps");
+        if (!file_exists("$YAWF_ROOT/apps/$app_name")) $this->usage('yawf vhost myapp.org myapp', "App \"$app_name\" does not exist in the apps directory here:\n$YAWF_ROOT/apps");
         if (!$address1) $address1 = self::DEFAULT_ADDRESS;
         if (!$address2) $address2 = $address1;
         $comment = ($address1 == $address2 ? '# ' : '');
 
         if (!$domain_name) $this->usage('yawf vhost myapp.org [app_name] [host_ip:port] [host_ip2:port2]', 'You need to choose a domain name for your new vhost file, e.g. "myapp.org"');
 
-        $template_file = "$this->root/app/configs/template.vhost";
+        $template_file = "$YAWF_ROOT/app/configs/template.vhost";
         $template = file_get_contents($template_file);
         $patterns = array('/{ADDRESS1}/', '/{ADDRESS2}/', '/{APACHE_LOGS_DIR}/', '/{APP}/', '/{DOMAIN}/', '/{YAWF_ROOT}/', '/{#}/');
-        $replacements = array($address1, $address2, "$this->root/logs", $app_name, $domain_name, $this->root, $comment);
+        $replacements = array($address1, $address2, "$YAWF_ROOT/logs", $app_name, $domain_name, $YAWF_ROOT, $comment);
         $config = preg_replace($patterns, $replacements, $template);
-        $vhost_file = "$this->root/vhosts/$domain_name";
+        $vhost_file = "$YAWF_ROOT/vhosts/$domain_name";
         file_put_contents($vhost_file, $config);
         $this->quit("A new vhost file has been created here:\n$vhost_file");
     }
@@ -156,16 +152,9 @@ End_of_usage;
         }
         closedir($dir);
     } 
-
-    // Display a message and quit
-
-    private function quit($message)
-    {
-        die("\n$message\n\n");
-    }
 }
 
-$admin = new YAWF_admin();
-$admin->run();
+$yawf = new YAWF_command();
+$yawf->run();
 
 // End of "admin/yawf"
