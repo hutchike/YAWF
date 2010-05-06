@@ -19,7 +19,7 @@ if (!$YAWF_ROOT || !is_dir($YAWF_ROOT) || !is_dir("$YAWF_ROOT/yawf"))
     exit;
 }
 
-require getenv('YAWF_ROOT') . '/yawf/lib/Command.php';
+require "$YAWF_ROOT/yawf/lib/Command.php";
 
 class YAWF_command extends Command
 {
@@ -37,7 +37,7 @@ class YAWF_command extends Command
         switch (strtolower($cmd))
         {
             case 'app':
-                $this->create_app($this->args(1));
+                $this->create_app($this->pad_args(1));
                 break;
 
             case 'doc':
@@ -45,7 +45,7 @@ class YAWF_command extends Command
                 break;
 
             case 'vhost':
-                $this->create_vhost_file($this->args(4));
+                $this->create_vhost_file($this->pad_args(4));
                 break;
 
             default:
@@ -55,7 +55,7 @@ class YAWF_command extends Command
 
     // Return a single argument or an args array of a particular length
 
-    private function args($length)
+    private function pad_args($length)
     {
         $args = $this->args;
         while (count($args) < $length) array_push($args, '');
