@@ -61,8 +61,9 @@ class Command
         // Log the time it took to run the command given the arguments
 
         $name = $this->name;
+        $opts = json_encode((array)$this->opts);
         $args = json_encode((array)$this->args);
-        YAWF::benchmark("\"$name\" command completed with args $args");
+        YAWF::benchmark("\"$name\" command completed with opts $opts and args $args");
     }
 
     public function name()
