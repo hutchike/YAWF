@@ -29,6 +29,7 @@ class YAWF_shell extends Command
 
     public function run()
     {
+        global $app;
         $stdin = fopen ("php://stdin","r");
         print '> ';
         while ($line = fgets($stdin))
@@ -54,6 +55,7 @@ class YAWF_shell extends Command
 }
 
 $ysh = new YAWF_shell(getcwd());
+$app = $ysh->app();
 $ysh->run();
 
 // End of "admin/yawf"

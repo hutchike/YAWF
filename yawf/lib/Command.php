@@ -70,6 +70,11 @@ class Command
         return $this->name;
     }
 
+    public function app()
+    {
+        return $this->app;
+    }
+
     protected function parse_command_line()
     {
         if (!array_key_exists('argv', $_SERVER))
