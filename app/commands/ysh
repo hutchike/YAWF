@@ -34,7 +34,8 @@ class YAWF_shell extends Command
         print '> ';
         while ($line = fgets($stdin))
         {
-            $line = trim($line);
+            $line = rtrim(trim($line), ';');
+            if ($line == 'quit') exit;
             if ($line === '') $line = 'NULL';
             try
             {
