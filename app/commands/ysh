@@ -33,10 +33,12 @@ class YAWF_shell extends Command
         print '> ';
         while ($line = fgets($stdin))
         {
+            $line = trim($line);
+            if ($line === '') $line = 'NULL';
             try
             {
                 $result = NULL;
-                $command_regexp = '/^\s*[a-z]\w*\s+/';
+                $command_regexp = '/^[a-z]\w*\s+/';
                 eval(preg_match($command_regexp, $line) ? "$line;"
                                                         : "\$result=($line);");
                 $out = is_null($result) ? '' : var_export($result, TRUE);
