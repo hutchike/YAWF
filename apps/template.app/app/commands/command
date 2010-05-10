@@ -42,7 +42,13 @@ class App_command extends Command
 
     protected function test()
     {
-        // TODO: Test the app
+        $dir = opendir('app/tests');
+        while ($test = readdir($dir))
+        {
+            if (!preg_match('/\.ysh$/', $test)) continue;
+            system("ysh -test < app/tests/$test");
+        }
+        closedir($dir);
     }
 
     protected function usage()

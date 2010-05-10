@@ -1,0 +1,2 @@
+print 'Application tests go here in the "app/tests" directory'
+print "We're using the " . ($app->is_testing() ? 'test' : 'live') . ' database'
