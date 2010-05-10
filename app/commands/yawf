@@ -96,6 +96,21 @@ End_of_usage;
         $this->recurse_copy("$template/app", "$new_app/app");
         symlink("$YAWF_ROOT/yawf", "$new_app/yawf");
 
+        // Rename the application's command
+
+        $cmd_dir = "$new_app/app/commands";
+        rename("$cmd_dir/command", "$cmd_dir/$name");
+
+        // Make all the commands executable
+
+        $dir = opendir($cmd_dir);
+        while ($command = readdir($dir))
+        {
+            if (preg_match('/\.txt$/i', $command)) continue; // skip text files
+            if (preg_match('/^\w+/', $command)) chmod("$cmd_dir/$command", 0777);
+        }
+        closedir($dir);
+
         // Make some directories writable
 
         $writable_dirs = array('logs', 'tmp/cache', 'tmp/queue', 'tmp/sessions', 'tmp/uploads');
