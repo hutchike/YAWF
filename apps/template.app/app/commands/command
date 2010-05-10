@@ -45,8 +45,8 @@ class App_command extends Command
         $dir = opendir('app/tests');
         while ($test = readdir($dir))
         {
-            if (!preg_match('/\.ysh$/', $test)) continue;
-            system("ysh -test < app/tests/$test");
+            if (!preg_match('/\.yash$/', $test)) continue;
+            system("yash -test < app/tests/$test");
         }
         closedir($dir);
     }

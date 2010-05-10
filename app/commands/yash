@@ -21,7 +21,7 @@ if (!$YAWF_ROOT || !is_dir($YAWF_ROOT) || !is_dir("$YAWF_ROOT/yawf"))
 
 require "$YAWF_ROOT/yawf/lib/Command.php";
 
-class YAWF_shell extends Command
+class Yet_another_shell extends Command
 {
     // Methods
 
@@ -55,8 +55,8 @@ class YAWF_shell extends Command
     }
 }
 
-$ysh = new YAWF_shell(getcwd());
-$app = $ysh->app;
-$ysh->run();
+$yash = new Yet_another_shell(getcwd());
+$app = $yash->app;
+$yash->run();
 
 // End of "admin/yawf"
