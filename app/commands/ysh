@@ -56,7 +56,7 @@ class YAWF_shell extends Command
 }
 
 $ysh = new YAWF_shell(getcwd());
-$app = $ysh->app();
+$app = $ysh->app;
 $ysh->run();
 
 // End of "admin/yawf"

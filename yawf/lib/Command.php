@@ -15,11 +15,11 @@ error_reporting(E_ALL | E_STRICT);
 
 class Command
 {
-    private $app;
-    private $path;
-    private $name;
-    public  $opts;
-    public  $args;
+    // Command properties are all public for convenience
+
+    public $app;
+    public $path, $name;
+    public $opts, $args;
 
     public function __construct($dir = NULL)
     {
@@ -64,16 +64,6 @@ class Command
         $opts = json_encode((array)$this->opts);
         $args = json_encode((array)$this->args);
         YAWF::benchmark("\"$name\" command completed with opts $opts and args $args");
-    }
-
-    public function name()
-    {
-        return $this->name;
-    }
-
-    public function app()
-    {
-        return $this->app;
     }
 
     protected function parse_command_line()
