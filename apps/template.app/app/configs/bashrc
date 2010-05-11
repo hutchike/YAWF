@@ -1,3 +1,6 @@
 export PATH=$PATH:$CLOUD_ROOT/projects/$project/app/commands
 export ${PROJECT}_ROOT=$CLOUD_ROOT/projects/$project
 export ${PROJECT}_COMMAND=$CLOUD_ROOT/projects/$project/app/commands/$project
+
+# The project host is used to configure /etc/hosts, NGiNX and Apache servers
+export ${PROJECT}_HOST=replace-this-domain-name.org
