@@ -37,6 +37,7 @@ class Command
 
         // Include from "app" before "yawf"
 
+        if (!is_dir('yawf')) $this->quit('No "yawf" directory in ' . getcwd());
         ini_set('include_path', 'app:yawf:.');
         require_once('lib/utils.php');
 
@@ -104,7 +105,7 @@ class YAWF
 
     public static function benchmark($info)
     {
-        if (!BENCHMARKING_ON) return;
+        if (!defined("BENCHMARKING_ON") || !BENCHMARKING_ON) return;
         global $__YAWF_start_time__; // Compute benchmark times in milliseconds
         $msecs = (int)( 1000 * ( microtime(TRUE) - $__YAWF_start_time__ ) );
         Log::alert($info . " after $msecs ms"); // "Log" helper loaded by run()
