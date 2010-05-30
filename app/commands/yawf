@@ -134,6 +134,9 @@ End_of_usage;
 
         if (!$app_name) $app_name = $domain_name;
         if (!file_exists("$YAWF_ROOT/apps/$app_name")) $this->usage('yawf vhost myapp.org myapp', "App \"$app_name\" does not exist in the apps directory here:\n$YAWF_ROOT/apps");
+        $internal_ip = getenv('INTERNAL_IP');
+        $apache_port = getenv('APACHE_PORT') ? getenv('APACHE_PORT') : 80;
+        if (!$address1 && $internal_ip) $address1 = "$internal_ip:$apache_port";
         if (!$address1) $address1 = self::DEFAULT_ADDRESS;
         if (!$address2) $address2 = $address1;
         $comment = ($address1 == $address2 ? '# ' : '');
