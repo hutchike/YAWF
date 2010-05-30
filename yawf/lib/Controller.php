@@ -43,8 +43,8 @@ class Controller extends YAWF
         // Call the controller's view method
 
         $this->before();
-        $view = $this->view;
-        if (method_exists($this, $view)) $this->$view();
+        $method = preg_replace('/-/', '_', $this->view);
+        if (method_exists($this, $method)) $this->$method();
         $this->after();
 
         // Render the view with a data array

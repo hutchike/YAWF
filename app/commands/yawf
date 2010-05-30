@@ -84,7 +84,7 @@ End_of_usage;
     private function create_app($name)
     {
         global $YAWF_ROOT;
-        if (!$name) $this->usage('yawf app myapp.org', 'You need to choose a name for your new app, e.g. "myapp.org"');
+        if (!$name) $this->usage('yawf app app_name', 'You need to choose a name for your new app, e.g. "myapp"');
 
         $template = "$YAWF_ROOT/apps/template.app";
         $new_app = "$YAWF_ROOT/apps/$name";
@@ -133,15 +133,19 @@ End_of_usage;
         list ($domain_name, $app_name, $address1, $address2) = $args;
 
         if (!$app_name) $app_name = $domain_name;
+<<<<<<< HEAD
         if (!file_exists("$YAWF_ROOT/apps/$app_name")) $this->usage('yawf vhost myapp.org myapp', "App \"$app_name\" does not exist in the apps directory here:\n$YAWF_ROOT/apps");
         $internal_ip = getenv('INTERNAL_IP');
         $apache_port = getenv('APACHE_PORT') ? getenv('APACHE_PORT') : 80;
         if (!$address1 && $internal_ip) $address1 = "$internal_ip:$apache_port";
+=======
+        if (!file_exists("$YAWF_ROOT/apps/$app_name")) $this->usage('yawf vhost mysite.org [app_name]', "App \"$app_name\" does not exist in the apps directory here:\n$YAWF_ROOT/apps");
+>>>>>>> bafa0f17c05486e08d43e6d55a8a862ceb9bb6b2
         if (!$address1) $address1 = self::DEFAULT_ADDRESS;
         if (!$address2) $address2 = $address1;
         $comment = ($address1 == $address2 ? '# ' : '');
 
-        if (!$domain_name) $this->usage('yawf vhost myapp.org [app_name] [host_ip:port] [host_ip2:port2]', 'You need to choose a domain name for your new vhost file, e.g. "myapp.org"');
+        if (!$domain_name) $this->usage('yawf vhost mysite.org [app_name] [host_ip:port] [host_ip2:port2]', 'You need to choose a domain name for your new vhost file, e.g. "myapp.org"');
 
         $template_file = "$YAWF_ROOT/app/configs/template.vhost";
         $template = file_get_contents($template_file);
