@@ -44,6 +44,10 @@ class YAWF_command extends Command
                 $this->create_docs();
                 break;
 
+            case 'perms':
+                $this->set_permissions();
+                break;
+
             case 'vhost':
                 $this->create_vhost_file($this->pad_args(4));
                 break;
@@ -73,6 +77,7 @@ usage: yawf ACTION [arg1 arg2 ...]
 where ACTION is one of:
 * app    : Create a new YAWF application
 * doc    : Create fresh YAWF documentation
+* perms  : Set the folder permissions
 * vhost  : Create a virtual host file
 * help   : Display this help message
 End_of_usage;
@@ -101,11 +106,23 @@ End_of_usage;
         $cmd_dir = "$new_app/app/commands";
         rename("$cmd_dir/command", "$cmd_dir/$name");
 
+        // Set all the file and folder perms
+
+        $this->set_permissions_for($new_app);
+    }
+
+    private function set_permissions_for($app_name)
+    {
+        global $YAWF_ROOT;
+        $app_dir = "$YAWF_ROOT/apps/$app_name/app";
+        $cmd_dir = "$app_dir/commands";
+
         // Make all the commands executable
 
         $dir = opendir($cmd_dir);
         while ($command = readdir($dir))
         {
+            if (preg_match('/readme/i', $command)) continue; // skip a "README"
             if (preg_match('/\.txt$/i', $command)) continue; // skip text files
             if (preg_match('/^\w+/', $command)) chmod("$cmd_dir/$command", 0777);
         }
@@ -114,7 +131,7 @@ End_of_usage;
         // Make some directories writable
 
         $writable_dirs = array('logs', 'tmp/cache', 'tmp/queue', 'tmp/sessions', 'tmp/uploads');
-        foreach ($writable_dirs as $dir) chmod("$new_app/app/$dir", 0777);
+        foreach ($writable_dirs as $dir) chmod("$app_dir/$dir", 0777);
     }
 
     // Create doc files using "phpdoc"
@@ -123,6 +140,33 @@ End_of_usage;
     {
         global $YAWF_ROOT;
         system("phpdoc -o HTML:frames:earthli -d $YAWF_ROOT/yawf -t $YAWF_ROOT/app/public/docs");
+    }
+
+    // Set the application folder permissions
+
+    private function set_permissions()
+    {
+        global $YAWF_ROOT;
+        $apps = $this->args;
+        if (!count($apps) || $apps[0] == 'all')
+        {
+            $apps = array();
+            $dir = opendir("$YAWF_ROOT/apps/");
+            while ($app_name = readdir($dir))
+            {
+                if (preg_match('/^\./', $app_name)) continue;
+                $folder = "$YAWF_ROOT/apps/$app_name";
+                if (is_dir($folder) || is_link($folder)) $apps[] = $app_name;
+            }
+            closedir($dir);
+        }
+
+        foreach ($apps as $app_name)
+        {
+            $folder = "$YAWF_ROOT/apps/$app_name";
+            if (!is_dir($folder) && !is_link($folder)) $this->usage('yawf perms app_name [app_name2...]', "App \"$app_name\" does not exist in the apps directory here:\n$YAWF_ROOT/apps");
+            $this->set_permissions_for($app_name);
+        }
     }
 
     // Create a new YAWF virtual host file
