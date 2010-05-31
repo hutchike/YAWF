@@ -119,7 +119,7 @@ End_of_usage;
 
         // Make all the commands executable
 
-        if (!is_dir($cmd_dir)) print "WARNING: Folder $cmd_dir does not exist\n";
+        if (!is_dir($cmd_dir)) print "WARNING: Folder does not exist: $cmd_dir\n";
         $dir = opendir($cmd_dir);
         while ($command = readdir($dir))
         {
@@ -138,7 +138,7 @@ End_of_usage;
             if (is_dir($writeable_dir))
                 chmod($writeable_dir, 0777);
             else
-                print "WARNING: Folder $writeable_dir does not exist\n";
+                print "WARNING: Folder does not exist: $writeable_dir\n";
         }
     }
 
