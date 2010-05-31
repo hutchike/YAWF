@@ -119,15 +119,16 @@ End_of_usage;
 
         // Make all the commands executable
 
-        if (!is_dir($cmd_dir)) print "WARNING: Folder does not exist: $cmd_dir\n";
-        $dir = opendir($cmd_dir);
-        while ($command = readdir($dir))
+        if (is_dir($cmd_dir))
         {
-            if (preg_match('/readme/i', $command)) continue; // skip a "README"
-            if (preg_match('/\.txt$/i', $command)) continue; // skip text files
-            if (preg_match('/^\w+/', $command)) chmod("$cmd_dir/$command", 0777);
+            $dir = opendir($cmd_dir);
+            while ($command = readdir($dir))
+            {
+                if (preg_match('/(^\.|^readme|\.txt$)/i', $command)) continue;
+                chmod("$cmd_dir/$command", 0777);
+            }
+            closedir($dir);
         }
-        closedir($dir);
 
         // Make some directories writable
 
@@ -135,10 +136,7 @@ End_of_usage;
         foreach ($writable_dirs as $dir)
         {
             $writeable_dir = "$app_dir/$dir";
-            if (is_dir($writeable_dir))
-                chmod($writeable_dir, 0777);
-            else
-                print "WARNING: Folder does not exist: $writeable_dir\n";
+            if (is_dir($writeable_dir)) chmod($writeable_dir, 0777);
         }
     }
 
