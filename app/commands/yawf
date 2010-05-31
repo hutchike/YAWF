@@ -119,6 +119,7 @@ End_of_usage;
 
         // Make all the commands executable
 
+        if (!is_dir($cmd_dir)) print "WARNING: Folder $cmd_dir does not exist\n";
         $dir = opendir($cmd_dir);
         while ($command = readdir($dir))
         {
@@ -131,7 +132,14 @@ End_of_usage;
         // Make some directories writable
 
         $writable_dirs = array('logs', 'tmp/cache', 'tmp/queue', 'tmp/sessions', 'tmp/uploads');
-        foreach ($writable_dirs as $dir) chmod("$app_dir/$dir", 0777);
+        foreach ($writable_dirs as $dir)
+        {
+            $writeable_dir = "$app_dir/$dir";
+            if (is_dir($writeable_dir))
+                chmod($writeable_dir, 0777);
+            else
+                print "WARNING: Folder $writeable_dir does not exist\n";
+        }
     }
 
     // Create doc files using "phpdoc"
