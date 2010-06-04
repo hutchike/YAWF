@@ -38,7 +38,7 @@ class MySQL_i extends YAWF implements Connector
 
     public function escape($sql)
     {
-        return mysql_real_escape_string($sql);
+        return $this->mysqli->real_escape_string($sql);
     }
 
     public function query($sql)

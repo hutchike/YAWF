@@ -175,6 +175,7 @@ class Model extends YAWF
 
     public static function escape($sql)
     {
+        self::connect();
         return self::$connector->escape($sql);
     }
 
