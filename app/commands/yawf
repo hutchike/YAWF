@@ -199,6 +199,7 @@ End_of_usage;
         $replacements = array($address1, $address2, "$YAWF_ROOT/logs", $app_name, $domain_name, $YAWF_ROOT, $comment);
         $config = preg_replace($patterns, $replacements, $template);
         $vhost_file = "$YAWF_ROOT/vhosts/$domain_name";
+        if (!is_dir("$YAWF_ROOT/vhosts")) mkdir("$YAWF_ROOT/vhosts");
         file_put_contents($vhost_file, $config);
         $this->quit("A new vhost file has been created here:\n$vhost_file");
     }
