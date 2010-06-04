@@ -260,7 +260,7 @@ class Model extends YAWF
                 substr($condition, 0, 4) === 'in (') $op = '';  // or "in ()"
             if ($clause) $clause .= ' and ';
             if ($field === 'password') $condition = $this->password($condition);
-            $condition = addslashes($condition);
+            $condition = $this->escape($condition);
             if ($op) $condition = '"' . $condition . '"';
             $clause .= $field . $op . $condition;
         }
@@ -292,7 +292,7 @@ class Model extends YAWF
             $fields .= $field;
             if ($values) $values .= ',';
             if ($field === 'password') $value = $this->password($value);
-            $values .= '"' . addslashes($value) . '"';
+            $values .= '"' . $this->escape($value) . '"';
         }
         $this->query("insert into $table ($fields) values ($values)");
 
@@ -325,7 +325,7 @@ class Model extends YAWF
             if (!array_key_exists($field, $this->to_update)) continue;
 
             if ($field === 'password') $value = $this->password($value);
-            if ($field !== $id_field) $updates .= $field . '="' . addslashes($value) . '",';
+            if ($field !== $id_field) $updates .= $field . '="' . $this->escape($value) . '",';
         }
         $updates = rtrim($updates, ','); // remove final comma
         if (!$updates) return;
