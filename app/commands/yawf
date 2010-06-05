@@ -44,6 +44,10 @@ class YAWF_command extends Command
                 $this->create_docs();
                 break;
 
+            case 'data':
+                $this->create_databases_for($this->pad_args(1));
+                break;
+
             case 'perms':
                 $this->set_permissions();
                 break;
@@ -76,8 +80,9 @@ usage: yawf ACTION [arg1 arg2 ...]
 
 where ACTION is one of:
 * app    : Create a new YAWF application
+* data   : Update an app's database schema
 * doc    : Create fresh YAWF documentation
-* perms  : Set the folder permissions
+* perms  : Set the file/folder permissions
 * vhost  : Create a virtual host file
 * help   : Display this help message
 End_of_usage;
@@ -146,6 +151,48 @@ End_of_usage;
     {
         global $YAWF_ROOT;
         system("phpdoc -o HTML:frames:earthli -d $YAWF_ROOT/yawf -t $YAWF_ROOT/app/public/docs");
+    }
+
+    // (Re)create databases ("live" and "test") using the "mysql" command
+
+    private function create_databases_for($app_name)
+    {
+        global $YAWF_ROOT;
+        if (!$app_name) $this->usage('yawf data app_name', 'You need to provide the name of your app, e.g. "myapp"');
+
+        // Get the app dir and app config file
+
+        $app_dir = "$YAWF_ROOT/apps/$app_name/app";
+        $config_file = "$app_dir/configs/app.yaml";
+        if (!is_dir($app_dir)) $this->usage('yawf data app_name', "No app folder found here: $app_dir");
+        if (!is_file($config_file)) $this->usage('yawf data app_name', "No config file found here: $config_file");
+
+        // Load the app config file and schema
+
+        load_helper('YAML');
+        $config = YAML::load_file("$app_dir/configs/app.yaml");
+        $database = $config['database'];
+        $connector = array_key($database, 'connector');
+        $username = array_key($database, 'username', 'root');
+        $password = array_key($database, 'password', '');
+        $database_live = array_key($database, 'database_live', "${app_name}_live");
+        $database_test = array_key($database, 'database_test', "${app_name}_test");
+        $schema_file = "$app_dir/data/" . array_key($database, 'schema', "$app_name.sql");
+        if (!is_file($schema_file)) $this->usage('yawf data app_name', "No schema file found here: $schema_file");
+        if (preg_match('/mysql/i', $connector))
+        {
+            $login = "-u$username" . ($password ? " -p$password" : '');
+            $dump_file = "/tmp/$database_live.dump";
+            system("mysqldump --no-create-info --complete-insert $login $database_live > $dump_file");
+            system("mysql $login $database_live <$schema_file");
+            system("mysql $login $database_live <$dump_file");
+            system("mysql $login $database_test <$schema_file");
+            unlink($dump_file);
+        }
+        else
+        {
+            print "Sorry but database connector $connector isn't supported yet";
+        }
     }
 
     // Set the application folder permissions
