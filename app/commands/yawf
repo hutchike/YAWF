@@ -158,14 +158,15 @@ End_of_usage;
     private function create_databases_for($app_name)
     {
         global $YAWF_ROOT;
-        if (!$app_name) $this->usage('yawf data app_name', 'You need to provide the name of your app, e.g. "myapp"');
+        $usage = 'yawf [-secure] data app_name';
+        if (!$app_name) $this->usage($usage, 'You need to provide the name of your app, e.g. "myapp"');
 
         // Get the app dir and app config file
 
         $app_dir = "$YAWF_ROOT/apps/$app_name/app";
         $config_file = "$app_dir/configs/app.yaml";
-        if (!is_dir($app_dir)) $this->usage('yawf data app_name', "No app folder found here: $app_dir");
-        if (!is_file($config_file)) $this->usage('yawf data app_name', "No config file found here: $config_file");
+        if (!is_dir($app_dir)) $this->usage($usage, "No app folder found here: $app_dir");
+        if (!is_file($config_file)) $this->usage($usage, "No config file found here: $config_file");
 
         // Load the app config file and schema
 
@@ -178,7 +179,7 @@ End_of_usage;
         $database_live = array_key($database, 'database_live', "${app_name}_live");
         $database_test = array_key($database, 'database_test', "${app_name}_test");
         $schema_file = "$app_dir/data/" . array_key($database, 'schema', "$app_name.sql");
-        if (!is_file($schema_file)) $this->usage('yawf data app_name', "No schema file found here: $schema_file");
+        if (!is_file($schema_file)) $this->usage($usage, "No schema file found here: $schema_file");
         if (preg_match('/mysql/i', $connector))
         {
             $login = "-u$username" . ($password ? " -p$password" : '');
@@ -187,7 +188,7 @@ End_of_usage;
             system("mysql $login $database_live <$schema_file");
             system("mysql $login $database_live <$dump_file");
             system("mysql $login $database_test <$schema_file");
-            unlink($dump_file);
+            if ($this->opts->secure) unlink($dump_file);
         }
         else
         {
