@@ -76,13 +76,14 @@ class Model extends YAWF
         if ($this->table) return $this->table;
         $this->table = array_key(self::$tables, get_class($this));
         if ($this->table) return $this->table;
-        return $this->set_table(Text::tableize(get_class($this)));
+        $this->set_table(Text::tableize(get_class($this)));
+        return $this->table;
     }
 
     protected function set_table($table)
     {
         $this->table = self::$tables[get_class($this)] = $table;
-        return $this->table;
+        return $this;
     }
 
     public function set_order($order)
@@ -106,7 +107,7 @@ class Model extends YAWF
     public function set_id_field($field)
     {
         $table = $this->get_table();
-        self::$id_fields[$table] = $field;
+        $this->id_field = self::$id_fields[$table] = $field;
         return $this;
     }
 
