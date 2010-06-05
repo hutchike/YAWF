@@ -19,6 +19,7 @@ class Model extends YAWF
     private static $connector;
     private static $database;
     private static $validators = array();
+    private static $tables = array();
     private static $id_fields = array();
     private static $timestamp = array();
     private static $virtual = array();
@@ -73,13 +74,15 @@ class Model extends YAWF
     protected function get_table()
     {
         if ($this->table) return $this->table;
-        $this->table = Text::tableize(get_class($this));
-        return $this->table;
+        $this->table = array_key(self::$tables, get_class($this));
+        if ($this->table) return $this->table;
+        return $this->set_table(Text::tableize(get_class($this)));
     }
 
     protected function set_table($table)
     {
-        $this->table = $table;
+        $this->table = self::$tables[get_class($this)] = $table;
+        return $this->table;
     }
 
     public function set_order($order)
