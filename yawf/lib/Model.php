@@ -320,6 +320,11 @@ class Model extends YAWF
         if ($this->has_timestamp('modified_at'))
             $this->data['modified_at'] = date('Y-m-d H:i:s');
 
+        // Did we provide a list of fields to update?
+
+        $field_list = func_get_args();
+        foreach ($field_list as $field) $this->to_update[$field] = TRUE;
+
         // Update the record values that have changed
 
         $table = $this->get_table();
