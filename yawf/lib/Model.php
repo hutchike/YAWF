@@ -260,8 +260,8 @@ class Model extends YAWF
         foreach ($conditions as $field => $condition)
         {
             if ($this->is_virtual($field)) continue;
-            $op = (substr($condition, 0, 1) === '%' ? ' like ' : '=');
-            if (preg_match('/^([<>]=?)\s+(.*)$/', $condition, $matches))
+            $op = ($condition !== trim($condition, '%') ? ' like ' : '=');
+            if (preg_match('/^([<>]=?)\s*(.*)$/', $condition, $matches))
             {
                 $op = $matches[1];
                 $condition = $matches[2];
