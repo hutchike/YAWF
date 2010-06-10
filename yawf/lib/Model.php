@@ -266,15 +266,15 @@ class Model extends YAWF
                 $op = $matches[1];
                 $condition = $matches[2];
             }
-            elseif (preg_replace('/^in (/', '', $condition))
+            elseif (preg_match('/^in \((.*)\)$/', $condition, $matches))
             {
                 $op = 'in';
-                $condition = $this->escape_in($condition);
+                $condition = $this->escape_in($matches[1]);
             }
             if ($clause) $clause .= ' and ';
             if ($field === 'password') $condition = $this->password($condition);
             if ($op != 'in') $condition = '"' . $this->escape($condition) . '"';
-            $clause .= $field . $op . $condition;
+            $clause .= "$field $op $condition";
         }
         return $clause ? "where $clause" : NULL;
     }
