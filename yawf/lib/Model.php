@@ -177,6 +177,19 @@ class Model extends YAWF
         self::$connector = NULL;
     }
 
+    public static function quote($sql)
+    {
+        return '"' . $this->escape($sql) . '"';
+    }
+
+    public static function quote_in($clause)
+    {
+        $parts = preg_split('/,\s*/', trim($clause, '()'));
+        $quoted = array();
+        foreach ($parts as $part) $quoted[] = $this->quote($part);
+        return '(' . join(',', $quoted) . ')';
+    }
+
     public static function escape($sql)
     {
         self::connect();
@@ -269,11 +282,11 @@ class Model extends YAWF
             elseif (preg_match('/^in \((.*)\)$/', $condition, $matches))
             {
                 $op = 'in';
-                $condition = $this->escape_in($matches[1]);
+                $condition = $this->quote_in($matches[1]);
             }
             if ($clause) $clause .= ' and ';
             if ($field === 'password') $condition = $this->password($condition);
-            if ($op != 'in') $condition = '"' . $this->escape($condition) . '"';
+            if ($op != 'in') $condition = $this->quote($condition);
             $clause .= "$field $op $condition";
         }
         return $clause ? "where $clause" : NULL;
@@ -304,7 +317,7 @@ class Model extends YAWF
             $fields .= $field;
             if ($values) $values .= ',';
             if ($field === 'password') $value = $this->password($value);
-            $values .= '"' . $this->escape($value) . '"';
+            $values .= $this->quote($value);
         }
         $this->query("insert into $table ($fields) values ($values)");
 
@@ -342,7 +355,7 @@ class Model extends YAWF
             if (!array_key_exists($field, $this->to_update)) continue;
 
             if ($field === 'password') $value = $this->password($value);
-            if ($field !== $id_field) $updates .= $field . '="' . $this->escape($value) . '",';
+            if ($field !== $id_field) $updates .= $field . '=' . $this->quote($value) . ',';
         }
         $updates = rtrim($updates, ','); // remove final comma
         if (!$updates) return;
@@ -362,7 +375,7 @@ class Model extends YAWF
         // Delete the record from the table
 
         $table = $this->get_table();
-        $this->query("delete from $table where $id_field=" . '"' . $this->escape($this->data[$id_field]) . '"');
+        $this->query("delete from $table where $id_field=" . $this->quote($this->data[$id_field]));
         $this->data[$id_field] = NULL;
         return $this;
     }
@@ -384,17 +397,6 @@ class Model extends YAWF
     protected function password($text)
     {
         return sha1(md5($text));
-    }
-
-    protected function escape_in($condition)
-    {
-        $parts = preg_split('/,\s*/', trim($condition, '()'));
-        $escaped = array();
-        foreach ($parts as $part)
-        {
-            $escaped[] = '"' . $this->escape($part) . '"';
-        }
-        return '(' . join(',', $escaped) . ')';
     }
 
     // ----------------------- Model validation methods ------------------------
