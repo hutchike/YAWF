@@ -261,12 +261,19 @@ class Model extends YAWF
         {
             if ($this->is_virtual($field)) continue;
             $op = (substr($condition, 0, 1) === '%' ? ' like ' : '=');
-            if (preg_match('/^[<>]/', $condition) ||            // "<" or ">"
-                substr($condition, 0, 4) === 'in (') $op = '';  // or "in ()"
+            if (preg_match('/^([<>]=?)\s+(.*)$/', $condition, $matches))
+            {
+                $op = $matches[1];
+                $condition = $matches[2];
+            }
+            elseif (preg_replace('/^in (/', '', $condition))
+            {
+                $op = 'in';
+                $condition = $this->escape_in($condition);
+            }
             if ($clause) $clause .= ' and ';
             if ($field === 'password') $condition = $this->password($condition);
-            $condition = $this->escape($condition);
-            if ($op) $condition = '"' . $condition . '"';
+            if ($op != 'in') $condition = '"' . $this->escape($condition) . '"';
             $clause .= $field . $op . $condition;
         }
         return $clause ? "where $clause" : NULL;
@@ -355,7 +362,7 @@ class Model extends YAWF
         // Delete the record from the table
 
         $table = $this->get_table();
-        $this->query("delete from $table where $id_field=" . $this->data[$id_field]);
+        $this->query("delete from $table where $id_field=" . '"' . $this->escape($this->data[$id_field]) . '"');
         $this->data[$id_field] = NULL;
         return $this;
     }
@@ -377,6 +384,17 @@ class Model extends YAWF
     protected function password($text)
     {
         return sha1(md5($text));
+    }
+
+    protected function escape_in($condition)
+    {
+        $parts = preg_split('/,\s*/', trim($condition, '()'));
+        $escaped = array();
+        foreach ($parts as $part)
+        {
+            $escaped[] = '"' . $this->escape($part) . '"';
+        }
+        return '(' . join(',', $escaped) . ')';
     }
 
     // ----------------------- Model validation methods ------------------------
