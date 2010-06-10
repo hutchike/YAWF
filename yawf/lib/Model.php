@@ -179,14 +179,14 @@ class Model extends YAWF
 
     public static function quote($sql)
     {
-        return '"' . $this->escape($sql) . '"';
+        return '"' . self::escape($sql) . '"';
     }
 
     public static function quote_in($clause)
     {
         $parts = preg_split('/,\s*/', trim($clause, '()'));
         $quoted = array();
-        foreach ($parts as $part) $quoted[] = $this->quote($part);
+        foreach ($parts as $part) $quoted[] = self::quote($part);
         return '(' . join(',', $quoted) . ')';
     }
 
