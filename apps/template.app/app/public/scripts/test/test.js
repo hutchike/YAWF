@@ -200,6 +200,12 @@ var YAWF = {
     this.testRunners[url] = func;
   },
 
+  then_open: function(url) {
+    this.then( function() {
+      this.open(url);
+    });
+  },
+
   open: function(url) {
     if (!/\.\w+$/.exec(url)) url += '.test'; // TODO: what about query strings?
     if (!/^http/.exec(url)) {
