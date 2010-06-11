@@ -71,6 +71,16 @@ class Model extends YAWF
         return $value;
     }
 
+    public function data()
+    {
+        return $this->data;
+    }
+
+    public function fields()
+    {
+        return array_keys($this->data);
+    }
+
     protected function get_table()
     {
         if ($this->table) return $this->table;
