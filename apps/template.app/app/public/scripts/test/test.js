@@ -55,7 +55,7 @@ var YAWF = {
     this.setupTestRunners();
     this.duration = this.stopwatch;
     this.stopwatch = 0;
-    this.callbackInt = setInterval(function() { YAWF.runTestActions(); }, this.interval);
+    this.callbackInt = setInterval(function() { YAWF.runTestActions() }, this.interval);
   },
 
   // Modify all the links on the page so that they'll load more ".test" pages
@@ -111,7 +111,7 @@ var YAWF = {
     for (i = 0; i < this.testActions.length; i++) {
       var action = this.testActions[i];
       if (action.func && action.msecs <= this.stopwatch) {
-        if (!action.func.call(this)) action.func = null;
+        if ('PAUSED' !== action.func.call(this)) action.func = null;
       }
     }
     this.stopwatch += this.interval;
@@ -154,18 +154,19 @@ var YAWF = {
     html += '</div>';
     this.console.innerHTML += html;
     this.logLines.push((passed ? 'passed' : 'failed') + ': Should ' + test);
+    return passed;
   },
 
   // Add a test result that passed :-)
 
   passed: function(test) {
-    this.addTestResult(test, true);
+    return this.addTestResult(test, true);
   },
 
   // Add a test result that failed :-/
 
   failed: function(test) {
-    this.addTestResult(test, false);
+    return this.addTestResult(test, false);
   },
 
 // ------------------------------------------------------------------------
@@ -196,8 +197,19 @@ var YAWF = {
     this.console.innerHTML = '';
   },
 
+  to_function: function(func) {
+    if (typeof func === 'string') eval('func = function() { with (YAWF) { ' + func + ' } };');
+    return func;
+  },
+
   when_open: function(url, func) {
-    this.testRunners[url] = func;
+    this.testRunners[url] = this.to_function(func);
+  },
+
+  then_open: function(url) {
+    this.then( function() {
+      this.open(url);
+    });
   },
 
   open: function(url) {
@@ -212,11 +224,11 @@ var YAWF = {
 
   after: function(msecs, func) {
     this.stopwatch += msecs;
-    this.testActions.push({msecs: this.stopwatch, func: func});
+    this.testActions.push({msecs: this.stopwatch, func: this.to_function(func)});
   },
 
   then: function(func) {
-    this.after(this.interval, func);
+    this.after(this.interval, this.to_function(func));
   },
 
   wait: function(msecs) {
@@ -224,6 +236,7 @@ var YAWF = {
   },
 
   wait_for: function(func) {
+    func = this.to_function(func);
     this.then(function() {
       if (this.interval) {
         this.original = this.interval;
@@ -231,7 +244,7 @@ var YAWF = {
       }
       var ready = func.call(this);
       if (ready) this.interval = this.original;
-      return (!ready); // or we may be deleted!
+      return (ready ? ready : 'PAUSED');
     });
   },
 
@@ -239,7 +252,7 @@ var YAWF = {
     var regexp = new RegExp(text);
     if (regexp.exec(this.view.document.body.innerHTML)) {
       this.addTestWhenHeader('found "' + text + '"');
-      func.call(this);
+      this.to_function(func).call(this);
     }
   },
 
@@ -247,22 +260,40 @@ var YAWF = {
     var regexp = new RegExp(text);
     if (!regexp.exec(this.view.document.body.innerHTML)) {
       this.addTestWhenHeader('not found "' + text + '"');
-      func.call(this);
+      this.to_function(func).call(this);
     }
   },
 
-  input: function(form, field, value) {
+  input: function(form_name, field, value) {
     this.then(function() {
-      this.view.document.forms[form][field].value = value;
-      this.should('have a form field called "' + field + '"', this.view.document.forms[form][field]);
-      this.should('hold the value "' + value + '"', this.view.document.forms[form][field].value == value);
+      var form = this.view.document.forms[form_name];
+      this.should('have a form field called "' + field + '"', form[field]);
+      form[field].value = value;
+      this.should('hold the value "' + value + '"', form[field].value == value);
     });
   },
 
-  click: function(form, field) {
+  input_id: function(field_id, value) {
     this.then(function() {
-      this.should('click the "' + field + '" button', this.view.document.forms[form][field].click);
-      this.view.document.forms[form][field].click();
+      var field = this.find_id(field_id);
+      this.should('have a field with id ' + field_id, field);
+      field.value = value;
+    });
+  },
+
+  click: function(form_name, field) {
+    this.then(function() {
+      var button = this.view.document.forms[form_name][field];
+      this.should('click the "' + field + '" button', button.click);
+      button.click();
+    });
+  },
+
+  click_id: function(button_id) {
+    this.then(function() {
+      var button = this.find_id(button_id);
+      this.should('click the "' + button_id + '" button', button.click);
+      button.click();
     });
   },
 
@@ -282,40 +313,51 @@ var YAWF = {
     return new String(el.innerText ? el.innerText : (el.textContent ? el.textContent : ''));
   },
 
-  submit: function(form) {
+  submit: function(form_name) {
     this.then(function() {
-      this.should('Submit a form called "' + form + '"', this.view.document.forms[form]);
-      this.view.document.forms[form].submit();
+      var form = this.view.document.forms[form_name];
+      this.should('Submit a form called "' + form_name + '"', form);
+      form.submit();
     });
   },
 
   should: function(test, passed) {
     this.then(function() {
-      if (passed) this.passed(test);
-      else this.failed(test);
+      if (passed) return this.passed(test);
+      else return this.failed(test);
     });
   },
 
   should_not: function(test, failed) {
     this.then(function() {
       test = 'not ' + test;
-      if (failed) this.failed(test);
-      else this.passed(test);
+      if (failed) return this.failed(test);
+      else return this.passed(test);
     });
   },
 
   should_find: function(text) {
     var test = 'find "' + text + '"';
-    this.should(test, this.find(new RegExp(text)));
+    return this.should(test, this.find(new RegExp(text)));
   },
 
   should_not_find: function(text) {
     var test = 'find "' + text + '"';
-    this.should_not(test, this.find(new RegExp(text)));
+    return this.should_not(test, this.find(new RegExp(text)));
   },
 
   find: function(regexp) {
     return regexp.exec(this.view.document.body.innerHTML);
+  },
+
+  should_find_id: function(id) {
+    var test = 'find id "' + id + '"';
+    return this.should(test, this.find_id(id));
+  },
+
+  should_not_find_id: function(id) {
+    var test = 'find id "' + id + '"';
+    return this.should_not(test, this.find_id(id));
   },
 
   find_id: function(id) {
