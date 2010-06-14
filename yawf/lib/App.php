@@ -51,7 +51,7 @@ class App extends YAWF
         // Use the content type to select a database
 
         require_once 'lib/Model.php';
-        $this->is_testing = ($_REQUEST['test'] || $content_type === 'test');
+        $this->is_testing = array_key($_REQUEST, 'test') || $content_type === 'test';
         Model::set_database($this->is_testing ? DB_DATABASE_TEST : DB_DATABASE_LIVE);
     }
 
