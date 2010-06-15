@@ -38,7 +38,7 @@ class Model extends YAWF
 
         // $this->set_id_field('table_id_field');
         // $this->set_virtual('transient_field');
-        // $this->set_timestamp('created_at', 'modified_at');
+        // $this->set_timestamp('created_at', 'updated_at');
         // $this->validates('email', 'is_valid_email');
     }
 
@@ -345,10 +345,10 @@ class Model extends YAWF
         $id_field = $this->get_id_field();
         if (!array_key($this->data, $id_field)) return;
 
-        // Apply an optional "modified_at" timestamp
+        // Apply an optional "updated_at" timestamp
 
-        if ($this->has_timestamp('modified_at'))
-            $this->data['modified_at'] = date('Y-m-d H:i:s');
+        if ($this->has_timestamp('updated_at'))
+            $this->data['updated_at'] = date('Y-m-d H:i:s');
 
         // Did we provide a list of fields to update?
 
