@@ -348,7 +348,7 @@ class Model extends YAWF
         // Apply an optional "updated_at" timestamp
 
         if ($this->has_timestamp('updated_at'))
-            $this->data['updated_at'] = date('Y-m-d H:i:s');
+            $this->updated_at = date('Y-m-d H:i:s');
 
         // Did we provide a list of fields to update?
 
