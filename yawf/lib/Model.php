@@ -232,12 +232,13 @@ class Model extends YAWF
     {
         // Query the database
 
+        $database = $this->get_database();
         $table = $this->get_table();
         $clause = $this->where_clause($conditions);
         $clause .= ($this->order ? ' order by ' . $this->order : '');
         $clause .= ($this->limit ? ' limit ' . $this->limit : '');
         $clause .= ($this->offset ? ' offset ' . $this->offset : '');
-        $result = $this->query("select * from $table $clause");
+        $result = $this->query("select * from $database.$table $clause");
 
         // ...to make objects
 
@@ -316,6 +317,7 @@ class Model extends YAWF
 
         // Insert the new record into the table
 
+        $database = $this->get_database();
         $table = $this->get_table();
         $fields = '';
         $values = '';
@@ -329,7 +331,7 @@ class Model extends YAWF
             if ($field === 'password') $value = $this->password($value);
             $values .= $this->quote($value);
         }
-        $this->query("insert into $table ($fields) values ($values)");
+        $this->query("insert into $database.$table ($fields) values ($values)");
 
         // Return the new ID on the record
 
@@ -357,6 +359,7 @@ class Model extends YAWF
 
         // Update the record values that have changed
 
+        $database = $this->get_database();
         $table = $this->get_table();
         $updates = '';
         foreach ($this->data as $field => $value)
@@ -370,7 +373,7 @@ class Model extends YAWF
         $updates = rtrim($updates, ','); // remove final comma
         if (!$updates) return;
         $updates .= " where $id_field=" . $this->data[$id_field];
-        $this->query("update $table set $updates");
+        $this->query("update $database.$table set $updates");
         $this->to_update = array();
         return $this;
     }
@@ -384,23 +387,26 @@ class Model extends YAWF
 
         // Delete the record from the table
 
+        $database = $this->get_database();
         $table = $this->get_table();
-        $this->query("delete from $table where $id_field=" . $this->quote($this->data[$id_field]));
+        $this->query("delete from $database.$table where $id_field=" . $this->quote($this->data[$id_field]));
         $this->data[$id_field] = NULL;
         return $this;
     }
 
     public function delete_all()
     {
+        $database = $this->get_database();
         $table = $this->get_table();
-        $this->query("delete from $table");
+        $this->query("delete from $database.$table");
         return $this;
     }
 
     public function drop()
     {
+        $database = $this->get_database();
         $table = $this->get_table();
-        $this->query("drop table $table");
+        $this->query("drop table $database.$table");
         return $this;
     }
 
