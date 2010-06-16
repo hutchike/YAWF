@@ -17,7 +17,7 @@ load_helper('Text'); // for "tableize"
 class Model extends YAWF
 {
     private static $connector;
-    private static $database;
+    private static $databases;
     private static $validators = array();
     private static $tables = array();
     private static $id_fields = array();
@@ -26,6 +26,7 @@ class Model extends YAWF
     private $validation_messages;
     private $to_update;
     private $data;
+    private $database;
     private $table;
     private $id_field;
     private $order;
@@ -40,16 +41,6 @@ class Model extends YAWF
         // $this->set_virtual('transient_field');
         // $this->set_timestamp('created_at', 'updated_at');
         // $this->validates('email', 'is_valid_email');
-    }
-
-    public static function set_database($database)
-    {
-        self::$database = $database;
-    }
-
-    public static function get_database()
-    {
-        return self::$database;
     }
 
     public function __construct($data = array())
@@ -81,7 +72,28 @@ class Model extends YAWF
         return array_keys($this->data);
     }
 
-    protected function get_table()
+    public function set_database($database)
+    {
+        $table = $this->get_table();
+        $this->database = self::$databases[$table] = $database;
+        return $this;
+    }
+
+    public function get_database()
+    {
+        if ($this->database) return $this->database;
+        $table = $this->get_table();
+        $this->database = array_key(self::$databases, $table, array_key(self::$databases, 'models'));
+        return $this->database;
+    }
+
+    public function set_table($table)
+    {
+        $this->table = self::$tables[get_class($this)] = $table;
+        return $this;
+    }
+
+    public function get_table()
     {
         if ($this->table) return $this->table;
         $this->table = array_key(self::$tables, get_class($this));
@@ -90,10 +102,9 @@ class Model extends YAWF
         return $this->table;
     }
 
-    protected function set_table($table)
+    public function get_db_table()
     {
-        $this->table = self::$tables[get_class($this)] = $table;
-        return $this;
+        return $this->get_database() . '.' . $this->get_table();
     }
 
     public function set_order($order)
@@ -177,7 +188,7 @@ class Model extends YAWF
             $connector_class = DB_CONNECTOR;
             require_once 'lib/data/' . $connector_class . '.php';
             self::$connector = new $connector_class();
-            self::$connector->connect(self::$database);
+            self::$connector->connect(self::$databases['models']);
         }
     }
 
@@ -232,13 +243,12 @@ class Model extends YAWF
     {
         // Query the database
 
-        $database = $this->get_database();
-        $table = $this->get_table();
+        $db_table = $this->get_db_table();
         $clause = $this->where_clause($conditions);
         $clause .= ($this->order ? ' order by ' . $this->order : '');
         $clause .= ($this->limit ? ' limit ' . $this->limit : '');
         $clause .= ($this->offset ? ' offset ' . $this->offset : '');
-        $result = $this->query("select * from $database.$table $clause");
+        $result = $this->query("select * from $db_table $clause");
 
         // ...to make objects
 
@@ -317,8 +327,7 @@ class Model extends YAWF
 
         // Insert the new record into the table
 
-        $database = $this->get_database();
-        $table = $this->get_table();
+        $db_table = $this->get_db_table();
         $fields = '';
         $values = '';
         foreach ($this->data as $field => $value)
@@ -331,7 +340,7 @@ class Model extends YAWF
             if ($field === 'password') $value = $this->password($value);
             $values .= $this->quote($value);
         }
-        $this->query("insert into $database.$table ($fields) values ($values)");
+        $this->query("insert into $db_table ($fields) values ($values)");
 
         // Return the new ID on the record
 
@@ -359,8 +368,7 @@ class Model extends YAWF
 
         // Update the record values that have changed
 
-        $database = $this->get_database();
-        $table = $this->get_table();
+        $db_table = $this->get_db_table();
         $updates = '';
         foreach ($this->data as $field => $value)
         {
@@ -373,7 +381,7 @@ class Model extends YAWF
         $updates = rtrim($updates, ','); // remove final comma
         if (!$updates) return;
         $updates .= " where $id_field=" . $this->data[$id_field];
-        $this->query("update $database.$table set $updates");
+        $this->query("update $db_table set $updates");
         $this->to_update = array();
         return $this;
     }
@@ -387,26 +395,23 @@ class Model extends YAWF
 
         // Delete the record from the table
 
-        $database = $this->get_database();
-        $table = $this->get_table();
-        $this->query("delete from $database.$table where $id_field=" . $this->quote($this->data[$id_field]));
+        $db_table = $this->get_db_table();
+        $this->query("delete from $db_table where $id_field=" . $this->quote($this->data[$id_field]));
         $this->data[$id_field] = NULL;
         return $this;
     }
 
     public function delete_all()
     {
-        $database = $this->get_database();
-        $table = $this->get_table();
-        $this->query("delete from $database.$table");
+        $db_table = $this->get_db_table();
+        $this->query("delete from $db_table");
         return $this;
     }
 
     public function drop()
     {
-        $database = $this->get_database();
-        $table = $this->get_table();
-        $this->query("drop table $database.$table");
+        $db_table = $this->get_db_table();
+        $this->query("drop table $db_table");
         return $this;
     }
 
