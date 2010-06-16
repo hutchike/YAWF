@@ -59,4 +59,4 @@ $yash = new Yet_another_shell(getcwd());
 $app = $yash->app;
 $yash->run();
 
-// End of "admin/yawf"
+// End of "commands/yash"

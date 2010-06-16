@@ -36,4 +36,4 @@ class Sure_command extends Command
 $sure = new Sure_command();
 $sure->run();
 
-// End of sure
+// End of "commands/sure"

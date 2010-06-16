@@ -179,15 +179,16 @@ End_of_usage;
         $database_live = array_key($database, 'database_live', "${app_name}_live");
         $database_test = array_key($database, 'database_test', "${app_name}_test");
         $schema_file = "$app_dir/data/" . array_key($database, 'schema', "$app_name.sql");
+print "dir " . getcwd() . "\n";
         if (!is_file($schema_file)) $this->usage($usage, "No schema file found here: $schema_file");
         if (preg_match('/mysql/i', $connector))
         {
             $login = "-u$username" . ($password ? " -p$password" : '');
             $dump_file = "/tmp/$database_live.dump";
             system("mysqldump --no-create-info --complete-insert $login $database_live > $dump_file");
-            system("mysql $login $database_live <$schema_file");
+            system("yawf_cat $schema_file | tee /tmp/x | mysql $login $database_live");
             system("mysql $login $database_live <$dump_file");
-            system("mysql $login $database_test <$schema_file");
+            system("yawf_cat $schema_file | tee /tmp/y | mysql $login $database_test");
             if ($this->opts->secure) unlink($dump_file);
         }
         else
@@ -274,4 +275,4 @@ End_of_usage;
 $yawf = new YAWF_command();
 $yawf->run();
 
-// End of "admin/yawf"
+// End of "commands/yawf"

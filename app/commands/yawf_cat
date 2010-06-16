@@ -1,0 +1,52 @@
+#!/usr/bin/env php
+<?
+// Copyright (c) 2009 Guanoo, Inc.
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public License
+// as published by the Free Software Foundation; either version 3
+// of the License, or (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+
+$YAWF_ROOT = getenv('YAWF_ROOT');
+if (!$YAWF_ROOT || !is_dir($YAWF_ROOT) || !is_dir("$YAWF_ROOT/yawf"))
+{
+    print "\nPlease set the YAWF_ROOT environment variable\nto the folder name where YAWF may be found on\nyour computer, e.g. ~/cloud/projects/YAWF\n\n";
+    exit;
+}
+
+require "$YAWF_ROOT/yawf/lib/Command.php";
+
+class YAWF_cat extends Command
+{
+    public function run()
+    {
+        $file = array_shift($this->args);
+        if (!$file) $this->usage();
+        $contents = file_get_contents($file);
+        $contents = preg_replace('/\$(\w+)/e', 'getenv("$1")', $contents);
+        print $contents;
+    }
+
+    // Display a usage message, defaulting to the standard help message
+
+    private function usage($cmd = '', $message = '')
+    {
+        if ($cmd && $message) die("\nusage: $cmd\n\n$message\n\n");
+        $usage = <<<End_of_usage
+usage: yawf_cat FILE
+
+The FILE will be read and all environment variables substituted for their values
+End_of_usage;
+        die("\n$usage\n\n");
+    }
+}
+
+$yawf = new YAWF_cat();
+$yawf->run();
+
+// End of "commands/yawf_cat"
