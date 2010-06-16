@@ -47,12 +47,13 @@ class App extends YAWF
         $this->content_type = $content_type; // can be "html", "test", etc.
         $this->folder = ($folder ? $folder : DEFAULT_FOLDER);
         $this->file = ($file ? $file : DEFAULT_FILE);
+        $this->is_testing = array_key($_REQUEST, 'test') || $content_type === 'test';
 
-        // Use the content type to select a database
+        // If we're testing then use a test database
 
         require_once 'lib/Model.php';
-        $this->is_testing = array_key($_REQUEST, 'test') || $content_type === 'test';
-        Model::set_database($this->is_testing ? DB_DATABASE_TEST : DB_DATABASE_LIVE);
+        $model = new Model();
+        $model->set_database($this->is_testing ? DB_DATABASE_TEST : DB_DATABASE_LIVE);
     }
 
     // Say whether we're testing
