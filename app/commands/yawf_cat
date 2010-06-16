@@ -23,10 +23,11 @@ require "$YAWF_ROOT/yawf/lib/Command.php";
 
 class YAWF_cat extends Command
 {
-    public function run()
+    public function run($dir)
     {
         $file = array_shift($this->args);
         if (!$file) $this->usage();
+        if (substr($file, 0, 1) != '/') $file = "$dir/$file";
         $contents = file_get_contents($file);
         $contents = preg_replace('/\$(\w+)/e', 'getenv("$1")', $contents);
         print $contents;
@@ -46,7 +47,8 @@ End_of_usage;
     }
 }
 
+$dir =  getcwd();
 $yawf = new YAWF_cat();
-$yawf->run();
+$yawf->run($dir);
 
 // End of "commands/yawf_cat"
