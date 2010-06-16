@@ -102,6 +102,11 @@ class Model extends YAWF
         return $this->table;
     }
 
+    public function get_db_table()
+    {
+        return $this->get_database() . '.' . $this->get_table();
+    }
+
     public function set_order($order)
     {
         $this->order = $order;
@@ -238,12 +243,12 @@ class Model extends YAWF
     {
         // Query the database
 
-        $table = $this->get_table();
+        $db_table = $this->get_db_table();
         $clause = $this->where_clause($conditions);
         $clause .= ($this->order ? ' order by ' . $this->order : '');
         $clause .= ($this->limit ? ' limit ' . $this->limit : '');
         $clause .= ($this->offset ? ' offset ' . $this->offset : '');
-        $result = $this->query("select * from $table $clause");
+        $result = $this->query("select * from $db_table $clause");
 
         // ...to make objects
 
@@ -322,7 +327,7 @@ class Model extends YAWF
 
         // Insert the new record into the table
 
-        $table = $this->get_table();
+        $db_table = $this->get_db_table();
         $fields = '';
         $values = '';
         foreach ($this->data as $field => $value)
@@ -335,7 +340,7 @@ class Model extends YAWF
             if ($field === 'password') $value = $this->password($value);
             $values .= $this->quote($value);
         }
-        $this->query("insert into $table ($fields) values ($values)");
+        $this->query("insert into $db_table ($fields) values ($values)");
 
         // Return the new ID on the record
 
@@ -363,7 +368,7 @@ class Model extends YAWF
 
         // Update the record values that have changed
 
-        $table = $this->get_table();
+        $db_table = $this->get_db_table();
         $updates = '';
         foreach ($this->data as $field => $value)
         {
@@ -376,7 +381,7 @@ class Model extends YAWF
         $updates = rtrim($updates, ','); // remove final comma
         if (!$updates) return;
         $updates .= " where $id_field=" . $this->data[$id_field];
-        $this->query("update $table set $updates");
+        $this->query("update $db_table set $updates");
         $this->to_update = array();
         return $this;
     }
@@ -390,23 +395,23 @@ class Model extends YAWF
 
         // Delete the record from the table
 
-        $table = $this->get_table();
-        $this->query("delete from $table where $id_field=" . $this->quote($this->data[$id_field]));
+        $db_table = $this->get_db_table();
+        $this->query("delete from $db_table where $id_field=" . $this->quote($this->data[$id_field]));
         $this->data[$id_field] = NULL;
         return $this;
     }
 
     public function delete_all()
     {
-        $table = $this->get_table();
-        $this->query("delete from $table");
+        $db_table = $this->get_db_table();
+        $this->query("delete from $db_table");
         return $this;
     }
 
     public function drop()
     {
-        $table = $this->get_table();
-        $this->query("drop table $table");
+        $db_table = $this->get_db_table();
+        $this->query("drop table $db_table");
         return $this;
     }
 
