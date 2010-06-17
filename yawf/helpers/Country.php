@@ -15,7 +15,7 @@ class Country extends YAWF
 {
     public static function code($code)
     {
-        return self::$codes[strtoupper($code)];
+        return array_key(self::$codes, strtoupper($code));
     }
 
 // Code list from http://www.iso.org/iso/english_country_names_and_code_elements
