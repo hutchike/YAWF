@@ -179,7 +179,6 @@ End_of_usage;
         $database_live = array_key($database, 'database_live', "${app_name}_live");
         $database_test = array_key($database, 'database_test', "${app_name}_test");
         $schema_file = "$app_dir/data/" . array_key($database, 'schema', "$app_name.sql");
-print "dir " . getcwd() . "\n";
         if (!is_file($schema_file)) $this->usage($usage, "No schema file found here: $schema_file");
         if (preg_match('/mysql/i', $connector))
         {
