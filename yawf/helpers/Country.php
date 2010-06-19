@@ -13,14 +13,14 @@
 
 class Country extends YAWF
 {
-    public static function code($code)
+    public static function name($code, $language = 'en')
     {
-        return array_key(self::$codes, strtoupper($code));
+        return array_key(self::$codes[$language], strtoupper($code));
     }
 
 // Code list from http://www.iso.org/iso/english_country_names_and_code_elements
 
-private static $codes = array(
+private static $codes = array('en' => array(
 'AF' => 'Afghanistan',
 'AX' => 'Åland Islands',
 'AL' => 'Albania',
@@ -268,7 +268,7 @@ private static $codes = array(
 'YE' => 'Yemen',
 'ZM' => 'Zambia',
 'ZW' => 'Zimbabwe',
-);
+));
 }
 
 // End of Country.php
