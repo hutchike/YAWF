@@ -734,7 +734,7 @@ class Net_GeoIP
      */
     public function lookupLocation($addr)
     {
-        load_plugin('Net/GeoIP/Location.php');
+        load_plugin('Net/GeoIP/Location');
         $ipnum = ip2long($addr);
         if ($ipnum === false) {
             throw new PEAR_Exception("Invalid IP address: " . var_export($addr, true), self::ERR_INVALID_IP);
