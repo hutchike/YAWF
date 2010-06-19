@@ -86,7 +86,7 @@
  * @package Sure
  */
 
-load_plugin('Sure');
+load_plugin('Logic/Sure');
 
 /**
  * A class to provide a Simpe User-defined Rule Engine (SURE) with fuzzy logic

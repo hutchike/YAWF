@@ -26,7 +26,7 @@
 * @version $Revision 0.1 $
 */
 
-load_plugin('AkInflector');
+load_plugin('Text/AkInflector');
 
 class AkInflexor extends AkInflector
 {

@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-load_plugin('AkInflector'); // from the Akelos PHP Application Framework
+load_plugin('Text/AkInflector'); // from the Akelos PHP Framework
 
 class Text extends YAWF
 {
