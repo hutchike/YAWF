@@ -182,12 +182,25 @@ End_of_usage;
         if (!is_file($schema_file)) $this->usage($usage, "No schema file found here: $schema_file");
         if (preg_match('/mysql/i', $connector))
         {
+            // First apply any migrations
+
+            $migrate_file = "$app_dir/data/migrate.sql";
             $login = "-u$username" . ($password ? " -p$password" : '');
+            if (file_exists($migrate_file)) system("yawf_cat $migrate_file | mysql $login $database_live");
+
+            // ...then dump existing data
+
             $dump_file = "/tmp/$database_live.dump";
             system("mysqldump --no-create-info --complete-insert $login $database_live > $dump_file");
-            system("yawf_cat $schema_file | tee /tmp/x | mysql $login $database_live");
+
+            // ...then recreate db tables
+
+            system("yawf_cat $schema_file | mysql $login $database_live");
             system("mysql $login $database_live <$dump_file");
             system("yawf_cat $schema_file | tee /tmp/y | mysql $login $database_test");
+
+            // ...finally remove the data
+
             if ($this->opts->secure) unlink($dump_file);
         }
         else
