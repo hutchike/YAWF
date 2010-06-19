@@ -98,7 +98,7 @@ class App_test extends App
     {
         // Create an XHTML validator
 
-        load_plugin('XhtmlValidator');
+        load_plugin('Validators/XhtmlValidator');
         $xhtml_validator = new XhtmlValidator();
 
         // Validate the HTML as XHTML
