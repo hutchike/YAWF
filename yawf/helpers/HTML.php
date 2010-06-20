@@ -52,9 +52,8 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
             list($object_name, $field) = preg_split('/\->/', $name);
             $object = AppView::get($object_name);
             $attrs['value'] = array_key($attrs, 'value', $object->$field);
-            $attrs['id'] = $object_name . '_' . $field;
         }
-        $attrs['id'] = str_replace('->', '_', $name);
+        $attrs['id'] = array_key($attrs, 'id', str_replace('->', '_', $name));
         $attrs['name'] = h($name);
         $attrs['type'] = array_key($attrs, 'type', 'text');
         return '<input ' . self::attrs($attrs) . ' />' . "\n";
