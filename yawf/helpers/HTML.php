@@ -53,7 +53,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
             $object = AppView::get($object_name);
             $attrs['value'] = array_key($attrs, 'value', $object->$field);
         }
-        $attrs['id'] = array_key($attrs, 'id', str_replace('->', '-', $name));
+        $attrs['id'] = array_key($attrs, 'id', str_replace('->', '_', $name));
         $attrs['name'] = h($name);
         $attrs['type'] = array_key($attrs, 'type', 'text');
         return '<input ' . self::attrs($attrs) . ' />' . "\n";
@@ -117,7 +117,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
             $object = AppView::get($object_name);
             $text = $object->$field;
         }
-        $attrs['id'] = array_key($attrs, 'id', str_replace('->', '-', $name));
+        $attrs['id'] = array_key($attrs, 'id', str_replace('->', '_', $name));
         $attrs['name'] = h($name);
         return '<textarea ' . self::attrs($attrs) . ">$text</textarea>\n";
     }
