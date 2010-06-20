@@ -36,4 +36,4 @@ class Fuzzy_command extends Command
 $fuzzy = new Fuzzy_command();
 $fuzzy->run();
 
-// End of sure
+// End of "commands/fuzzy"

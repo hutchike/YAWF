@@ -22,4 +22,4 @@ class YAWF_edit_daemon extends Command
     }
 }
 
-// End of "yawf_edit"
+// End of "commands/yawf_edit"

@@ -28,7 +28,8 @@ class App_test extends App
 
         // Models connect to the test database
 
-        Model::set_database(DB_DATABASE_TEST);
+        $model = new Model();
+        $model->set_database(DB_DATABASE_TEST);
         $this->is_testing = TRUE;
     }
 
@@ -97,7 +98,7 @@ class App_test extends App
     {
         // Create an XHTML validator
 
-        load_plugin('XhtmlValidator');
+        load_plugin('Validators/XhtmlValidator');
         $xhtml_validator = new XhtmlValidator();
 
         // Validate the HTML as XHTML

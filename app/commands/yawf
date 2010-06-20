@@ -176,18 +176,33 @@ End_of_usage;
         $connector = array_key($database, 'connector');
         $username = array_key($database, 'username', 'root');
         $password = array_key($database, 'password', '');
-        $database_live = array_key($database, 'database_live', "${app_name}_live");
-        $database_test = array_key($database, 'database_test', "${app_name}_test");
-        $schema_file = "$app_dir/data/" . array_key($database, 'schema', "$app_name.sql");
+        $database_live = first($this->opts->database, array_key($database, 'database_live', "${app_name}_live"));
+        $database_test = first($this->opts->database, array_key($database, 'database_test', "${app_name}_test"));
+        $schema_file = "$app_dir/data/" . first($this->opts->schema, array_key($database, 'schema', "$app_name.sql"));
         if (!is_file($schema_file)) $this->usage($usage, "No schema file found here: $schema_file");
+        $migrate_file = "$app_dir/data/" . first($this->opts->migrate, array_key($database, 'migrate', 'migrate.sql'));
         if (preg_match('/mysql/i', $connector))
         {
+            // First apply any migrations
+
             $login = "-u$username" . ($password ? " -p$password" : '');
+            if (file_exists($migrate_file)) system("yawf_cat $migrate_file | mysql $login $database_live");
+
+            // ...then dump existing data
+
             $dump_file = "/tmp/$database_live.dump";
             system("mysqldump --no-create-info --complete-insert $login $database_live > $dump_file");
-            system("mysql $login $database_live <$schema_file");
+
+            // ...then recreate db tables
+
+            system("yawf_cat $schema_file | mysql $login $database_live");
             system("mysql $login $database_live <$dump_file");
-            system("mysql $login $database_test <$schema_file");
+            if ($database_test != $database_live) {
+                system("yawf_cat $schema_file | tee /tmp/y | mysql $login $database_test");
+            }
+
+            // ...finally remove the data
+
             if ($this->opts->secure) unlink($dump_file);
         }
         else
@@ -274,4 +289,4 @@ End_of_usage;
 $yawf = new YAWF_command();
 $yawf->run();
 
-// End of "admin/yawf"
+// End of "commands/yawf"
