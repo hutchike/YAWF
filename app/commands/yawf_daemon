@@ -1,0 +1,7 @@
+#!/bin/bash
+
+dir=`which $1`
+dir=`dirname $dir`
+dir=`dirname $dir`
+log="$dir/logs/daemon.log"
+nohup $1 >> $log &
