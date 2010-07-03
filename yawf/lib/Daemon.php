@@ -17,18 +17,72 @@ require_once('Command.php');
 
 class Daemon extends Command
 {
+    private $pid, $pid_file;
+
     public function __construct($dir = NULL)
     {
-        // TODO: Check for a pid file
-
         parent::__construct($dir);
+        if ($pid = $this->is_running()) $this->quit("Daemon \"$this->name\" is already running with PID $pid");
+        $this->write_pid_to_file();
     }
 
     public function __destruct()
     {
-        // TODO: Remove the pid file
-
+        $this->delete_pid_file();
         parent::__destruct();
+    }
+
+    public function pid()
+    {
+        if ($this->pid) return $this->pid;
+        return ($this->pid = getmypid());
+    }
+
+    public function pid_file()
+    {
+        if (!$this->pid_file)
+        {
+            $pid_dir = 'app/tmp/pids';
+            if (!is_dir($pid_dir)) $this->quit("No PID directory here: $pid_dir");
+            $this->pid_file = "$pid_dir/$this->name.pid";
+        }
+        return $this->pid_file;
+    }
+
+    protected function is_running()
+    {
+        if ($pid = $this->read_pid_from_file())
+        {
+            $fh = popen("ps -p $pid", 'r');
+            $ps = fread($fh, 2048);
+            pclose($fh);
+            return strpos($ps, $pid) > 0 ? $pid : FALSE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    protected function read_pid_from_file()
+    {
+
+        return file_exists($this->pid_file()) ?
+               trim(file_get_contents($this->pid_file())) :
+               null;
+    }
+
+    protected function write_pid_to_file()
+    {
+        file_put_contents($this->pid_file(), $this->pid());
+    }
+
+    protected function delete_pid_file()
+    {
+        if ($pid = $this->read_pid_from_file());
+        {
+            if ($pid == $this->pid()) unlink($this->pid_file());
+        }
     }
 }
 

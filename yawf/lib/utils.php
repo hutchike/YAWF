@@ -119,7 +119,7 @@ function load_files($dir, $files)
         $path = $dir . '/' . $file . '.php';
         if (!file_found($path))
         {
-            throw new Exception("File $path not found");
+            throw new Exception("File \"$path\" not found");
         }
         require_once $path;
     }
