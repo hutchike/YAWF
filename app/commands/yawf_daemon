@@ -1,7 +1,38 @@
 #!/bin/bash
 
-dir=`which $1`
-dir=`dirname $dir`
-dir=`dirname $dir`
-log="$dir/logs/daemon.log"
-nohup $1 >> $log &
+command=$1
+daemon=$2
+
+# Get the app dir
+
+if [ -n "$daemon" ] ; then
+  app_dir=`which $daemon`
+  app_dir=`dirname $app_dir`
+  app_dir=`dirname $app_dir`
+fi
+
+if [ -z "$app_dir" ] ; then
+  echo "usage: yawf_daemon [start|stop] daemon"
+  exit 1
+fi
+
+# Start or stop the daemon
+
+if [ "$command" == 'start' ] ; then
+  log="$app_dir/logs/daemon.log"
+  echo Starting $daemon
+  nohup $daemon >> $log &
+elif [ "$command" == 'stop' ] ; then
+  echo Stopping $daemon
+  pid_file="$app_dir/tmp/pids/$daemon.pid"
+  if [ -f $pid_file ] ; then
+    pid=`cat $pid_file`
+    kill $pid
+  else
+    echo "Daemon $daemon is not running"
+  fi
+else
+  echo "usage: yawf_daemon [start|stop] daemon"
+fi
+
+# End of "yawf_daemon"
