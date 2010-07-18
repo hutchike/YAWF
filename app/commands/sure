@@ -20,7 +20,7 @@ class Sure_command extends Command
 
     public function run()
     {
-        load_plugin('Sure');
+        load_plugin('Logic/Sure');
 
         $rules = $this->opts->rules;
         $facts = $this->opts->facts;

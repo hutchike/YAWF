@@ -20,7 +20,7 @@ class Fuzzy_command extends Command
 
     public function run()
     {
-        load_plugin('FuzzySure');
+        load_plugin('Logic/FuzzySure');
 
         $rules = $this->opts->rules;
         $facts = $this->opts->facts;
