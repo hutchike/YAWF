@@ -1,14 +1,15 @@
 create table if not exists users
 (
     id          integer unsigned auto_increment primary key,
-    created_at  datetime not null,
-    modified_at datetime not null,
-    name        varchar(255) not null,
-    email       varchar(255) not null,
-    password    varchar(255) not null,
+    name        varchar(255),
+    email       varchar(255),
+    password    varchar(255),
     phone       varchar(255),
     status      char(1),
+    created_at  datetime,
+    updated_at  datetime,
 
+    key         user_email(email(15)),
     key         user_created_at(created_at),
-    key         user_email(email(15))
+    key         user_updated_at(updated_at)
 );
