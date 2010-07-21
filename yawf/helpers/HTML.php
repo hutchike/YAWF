@@ -118,6 +118,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
     public static function textarea($name, $attrs = array())
     {
         $object_name = null;
+        $text = array_key($attrs, 'text');
         if (strstr($name, '->')) // special case for "object->field"
         {
             list($object_name, $field) = preg_split('/\->/', $name);
