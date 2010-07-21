@@ -104,7 +104,9 @@ class Model extends YAWF
 
     public function get_db_table()
     {
-        return $this->get_database() . '.' . $this->get_table();
+        $database = $this->get_database() . '.';        // MySQL databases
+        if (strpos($database, '/') > 0) $database = ''; // SQLite file path
+        return $database . $this->get_table();
     }
 
     public function set_order($order)
