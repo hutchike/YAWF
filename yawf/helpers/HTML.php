@@ -75,6 +75,11 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return '<link ' . self::attrs($attrs) . ' />' . "\n";
     }
 
+    public static function meta_tag($attrs)
+    {
+        return '<meta ' . self::attrs($attrs) . ' />' . "\n";
+    }
+
     public static function bullet_list($items)
     {
         return "<ul>\n$items\n</ul>\n";
