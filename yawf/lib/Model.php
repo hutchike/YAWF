@@ -237,7 +237,7 @@ class Model extends YAWF
 
     public function save()
     {
-        if (! $this->validate_on_save()) return FALSE;
+        if (!$this->data() || !$this->validate_on_save()) return FALSE;
         return $this->get_id() ? $this->update() : $this->insert();
     }
 
