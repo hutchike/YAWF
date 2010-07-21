@@ -9,6 +9,7 @@ en:
     valid_length_too_short: Too short
     valid_length_too_long: Too long
     valid_name_can_only_include_words: Name can only include words
+    valid_passwords_do_not_match: Passwords do not match
 
 # Spanish translations
 es:
@@ -21,3 +22,4 @@ es:
     valid_length_too_short: Too short
     valid_length_too_long: Too long
     valid_name_can_only_include_words: Name can only include words
+    valid_passwords_do_not_match: Passwords do not match
