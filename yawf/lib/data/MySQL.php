@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-class MySQL extends YAWF implements Connector
+class Data_MySQL extends YAWF implements Connector
 {
     private $hostname;
     private $username;

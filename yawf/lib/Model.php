@@ -189,6 +189,7 @@ class Model extends YAWF
         {
             $connector_class = DB_CONNECTOR;
             require_once 'lib/data/' . $connector_class . '.php';
+            $connector_class = "Data_$connector_class";
             self::$connector = new $connector_class();
             self::$connector->connect(self::$databases['models']);
         }
@@ -479,6 +480,11 @@ class Model extends YAWF
         $longest = array_key($args, 'longest');
         if ($shortest && strlen($value) < $shortest) return 'VALID_LENGTH_TOO_SHORT';
         if ($longest && strlen($value) > $longest) return 'VALID_LENGTH_TOO_LONG';
+    }
+
+    protected function is_valid_password($value, $password_repeat_field)
+    {
+        if ($value != $this->$password_repeat_field) return 'VALID_PASSWORDS_DO_NOT_MATCH';
     }
 }
 

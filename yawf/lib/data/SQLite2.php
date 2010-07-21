@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-class SQLite2 extends YAWF implements Connector
+class Data_SQLite2 extends YAWF implements Connector
 {
     const SQLITE_FILE_PERMISSIONS = 0666; // everyone can read and write
     private $sqlite_db;
