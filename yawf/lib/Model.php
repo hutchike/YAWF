@@ -226,6 +226,14 @@ class Model extends YAWF
         return self::$connector->query($sql);
     }
 
+    public function copy_to($other)
+    {
+        foreach ($this->data() as $field => $value)
+        {
+            $other->$field = $value;
+        }
+    }
+
     public function load()
     {
         if ($found = $this->find_first())
