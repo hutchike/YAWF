@@ -57,7 +57,8 @@ class Config extends YAWF
             $prefix = array_key($options, 'prefix');
             $suffix = array_key($options, 'suffix');
             if (is_array($value)) $value = join(', ', $value);
-            define(strtoupper($prefix . $key . $suffix), $value);
+            $name = strtoupper($prefix . $key . $suffix);
+            if (!defined($name)) define($name, $value);
         }
     }
 }

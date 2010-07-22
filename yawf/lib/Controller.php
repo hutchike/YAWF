@@ -38,18 +38,20 @@ class Controller extends YAWF
 
     // Render the requested view
 
-    public function render()
+    public function render($view = null, $options = array())
     {
+        if (is_null($view)) $view = $this->view;
+
         // Call the controller's view method
 
         $this->before();
-        $method = strtr($this->view, '-', '_');
+        $method = strtr($view, '-', '_');
         if (method_exists($this, $method)) $this->$method();
         $this->after();
 
         // Render the view with a data array
 
-        $this->render->content = $this->app->render_view($this->view, $this->render);
+        $this->render->content = $this->app->render_view($view, $this->render, $options);
         return $this->app->render_type($this->app->get_content_type(), $this->render);
     }
 
