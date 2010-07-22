@@ -335,7 +335,7 @@ class Model extends YAWF
         $values = '';
         foreach ($this->data as $field => $value)
         {
-            if ($this->is_virtual($field)) continue;
+            if ($field == $id_field || $this->is_virtual($field)) continue;
 
             if ($fields) $fields .= ',';
             $fields .= $field;
@@ -375,11 +375,11 @@ class Model extends YAWF
         $updates = '';
         foreach ($this->data as $field => $value)
         {
-            if ($this->is_virtual($field)) continue;
+            if ($field == $id_field || $this->is_virtual($field)) continue;
             if (!array_key_exists($field, $this->to_update)) continue;
 
             if ($field === 'password') $value = $this->password($value);
-            if ($field !== $id_field) $updates .= $field . '=' . $this->quote($value) . ',';
+            $updates .= $field . '=' . $this->quote($value) . ',';
         }
         $updates = rtrim($updates, ','); // remove final comma
         if (!$updates) return;
