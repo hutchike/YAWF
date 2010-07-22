@@ -40,7 +40,10 @@ class Controller extends YAWF
 
     public function render($view = null, $options = array())
     {
-        if (is_null($view)) $view = $this->view;
+        // Get the view (e.g. "index") and the type (e.g. "html")
+
+        $view = $this->view = is_null($view) ? $this->view : $view;
+        $type = array_key($options, 'type', $this->app->get_content_type());
 
         // Call the controller's view method
 
@@ -52,7 +55,7 @@ class Controller extends YAWF
         // Render the view with a data array
 
         $this->render->content = $this->app->render_view($view, $this->render, $options);
-        return $this->app->render_type($this->app->get_content_type(), $this->render);
+        return $this->app->render_type($type, $this->render);
     }
 
     // Set up render data defaults (called by $this->app)
