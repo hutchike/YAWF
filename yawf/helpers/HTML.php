@@ -53,7 +53,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         {
             list($object_name, $field) = preg_split('/\->/', $name);
             $object = AppView::get($object_name);
-            $attrs['value'] = array_key($attrs, 'value', $object->$field);
+            $attrs['value'] = array_key($attrs, 'value', h($object->$field));
         }
         $attrs['id'] = array_key($attrs, 'id', str_replace('->', self::$id_format, $name));
         $attrs['name'] = h($name);
@@ -123,7 +123,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         {
             list($object_name, $field) = preg_split('/\->/', $name);
             $object = AppView::get($object_name);
-            $text = $object->$field;
+            $text = h($object->$field);
         }
         $attrs['id'] = array_key($attrs, 'id', str_replace('->', self::$id_format, $name));
         $attrs['name'] = h($name);
