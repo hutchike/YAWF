@@ -35,7 +35,7 @@ class Data_SQLite2 extends YAWF implements Connector
 
     public function escape($sql)
     {
-        return addslashes($sql);
+        return str_replace('"', '""', $sql);
     }
 
     public function query($sql)
