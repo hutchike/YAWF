@@ -19,7 +19,7 @@ class Cache_controller extends App_controller
 
     // Render the requested view
 
-    public function render()
+    public function render($view = null, $options = array())
     {
         // First look for cached contents
 
