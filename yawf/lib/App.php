@@ -118,6 +118,13 @@ class App extends YAWF
         return $this->file;
     }
 
+    // Get the path (i.e. "folder/file")
+
+    public function get_path()
+    {
+        return $this->get_folder() . '/' . $this->get_file();
+    }
+
     // Get the path to a view file by looking in many places
 
     protected function get_view_path($file, $options = array())
