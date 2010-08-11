@@ -76,7 +76,7 @@ class Model extends YAWF
     {
         $table = $this->get_table();
         $this->database = self::$databases[$table] = $database;
-        self::connect($reconnect);
+        self::connect($database, $reconnect);
         return $this;
     }
 
@@ -183,8 +183,9 @@ class Model extends YAWF
         return array_key(self::$virtual, "$table.$field") ? TRUE : FALSE;
     }
 
-    public static function connect($reconnect = FALSE)
+    public static function connect($database = NULL, $reconnect = FALSE)
     {
+        if (is_null($database)) $database = self::$databases['models'];
         if ($reconnect) self::$connector = NULL;
         if (is_null(self::$connector))
         {
@@ -192,7 +193,7 @@ class Model extends YAWF
             require_once 'lib/data/' . $connector_class . '.php';
             $connector_class = "Data_$connector_class";
             self::$connector = new $connector_class();
-            self::$connector->connect(self::get_database());
+            self::$connector->connect($database);
         }
     }
 
