@@ -72,10 +72,11 @@ class Model extends YAWF
         return array_keys($this->data);
     }
 
-    public function set_database($database)
+    public function set_database($database, $reconnect = FALSE)
     {
         $table = $this->get_table();
         $this->database = self::$databases[$table] = $database;
+        self::connect($reconnect);
         return $this;
     }
 
@@ -191,7 +192,7 @@ class Model extends YAWF
             require_once 'lib/data/' . $connector_class . '.php';
             $connector_class = "Data_$connector_class";
             self::$connector = new $connector_class();
-            self::$connector->connect(self::$databases['models']);
+            self::$connector->connect(self::get_database());
         }
     }
 
