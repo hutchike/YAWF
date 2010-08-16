@@ -72,11 +72,11 @@ class Model extends YAWF
         return array_keys($this->data);
     }
 
-    public function set_database($database, $reconnect = FALSE)
+    public function set_database($database)
     {
         $table = $this->get_table();
         $this->database = self::$databases[$table] = $database;
-        self::connect($database, $reconnect);
+        if (substr(DB_CONNECTOR, 0, 6) == 'SQLite') self::$connector = NULL;
         return $this;
     }
 
