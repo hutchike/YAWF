@@ -15,6 +15,7 @@ class Controller extends YAWF
 {
     protected $app;     // either the "App" or the "App_test" object
     protected $view;    // a string naming the view file for display
+    protected $type;    // a string with the content type, e.g. html
     protected $lang;    // the two character language code e.g. "en"
     protected $render;  // array of data to be rendered inside views
     protected $params;  // a copy of all the request parameters sent
@@ -42,20 +43,20 @@ class Controller extends YAWF
     {
         // Get the view (e.g. "index") and the type (e.g. "html")
 
-        $view = $this->view = is_null($view) ? $this->view : $view;
-        $type = array_key($options, 'type', $this->app->get_content_type());
+        $this->view = is_null($view) ? $this->view : $view;
+        $this->type = array_key($options, 'type', $this->app->get_content_type());
 
         // Call the controller's view method
 
         $this->before();
-        $method = strtr($view, '-', '_');
+        $method = strtr($this->view, '-', '_');
         if (method_exists($this, $method)) $this->$method();
         $this->after();
 
         // Render the view with a data array
 
-        $this->render->content = $this->app->render_view($view, $this->render, $options);
-        return $this->app->render_type($type, $this->render);
+        $this->render->content = $this->app->render_view($this->view, $this->render, $options);
+        return $this->app->render_type($this->type, $this->render);
     }
 
     // Set up render data defaults (called by $this->app)
@@ -88,6 +89,13 @@ class Controller extends YAWF
     protected function set_view($view)
     {
         $this->view = $view;
+    }
+
+    // Change the content type to show
+
+    protected function set_type($type)
+    {
+        $this->type = $type;
     }
 
     // Parse request params (from the $_REQUEST array by default)
