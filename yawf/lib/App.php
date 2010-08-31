@@ -44,7 +44,7 @@ class App extends YAWF
 
         // Setup the application request environment
 
-        $this->content_type = $content_type; // can be "html", "test", etc.
+        $this->content_type = strtolower($content_type); // e.g. "html", "test"
         $this->folder = ($folder ? $folder : DEFAULT_FOLDER);
         $this->file = ($file ? $file : DEFAULT_FILE);
         $this->is_testing = array_key($_REQUEST, 'test') || $content_type === 'test';
