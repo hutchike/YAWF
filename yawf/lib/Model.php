@@ -149,6 +149,13 @@ class Model extends YAWF
         return $this->$id_field;
     }
 
+    public function set_id($id)
+    {
+        $id_field = $this->get_id_field();
+        $this->$id_field = $id;
+        return $this;
+    }
+
     private function set_field_flags(&$array, $fields)
     {
         $table = $this->get_table();
