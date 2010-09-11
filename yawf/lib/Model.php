@@ -243,8 +243,9 @@ class Model extends YAWF
         }
     }
 
-    public function load()
+    public function load($id = NULL)
     {
+        if ($id) $this->set_id($id);
         if ($found = $this->find_first())
         {
             $this->to_update = array();
@@ -255,7 +256,7 @@ class Model extends YAWF
 
     public function save()
     {
-        if (!$this->data() || !$this->validate_on_save()) return FALSE;
+        if (!$this->data || !$this->validate_on_save()) return FALSE;
         return $this->get_id() ? $this->update() : $this->insert();
     }
 
@@ -404,6 +405,15 @@ class Model extends YAWF
         $this->query("update $db_table set $updates");
         $this->to_update = array();
         return $this;
+    }
+
+    public function update_all_fields()
+    {
+        foreach ($this->data as $field => $value)
+        {
+            $this->to_update[$field] = TRUE;
+        }
+        return $this->update();
     }
 
     public function delete()
