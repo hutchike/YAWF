@@ -46,6 +46,13 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return '<img ' . self::attrs($attrs) . ' />';
     }
 
+    public static function hidden_id_for($name, $object)
+    {
+        $name .= '->' . $object->get_id_field();
+        $value = $object->get_id();
+        return '<input type="hidden" name="' . $name . '" value="' . $value . '" />' . "\n";
+    }
+
     public static function input($name, $attrs = array())
     {
         $object_name = null;

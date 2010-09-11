@@ -135,7 +135,7 @@ class Model extends YAWF
         return $this;
     }
 
-    protected function get_id_field()
+    public function get_id_field()
     {
         if ($this->id_field) return $this->id_field;
         $table = $this->get_table();
