@@ -243,8 +243,9 @@ class Model extends YAWF
         }
     }
 
-    public function load($id = NULL)
+    public function load($id = FALSE)
     {
+        if (is_null($id)) return 0;
         if ($id) $this->set_id($id);
         if ($found = $this->find_first())
         {
