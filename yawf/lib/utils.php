@@ -186,7 +186,7 @@ function indent($text, $chars = 2)
 {
     $spaces = '                                                '; // enough?
     $indent = substr($spaces, 0, $chars);
-    return $indent . join("\n$indent", explode("\n", $text)) . "\n";
+    return $indent . join("\n$indent", explode("\n", trim($text))) . "\n";
 }
 
 // End of utils.php
