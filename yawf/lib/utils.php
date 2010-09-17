@@ -180,4 +180,13 @@ function h($text)
     return htmlentities($text);
 }
 
+// Indent some text with whitespace
+
+function indent($text, $chars = 2)
+{
+    $spaces = '                                                '; // enough?
+    $indent = substr($spaces, 0, $chars);
+    return $indent . join("\n$indent", explode("\n", $text)) . "\n";
+}
+
 // End of utils.php
