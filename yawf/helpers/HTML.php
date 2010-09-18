@@ -72,14 +72,14 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
     {
         $attrs['type'] = 'submit';
         $attrs['value'] = $value;
-        self::input($name, $attrs);
+        return self::input($name, $attrs);
     }
 
     public static function button($name, $value, $attrs = array())
     {
         $attrs['type'] = 'button';
         $attrs['value'] = $value;
-        self::input($name, $attrs);
+        return self::input($name, $attrs);
     }
 
     public static function link($url, $html, $attrs = array())
