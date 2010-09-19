@@ -75,9 +75,9 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return self::input($name, $attrs);
     }
 
-    public static function password($name, $value, $attrs = array())
+    public static function password($name, $attrs = array())
     {
-        return self::input_type('password', $name, $value, $attrs);
+        return self::input_type('password', $name, '', $attrs); # blank value
     }
 
     public static function submit($name, $value, $attrs = array())
