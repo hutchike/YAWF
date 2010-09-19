@@ -103,11 +103,12 @@ function url_get_contents($url, $options = array())
     return $contents;
 }
 
-// Split a comma separated list
+// Split a comma-separated list
 
 function split_list($list)
 {
-    return preg_split('/,\s*/', $list);
+    $list = preg_split('/,\s*/', $list);
+    return count($list) == 1 && $list[0] == '' ? array() : $list;
 }
 
 // Load some PHP files with "require_once"
