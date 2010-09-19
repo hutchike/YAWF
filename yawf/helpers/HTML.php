@@ -68,18 +68,26 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return '<input ' . self::attrs($attrs) . ' />' . "\n";
     }
 
-    public static function submit($name, $value, $attrs = array())
+    public static function input_type($type, $name, $value, $attrs = array())
     {
-        $attrs['type'] = 'submit';
+        $attrs['type'] = $type;
         $attrs['value'] = $value;
         return self::input($name, $attrs);
     }
 
+    public static function password($name, $value, $attrs = array())
+    {
+        return self::input_type('password', $name, $value, $attrs);
+    }
+
+    public static function submit($name, $value, $attrs = array())
+    {
+        return self::input_type('submit', $name, $value, $attrs);
+    }
+
     public static function button($name, $value, $attrs = array())
     {
-        $attrs['type'] = 'button';
-        $attrs['value'] = $value;
-        return self::input($name, $attrs);
+        return self::input_type('button', $name, $value, $attrs);
     }
 
     public static function link($url, $html, $attrs = array())
