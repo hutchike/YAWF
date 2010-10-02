@@ -198,12 +198,12 @@ class App extends YAWF
 
     // Redirect to another URL, and possibly exit
 
-    public function redirect($url, $exit = FALSE)
+    public function redirect($url, $options = array())
     {
         if ($this->content_type !== DEFAULT_CONTENT_TYPE) $url .= '.' . $this->content_type;
         header('Location: ' . AppView::url($url));
         $this->is_silent = TRUE;
-        if ($exit) exit; // it stops our logging!
+        if (array_key($options, 'exit')) exit; // it stops our logging!
     }
 
     // Send some mail (this depends on the Mail helper)

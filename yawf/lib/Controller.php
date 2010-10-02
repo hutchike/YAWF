@@ -161,9 +161,9 @@ class Controller extends YAWF
 
     // Redirect to another URL
 
-    protected function redirect($url, $exit = FALSE)
+    protected function redirect($url, $options = array())
     {
-        $this->app->redirect($url, $exit);
+        $this->app->redirect($url, $options);
     }
 
     // Send any errors to the webmaster
