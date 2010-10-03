@@ -233,7 +233,8 @@ class Controller_flash
 
     public function __set($name, $value)
     {
-        $_SESSION[self::SESSION_KEY][$name] = $value;
+        return $name == 'now' ? $this->now('notice', $value)
+                              : $_SESSION[self::SESSION_KEY][$name] = $value;
     }
 
     public function now($name, $value = NULL)
