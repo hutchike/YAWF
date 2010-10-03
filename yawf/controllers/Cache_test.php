@@ -144,11 +144,11 @@ class Cache_test_controller extends Cache_controller
     public function set_cache_path_test()
     {
         $this->set_cache_path();
-        list ($yawf_or_app, $cache_folder, $cache_file) = preg_split('/\//', $this->cache_path);
+        list ($yawf_or_app, $cache_folder1, $cache_folder2, $cache_file) = preg_split('/\//', $this->cache_path);
         $this->should('have a cache path in either "yawf" or "app"',
                       in_array($yawf_or_app, array('yawf', 'app')), $yawf_or_app);
-        $this->should('set the cache folder to "cache" always',
-                      $cache_folder === 'cache', $cache_folder);
+        $this->should('set the cache folder to "tmp/cache" always',
+                      $cache_folder1 === 'tmp' && $cache_folder2 === 'cache', "$cache_folder1/$cache_folder2");
         $this->should('use the md5() function to name the cache file',
                       $cache_file === md5($_SERVER['REQUEST_URI']));
     }

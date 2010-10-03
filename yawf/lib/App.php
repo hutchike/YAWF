@@ -203,7 +203,8 @@ class App extends YAWF
         if ($this->content_type !== DEFAULT_CONTENT_TYPE) $url .= '.' . $this->content_type;
         header('Location: ' . AppView::url($url));
         $this->is_silent = TRUE;
-        if (array_key($options, 'exit')) exit; // it stops our logging!
+        if ($notice = array_key($options, 'notice')) $this->controller->flash->notice = $notice;
+        if (array_key($options, 'exit')) exit; // careful! it stops our logging!
     }
 
     // Send some mail (this depends on the Mail helper)

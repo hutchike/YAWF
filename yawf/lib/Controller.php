@@ -19,6 +19,7 @@ class Controller extends YAWF
     protected $lang;    // the two character language code e.g. "en"
     protected $render;  // array of data to be rendered inside views
     protected $params;  // a copy of all the request parameters sent
+    protected $flash;   // an object to send data into the next view
     protected $cookie;  // an object to get & set $_COOKIE variable,
     protected $session; // an object to get & set $_SESSION variable
 
@@ -33,6 +34,7 @@ class Controller extends YAWF
         $this->set_params();            // request parameters passed in
         $this->set_lang();              // the browser language setting
         @session_start();               // start a session for the user
+        $this->flash = new Controller_flash();
         $this->cookie = new Controller_cookie();
         $this->session = new Controller_session();
     }
@@ -206,6 +208,40 @@ class Controller extends YAWF
     protected function should_not($desc, $failed = TRUE, $test_data = NULL)
     {
         $this->app->test_case('not ' . $desc, !$failed, $test_data);
+    }
+}
+
+class Controller_flash
+{
+    const SESSION_KEY = '__flash__';
+    private $flash;
+
+    public function __construct()
+    {
+        $this->flash = array_key($_SESSION, self::SESSION_KEY, array());
+        $_SESSION[self::SESSION_KEY] = array();
+    }
+
+    public function __get($name)
+    {
+        return array_key($this->flash, $name);
+    }
+
+    public function __set($name, $value)
+    {
+        $_SESSION[self::SESSION_KEY][$name] = $value;
+    }
+
+    public function now($name, $value = NULL)
+    {
+        if (is_array($name))
+        {
+            foreach ($name as $key => $val) $this->flash[$key] = $val;
+        }
+        else
+        {
+            $this->flash[$name] = $value;
+        }
     }
 }
 

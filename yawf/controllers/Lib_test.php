@@ -19,6 +19,40 @@ class Lib_test_controller extends Controller
     const TEST_TEXT = 'Just some text to test things';
     const STALE_SECS = 10;
 
+    // Test that we can set flash, cookie and session variables (use a redirect)
+    // IMPORTANT: This MUST be the first test to avoid side-effects from others!
+
+    public function flash_and_cookie_and_session_test()
+    {
+        $time_in_cookie = $this->cookie->remember_the_time_now;
+        $time_in_session = $this->session->remember_the_time_now;
+        $time_now = time();
+        $cookie_is_stale = $time_now - $time_in_cookie > self::STALE_SECS;
+        $session_is_stale = $time_now - $time_in_session > self::STALE_SECS;
+        if ($cookie_is_stale || $session_is_stale)
+        {
+            $this->flash->notice = 'Flash should work';
+            $this->cookie->remember_the_time_now = $time_now;
+            $this->session->remember_the_time_now = $time_now;
+            $type = $this->app->get_content_type();
+            header('Location: ' . VIEW_URL_PREFIX . "lib_test.$type?$time_now");
+            exit;
+        }
+
+        $this->should('set a "flash" notice',
+                      $this->flash->notice === 'Flash should work', $this->flash->notice);
+
+        $this->flash->now(array('notice2' => 'Flash now should also work'));
+        $this->should('set a "flash now" notice',
+                      $this->flash->notice2 === 'Flash now should also work', $this->flash->notice2);
+
+        $this->should('set a cookie variable',
+                      !$cookie_is_stale, $time_in_cookie);
+
+        $this->should('set a session variable',
+                      !$session_is_stale, $time_in_session);
+    }
+
     // Test that we can set up this controller for the application
 
     public function setup_for_app_test()
@@ -101,29 +135,6 @@ class Lib_test_controller extends Controller
     protected function get_state() // for before_test() and after_test() above
     {
         return serialize($this) . ' ' . serialize($_COOKIE) . ' ' . serialize($_SESSION);
-    }
-
-    // Test that we can set cookie and session variables (requires a redirect)
-
-    public function cookie_and_session_test()
-    {
-        $time_in_cookie = $this->cookie->remember_the_time_now;
-        $time_in_session = $this->session->remember_the_time_now;
-        $time_now = time();
-        $cookie_is_stale = $time_now - $time_in_cookie > self::STALE_SECS;
-        $session_is_stale = $time_now - $time_in_session > self::STALE_SECS;
-        if ($cookie_is_stale || $session_is_stale)
-        {
-            $this->cookie->remember_the_time_now = $time_now;
-            $this->session->remember_the_time_now = $time_now;
-            $type = $this->app->get_content_type();
-            header('Location: ' . VIEW_URL_PREFIX . "lib_test.$type?$time_now");
-            exit;
-        }
-        $this->should('set a cookie variable',
-                      !$cookie_is_stale, $time_in_cookie);
-        $this->should('set a session variable',
-                      !$session_is_stale, $time_in_session);
     }
 
     // Test that we can set the view
