@@ -46,6 +46,10 @@ class Lib_test_controller extends Controller
         $this->should('set a "flash now" notice',
                       $this->flash->notice2 === 'Flash now should also work', $this->flash->notice2);
 
+        $this->flash->now = 'Flash now (conventional) should also work';
+        $this->should('set a "flash now" (conventional) notice',
+                      $this->flash->notice === 'Flash now (conventional) should also work', $this->flash->notice);
+
         $this->should('set a cookie variable',
                       !$cookie_is_stale, $time_in_cookie);
 
