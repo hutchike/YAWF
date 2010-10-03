@@ -213,6 +213,12 @@ class Controller extends YAWF
     {
         $this->app->test_case('not ' . $desc, !$failed, $test_data);
     }
+
+    public function flash($name, $value = NULL)
+    {
+        if (is_null($value)) return $this->flash->$name;
+        return $this->flash->$name = $value;
+    }
 }
 
 class Controller_flash
@@ -245,7 +251,8 @@ class Controller_flash
         }
         else
         {
-            $this->flash[$name] = $value;
+            return is_null($value) ? array_key($this->flash, $name)
+                                   : $this->flash[$name] = $value;
         }
     }
 }

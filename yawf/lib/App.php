@@ -200,10 +200,10 @@ class App extends YAWF
 
     public function redirect($url, $options = array())
     {
+        if ($notice = array_key($options, 'notice')) $this->controller->flash('notice', $notice);
         if ($this->content_type !== DEFAULT_CONTENT_TYPE) $url .= '.' . $this->content_type;
         header('Location: ' . AppView::url($url));
         $this->is_silent = TRUE;
-        if ($notice = array_key($options, 'notice')) $this->controller->flash->notice = $notice;
         if (array_key($options, 'exit')) exit; // careful! it stops our logging!
     }
 
