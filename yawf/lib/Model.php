@@ -152,7 +152,7 @@ class Model extends YAWF
     public function set_id($id)
     {
         $id_field = $this->get_id_field();
-        $this->$id_field = $id;
+        $this->$id_field = $id + 0;
         return $this;
     }
 
@@ -410,10 +410,7 @@ class Model extends YAWF
 
     public function update_all_fields()
     {
-        foreach ($this->data as $field => $value)
-        {
-            $this->to_update[$field] = TRUE;
-        }
+        foreach ($this->fields() as $field) $this->to_update[$field] = TRUE;
         return $this->update();
     }
 

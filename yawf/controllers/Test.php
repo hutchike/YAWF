@@ -22,7 +22,6 @@ class Test_controller extends App_controller
     {
         $this->url = $this->render->url = first($this->params->url, '/');
         $this->script = $this->render->script = first($this->params->script, self::SCRIPT_RUNNER);
-        $this->render->flash = '';
     }
 
     public function runner()
@@ -64,10 +63,10 @@ class Test_controller extends App_controller
 
         $file_path = self::SCRIPT_DIR . '/' . $this->script;
         if (!file_exists($file_path))
-            $this->render->flash = 'Test script "' . $file_path . '" does not exist?';
+            $this->flash->now = 'Test script "' . $file_path . '" does not exist?';
 
         if (!count($scripts))
-            $this->render->flash = 'Folder "' . self::SCRIPT_DIR . '" is empty?';
+            $this->flash->now = 'Folder "' . self::SCRIPT_DIR . '" is empty?';
     }
 
     public function console()

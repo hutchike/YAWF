@@ -37,7 +37,7 @@
     using test script
     <?= HTML::select('script', $scripts, $script, array('onchange' => 'change_script(this.form)')) ?>
     <a href="#" onclick="top.YAWF.open('test/script.part?script=' + document.forms.browser.script.value)">view</a>
-    <span id="flash"><?= $flash ?></span>
+    <span id="flash"><?= $flash->notice ?></span>
   </form>
 </body>
 </html>
