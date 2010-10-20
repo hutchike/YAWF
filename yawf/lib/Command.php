@@ -138,9 +138,10 @@ class Command
 
         // Run all the YASH test files in order
 
+        print "Running test files in \"$test_dir\":\n";
         foreach ($tests as $test)
         {
-            print "$test:\n";
+            print "Running test file \"$test\":\n";
             system("yash -test < $test_dir/$test");
         }
     }
