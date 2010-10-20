@@ -131,7 +131,11 @@ class Command
 
         // Run all the YASH test files in order
 
-        foreach ($tests as $test) system("yash -test < app/tests/$test");
+        foreach ($tests as $test)
+        {
+            print "$test:\n";
+            system("yash -test < app/tests/$test");
+        }
     }
 }
 
