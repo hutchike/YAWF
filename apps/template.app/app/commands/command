@@ -20,6 +20,12 @@ class App_command extends Command
             $this->usage();
     }
 
+    protected function restart()
+    {
+        $this->stop();
+        $this->start();
+    }
+
     protected function start()
     {
         // TODO: Start the app
@@ -28,11 +34,6 @@ class App_command extends Command
     protected function stop()
     {
         // TODO: Stop the app
-    }
-
-    protected function restart()
-    {
-        // TODO: Restart the app
     }
 
     protected function status()
