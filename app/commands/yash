@@ -30,7 +30,7 @@ class Yet_another_shell extends Command
     public function run()
     {
         global $app;
-        $stdin = fopen ("php://stdin","r");
+        $stdin = fopen('php://stdin', 'r');
         print '> ';
         while ($line = fgets($stdin))
         {
@@ -44,7 +44,7 @@ class Yet_another_shell extends Command
                 eval(preg_match($command_regexp, $line) ? "$line;"
                                                         : "\$result=($line);");
                 print_r($result);
-                if ($result) print "\n";
+                print "\n";
             }
             catch (Exception $e)
             {
