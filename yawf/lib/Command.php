@@ -141,7 +141,7 @@ class Command
         foreach ($tests as $test)
         {
             print "$test:\n";
-            system("yash -test < app/tests/$test");
+            system("yash -test < $test_dir/$test");
         }
     }
 }
