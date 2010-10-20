@@ -98,11 +98,18 @@ class Command
 
     protected function test()
     {
+        // Which directory holds the YASH test files?
+
         $test_dir = 'app/tests';
-        $tests = array();
+        if ($this->opts->run) $test_dir .= '/' . $this->opts->run;
+        if (!is_dir($test_dir))
+        {
+            $this->quit("Test directory \"$test_dir\" does not exist");
+        }
 
         // Create an array of YASH test files to run
 
+        $tests = array();
         if (file_exists("$test_dir/setup.yash")) $tests[] = 'setup.yash';
         if ($this->args)
         {
