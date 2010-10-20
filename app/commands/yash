@@ -37,6 +37,7 @@ class Yet_another_shell extends Command
             $line = rtrim(trim($line), ';');
             if ($line == 'quit') exit;
             if ($line === '') $line = 'NULL';
+            if (preg_match('/^(#|\/\/)/', $line)) continue; # comments
             try
             {
                 $result = NULL;
@@ -52,6 +53,7 @@ class Yet_another_shell extends Command
             }
             print '> ';
         }
+        print "\n";
     }
 }
 
