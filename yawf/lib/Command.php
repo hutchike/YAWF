@@ -98,35 +98,36 @@ class Command
 
     protected function test()
     {
-        $dir = 'app/tests';
+        $test_dir = 'app/tests';
         $tests = array();
 
         // Create an array of YASH test files to run
 
-        if (file_exists("$dir/setup.yash")) $tests[] = 'setup.yash';
+        if (file_exists("$test_dir/setup.yash")) $tests[] = 'setup.yash';
         if ($this->args)
         {
             foreach ($this->args as $name)
             {
                 $test = "$name.yash";
-                if (!file_exists("$dir/$test"))
+                if (!file_exists("$test_dir/$test"))
                 {
-                    $this->quit("Test file \"$dir/$test\" does not exist");
+                    $this->quit("Test file \"$test_dir/$test\" does not exist");
                 }
                 $tests[] = $test;
             }
         }
         else
         {
-            $dir = opendir($dir);
+            $dir = opendir($test_dir);
             while ($test = readdir($dir))
             {
+                if (preg_match('/^(setup|teardown)\.yash$/', $test)) continue;
                 if (!preg_match('/\.yash$/', $test)) continue;
                 $tests[] = $test;
             }
             closedir($dir);
         }
-        if (file_exists("$dir/teardown.yash")) $tests[] = 'teardown.yash';
+        if (file_exists("$test_dir/teardown.yash")) $tests[] = 'teardown.yash';
 
         // Run all the YASH test files in order
 
