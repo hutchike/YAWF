@@ -95,6 +95,43 @@ class Command
         print "\n$message\n\n";
         exit;
     }
+
+    protected function test()
+    {
+        $dir = 'app/tests';
+        $tests = array();
+
+        // Create an array of YASH test files to run
+
+        if (file_exists("$dir/setup.yash")) $tests[] = 'setup.yash';
+        if ($this->args)
+        {
+            foreach ($this->args as $name)
+            {
+                $test = "$name.yash";
+                if (!file_exists("$dir/$test"))
+                {
+                    $this->quit("Test file \"$dir/$test\" does not exist");
+                }
+                $tests[] = $test;
+            }
+        }
+        else
+        {
+            $dir = opendir($dir);
+            while ($test = readdir($dir))
+            {
+                if (!preg_match('/\.yash$/', $test)) continue;
+                $tests[] = $test;
+            }
+            closedir($dir);
+        }
+        if (file_exists("$dir/teardown.yash")) $tests[] = 'teardown.yash';
+
+        // Run all the YASH test files in order
+
+        foreach ($tests as $test) system("yash -test < app/tests/$test");
+    }
 }
 
 $__YAWF_start_time__ = microtime(TRUE);

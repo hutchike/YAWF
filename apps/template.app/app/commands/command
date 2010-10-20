@@ -40,17 +40,6 @@ class App_command extends Command
         // TODO: Get the app status
     }
 
-    protected function test()
-    {
-        $dir = opendir('app/tests');
-        while ($test = readdir($dir))
-        {
-            if (!preg_match('/\.yash$/', $test)) continue;
-            system("yash -test < app/tests/$test");
-        }
-        closedir($dir);
-    }
-
     protected function usage()
     {
         $this->quit("usage: $this->name [-start] [-stop] [-restart] [-status] [-test]");
