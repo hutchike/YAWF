@@ -8,20 +8,20 @@ class Fuzzy_command extends Command
 
     public function run()
     {
-        load_plugin('FuzzySure');
+        load_plugin('Logic/FuzzySure');
 
-        $rules = $this->args->rules;
-        $facts = $this->args->facts;
+        $rules = $this->opts->rules;
+        $facts = $this->opts->facts;
         if (!$rules || !$facts) $this->quit(self::USAGE);
 
-        $memory = $this->args->debug ? array('DEBUG' => TRUE) : NULL;
-        $sure = new FuzzySure($this->args->limit);
+        $memory = $this->opts->debug ? array('DEBUG' => TRUE) : NULL;
+        $sure = new FuzzySure($this->opts->limit);
         $sure->with($rules)->given($facts)->infer($memory);
-        if ($this->args->dump) print json_encode((array)$sure->memory());
+        if ($this->opts->dump) print json_encode((array)$sure->memory());
     }
 }
 
 $fuzzy = new Fuzzy_command();
 $fuzzy->run();
 
-// End of sure
+// End of fuzzy
