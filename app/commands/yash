@@ -46,8 +46,7 @@ class Yet_another_shell extends Command
             if ($line == 'quit') exit;
             if ($line === '') $line = 'NULL';
             if (preg_match('/^(#|\/\/)/', $line)) continue; # comments
-            $line = preg_replace('/^p\s+(.*)$/', 'print_r(\1)', $line);
-            $line = preg_replace('/^puts\s+(.*)$/', 'print(\1 . "\n")', $line);
+            $line = $this->parse($line);
             try
             {
                 $result = NULL;
@@ -63,6 +62,17 @@ class Yet_another_shell extends Command
             $this->say('> ');
         }
         $this->say("\n");
+    }
+
+    // Parse "p", "puts", "should" and "should_not" commands
+
+    protected function parse($line)
+    {
+        $line = preg_replace('/^p\s+(.*)$/', 'print_r(\1)', $line);
+        $line = preg_replace('/^puts\s+(.*)$/', 'print(\1 . "\n")', $line);
+        $line = preg_replace('/^should[_\s]not\s+(.*)$/', '$this->should_not(\1)', $line);
+        $line = preg_replace('/^should\s+(.*)$/', '$this->should(\1)', $line);
+        return $line;
     }
 
     // Say something unless we're being quiet
