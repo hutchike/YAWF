@@ -148,7 +148,7 @@ class Command
         foreach ($tests as $test)
         {
             print "Running test file \"$test_dir/$test\":\n";
-            system("yash -test < $test_dir/$test");
+            system("yash -quiet -test < $test_dir/$test");
         }
     }
 }

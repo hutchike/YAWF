@@ -23,7 +23,15 @@ require "$YAWF_ROOT/yawf/lib/Command.php";
 
 class Yet_another_shell extends Command
 {
+    protected $is_quiet;
+
     // Methods
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->is_quiet = $this->opts->quiet;
+    }
 
     // Run the YAWF shell
 
@@ -31,29 +39,37 @@ class Yet_another_shell extends Command
     {
         global $app;
         $stdin = fopen('php://stdin', 'r');
-        print '> ';
+        $this->say('> ');
         while ($line = fgets($stdin))
         {
             $line = rtrim(trim($line), ';');
             if ($line == 'quit') exit;
             if ($line === '') $line = 'NULL';
             if (preg_match('/^(#|\/\/)/', $line)) continue; # comments
+            $line = preg_replace('/^p\s+(.*)$/', 'print_r(\1)', $line);
+            $line = preg_replace('/^puts\s+(.*)$/', 'print(\1 . "\n")', $line);
             try
             {
                 $result = NULL;
                 $command_regexp = '/^[a-z]\w*\s+/';
                 eval(preg_match($command_regexp, $line) ? "$line;"
                                                         : "\$result=($line);");
-                print_r($result);
-                print "\n";
+                $this->say(print_r($result, TRUE) . "\n");
             }
             catch (Exception $e)
             {
                 print "ERROR: $e\n";
             }
-            print '> ';
+            $this->say('> ');
         }
-        print "\n";
+        $this->say("\n");
+    }
+
+    // Say something unless we're being quiet
+
+    public function say($text)
+    {
+        if (!$this->is_quiet) print $text;
     }
 
     // Parse lines like "$this->should('work', 1==1)" in yash scripts
