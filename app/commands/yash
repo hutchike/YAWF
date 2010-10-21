@@ -87,7 +87,8 @@ class Yet_another_shell extends Command
             if (!is_null($var)) $text .= "\n\n" . print_r($var, TRUE);
             Log::error($text);
         }
-        return $text;
+        print "$text\n";
+        return $is_ok;
     }
 
     // Parse lines like "$this->should_not('fail', 1==2)" in yash scripts
