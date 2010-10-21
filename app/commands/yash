@@ -90,8 +90,8 @@ class Yet_another_shell extends Command
     {
         $line = preg_replace('/^p\s+(.*)$/', 'p(\1)', $line);
         $line = preg_replace('/^puts\s+(.*)$/', 'puts(\1)', $line);
-        $line = preg_replace('/^should[_\s]not\s+(.*)$/', '$this->should_not(\1)', $line);
-        $line = preg_replace('/^should\s+(.*)$/', '$this->should(\1)', $line);
+        $line = preg_replace('/^should[_\s]not\s+(.*)$/', 'should_not(\1)', $line);
+        $line = preg_replace('/^should\s+(.*)$/', 'should(\1)', $line);
         return $line;
     }
 
@@ -125,20 +125,26 @@ class Yet_another_shell extends Command
 
     // Parse lines like "$this->should_not('fail', 1==2)" in yash scripts
 
-    public function should_not($text, $bool, $var = NULL)
+    public function should_not($text, $is_ok, $var = NULL)
     {
-        return $this->should("not $text", !$bool, $var);
+        return $this->should("not $text", !$is_ok, $var);
     }
 }
+
+$yash = new Yet_another_shell(getcwd());
 
 // Add a couple of rather nice Ruby print functions
 
 function p($text) { print_r($text); return NULL; }
 function puts($text) { print "$text\n"; return NULL; }
 
+// Add shortcuts to should and should_not functions
+
+function should($text, $is_ok, $var = NULL) { global $yash; return $yash->should($text, $is_ok, $var); }
+function should_not($text, $is_ok, $var = NULL) { global $yash; return $yash->should_not($text, $is_ok, $var); }
+
 // Run the shell then print out any test results
 
-$yash = new Yet_another_shell(getcwd());
 $app = $yash->app;
 $yash->run();
 $yash->results();
