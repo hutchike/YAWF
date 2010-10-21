@@ -147,7 +147,9 @@ class Command
         {
             print "Running test file \"$test_dir/$test\":\n";
             system("yash -quiet -test < $test_dir/$test");
+            print "\n";
         }
+        if (!$tests) print "No test files found in \"$test_dir\"\n\n";
     }
 }
 
