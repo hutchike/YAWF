@@ -97,16 +97,24 @@ class Command
         exit;
     }
 
-    protected function test()
+    protected function test($test_dir = NULL)
     {
         // Which directory holds the YASH test files?
 
-        $test_dir = 'app/tests';
-        if ($this->opts->run) $test_dir .= '/' . $this->opts->run;
+        if (is_null($test_dir))
+        {
+            $test_dir = 'app/tests';
+            if ($this->opts->run) $test_dir .= '/' . $this->opts->run;
+        }
+
         if (!is_dir($test_dir))
         {
             $this->quit("Test directory \"$test_dir\" does not exist");
         }
+
+        // Say that we're running tests in the folder
+
+        print "Running test files in \"$test_dir\":\n";
 
         // Create an array of YASH test files to run
 
@@ -129,8 +137,10 @@ class Command
             $dir = opendir($test_dir);
             while ($test = readdir($dir))
             {
+                if (substr($test, 0, 1) == '.') continue;
+                if (is_dir("$test_dir/$test")) $this->test("$test_dir/$test");
                 if (preg_match('/^(setup|teardown)\.yash$/', $test)) continue;
-                if (!preg_match('/\.yash$/', $test)) continue;
+                if (!preg_match('/\.yash$/', $test)) continue; // must be yash
                 $tests[] = $test;
             }
             closedir($dir);
@@ -139,7 +149,6 @@ class Command
 
         // Run all the YASH test files in order
 
-        print "Running test files in \"$test_dir\":\n";
         foreach ($tests as $test)
         {
             print "Running test file \"$test\":\n";
