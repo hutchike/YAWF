@@ -21,19 +21,17 @@ class Command
     public $path, $name;
     public $opts, $args;
 
-    public function __construct($dir = NULL)
+    public function __construct($dir = '.')
     {
         $this->parse_command_line();
 
         // Run from a project's root directory
 
-        chdir(dirname($this->path) . '/../..');
-        if ($dir)
-        {
-            if (is_dir("$dir/app")) chdir($dir);
-            elseif (is_dir("/$dir/../app")) chdir("$dir/..");
-            elseif (is_dir("/$dir/../../app")) chdir("$dir/../..");
-        }
+        if (is_dir("$dir/app")) chdir($dir);
+        elseif (is_dir("/$dir/../app")) chdir("$dir/..");
+        elseif (is_dir("/$dir/../../app")) chdir("$dir/../..");
+        elseif (is_dir("/$dir/../../../app")) chdir("$dir/../../..");
+        else chdir(dirname($this->path) . '/../..');
 
         // Include from "app" before "yawf"
 
