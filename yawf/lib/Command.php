@@ -50,9 +50,10 @@ class Command
         $this->app = $this->opts->test ? new App_test($this->path)
                                        : new App($this->path);
 
-        // Log output to a log file named "YYYYMMDD.command.log"
+        // Log output to a log file named "YYYYMMDD.command[.test].log"
 
-        Log::type('command');
+        $type = $this->opts->test ? 'command.test' : 'command';
+        Log::type($type);
 
         return $this;
     }
