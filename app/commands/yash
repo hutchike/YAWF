@@ -24,6 +24,8 @@ require "$YAWF_ROOT/yawf/lib/Command.php";
 class Yet_another_shell extends Command
 {
     protected $is_quiet;
+    protected $tests;
+    protected $fails;
 
     // Methods
 
@@ -31,6 +33,8 @@ class Yet_another_shell extends Command
     {
         parent::__construct();
         $this->is_quiet = $this->opts->quiet;
+        $this->tests = 0;
+        $this->fails = 0;
     }
 
     // Run the YAWF shell
@@ -64,12 +68,28 @@ class Yet_another_shell extends Command
         $this->say("\n");
     }
 
+    public function results()
+    {
+        if ($this->tests > 0)
+        {
+            $test_s = $this->tests == 1 ? 'test' : 'tests';
+            if ($this->fails > 0)
+            {
+                print "Failed $this->fails of $this->tests $test_s\n";
+            }
+            else
+            {
+                print "Passed $this->tests $test_s\n";
+            }
+        }
+    }
+
     // Parse "p", "puts", "should" and "should_not" commands
 
     protected function parse($line)
     {
-        $line = preg_replace('/^p\s+(.*)$/', 'print_r(\1)', $line);
-        $line = preg_replace('/^puts\s+(.*)$/', 'print(\1 . "\n")', $line);
+        $line = preg_replace('/^p\s+(.*)$/', 'p(\1)', $line);
+        $line = preg_replace('/^puts\s+(.*)$/', 'puts(\1)', $line);
         $line = preg_replace('/^should[_\s]not\s+(.*)$/', '$this->should_not(\1)', $line);
         $line = preg_replace('/^should\s+(.*)$/', '$this->should(\1)', $line);
         return $line;
@@ -98,6 +118,8 @@ class Yet_another_shell extends Command
             Log::error($text);
         }
         print "$text\n";
+        $this->tests++;
+        if (!$is_ok) $this->fails++;
         return $is_ok;
     }
 
@@ -109,8 +131,16 @@ class Yet_another_shell extends Command
     }
 }
 
+// Add a couple of rather nice Ruby print functions
+
+function p($text) { print_r($text); return NULL; }
+function puts($text) { print "$text\n"; return NULL; }
+
+// Run the shell then print out any test results
+
 $yash = new Yet_another_shell(getcwd());
 $app = $yash->app;
 $yash->run();
+$yash->results();
 
 // End of "commands/yash"
