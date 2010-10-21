@@ -112,10 +112,6 @@ class Command
             $this->quit("Test directory \"$test_dir\" does not exist");
         }
 
-        // Say that we're running tests in the folder
-
-        print "Running test files in \"$test_dir\":\n";
-
         // Create an array of YASH test files to run
 
         $tests = array();
@@ -151,7 +147,7 @@ class Command
 
         foreach ($tests as $test)
         {
-            print "Running test file \"$test\":\n";
+            print "Running test file \"$test_dir/$test\":\n";
             system("yash -test < $test_dir/$test");
         }
     }
