@@ -31,6 +31,7 @@ class App_test extends App
         $model = new Model();
         $model->set_database(DB_DATABASE_TEST);
         $this->is_testing = TRUE;
+        Log::testing(TRUE);
     }
 
     // Remove "_test" from the folder

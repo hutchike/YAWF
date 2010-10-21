@@ -22,15 +22,24 @@ class Log extends YAWF
     private static $level_names = array('DEBUG', 'INFO', 'WARN', 'ERROR', 'ALERT', 'TEST');
     private static $level;
     private static $type;
+    private static $testing;
 
-    public static function level($level)
+    public static function level($level = NULL)
     {
-        self::$level = $level;
+        if (!is_null($level)) self::$level = $level;
+        return self::$level;
     }
 
-    public static function type($type)
+    public static function type($type = NULL)
     {
-        self::$type = $type;
+        if (!is_null($type)) self::$type = $type;
+        return self::$type;
+    }
+
+    public static function testing($testing = NULL)
+    {
+        if (!is_null($testing)) self::$testing = $testing;
+        return self::$testing;
     }
 
     public static function level_name($level)
@@ -47,11 +56,25 @@ class Log extends YAWF
         $path = file_exists('app/logs') ? 'app/logs' : 'yawf/logs';
         $date = date('Ymd');
         $type = self::$type ? '.' . self::$type : '';
-        $fh = fopen("$path/$date$type.log", 'a'); // append
+        $log = self::$testing ? 'test.log' : 'log';
+        $fh = fopen("$path/$date$type.$log", 'a'); // append
         $time = date('H:i:s');
         $level = self::level_name($level);
         fwrite($fh, "$time $level $line\n");
         fclose($fh);
+    }
+
+    public static function assert($pass, $line, $var = NULL)
+    {
+        if ($pass)
+        {
+            self::info("Assertion passed: $line");
+        }
+        else
+        {
+            $debug = $var ? "\n" . print_r($var, TRUE) : '';
+            self::error("Assertion failed: $line$debug");
+        }
     }
 
     public static function debug($line)
