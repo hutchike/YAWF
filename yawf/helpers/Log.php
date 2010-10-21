@@ -22,7 +22,7 @@ class Log extends YAWF
     private static $level_names = array('DEBUG', 'INFO', 'WARN', 'ERROR', 'ALERT', 'TEST');
     private static $level;
     private static $type;
-    private static $testing;
+    private static $is_testing;
 
     public static function level($level = NULL)
     {
@@ -36,10 +36,10 @@ class Log extends YAWF
         return self::$type;
     }
 
-    public static function testing($testing = NULL)
+    public static function is_testing($is_testing = NULL)
     {
-        if (!is_null($testing)) self::$testing = $testing;
-        return self::$testing;
+        if (!is_null($is_testing)) self::$is_testing = $is_testing;
+        return self::$is_testing;
     }
 
     public static function level_name($level)
@@ -56,7 +56,7 @@ class Log extends YAWF
         $path = file_exists('app/logs') ? 'app/logs' : 'yawf/logs';
         $date = date('Ymd');
         $type = self::$type ? '.' . self::$type : '';
-        $log = self::$testing ? 'test.log' : 'log';
+        $log = self::$is_testing ? 'test.log' : 'log';
         $fh = fopen("$path/$date$type.$log", 'a'); // append
         $time = date('H:i:s');
         $level = self::level_name($level);
