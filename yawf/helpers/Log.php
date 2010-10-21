@@ -56,19 +56,6 @@ class Log extends YAWF
         fclose($fh);
     }
 
-    public static function assert($pass, $line, $var = NULL)
-    {
-        if ($pass)
-        {
-            self::info("Assertion passed: $line");
-        }
-        else
-        {
-            $debug = $var ? "\n" . print_r($var, TRUE) : '';
-            self::error("Assertion failed: $line$debug");
-        }
-    }
-
     public static function debug($line)
     {
         self::line($line, self::DEBUG);
