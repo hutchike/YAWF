@@ -55,6 +55,31 @@ class Yet_another_shell extends Command
         }
         print "\n";
     }
+
+    // Parse lines like "$this->should('work', 1==1)" in yash scripts
+
+    public function should($test, $is_ok, $var = NULL)
+    {
+        $text = $is_ok ? 'Pass' : 'Fail';
+        $text .= ": should $test";
+        if ($is_ok)
+        {
+            Log::info($text);
+        }
+        else
+        {
+            if (!is_null($var)) $text .= "\n" . print_r($var, TRUE);
+            Log::error($text);
+        }
+        return $text;
+    }
+
+    // Parse lines like "$this->should_not('fail', 1==2)" in yash scripts
+
+    public function should_not($text, $bool, $var = NULL)
+    {
+        return $this->should("not $text", !$bool, $var);
+    }
 }
 
 $yash = new Yet_another_shell(getcwd());
