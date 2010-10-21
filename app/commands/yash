@@ -68,7 +68,7 @@ class Yet_another_shell extends Command
         }
         else
         {
-            if (!is_null($var)) $text .= "\n" . print_r($var, TRUE);
+            if (!is_null($var)) $text .= "\n\n" . print_r($var, TRUE);
             Log::error($text);
         }
         return $text;
