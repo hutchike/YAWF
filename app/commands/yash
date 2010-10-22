@@ -27,7 +27,7 @@ class Yet_another_shell extends Command
     protected $tests;
     protected $fails;
 
-    // Methods
+    // Create a new Yet Another Shell object
 
     public function __construct()
     {
