@@ -57,7 +57,7 @@ class Yet_another_shell extends Command
                 $command_regexp = '/^[a-z]\w*\s+/';
                 eval(preg_match($command_regexp, $line) ? "$line;"
                                                         : "\$result=($line);");
-                $this->say(print_r($result, TRUE) . "\n");
+                if (!is_null($result)) $this->say(print_r($result, TRUE)."\n");
             }
             catch (Exception $e)
             {
