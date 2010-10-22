@@ -23,16 +23,10 @@ class Command
 
     public function __construct($dir = NULL)
     {
+        // Parse options and arguments, and run in the project's root directory
+
         $this->parse_command_line();
-
-        // Run from a project's root directory
-
-        if (is_null($dir)) $dir = getcwd();
-        if (is_dir("$dir/app")) chdir($dir);
-        elseif (is_dir("/$dir/../app")) chdir("$dir/..");
-        elseif (is_dir("/$dir/../../app")) chdir("$dir/../..");
-        elseif (is_dir("/$dir/../../../app")) chdir("$dir/../../..");
-        else chdir(dirname($this->path) . '/../..'); // worst case use YAWF
+        $this->change_directory($dir);
 
         // Include from "app" before "yawf"
 
@@ -57,15 +51,17 @@ class Command
         return $this;
     }
 
+    // Log the time it took to run the command, given the options and arguments
+
     public function __destruct()
     {
-        // Log the time it took to run the command given the arguments
-
         $name = $this->name;
         $opts = json_encode((array)$this->opts);
         $args = json_encode((array)$this->args);
         YAWF::benchmark("\"$name\" command completed with opts $opts and args $args");
     }
+
+    // Parse options and arguments on the command line
 
     protected function parse_command_line()
     {
@@ -90,11 +86,35 @@ class Command
         $this->args = $args;
     }
 
-    protected function quit($message)
+    // Change to the project's root directory, containing the "app" directory
+
+    protected function change_directory($dir = NULL)
     {
-        print "\n$message\n\n";
+        $config = 'app/configs/app.yaml'; // search for the app's config file
+        if (is_null($dir)) $dir = getcwd();
+        $last_dir = NULL;
+        do {
+            if ($last_dir == $dir) break;
+            if (file_exists("$dir/$config"))
+            {
+                chdir($dir);
+                $last_dir = NULL;
+                break;
+            }
+            $last_dir = $dir;
+        } while ($dir = dirname($dir));
+        if ($last_dir) chdir(dirname($this->path) . '/../..');
+    }
+
+    // Quit the command, and write an optional message
+
+    protected function quit($message = NULL)
+    {
+        if (!is_null($message)) print "\n$message\n\n";
         exit;
     }
+
+    // Run "yash" test files in the "app/tests" folder
 
     protected function test($test_dir = NULL)
     {
@@ -115,7 +135,7 @@ class Command
 
         $tests = array();
         if (file_exists("$test_dir/setup.yash")) $tests[] = 'setup.yash';
-        if ($this->args)
+        if ($this->args) // use the args list to list test files
         {
             foreach ($this->args as $name)
             {
@@ -127,7 +147,7 @@ class Command
                 $tests[] = $test;
             }
         }
-        else
+        else // find all test folders and files in the directory
         {
             $dir = opendir($test_dir);
             while ($test = readdir($dir))
