@@ -68,7 +68,9 @@ class Yet_another_shell extends Command
         $this->say("\n");
     }
 
-    public function results()
+    // Display the results of tests we ran
+
+    public function display_test_results()
     {
         if ($this->tests > 0)
         {
@@ -131,6 +133,8 @@ class Yet_another_shell extends Command
     }
 }
 
+// Create our very awesome Yet Another Shell object
+
 $yash = new Yet_another_shell(getcwd());
 
 // Add a couple of rather nice Ruby print functions
@@ -143,10 +147,10 @@ function puts($text) { print "$text\n"; return NULL; }
 function should($text, $is_ok, $var = NULL) { global $yash; return $yash->should($text, $is_ok, $var); }
 function should_not($text, $is_ok, $var = NULL) { global $yash; return $yash->should_not($text, $is_ok, $var); }
 
-// Run the shell then print out any test results
+// Run the shell, then display all the test results
 
 $app = $yash->app;
 $yash->run();
-$yash->results();
+$yash->display_test_results();
 
 // End of "commands/yash"
