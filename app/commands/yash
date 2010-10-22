@@ -24,6 +24,7 @@ require "$YAWF_ROOT/yawf/lib/Command.php";
 class Yet_another_shell extends Command
 {
     protected $is_quiet;
+    protected $if_conds;
     protected $tests;
     protected $fails;
 
@@ -33,6 +34,7 @@ class Yet_another_shell extends Command
     {
         parent::__construct();
         $this->is_quiet = $this->opts->quiet;
+        $this->if_conds = array();
         $this->tests = 0;
         $this->fails = 0;
     }
@@ -47,9 +49,35 @@ class Yet_another_shell extends Command
         while ($line = fgets($stdin))
         {
             $line = rtrim(trim($line), ';');
+
+            // Parse "if", "else", "endif" logical constructs
+
+            if (preg_match('/if\s+(.*):$/', $line, $matches))
+            {
+                eval('$bool = ' . $matches[1] . ' ;');
+                array_unshift($this->if_conds, $bool);
+                $line = '';
+            }
+            elseif (preg_match('/^else:/', $line))
+            {
+                if ($this->if_conds) $this->if_conds[0] = !$this->if_conds[0];
+                $line = '';
+            }
+            elseif (preg_match('/^endif/', $line))
+            {
+                array_shift($this->if_conds);
+                $line = '';
+            }
+
+            // Parse special cases e.g. if, quit and comments
+
+            if (in_array(FALSE, $this->if_conds)) $line = '';
             if ($line == 'quit') exit;
-            if ($line === '') $line = 'NULL';
+            if ($line === '') $line = 'NULL'; // so we can eval a line
             if (preg_match('/^(#|\/\/)/', $line)) continue; # comments
+
+            // Parse regular shell lines
+
             $line = $this->parse($line);
             try
             {
@@ -84,6 +112,12 @@ class Yet_another_shell extends Command
                 print "Passed $this->tests $test_s\n";
             }
         }
+    }
+
+    // Parse "if", "else:" and "endif" conditionals
+
+    protected function parse_conditional($line)
+    {
     }
 
     // Parse "p", "puts", "should", "should_not" and similar commands
