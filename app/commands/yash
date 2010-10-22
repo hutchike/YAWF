@@ -86,15 +86,13 @@ class Yet_another_shell extends Command
         }
     }
 
-    // Parse "p", "puts", "should" and "should_not" commands
+    // Parse "p", "puts", "should", "should_not" and similar commands
 
     protected function parse($line)
     {
-        $line = preg_replace('/^p\s+(.*)$/', 'p(\1)', $line);
-        $line = preg_replace('/^puts\s+(.*)$/', 'puts(\1)', $line);
-        $line = preg_replace('/^should[_\s]not\s+(.*)$/', 'should_not(\1)', $line);
-        $line = preg_replace('/^should\s+(.*)$/', 'should(\1)', $line);
-        return $line;
+        if (preg_match('/^(do|for|if|while)/', $line)) return $line;
+        $line = preg_replace('/^should\s+not/', 'should_not', $line);
+        return preg_replace('/^(\w+)\s+(.*)$/', '\1(\2)', $line);
     }
 
     // Say something unless we're being quiet
@@ -146,6 +144,15 @@ function puts($text) { print "$text\n"; return NULL; }
 
 function should($text, $is_ok, $var = NULL) { global $yash; return $yash->should($text, $is_ok, $var); }
 function should_not($text, $is_ok, $var = NULL) { global $yash; return $yash->should_not($text, $is_ok, $var); }
+
+// Add some more very useful shortcuts to functions
+
+function say($text) { global $yash; return $yash->say($text); }
+function debug($text) { return Log::debug($text); }
+function info($text) { return Log::info($text); }
+function warn($text) { return Log::warn($text); }
+function error($text) { return Log::error($text); }
+function alert($text) { return Log::alert($text); }
 
 // Run the shell, then display all the test results
 
