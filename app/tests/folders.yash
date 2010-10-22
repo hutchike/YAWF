@@ -1,0 +1,6 @@
+should 'have an "app" folder', is_dir('app')
+should 'have an "apps" folder', is_dir('apps')
+should 'have an "apps/template.app" folder', is_dir('apps/template.app')
+should 'have a "logs" folder', is_dir('logs')
+should 'have a "vhosts" folder', is_dir('vhosts')
+should 'have a "yawf" folder', is_dir('yawf')

@@ -1,0 +1,6 @@
+$temp = 'apps/template.app/app';
+$sure = 'commands/sure';
+should 'have the same "sure" command', file_get_contents("$temp/$sure") == file_get_contents("app/$sure")
+
+$fuzzy = 'commands/fuzzy';
+should 'have the same "fuzzy" command', file_get_contents("$temp/$fuzzy") == file_get_contents("app/$fuzzy")

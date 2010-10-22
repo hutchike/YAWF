@@ -56,6 +56,10 @@ class YAWF_command extends Command
                 $this->create_vhost_file($this->pad_args(4));
                 break;
 
+            case 'test':
+                $this->test();
+                break;
+
             default:
                 $this->usage();
         }
@@ -84,6 +88,7 @@ where ACTION is one of:
 * doc    : Create fresh YAWF documentation
 * perms  : Set the file/folder permissions
 * vhost  : Create a virtual host file
+* test   : Run some YAWF system tests
 * help   : Display this help message
 End_of_usage;
         die("\n$usage\n\n");
