@@ -128,7 +128,7 @@ class Command
         $tests = array();
         $args = $this->args; $this->args = NULL; // to prevent recursions
         if (file_exists("$test_dir/setup.yash")) $tests[] = 'setup.yash';
-        if ($args) // use the args list to list test files
+        if ($args) // use the args list to select our test files
         {
             foreach ($args as $test)
             {
