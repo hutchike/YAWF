@@ -120,31 +120,22 @@ class Command
     {
         // Which directory holds the YASH test files?
 
-        if (is_null($test_dir))
-        {
-            $test_dir = 'app/tests';
-            if ($this->opts->run) $test_dir .= '/' . $this->opts->run;
-        }
-
-        if (!is_dir($test_dir))
-        {
-            $this->quit("Test directory \"$test_dir\" does not exist");
-        }
+        if (is_null($test_dir)) $test_dir = 'app/tests';
+        if (!is_dir($test_dir)) $this->quit("Test directory \"$test_dir\" does not exist");
 
         // Create an array of YASH test files to run
 
         $tests = array();
+        $args = $this->args; $this->args = NULL; // to prevent recursions
         if (file_exists("$test_dir/setup.yash")) $tests[] = 'setup.yash';
-        if ($this->args) // use the args list to list test files
+        if ($args) // use the args list to list test files
         {
-            foreach ($this->args as $name)
+            foreach ($args as $test)
             {
-                $test = "$name.yash";
-                if (!file_exists("$test_dir/$test"))
-                {
-                    $this->quit("Test file \"$test_dir/$test\" does not exist");
-                }
-                $tests[] = $test;
+                if (is_dir("$test_dir/$test")) $this->test("$test_dir/$test", $test);
+                elseif (file_exists("$test_dir/$test")) $tests[] = $test;
+                elseif (file_exists("$test_dir/$test.yash")) $tests[] = "$test.yash";
+                else $this->quit("Test file \"$test_dir/$test\" does not exist");
             }
         }
         else // find all test folders and files in the directory
@@ -170,7 +161,7 @@ class Command
             system("yash -quiet -test < $test_dir/$test");
             print "\n";
         }
-        if (!$tests) print "No test files found in \"$test_dir\"\n\n";
+        if (!$tests && !$args) print "No test files found in \"$test_dir\"\n\n";
     }
 }
 
