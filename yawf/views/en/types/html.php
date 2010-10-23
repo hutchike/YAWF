@@ -6,7 +6,7 @@
     <meta name="description" content="YAWF - Yet Another Web Framework" />
     <meta name="keywords" content="YAWF, PHP, SQLite, MySQL, MVC, Web, Framework" />
     <meta name="robots" content="index, follow" />
-    <?= HTML::link_tag('images/y.jpg', array('rel' => 'shortcut icon', 'type' => 'image/jpg')) ?>
+    <?= HTML::link_tag('images/y.png', array('rel' => 'shortcut icon', 'type' => 'image/png')) ?>
     <?= HTML::link_tag('styles/base.css') ?>
     <?= HTML::script('scripts/jquery.js') ?>
 </head>
