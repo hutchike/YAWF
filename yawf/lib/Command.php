@@ -116,7 +116,7 @@ class Command
 
     // Run "yash" test files in the "app/tests" folder
 
-    protected function test($test_dir = NULL)
+    protected function test($test_dir = NULL, $check_args = TRUE)
     {
         // Which directory holds the YASH test files?
 
@@ -126,13 +126,12 @@ class Command
         // Create an array of YASH test files to run
 
         $tests = array();
-        $args = $this->args; $this->args = NULL; // to prevent recursions
         if (file_exists("$test_dir/setup.yash")) $tests[] = 'setup.yash';
-        if ($args) // use the args list to select our test files
+        if ($check_args && $this->args) // look at the args list
         {
-            foreach ($args as $test)
+            foreach ($this->args as $test)
             {
-                if (is_dir("$test_dir/$test")) $this->test("$test_dir/$test", $test);
+                if (is_dir("$test_dir/$test")) $this->test("$test_dir/$test", FALSE);
                 elseif (file_exists("$test_dir/$test")) $tests[] = $test;
                 elseif (file_exists("$test_dir/$test.yash")) $tests[] = "$test.yash";
                 else $this->quit("Test file \"$test_dir/$test\" does not exist");
@@ -161,7 +160,7 @@ class Command
             system("yash -quiet -test < $test_dir/$test");
             print "\n";
         }
-        if (!$tests && !$args) print "No test files found in \"$test_dir\"\n\n";
+        if (!$tests) print "No test files found in \"$test_dir\"\n\n";
     }
 }
 
