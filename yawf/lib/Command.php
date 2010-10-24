@@ -86,17 +86,18 @@ class Command
         $this->args = $args;
     }
 
+    // Return the default start directory
+
+    protected function start_directory()
+    {
+        return dirname($this->path);
+    }
+
     // Change to the project's root directory, containing the "app" directory
 
     protected function change_directory($dir = NULL)
     {
-        if (is_null($dir))
-        {
-            // Use the class name to guess the command folder
-
-            $dir = strpos(get_class($this), '_command') > 0 ?
-                             dirname($this->path) : getcwd();
-        }
+        if (is_null($dir)) $dir = $this->start_directory();
 
         $config = 'app/configs/app.yaml'; // search for the app's config file
         $last_dir = NULL;

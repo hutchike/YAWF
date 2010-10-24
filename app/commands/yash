@@ -39,6 +39,13 @@ class Yet_another_shell extends Command
         $this->fails = 0;
     }
 
+    // Return the default start directory
+
+    protected function start_directory()
+    {
+        return getcwd();
+    }
+
     // Run the YAWF shell
 
     public function run()
