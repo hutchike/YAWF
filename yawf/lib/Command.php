@@ -90,7 +90,7 @@ class Command
 
     protected function start_directory()
     {
-        return dirname($this->path);
+        return getcwd(); // Regular commands start from the current directory
     }
 
     // Change to the project's root directory, containing the "app" directory

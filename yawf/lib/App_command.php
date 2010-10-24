@@ -59,6 +59,13 @@ class App_command extends Command
         $this->quit("usage: $this->name [-start] [-stop] [-restart] [-status] [-test]");
     }
 
+    // Return the default start directory
+
+    protected function start_directory()
+    {
+        return dirname($this->path); // App commands start from their own path
+    }
+
     // Run "yash" test files in the "app/tests" folder
 
     protected function test($test_dir = 'app/tests', $check_args = TRUE)

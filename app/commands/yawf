@@ -19,9 +19,9 @@ if (!$YAWF_ROOT || !is_dir($YAWF_ROOT) || !is_dir("$YAWF_ROOT/yawf"))
     exit;
 }
 
-require "$YAWF_ROOT/yawf/lib/Command.php";
+require "$YAWF_ROOT/yawf/lib/App_command.php";
 
-class YAWF_command extends Command
+class YAWF_command extends App_command
 {
     // Constants
 

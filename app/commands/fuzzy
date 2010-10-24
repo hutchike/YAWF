@@ -18,13 +18,6 @@ class Fuzzy_command extends Command
 {
     const USAGE = 'usage: fuzzy -rules=rules.txt -facts=facts.txt';
 
-    // Return the default start directory
-
-    protected function start_directory()
-    {
-        return getcwd();
-    }
-
     // Run the "fuzzy" command
 
     public function run()
