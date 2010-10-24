@@ -19,6 +19,8 @@ class Daemon extends Command
 {
     private $pid, $pid_file;
 
+    // Quit if we're already running, or start by creating a new PID file
+
     public function __construct($dir = NULL)
     {
         parent::__construct($dir);
@@ -26,17 +28,23 @@ class Daemon extends Command
         $this->write_pid_to_file();
     }
 
+    // Delete our PID file and finish
+
     public function __destruct()
     {
         $this->delete_pid_file();
         parent::__destruct();
     }
 
+    // Return the PID of our process
+
     public function pid()
     {
         if ($this->pid) return $this->pid;
         return ($this->pid = getmypid());
     }
+
+    // Return the name of our process's PID file
 
     public function pid_file()
     {
@@ -48,6 +56,8 @@ class Daemon extends Command
         }
         return $this->pid_file;
     }
+
+    // Return whether our process is already running
 
     protected function is_running()
     {
@@ -64,6 +74,8 @@ class Daemon extends Command
         }
     }
 
+    // Read a PID from our process's PID file
+
     protected function read_pid_from_file()
     {
 
@@ -72,10 +84,14 @@ class Daemon extends Command
                null;
     }
 
+    // Write our PID to a PID file
+
     protected function write_pid_to_file()
     {
         file_put_contents($this->pid_file(), $this->pid());
     }
+
+    // Delete a PID file if the PID matches ours
 
     protected function delete_pid_file()
     {
@@ -83,6 +99,13 @@ class Daemon extends Command
         {
             if ($pid == $this->pid()) unlink($this->pid_file());
         }
+    }
+
+    // Return the default start directory
+
+    protected function start_directory()
+    {
+        return dirname($this->path); // Daemons start from their own path
     }
 }
 
