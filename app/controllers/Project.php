@@ -16,7 +16,6 @@ class Project_controller extends App_controller
     public function before()
     {
         parent::before();
-        $this->render->title = 'The YAWF Project';
     }
 
     public function contact()
