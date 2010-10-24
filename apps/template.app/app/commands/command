@@ -1,53 +1,13 @@
 #!/usr/bin/env php
 <?
-require getenv('YAWF_ROOT') . '/yawf/lib/Command.php';
+require getenv('YAWF_ROOT') . '/yawf/lib/App_command.php';
 
-class App_command extends Command
+class MyApp_command extends App_command
 {
-    public function run()
-    {
-        if ($this->opts->start)
-            $this->start();
-        elseif ($this->opts->stop)
-            $this->stop();
-        elseif ($this->opts->restart)
-            $this->restart();
-        elseif ($this->opts->status)
-            $this->status();
-        elseif ($this->opts->test)
-            $this->test();
-        else
-            $this->usage();
-    }
-
-    protected function restart()
-    {
-        $this->stop();
-        $this->start();
-    }
-
-    protected function start()
-    {
-        // TODO: Start the app
-    }
-
-    protected function stop()
-    {
-        // TODO: Stop the app
-    }
-
-    protected function status()
-    {
-        // TODO: Get the app status
-    }
-
-    protected function usage()
-    {
-        $this->quit("usage: $this->name [-start] [-stop] [-restart] [-status] [-test]");
-    }
+    // TODO: Override "start" and "stop" methods as needed
 }
 
-$command = new App_command();
+$command = new MyApp_command();
 $command->run();
 
-// End of the app command
+// End of the MyApp command
