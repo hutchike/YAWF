@@ -90,8 +90,15 @@ class Command
 
     protected function change_directory($dir = NULL)
     {
+        if (is_null($dir))
+        {
+            // Use the class name to guess the command folder
+
+            $dir = strpos(get_class($this), '_command') > 0 ?
+                             dirname($this->path) : getcwd();
+        }
+
         $config = 'app/configs/app.yaml'; // search for the app's config file
-        if (is_null($dir)) $dir = getcwd();
         $last_dir = NULL;
         do {
             if ($last_dir == $dir) break;
@@ -116,11 +123,10 @@ class Command
 
     // Run "yash" test files in the "app/tests" folder
 
-    protected function test($test_dir = NULL, $check_args = TRUE)
+    protected function test($test_dir = 'app/tests', $check_args = TRUE)
     {
         // Which directory holds the YASH test files?
 
-        if (is_null($test_dir)) $test_dir = 'app/tests';
         if (!is_dir($test_dir)) $this->quit("Test directory \"$test_dir\" does not exist");
 
         // Create an array of YASH test files to run
@@ -160,7 +166,7 @@ class Command
             system("yash -quiet -test < $test_dir/$test");
             print "\n";
         }
-        if (!$tests) print "No test files found in \"$test_dir\"\n\n";
+        if (!$this->args && !$tests) print "No test files found in \"$test_dir\"\n\n";
     }
 }
 

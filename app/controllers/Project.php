@@ -65,6 +65,7 @@ class Project_controller extends App_controller
         }
         closedir($dir);
 
+        $this->render->layout = 'purple2';
         $this->render->folder = $folder;
         $this->render->parent = ($folder != 'yawf' ? dirname($folder) : '');
         $this->render->files = $files;
