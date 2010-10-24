@@ -76,7 +76,7 @@ class YAWF_command extends App_command
 
     // Display a usage message, defaulting to the standard help message
 
-    private function usage($cmd = '', $message = '')
+    protected function usage($cmd = '', $message = '')
     {
         if ($cmd && $message) die("\nusage: $cmd\n\n$message\n\n");
         $usage = <<<End_of_usage
