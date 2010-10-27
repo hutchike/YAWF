@@ -17,6 +17,7 @@ class Spam extends YAWF
     public static $pass_score = 3;          // Pass at 3 or less
     public static $field_name = 'form_ip';  // Field name to use
     public static $grace_secs = 86400;      // A whole day grace
+    public static $quick_secs = 3;          // Filled in quickly
     public static $has_script = FALSE;      // Script was shown?
 
     public static function form_attrs($attrs = array())
@@ -45,7 +46,8 @@ class Spam extends YAWF
         $html = <<<End_of_HTML
 <script type="text/javascript">
 /* <![CDATA[ */
-function form_script(f){f.$field.value+=' '+(new Date()).getTime();f.$field.name+='_tm';return true}
+window.form_render=new Date();
+window.form_script=function(f){f.$field.value+='|'+window.form_render.getTime()+'|'+(new Date()).getTime();f.$field.name+='_tm';return true};
 /* ]]> */
 </script>
 End_of_HTML;
@@ -65,18 +67,25 @@ End_of_HTML;
 
             // Second check the IP and clock time
 
-            list ($ip, $msecs) = explode(' ', $value);
+            list ($ip, $msecs1, $msecs2) = explode('|', $value);
             $addr = array_key($_SERVER, 'HTTP_X_FORWARDED_FOR', $_SERVER['REMOTE_ADDR']);
-            $secs = abs(time() - intval($msecs / 1000));
-            if ($ip == $addr) $score -= 3;
-            if ($secs < self::$grace_secs) $score -= 3;
-            if ($secs >= self::$grace_secs / 2) Log::warn("Spam::score() measured $secs seconds of browser time difference at IP $addr");
+            $used = intval(($msecs2 - $msecs1) / 1000);
+            $diff = abs(time() - intval($msecs2 / 1000));
+            if ($ip == $addr) $score -= 2;
+            if ($used >= self::$quick_secs) $score -= 2;
+            if ($diff <= self::$grace_secs) $score -= 2;
+            if ($diff >= self::$grace_secs / 2) Log::warn("Spam::score() measured $diff seconds of browser time difference at IP $addr");
+            $info = " (form submitted after $used secs)";
+        }
+        else
+        {
+            $info = ' (field was not renamed)';
         }
 
         // If the checks fail, it's probably spam
 
         if ($score < 0) $score = 0;
-        Log::info("Spam::score() returned a score of $score");
+        Log::info("Spam::score() returned a score of $score$info");
         return $score;
     }
 
