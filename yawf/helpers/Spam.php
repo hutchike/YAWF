@@ -93,6 +93,11 @@ End_of_HTML;
     {
         return self::score($params) <= self::$pass_score;
     }
+
+    public static function fail($params)
+    {
+        return !self::pass($params);
+    }
 }
 
 // End of Spam.php
