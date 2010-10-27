@@ -13,8 +13,8 @@
 
 class Form extends YAWF // and depends on "AppView" and "Translate"
 {
-    private static $field_name = 'form_sec';
-    private static $grace_secs = 86400; // A whole day
+    public static $field_name = 'form_sec';
+    public static $grace_secs = 86400; // A whole day
 
     public static function spam_attrs($attrs = array())
     {
