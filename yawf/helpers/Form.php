@@ -14,6 +14,7 @@
 class Form extends YAWF // and depends on "AppView" and "Translate"
 {
     private static $field_name = 'form_sec';
+    private static $grace_secs = 86400; // A whole day
 
     public static function spam_attrs($attrs = array())
     {
@@ -24,17 +25,17 @@ class Form extends YAWF // and depends on "AppView" and "Translate"
     public static function spam_field($field = NULL)
     {
         if (is_null($field)) $field = self::$field_name;
-        return "<input type=\"hidden\" name=\"$field\" value=\"\"/>\n";
+        $addr = array_key($_SERVER, 'HTTP_X_FORWARDED_FOR', $_SERVER['REMOTE_ADDR']);
+        return "<input type=\"hidden\" name=\"$field\" value=\"$addr\"/>\n";
     }
 
     public static function spam_script($field = NULL)
     {
         if (is_null($field)) $field = self::$field_name;
-        $addr = array_key($_SERVER, 'HTTP_X_FORWARDED_FOR', $_SERVER['REMOTE_ADDR']);
         $html = <<<End_of_HTML
 <script type="text/javascript">
 /* <![CDATA[ */
-function form_script(f){f.$field.value='$addr';f.$field.name+='_ip';return true}
+function form_script(f){f.$field.value+=' '+(new Date()).getTime();f.$field.name+='_ip';return true}
 /* ]]> */
 </script>
 End_of_HTML;
@@ -43,9 +44,17 @@ End_of_HTML;
 
     public static function is_spam($params, $field = NULL)
     {
-        if (is_null($field)) $field = self::$field_name . '_ip';
-        $addr = array_key($_SERVER, 'HTTP_X_FORWARDED_FOR', $_SERVER['REMOTE_ADDR']);
-        return $params->$field == $addr ? FALSE : TRUE;
+        if (is_null($field)) $field = self::$field_name;
+        $field .= '_ip';
+        if ($value = $params->$field)
+        {
+            list ($ip, $msecs) = explode(' ', $value);
+            $addr = array_key($_SERVER, 'HTTP_X_FORWARDED_FOR', $_SERVER['REMOTE_ADDR']);
+            $secs = abs(time() - intval($msecs / 1000));
+            Log::info("Form::is_spam() measured $secs seconds of browser time difference at IP $addr");
+            if ($ip == $addr && $secs < self::$grace_secs) return FALSE;
+        }
+        return TRUE;
     }
 }
 
