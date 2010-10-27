@@ -13,8 +13,9 @@
 
 class Form extends YAWF // and depends on "AppView" and "Translate"
 {
-    public static $field_name = 'form_sec';
+    public static $field_name = 'form_ip';
     public static $grace_secs = 86400; // A whole day
+    public static $has_script = FALSE;
 
     public static function spam_attrs($attrs = array())
     {
@@ -22,38 +23,52 @@ class Form extends YAWF // and depends on "AppView" and "Translate"
         return array_merge($attrs, array('onsubmit' => 'return form_script(this)'));
     }
 
-    public static function spam_field($field = NULL)
+    public static function spam_field()
     {
-        if (is_null($field)) $field = self::$field_name;
+        $field = self::$field_name;
         $addr = array_key($_SERVER, 'HTTP_X_FORWARDED_FOR', $_SERVER['REMOTE_ADDR']);
         return "<input type=\"hidden\" name=\"$field\" value=\"$addr\"/>\n";
     }
 
-    public static function spam_script($field = NULL)
+    public static function spam_script()
     {
-        if (is_null($field)) $field = self::$field_name;
+        // Don't write the script twice
+
+        if (self::$has_script) return '';
+        self::$has_script = TRUE;
+
+        // Write some 'onsubmit' script
+
+        $field = self::$field_name;
         $html = <<<End_of_HTML
 <script type="text/javascript">
 /* <![CDATA[ */
-function form_script(f){f.$field.value+=' '+(new Date()).getTime();f.$field.name+='_ip';return true}
+function form_script(f){f.$field.value+=' '+(new Date()).getTime();f.$field.name+='_tm';return true}
 /* ]]> */
 </script>
 End_of_HTML;
         return $html;
     }
 
-    public static function is_spam($params, $field = NULL)
+    public static function is_spam($params)
     {
-        if (is_null($field)) $field = self::$field_name;
-        $field .= '_ip';
+        // First check the field name has changed
+
+        $field = self::$field_name;
+        $field .= '_tm';
         if ($value = $params->$field)
         {
+            // Second check the IP and clock time
+
             list ($ip, $msecs) = explode(' ', $value);
             $addr = array_key($_SERVER, 'HTTP_X_FORWARDED_FOR', $_SERVER['REMOTE_ADDR']);
             $secs = abs(time() - intval($msecs / 1000));
             Log::info("Form::is_spam() measured $secs seconds of browser time difference at IP $addr");
             if ($ip == $addr && $secs < self::$grace_secs) return FALSE;
         }
+
+        // If our checks fail, it's probably spam
+
         return TRUE;
     }
 }
