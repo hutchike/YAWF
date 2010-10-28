@@ -91,7 +91,7 @@ End_of_HTML;
         // If the checks fail, it's probably spam
 
         if ($score < 0) $score = 0;
-        Log::info("Form::spam_score() returned a score of $score$info");
+        Log::info("Form::spam_score() returned $score$info");
         return $score;
     }
 
