@@ -80,7 +80,7 @@ End_of_HTML;
             if ($ip == $addr) $score -= 2;
             if ($used >= self::$quick_secs) $score -= 2;
             if ($diff <= self::$grace_secs) $score -= 2;
-            if ($diff >= self::$grace_secs / 2) Log::warn("Form::spam_score() measured $diff seconds of browser time diff at IP $addr");
+            if ($diff >= self::$grace_secs / 2) Log::warn("Form::spam_score() measured $diff seconds of browser time difference at IP $addr");
             $info = " (form submitted after $used secs)";
         }
         else
