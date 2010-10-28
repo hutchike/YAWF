@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-class Spam extends YAWF
+class Form extends YAWF // and depends on "HTML"
 {
     public static $spam_score = 10;         // Measure out of 10
     public static $pass_score = 3;          // Pass at 3 or less
@@ -20,20 +20,26 @@ class Spam extends YAWF
     public static $quick_secs = 3;          // Filled in quickly
     public static $has_script = FALSE;      // Script was shown?
 
-    public static function form_attrs($attrs = array())
+    public static function open($id, $action, $attrs = array())
     {
-        if (array_key($attrs, 'onsubmit')) Log::error('Spam::form_attrs "onsubmit" conflict!');
-        return array_merge($attrs, array('onsubmit' => 'return form_script(this)'));
+        $attrs = self::spam_attrs($attrs);
+        return HTML::form_open($id, $action, $attrs);
     }
 
-    public static function form_field()
+    public static function spam_attrs($attrs = array())
+    {
+        if (array_key($attrs, 'onsubmit')) Log::error('Form::spam_attrs "onsubmit" conflict!');
+        return array_merge($attrs, array('onsubmit' => 'return(window.form_script?form_script(this):true)'));
+    }
+
+    public static function spam_field()
     {
         $field = self::$field_name;
         $addr = array_key($_SERVER, 'HTTP_X_FORWARDED_FOR', $_SERVER['REMOTE_ADDR']);
         return "<input type=\"hidden\" name=\"$field\" value=\"$addr\"/>\n";
     }
 
-    public static function form_script()
+    public static function spam_script()
     {
         // Don't write the script twice
 
@@ -54,7 +60,7 @@ End_of_HTML;
         return $html;
     }
 
-    public static function score($params)
+    public static function spam_score($params)
     {
         // First check the field name has changed
 
@@ -74,7 +80,7 @@ End_of_HTML;
             if ($ip == $addr) $score -= 2;
             if ($used >= self::$quick_secs) $score -= 2;
             if ($diff <= self::$grace_secs) $score -= 2;
-            if ($diff >= self::$grace_secs / 2) Log::warn("Spam::score() measured $diff seconds of browser time difference at IP $addr");
+            if ($diff >= self::$grace_secs / 2) Log::warn("Form::spam_score() measured $diff seconds of browser time diff at IP $addr");
             $info = " (form submitted after $used secs)";
         }
         else
@@ -85,18 +91,19 @@ End_of_HTML;
         // If the checks fail, it's probably spam
 
         if ($score < 0) $score = 0;
-        Log::info("Spam::score() returned a score of $score$info");
+        Log::info("Form::spam_score() returned a score of $score$info");
         return $score;
     }
 
-    public static function pass($params)
+    public static function is_spam($params, $score = NULL)
     {
-        return self::score($params) <= self::$pass_score;
+        if (is_null($score)) $score = self::$pass_score;
+        return self::spam_score($params) > $score;
     }
 
-    public static function fail($params)
+    public static function is_not_spam($params, $score = NULL)
     {
-        return !self::pass($params);
+        return !self::is_spam($params, $score);
     }
 }
 
