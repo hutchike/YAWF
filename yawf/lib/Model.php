@@ -122,10 +122,20 @@ class Model extends YAWF
         return $this;
     }
 
+    public function get_limit()
+    {
+        return $this->limit + 0;
+    }
+
     public function set_offset($offset)
     {
         $this->offset = $offset + 0;
         return $this;
+    }
+
+    public function get_offset()
+    {
+        return $this->offset + 0;
     }
 
     public function set_id_field($field)
@@ -294,13 +304,15 @@ class Model extends YAWF
             $this->find_first(array($id_field => $id + 0));
     }
 
-    public function find_first($conditions = NULL) // returns an object
+    public function find_first($conditions = NULL) // returns an object or null
     {
-        $objects = $this->find_all($conditions);
+        $old_limit = $this->get_limit();
+        $objects = $this->set_limit(1)->find_all($conditions);
+        $this->set_limit($old_limit);
         return count($objects) ? $objects[0] : NULL;
     }
 
-    public function find_last($conditions = NULL) // returns an object
+    public function find_last($conditions = NULL) // returns an object or null
     {
         $objects = $this->find_all($conditions);
         return count($objects) ? $objects[count($objects) - 1] : NULL;
