@@ -23,24 +23,40 @@ class Service extends YAWF
         return $this->token;
     }
 
+    // Service errors should be arrays
+
+    protected function error($message)
+    {
+        $message .= ' in ' . get_class($this);
+        return array('error' => $message);
+    }
+
+    // Override "get" in your service
+
     public function get()
     {
-        return 'method "get" not supported by ' . get_class($this);
+        return $this->error('method "get" not supported');
     }
+
+    // Override "post" in your service
 
     public function post()
     {
-        return 'method "post" not supported by ' . get_class($this);
+        return $this->errror('method "post" not supported');
     }
+
+    // Override "put" in your service
 
     public function put()
     {
-        return 'method "put" not supported by ' . get_class($this);
+        return $this->errror('method "put" not supported');
     }
+
+    // Override "delete" in your service
 
     public function delete()
     {
-        return 'method "delete" not supported by ' . get_class($this);
+        return $this->errror('method "delete" not supported');
     }
 }
 
