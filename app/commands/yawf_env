@@ -1,0 +1,81 @@
+#!/usr/bin/env php
+<?
+// Copyright (c) 2010 Guanoo, Inc.
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public License
+// as published by the Free Software Foundation; either version 3
+// of the License, or (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+
+$YAWF_ROOT = getenv('YAWF_ROOT');
+if (!$YAWF_ROOT || !is_dir($YAWF_ROOT) || !is_dir("$YAWF_ROOT/yawf"))
+{
+    print "\nPlease set the YAWF_ROOT environment variable\nto the folder name where YAWF may be found on\nyour computer, e.g. ~/cloud/projects/YAWF\n\n";
+    exit;
+}
+
+require "$YAWF_ROOT/yawf/lib/Command.php";
+
+class YAWF_env extends Command
+{
+    const ENV_FILE = '/tmp/yawf.env';
+
+    public function run($dir)
+    {
+        $clr = $this->opts->clear;
+        if ($clr) $this->clear();
+        $var = array_shift($this->args);
+        if (!$clr && !$var) $this->usage();
+        $env = $this->load();
+        $pos = strpos($var, '=');
+        if ($pos > 0)
+        {
+            $val = substr($var, $pos+1);
+            $var = substr($var, 0, $pos);
+            $env->$var = $val;
+        }
+        $this->save($env);
+        print $env->$var . "\n";
+    }
+
+    // Display a usage message, defaulting to the standard help message
+
+    private function usage($cmd = '', $message = '')
+    {
+        if ($cmd && $message) die("\nusage: $cmd\n\n$message\n\n");
+        $usage = <<<End_of_usage
+usage: yawf_env [-clear] VAR[=VALUE]
+
+The VAR will optionally be set to a new value, and its current value returned
+End_of_usage;
+        die("\n$usage\n\n");
+    }
+
+    private function clear()
+    {
+        unlink(self::ENV_FILE);
+    }
+
+    private function load()
+    {
+        $env = new Object();
+        if (file_exists(self::ENV_FILE)) $env = unserialize(file_get_contents(self::ENV_FILE));
+        return $env;
+    }
+
+    private function save($env)
+    {
+        file_put_contents(self::ENV_FILE, serialize($env));
+    }
+}
+
+$dir =  getcwd();
+$yawf = new YAWF_env();
+$yawf->run($dir);
+
+// End of "commands/yawf_env"

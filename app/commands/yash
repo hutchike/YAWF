@@ -114,6 +114,15 @@ class Yet_another_shell extends Command
         }
     }
 
+    // Get/set YAWF environment variables
+
+    public function env($key, $value = NULL)
+    {
+        $command = "yawf_env $key";
+        if (!is_null($value)) $command .= "=\"$value\"";
+        return rtrim(system($command));
+    }
+
     // Send an HTTP request via a method to a URL
 
     public function http($method, $url, $params = array())
@@ -197,6 +206,7 @@ function should_not($text, $is_ok, $var = NULL) { global $yash; return $yash->sh
 // Useful functions
 
 function say($text) { global $yash; return $yash->say($text); }
+function env($key, $value = NULL) { global $yash; return $yash->env($key, $value); }
 function setenv($key, $value) { putenv("$key=$value"); }
 
 // HTTP functions
