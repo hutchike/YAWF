@@ -42,21 +42,21 @@ class Service extends YAWF
 
     public function post()
     {
-        return $this->errror('method "post" not supported');
+        return $this->error('method "post" not supported');
     }
 
     // Override "put" in your service
 
     public function put()
     {
-        return $this->errror('method "put" not supported');
+        return $this->error('method "put" not supported');
     }
 
     // Override "delete" in your service
 
     public function delete()
     {
-        return $this->errror('method "delete" not supported');
+        return $this->error('method "delete" not supported');
     }
 }
 
