@@ -55,10 +55,6 @@ class Controller extends YAWF
         if (method_exists($this, $method)) $this->$method();
         $this->after();
 
-        // Shown view renders flash messages
-
-        $this->render->flash = $this->flash;
-
         // Render the view with a data array
 
         $this->render->content = $this->app->render_view($this->view, $this->render, $options);
@@ -73,6 +69,7 @@ class Controller extends YAWF
         $render->view = $this->view;
         $render->path = $this->path;
         $render->lang = $this->lang;
+        $render->flash = $this->flash;
         $render->params = $this->params;
     }
 
