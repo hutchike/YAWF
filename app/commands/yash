@@ -194,13 +194,20 @@ function puts($text) { print "$text\n"; return NULL; }
 function should($text, $is_ok, $var = NULL) { global $yash; return $yash->should($text, $is_ok, $var); }
 function should_not($text, $is_ok, $var = NULL) { global $yash; return $yash->should_not($text, $is_ok, $var); }
 
-// Add some more very useful shortcuts to functions
+// Useful functions
+
+function say($text) { global $yash; return $yash->say($text); }
+function setenv($key, $value) { putenv("$key=$value"); }
+
+// HTTP functions
 
 function get($url, $params = array()) { global $yash; return $yash->http('get', $url, $params); }
 function post($url, $params = array()) { global $yash; return $yash->http('post', $url, $params); }
 function put($url, $params = array()) { global $yash; return $yash->http('put', $url, $params); }
 function delete($url, $params = array()) { global $yash; return $yash->http('delete', $url, $params); }
-function say($text) { global $yash; return $yash->say($text); }
+
+// Logging functions
+
 function debug($text) { return Log::debug($text); }
 function info($text) { return Log::info($text); }
 function warn($text) { return Log::warn($text); }
