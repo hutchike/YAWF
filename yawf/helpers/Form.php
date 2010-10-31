@@ -19,6 +19,7 @@ class Form extends YAWF // and depends on "HTML"
     public static $grace_secs = 86400;      // A whole day grace
     public static $quick_secs = 3;          // Filled in quickly
     public static $has_script = FALSE;      // Script was shown?
+    public static $is_testing = FALSE;      // True when testing
 
     public static function open($id, $action, $attrs = array())
     {
@@ -60,8 +61,10 @@ End_of_HTML;
         return $html;
     }
 
-    public static function spam_score($params)
+    public static function spam_score($params, $test_score = 1)
     {
+        if (self::$is_testing) return $test_score;
+
         // First check the field name has changed
 
         $score = self::$spam_score;
@@ -104,6 +107,12 @@ End_of_HTML;
     public static function is_not_spam($params, $score = NULL)
     {
         return !self::is_spam($params, $score);
+    }
+
+    public static function is_testing($is_testing = NULL)
+    {
+        if (!is_null($is_testing)) self::$is_testing = $is_testing;
+        return self::$is_testing;
     }
 }
 
