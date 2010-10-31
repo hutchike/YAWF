@@ -22,6 +22,26 @@ class Service extends YAWF
         if (!is_null($token)) $this->token = $token;
         return $this->token;
     }
+
+    public function get()
+    {
+        return 'method "get" not supported by ' . get_class($this);
+    }
+
+    public function post()
+    {
+        return 'method "post" not supported by ' . get_class($this);
+    }
+
+    public function put()
+    {
+        return 'method "put" not supported by ' . get_class($this);
+    }
+
+    public function delete()
+    {
+        return 'method "delete" not supported by ' . get_class($this);
+    }
 }
 
 // End of Service.php
