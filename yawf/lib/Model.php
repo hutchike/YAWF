@@ -243,7 +243,7 @@ class Model extends YAWF
         }
     }
 
-    public function load($id = FALSE)
+    public function load($id = 0) // returns the object ID or zero on failure
     {
         if (is_null($id)) return 0;
         if ($id) $this->set_id($id);
@@ -251,17 +251,19 @@ class Model extends YAWF
         {
             $this->to_update = array();
             $this->data = $found->data;
+            return $this->get_id();
         }
-        return $this->get_id();
+        return 0;
     }
 
-    public function save()
+    public function save() // returns true if the object saved or false if not
     {
         if (!$this->data || !$this->validate_on_save()) return FALSE;
-        return $this->get_id() ? $this->update() : $this->insert();
+        $saved = $this->get_id() ? $this->update() : $this->insert();
+        return $saved ? TRUE : FALSE;
     }
 
-    public function find_all($conditions = NULL)
+    public function find_all($conditions = NULL) // returns array of objects
     {
         // Query the database
 
@@ -284,7 +286,7 @@ class Model extends YAWF
         return $objects;
     }
 
-    public function find_id($id)
+    public function find_id($id) // returns an array of objects, or an object
     {
         $id_field = $this->get_id_field();
         return is_array($id) ?
@@ -292,24 +294,24 @@ class Model extends YAWF
             $this->find_first(array($id_field => $id + 0));
     }
 
-    public function find_first($conditions = NULL)
+    public function find_first($conditions = NULL) // returns an object
     {
         $objects = $this->find_all($conditions);
         return count($objects) ? $objects[0] : NULL;
     }
 
-    public function find_last($conditions = NULL)
+    public function find_last($conditions = NULL) // returns an object
     {
         $objects = $this->find_all($conditions);
         return count($objects) ? $objects[count($objects) - 1] : NULL;
     }
 
-    public function find_where($clause)
+    public function find_where($clause) // returns an array of objects
     {
         return $this->find_all(array('where' => $clause));
     }
 
-    protected function where_clause($conditions = NULL)
+    protected function where_clause($conditions = NULL) // returns SQL
     {
         $conditions = is_null($conditions) ? $this->data : (array)$conditions;
         if ($clause = array_key($conditions, 'where')) return "where $clause";
@@ -332,15 +334,15 @@ class Model extends YAWF
             if ($op != 'in') $condition = $this->quote($condition);
             $clause .= "$field $op $condition";
         }
-        return $clause ? "where $clause" : NULL;
+        return $clause ? "where $clause" : '';
     }
 
-    public function insert()
+    public function insert() // returns the ID of the inserted row, or zero
     {
         // Check there is no ID yet
 
         $id_field = $this->get_id_field();
-        if (array_key($this->data, $id_field)) return;
+        if (array_key($this->data, $id_field)) return 0; // already has ID!
 
         // Apply an optional "created_at" timestamp
 
@@ -371,12 +373,12 @@ class Model extends YAWF
         return $this->data[$id_field];
     }
 
-    public function update()
+    public function update() // returns the object unless it has no ID field
     {
         // Check there's an ID value
 
         $id_field = $this->get_id_field();
-        if (!array_key($this->data, $id_field)) return;
+        if (!array_key($this->data, $id_field)) return NULL; // no ID field!
 
         // Apply an optional "updated_at" timestamp
 
@@ -401,7 +403,7 @@ class Model extends YAWF
             $updates .= $field . '=' . $this->quote($value) . ',';
         }
         $updates = rtrim($updates, ','); // remove final comma
-        if (!$updates) return;
+        if (!$updates) return $this;
         $updates .= " where $id_field=" . $this->data[$id_field];
         $this->query("update $db_table set $updates");
         $this->to_update = array();
@@ -414,12 +416,12 @@ class Model extends YAWF
         return $this->update();
     }
 
-    public function delete()
+    public function delete() // returns the object unless it has no ID field
     {
         // Check there's an ID value
 
         $id_field = $this->get_id_field();
-        if (!array_key($this->data, $id_field)) return;
+        if (!array_key($this->data, $id_field)) return NULL; // no ID field!
 
         // Delete the record from the table
 
