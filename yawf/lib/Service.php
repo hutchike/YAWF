@@ -33,28 +33,28 @@ class Service extends YAWF
 
     // Override "get" in your service
 
-    public function get()
+    public function get($params)
     {
         return $this->error('method "get" not supported');
     }
 
     // Override "post" in your service
 
-    public function post()
+    public function post($params)
     {
         return $this->error('method "post" not supported');
     }
 
     // Override "put" in your service
 
-    public function put()
+    public function put($params)
     {
         return $this->error('method "put" not supported');
     }
 
     // Override "delete" in your service
 
-    public function delete()
+    public function delete($params)
     {
         return $this->error('method "delete" not supported');
     }
