@@ -119,10 +119,17 @@ class Yet_another_shell extends Command
     public function http($method, $url, $params = array())
     {
         $curl = curl_init();
+        if ($method == 'get' && $params)
+        {
+            $url .= '?' . urlencode_array($params);
+        }
+        elseif ($method == 'post')
+        {
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+        }
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, strtoupper($method));
-        if ($method == 'post') curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
         $content = curl_exec($curl);
         curl_close($curl);
         return $content;
@@ -189,10 +196,10 @@ function should_not($text, $is_ok, $var = NULL) { global $yash; return $yash->sh
 
 // Add some more very useful shortcuts to functions
 
-function get($url) { global $yash; return $yash->http('get', $url); }
-function post($url) { global $yash; return $yash->http('post', $url); }
-function put($url) { global $yash; return $yash->http('put', $url); }
-function delete($url) { global $yash; return $yash->http('delete', $url); }
+function get($url, $params = array()) { global $yash; return $yash->http('get', $url, $params); }
+function post($url, $params = array()) { global $yash; return $yash->http('post', $url, $params); }
+function put($url, $params = array()) { global $yash; return $yash->http('put', $url, $params); }
+function delete($url, $params = array()) { global $yash; return $yash->http('delete', $url, $params); }
 function say($text) { global $yash; return $yash->say($text); }
 function debug($text) { return Log::debug($text); }
 function info($text) { return Log::info($text); }

@@ -103,6 +103,20 @@ function url_get_contents($url, $options = array())
     return $contents;
 }
 
+// Encode array as query string
+
+function urlencode_array($array)
+{
+    $query = '';
+    foreach($array as $key => $value)
+    {
+        if ($query) $query .= '&';
+        $query .= urlencode($key) . '=';
+        $query .= is_array($value) ? urlencode(serialize($value)) : urlencode($value);
+    }
+    return $query;
+}
+
 // Split a comma-separated list
 
 function split_list($list)
