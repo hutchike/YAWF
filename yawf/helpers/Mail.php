@@ -22,9 +22,9 @@ class Mail extends YAWF
 
         // Get the message parameters
 
-        $from = $render->from;
-        $to = $render->to; if (!$to) throw new Exception('no "to" email');
-        $subject = $render->subject; if (is_null($subject)) throw new Exception('no email "subject"');
+        $from = self::field($render->from);
+        $to = self::field($render->to); if (!$to) throw new Exception('no "to" email');
+        $subject = self::field($render->subject); if (is_null($subject)) throw new Exception('no email "subject"');
         $text = $render->text; if (is_null($text)) throw new Exception('no email message text');
         $html = $render->html;
 
@@ -63,6 +63,13 @@ End_of_message;
         $message = wordwrap($message, 80);
         if (!$is_testing) mail($to, $subject, $message, $headers);
         return $message;
+    }
+
+    // Mail fields cannot include returns
+
+    private static function field($value)
+    {
+        return strtr($value, "\r\n", '  ');
     }
 }
 
