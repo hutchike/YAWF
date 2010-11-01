@@ -202,7 +202,15 @@ class App extends YAWF
     {
         if ($notice = array_key($options, 'notice')) $this->controller->flash('notice', $notice);
         if ($this->content_type !== DEFAULT_CONTENT_TYPE) $url .= '.' . $this->content_type;
-        header('Location: ' . AppView::url($url));
+        $header = 'Location: ' . AppView::url($url);
+        if ($status = array_key($options, 'status'))
+        {
+            header($header, TRUE, $status); // set user-defined HTTP status code
+        }
+        else
+        {
+            header($header);
+        }
         $this->is_silent = TRUE;
         if (array_key($options, 'exit')) exit; // careful! it stops our logging!
     }

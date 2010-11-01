@@ -41,9 +41,9 @@ class App_test extends App
         $this->folder = preg_replace('/_test$/', '', $this->folder);
     }
 
-    // It's important that tests cannot redirect!
+    // It's important that tests cannot make redirects
 
-    public function redirect($url, $exit = FALSE)
+    public function redirect($url, $options = array())
     {
         // Do nothing
     }
