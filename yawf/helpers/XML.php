@@ -27,7 +27,7 @@ class XML extends YAWF
         $options = array_merge(self::$defaults, $options);
         $serializer = new XML_Serializer($options);
         $status = $serializer->serialize($data);
-        if (PEAR::isError($status)) die($status->getMessage());
+        if (PEAR::isError($status)) throw new Exception($status->getMessage());
         return $serializer->getSerializedData();
     }
 }
