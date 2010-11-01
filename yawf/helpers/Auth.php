@@ -13,6 +13,8 @@
 
 class Auth extends YAWF
 {
+    private static $realm = 'Login';
+    private static $message = 'Wrong username or password';
     private static $is_testing = FALSE;
     private static $test_username = '';
     private static $test_password = '';
@@ -33,14 +35,54 @@ class Auth extends YAWF
         return array_key($_SERVER, 'PHP_AUTH_PW');
     }
 
-    // Show a basic authentication login dialog in the user's web browser
+    // Show a basic authentication login dialog pop-up
 
-    public static function login($realm = 'Login', $message = 'Wrong username or password')
+    public static function login($username, $password)
     {
-        header("WWW-Authenticate: Basic realm=\"$realm\"");
-        header('HTTP/1.0 401 Unauthorized');
-        print $message;
-        exit;
+        if (self::username() == $username && self::password() == $password)
+        {
+            return TRUE;
+        }
+        else
+        {
+            header('WWW-Authenticate: Basic realm="' . self::$realm . '"');
+            header('HTTP/1.0 401 Unauthorized');
+            print self::$message;
+            return FALSE;
+        }
+    }
+
+    // Setup the test login details (returned when testing)
+
+    public static function test_login($username, $password)
+    {
+        self::is_testing(TRUE);
+        self::test_username($username);
+        self::test_password($password);
+    }
+
+    // Set the realm - i.e. user message dialog
+
+    public static function realm($realm = NULL)
+    {
+        if (!is_null($realm)) self::$realm = $realm;
+        return self::$realm;
+    }
+
+    // Set the message displayed on a login failure
+
+    public static function message($message = NULL)
+    {
+        if (!is_null($message)) self::$message = $message;
+        return self::$message;
+    }
+
+    // Set whether or not we're in testing mode right now
+
+    public static function is_testing($is_testing = NULL)
+    {
+        if (!is_null($is_testing)) self::$is_testing = $is_testing;
+        return self::$is_testing;
     }
 
     // Set the test username (returned for testing)
@@ -55,14 +97,6 @@ class Auth extends YAWF
     public static function test_password($password)
     {
         self::$test_password = $password;
-    }
-
-    // Set whether or not we're in testing mode right now
-
-    public static function is_testing($is_testing = NULL)
-    {
-        if (!is_null($is_testing)) self::$is_testing = $is_testing;
-        return self::$is_testing;
     }
 }
 
