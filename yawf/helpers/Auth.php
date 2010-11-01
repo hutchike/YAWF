@@ -43,7 +43,7 @@ class Auth extends YAWF
         {
             return TRUE;
         }
-        else
+        else // wrong username and/or password
         {
             header('WWW-Authenticate: Basic realm="' . self::$realm . '"');
             header('HTTP/1.0 401 Unauthorized');
@@ -87,16 +87,18 @@ class Auth extends YAWF
 
     // Set the test username (returned for testing)
 
-    public static function test_username($username)
+    public static function test_username($username = NULL)
     {
-        self::$test_username = $username;
+        if (!is_null($username)) self::$test_username = $username;
+        return self::$test_username;
     }
 
     // Set the test password (returned for testing)
 
-    public static function test_password($password)
+    public static function test_password($password = NULL)
     {
-        self::$test_password = $password;
+        if (!is_null($password)) self::$test_password = $password;
+        return self::$test_password;
     }
 }
 
