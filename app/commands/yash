@@ -49,6 +49,7 @@ class Yet_another_shell extends Command
         while ($line = fgets($stdin))
         {
             $line = rtrim(trim($line), ';');
+            if (substr($line, 0, 2) == '<?') continue; // ignore PHP open syntax
 
             // Parse "if", "else", "endif" logical constructs
 
@@ -120,7 +121,7 @@ class Yet_another_shell extends Command
     {
         $command = "yawf_env $key";
         if (!is_null($value)) $command .= "=\"$value\"";
-        return rtrim(system($command));
+        return rtrim(exec($command));
     }
 
     // Send an HTTP request via a method to a URL
