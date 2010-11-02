@@ -13,14 +13,16 @@
 
 class Service extends YAWF
 {
-    protected $token;
+    protected $app;
+    protected $id;
 
-    // Get/set the service access token
+    // Setup the service for the app
 
-    public function token($token = NULL)
+    public function setup_for_app($app)
     {
-        if (!is_null($token)) $this->token = $token;
-        return $this->token;
+        $this->app = $app;
+        $file = $app->get_file();
+        $this->id = (is_numeric($file) ? $file : 0);
     }
 
     // Service errors should be arrays
@@ -31,11 +33,36 @@ class Service extends YAWF
         return array('error' => $message);
     }
 
+    // ------------------------
+    // HTTP METHODS TO OVERRIDE
+    // ------------------------
+
+    // Override "delete" in your service
+
+    public function delete($params)
+    {
+        return $this->error('method "delete" not supported');
+    }
+
     // Override "get" in your service
 
     public function get($params)
     {
         return $this->error('method "get" not supported');
+    }
+
+    // Override "move" in your service
+
+    public function move($params)
+    {
+        return $this->error('method "move" not supported');
+    }
+
+    // Override "options" in your service
+
+    public function options($params)
+    {
+        return $this->error('method "options" not supported');
     }
 
     // Override "post" in your service
@@ -50,13 +77,6 @@ class Service extends YAWF
     public function put($params)
     {
         return $this->error('method "put" not supported');
-    }
-
-    // Override "delete" in your service
-
-    public function delete($params)
-    {
-        return $this->error('method "delete" not supported');
     }
 }
 

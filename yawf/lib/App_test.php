@@ -154,10 +154,10 @@ class TestRun
                 $this->add_method( $test_method );
                 $this->add_output( $this->controller->$test_method() );
             }
-            catch (Exception $exception)
+            catch (Exception $e)
             {
-                $should = 'handle exception "' . $exception->getMessage() . '"';
-                $this->add_test_case($should, FALSE, $exception, $test_method);
+                $should = 'handle exception "' . $e->getMessage() . '"';
+                $this->add_test_case($should, FALSE, $e, $test_method);
             }
         }
         if (in_array('teardown', $methods)) $this->controller->teardown();

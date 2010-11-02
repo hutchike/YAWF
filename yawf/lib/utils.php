@@ -140,25 +140,13 @@ function load_files($dir, $files)
     }
 }
 
-function load_files_as_objects($dir, $files)
-{
-    load_files($dir, $files);
-    $objects = array();
-    foreach ($files as $class)
-    {
-        $class .= '_' . rtrim($dir, 's');
-        $objects[] = new $class();
-    }
-    return count($objects) == 1 ? $objects[0] : $objects;
-}
-
 // Load some controllers 
 
-function load_controller($controller) { return load_controllers($controller); }
+function load_controller($controller) { load_controllers($controller); }
 function load_controllers() // list of controllers
 {
     $controllers = func_get_args();
-    return load_files_as_objects('controllers', $controllers);
+    load_files('controllers', $controllers);
 }
 
 // Load some helpers
@@ -195,11 +183,11 @@ function load_plugins() // list of plugins
 
 // Load some services 
 
-function load_service($service) { return load_services($service); }
+function load_service($service) { load_services($service); }
 function load_services() // list of services
 {
     $services = func_get_args();
-    return load_files_as_objects('services', $services);
+    load_files('services', $services);
 }
 
 // Autoload classes in the "lib"

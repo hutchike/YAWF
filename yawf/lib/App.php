@@ -15,6 +15,7 @@ class App extends YAWF
 {
     protected $content_type;// derived from the file extension
     protected $controller;  // a controller to render the view
+    protected $service;     // a service to enable web services
     protected $folder;      // views folder name e.g. "default"
     protected $file;        // the view file name e.g. "index"
     protected $is_silent;   // "TRUE" after we've redirected
@@ -38,7 +39,7 @@ class App extends YAWF
         $content_type = preg_match('/\.([^\/]+)$/', $uri_no_fluff, $matches) ? $matches[1] : DEFAULT_CONTENT_TYPE;
         if ($content_type === 'test' && !TESTING_ENABLED) $content_type = DEFAULT_CONTENT_TYPE;
         if (substr($uri_no_fluff, 0, strlen(VIEW_URL_PREFIX)) === VIEW_URL_PREFIX) $uri_no_fluff = substr($uri_no_fluff, strlen(VIEW_URL_PREFIX));
-        list($folder, $file) = preg_split('/\//', strtolower($uri_no_fluff) . '//');
+        list($folder, $file) = preg_split('/\//', $uri_no_fluff . '//');
         $folder = preg_replace('/\.\w+$/', '', $folder);
         $file = preg_replace('/\.\w+$/', '', $file);
 
@@ -87,6 +88,7 @@ class App extends YAWF
         // Require the controller's subclass
 
         if (!$class) $class = ucfirst($this->folder);
+        if (defined('REST_SERVICES') && in_array($class, split_list(REST_SERVICES))) $class = 'REST';
         if ($this->is_testing && FALSE === strpos($class, '_test')) $class .= '_test';
         $path = 'controllers/' . $class . '.php';
         if (!file_found($path))
@@ -102,6 +104,29 @@ class App extends YAWF
         $this->controller = new $class();
         $this->controller->setup_for_app($this, $render);
         return $this->controller;
+    }
+
+    // Create a new service and return it
+
+    public function new_service($class = NULL)
+    {
+        // Require the Service base class
+        // ...and the Application service
+
+        require_once 'lib/Service.php';
+        require_once 'services/App.php';
+
+        // Require the service's subclass
+
+        if (!$class) $class = ucfirst($this->folder);
+        load_service($class);
+
+        // Create and return a new Service object
+
+        $class .= '_service';
+        $this->service = new $class();
+        $this->service->setup_for_app($this);
+        return $this->service;
     }
 
     // Get the folder in the URL (e.g. "default")
