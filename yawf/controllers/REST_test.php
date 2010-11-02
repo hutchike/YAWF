@@ -25,7 +25,7 @@ class REST_test_controller extends Rest_controller
             $service = $class . '_test';
             $this->service = $this->app->new_service($service);
         }
-        return Controller::render(); // to show test results
+        return App_controller::render(); // to show test results
     }
 }
 
