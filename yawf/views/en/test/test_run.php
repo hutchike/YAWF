@@ -19,10 +19,10 @@
 
 if (!method_exists($app, 'run_tests')) $app->redirect('', TRUE);
 ?>
-<tests controller="<?= $controller_name ?>">
+<tests testing="<?= $testee_name ?>">
   <link rel="stylesheet" href="/styles/test/runner.css" type="text/css" />
   <div class="test_controller">
-    <div class="test_controller_header">Testing <?= $controller_name ?></div>
+    <div class="test_controller_header">Testing <?= $testee_name ?></div>
 
 <? foreach ($test_cases as $method => $cases): ?>
     <div class="test_method">

@@ -70,8 +70,8 @@ class App_test extends App
         $render->test_cases = $test_run->get_test_cases();
         $render->count_passed = $test_run->count_test_cases_that_passed();
         $render->count_failed = $test_run->count_test_cases_that_failed();
-        $render->controller_name = $test_run->get_controller_name();
-        $render->title = 'Testing "' . $test_run->get_controller_name() . '"';
+        $render->testee_name = $test_run->get_testee_name();
+        $render->title = 'Testing "' . $test_run->get_testee_name() . '"';
         $render->content = parent::render_view('test_run', $render, array('folder' => 'test'));
     }
 
@@ -132,27 +132,27 @@ class TestRun
     private $test_cases;        // an array of arrays of TestCase objects
     private $test_output;       // string of test output from the test run
 
-    public function __construct($test_controller)
+    public function __construct($testee)
     {
-        $this->controller = $test_controller;
+        $this->testee = $testee;
         $this->test_cases = array();
         $this->test_output = '';
-        Log::test('controller: ' . $this->get_controller_name());
+        Log::test('testing: ' . $this->get_testee_name());
     }
 
     public function run_tests()
     {
-        $methods = get_class_methods($this->controller);
-        if (in_array('setup', $methods)) $this->controller->setup();
+        $methods = get_class_methods($this->testee);
+        if (in_array('setup', $methods)) $this->testee->setup();
         foreach ($methods as $test_method)
         {
-            // Only run controller methods that end with "_test"
+            // Only run methods on testee that end with "_test"
 
             if (!preg_match('/_test$/', $test_method)) continue;
             try
             {
                 $this->add_method( $test_method );
-                $this->add_output( $this->controller->$test_method() );
+                $this->add_output( $this->testee->$test_method() );
             }
             catch (Exception $e)
             {
@@ -160,12 +160,12 @@ class TestRun
                 $this->add_test_case($should, FALSE, $e, $test_method);
             }
         }
-        if (in_array('teardown', $methods)) $this->controller->teardown();
+        if (in_array('teardown', $methods)) $this->testee->teardown();
     }
 
-    public function get_controller_name()
+    public function get_testee_name()
     {
-        return preg_replace('/_test/', '', get_class($this->controller));
+        return preg_replace('/_test/', '', get_class($this->testee));
     }
 
     public function add_output($output)
