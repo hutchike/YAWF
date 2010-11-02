@@ -90,11 +90,11 @@ class App extends YAWF
         if (!$class) $class = ucfirst($this->folder);
         if (defined('REST_SERVICES') && in_array($class, split_list(REST_SERVICES))) $class = 'REST';
         if ($this->is_testing && FALSE === strpos($class, '_test')) $class .= '_test';
-        $path = 'controllers/' . $class . '.php';
+        $path = "controllers/$class.php";
         if (!file_found($path))
         {
             $class = ucfirst(DEFAULT_CONTROLLER);
-            $path = 'controllers/' . $class . '.php';
+            $path = "controllers/$class.php";
         }
         require_once $path;
 
@@ -123,7 +123,7 @@ class App extends YAWF
 
         // Create and return a new Service object
 
-        $class .= '_service';
+        $class .= '_service'; // mandatory suffix
         $this->service = new $class();
         $this->service->setup_for_app($this);
         return $this->service;
@@ -309,7 +309,7 @@ class AppConfig extends YAWF
 
     public static function configure()
     {
-        require_once "lib/Config.php";
+        require_once 'lib/Config.php';
         $config = Config::load('app');
         foreach ($config['ini'] as $field => $value) ini_set($field, $value);
         date_default_timezone_set(ini_get('date.timezone'));
