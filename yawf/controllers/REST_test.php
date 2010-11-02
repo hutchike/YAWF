@@ -107,7 +107,7 @@ class REST_test_controller extends Rest_controller
         {
             $parsed = array_key($data, 'data');
             $type = $this->server->content_type;
-            $this->should("have parsed \"$type\" input data", $parsed->list->item[1] == 'that');
+            $this->should("have parsed \"$type\" input data using \"$method\"", $parsed->list->item[1] == 'that');
         }
     }
 }
