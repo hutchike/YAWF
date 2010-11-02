@@ -21,6 +21,7 @@ class Controller extends YAWF
     protected $params;  // a copy of all the request parameters sent
     protected $flash;   // an object to send data into the next view
     protected $cookie;  // an object to get & set $_COOKIE variable,
+    protected $server;  // an object to get & set $_SERVER variable,
     protected $session; // an object to get & set $_SESSION variable
 
     // Set up this new Controller object for an app with render data
@@ -36,6 +37,7 @@ class Controller extends YAWF
         @session_start();               // start a session for the user
         $this->flash = new Controller_flash();
         $this->cookie = new Controller_cookie();
+        $this->server = new Controller_server();
         $this->session = new Controller_session();
     }
 
@@ -269,6 +271,19 @@ class Controller_cookie
     public function set($name, $value = NULL, $expires = 0, $path = '/', $domain = COOKIE_DOMAIN, $secure = FALSE)
     {
         setcookie($name, $value, $expires, $path, $domain, $secure);
+    }
+}
+
+class Controller_server
+{
+    public function __get($key)
+    {
+        return array_key($_SERVER, strtoupper($key));
+    }
+
+    public function __set($key, $value)
+    {
+        $_SERVER[strtoupper($key)] = $value;
     }
 }
 

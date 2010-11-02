@@ -42,6 +42,22 @@ class Object
     }
 }
 
+// Turn an array into an object
+
+function array_to_object($array, $lists_too = FALSE)
+{
+    if (!is_array($array)) return NULL;
+    $object = new Object();
+    foreach ($array as $key => $value)
+    {
+        $object->$key = (is_array($value) ?
+                            (array_key_exists(0, $value) && !$lists_too ?
+                                $value : array_to_object($value, $lists_too))
+                            : $value);
+    }
+    return $object;
+}
+
 // Return a key from an array or the default value
 
 function array_key($array, $key, $default = NULL)

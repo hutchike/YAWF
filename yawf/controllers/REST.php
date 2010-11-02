@@ -15,7 +15,6 @@ class REST_controller extends App_controller
 {
     // A mapping of request content types to file types
 
-    private $request_type;
     private static $request_types = array(
         'text/xml' => 'xml',
         'text/html' => 'html',
@@ -61,19 +60,17 @@ class REST_controller extends App_controller
     protected function request_method()
     {
         return first($this->params->_method,
-                     strtolower(array_key($_SERVER, 'REQUEST_METHOD')));
+                     strtolower($this->server->request_method));
     }
 
     // Return the requested content type set in HTTP headers
 
     protected function request_type()
     {
-        if ($this->request_type) return $this->request_type;
-        $type = strtolower(array_key($_SERVER, 'CONTENT_TYPE'));
+        $type = strtolower($this->server->content_type);
         if ($type == 'application/x-www-form-urlencoded') $type = NULL;
-        $this->request_type = ($type ? array_key(self::$request_types, $type)
-                                     : $this->app->get_content_type());
-        return $this->request_type;
+        return ($type ? array_key(self::$request_types, $type)
+                      : $this->app->get_content_type());
     }
 
     // Call the REST service "delete" method
@@ -120,11 +117,18 @@ class REST_controller extends App_controller
         $this->call_method('put');
     }
 
+    // Get any input for PUT and POST methods
+
+    protected function get_input()
+    {
+        return file_get_contents('php://input');
+    }
+
     // Parse any input data according to type
 
     protected function parse_input()
     {
-        if ($input = file_get_contents('php://input'))
+        if ($input = $this->get_input())
         {
             $this->params->input = $input;
             switch ($this->request_type())
@@ -132,7 +136,7 @@ class REST_controller extends App_controller
                 case 'js':
                 case 'json':
                 case 'jsonp':
-                    $this->params->data = json_decode($input);
+                    $this->params->data = array_to_object(json_decode($input, TRUE));
                     break;
 
                 case 'xml':
@@ -142,7 +146,7 @@ class REST_controller extends App_controller
 
                 case 'yaml':
                     load_helper('YAML');
-                    $this->params->data = YAML::parse($input);
+                    $this->params->data = array_to_object(YAML::parse($input));
                     break;
             }
         }
@@ -154,8 +158,12 @@ class REST_controller extends App_controller
     {
         if ($this->service && method_exists($this->service, $method))
         {
+            // Wrap the method call in "before" and "after" calls
+
+            if (method_exists($this->service, 'before')) $this->service->before($this->params);
             $this->render->callback = $this->params->callback; // for JSON
             $this->render->data = $this->service->$method($this->params);
+            if (method_exists($this->service, 'after')) $this->service->after($this->params);
         }
         else
         {

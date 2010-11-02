@@ -194,10 +194,10 @@ class TestRun
     {
         $this->test_cases[$method][] = new TestCase($desc, $passed, $test_data);
         Log::test(($passed ? 'passed' : 'failed') . ': Should ' . $desc);
-        if ($passed === FALSE) Log::test('data: ' . var_export($test_data, TRUE));
+        if ($passed === FALSE) Log::test('data: ' . print_r($test_data, TRUE));
     }
 
-    private function _count_test_cases($filter = 'all')
+    private function filter_test_cases($filter = 'all')
     {
         $count = 0;
         foreach ($this->test_cases as $method => $cases)
@@ -214,17 +214,17 @@ class TestRun
 
     public function count_test_cases()
     {
-        return $this->_count_test_cases();
+        return $this->filter_test_cases();
     }
 
     public function count_test_cases_that_passed()
     {
-        return $this->_count_test_cases('passed');
+        return $this->filter_test_cases('passed');
     }
 
     public function count_test_cases_that_failed()
     {
-        return $this->_count_test_cases('failed');
+        return $this->filter_test_cases('failed');
     }
 }
 
