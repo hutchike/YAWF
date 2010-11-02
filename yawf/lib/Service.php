@@ -14,15 +14,12 @@
 class Service extends YAWF
 {
     protected $app;
-    protected $id;
 
     // Setup the service for the app
 
     public function setup_for_app($app)
     {
         $this->app = $app;
-        $file = $app->get_file();
-        $this->id = (is_numeric($file) ? $file : 0);
     }
 
     // Service errors should be arrays

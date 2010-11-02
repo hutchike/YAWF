@@ -156,16 +156,17 @@ class App extends YAWF
     {
         // Read any options that were passed, e.g. extension
 
-        $ext = array_key($options, 'ext', DEFAULT_EXTENSION);
         $must_find = array_key($options, 'must_find', FALSE);
-        $lang = first(array_key($options, 'lang'), $this->controller->get_lang());
-        $folder = first(array_key($options, 'folder'), $this->folder);
+        $lang = array_key($options, 'lang', $this->controller->get_lang());
+        $folder = array_key($options, 'folder', $this->folder);
+        $type = array_key($options, 'type', $this->content_type);
+        $ext = array_key($options, 'ext', DEFAULT_EXTENSION);
 
         // Create an array of paths to look for a view file
 
         $lang_folder = 'views/' . $lang . '/';
         $paths = array();
-        if ($this->content_type !== DEFAULT_CONTENT_TYPE) $paths[] = $lang_folder . $folder . '/' . $file . '.' . $this->content_type . $ext;
+        if ($type !== DEFAULT_CONTENT_TYPE) $paths[] = "$lang_folder$folder/$file.$type$ext";
         $paths[] = $lang_folder . $folder . '/' . $file . $ext;
         $paths[] = $lang_folder . DEFAULT_FOLDER . '/' . $file . $ext;
         if (!$must_find) $paths[] = $lang_folder . DEFAULT_FOLDER . '/' . FILE_NOT_FOUND . DEFAULT_EXTENSION;

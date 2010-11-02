@@ -73,7 +73,7 @@ class Controller extends YAWF
         $render->params = $this->params;
     }
 
-    // Before just start a session
+    // Before there's nothing to do
 
     protected function before()
     {
