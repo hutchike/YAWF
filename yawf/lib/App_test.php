@@ -64,7 +64,8 @@ class App_test extends App
     protected function render_test_run(&$render)
     {
         if ($this->test_run) return; // so we don't repeat the tests
-        $test_run = $this->test_run = new TestRun($this->controller);
+        $testee = (defined('REST_SERVICES') && in_array($this->get_class_name(), split_list(REST_SERVICES)) ? $this->service : $this->controller);
+        $test_run = $this->test_run = new TestRun($testee);
         $test_run->run_tests();
         $render->test_run_output = $test_run->get_output();
         $render->test_cases = $test_run->get_test_cases();

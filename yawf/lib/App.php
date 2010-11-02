@@ -87,13 +87,13 @@ class App extends YAWF
 
         // Require the controller's subclass
 
-        if (!$class) $class = ucfirst($this->folder);
+        if (!$class) $class = $this->get_class_name();
         if (defined('REST_SERVICES') && in_array($class, split_list(REST_SERVICES))) $class = 'REST';
         if ($this->is_testing && FALSE === strpos($class, '_test')) $class .= '_test';
         $path = "controllers/$class.php";
         if (!file_found($path))
         {
-            $class = ucfirst(DEFAULT_CONTROLLER);
+            $class = $this->get_class_name(DEFAULT_CONTROLLER);
             $path = "controllers/$class.php";
         }
         require_once $path;
@@ -118,7 +118,7 @@ class App extends YAWF
 
         // Require the service's subclass
 
-        if (!$class) $class = ucfirst($this->folder);
+        if (!$class) $class = $this->get_class_name();
         load_service($class);
 
         // Create and return a new Service object
@@ -127,6 +127,13 @@ class App extends YAWF
         $this->service = new $class();
         $this->service->setup_for_app($this);
         return $this->service;
+    }
+
+    // Get the class from the folder name (e.g. "User")
+
+    public function get_class_name($name = NULL)
+    {
+        return ucfirst($name ? $name : $this->folder);
     }
 
     // Get the folder in the URL (e.g. "default")
