@@ -15,6 +15,7 @@ class REST_controller extends App_controller
 {
     // A mapping of request content types to file types
 
+    private $request_type;
     private static $request_types = array(
         'text/xml' => 'xml',
         'text/html' => 'html',
@@ -42,7 +43,7 @@ class REST_controller extends App_controller
         $this->service = $this->app->new_service();
         $this->setup_params();
         $method = $this->request_method();
-        if ($type = $this->requested_content_type()) $options['type'] = $type;
+        $options['type'] = $this->request_type();
         $options['folder'] = 'REST';
         return parent::render($method, $options);
     }
@@ -63,12 +64,16 @@ class REST_controller extends App_controller
                      strtolower(array_key($_SERVER, 'REQUEST_METHOD')));
     }
 
-    // Return the requested content when set in HTTP headers
+    // Return the requested content type set in HTTP headers
 
-    protected function requested_content_type()
+    protected function request_type()
     {
+        if ($this->request_type) return $this->request_type;
         $type = strtolower(array_key($_SERVER, 'CONTENT_TYPE'));
-        return $type ? array_key(self::$request_types, $type) : NULL;
+        if ($type == 'application/x-www-form-urlencoded') $type = NULL;
+        $this->request_type = ($type ? array_key(self::$request_types, $type)
+                                     : $this->app->get_content_type());
+        return $this->request_type;
     }
 
     // Call the REST service "delete" method
@@ -103,7 +108,7 @@ class REST_controller extends App_controller
 
     public function post()
     {
-        $this->params->input = file_get_contents('php://input');
+        $this->parse_input();
         $this->call_method('post');
     }
 
@@ -111,8 +116,36 @@ class REST_controller extends App_controller
 
     public function put()
     {
-        $this->params->input = file_get_contents('php://input');
+        $this->parse_input();
         $this->call_method('put');
+    }
+
+    // Parse any input data according to type
+
+    protected function parse_input()
+    {
+        if ($input = file_get_contents('php://input'))
+        {
+            $this->params->input = $input;
+            switch ($this->request_type())
+            {
+                case 'js':
+                case 'json':
+                case 'jsonp':
+                    $this->params->data = json_decode($input);
+                    break;
+
+                case 'xml':
+                    load_helper('XML');
+                    $this->params->data = XML::deserialize($input);
+                    break;
+
+                case 'yaml':
+                    load_helper('YAML');
+                    $this->params->data = YAML::parse($input);
+                    break;
+            }
+        }
     }
 
     // Call a REST method on the REST service

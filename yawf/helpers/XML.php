@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-class XML extends YAWF
+class XML extends YAWF // depends on the SimpleXML PHP extension
 {
     private static $defaults = array(
         'addDecl' => TRUE,
@@ -29,6 +29,11 @@ class XML extends YAWF
         $status = $serializer->serialize($data);
         if (PEAR::isError($status)) throw new Exception($status->getMessage());
         return $serializer->getSerializedData();
+    }
+
+    public static function deserialize($data, $options = array())
+    {
+        return new SimpleXMLElement($data);
     }
 }
 
