@@ -44,7 +44,7 @@ class Test_controller extends App_controller
         $count = 0;
         foreach ($lines as $line)
         {
-            if ($line)
+            if ($line = trim($line))
             {
                 Log::test($line);
                 $count++;
