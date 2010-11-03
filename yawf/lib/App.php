@@ -88,7 +88,7 @@ class App extends YAWF
         // Require the controller's subclass
 
         if (!$class) $class = $this->get_class_name();
-        if (defined('REST_SERVICES') && in_array($class, split_list(REST_SERVICES))) $class = 'REST';
+        if (defined('REST_SERVICE_LIST') && in_array($class, split_list(REST_SERVICE_LIST))) $class = 'REST';
         if ($this->is_testing && FALSE === strpos($class, '_test')) $class .= '_test';
         $path = "controllers/$class.php";
         if (!file_found($path))
