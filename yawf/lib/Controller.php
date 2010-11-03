@@ -35,10 +35,10 @@ class Controller extends YAWF
         $this->set_params();            // request parameters passed in
         $this->set_lang();              // the browser language setting
         @session_start();               // start a session for the user
-        $this->flash = new Controller_flash();
-        $this->cookie = new Controller_cookie();
-        $this->server = new Controller_server();
-        $this->session = new Controller_session();
+        $this->flash = $this->new_flash_object();
+        $this->cookie = $this->new_cookie_object();
+        $this->server = $this->new_server_object();
+        $this->session = $this->new_session_object();
     }
 
     // Render the requested view
@@ -205,6 +205,34 @@ class Controller extends YAWF
     protected function send_mail($file, $render)
     {
         return $this->app->send_mail($file, $render);
+    }
+
+    // Return new controller flash object
+
+    protected function new_flash_object()
+    {
+        return new Controller_flash();
+    }
+
+    // Return new controller cookie object
+
+    protected function new_cookie_object()
+    {
+        return new Controller_cookie();
+    }
+
+    // Return new controller server object
+
+    protected function new_server_object()
+    {
+        return new Controller_server();
+    }
+
+    // Return new controller session object
+
+    protected function new_session_object()
+    {
+        return new Controller_session();
     }
 
     // Assert that something "should" be true

@@ -20,5 +20,5 @@ echo $html;
 // Then, show sent email contents
 // so we can include in the tests
 
-echo array_key($render, 'sent');
+echo isset($sent) ? $sent : $flash->sent;
 ?>

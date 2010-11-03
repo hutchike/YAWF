@@ -24,6 +24,7 @@ class Test_controller extends App_controller
     {
         $this->url = $this->render->url = first($this->params->url, '/');
         $this->script = $this->render->script = first($this->params->script, self::SCRIPT_RUNNER);
+        $this->render->error = '';
     }
 
     public function runner()
@@ -65,10 +66,10 @@ class Test_controller extends App_controller
 
         $file_path = self::SCRIPT_DIR . '/' . $this->script;
         if (!file_exists($file_path))
-            $this->flash->now = 'Test script "' . $file_path . '" does not exist?';
+            $this->render->error = 'Test script "' . $file_path . '" does not exist?';
 
         if (!count($scripts))
-            $this->flash->now = 'Folder "' . self::SCRIPT_DIR . '" is empty?';
+            $this->render->error = 'Folder "' . self::SCRIPT_DIR . '" is empty?';
     }
 
     public function console()
@@ -79,6 +80,11 @@ class Test_controller extends App_controller
     public function script()
     {
         $this->render->file_path = self::SCRIPT_DIR . '/' . $this->script;
+    }
+
+    protected function new_flash_object()
+    {
+        return NULL; // so we don't affect the tested controller's flash object
     }
 }
 
