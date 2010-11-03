@@ -14,11 +14,6 @@
 class App_service extends Service
 {
     // Replace this by writing your own class in "myapp/app/services/App.php"
-
-    function before()
-    {
-        $this->render->data = array('message' => 'Welcome to YAWF');
-    }
 }
 
 // End of App.php
