@@ -17,6 +17,7 @@ class Lib_test_controller extends Controller
 {
     const TEST_VIEW = 'test_view'; // in the "default" folder so we can find it
     const TEST_TEXT = 'Just some text to test things';
+    const TEST_FLASH = 'A notice to set in the flash';
     const STALE_SECS = 10;
 
     // Test that we can set flash, cookie and session variables (use a redirect)
@@ -230,6 +231,15 @@ class Lib_test_controller extends Controller
         $mail = $this->send_mail('errors', $render);
         $this->should('send mail',
                       strpos($mail, 'param1') > 0, $mail);
+    }
+
+    // Test we can set and get flash messages
+
+    public function flash_test()
+    {
+        $this->should_not("have a flash notice yet", $this->flash->notice);
+        $this->flash->now = self::TEST_FLASH;
+        $this->should("have a flash notice now", $this->flash->notice == self::TEST_FLASH);
     }
 
     // Test that the "Text" helper works as expected
