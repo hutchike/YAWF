@@ -232,8 +232,22 @@ class App extends YAWF
 
     public function redirect($url, $options = array())
     {
-        if ($notice = array_key($options, 'notice')) $this->controller->flash('notice', $notice);
-        if ($this->content_type !== DEFAULT_CONTENT_TYPE) $url .= '.' . $this->content_type;
+        // Set flash messages to be shown on the next view page
+
+        foreach (array('notice', 'warning', 'error') as $level)
+        {
+            if ($message = array_key($options, $level)) $this->controller->flash($level, $message);
+        }
+
+        // Remember, type for interface testing is "test"
+
+        if ($this->content_type !== DEFAULT_CONTENT_TYPE)
+        {
+            $url .= '.' . $this->content_type;
+        }
+
+        // Set a location header and optional status
+
         $header = 'Location: ' . AppView::url($url);
         if ($status = array_key($options, 'status'))
         {
@@ -243,6 +257,9 @@ class App extends YAWF
         {
             header($header);
         }
+
+        // Remain silent, and optionally exit
+
         $this->is_silent = TRUE;
         if (array_key($options, 'exit')) exit; // careful! it stops our logging!
     }
