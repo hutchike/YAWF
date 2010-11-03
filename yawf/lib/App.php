@@ -114,7 +114,6 @@ class App extends YAWF
         // ...and the Application service
 
         require_once 'lib/Service.php';
-        require_once 'services/App.php';
 
         // Require the service's subclass
 

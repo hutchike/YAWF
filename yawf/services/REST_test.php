@@ -13,7 +13,9 @@
 
 // This test service is used when testing the REST controller
 
-class REST_test_service extends App_service
+load_service('REST');
+
+class REST_test_service extends REST_service
 {
     public function delete($params)
     {

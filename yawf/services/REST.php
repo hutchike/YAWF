@@ -11,9 +11,19 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-class App_service extends Service
+// Replace this class by writing your own class in "myapp/app/services/REST.php"
+
+class REST_service extends Service
 {
-    // Replace this by writing your own class in "myapp/app/services/App.php"
+    // Get a model object for an ID
+
+    public function get_id($params)
+    {
+        $class = preg_replace('/_service$/', '', get_class($this));
+        load_model($class);
+        $model = new $class();
+        return $model->load($params->id) ? array($class => $model->data()) : $this->error("id $params->id not found");
+    }
 }
 
-// End of App.php
+// End of REST.php
