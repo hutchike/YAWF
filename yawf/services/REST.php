@@ -15,14 +15,60 @@
 
 class REST_service extends Service
 {
-    // Get a model object for an ID
+    // Get object data for an ID param
 
-    public function get_id($params)
+    public function get_for_id($params)
     {
         $class = preg_replace('/_service$/', '', get_class($this));
         load_model($class);
         $model = new $class();
         return $model->load($params->id) ? array($class => $model->data()) : $this->error("id $params->id not found");
+    }
+
+    // ------------------------
+    // HTTP METHODS TO OVERRIDE
+    // ------------------------
+
+    // Override "delete" in your service
+
+    public function delete($params)
+    {
+        return $this->error('method "delete" not supported');
+    }
+
+    // Override "get" in your service
+
+    public function get($params)
+    {
+        return $this->error('method "get" not supported');
+    }
+
+    // Override "move" in your service
+
+    public function move($params)
+    {
+        return $this->error('method "move" not supported');
+    }
+
+    // Override "options" in your service
+
+    public function options($params)
+    {
+        return $this->error('method "options" not supported');
+    }
+
+    // Override "post" in your service
+
+    public function post($params)
+    {
+        return $this->error('method "post" not supported');
+    }
+
+    // Override "put" in your service
+
+    public function put($params)
+    {
+        return $this->error('method "put" not supported');
     }
 }
 

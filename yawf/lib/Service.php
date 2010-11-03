@@ -29,52 +29,6 @@ class Service extends YAWF
         $message .= ' in ' . get_class($this);
         return array('error' => $message);
     }
-
-    // ------------------------
-    // HTTP METHODS TO OVERRIDE
-    // ------------------------
-
-    // Override "delete" in your service
-
-    public function delete($params)
-    {
-        return $this->error('method "delete" not supported');
-    }
-
-    // Override "get" in your service
-
-    public function get($params)
-    {
-        return $this->error('method "get" not supported');
-    }
-
-    // Override "move" in your service
-
-    public function move($params)
-    {
-        return $this->error('method "move" not supported');
-    }
-
-    // Override "options" in your service
-
-    public function options($params)
-    {
-        return $this->error('method "options" not supported');
-    }
-
-    // Override "post" in your service
-
-    public function post($params)
-    {
-        return $this->error('method "post" not supported');
-    }
-
-    // Override "put" in your service
-
-    public function put($params)
-    {
-        return $this->error('method "put" not supported');
-    }
 }
 
 // End of Service.php
