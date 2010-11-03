@@ -164,6 +164,14 @@ class Controller extends YAWF
         return $this->cookie->$name;
     }
 
+    // Get or set a flash message (used by App)
+
+    public function flash($name, $value = NULL) 
+    {
+        return (is_null($value) ? $this->flash->$name
+                                : $this->flash->$name = $value);
+    }
+
     // Redirect to another URL
 
     protected function redirect($url, $options = array())
