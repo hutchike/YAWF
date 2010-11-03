@@ -11,6 +11,8 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+Log::type('test');
+
 class Test_controller extends App_controller
 {
     const SCRIPT_RUNNER = 'runner.js';
@@ -26,12 +28,12 @@ class Test_controller extends App_controller
 
     public function runner()
     {
-        if (!TESTING_ENABLED) $this->app->redirect('', TRUE);
+        if (!TESTING_ENABLED) $this->app->redirect('', array('exit' => TRUE));
 
         if ($this->app->get_content_type() != 'part')
         {
             $params = 'url=' . $this->url . '&script=' . $this->script;
-            $this->app->redirect('test/runner.part?' . $params, TRUE);
+            $this->app->redirect('test/runner.part?' . $params, array('exit' => TRUE));
         }
     }
 
