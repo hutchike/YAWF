@@ -245,9 +245,10 @@ class Lib_test_controller extends Controller
         $this->should_not("have a flash notice yet", $this->flash->notice);
         $this->flash->now = self::TEST_FLASH;
         $this->should("have a flash notice now", $this->flash->notice == self::TEST_FLASH);
-        $this->flash->warning = self::TEST_FLASH;
+        $this->flash->warning = $this->flash->error = self::TEST_FLASH;
         $this->flash = $this->new_flash_object(); // to simulate a redirect call
         $this->should("have a flash warning set", $this->flash->warning == self::TEST_FLASH);
+        $this->should("have a flash error set", $this->flash->error == self::TEST_FLASH);
     }
 
     // Test that the "Text" helper works as expected
