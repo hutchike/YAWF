@@ -14,7 +14,7 @@
             <li<?= array_key($active_tab, 'project/faq') ?>><?= HTML::link("project/faq", 'FAQ') ?></li>
             <li<?= array_key($active_tab, 'project/cookbook') ?>><?= HTML::link("project/cookbook", 'Cookbook') ?></li>
             <li<?= array_key($active_tab, 'project/code') ?>><?= HTML::link("project/code", 'Code browser') ?></li>
-            <li<?= array_key($active_tab, 'phpdocs') ?>><?= HTML::link("phpdocs", 'Docs') ?></li>
+            <li<?= array_key($active_tab, 'phpdocs') ?>><?= HTML::link("phpdocs", 'PHP Docs') ?></li>
             <li<?= array_key($active_tab, 'project/download') ?>><?= HTML::link("project/download", 'Download') ?></li>
         </ul>
     </div>
