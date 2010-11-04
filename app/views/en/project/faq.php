@@ -8,6 +8,7 @@ Sorry, you'll have to upgrade or find <a href="http://cakephp.org/">another good
 The existing frameworks are good, but they seem big and heavy. YAWF is small, light and fast. Of course, the cost for this is the range of features, but YAWF does include many "standard" features:
 <ul>
   <li>Models, Views &amp; Controllers</li>
+  <li>Database adapters for SQLite and MySQL</li>
   <li>REST Services</li>
   <li>Language translations (view folders for "en", "es", "fr", "de", etc.)</li>
   <li>Testing (unit, integration and interface)</li>
