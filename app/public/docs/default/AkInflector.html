@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class AkInflector</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> AkInflector</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|													<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">AkInflector for pluralize and singularize English nouns.</p>
+<p class="description"><p>This AkInflector is a port of Ruby on Rails AkInflector.</p><p>It can be really helpful for developers that want to  create frameworks based on naming conventions rather than  configurations.</p><p>It was ported to PHP for the Akelos Framework, a  multilingual Ruby on Rails like framework for PHP that will  be launched soon.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Bermi Ferrer Martinez &lt;<a href="mailto:bermi">akelos com bermi akelos com</a>&gt;</li>
+				<li><span class="field">version:</span> $Revision 0.1 $</li>
+				<li><span class="field">copyright:</span> Copyright (c) 2002-2006, Akelos Media, S.L. http://www.akelos.org</li>
+				<li><span class="field">since:</span> 0.1</li>
+				<li><span class="field">license:</span> GNU</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_plugins---Text---AkInflector.php.html">/plugins/Text/AkInflector.php</a> (line <span class="field">38</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"
+								 style="vertical-align: center"/>
+						<a href="../default/AkInflexor.html">AkInflexor</a>
+					</td>
+					<td>
+											AkInflexor for pluralize and singularize Spanish nouns.
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendants</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+												<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result">string</span>
+										<a href="#camelize" title="details" class="method-name">camelize</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result">string</span>
+										<a href="#classify" title="details" class="method-name">classify</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table_name</span>)
+									</div>
+																																								<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result">string</span>
+										<a href="#humanize" title="details" class="method-name">humanize</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$uppercase</span> = <span class="var-default">''</span>])
+									</div>
+																								<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result">string</span>
+										<a href="#ordinalize" title="details" class="method-name">ordinalize</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$number</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result">string</span>
+										<a href="#pluralize" title="details" class="method-name">pluralize</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result">string</span>
+										<a href="#singularize" title="details" class="method-name">singularize</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result">string</span>
+										<a href="#tableize" title="details" class="method-name">tableize</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$class_name</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result">string</span>
+										<a href="#titleize" title="details" class="method-name">titleize</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$uppercase</span> = <span class="var-default">''</span>])
+									</div>
+																																<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result">string</span>
+										<a href="#underscore" title="details" class="method-name">underscore</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>)
+									</div>
+																								<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result">string</span>
+										<a href="#variablize" title="details" class="method-name">variablize</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>)
+									</div>
+																																				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#conditionalPlural" title="details" class="method-name">conditionalPlural</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$numer_of_records</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#demodulize" title="details" class="method-name">demodulize</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$module_name</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#foreignKey" title="details" class="method-name">foreignKey</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$class_name</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$separate_class_name_and_id_with_underscore</span> = <span class="var-default">TRUE</span>])
+									</div>
+																								<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#modulize" title="details" class="method-name">modulize</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$module_description</span>)
+									</div>
+																																																								<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#toFullName" title="details" class="method-name">toFullName</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$name</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$correct</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#unaccent" title="details" class="method-name">unaccent</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$text</span>)
+									</div>
+																								<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#urlize" title="details" class="method-name">urlize</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$text</span>)
+									</div>
+																			</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+													<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodcamelize" id="camelize"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static camelize</span> (line <span class="line-number">236</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns given word as CamelCased</p>
+<p class="description"><p>Converts a word like &quot;send_email&quot; to &quot;SendEmail&quot;. It  will remove non alphanumeric character from the word, so  &quot;who's online&quot; will be converted to &quot;WhoSOnline&quot;</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> UpperCamelCasedWord</li>
+				<li><span class="field">see:</span> <a href="../default/AkInflector.html#methodvariablize">AkInflector::variablize()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			camelize
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$word</span><span class="var-description">: Word to convert to camel case</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodclassify" id="classify"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static classify</span> (line <span class="line-number">354</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Converts a table name to its class name according to rails  naming conventions.</p>
+<p class="description"><p>Converts &quot;people&quot; to &quot;Person&quot;</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> SingularClassName</li>
+				<li><span class="field">see:</span> <a href="../default/AkInflector.html#methodtableize">AkInflector::tableize()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			classify
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table_name</span><span class="var-description">: Table name for getting related ClassName.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodhumanize" id="humanize"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static humanize</span> (line <span class="line-number">291</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns a human-readable string from $word</p>
+<p class="description"><p>Returns a human-readable string from $word, by replacing  underscores with a space, and by upper-casing the initial  character by default.</p><p>If you need to uppercase all the words you just have to  pass 'all' as a second parameter.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Human-readable word</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			humanize
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$uppercase</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$word</span><span class="var-description">: String to &quot;humanize&quot;</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$uppercase</span><span class="var-description">: If set to 'all' it will uppercase all the words  instead of just the first one.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodordinalize" id="ordinalize"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static ordinalize</span> (line <span class="line-number">372</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Converts number to its ordinal English form.</p>
+<p class="description"><p>This method converts 13 to 13th, 2 to 2nd ...</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Ordinal representation of given string.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			ordinalize
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$number</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$number</span><span class="var-description">: Number to get its ordinal value</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodpluralize" id="pluralize"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static pluralize</span> (line <span class="line-number">54</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Pluralizes English nouns.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Plural noun</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			pluralize
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$word</span><span class="var-description">: English noun to pluralize</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../default/AkInflexor.html#methodpluralize">AkInflexor::pluralize()</a>
+							</li>
+				</ul>
+	</div>
+<a name="methodsingularize" id="singularize"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static singularize</span> (line <span class="line-number">118</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Singularizes English nouns.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Singular noun.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			singularize
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$word</span><span class="var-description">: English noun to singularize</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../default/AkInflexor.html#methodsingularize">AkInflexor::singularize()</a>
+							</li>
+				</ul>
+	</div>
+<a name="methodtableize" id="tableize"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static tableize</span> (line <span class="line-number">334</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Converts a class name to its table name according to rails  naming conventions.</p>
+<p class="description"><p>Converts &quot;Person&quot; to &quot;people&quot;</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> plural_table_name</li>
+				<li><span class="field">see:</span> <a href="../default/AkInflector.html#methodclassify">AkInflector::classify()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			tableize
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$class_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$class_name</span><span class="var-description">: Class name for getting related table_name.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtitleize" id="titleize"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static titleize</span> (line <span class="line-number">214</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Converts an underscored or CamelCase word into a English  sentence.</p>
+<p class="description"><p>The titleize function converts text like &quot;WelcomePage&quot;,  &quot;welcome_page&quot; or  &quot;welcome page&quot; to this &quot;Welcome  Page&quot;.  If second parameter is set to 'first' it will only  capitalize the first character of the title.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Text formatted as title</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			titleize
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$uppercase</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$word</span><span class="var-description">: Word to format as tile</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$uppercase</span><span class="var-description">: If set to 'first' it will only uppercase the  first character. Otherwise it will uppercase all  the words in the title.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodunderscore" id="underscore"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static underscore</span> (line <span class="line-number">263</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Converts a word &quot;into_it_s_underscored_version&quot;</p>
+<p class="description"><p>Convert any &quot;CamelCased&quot; or &quot;ordinary Word&quot; into an  &quot;underscored_word&quot;.</p><p>This can be really useful for creating friendly URLs.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Underscored word</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			underscore
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$word</span><span class="var-description">: Word to underscore</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodvariablize" id="variablize"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static variablize</span> (line <span class="line-number">313</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Same as camelize but first char is lowercased</p>
+<p class="description"><p>Converts a word like &quot;send_email&quot; to &quot;sendEmail&quot;. It  will remove non alphanumeric character from the word, so  &quot;who's online&quot; will be converted to &quot;whoSOnline&quot;</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Returns a lowerCamelCasedWord</li>
+				<li><span class="field">see:</span> <a href="../default/AkInflector.html#methodcamelize">AkInflector::camelize()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			variablize
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$word</span><span class="var-description">: Word to lowerCamelCase</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodconditionalPlural" id="conditionalPlural"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">conditionalPlural</span> (line <span class="line-number">188</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the plural form of a word if first parameter is greater than 1</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Pluralized string when number of items is greater than 1</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			conditionalPlural
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$numer_of_records</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$word</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$numer_of_records</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$word</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddemodulize" id="demodulize"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">demodulize</span> (line <span class="line-number">396</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			demodulize
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$module_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$module_name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodforeignKey" id="foreignKey"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">foreignKey</span> (line <span class="line-number">431</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns $class_name in underscored form, with &quot;_id&quot; tacked on at the end.</p>
+<p class="description"><p>This is for use in dealing with the database.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			foreignKey
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$class_name</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$separate_class_name_and_id_with_underscore</span> = <span class="var-default">TRUE</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$class_name</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$separate_class_name_and_id_with_underscore</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodmodulize" id="modulize"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">modulize</span> (line <span class="line-number">402</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			modulize
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$module_description</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$module_description</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtoFullName" id="toFullName"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">toFullName</span> (line <span class="line-number">436</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			toFullName
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$name</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$correct</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$name</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$correct</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodunaccent" id="unaccent"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">unaccent</span> (line <span class="line-number">412</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Transforms a string to its unaccented version.</p>
+<p class="description"><p>This might be useful for generating &quot;friendly&quot; URLs</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			unaccent
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$text</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$text</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodurlize" id="urlize"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">urlize</span> (line <span class="line-number">419</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			urlize
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$text</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$text</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+	
+	<p class="notes" id="credit">
+		Documentation generated on Wed, 03 Nov 2010 23:21:07 -0500 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

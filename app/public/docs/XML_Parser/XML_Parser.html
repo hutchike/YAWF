@@ -1,0 +1,1051 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class XML_Parser</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> XML_Parser</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|											<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">XML Parser class.</p>
+<p class="description"><p>This is an XML parser based on PHP's &quot;xml&quot; extension,  based on the bundled expat library.</p><p>Notes: <ul><li>It requires PHP 4.0.4pl1 or greater</li></ul><ul><li>different parsing modes</li></ul></p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Stig Bakken &lt;<a href="mailto:ssb@fast.no">ssb@fast.no</a>&gt;</li>
+				<li><span class="field">author:</span> Stephan Schmidt &lt;<a href="mailto:schst@php.net">schst@php.net</a>&gt;</li>
+				<li><span class="field">author:</span> Tomas V.V.Cox &lt;<a href="mailto:cox@idecnet.com">cox@idecnet.com</a>&gt;</li>
+				<li><span class="field">version:</span> Release: @package_version@</li>
+				<li><span class="field">copyright:</span> 2002-2008 The PHP Group</li>
+				<li><span class="field">link:</span> <a href="http://pear.php.net/package/XML_Parser">http://pear.php.net/package/XML_Parser</a></li>
+				<li><span class="field">todo:</span> create XML_Parser_Pull</li>
+				<li><span class="field">todo:</span> Tests that need to be made: <ul><li>mixing character encodings</li><li>a test using all expat handlers</li><li>options (folding, output charset)</li></ul></li>
+				<li><span class="field">todo:</span> create XML_Parser_Namespace to parse documents with namespaces</li>
+				<li><span class="field">license:</span> <a href="http://opensource.org/licenses/bsd-license">New BSD License</a></li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_plugins---XML---Parser.php.html">/plugins/XML/Parser.php</a> (line <span class="field">116</span>)
+		</p>
+		
+				
+		<pre><a href="../PEAR/PEAR.html">PEAR</a>
+   |
+   --XML_Parser</pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"
+								 style="vertical-align: center"/>
+						<a href="../XML_Parser/XML_Parser_Simple.html">XML_Parser_Simple</a>
+					</td>
+					<td>
+											Simple XML parser class.
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendants</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																																								<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">boolean</span>
+					<a href="#$folding" title="details" class="var-name">$folding</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">resource</span>
+					<a href="#$fp" title="details" class="var-name">$fp</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">array</span>
+					<a href="#$handler" title="details" class="var-name">$handler</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$mode" title="details" class="var-name">$mode</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">resource</span>
+					<a href="#$parser" title="details" class="var-name">$parser</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$srcenc" title="details" class="var-name">$srcenc</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$tgtenc" title="details" class="var-name">$tgtenc</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">object</span>
+					<a href="#$_handlerObj" title="details" class="var-name">$_handlerObj</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">array</span>
+					<a href="#$_validEncodings" title="details" class="var-name">$_validEncodings</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendants</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																<div class="method-definition">
+					<img src="../media/images/Constructor.png" alt=" "/>
+											<span class="method-result">XML_Parser</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$srcenc</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$mode</span> = <span class="var-default">'event'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$tgtenc</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Constructor.png" alt=" "/>
+											<span class="method-result">XML_Parser</span>
+										<a href="#XML_Parser" title="details" class="method-name">XML_Parser</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$srcenc</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$mode</span> = <span class="var-default">'event'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$tgtenc</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/AbstractMethod.png" alt=" "/>
+											<span class="method-result">null</span>
+										<a href="#endHandler" title="details" class="method-name">endHandler</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$xp</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$elem</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">null</span>
+										<a href="#free" title="details" class="method-name">free</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#funcEndHandler" title="details" class="method-name">funcEndHandler</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$xp</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$elem</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#funcStartHandler" title="details" class="method-name">funcStartHandler</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$xp</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$elem</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribs</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">bool|<a href="../PEAR/PEAR_Error.html">PEAR_Error</a></span>
+										<a href="#parse" title="details" class="method-name">parse</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">bool|<a href="../PEAR/PEAR_Error.html">PEAR_Error</a></span>
+										<a href="#parseString" title="details" class="method-name">parseString</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$eof</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../XML_Parser/XML_Parser_Error.html">XML_Parser_Error</a></span>
+										<a href="#raiseError" title="details" class="method-name">&amp;raiseError</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$msg</span> = <span class="var-default">null</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$ecode</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">boolean|object</span>
+										<a href="#reset" title="details" class="method-name">reset</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">boolean</span>
+										<a href="#setHandlerObj" title="details" class="method-name">setHandlerObj</a>
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">&$obj</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">mixed</span>
+										<a href="#setInput" title="details" class="method-name">setInput</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$fp</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">resource</span>
+										<a href="#setInputFile" title="details" class="method-name">setInputFile</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$file</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">null</span>
+										<a href="#setInputString" title="details" class="method-name">setInputString</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$data</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">boolean|object</span>
+										<a href="#setMode" title="details" class="method-name">setMode</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$mode</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/AbstractMethod.png" alt=" "/>
+											<span class="method-result">null</span>
+										<a href="#startHandler" title="details" class="method-name">startHandler</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$xp</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$elem</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">&$attribs</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$folding" id="$folding"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$folding</span>
+			 = <span class="var-default"> true</span>			(line <span class="line-number">143</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Whether to do case folding</p>
+<p class="description"><p>If set to true, all tag and attribute names will  be converted to UPPER CASE.</p></p>
+	
+	
+		
+		
+
+</div>
+<a name="var$fp" id="$fp"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">resource</span>
+			<span class="var-name">$fp</span>
+						(line <span class="line-number">133</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">File handle if parsing from a file</p>
+	
+	
+		
+		
+
+</div>
+<a name="var$handler" id="$handler"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$handler</span>
+			 = <span class="var-default">array(<br />        'character_data_handler'            =&gt; 'cdataHandler',<br />        'default_handler'                   =&gt; 'defaultHandler',<br />        'processing_instruction_handler'    =&gt; 'piHandler',<br />        'unparsed_entity_decl_handler'      =&gt; 'unparsedHandler',<br />        'notation_decl_handler'             =&gt; 'notationHandler',<br />        'external_entity_ref_handler'       =&gt; 'entityrefHandler'<br />    )</span>			(line <span class="line-number">157</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Mapping from expat handler function to class method.</p>
+	
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../XML_Parser/XML_Parser_Simple.html#var$handler">XML_Parser_Simple::$handler</a>
+								: Mapping from expat handler function to class method.
+							</li>
+				</ul>
+		
+
+</div>
+<a name="var$mode" id="$mode"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$mode</span>
+						(line <span class="line-number">150</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Mode of operation, one of &quot;event&quot; or &quot;func&quot;</p>
+	
+	
+		
+		
+
+</div>
+<a name="var$parser" id="$parser"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">resource</span>
+			<span class="var-name">$parser</span>
+						(line <span class="line-number">126</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">XML parser handle</p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="http://www.php.net/xml_parser_create">xml_parser_create()</a></li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$srcenc" id="$srcenc"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$srcenc</span>
+						(line <span class="line-number">171</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">source encoding</p>
+	
+	
+		
+		
+
+</div>
+<a name="var$tgtenc" id="$tgtenc"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$tgtenc</span>
+						(line <span class="line-number">178</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">target encoding</p>
+	
+	
+		
+		
+
+</div>
+<a name="var$_handlerObj" id="$_handlerObj"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">object</span>
+			<span class="var-name">$_handlerObj</span>
+						(line <span class="line-number">185</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">handler object</p>
+	
+	
+		
+		
+
+</div>
+<a name="var$_validEncodings" id="$_validEncodings"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$_validEncodings</span>
+			 = <span class="var-default">array('ISO-8859-1', 'UTF-8', 'US-ASCII')</span>			(line <span class="line-number">192</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">valid encodings</p>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Constructor.png" />
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">227</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">PHP5 constructor</p>
+	
+	<div class="method-signature">
+		<span class="method-result">XML_Parser</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$srcenc</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$mode</span> = <span class="var-default">'event'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$tgtenc</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$srcenc</span><span class="var-description">: source charset encoding, use NULL (default) to use                        whatever the document specifies</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$mode</span><span class="var-description">: how this parser object should work, &quot;event&quot; for                        startelement/endelement-type events, &quot;func&quot;                        to have it call functions named after elements</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tgtenc</span><span class="var-description">: a valid target encoding</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodXML_Parser" id="XML_Parser"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Constructor.png" />
+		<span class="method-title">Constructor XML_Parser</span> (line <span class="line-number">210</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates an XML parser.</p>
+<p class="description"><p>This is needed for PHP4 compatibility, it will  call the constructor, when a new instance is created.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">XML_Parser</span>
+		<span class="method-name">
+			XML_Parser
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$srcenc</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$mode</span> = <span class="var-default">'event'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$tgtenc</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$srcenc</span><span class="var-description">: source charset encoding, use NULL (default) to use                        whatever the document specifies</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$mode</span><span class="var-description">: how this parser object should work, &quot;event&quot; for                        startelement/endelement-type events, &quot;func&quot;                        to have it call functions named after elements</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tgtenc</span><span class="var-description">: a valid target encoding</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodendHandler" id="endHandler"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/AbstractMethod.png" />
+		<span class="method-title">endHandler</span> (line <span class="line-number">696</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">abstract method signature for End Handler</p>
+	<ul class="tags">
+				<li><span class="field">abstract:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">null</span>
+		<span class="method-name">
+			endHandler
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$xp</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$elem</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$xp</span><span class="var-description">: ??</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$elem</span><span class="var-description">: ??</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfree" id="free"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">free</span> (line <span class="line-number">590</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">XML_Parser::free()</p>
+<p class="description"><p>Free the internal resources associated with the parser</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">null</span>
+		<span class="method-name">
+			free
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodfuncEndHandler" id="funcEndHandler"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">funcEndHandler</span> (line <span class="line-number">655</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">derives and calls the End Handler function</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			funcEndHandler
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$xp</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$elem</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$xp</span><span class="var-description">: ??</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$elem</span><span class="var-description">: ??</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfuncStartHandler" id="funcStartHandler"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">funcStartHandler</span> (line <span class="line-number">632</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">derives and calls the Start Handler function</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			funcStartHandler
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$xp</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$elem</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$attribs</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$xp</span><span class="var-description">: ??</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$elem</span><span class="var-description">: ??</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$attribs</span><span class="var-description">: ??</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodparse" id="parse"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">parse</span> (line <span class="line-number">502</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Central parsing function.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> returns true on success, or a PEAR_Error otherwise</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool|<a href="../PEAR/PEAR_Error.html">PEAR_Error</a></span>
+		<span class="method-name">
+			parse
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodparseString" id="parseString"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">parseString</span> (line <span class="line-number">565</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">XML_Parser::parseString()</p>
+<p class="description"><p>Parses a string.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true on success or a PEAR Error</li>
+				<li><span class="field">see:</span> _parseString()</li>
+				<li><span class="field">throws:</span> XML_Parser_Error</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool|<a href="../PEAR/PEAR_Error.html">PEAR_Error</a></span>
+		<span class="method-name">
+			parseString
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$eof</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$data</span><span class="var-description">: XML data</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$eof</span><span class="var-description">: If set and TRUE, data is the last piece                       of data sent in this parser</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodraiseError" id="raiseError"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">raiseError</span> (line <span class="line-number">613</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">XML_Parser::raiseError()</p>
+<p class="description"><p>Throws a XML_Parser_Error</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> reference to the error object</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../XML_Parser/XML_Parser_Error.html">XML_Parser_Error</a></span>
+		<span class="method-name">
+			&amp;raiseError
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$msg</span> = <span class="var-default">null</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$ecode</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$msg</span><span class="var-description">: the error message</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$ecode</span><span class="var-description">: the error message code</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../PEAR/PEAR.html#methodraiseError">PEAR::raiseError()</a></dt>
+						<dd>This method is a wrapper that returns an instance of the  configured error class with this object's default error  handling applied.  If the $mode and $options parameters are not  specified, the object's defaults are used.</dd>
+					</dl>
+			
+	</div>
+<a name="methodreset" id="reset"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">reset</span> (line <span class="line-number">393</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Reset the parser.</p>
+<p class="description"><p>This allows you to use one parser instance  to parse multiple XML documents.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true on success, PEAR_Error otherwise</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean|object</span>
+		<span class="method-name">
+			reset
+		</span>
+				()
+			</div>
+	
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../XML_Parser/XML_Parser_Simple.html#methodreset">XML_Parser_Simple::reset()</a>
+								: Reset the parser.
+							</li>
+				</ul>
+	</div>
+<a name="methodsetHandlerObj" id="setHandlerObj"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">setHandlerObj</span> (line <span class="line-number">282</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the object, that will handle the XML events</p>
+<p class="description"><p>This allows you to create a handler object independent of the  parser object that you are using and easily switch the underlying  parser.</p><p>If no object will be set, XML_Parser assumes that you  extend this class and handle the events in $this.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> will always return true</li>
+				<li><span class="field">since:</span> v1.2.0beta3</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			setHandlerObj
+		</span>
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">&$obj</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">&$obj</span><span class="var-description">: object to handle the events</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetInput" id="setInput"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">setInput</span> (line <span class="line-number">472</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the file handle to use with parse().</p>
+<p class="description"><p>You should use setInputFile() or setInputString() if you  pass a string</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../XML_Parser/XML_Parser.html#methodparse">XML_Parser::parse()</a></li>
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">uses:</span> <a href="../XML_Parser/XML_Parser.html#methodsetInputString">XML_Parser::setInputString()</a>,  - setInputFile()</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			setInput
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$fp</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$fp</span><span class="var-description">: Can be either a resource returned from fopen(),                   a URL, a local filename or a string.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetInputFile" id="setInputFile"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">setInputFile</span> (line <span class="line-number">415</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the input xml file to be parsed</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> fopen handle of the given file</li>
+				<li><span class="field">see:</span> <a href="../XML_Parser/XML_Parser.html#methodsetInput">XML_Parser::setInput()</a>, <a href="../XML_Parser/XML_Parser.html#methodsetInputString">XML_Parser::setInputString()</a>, <a href="../XML_Parser/XML_Parser.html#methodparse">XML_Parser::parse()</a></li>
+				<li><span class="field">throws:</span> XML_Parser_Error</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">resource</span>
+		<span class="method-name">
+			setInputFile
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$file</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$file</span><span class="var-description">: Filename (full path)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetInputString" id="setInputString"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">setInputString</span> (line <span class="line-number">449</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">XML_Parser::setInputString()</p>
+<p class="description"><p>Sets the xml input from a string</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">null</span>
+		<span class="method-name">
+			setInputString
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$data</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$data</span><span class="var-description">: a string containing the XML document</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetMode" id="setMode"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">setMode</span> (line <span class="line-number">255</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the mode of the parser.</p>
+<p class="description"><p>Possible modes are: <ul><li>func</li><li>event</li></ul>  You can set the mode using the second parameter  in the constructor.</p><p>This method is only needed, when switching to a new  mode at a later point.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true on success, PEAR_Error otherwise</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean|object</span>
+		<span class="method-name">
+			setMode
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$mode</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$mode</span><span class="var-description">: mode, either 'func' or 'event'</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodstartHandler" id="startHandler"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/AbstractMethod.png" />
+		<span class="method-title">startHandler</span> (line <span class="line-number">679</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">abstract method signature for Start Handler</p>
+	<ul class="tags">
+				<li><span class="field">abstract:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">null</span>
+		<span class="method-name">
+			startHandler
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$xp</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$elem</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">&$attribs</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$xp</span><span class="var-description">: ??</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$elem</span><span class="var-description">: ??</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">&$attribs</span><span class="var-description">: ??</span>			</li>
+				</ul>
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../PEAR/PEAR.html">PEAR</a></span></p>
+					<blockquote>
+													<img src="../media/images/Constructor.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#methodPEAR">PEAR::PEAR()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#methoddelExpect">PEAR::delExpect()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#methodexpectError">PEAR::expectError()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#methodgetStaticProperty">PEAR::getStaticProperty()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#methodisError">PEAR::isError()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#methodloadExtension">PEAR::loadExtension()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#methodpopErrorHandling">PEAR::popErrorHandling()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#methodpopExpect">PEAR::popExpect()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#methodpushErrorHandling">PEAR::pushErrorHandling()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#methodraiseError">PEAR::raiseError()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#methodregisterShutdownFunc">PEAR::registerShutdownFunc()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#methodsetErrorHandling">PEAR::setErrorHandling()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#methodstaticPopErrorHandling">PEAR::staticPopErrorHandling()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#methodstaticPushErrorHandling">PEAR::staticPushErrorHandling()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#methodthrowError">PEAR::throwError()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../PEAR/PEAR.html#method_PEAR">PEAR::_PEAR()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+	
+	<p class="notes" id="credit">
+		Documentation generated on Wed, 03 Nov 2010 23:26:14 -0500 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

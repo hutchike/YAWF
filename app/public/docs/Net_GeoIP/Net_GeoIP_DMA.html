@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Net_GeoIP_DMA</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> Net_GeoIP_DMA</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Static class to handle mapping of DMA codes to metro regions.</p>
+<p class="description"><p>Use this class with the dmaCode property of the Net_GeoIpLocation object.</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-var">$region&nbsp;</span>=&nbsp;<span class="src-id">Net_GeoIPDMA</span><span class="src-sym">::</span><span class="src-id">getMetroRegion</span><span class="src-sym">(</span><span class="src-var">$record</span><span class="src-sym">-&gt;</span><span class="src-id">dmaCode</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Dmitri Snytkine &lt;<a href="mailto:d.snytkine@gmail.com">d.snytkine@gmail.com</a>&gt;</li>
+				<li><span class="field">author:</span> Hans Lellelid &lt;<a href="mailto:hans@xmpl.org">hans@xmpl.org</a>&gt;</li>
+				<li><span class="field">version:</span> $Revision: 296755 $</li>
+				<li><span class="field">link:</span> <a href="http://pear.php.net/package/Net_GeoIp">http://pear.php.net/package/Net_GeoIp</a></li>
+				<li><span class="field">license:</span> LGPL</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_plugins---Net---GeoIP---DMA.php.html">/plugins/Net/GeoIP/DMA.php</a> (line <span class="field">52</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+												<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result">int</span>
+										<a href="#getDMACode" title="details" class="method-name">getDMACode</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$metro</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result">string</span>
+										<a href="#getMetroRegion" title="details" class="method-name">getMetroRegion</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$dmaCode</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result">void</span>
+										<a href="#initialize" title="details" class="method-name">initialize</a>
+										()
+									</div>
+																																							</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+													<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodgetDMACode" id="getDMACode"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static getDMACode</span> (line <span class="line-number">307</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Reverse lookup of DMA code if [exact] metro region name is known.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> DMA code, or false if not found.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			getDMACode
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$metro</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$metro</span><span class="var-description">: Metro region name.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetMetroRegion" id="getMetroRegion"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static getMetroRegion</span> (line <span class="line-number">289</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Lookup the metro region based on the provided DMA code.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Metro region name.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getMetroRegion
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$dmaCode</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$dmaCode</span><span class="var-description">: The DMA code</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodinitialize" id="initialize"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static initialize</span> (line <span class="line-number">65</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Initialize</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			initialize
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+	
+	<p class="notes" id="credit">
+		Documentation generated on Wed, 03 Nov 2010 23:26:12 -0500 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

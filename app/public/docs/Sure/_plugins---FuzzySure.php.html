@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs for page FuzzySure.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="file-name"><img src="../media/images/Page_logo.png" alt="File" style="vertical-align: middle">/plugins/FuzzySure.php</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-classes">Classes</a>
+														</div>
+	<div class="info-box-body">	
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">FuzzySure -- Simple User-defined Rule Engine (SURE) - Fuzzy logic version</p>
+<p class="description"><p>&quot;FuzzySure&quot; is a simple way to embed a fuzzy expert system in your PHP web  application. It subclasses the &quot;Sure&quot; expert system classes to add fuzziness.  Here's a simple example:</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-var">$sure&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Sure/FuzzySure.html">FuzzySure</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$sure</span><span class="src-sym">-&gt;</span><span class="src-id">with</span><span class="src-sym">(</span><span class="src-str">'rules.fuzzy'</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">given</span><span class="src-sym">(</span><span class="src-str">'facts.fuzzy'</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">infer</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p><p>...where &quot;rules.fuzzy&quot; and &quot;facts.fuzzy&quot; are the filenames for files written  like this:</p><p>rules.fuzzy:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-id">rule</span>:&nbsp;<span class="src-id">Relax&nbsp;when&nbsp;it&nbsp;is&nbsp;hot</span><span class="src-sym">,&nbsp;</span><span class="src-id">also&nbsp;on&nbsp;holidays</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-id">when</span>:&nbsp;<span class="src-var">$is_a_hot_day&nbsp;</span><span class="src-key">or&nbsp;</span><span class="src-var">$is_holiday</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-id">then</span>:&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-var">$TRUTH&nbsp;</span>&gt;=&nbsp;<span class="src-num">0.5</span><span class="src-sym">)&nbsp;</span>print&nbsp;<span class="src-str">&quot;Relaxing&nbsp;today,&nbsp;thanks!&quot;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;Note&nbsp;that&nbsp;you&nbsp;can&nbsp;use&nbsp;the&nbsp;$TRUTH&nbsp;variable&nbsp;to&nbsp;read&nbsp;fuzzy&nbsp;truths&nbsp;like&nbsp;this</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-id">rule</span>:&nbsp;<span class="src-id">Is&nbsp;it&nbsp;hot&nbsp;today</span>?</div></li>
+<li><div class="src-line">&nbsp;<span class="src-id">when</span>:&nbsp;<span class="src-var">$today</span><span class="src-sym">-&gt;</span><span class="src-id">is</span><span class="src-sym">(</span><span class="src-var">$hot</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-id">then</span>:&nbsp;<span class="src-var">$is_a_hot_day&nbsp;</span>=&nbsp;<span class="src-var">$TRUTH</span></div></li>
+</ol></div></p><p>facts.fuzzy:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-var">$today&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Sure/FuzzyObject.html">FuzzyObject</a></span><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'temp'&nbsp;</span>=&gt;&nbsp;<span class="src-num">85</span><span class="src-sym">,&nbsp;</span><span class="src-str">'day_of_week'&nbsp;</span>=&gt;&nbsp;<span class="src-str">'Sun'</span><span class="src-sym">))</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$hot&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Sure/FuzzyMatch.html">FuzzyMatch</a></span><span class="src-sym">(</span><span class="src-str">'temp'</span><span class="src-sym">,&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-num">80</span><span class="src-sym">,&nbsp;</span><span class="src-num">90</span><span class="src-sym">,&nbsp;</span><span class="src-num">100</span><span class="src-sym">,&nbsp;</span><span class="src-num">110</span><span class="src-sym">))</span></div></li>
+</ol></div></p><p>The syntax for the rules and the facts is regular PHP code, except that you  may also use FuzzyObject and FuzzyMatch objects. Note that a FuzzyMatch has  an array of 4 numbers specifying the values on a fuzzy &quot;_/*\_&quot; curve so that  partial matches still give a truth between 0 and 1. The rules should include  &quot;rule:&quot;, &quot;when:&quot; and &quot;then:&quot; prefix labels at the start of lines to define  the rules. (You can replace &quot;when:&quot; with &quot;if:&quot; if you prefer).</p><p>If you want a rule to meet many conditions, you can list them on lines like  this:</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-id">rule</span>:&nbsp;<span class="src-id">Pay&nbsp;rent&nbsp;on&nbsp;</span><span class="src-num">1</span><span class="src-id">st&nbsp;of&nbsp;the&nbsp;month</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-id">when</span>:</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$day_of_month&nbsp;</span>==&nbsp;<span class="src-num">1</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$rent_unpaid</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$cash_in_pocket&nbsp;</span>&gt;=&nbsp;<span class="src-num">4800</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-id">then</span>:</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$bank</span><span class="src-sym">-&gt;</span><span class="src-id">pay_the_rent</span><span class="src-sym">(</span><span class="src-sym">)</span></div></li>
+</ol></div></p><p>In this example, we've used a PHP object $bank, which may be passed into the  Sure object constructor like this:</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-var">$sure&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Sure/FuzzySure.html">FuzzySure</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$sure</span><span class="src-sym">-&gt;</span><span class="src-id">with</span><span class="src-sym">(</span><span class="src-str">'rules.sure'</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">given</span><span class="src-sym">(</span><span class="src-str">'facts.sure'</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">infer</span><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'bank'&nbsp;</span>=&gt;&nbsp;<span class="src-var">$bank_object</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol></div></p><p>This way, the Sure rules engine can be used to orchestrate your other PHP  code according to flexible rules. Note that the filenames &quot;rules.sure&quot; and  &quot;facts.sure&quot; may be replaced with string values if you prefer to pass the  rules and facts directly, for example if you store them in a database.</p><p>The &quot;infer()&quot; method will iterate up to 1000 times until the state of the  facts memory is unchaged. If you need to iterate more or less than 1000  times then call the &quot;limit()&quot; getter/setter method like this:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-var">$sure&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Sure/FuzzySure.html">FuzzySure</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$sure</span><span class="src-sym">-&gt;</span><span class="src-id">limit</span><span class="src-sym">(</span><span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;only&nbsp;match&nbsp;the&nbsp;rules&nbsp;against&nbsp;the&nbsp;facts&nbsp;once</span></div></li>
+</ol></div>  ...or just pass the iteration limit to the constructor like this:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-var">$sure&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Sure/FuzzySure.html">FuzzySure</a></span><span class="src-sym">(</span><span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div>  ...but this is less readable code, so a call to &quot;limit()&quot; is preferred.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.org">kevin@guanoo.org</a>&gt;</li>
+				<li><span class="field">version:</span> 0.2</li>
+				<li><span class="field">copyright:</span> Copyright 2010 Kevin Hutchinson</li>
+				<li><span class="field">link:</span> <a href="http://github.com/hutchike/YAWF">http://github.com/hutchike/YAWF</a></li>
+				<li><span class="field">license:</span> <a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></li>
+			</ul>
+		
+			</div>
+</div>
+		
+	<a name="sec-classes"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Classes</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Classes</span>
+																	</div>
+		<div class="info-box-body">	
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"/>
+						<a href="../Sure/FuzzySure.html">FuzzySure</a>
+					</td>
+					<td>
+											A class to provide a Simpe User-defined Rule Engine (SURE) with fuzzy logic
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"/>
+						<a href="../Sure/FuzzyParser.html">FuzzyParser</a>
+					</td>
+					<td>
+											A class to parse fuzzy rules and facts as pseudo-PHP code
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"/>
+						<a href="../Sure/FuzzyRule.html">FuzzyRule</a>
+					</td>
+					<td>
+											A fuzzy rule has a name, a list of conditions and a list of actions to take
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"/>
+						<a href="../Sure/FuzzyObject.html">FuzzyObject</a>
+					</td>
+					<td>
+											A FuzzyObject is just like a regular Object except it has an &quot;is()&quot; method
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"/>
+						<a href="../Sure/FuzzyMatch.html">FuzzyMatch</a>
+					</td>
+					<td>
+											A FuzzyMatch object matches an object's property against a fuzzy curve: _/\_
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+	
+	
+	
+	
+	<p class="notes" id="credit">
+		Documentation generated on Wed, 05 May 2010 19:07:11 -0500 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>
