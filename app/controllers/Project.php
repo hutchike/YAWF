@@ -25,31 +25,33 @@ class Project_controller extends App_controller
 
     public function cookbook()
     {
-        // Nothing to do
+        $this->render->title = 'Cookbook';
     }
 
     public function download()
     {
-        // Nothing to do
+        $this->render->title = 'Download';
     }
 
     public function faq()
     {
-        // Nothing to do
+        $this->render->title = 'FAQ';
     }
 
     public function forum()
     {
-        // Nothing to do
+        $this->render->title = 'Forum';
     }
 
     public function news()
     {
-        // Nothing to do
+        $this->render->title = 'News';
     }
 
     public function code()
     {
+        $this->render->title = 'Code';
+
         // Get a list of files in the folder
 
         $folder = $this->params->folder;
@@ -73,7 +75,7 @@ class Project_controller extends App_controller
 
     public function terms()
     {
-        // Nothing to do
+        $this->render->title = 'Terms &amp; Conditions';
     }
 }
 
