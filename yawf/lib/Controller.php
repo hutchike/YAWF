@@ -96,7 +96,7 @@ class Controller extends YAWF
         $this->view = $view;
     }
 
-    // Change the content type to show
+    // Change the display content type
 
     protected function set_type($type)
     {
@@ -179,7 +179,7 @@ class Controller extends YAWF
         $this->app->redirect($url, $options);
     }
 
-    // Send any errors to the webmaster
+    // Mail errors to the webmaster
 
     public function report_errors()
     {
@@ -200,7 +200,7 @@ class Controller extends YAWF
         return $this->send_mail('errors', $render);
     }
 
-    // Send some mail as text & HTML multipart (depends on the MailHelper)
+    // Send some mail as text & HTML multipart (depends on the Mail helper)
 
     protected function send_mail($file, $render)
     {
