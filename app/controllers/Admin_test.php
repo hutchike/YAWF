@@ -17,7 +17,8 @@ class Admin_test_controller extends Admin_controller
 {
     public function setup()
     {
-        $this->database_filename = Model::get_database();
+        $admin = new YawfAdmin();
+        $this->database_filename = $admin->get_database();
     }
 
     public function teardown()
@@ -35,15 +36,17 @@ class Admin_test_controller extends Admin_controller
 
     public function create_database_test()
     {
+        $admin = new YawfAdmin();
+
         $test_db_exists = file_exists($this->database_filename);
         $this->should_not('have a test database already', $test_db_exists,
-                          Model::get_database());
+                          $admin->get_database());
 
         parent::create_database();
 
         $test_db_exists = file_exists($this->database_filename);
         $this->should('have a test database now', $test_db_exists,
-                      Model::get_database());
+                      $admin->get_database());
 
     }
 

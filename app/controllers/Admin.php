@@ -19,10 +19,10 @@ class Admin_controller extends App_controller
     {
         // Create a YAWF database, but only do it once
 
-        if (file_exists(Model::get_database())) return;
-        $issue = new YawfIssue();
+        $admin = new YawfAdmin();
+        if (file_exists($admin->get_database())) return;
         $sql = file_get_contents('app/data/YAWF_' . DB_CONNECTOR . '.sql');
-        $issue->query($sql);
+        $admin->query($sql);
     }
 
     public function before()
