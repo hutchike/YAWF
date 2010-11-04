@@ -56,11 +56,13 @@ class REST_controller extends App_controller
     }
 
     // Allow method overriding using the "_method" parameter
+    // (or the "X_HTTP_METHOD_OVERRIDE" custom HTTP header).
 
     protected function request_method()
     {
-        return first($this->params->_method,
-                     strtolower($this->server->request_method));
+        return strtolower(first($this->params->_method,
+                                $this->server->x_http_method_override,
+                                $this->server->request_method));
     }
 
     // Return the requested content type set in HTTP headers
