@@ -1,0 +1,1454 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Net_GeoIP</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> Net_GeoIP</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">GeoIP class provides an API for performing geo-location lookups based on IP  address.</p>
+<p class="description"><p>To use this class you must have a [binary version] GeoIP database. There is  a free GeoIP country database which can be obtained from Maxmind:  <a href="http://www.maxmind.com/app/geoip_country">http://www.maxmind.com/app/geoip_country</a></p><p><strong>SIMPLE USE</strong></p><p>Create an instance:</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-var">$geoip&nbsp;</span>=&nbsp;<span class="src-id"><a href="../Net_GeoIP/Net_GeoIP.html">Net_GeoIP</a></span><span class="src-sym">::</span><a href="../Net_GeoIP/Net_GeoIP.html#methodgetInstance">getInstance</a><span class="src-sym">(</span><span class="src-str">'/path/to/geoipdb.dat'</span><span class="src-sym">,&nbsp;</span><span class="src-id"><a href="../Net_GeoIP/Net_GeoIP.html">Net_GeoIP</a></span><span class="src-sym">::</span><span class="src-id">SHARED_MEMORY</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p><p>Depending on which database you are using (free, or one of paid versions)  you must use appropriate lookup method:</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;for&nbsp;free&nbsp;country&nbsp;db:</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$country_name&nbsp;</span>=&nbsp;<span class="src-var">$geoip</span><span class="src-sym">-&gt;</span><a href="../Net_GeoIP/Net_GeoIP.html#methodlookupCountryName">lookupCountryName</a><span class="src-sym">(</span><span class="src-var">$_SERVER</span><span class="src-sym">[</span><span class="src-str">'REMOTE_ADDR'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$country_code&nbsp;</span>=&nbsp;<span class="src-var">$geoip</span><span class="src-sym">-&gt;</span><a href="../Net_GeoIP/Net_GeoIP.html#methodlookupCountryCode">lookupCountryCode</a><span class="src-sym">(</span><span class="src-var">$_SERVER</span><span class="src-sym">[</span><span class="src-str">'REMOTE_ADDR'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;for&nbsp;[non-free]&nbsp;region&nbsp;db:</span></div></li>
+<li><div class="src-line">&nbsp;list<span class="src-sym">(</span><span class="src-var">$ctry_code</span><span class="src-sym">,&nbsp;</span><span class="src-var">$region</span><span class="src-sym">)&nbsp;</span>=&nbsp;<span class="src-var">$geoip</span><span class="src-sym">-&gt;</span><a href="../Net_GeoIP/Net_GeoIP.html#methodlookupRegion">lookupRegion</a><span class="src-sym">(</span><span class="src-var">$_SERVER</span><span class="src-sym">[</span><span class="src-str">'REMOTE_ADDR'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;for&nbsp;[non-free]&nbsp;city&nbsp;db:</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$location&nbsp;</span>=&nbsp;<span class="src-var">$geoip</span><span class="src-sym">-&gt;</span><a href="../Net_GeoIP/Net_GeoIP.html#methodlookupLocation">lookupLocation</a><span class="src-sym">(</span><span class="src-var">$_SERVER</span><span class="src-sym">[</span><span class="src-str">'REMOTE_ADDR'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;print&nbsp;<span class="src-str">&quot;city:&nbsp;&quot;&nbsp;</span>.&nbsp;<span class="src-var">$location</span><span class="src-sym">-&gt;</span><span class="src-id">city&nbsp;</span>.&nbsp;<span class="src-str">&quot;,&nbsp;&quot;&nbsp;</span>.&nbsp;<span class="src-var">$location</span><span class="src-sym">-&gt;</span><span class="src-id">region</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;print&nbsp;<span class="src-str">&quot;lat:&nbsp;&quot;&nbsp;</span>.&nbsp;<span class="src-var">$location</span><span class="src-sym">-&gt;</span><span class="src-id">latitude&nbsp;</span>.&nbsp;<span class="src-str">&quot;,&nbsp;long:&nbsp;&quot;&nbsp;</span>.&nbsp;<span class="src-var">$location</span><span class="src-sym">-&gt;</span><span class="src-id">longitude</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;for&nbsp;organization&nbsp;or&nbsp;ISP&nbsp;db:</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$org_or_isp_name&nbsp;</span>=&nbsp;<span class="src-var">$geoip</span><span class="src-sym">-&gt;</span><a href="../Net_GeoIP/Net_GeoIP.html#methodlookupOrg">lookupOrg</a><span class="src-sym">(</span><span class="src-var">$_SERVER</span><span class="src-sym">[</span><span class="src-str">'REMOTE_ADDR'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p><p><strong>MULTIPLE INSTANCES</strong></p><p>You can have several instances of this class, one for each database file  you are using.  You should use the static getInstance() singleton method  to save on overhead of setting up database segments.  Note that only one  instance is stored per filename, and any flags will be ignored if an  instance already exists for the specifiedfilename.</p><p><strong>Special note on using SHARED_MEMORY flag</strong></p><p>If you are using SHARED_MEMORY (shmop) you can only use SHARED_MEMORY for  one (1) instance  (i.e. for one database). Any subsequent attempts to  instantiate using SHARED_MEMORY will read the same shared memory block  already initialized, and therefore will cause problems since the expected  database format won't match the database in the shared memory block.</p><p>Note that there is no easy way to flag &quot;nice errors&quot; to prevent attempts  to create new instances using SHARED_MEMORY flag and it is also not posible  (in a safe way) to allow new instances to overwrite the shared memory block.</p><p>In short, is you are using multiple databses, use the SHARED_MEMORY flag  with care.</p><p><strong>LOOKUPS ON HOSTNAMES</strong></p><p>Note that this PHP API does NOT support lookups on hostnames.  This is so  that the public API can be kept simple and so that the lookup functions  don't need to try name lookups if IP lookup fails (which would be the only  way to keep the API simple and support name-based lookups).</p><p>If you do not know the IP address, you can convert an name to IP very  simply using PHP native functions or other libraries:</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$geoip</span><span class="src-sym">-&gt;</span><a href="../Net_GeoIP/Net_GeoIP.html#methodlookupCountryName">lookupCountryName</a><span class="src-sym">(</span><a href="http://www.php.net/gethostbyname">gethostbyname</a><span class="src-sym">(</span><span class="src-str">'www.sunset.se'</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+</ol></div></p><p>Or, if you don't know whether an address is a name or ip address, use  application-level logic:</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><a href="http://www.php.net/ip2long">ip2long</a><span class="src-sym">(</span><span class="src-var">$ip_or_name</span><span class="src-sym">)&nbsp;</span>===&nbsp;<span class="src-id">false</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$ip&nbsp;</span>=&nbsp;<a href="http://www.php.net/gethostbyname">gethostbyname</a><span class="src-sym">(</span><span class="src-var">$ip_or_name</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">}&nbsp;</span><span class="src-key">else&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$ip&nbsp;</span>=&nbsp;<span class="src-var">$ip_or_name</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$ctry&nbsp;</span>=&nbsp;<span class="src-var">$geoip</span><span class="src-sym">-&gt;</span><a href="../Net_GeoIP/Net_GeoIP.html#methodlookupCountryName">lookupCountryName</a><span class="src-sym">(</span><span class="src-var">$ip</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Hans Lellelid &lt;<a href="mailto:hans@xmpl.org">hans@xmpl.org</a>&gt;</li>
+				<li><span class="field">author:</span> Jim Winstead &lt;<a href="mailto:jimw@apache.org">jimw@apache.org</a>&gt; (original Maxmind PHP API)</li>
+				<li><span class="field">link:</span> <a href="http://pear.php.net/package/Net_GeoIp">http://pear.php.net/package/Net_GeoIp</a></li>
+				<li><span class="field">license:</span> LGPL</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_plugins---Net---GeoIP.php.html">/plugins/Net/GeoIP.php</a> (line <span class="field">143</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#CANADA_OFFSET" title="details" class="const-name">CANADA_OFFSET</a> = 					<span class="var-type"> 677</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#CITY_EDITION_REV0" title="details" class="const-name">CITY_EDITION_REV0</a> = 					<span class="var-type"> 111</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#CITY_EDITION_REV1" title="details" class="const-name">CITY_EDITION_REV1</a> = 					<span class="var-type"> 2</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#COUNTRY_BEGIN" title="details" class="const-name">COUNTRY_BEGIN</a> = 					<span class="var-type"> 16776960</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#COUNTRY_EDITION" title="details" class="const-name">COUNTRY_EDITION</a> = 					<span class="var-type"> 106</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#DATABASE_INFO_MAX_SIZE" title="details" class="const-name">DATABASE_INFO_MAX_SIZE</a> = 					<span class="var-type"> 100</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#ERR_DB_FORMAT" title="details" class="const-name">ERR_DB_FORMAT</a> = 					<span class="var-type"> 866184008</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#ERR_INVALID_IP" title="details" class="const-name">ERR_INVALID_IP</a> = 					<span class="var-type">  218624992</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#FIPS_RANGE" title="details" class="const-name">FIPS_RANGE</a> = 					<span class="var-type"> 360</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#FULL_RECORD_LENGTH" title="details" class="const-name">FULL_RECORD_LENGTH</a> = 					<span class="var-type"> 50</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#MAX_ORG_RECORD_LENGTH" title="details" class="const-name">MAX_ORG_RECORD_LENGTH</a> = 					<span class="var-type"> 300</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#MAX_RECORD_LENGTH" title="details" class="const-name">MAX_RECORD_LENGTH</a> = 					<span class="var-type"> 4</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#MEMORY_CACHE" title="details" class="const-name">MEMORY_CACHE</a> = 					<span class="var-type"> 1</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#ORG_EDITION" title="details" class="const-name">ORG_EDITION</a> = 					<span class="var-type"> 110</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#ORG_RECORD_LENGTH" title="details" class="const-name">ORG_RECORD_LENGTH</a> = 					<span class="var-type"> 4</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#REGION_EDITION_REV0" title="details" class="const-name">REGION_EDITION_REV0</a> = 					<span class="var-type"> 112</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#REGION_EDITION_REV1" title="details" class="const-name">REGION_EDITION_REV1</a> = 					<span class="var-type"> 3</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#SEGMENT_RECORD_LENGTH" title="details" class="const-name">SEGMENT_RECORD_LENGTH</a> = 					<span class="var-type"> 3</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#SHARED_MEMORY" title="details" class="const-name">SHARED_MEMORY</a> = 					<span class="var-type"> 2</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#SHM_KEY" title="details" class="const-name">SHM_KEY</a> = 					<span class="var-type"> 0x4f415401</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#STANDARD" title="details" class="const-name">STANDARD</a> = 					<span class="var-type"> 0</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#STANDARD_RECORD_LENGTH" title="details" class="const-name">STANDARD_RECORD_LENGTH</a> = 					<span class="var-type"> 3</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#STATE_BEGIN_REV0" title="details" class="const-name">STATE_BEGIN_REV0</a> = 					<span class="var-type"> 16700000</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#STATE_BEGIN_REV1" title="details" class="const-name">STATE_BEGIN_REV1</a> = 					<span class="var-type"> 16000000</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#STRUCTURE_INFO_MAX_SIZE" title="details" class="const-name">STRUCTURE_INFO_MAX_SIZE</a> = 					<span class="var-type"> 20</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#US_OFFSET" title="details" class="const-name">US_OFFSET</a> = 					<span class="var-type"> 1</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#WORLD_OFFSET" title="details" class="const-name">WORLD_OFFSET</a> = 					<span class="var-type"> 1353</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+												<div class="var-title">
+					<img src="../media/images/StaticVariable.png" alt=" " />
+					static <span class="var-type">mixed</span>
+					<a href="#$COUNTRY_CODES" title="details" class="var-name">$COUNTRY_CODES</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/StaticVariable.png" alt=" " />
+					static <span class="var-type">mixed</span>
+					<a href="#$COUNTRY_CODES3" title="details" class="var-name">$COUNTRY_CODES3</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/StaticVariable.png" alt=" " />
+					static <span class="var-type">mixed</span>
+					<a href="#$COUNTRY_NAMES" title="details" class="var-name">$COUNTRY_NAMES</a>
+				</div>
+																																							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																												<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result"><a href="../Net_GeoIP/Net_GeoIP.html">Net_GeoIP</a></span>
+										<a href="#getInstance" title="details" class="method-name">getInstance</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span> = <span class="var-default">null</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$flags</span> = <span class="var-default">null</span>])
+									</div>
+																																																																																																																												<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">int</span>
+										<a href="#close" title="details" class="method-name">close</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Constructor.png" alt=" "/>
+											<span class="method-result">Net_GeoIP</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span> = <span class="var-default">null</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$flags</span> = <span class="var-default">null</span>])
+									</div>
+																								<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#getOrg" title="details" class="method-name">getOrg</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$ipnum</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../Net_GeoIP/Net_GeoIP_Location.html">Net_GeoIP_Location</a></span>
+										<a href="#getRecord" title="details" class="method-name">getRecord</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$ipnum</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">array</span>
+										<a href="#getRegion" title="details" class="method-name">getRegion</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$ipnum</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#loadSharedMemory" title="details" class="method-name">loadSharedMemory</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#lookupCountryCode" title="details" class="method-name">lookupCountryCode</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$addr</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#lookupCountryId" title="details" class="method-name">lookupCountryId</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$addr</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#lookupCountryName" title="details" class="method-name">lookupCountryName</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$addr</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../Net_GeoIP/Net_GeoIP_Location.html">Net_GeoIP_Location</a></span>
+										<a href="#lookupLocation" title="details" class="method-name">lookupLocation</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$addr</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#lookupOrg" title="details" class="method-name">lookupOrg</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$addr</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">array</span>
+										<a href="#lookupRegion" title="details" class="method-name">lookupRegion</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$addr</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#open" title="details" class="method-name">open</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$flags</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">int</span>
+										<a href="#seekCountry" title="details" class="method-name">seekCountry</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$ipnum</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#setupSegments" title="details" class="method-name">setupSegments</a>
+										()
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$COUNTRY_CODES" id="$COUNTRY_CODES"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			static <span class="var-type">mixed</span>
+			<span class="var-name">$COUNTRY_CODES</span>
+			 = <span class="var-default">array(<br />      &quot;&quot;, &quot;AP&quot;, &quot;EU&quot;, &quot;AD&quot;, &quot;AE&quot;, &quot;AF&quot;, &quot;AG&quot;, &quot;AI&quot;, &quot;AL&quot;, &quot;AM&quot;, &quot;AN&quot;, &quot;AO&quot;, &quot;AQ&quot;,<br />      &quot;AR&quot;, &quot;AS&quot;, &quot;AT&quot;, &quot;AU&quot;, &quot;AW&quot;, &quot;AZ&quot;, &quot;BA&quot;, &quot;BB&quot;, &quot;BD&quot;, &quot;BE&quot;, &quot;BF&quot;, &quot;BG&quot;, &quot;BH&quot;,<br />      &quot;BI&quot;, &quot;BJ&quot;, &quot;BM&quot;, &quot;BN&quot;, &quot;BO&quot;, &quot;BR&quot;, &quot;BS&quot;, &quot;BT&quot;, &quot;BV&quot;, &quot;BW&quot;, &quot;BY&quot;, &quot;BZ&quot;, &quot;CA&quot;,<br />      &quot;CC&quot;, &quot;CD&quot;, &quot;CF&quot;, &quot;CG&quot;, &quot;CH&quot;, &quot;CI&quot;, &quot;CK&quot;, &quot;CL&quot;, &quot;CM&quot;, &quot;CN&quot;, &quot;CO&quot;, &quot;CR&quot;, &quot;CU&quot;,<br />      &quot;CV&quot;, &quot;CX&quot;, &quot;CY&quot;, &quot;CZ&quot;, &quot;DE&quot;, &quot;DJ&quot;, &quot;DK&quot;, &quot;DM&quot;, &quot;DO&quot;, &quot;DZ&quot;, &quot;EC&quot;, &quot;EE&quot;, &quot;EG&quot;,<br />      &quot;EH&quot;, &quot;ER&quot;, &quot;ES&quot;, &quot;ET&quot;, &quot;FI&quot;, &quot;FJ&quot;, &quot;FK&quot;, &quot;FM&quot;, &quot;FO&quot;, &quot;FR&quot;, &quot;FX&quot;, &quot;GA&quot;, &quot;GB&quot;,<br />      &quot;GD&quot;, &quot;GE&quot;, &quot;GF&quot;, &quot;GH&quot;, &quot;GI&quot;, &quot;GL&quot;, &quot;GM&quot;, &quot;GN&quot;, &quot;GP&quot;, &quot;GQ&quot;, &quot;GR&quot;, &quot;GS&quot;, &quot;GT&quot;,<br />      &quot;GU&quot;, &quot;GW&quot;, &quot;GY&quot;, &quot;HK&quot;, &quot;HM&quot;, &quot;HN&quot;, &quot;HR&quot;, &quot;HT&quot;, &quot;HU&quot;, &quot;ID&quot;, &quot;IE&quot;, &quot;IL&quot;, &quot;IN&quot;,<br />      &quot;IO&quot;, &quot;IQ&quot;, &quot;IR&quot;, &quot;IS&quot;, &quot;IT&quot;, &quot;JM&quot;, &quot;JO&quot;, &quot;JP&quot;, &quot;KE&quot;, &quot;KG&quot;, &quot;KH&quot;, &quot;KI&quot;, &quot;KM&quot;,<br />      &quot;KN&quot;, &quot;KP&quot;, &quot;KR&quot;, &quot;KW&quot;, &quot;KY&quot;, &quot;KZ&quot;, &quot;LA&quot;, &quot;LB&quot;, &quot;LC&quot;, &quot;LI&quot;, &quot;LK&quot;, &quot;LR&quot;, &quot;LS&quot;,<br />      &quot;LT&quot;, &quot;LU&quot;, &quot;LV&quot;, &quot;LY&quot;, &quot;MA&quot;, &quot;MC&quot;, &quot;MD&quot;, &quot;MG&quot;, &quot;MH&quot;, &quot;MK&quot;, &quot;ML&quot;, &quot;MM&quot;, &quot;MN&quot;,<br />      &quot;MO&quot;, &quot;MP&quot;, &quot;MQ&quot;, &quot;MR&quot;, &quot;MS&quot;, &quot;MT&quot;, &quot;MU&quot;, &quot;MV&quot;, &quot;MW&quot;, &quot;MX&quot;, &quot;MY&quot;, &quot;MZ&quot;, &quot;NA&quot;,<br />      &quot;NC&quot;, &quot;NE&quot;, &quot;NF&quot;, &quot;NG&quot;, &quot;NI&quot;, &quot;NL&quot;, &quot;NO&quot;, &quot;NP&quot;, &quot;NR&quot;, &quot;NU&quot;, &quot;NZ&quot;, &quot;OM&quot;, &quot;PA&quot;,<br />      &quot;PE&quot;, &quot;PF&quot;, &quot;PG&quot;, &quot;PH&quot;, &quot;PK&quot;, &quot;PL&quot;, &quot;PM&quot;, &quot;PN&quot;, &quot;PR&quot;, &quot;PS&quot;, &quot;PT&quot;, &quot;PW&quot;, &quot;PY&quot;,<br />      &quot;QA&quot;, &quot;RE&quot;, &quot;RO&quot;, &quot;RU&quot;, &quot;RW&quot;, &quot;SA&quot;, &quot;SB&quot;, &quot;SC&quot;, &quot;SD&quot;, &quot;SE&quot;, &quot;SG&quot;, &quot;SH&quot;, &quot;SI&quot;,<br />      &quot;SJ&quot;, &quot;SK&quot;, &quot;SL&quot;, &quot;SM&quot;, &quot;SN&quot;, &quot;SO&quot;, &quot;SR&quot;, &quot;ST&quot;, &quot;SV&quot;, &quot;SY&quot;, &quot;SZ&quot;, &quot;TC&quot;, &quot;TD&quot;,<br />      &quot;TF&quot;, &quot;TG&quot;, &quot;TH&quot;, &quot;TJ&quot;, &quot;TK&quot;, &quot;TM&quot;, &quot;TN&quot;, &quot;TO&quot;, &quot;TL&quot;, &quot;TR&quot;, &quot;TT&quot;, &quot;TV&quot;, &quot;TW&quot;,<br />      &quot;TZ&quot;, &quot;UA&quot;, &quot;UG&quot;, &quot;UM&quot;, &quot;US&quot;, &quot;UY&quot;, &quot;UZ&quot;, &quot;VA&quot;, &quot;VC&quot;, &quot;VE&quot;, &quot;VG&quot;, &quot;VI&quot;, &quot;VN&quot;,<br />      &quot;VU&quot;, &quot;WF&quot;, &quot;WS&quot;, &quot;YE&quot;, &quot;YT&quot;, &quot;RS&quot;, &quot;ZA&quot;, &quot;ZM&quot;, &quot;ME&quot;, &quot;ZW&quot;, &quot;A1&quot;, &quot;A2&quot;, &quot;O1&quot;,<br />      &quot;AX&quot;, &quot;GG&quot;, &quot;IM&quot;, &quot;JE&quot;, &quot;BL&quot;, &quot;MF&quot;<br />        )</span>			(line <span class="line-number">155</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$COUNTRY_CODES3" id="$COUNTRY_CODES3"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			static <span class="var-type">mixed</span>
+			<span class="var-name">$COUNTRY_CODES3</span>
+			 = <span class="var-default">array(<br />    &quot;&quot;,&quot;AP&quot;,&quot;EU&quot;,&quot;AND&quot;,&quot;ARE&quot;,&quot;AFG&quot;,&quot;ATG&quot;,&quot;AIA&quot;,&quot;ALB&quot;,&quot;ARM&quot;,&quot;ANT&quot;,&quot;AGO&quot;,&quot;AQ&quot;,&quot;ARG&quot;,<br />    &quot;ASM&quot;,&quot;AUT&quot;,&quot;AUS&quot;,&quot;ABW&quot;,&quot;AZE&quot;,&quot;BIH&quot;,&quot;BRB&quot;,&quot;BGD&quot;,&quot;BEL&quot;,&quot;BFA&quot;,&quot;BGR&quot;,&quot;BHR&quot;,&quot;BDI&quot;,<br />    &quot;BEN&quot;,&quot;BMU&quot;,&quot;BRN&quot;,&quot;BOL&quot;,&quot;BRA&quot;,&quot;BHS&quot;,&quot;BTN&quot;,&quot;BV&quot;,&quot;BWA&quot;,&quot;BLR&quot;,&quot;BLZ&quot;,&quot;CAN&quot;,&quot;CC&quot;,<br />    &quot;COD&quot;,&quot;CAF&quot;,&quot;COG&quot;,&quot;CHE&quot;,&quot;CIV&quot;,&quot;COK&quot;,&quot;CHL&quot;,&quot;CMR&quot;,&quot;CHN&quot;,&quot;COL&quot;,&quot;CRI&quot;,&quot;CUB&quot;,&quot;CPV&quot;,<br />    &quot;CX&quot;,&quot;CYP&quot;,&quot;CZE&quot;,&quot;DEU&quot;,&quot;DJI&quot;,&quot;DNK&quot;,&quot;DMA&quot;,&quot;DOM&quot;,&quot;DZA&quot;,&quot;ECU&quot;,&quot;EST&quot;,&quot;EGY&quot;,&quot;ESH&quot;,<br />    &quot;ERI&quot;,&quot;ESP&quot;,&quot;ETH&quot;,&quot;FIN&quot;,&quot;FJI&quot;,&quot;FLK&quot;,&quot;FSM&quot;,&quot;FRO&quot;,&quot;FRA&quot;,&quot;FX&quot;,&quot;GAB&quot;,&quot;GBR&quot;,&quot;GRD&quot;,<br />    &quot;GEO&quot;,&quot;GUF&quot;,&quot;GHA&quot;,&quot;GIB&quot;,&quot;GRL&quot;,&quot;GMB&quot;,&quot;GIN&quot;,&quot;GLP&quot;,&quot;GNQ&quot;,&quot;GRC&quot;,&quot;GS&quot;,&quot;GTM&quot;,&quot;GUM&quot;,<br />    &quot;GNB&quot;,&quot;GUY&quot;,&quot;HKG&quot;,&quot;HM&quot;,&quot;HND&quot;,&quot;HRV&quot;,&quot;HTI&quot;,&quot;HUN&quot;,&quot;IDN&quot;,&quot;IRL&quot;,&quot;ISR&quot;,&quot;IND&quot;,&quot;IO&quot;,<br />    &quot;IRQ&quot;,&quot;IRN&quot;,&quot;ISL&quot;,&quot;ITA&quot;,&quot;JAM&quot;,&quot;JOR&quot;,&quot;JPN&quot;,&quot;KEN&quot;,&quot;KGZ&quot;,&quot;KHM&quot;,&quot;KIR&quot;,&quot;COM&quot;,&quot;KNA&quot;,<br />    &quot;PRK&quot;,&quot;KOR&quot;,&quot;KWT&quot;,&quot;CYM&quot;,&quot;KAZ&quot;,&quot;LAO&quot;,&quot;LBN&quot;,&quot;LCA&quot;,&quot;LIE&quot;,&quot;LKA&quot;,&quot;LBR&quot;,&quot;LSO&quot;,&quot;LTU&quot;,<br />    &quot;LUX&quot;,&quot;LVA&quot;,&quot;LBY&quot;,&quot;MAR&quot;,&quot;MCO&quot;,&quot;MDA&quot;,&quot;MDG&quot;,&quot;MHL&quot;,&quot;MKD&quot;,&quot;MLI&quot;,&quot;MMR&quot;,&quot;MNG&quot;,&quot;MAC&quot;,<br />    &quot;MNP&quot;,&quot;MTQ&quot;,&quot;MRT&quot;,&quot;MSR&quot;,&quot;MLT&quot;,&quot;MUS&quot;,&quot;MDV&quot;,&quot;MWI&quot;,&quot;MEX&quot;,&quot;MYS&quot;,&quot;MOZ&quot;,&quot;NAM&quot;,&quot;NCL&quot;,<br />    &quot;NER&quot;,&quot;NFK&quot;,&quot;NGA&quot;,&quot;NIC&quot;,&quot;NLD&quot;,&quot;NOR&quot;,&quot;NPL&quot;,&quot;NRU&quot;,&quot;NIU&quot;,&quot;NZL&quot;,&quot;OMN&quot;,&quot;PAN&quot;,&quot;PER&quot;,<br />    &quot;PYF&quot;,&quot;PNG&quot;,&quot;PHL&quot;,&quot;PAK&quot;,&quot;POL&quot;,&quot;SPM&quot;,&quot;PCN&quot;,&quot;PRI&quot;,&quot;PSE&quot;,&quot;PRT&quot;,&quot;PLW&quot;,&quot;PRY&quot;,&quot;QAT&quot;,<br />    &quot;REU&quot;,&quot;ROU&quot;,&quot;RUS&quot;,&quot;RWA&quot;,&quot;SAU&quot;,&quot;SLB&quot;,&quot;SYC&quot;,&quot;SDN&quot;,&quot;SWE&quot;,&quot;SGP&quot;,&quot;SHN&quot;,&quot;SVN&quot;,&quot;SJM&quot;,<br />    &quot;SVK&quot;,&quot;SLE&quot;,&quot;SMR&quot;,&quot;SEN&quot;,&quot;SOM&quot;,&quot;SUR&quot;,&quot;STP&quot;,&quot;SLV&quot;,&quot;SYR&quot;,&quot;SWZ&quot;,&quot;TCA&quot;,&quot;TCD&quot;,&quot;TF&quot;,<br />    &quot;TGO&quot;,&quot;THA&quot;,&quot;TJK&quot;,&quot;TKL&quot;,&quot;TLS&quot;,&quot;TKM&quot;,&quot;TUN&quot;,&quot;TON&quot;,&quot;TUR&quot;,&quot;TTO&quot;,&quot;TUV&quot;,&quot;TWN&quot;,&quot;TZA&quot;,<br />    &quot;UKR&quot;,&quot;UGA&quot;,&quot;UM&quot;,&quot;USA&quot;,&quot;URY&quot;,&quot;UZB&quot;,&quot;VAT&quot;,&quot;VCT&quot;,&quot;VEN&quot;,&quot;VGB&quot;,&quot;VIR&quot;,&quot;VNM&quot;,&quot;VUT&quot;,<br />    &quot;WLF&quot;,&quot;WSM&quot;,&quot;YEM&quot;,&quot;YT&quot;,&quot;SRB&quot;,&quot;ZAF&quot;,&quot;ZMB&quot;,&quot;MNE&quot;,&quot;ZWE&quot;,&quot;A1&quot;,&quot;A2&quot;,&quot;O1&quot;,<br />    &quot;ALA&quot;,&quot;GGY&quot;,&quot;IMN&quot;,&quot;JEY&quot;,&quot;BLM&quot;,&quot;MAF&quot;<br />        )</span>			(line <span class="line-number">178</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$COUNTRY_NAMES" id="$COUNTRY_NAMES"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			static <span class="var-type">mixed</span>
+			<span class="var-name">$COUNTRY_NAMES</span>
+			 = <span class="var-default">array(<br />        &quot;&quot;, &quot;Asia/Pacific Region&quot;, &quot;Europe&quot;, &quot;Andorra&quot;, &quot;United Arab Emirates&quot;,<br />        &quot;Afghanistan&quot;, &quot;Antigua and Barbuda&quot;, &quot;Anguilla&quot;, &quot;Albania&quot;, &quot;Armenia&quot;,<br />        &quot;Netherlands Antilles&quot;, &quot;Angola&quot;, &quot;Antarctica&quot;, &quot;Argentina&quot;, &quot;American Samoa&quot;,<br />        &quot;Austria&quot;, &quot;Australia&quot;, &quot;Aruba&quot;, &quot;Azerbaijan&quot;, &quot;Bosnia and Herzegovina&quot;,<br />        &quot;Barbados&quot;, &quot;Bangladesh&quot;, &quot;Belgium&quot;, &quot;Burkina Faso&quot;, &quot;Bulgaria&quot;, &quot;Bahrain&quot;,<br />        &quot;Burundi&quot;, &quot;Benin&quot;, &quot;Bermuda&quot;, &quot;Brunei Darussalam&quot;, &quot;Bolivia&quot;, &quot;Brazil&quot;,<br />        &quot;Bahamas&quot;, &quot;Bhutan&quot;, &quot;Bouvet Island&quot;, &quot;Botswana&quot;, &quot;Belarus&quot;, &quot;Belize&quot;,<br />        &quot;Canada&quot;, &quot;Cocos (Keeling) Islands&quot;, &quot;Congo, The Democratic Republic of the&quot;,<br />        &quot;Central African Republic&quot;, &quot;Congo&quot;, &quot;Switzerland&quot;, &quot;Cote D'Ivoire&quot;, &quot;Cook Islands&quot;,<br />        &quot;Chile&quot;, &quot;Cameroon&quot;, &quot;China&quot;, &quot;Colombia&quot;, &quot;Costa Rica&quot;, &quot;Cuba&quot;, &quot;Cape Verde&quot;,<br />        &quot;Christmas Island&quot;, &quot;Cyprus&quot;, &quot;Czech Republic&quot;, &quot;Germany&quot;, &quot;Djibouti&quot;,<br />        &quot;Denmark&quot;, &quot;Dominica&quot;, &quot;Dominican Republic&quot;, &quot;Algeria&quot;, &quot;Ecuador&quot;, &quot;Estonia&quot;,<br />        &quot;Egypt&quot;, &quot;Western Sahara&quot;, &quot;Eritrea&quot;, &quot;Spain&quot;, &quot;Ethiopia&quot;, &quot;Finland&quot;, &quot;Fiji&quot;,<br />        &quot;Falkland Islands (Malvinas)&quot;, &quot;Micronesia, Federated States of&quot;, &quot;Faroe Islands&quot;,<br />        &quot;France&quot;, &quot;France, Metropolitan&quot;, &quot;Gabon&quot;, &quot;United Kingdom&quot;,<br />        &quot;Grenada&quot;, &quot;Georgia&quot;, &quot;French Guiana&quot;, &quot;Ghana&quot;, &quot;Gibraltar&quot;, &quot;Greenland&quot;,<br />        &quot;Gambia&quot;, &quot;Guinea&quot;, &quot;Guadeloupe&quot;, &quot;Equatorial Guinea&quot;, &quot;Greece&quot;, &quot;South Georgia and the South Sandwich Islands&quot;,<br />        &quot;Guatemala&quot;, &quot;Guam&quot;, &quot;Guinea-Bissau&quot;,<br />        &quot;Guyana&quot;, &quot;Hong Kong&quot;, &quot;Heard Island and McDonald Islands&quot;, &quot;Honduras&quot;,<br />        &quot;Croatia&quot;, &quot;Haiti&quot;, &quot;Hungary&quot;, &quot;Indonesia&quot;, &quot;Ireland&quot;, &quot;Israel&quot;, &quot;India&quot;,<br />        &quot;British Indian Ocean Territory&quot;, &quot;Iraq&quot;, &quot;Iran, Islamic Republic of&quot;,<br />        &quot;Iceland&quot;, &quot;Italy&quot;, &quot;Jamaica&quot;, &quot;Jordan&quot;, &quot;Japan&quot;, &quot;Kenya&quot;, &quot;Kyrgyzstan&quot;,<br />        &quot;Cambodia&quot;, &quot;Kiribati&quot;, &quot;Comoros&quot;, &quot;Saint Kitts and Nevis&quot;, &quot;Korea, Democratic People's Republic of&quot;,<br />        &quot;Korea, Republic of&quot;, &quot;Kuwait&quot;, &quot;Cayman Islands&quot;,<br />        &quot;Kazakstan&quot;, &quot;Lao People's Democratic Republic&quot;, &quot;Lebanon&quot;, &quot;Saint Lucia&quot;,<br />        &quot;Liechtenstein&quot;, &quot;Sri Lanka&quot;, &quot;Liberia&quot;, &quot;Lesotho&quot;, &quot;Lithuania&quot;, &quot;Luxembourg&quot;,<br />        &quot;Latvia&quot;, &quot;Libyan Arab Jamahiriya&quot;, &quot;Morocco&quot;, &quot;Monaco&quot;, &quot;Moldova, Republic of&quot;,<br />        &quot;Madagascar&quot;, &quot;Marshall Islands&quot;, &quot;Macedonia&quot;,<br />        &quot;Mali&quot;, &quot;Myanmar&quot;, &quot;Mongolia&quot;, &quot;Macau&quot;, &quot;Northern Mariana Islands&quot;,<br />        &quot;Martinique&quot;, &quot;Mauritania&quot;, &quot;Montserrat&quot;, &quot;Malta&quot;, &quot;Mauritius&quot;, &quot;Maldives&quot;,<br />        &quot;Malawi&quot;, &quot;Mexico&quot;, &quot;Malaysia&quot;, &quot;Mozambique&quot;, &quot;Namibia&quot;, &quot;New Caledonia&quot;,<br />        &quot;Niger&quot;, &quot;Norfolk Island&quot;, &quot;Nigeria&quot;, &quot;Nicaragua&quot;, &quot;Netherlands&quot;, &quot;Norway&quot;,<br />        &quot;Nepal&quot;, &quot;Nauru&quot;, &quot;Niue&quot;, &quot;New Zealand&quot;, &quot;Oman&quot;, &quot;Panama&quot;, &quot;Peru&quot;, &quot;French Polynesia&quot;,<br />        &quot;Papua New Guinea&quot;, &quot;Philippines&quot;, &quot;Pakistan&quot;, &quot;Poland&quot;, &quot;Saint Pierre and Miquelon&quot;,<br />        &quot;Pitcairn Islands&quot;, &quot;Puerto Rico&quot;, &quot;Palestinian Territory&quot;,<br />        &quot;Portugal&quot;, &quot;Palau&quot;, &quot;Paraguay&quot;, &quot;Qatar&quot;, &quot;Reunion&quot;, &quot;Romania&quot;,<br />        &quot;Russian Federation&quot;, &quot;Rwanda&quot;, &quot;Saudi Arabia&quot;, &quot;Solomon Islands&quot;,<br />        &quot;Seychelles&quot;, &quot;Sudan&quot;, &quot;Sweden&quot;, &quot;Singapore&quot;, &quot;Saint Helena&quot;, &quot;Slovenia&quot;,<br />        &quot;Svalbard and Jan Mayen&quot;, &quot;Slovakia&quot;, &quot;Sierra Leone&quot;, &quot;San Marino&quot;, &quot;Senegal&quot;,<br />        &quot;Somalia&quot;, &quot;Suriname&quot;, &quot;Sao Tome and Principe&quot;, &quot;El Salvador&quot;, &quot;Syrian Arab Republic&quot;,<br />        &quot;Swaziland&quot;, &quot;Turks and Caicos Islands&quot;, &quot;Chad&quot;, &quot;French Southern Territories&quot;,<br />        &quot;Togo&quot;, &quot;Thailand&quot;, &quot;Tajikistan&quot;, &quot;Tokelau&quot;, &quot;Turkmenistan&quot;,<br />        &quot;Tunisia&quot;, &quot;Tonga&quot;, &quot;Timor-Leste&quot;, &quot;Turkey&quot;, &quot;Trinidad and Tobago&quot;, &quot;Tuvalu&quot;,<br />        &quot;Taiwan&quot;, &quot;Tanzania, United Republic of&quot;, &quot;Ukraine&quot;,<br />        &quot;Uganda&quot;, &quot;United States Minor Outlying Islands&quot;, &quot;United States&quot;, &quot;Uruguay&quot;,<br />        &quot;Uzbekistan&quot;, &quot;Holy See (Vatican City State)&quot;, &quot;Saint Vincent and the Grenadines&quot;,<br />        &quot;Venezuela&quot;, &quot;Virgin Islands, British&quot;, &quot;Virgin Islands, U.S.&quot;,<br />        &quot;Vietnam&quot;, &quot;Vanuatu&quot;, &quot;Wallis and Futuna&quot;, &quot;Samoa&quot;, &quot;Yemen&quot;, &quot;Mayotte&quot;,<br />        &quot;Serbia&quot;, &quot;South Africa&quot;, &quot;Zambia&quot;, &quot;Montenegro&quot;, &quot;Zimbabwe&quot;,<br />        &quot;Anonymous Proxy&quot;,&quot;Satellite Provider&quot;,&quot;Other&quot;,<br />        &quot;Aland Islands&quot;,&quot;Guernsey&quot;,&quot;Isle of Man&quot;,&quot;Jersey&quot;,&quot;Saint Barthelemy&quot;,&quot;Saint Martin&quot;<br />        )</span>			(line <span class="line-number">201</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodgetInstance" id="getInstance"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static getInstance</span> (line <span class="line-number">399</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Singleton method, use this to get an instance and avoid re-parsing the db.</p>
+<p class="description"><p>Unique instances are instantiated based on the filename of the db. The flags  are ignored -- in that requests to for instance with same filename but different  flags will return the already-instantiated instance.  For example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;create&nbsp;new&nbsp;instance&nbsp;with&nbsp;memory_cache&nbsp;enabled</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$geoip&nbsp;</span>=&nbsp;<span class="src-id"><a href="../Net_GeoIP/Net_GeoIP.html">Net_GeoIP</a></span><span class="src-sym">::</span><a href="../Net_GeoIP/Net_GeoIP.html#methodgetInstance">getInstance</a><span class="src-sym">(</span><span class="src-str">'C:\mydb.dat'</span><span class="src-sym">,&nbsp;</span><span class="src-id"><a href="../Net_GeoIP/Net_GeoIP.html">Net_GeoIP</a></span><span class="src-sym">::</span><span class="src-id">MEMORY_CACHE</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;....</div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;later&nbsp;in&nbsp;code,&nbsp;request&nbsp;instance&nbsp;with&nbsp;no&nbsp;flags&nbsp;specified.</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$geoip&nbsp;</span>=&nbsp;<span class="src-id"><a href="../Net_GeoIP/Net_GeoIP.html">Net_GeoIP</a></span><span class="src-sym">::</span><a href="../Net_GeoIP/Net_GeoIP.html#methodgetInstance">getInstance</a><span class="src-sym">(</span><span class="src-str">'C:\mydb.dat'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;Normally&nbsp;this&nbsp;means&nbsp;no&nbsp;MEMORY_CACHE&nbsp;but&nbsp;since&nbsp;an&nbsp;instance</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;with&nbsp;memory&nbsp;cache&nbsp;enabled&nbsp;has&nbsp;already&nbsp;been&nbsp;created&nbsp;for&nbsp;'C:\mydb.dat',&nbsp;the</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;existing&nbsp;instance&nbsp;(with&nbsp;memory&nbsp;cache)&nbsp;will&nbsp;be&nbsp;returned.</span></div></li>
+</ol></div></p><p>NOTE: You can only use SHARED_MEMORY flag for one instance!  Any subsquent instances  that attempt to use the SHARED_MEMORY will use the *same* shared memory, which will break  your script.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Net_GeoIP/Net_GeoIP.html">Net_GeoIP</a></span>
+		<span class="method-name">
+			getInstance
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span> = <span class="var-default">null</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$flags</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$filename</span><span class="var-description">: Filename</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$flags</span><span class="var-description">: Flags that control class behavior. <ul><li>Net_GeoIp::SHARED_MEMORY
+             Use SHMOP to share a db among multiple PHP instances.
+             NOTE: ONLY ONE GEOIP INSTANCE CAN USE SHARED MEMORY!!!</li><li>Net_GeoIp::MEMORY_CACHE
+             Store the full contents of the database in memory for current script.
+             This is useful if you access the database several times in a script.</li><li>Net_GeoIp::STANDARD
+             [default] standard no-cache version.</li></ul></span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodclose" id="close"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">close</span> (line <span class="line-number">568</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Closes the geoip database.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Status of close command.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			close
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Constructor.png" />
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">340</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Construct a Net_GeoIP instance.</p>
+<p class="description"><p>You should use the getInstance() method if you plan to use multiple databases or  the same database from several different places in your script.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../Net_GeoIP/Net_GeoIP.html#methodgetInstance">Net_GeoIP::getInstance()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Net_GeoIP</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span> = <span class="var-default">null</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$flags</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$filename</span><span class="var-description">: Path to binary geoip database.</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$flags</span><span class="var-description">: Flags</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetOrg" id="getOrg"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">getOrg</span> (line <span class="line-number">755</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Seek and return organization (or ISP) name for converted IP addr.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The organization</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getOrg
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$ipnum</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$ipnum</span><span class="var-description">: Converted IP address.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetRecord" id="getRecord"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">getRecord</span> (line <span class="line-number">819</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Seek and populate Net_GeoIP_Location object for converted IP addr.</p>
+<p class="description"><p>Note: this</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Net_GeoIP/Net_GeoIP_Location.html">Net_GeoIP_Location</a></span>
+		<span class="method-name">
+			getRecord
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$ipnum</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$ipnum</span><span class="var-description">: Converted IP address.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetRegion" id="getRegion"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">getRegion</span> (line <span class="line-number">779</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Seek and return the region info (array containing country code and region name) for converted IP addr.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Array containing country code and region: array($country_code, $region)</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getRegion
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$ipnum</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$ipnum</span><span class="var-description">: Converted IP address.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodloadSharedMemory" id="loadSharedMemory"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">loadSharedMemory</span> (line <span class="line-number">453</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Loads the database file into shared memory.</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> PEAR_Exception     - if unable to read the db file.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			loadSharedMemory
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$filename</span><span class="var-description">: Path to database file to read into shared memory.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlookupCountryCode" id="lookupCountryCode"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">lookupCountryCode</span> (line <span class="line-number">616</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns 2-letter country code (e.g. 'CA') for specified IP address.</p>
+<p class="description"><p>Use this method if you have a Country database.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> 2-letter country code</li>
+				<li><span class="field">see:</span> <a href="../Net_GeoIP/Net_GeoIP.html#methodlookupCountryId">Net_GeoIP::lookupCountryId()</a></li>
+				<li><span class="field">throws:</span> PEAR_Exception (see lookupCountryId())</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			lookupCountryCode
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$addr</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$addr</span><span class="var-description">: IP address (hostname not allowed).</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlookupCountryId" id="lookupCountryId"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">lookupCountryId</span> (line <span class="line-number">593</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the country index.</p>
+<p class="description"><p>This method is called by the lookupCountryCode() and lookupCountryName()  methods.  It lookups up the index ('id') for the country which is the key  for the code and name.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> ID for the country</li>
+				<li><span class="field">throws:</span> PEAR_Exception  - if IP address is invalid. <ul><li>if database type is incorrect</li></ul></li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			lookupCountryId
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$addr</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$addr</span><span class="var-description">: IP address (hostname not allowed)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlookupCountryName" id="lookupCountryName"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">lookupCountryName</span> (line <span class="line-number">631</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns full country name for specified IP address.</p>
+<p class="description"><p>Use this method if you have a Country database.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Country name</li>
+				<li><span class="field">see:</span> <a href="../Net_GeoIP/Net_GeoIP.html#methodlookupCountryId">Net_GeoIP::lookupCountryId()</a></li>
+				<li><span class="field">throws:</span> PEAR_Exception (see lookupCountryId())</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			lookupCountryName
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$addr</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$addr</span><span class="var-description">: IP address (hostname not allowed).</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlookupLocation" id="lookupLocation"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">lookupLocation</span> (line <span class="line-number">735</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Lookup the location record for given IP address.</p>
+<p class="description"><p>Use this method if you have a City database.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The full location record.</li>
+				<li><span class="field">throws:</span> PEAR_Exception - if IP address is invalid.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Net_GeoIP/Net_GeoIP_Location.html">Net_GeoIP_Location</a></span>
+		<span class="method-name">
+			lookupLocation
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$addr</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$addr</span><span class="var-description">: IP address (hostname not allowed).</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlookupOrg" id="lookupOrg"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">lookupOrg</span> (line <span class="line-number">691</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Lookup the organization (or ISP) for given IP address.</p>
+<p class="description"><p>Use this method if you have an Organization/ISP database.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The organization</li>
+				<li><span class="field">throws:</span> PEAR_Exception  - if IP address is invalid. <ul><li>if database is of wrong type</li></ul></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			lookupOrg
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$addr</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$addr</span><span class="var-description">: IP address (hostname not allowed).</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlookupRegion" id="lookupRegion"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">lookupRegion</span> (line <span class="line-number">713</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Lookup the region for given IP address.</p>
+<p class="description"><p>Use this method if you have a Region database.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Array containing country code and region: array($country_code, $region)</li>
+				<li><span class="field">throws:</span> PEAR_Exception - if IP address is invalid.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			lookupRegion
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$addr</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$addr</span><span class="var-description">: IP address (hostname not allowed).</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodopen" id="open"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">open</span> (line <span class="line-number">417</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Opens geoip database at filename and with specified flags.</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> PEAR_Exception if unable to open specified file or shared memory.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			open
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$flags</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$filename</span><span class="var-description">: File to open</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$flags</span><span class="var-description">: Flags</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodseekCountry" id="seekCountry"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">seekCountry</span> (line <span class="line-number">645</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Using the record length and appropriate start points, seek to the country that corresponds  to the converted IP address integer.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Offset of start of record.</li>
+				<li><span class="field">throws:</span> PEAR_Exception - if fseek() fails on the file or no results after traversing the database (indicating corrupt db).</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			seekCountry
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$ipnum</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$ipnum</span><span class="var-description">: Result of ip2long() conversion.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetupSegments" id="setupSegments"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">setupSegments</span> (line <span class="line-number">486</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parses the database file to determine what kind of database is being used and setup  segment sizes and start points that will be used by the seek*() methods later.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setupSegments
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constCANADA_OFFSET" id="CANADA_OFFSET"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">CANADA_OFFSET</span>
+			 = <span class="const-default"> 677</span>
+			(line <span class="line-number">281</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constCITY_EDITION_REV0" id="CITY_EDITION_REV0"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">CITY_EDITION_REV0</span>
+			 = <span class="const-default"> 111</span>
+			(line <span class="line-number">270</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constCITY_EDITION_REV1" id="CITY_EDITION_REV1"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">CITY_EDITION_REV1</span>
+			 = <span class="const-default"> 2</span>
+			(line <span class="line-number">271</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constCOUNTRY_BEGIN" id="COUNTRY_BEGIN"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">COUNTRY_BEGIN</span>
+			 = <span class="const-default"> 16776960</span>
+			(line <span class="line-number">261</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constCOUNTRY_EDITION" id="COUNTRY_EDITION"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">COUNTRY_EDITION</span>
+			 = <span class="const-default"> 106</span>
+			(line <span class="line-number">267</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constDATABASE_INFO_MAX_SIZE" id="DATABASE_INFO_MAX_SIZE"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">DATABASE_INFO_MAX_SIZE</span>
+			 = <span class="const-default"> 100</span>
+			(line <span class="line-number">266</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constERR_DB_FORMAT" id="ERR_DB_FORMAT"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">ERR_DB_FORMAT</span>
+			 = <span class="const-default"> 866184008</span>
+			(line <span class="line-number">153</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Exception error code when there is a DB-format-related error.</p>
+	
+	
+</div>
+<a name="constERR_INVALID_IP" id="ERR_INVALID_IP"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">ERR_INVALID_IP</span>
+			 = <span class="const-default">  218624992</span>
+			(line <span class="line-number">148</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Exception error code used for invalid IP address.</p>
+	
+	
+</div>
+<a name="constFIPS_RANGE" id="FIPS_RANGE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">FIPS_RANGE</span>
+			 = <span class="const-default"> 360</span>
+			(line <span class="line-number">283</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constFULL_RECORD_LENGTH" id="FULL_RECORD_LENGTH"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">FULL_RECORD_LENGTH</span>
+			 = <span class="const-default"> 50</span>
+			(line <span class="line-number">278</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constMAX_ORG_RECORD_LENGTH" id="MAX_ORG_RECORD_LENGTH"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">MAX_ORG_RECORD_LENGTH</span>
+			 = <span class="const-default"> 300</span>
+			(line <span class="line-number">277</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constMAX_RECORD_LENGTH" id="MAX_RECORD_LENGTH"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">MAX_RECORD_LENGTH</span>
+			 = <span class="const-default"> 4</span>
+			(line <span class="line-number">276</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constMEMORY_CACHE" id="MEMORY_CACHE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">MEMORY_CACHE</span>
+			 = <span class="const-default"> 1</span>
+			(line <span class="line-number">257</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constORG_EDITION" id="ORG_EDITION"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">ORG_EDITION</span>
+			 = <span class="const-default"> 110</span>
+			(line <span class="line-number">272</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constORG_RECORD_LENGTH" id="ORG_RECORD_LENGTH"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">ORG_RECORD_LENGTH</span>
+			 = <span class="const-default"> 4</span>
+			(line <span class="line-number">275</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constREGION_EDITION_REV0" id="REGION_EDITION_REV0"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">REGION_EDITION_REV0</span>
+			 = <span class="const-default"> 112</span>
+			(line <span class="line-number">268</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constREGION_EDITION_REV1" id="REGION_EDITION_REV1"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">REGION_EDITION_REV1</span>
+			 = <span class="const-default"> 3</span>
+			(line <span class="line-number">269</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSEGMENT_RECORD_LENGTH" id="SEGMENT_RECORD_LENGTH"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">SEGMENT_RECORD_LENGTH</span>
+			 = <span class="const-default"> 3</span>
+			(line <span class="line-number">273</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSHARED_MEMORY" id="SHARED_MEMORY"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">SHARED_MEMORY</span>
+			 = <span class="const-default"> 2</span>
+			(line <span class="line-number">258</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSHM_KEY" id="SHM_KEY"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">SHM_KEY</span>
+			 = <span class="const-default"> 0x4f415401</span>
+			(line <span class="line-number">286</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSTANDARD" id="STANDARD"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">STANDARD</span>
+			 = <span class="const-default"> 0</span>
+			(line <span class="line-number">256</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSTANDARD_RECORD_LENGTH" id="STANDARD_RECORD_LENGTH"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">STANDARD_RECORD_LENGTH</span>
+			 = <span class="const-default"> 3</span>
+			(line <span class="line-number">274</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSTATE_BEGIN_REV0" id="STATE_BEGIN_REV0"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">STATE_BEGIN_REV0</span>
+			 = <span class="const-default"> 16700000</span>
+			(line <span class="line-number">262</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSTATE_BEGIN_REV1" id="STATE_BEGIN_REV1"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">STATE_BEGIN_REV1</span>
+			 = <span class="const-default"> 16000000</span>
+			(line <span class="line-number">263</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSTRUCTURE_INFO_MAX_SIZE" id="STRUCTURE_INFO_MAX_SIZE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">STRUCTURE_INFO_MAX_SIZE</span>
+			 = <span class="const-default"> 20</span>
+			(line <span class="line-number">265</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constUS_OFFSET" id="US_OFFSET"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">US_OFFSET</span>
+			 = <span class="const-default"> 1</span>
+			(line <span class="line-number">280</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constWORLD_OFFSET" id="WORLD_OFFSET"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">WORLD_OFFSET</span>
+			 = <span class="const-default"> 1353</span>
+			(line <span class="line-number">282</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+						
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 04 Nov 2010 00:02:48 -0500 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>
