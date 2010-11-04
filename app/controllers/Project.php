@@ -50,7 +50,7 @@ class Project_controller extends App_controller
 
     public function code()
     {
-        $this->render->title = 'Code';
+        $this->render->title = 'Code browser';
 
         // Get a list of files in the folder
 
