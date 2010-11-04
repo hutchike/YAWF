@@ -40,7 +40,7 @@ class YAWF_command extends App_command
                 $this->create_app($this->pad_args(1));
                 break;
 
-            case 'doc':
+            case 'docs':
                 $this->create_docs();
                 break;
 
@@ -74,6 +74,27 @@ class YAWF_command extends App_command
         return ($length == 1 ? $args[0] : $args);
     }
 
+    // Return a list of apps either specified or found with "all" param
+
+    private function get_apps()
+    {
+        global $YAWF_ROOT;
+        $apps = $this->args;
+        if (!count($apps) || $apps[0] == 'all')
+        {
+            $apps = array();
+            $dir = opendir("$YAWF_ROOT/apps/");
+            while ($app_name = readdir($dir))
+            {
+                if (preg_match('/^\./', $app_name)) continue;
+                $folder = "$YAWF_ROOT/apps/$app_name";
+                if (is_dir($folder) || is_link($folder)) $apps[] = $app_name;
+            }
+            closedir($dir);
+        }
+        return $apps;
+    }
+
     // Display a usage message, defaulting to the standard help message
 
     protected function usage($cmd = '', $message = '')
@@ -85,7 +106,7 @@ usage: yawf ACTION [arg1 arg2 ...]
 where ACTION is one of:
 * app    : Create a new YAWF application
 * data   : Update an app's database schema
-* doc    : Create fresh YAWF documentation
+* docs   : Write all the PHP documentation
 * perms  : Set the file/folder permissions
 * vhost  : Create a virtual host file
 * test   : Run some YAWF system tests
@@ -155,7 +176,15 @@ End_of_usage;
     private function create_docs()
     {
         global $YAWF_ROOT;
-        system("phpdoc -o HTML:frames:earthli -d $YAWF_ROOT/yawf -t $YAWF_ROOT/app/public/docs");
+        foreach ($this->get_apps() as $app_name)
+        {
+            $cmd = 'phpdoc -o HTML:frames:earthli';
+            $dir = 'app/public/' . first($this->opts->dir, 'phpdocs');
+            $read = ($app_name == 'YAWF' ? 'yawf' : "apps/$app_name");
+            $write = ($app_name == 'YAWF' ? $dir : "apps/$app_name/$dir");
+            system("$cmd -dn $app_name -d $YAWF_ROOT/$read -t $YAWF_ROOT/$write");
+        }
+        print "\nWrote PHP documentation in $YAWF_ROOT/$write\n\n";
     }
 
     // (Re)create databases ("live" and "test") using the "mysql" command
@@ -221,21 +250,7 @@ End_of_usage;
     private function set_permissions()
     {
         global $YAWF_ROOT;
-        $apps = $this->args;
-        if (!count($apps) || $apps[0] == 'all')
-        {
-            $apps = array();
-            $dir = opendir("$YAWF_ROOT/apps/");
-            while ($app_name = readdir($dir))
-            {
-                if (preg_match('/^\./', $app_name)) continue;
-                $folder = "$YAWF_ROOT/apps/$app_name";
-                if (is_dir($folder) || is_link($folder)) $apps[] = $app_name;
-            }
-            closedir($dir);
-        }
-
-        foreach ($apps as $app_name)
+        foreach ($this->get_apps() as $app_name)
         {
             $folder = "$YAWF_ROOT/apps/$app_name";
             if (!is_dir($folder) && !is_link($folder)) $this->usage('yawf perms app_name [app_name2...]', "App \"$app_name\" does not exist in the apps directory here:\n$YAWF_ROOT/apps");
