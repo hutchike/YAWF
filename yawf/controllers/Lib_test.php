@@ -11,6 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+// Base controller "lib/Controller.php" tests here
 // See this test controller run at URL "/lib_test"
 
 class Lib_test_controller extends Controller
@@ -79,6 +80,10 @@ class Lib_test_controller extends Controller
                       $this->lang === DEFAULT_LANGUAGE, $this->lang);
         $this->should('have a seesion',
                       is_array($_SESSION), $_SESSION);
+        $this->should('have a flash object', $this->flash instanceof Controller_flash, $this->flash);
+        $this->should('have a cookie object', $this->cookie instanceof Controller_cookie, $this->cookie);
+        $this->should('have a server object', $this->server instanceof Controller_server, $this->server);
+        $this->should('have a session object', $this->session instanceof Controller_session, $this->session);
     }
 
     // Test that we can render a view containing the content we expect
@@ -240,6 +245,9 @@ class Lib_test_controller extends Controller
         $this->should_not("have a flash notice yet", $this->flash->notice);
         $this->flash->now = self::TEST_FLASH;
         $this->should("have a flash notice now", $this->flash->notice == self::TEST_FLASH);
+        $this->flash->warning = self::TEST_FLASH;
+        $this->flash = $this->new_flash_object(); // to simulate a redirect call
+        $this->should("have a flash warning set", $this->flash->warning == self::TEST_FLASH);
     }
 
     // Test that the "Text" helper works as expected
