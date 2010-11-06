@@ -179,8 +179,9 @@ End_of_usage;
         foreach ($this->get_apps() as $app_name)
         {
             $cmd = 'phpdoc -o HTML:frames:earthli';
-            $dir = 'app/public/' . first($this->opts->dir, 'phpdocs');
-            $read = ($app_name == 'YAWF' ? 'yawf' : "apps/$app_name");
+            $in = $app_name == 'YAYF' ? 'YAWF' : 'app';
+            $dir = "$in/public/" . first($this->opts->dir, 'phpdocs');
+            $read = ($app_name == 'YAWF' ? 'yawf' : "apps/$app_name/app");
             $write = ($app_name == 'YAWF' ? $dir : "apps/$app_name/$dir");
             system("$cmd -dn $app_name -d $YAWF_ROOT/$read -t $YAWF_ROOT/$write");
         }
