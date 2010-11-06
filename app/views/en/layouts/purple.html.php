@@ -38,6 +38,6 @@
     </div>
 
     <div id="footer">
-        Copyright &copy; <?= date('Y') ?> Guanoo, Inc. Released under the terms of the <?= HTML::link('http://www.gnu.org/licenses/gpl-3.0.html', 'GPL3') ?>. By using this site you accept our <?= HTML::link('project/terms', 'terms &amp; conditions') ?>. Please use our <?= HTML::link('project/contact', 'contact form') ?> to get in touch.
+        Copyright &copy; <?= date('Y') ?> Guanoo, Inc. Released under the terms of the <?= HTML::link('http://www.gnu.org/licenses/lgpl-3.0.html', 'Lesser GPL3') ?>. By using this site you accept our <?= HTML::link('project/terms', 'terms &amp; conditions') ?>. Please use our <?= HTML::link('project/contact', 'contact form') ?> to get in touch.
     </div>
 </div>
