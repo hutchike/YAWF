@@ -249,7 +249,7 @@ class PEAR
      */
     public static function isError($data, $code = null)
     {
-        if (!is_a($data, 'PEAR_Error')) {
+        if (!($data instanceof PEAR_Error)) {
             return false;
         }
 
