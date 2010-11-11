@@ -15,7 +15,7 @@ class Service extends YAWF
 {
     protected $app;
 
-    // Setup the service for the app
+    // Link this service to the web app
 
     public function setup_for_app($app)
     {
@@ -23,6 +23,7 @@ class Service extends YAWF
     }
 
     // Service errors should be arrays
+    // for easy formatting as XML/JSON
 
     protected function error($message)
     {
