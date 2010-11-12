@@ -19,9 +19,17 @@ class Data extends YAWF
     {
         switch (strtolower($type))
         {
-            case 'json': return self::from_json($data);
-            case 'xml': return self::from_xml($data);
-            case 'yaml': return self::from_yaml($data);
+            case 'js':
+            case 'json':
+            case 'jsonp':
+                return self::from_json($data);
+
+            case 'xml':
+                return self::from_xml($data);
+
+            case 'yaml':
+                return self::from_yaml($data);
+
             default: throw new Exception("Type $type is not supported");
         }
     }
