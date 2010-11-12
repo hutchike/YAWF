@@ -48,7 +48,7 @@ class Data extends YAWF
     {
         load_helper('XML');
         $data = object_to_array(XML::deserialize($data));
-        return array_key($data, 'api', $data);
+        return array_key($data, 'root', $data); // skip the root element
     }
 
     // Decode the YAML type and return data
@@ -57,6 +57,50 @@ class Data extends YAWF
     {
         load_helper('YAML');
         return YAML::parse($data);
+    }
+
+    // Return some text by encoding a type
+
+    public static function to($type, $data)
+    {
+        switch (strtolower($type))
+        {
+            case 'js':
+            case 'json':
+            case 'jsonp':
+                return self::to_json($data);
+
+            case 'xml':
+                return self::to_xml($data);
+
+            case 'yaml':
+                return self::to_yaml($data);
+
+            default: throw new Exception("Type $type is not supported");
+        }
+    }
+
+    // Encode the JSON type & return text
+
+    public static function to_json($data)
+    {
+        return json_encode($data, TRUE);
+    }
+
+    // Encode the XML type & return text
+
+    public static function to_xml($data)
+    {
+        load_helper('XML');
+        return XML::serialize($data);
+    }
+
+    // Encode the YAML type & return text
+
+    public static function to_yaml($data)
+    {
+        load_helper('YAML');
+        return YAML::dump(object_to_array($data));
     }
 }
 

@@ -7,4 +7,4 @@ load_helper('XML');
 
 if (!isset($data)) $data = array();
 ?>
-<?= XML::serialize($data, array('rootName' => 'api')) ?>
+<?= XML::serialize($data) ?>

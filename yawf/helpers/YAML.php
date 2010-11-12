@@ -25,7 +25,7 @@ class YAML extends YAWF
         return Spyc::YAMLLoad($yaml_file);
     }
 
-    public static function dump($array, $indent = false, $wordwrap = false)
+    public static function dump($array, $indent = FALSE, $wordwrap = FALSE)
     {
         return Spyc::YAMLDump($array, $indent, $wordwrap);
     }

@@ -35,14 +35,30 @@ class CURL extends YAWF
 
     public static function method($method, $url, $headers = array(), $data = NULL)
     {
+        // Get a Curl session
+
         $c = curl_init($url);
-        if ($headers) curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
+
+        // Set the method type
+
         if ($method == 'get') {} // nothing to do
         elseif ($method == 'delete') curl_setopt($c, CURLOPT_CUSTOMREQUEST, 'DELETE');
         elseif ($method == 'post') curl_setopt($c, CURLOPT_POST, TRUE);
         elseif ($method == 'put') curl_setopt($c, CURLOPT_PUT, TRUE);
+
+        // Include a payload
+
+        if (!is_null($data))
+        {
+            if (is_string($data)) $data = urlencode($data);
+            curl_setopt($c, CURLOPT_POSTFIELDS, $data);
+            $headers['Content-length'] = strlen($data);
+        }
+        if ($headers) curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-        if (!is_null($data)) curl_setopt($c, CURLOPT_POSTFIELDS, is_array($data) ? $data : urlencode($data));
+
+        // Send the request and receive a response
+
         $received_data = curl_exec($c);
         if ($received_data === FALSE) throw new Exception(curl_error($c));
         return $received_data;

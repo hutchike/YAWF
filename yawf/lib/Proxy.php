@@ -15,16 +15,16 @@ load_helpers('CURL', 'Data');
 
 class Proxy
 {
-    const DEFAULT_TYPE = 'json';
+    const DEFAULT_TYPE = 'json'; // (it's built into PHP)
 
     private static $defaults = array();
-    private $username;
-    private $password;
-    private $class;
-    private $object;
-    private $type;
-    private $url;
-    private $has_changed;
+    private $username;      // Do we need a username too?
+    private $password;      // Do we need a password too?
+    private $class;         // What class are we proxying?
+    private $object;        // The object that gets proxied
+    private $type;          // What type are we marshalling?
+    private $url;           // At what URL is the data found?
+    private $has_changed;   // Have we changed our proxy data?
 
     public function __construct($class, $url = NULL)
     {
@@ -59,6 +59,12 @@ class Proxy
         return array_key(self::$defaults, $field);
     }
 
+    public function auth($username, $password)
+    {
+        $this->username = $username;
+        $this->password = $password;
+    }
+
     public function from($url)
     {
         $this->url = $url;
@@ -78,24 +84,49 @@ class Proxy
 
     public function save()
     {
-        if (!$this->has_changed) return;
+        if (!$this->has_changed) return FALSE;
         return $this->object->get_id() ? $this->update() : $this->insert();
     }
 
     public function insert()
     {
-        // TODO - post the object
+        if (!is_object($this->object)) return FALSE;
+        if ($this->object->get_id()) return FALSE;
+        $class = $this->class;
+        $type = $this->type;
+        $url = $this->secure_url($this->url);
+        $data = Data::to($type, array($this->class => $this->object->data()));
+        $text = CURL::post($url, $data, array("Content-type: text/$type"));
+        $data = Data::from($type, $text);
+        // TODO: Compare the data with our object
     }
 
     public function update()
     {
-        if (!$this->has_changed) return;
-        // TODO - put the object
+        if (!is_object($this->object) || !$this->has_changed) return FALSE;
+        if (!$this->object->get_id()) return FALSE;
+        $class = $this->class;
+        $type = $this->type;
+        $url = $this->secure_url($this->url . '/' . $this->object->get_id());
+        $data = Data::to($type, array($this->class => $this->object->data()));
+print "[data=$data]\n";
+        $text = CURL::put($url, $data, array("Content-type: text/$type"));
+        $data = Data::from($type, $text);
+        // TODO: Compare the data with our object
+return "[$text]\n";
     }
 
     public function delete()
     {
-        // TODO - delete the object
+        if (!is_object($this->object)) return FALSE;
+        if (!$this->object->get_id()) return FALSE;
+        $class = $this->class;
+        $type = $this->type;
+        $url = $this->secure_url($this->url . '/' . $this->object->get_id());
+        $text = CURL::delete($url, array("Content-type: text/$type"));
+        $data = Data::from($type, $text);
+        // TODO: Compare the data with our object
+        $this->object = new $class(); // blank object
     }
 
     public function __get($field)
