@@ -75,7 +75,7 @@ class Proxy
         $class = $this->class;
         $type = $this->type;
         $url = $this->secure_url($this->url . '/' . $id);
-        $text = CURL::get($url, array("Content-type: text/$type"));
+        $text = CURL::get($url, array("Content-Type: text/$type"));
         $data = Data::from($type, $text);
         if (!array_key($data, $class)) return 0;
         $this->object = new $class($data[$class]);
@@ -90,43 +90,43 @@ class Proxy
 
     public function insert()
     {
-        if (!is_object($this->object)) return FALSE;
-        if ($this->object->get_id()) return FALSE;
+        if (!is_object($this->object)) return 0;
+        if ($this->object->get_id()) return 0;
         $class = $this->class;
         $type = $this->type;
         $url = $this->secure_url($this->url);
         $data = Data::to($type, array($this->class => $this->object->data()));
-        $text = CURL::post($url, $data, array("Content-type: text/$type"));
+        $text = CURL::post($url, $data, array("Content-Type: text/$type"));
         $data = Data::from($type, $text);
-        // TODO: Compare the data with our object
+        $id = $data[$class]['id'];
+        $this->object->set_id($id);
+        $this->check_data($data);
+        return $id;
     }
 
     public function update()
     {
-        if (!is_object($this->object) || !$this->has_changed) return FALSE;
-        if (!$this->object->get_id()) return FALSE;
+        if (!is_object($this->object) || !$this->has_changed) return NULL;
+        if (!$this->object->get_id()) return NULL;
         $class = $this->class;
         $type = $this->type;
         $url = $this->secure_url($this->url . '/' . $this->object->get_id());
         $data = Data::to($type, array($this->class => $this->object->data()));
-print "[data=$data]\n";
-        $text = CURL::put($url, $data, array("Content-type: text/$type"));
-        $data = Data::from($type, $text);
-        // TODO: Compare the data with our object
-return "[$text]\n";
+        $text = CURL::post($url, $data, array("Content-Type: text/$type"));
+        $this->check_data(Data::from($type, $text));
+        return $this;
     }
 
     public function delete()
     {
-        if (!is_object($this->object)) return FALSE;
-        if (!$this->object->get_id()) return FALSE;
+        if (!is_object($this->object)) return NULL;
+        if (!$this->object->get_id()) return NULL;
         $class = $this->class;
         $type = $this->type;
         $url = $this->secure_url($this->url . '/' . $this->object->get_id());
-        $text = CURL::delete($url, array("Content-type: text/$type"));
-        $data = Data::from($type, $text);
-        // TODO: Compare the data with our object
-        $this->object = new $class(); // blank object
+        $text = CURL::delete($url, array("Content-Type: text/$type"));
+        $this->check_data(Data::from($type, $text));
+        return $this;
     }
 
     public function __get($field)
@@ -160,6 +160,21 @@ return "[$text]\n";
         $password = first($this->password, self::get_default('password'));
         if ($username && $password) $url = "$username:$password" . '@' . $url;
         return $url;
+    }
+
+    protected function check_data($data)
+    {
+        $data = array_key($data, $this->class, $data);
+        foreach ($this->object->data() as $key => $value)
+        {
+            if (($found = array_key($data, $key)) !== $value)
+            {
+                $class = $this->class;
+                $message = "Check data key \"$key\" for class \"$class\" - expected \"$value\" but found \"$found\"";
+                Log::error($message);
+                throw new Exception($message);
+            }
+        }
     }
 }
 

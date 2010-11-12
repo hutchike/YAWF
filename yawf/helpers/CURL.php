@@ -39,23 +39,23 @@ class CURL extends YAWF
 
         $c = curl_init($url);
 
+        // Include a payload
+
+        if (!is_null($data))
+        {
+            //if (is_string($data)) $data = urlencode($data);
+            curl_setopt($c, CURLOPT_POSTFIELDS, $data);
+            $headers[] = 'Content-Length: ' . strlen($data);
+        }
+        if ($headers) curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+
         // Set the method type
 
         if ($method == 'get') {} // nothing to do
         elseif ($method == 'delete') curl_setopt($c, CURLOPT_CUSTOMREQUEST, 'DELETE');
         elseif ($method == 'post') curl_setopt($c, CURLOPT_POST, TRUE);
-        elseif ($method == 'put') curl_setopt($c, CURLOPT_PUT, TRUE);
-
-        // Include a payload
-
-        if (!is_null($data))
-        {
-            if (is_string($data)) $data = urlencode($data);
-            curl_setopt($c, CURLOPT_POSTFIELDS, $data);
-            $headers['Content-length'] = strlen($data);
-        }
-        if ($headers) curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+        elseif ($method == 'put') curl_setopt($c, CURLOPT_CUSTOMREQUEST, 'PUT');
 
         // Send the request and receive a response
 

@@ -1,5 +1,5 @@
 <?
-header('Content-type: text/plain');
+header('Content-Type: text/plain');
 
 // Get the data to encode into YAML
 

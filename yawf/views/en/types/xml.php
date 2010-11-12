@@ -1,5 +1,5 @@
 <?
-header('Content-type: text/xml');
+header('Content-Type: text/xml');
 
 load_helper('XML');
 

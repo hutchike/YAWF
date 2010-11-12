@@ -1,5 +1,5 @@
 <?
-header('Content-type: text/javascript');
+header('Content-Type: text/javascript');
 
 // Get the callback and data to encode
 

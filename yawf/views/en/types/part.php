@@ -1,2 +1,2 @@
-<? header('Content-type: text/html') ?>
+<? header('Content-Type: text/html') ?>
 <?= $content ?>
