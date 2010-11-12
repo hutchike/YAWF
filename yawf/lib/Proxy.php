@@ -11,13 +11,11 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-// Replace this class by writing your own class in "myapp/app/services/REST.php"
-
-load_helper('CURL');
+load_helpers('CURL', 'Data');
 
 class Proxy
 {
-    const DEFAULT_FORMAT = 'json';
+    const DEFAULT_TYPE = 'json';
 
     private static $defaults = array();
     private $username;
@@ -32,25 +30,33 @@ class Proxy
     {
         $this->class = $class;
         $this->object = new $class();
-        $this->type = array_key(self::$defaults, 'format', self::DEFAULT_FORMAT);
+        $this->type = array_key(self::$defaults, 'type', self::DEFAULT_TYPE);
         $this->url = $url ? $url : $this->default_url($class);
         $this->has_changed = FALSE;
     }
 
-    public static function login($username, $password)
+    public static function set_default($field, $value = NULL)
     {
-        self::$defaults['username'] = $username;
-        self::$defaults['password'] = $password;
+        if (is_array($field) && is_null($value))
+        {
+            foreach ($field as $key => $value)
+            {
+                self::$defaults[$key] = $value;
+            }
+        }
+        elseif (is_string($field))
+        {
+            self::$defaults[$field] = $value;
+        }
+        else
+        {
+            throw new Exception("Bad default field: " . dump($field));
+        }
     }
 
-    public static function server($server)
+    public static function get_default($field)
     {
-        self::$defaults['server'] = rtrim($server, '/');
-    }
-
-    public static function format($format)
-    {
-        self::$defaults['format'] = strtolower($format);
+        return array_key(self::$defaults, $field);
     }
 
     public function from($url)
@@ -62,13 +68,9 @@ class Proxy
     {
         $class = $this->class;
         $type = $this->type;
-        $url = $this->url . '/' . $id;
-        CURL::get($url, array("Content-type: text/$type"));
-
-        // TODO: Make it work with other formats too
-
-        $data = trim($data, "()\n ");
-        $data = json_decode($data, TRUE);
+        $url = $this->secure_url($this->url . '/' . $id);
+        $text = CURL::get($url, array("Content-type: text/$type"));
+        $data = Data::from($type, $text);
         if (!array_key($data, $class)) return 0;
         $this->object = new $class($data[$class]);
         return $this->object->get_id();
@@ -108,6 +110,11 @@ class Proxy
         return $value;
     }
 
+    public function data()
+    {
+        return ($this->object ? $this->object->data() : NULL);
+    }
+
     protected function default_url($class = NULL)
     {
         $default_url = array_key(self::$defaults, 'server', '');
@@ -115,17 +122,12 @@ class Proxy
         return $default_url;
     }
 
-    protected function secure_url()
+    protected function secure_url($url = NULL)
     {
-        $url = $this->url;
-        if ($this->username && $this->password)
-        {
-            $url = $this->username . ':' . $this->password . '@' . $url;
-        }
-        elseif (self::$username && self::$password)
-        {
-            $url = self::$username . ':' . self::$password . '@' . $url;
-        }
+        if (is_null($url)) $url = $this->url;
+        $username = first($this->username, self::get_default('username'));
+        $password = first($this->password, self::get_default('password'));
+        if ($username && $password) $url = "$username:$password" . '@' . $url;
         return $url;
     }
 }

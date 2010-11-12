@@ -58,6 +58,15 @@ function array_to_object($array, $lists_too = FALSE)
     return $object;
 }
 
+// Turn an object into an array
+
+function object_to_array($object)
+{
+    if(!is_object($object) && !is_array($object)) return $object;
+    if(is_object($object)) $object = get_object_vars($object);
+    return array_map('object_to_array', $object);
+}
+
 // Return a key from an array or the default value
 
 function array_key($array, $key, $default = NULL)
@@ -227,6 +236,13 @@ function indent($text, $chars = 2)
     $spaces = '                                                '; // enough?
     $indent = substr($spaces, 0, $chars);
     return $indent . join("\n$indent", explode("\n", trim($text))) . "\n";
+}
+
+// Dump data in object
+
+function dump($object)
+{
+    return print_r($object, TRUE);
 }
 
 // End of utils.php

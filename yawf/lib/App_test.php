@@ -194,7 +194,7 @@ class TestRun
     {
         $this->test_cases[$method][] = new TestCase($desc, $passed, $test_data);
         Log::test(($passed ? 'passed' : 'failed') . ': Should ' . $desc);
-        if ($passed === FALSE) Log::test('data: ' . print_r($test_data, TRUE));
+        if ($passed === FALSE) Log::test('data: ' . dump($test_data));
     }
 
     private function filter_test_cases($filter = 'all')
