@@ -112,7 +112,7 @@ class Proxy
         $type = $this->type;
         $url = $this->secure_url($this->url . '/' . $this->object->get_id());
         $data = Data::to($type, array($this->class => $this->object->data()));
-        $text = CURL::post($url, $data, array("Content-Type: text/$type"));
+        $text = CURL::put($url, $data, array("Content-Type: text/$type"));
         $this->check_data(Data::from($type, $text));
         return $this;
     }
