@@ -19,56 +19,73 @@ class REST_service extends Service
 
     public function get_for_id($params)
     {
-        $class = preg_replace('/_service$/', '', get_class($this));
-        load_model($class);
-        $model = new $class();
-        return $model->load($params->id) ? array($class => $model->data()) : $this->error("id $params->id not found");
     }
 
     // ------------------------
     // HTTP METHODS TO OVERRIDE
     // ------------------------
 
-    // Override "delete" in your service
+    // Default "delete" method behavior is "delete"
 
     public function delete($params)
     {
-        return $this->error('method "delete" not supported');
+        $class = $this->class_name();
+        $object = new $class();
+        if ($object->load($params->id)) $object->delete();
+        return $params->data;
     }
 
-    // Override "get" in your service
+    // Default "get" method behavior is "load"
 
     public function get($params)
     {
-        return $this->error('method "get" not supported');
+        $class = $this->class_name();
+        $model = new $class();
+        return $model->load($params->id) ? array($class => $model->data()) : $this->error("id $params->id not found");
     }
 
-    // Override "move" in your service
+    // Override "move" in your service if you wish to support it
 
     public function move($params)
     {
         return $this->error('method "move" not supported');
     }
 
-    // Override "options" in your service
+    // Override "options" in your service if you wish to support it
 
     public function options($params)
     {
         return $this->error('method "options" not supported');
     }
 
-    // Override "post" in your service
+    // Default "post" method behavior is "insert"
 
     public function post($params)
     {
-        return $this->error('method "post" not supported');
+        $class = $this->class_name();
+        $object = new $class($params->data->$class);
+        $params->data->$class->id = $object->insert();
+        return $params->data;
     }
 
-    // Override "put" in your service
+    // Default "put" method behavior is "update"
 
     public function put($params)
     {
-        return $this->error('method "put" not supported');
+        $class = $this->class_name();
+        $object = new $class($params->data->$class);
+        if ($params->id) $object->set_id($params->id);
+        $object->update_all_fields();
+        return $params->data;
+    }
+
+    // Return the likely class name
+
+    protected function class_name()
+    {
+        $class = preg_replace('/_service$/', '', get_class($this));
+        load_model($class); // in case we haven't loaded it already
+        return $class;
     }
 }
 
