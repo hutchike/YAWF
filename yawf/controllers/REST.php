@@ -11,6 +11,8 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+load_helper('Data');
+
 class REST_controller extends App_controller
 {
     // A mapping of request content types to file types
@@ -133,24 +135,7 @@ class REST_controller extends App_controller
         if ($input = $this->get_input())
         {
             $this->params->input = $input;
-            switch ($this->request_type())
-            {
-                case 'js':
-                case 'json':
-                case 'jsonp':
-                    $this->params->data = array_to_object(json_decode($input, TRUE));
-                    break;
-
-                case 'xml':
-                    load_helper('XML');
-                    $this->params->data = XML::deserialize($input);
-                    break;
-
-                case 'yaml':
-                    load_helper('YAML');
-                    $this->params->data = array_to_object(YAML::parse($input));
-                    break;
-            }
+            $this->params->data = array_to_object(Data::from($this->request_type(), $input));
         }
     }
 
