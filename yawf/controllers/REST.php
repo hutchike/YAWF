@@ -72,6 +72,7 @@ class REST_controller extends App_controller
     protected function request_type()
     {
         $type = strtolower($this->server->content_type);
+        $type = preg_replace('/;charset=.*$/', '', $type); // strip the encoding
         if ($type == 'application/x-www-form-urlencoded') $type = NULL;
         return ($type ? array_key(self::$request_types, $type)
                       : $this->app->get_content_type());
