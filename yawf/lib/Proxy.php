@@ -168,11 +168,19 @@ class Proxy
         return $value;
     }
 
-    // Get the object data
+    // Get (or set) this object's data
 
-    public function data()
+    public function data($data = NULL)
     {
-        return ($this->object ? $this->object->data() : NULL);
+        if (!$this->object) return NULL;
+        if (is_array($data) && is_object($this->object))
+        {
+            foreach ($data as $field => $value)
+            {
+                $this->object->$field = $value;
+            }
+        }
+        return $this->object->data();
     }
 
     // Return response object
