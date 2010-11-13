@@ -25,6 +25,7 @@ class Proxy
     private $type;          // What type are we marshalling?
     private $url;           // At what URL is the data found?
     private $has_changed;   // Have we changed our proxy data?
+    private $response;      // Data we received from the server
 
     // Create a proxy object behaving *like* a model
 
@@ -172,6 +173,13 @@ class Proxy
     public function data()
     {
         return ($this->object ? $this->object->data() : NULL);
+    }
+
+    // Return response object
+
+    public function response()
+    {
+        return array_to_object($this->response);
     }
 
     // Return the default URL for an object class
