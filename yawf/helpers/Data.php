@@ -15,20 +15,20 @@ class Data extends YAWF
 {
     // Return a data array by decoding a type
 
-    public static function from($type, $data)
+    public static function from($type, $text)
     {
         switch (strtolower($type))
         {
             case 'js':
             case 'json':
             case 'jsonp':
-                return self::from_json($data);
+                return self::from_json($text);
 
             case 'xml':
-                return self::from_xml($data);
+                return self::from_xml($text);
 
             case 'yaml':
-                return self::from_yaml($data);
+                return self::from_yaml($text);
 
             default: throw new Exception("Type $type is not supported");
         }
@@ -36,27 +36,27 @@ class Data extends YAWF
 
     // Decode the JSON type and return data
 
-    public static function from_json($data)
+    public static function from_json($text)
     {
-        $data = trim($data, "()\n ");
-        return json_decode($data, TRUE);
+        $text = trim($text, "()\n ");
+        return json_decode($text, TRUE);
     }
 
     // Decode the XML type and return data
 
-    public static function from_xml($data)
+    public static function from_xml($text)
     {
         load_helper('XML');
-        $data = object_to_array(XML::deserialize($data));
+        $data = object_to_array(XML::deserialize($text));
         return array_key($data, 'root', $data); // skip the root element
     }
 
     // Decode the YAML type and return data
 
-    public static function from_yaml($data)
+    public static function from_yaml($text)
     {
         load_helper('YAML');
-        return YAML::parse($data);
+        return YAML::parse($text);
     }
 
     // Return some text by encoding a type
@@ -101,6 +101,20 @@ class Data extends YAWF
     {
         load_helper('YAML');
         return YAML::dump(object_to_array($data));
+    }
+
+    // Get the ID from some object data (using a class)
+
+    public static function get_id($data, $class = NULL)
+    {
+        if (is_object($data)) $data = object_to_array($data);
+        if (!is_array($data)) return NULL;
+        if ($id = array_key($data, 'id')) return $id;
+        if ($class = array_key($data, $class))
+        {
+            if (is_array($class) && $id = array_key($class, 'id')) return $id;
+        }
+        return NULL;
     }
 }
 

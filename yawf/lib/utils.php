@@ -42,11 +42,12 @@ class Object
     }
 }
 
-// Turn an array into an object
+// Turn an array into an object (or NULL when empty)
 
 function array_to_object($array, $lists_too = FALSE)
 {
     if (!is_array($array)) return NULL;
+    if (count($array) == 0) return NULL;
     $object = new Object();
     foreach ($array as $key => $value)
     {
@@ -64,7 +65,7 @@ function object_to_array($object)
 {
     if(!is_object($object) && !is_array($object)) return $object;
     if(is_object($object)) $object = get_object_vars($object);
-    return array_map('object_to_array', $object);
+    return count($object) ? array_map('object_to_array', $object) : NULL;
 }
 
 // Return a key from an array or the default value
