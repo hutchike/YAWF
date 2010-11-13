@@ -13,6 +13,12 @@
 
 class HTTP extends YAWF
 {
+    // 200 status codes
+    const OK = 200;
+    const CREATED = 201;
+    const ACCEPTED = 202;
+    // Add more here...
+
     // 300 status codes
 
     const MOVED_PERMANENTLY = 301;

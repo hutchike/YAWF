@@ -63,8 +63,8 @@ class REST_service extends Service
     public function post($params)
     {
         $class = $this->class_name();
-        $object = new $class($params->data->$class);
-        $params->data->$class->id = $object->insert();
+        $object = new $class($params->data[$class]);
+        $params->data[$class]['id'] = $object->insert();
         return $params->data;
     }
 
@@ -73,7 +73,7 @@ class REST_service extends Service
     public function put($params)
     {
         $class = $this->class_name();
-        $object = new $class($params->data->$class);
+        $object = new $class($params->data[$class]);
         if ($params->id) $object->set_id($params->id);
         $object->update_all_fields();
         return $params->data;

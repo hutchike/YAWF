@@ -136,7 +136,7 @@ class REST_controller extends App_controller
         if ($input = $this->get_input())
         {
             $this->params->input = $input;
-            $this->params->data = array_to_object(Data::from($this->request_type(), $input));
+            $this->params->data = Data::from($this->request_type(), $input);
         }
     }
 
