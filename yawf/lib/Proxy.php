@@ -173,14 +173,30 @@ class Proxy
     public function data($data = NULL)
     {
         if (!$this->object) return NULL;
-        if (is_array($data) && is_object($this->object))
+        if (is_array($data) && count($data) && is_object($this->object))
         {
             foreach ($data as $field => $value)
             {
                 $this->object->$field = $value;
             }
+            $this->has_changed = TRUE;
         }
         return $this->object->data();
+    }
+
+    // Return the object ID
+
+    public function get_id()
+    {
+        return is_object($this->object) ? $this->object->get_id() : 0;
+    }
+
+    // Set the object ID number
+
+    public function set_id($id)
+    {
+        if (is_object($this->object)) $this->object->set_id($id);
+        return $this; // just like normal models do
     }
 
     // Return response object

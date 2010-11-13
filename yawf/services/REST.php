@@ -64,7 +64,7 @@ class REST_service extends Service
     {
         $class = $this->class_name();
         $object = new $class($params->data[$class]);
-        $params->data[$class]['id'] = $object->insert();
+        $params->data[$class][$object->get_id_field()] = $object->insert();
         return $params->data;
     }
 
