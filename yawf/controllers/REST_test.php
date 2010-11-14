@@ -17,8 +17,9 @@ class REST_test_controller extends Rest_controller
 {
     private $test_input;
     private $test_input_map = array(
-        'text/xml' => '<xml><list><item>this</item><item>that</item></list></xml>',
+        'text/xml' => '<root><list><item>this</item><item>that</item></list></root>',
         'text/json' => '{"list":{"item":["this","that"]}}',
+        'text/serialized' => 'a:1:{s:4:"list";a:1:{s:4:"item";a:2:{i:0;s:4:"this";i:1;s:4:"that";}}}',
         'text/yaml' => "list:\n  item:[this, that]",
     );
 
@@ -73,6 +74,7 @@ class REST_test_controller extends Rest_controller
     {
         $this->test_method('post', 'text/xml');
         $this->test_method('post', 'text/json');
+        $this->test_method('post', 'text/serialized');
         $this->test_method('post', 'text/yaml');
     }
 
@@ -82,6 +84,7 @@ class REST_test_controller extends Rest_controller
     {
         $this->test_method('put', 'text/xml');
         $this->test_method('put', 'text/json');
+        $this->test_method('put', 'text/serialized');
         $this->test_method('put', 'text/yaml');
     }
 
@@ -107,7 +110,7 @@ class REST_test_controller extends Rest_controller
         {
             $parsed = array_key($data, 'data');
             $type = $this->server->content_type;
-            $this->should("have parsed \"$type\" input data using \"$method\"", $parsed->list->item[1] == 'that');
+            $this->should("have parsed \"$type\" input data using \"$method\"", $parsed['list']['item'][1] == 'that');
         }
     }
 }

@@ -13,8 +13,6 @@
 
 // Replace this class by writing your own class in "myapp/app/services/REST.php"
 
-load_helper('Auth');
-
 class REST_service extends Service
 {
     // ----------------------------------------
