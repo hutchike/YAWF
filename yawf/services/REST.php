@@ -102,7 +102,7 @@ class REST_service extends Service
 
     protected function class_name()
     {
-        $class = preg_replace('/_service$/', '', get_class($this));
+        $class = preg_replace('/(_test)_service$/', '', get_class($this));
         load_model($class); // in case we haven't loaded it already
         return $class;
     }
