@@ -36,7 +36,8 @@ class Controller extends YAWF
         $this->set_params();            // request parameters passed in
         $this->set_lang();              // the browser language setting
         @session_start();               // start a session for the user
-        $this->title = $this->get_title();
+        $this->desc = $this->get_path_config_from('descriptions');
+        $this->title = $this->get_path_config_from('titles');
         $this->flash = $this->new_flash_object();
         $this->cookie = $this->new_cookie_object();
         $this->server = $this->new_server_object();
@@ -73,6 +74,7 @@ class Controller extends YAWF
         $render->view = $this->view;
         $render->path = $this->path;
         $render->lang = $this->lang;
+        $render->desc = $this->desc;
         $render->title = $this->title;
         $render->flash = $this->flash;
         $render->params = $this->params;
@@ -210,11 +212,11 @@ class Controller extends YAWF
         return $this->app->send_mail($file, $render);
     }
 
-    // Return the title translated
+    // Return the title or description config, translated
 
-    protected function get_title()
+    protected function get_path_config_from($config_file)
     {
-        $titles = Config::load('titles');
+        $titles = Config::load($config_file);
         if (is_array($titles) && $lang = array_key($titles, $this->lang))
         {
             if ($title = array_key($lang, $this->path)) return $title;
