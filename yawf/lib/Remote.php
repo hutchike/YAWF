@@ -253,9 +253,8 @@ class Remote
             if (($found = array_key($response, $key)) !== $value)
             {
                 $class = $this->class;
-                $message = "Check data key \"$key\" for class \"$class\" - expected \"$value\" but found \"$found\"";
-                Log::error($message);
-                throw new Exception($message);
+                $message = "Check response \"$key\" for class \"$class\" - expected \"$value\" but received \"$found\"";
+                Log::warn($message);
             }
         }
     }
