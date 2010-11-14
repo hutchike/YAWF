@@ -18,40 +18,8 @@ class Project_controller extends App_controller
         parent::before();
     }
 
-    public function contact()
-    {
-        // Nothing to do
-    }
-
-    public function cookbook()
-    {
-        $this->render->title = 'Cookbook';
-    }
-
-    public function download()
-    {
-        $this->render->title = 'Download';
-    }
-
-    public function faq()
-    {
-        $this->render->title = 'FAQ';
-    }
-
-    public function forum()
-    {
-        $this->render->title = 'Forum';
-    }
-
-    public function news()
-    {
-        $this->render->title = 'News';
-    }
-
     public function code()
     {
-        $this->render->title = 'Code browser';
-
         // Get a list of files in the folder
 
         $folder = $this->params->folder;
@@ -71,11 +39,6 @@ class Project_controller extends App_controller
         $this->render->parent = ($folder != 'yawf' ? dirname($folder) : '');
         $this->render->files = $files;
         return (array)$this->render;
-    }
-
-    public function terms()
-    {
-        $this->render->title = 'Terms &amp; Conditions';
     }
 }
 

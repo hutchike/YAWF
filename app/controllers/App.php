@@ -26,7 +26,6 @@ class App_controller extends Controller
     {
         // Put code here that should be performed by every controller
 
-        $this->render->title = 'Yet Another Web Framework';
         $this->render->layout = 'purple';
         $this->render->greeting = array_rand_value(self::$greetings);
         $this->render->active_tab = array($this->path => ' class="active"');

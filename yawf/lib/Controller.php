@@ -217,7 +217,8 @@ class Controller extends YAWF
         $titles = Config::load('titles');
         if (is_array($titles) && $lang = array_key($titles, $this->lang))
         {
-            return array_key($lang, $this->path, '');
+            if ($title = array_key($lang, $this->path)) return $title;
+            if ($title = array_key($lang, Symbol::DEFAULT_WORD)) return $title;
         }
         return '';
     }

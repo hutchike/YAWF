@@ -1,5 +1,5 @@
 en:
-    'default/index': Welcome
+    default: Welcome
 
 es:
-    'default/index': Bienvenidos
+    default: Bienvenidos

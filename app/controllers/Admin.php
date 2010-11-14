@@ -29,7 +29,6 @@ class Admin_controller extends App_controller
     {
         parent::before();
         $this->create_database();
-        $this->render->title = 'Admin';
     }
 
     public function index()
