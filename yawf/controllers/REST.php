@@ -18,19 +18,19 @@ class REST_controller extends App_controller
     // A mapping of request content types to file types
 
     private static $request_types = array(
-        'text/xml' => 'xml',
-        'text/html' => 'html',
-        'text/plain' => 'txt',
-        'text/yaml' => 'yaml',
-        'text/json' => 'json',
-        'text/jsonp' => 'json',
-        'text/javascript' => 'json',
-        'application/json' => 'json',
-        'application/jsonp' => 'json',
-        'application/javascript' => 'json',
-        'application/x-javascript' => 'json',
-        'application/yaml' => 'yaml',
-        'application/xml' => 'xml',
+        'text/xml' => Symbol::XML,
+        'text/html' => Symbol::HTML,
+        'text/plain' => Symbol::TXT,
+        'text/yaml' => Symbol::YAML,
+        'text/json' => Symbol::JSON,
+        'text/jsonp' => Symbol::JSON,
+        'text/javascript' => Symbol::JSON,
+        'application/json' => Symbol::JSON,
+        'application/jsonp' => Symbol::JSON,
+        'application/javascript' => Symbol::JSON,
+        'application/x-javascript' => Symbol::JSON,
+        'application/yaml' => Symbol::YAML,
+        'application/xml' => Symbol::XML,
     );
 
     // The REST service

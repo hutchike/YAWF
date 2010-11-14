@@ -15,8 +15,6 @@
 
 class REST_service extends Service
 {
-    const VALIDATION_MESSAGES = 'validation_messages';
-
     // ----------------------------------------
     // HTTP METHODS TO OVERRIDE IN YOUR SERVICE
     // ----------------------------------------
@@ -63,7 +61,7 @@ class REST_service extends Service
         if ($object->is_validated())
             $params->data[$class][$object->get_id_field()] = $object->insert();
         else
-            $params->data[VALIDATION_MESSAGES] = $object->validation_messages();
+            $params->data[Symbol::VALIDATION_MESSAGES] = $object->validation_messages();
 
         return $params->data;
     }
@@ -78,7 +76,7 @@ class REST_service extends Service
         if ($object->is_validated())
             $object->update_all_fields();
         else
-            $params->data[VALIDATION_MESSAGES] = $object->validation_messages();
+            $params->data[Symbol::VALIDATION_MESSAGES] = $object->validation_messages();
             
         return $params->data;
     }

@@ -15,8 +15,7 @@ load_helpers('CURL', 'Data');
 
 class Remote
 {
-    const DEFAULT_TYPE = 'json'; // (it's built into PHP)
-    const VALIDATION_MESSAGES = 'validation_messages';
+    const DEFAULT_TYPE = Symbol::JSON; // (it's built into PHP)
 
     private static $defaults = array();
     private $username;      // Do we need a username too?
@@ -220,7 +219,7 @@ class Remote
     public function validation_messages()
     {
         return is_array($this->response) ?
-                        array_key($this->response, VALIDATION_MESSAGES) : NULL;
+                        array_key($this->response, Symbol::VALIDATION_MESSAGES) : NULL;
     }
 
     // Return the default URL for an object class

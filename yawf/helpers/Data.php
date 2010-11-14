@@ -19,15 +19,15 @@ class Data extends YAWF
     {
         switch (strtolower($type))
         {
-            case 'js':
-            case 'json':
-            case 'jsonp':
+            case Symbol::JS:
+            case Symbol::JSON:
+            case Symbol::JSONP:
                 return self::from_json($text);
 
-            case 'xml':
+            case Symbol::XML:
                 return self::from_xml($text);
 
-            case 'yaml':
+            case Symbol::YAML:
                 return self::from_yaml($text);
 
             default: throw new Exception("Type $type is not supported");
@@ -65,15 +65,15 @@ class Data extends YAWF
     {
         switch (strtolower($type))
         {
-            case 'js':
-            case 'json':
-            case 'jsonp':
+            case Symbol::JS:
+            case Symbol::JSON:
+            case Symbol::JSONP:
                 return self::to_json($data);
 
-            case 'xml':
+            case Symbol::XML:
                 return self::to_xml($data);
 
-            case 'yaml':
+            case Symbol::YAML:
                 return self::to_yaml($data);
 
             default: throw new Exception("Type $type is not supported");
