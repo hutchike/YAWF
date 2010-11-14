@@ -124,7 +124,7 @@ class Proxy
         $data = Data::to($type, array($this->class => $this->object->data()));
         $text = CURL::post($url, $data, $this->headers_for($type));
         $this->response = Data::from($type, $text);
-        $id = Data::get_id($this->response, $class);
+        $id = Data::get_id($this->response, $class, $this->object->get_id_field());
         $this->object->set_id($id);
         $this->check_response();
         return $id;

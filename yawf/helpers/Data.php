@@ -103,16 +103,16 @@ class Data extends YAWF
         return YAML::dump(object_to_array($data));
     }
 
-    // Get the ID from some object data (using a class)
+    // Get the ID from some object data by looking for the class ID field
 
-    public static function get_id($data, $class = NULL)
+    public static function get_id($data, $class = NULL, $id_field = 'id')
     {
         if (is_object($data)) $data = object_to_array($data);
-        if (!is_array($data)) return NULL;
-        if ($id = array_key($data, 'id')) return $id;
-        if ($class = array_key($data, $class))
+        if (!is_array($data)) return NULL; // data must be an array
+        if ($id = array_key($data, $id_field)) return $id;
+        if (!is_null($class) && $data = array_key($data, $class))
         {
-            if (is_array($class) && $id = array_key($class, 'id')) return $id;
+            if (is_array($data) && $id = array_key($data, $id_field)) return $id;
         }
         return NULL;
     }
