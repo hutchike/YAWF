@@ -82,6 +82,7 @@ class Remote
     {
         $this->username = $username;
         $this->password = $password;
+        return $this;
     }
 
     // Set the URL to request
@@ -89,6 +90,15 @@ class Remote
     public function from($url)
     {
         $this->url = $url;
+        return $this;
+    }
+
+    // Set the data content type
+
+    public function type($type)
+    {
+        $this->type = $type;
+        return $this;
     }
 
     // Perform a remote load request
