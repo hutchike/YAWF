@@ -16,6 +16,7 @@ load_helpers('CURL', 'Data');
 class Remote
 {
     const DEFAULT_TYPE = 'json'; // (it's built into PHP)
+    const VALIDATION_MESSAGES = 'validation_messages';
 
     private static $defaults = array();
     private $username;      // Do we need a username too?
@@ -45,6 +46,7 @@ class Remote
         }
         $this->type = array_key(self::$defaults, 'type', self::DEFAULT_TYPE);
         $this->url = $url ? $url : $this->default_url($this->class);
+        $this->response = NULL;
     }
 
     // Set a default (e.g. "server", "username" & "password")
@@ -213,6 +215,14 @@ class Remote
         return array_to_object($this->response);
     }
 
+    // Return any validation messages
+
+    public function validation_messages()
+    {
+        return is_array($this->response) ?
+                        array_key($this->response, VALIDATION_MESSAGES) : NULL;
+    }
+
     // Return the default URL for an object class
 
     protected function default_url($class = NULL)
@@ -233,7 +243,7 @@ class Remote
         return $url;
     }
 
-    // Ensure returned data in the resposne is identical
+    // Check data returned in the resposne is identical
 
     protected function check_response($response = NULL)
     {
