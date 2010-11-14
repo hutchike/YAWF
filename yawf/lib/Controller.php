@@ -19,6 +19,7 @@ class Controller extends YAWF
     protected $lang;    // the two character language code e.g. "en"
     protected $render;  // array of data to be rendered inside views
     protected $params;  // a copy of all the request parameters sent
+    protected $title;   // a translation from the titles.yaml config
     protected $flash;   // an object to send data into the next view
     protected $cookie;  // an object to get & set $_COOKIE variable,
     protected $server;  // an object to get & set $_SERVER variable,
@@ -35,6 +36,7 @@ class Controller extends YAWF
         $this->set_params();            // request parameters passed in
         $this->set_lang();              // the browser language setting
         @session_start();               // start a session for the user
+        $this->title = $this->get_title();
         $this->flash = $this->new_flash_object();
         $this->cookie = $this->new_cookie_object();
         $this->server = $this->new_server_object();
@@ -71,6 +73,7 @@ class Controller extends YAWF
         $render->view = $this->view;
         $render->path = $this->path;
         $render->lang = $this->lang;
+        $render->title = $this->title;
         $render->flash = $this->flash;
         $render->params = $this->params;
     }
@@ -205,6 +208,18 @@ class Controller extends YAWF
     protected function send_mail($file, $render)
     {
         return $this->app->send_mail($file, $render);
+    }
+
+    // Return the title translated
+
+    protected function get_title()
+    {
+        $titles = Config::load('titles');
+        if (is_array($titles) && $lang = array_key($titles, $this->lang))
+        {
+            return array_key($lang, $this->path, '');
+        }
+        return '';
     }
 
     // Return new controller flash object
