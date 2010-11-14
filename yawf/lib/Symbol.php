@@ -20,6 +20,7 @@ class Symbol extends YAWF
     const JS = 'js';
     const JSON = 'json';
     const JSONP = 'jsonp';
+    const SERIALIZED = 'serialized';
     const TXT = 'txt';
     const VALIDATION_MESSAGES = 'validation_messages';
     const XML = 'xml';

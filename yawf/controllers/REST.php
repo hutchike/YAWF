@@ -25,12 +25,14 @@ class REST_controller extends App_controller
         'text/json' => Symbol::JSON,
         'text/jsonp' => Symbol::JSON,
         'text/javascript' => Symbol::JSON,
+        'text/serialzied' => Symbol::SERIALIZED,
         'application/json' => Symbol::JSON,
         'application/jsonp' => Symbol::JSON,
         'application/javascript' => Symbol::JSON,
+        'application/serialzied' => Symbol::SERIALIZED,
         'application/x-javascript' => Symbol::JSON,
-        'application/yaml' => Symbol::YAML,
         'application/xml' => Symbol::XML,
+        'application/yaml' => Symbol::YAML,
     );
 
     // The REST service

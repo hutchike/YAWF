@@ -24,6 +24,9 @@ class Data extends YAWF
             case Symbol::JSONP:
                 return self::from_json($text);
 
+            case Symbol::SERIALIZED:
+                return self::from_serialized($text);
+
             case Symbol::XML:
                 return self::from_xml($text);
 
@@ -40,6 +43,13 @@ class Data extends YAWF
     {
         $text = trim($text, "()\n ");
         return json_decode($text, TRUE);
+    }
+
+    // Decode the serialized type and return data
+
+    public static function from_serialized($text)
+    {
+        return object_to_array(unserialize($text));
     }
 
     // Decode the XML type and return data
@@ -70,6 +80,9 @@ class Data extends YAWF
             case Symbol::JSONP:
                 return self::to_json($data);
 
+            case Symbol::SERIALIZED:
+                return self::to_serialized($data);
+
             case Symbol::XML:
                 return self::to_xml($data);
 
@@ -85,6 +98,13 @@ class Data extends YAWF
     public static function to_json($data)
     {
         return json_encode($data, TRUE);
+    }
+
+    // Encode the serialized type & return text
+
+    public static function to_serialized($data)
+    {
+        return serialize($data);
     }
 
     // Encode the XML type & return text
