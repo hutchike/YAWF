@@ -15,15 +15,11 @@
 
 class REST_service extends Service
 {
-    // Get object data for an ID param
+    const VALIDATION_MESSAGES = 'validation_messages';
 
-    public function get_for_id($params)
-    {
-    }
-
-    // ------------------------
-    // HTTP METHODS TO OVERRIDE
-    // ------------------------
+    // ----------------------------------------
+    // HTTP METHODS TO OVERRIDE IN YOUR SERVICE
+    // ----------------------------------------
 
     // Default "delete" method behavior is "delete"
 
@@ -64,7 +60,11 @@ class REST_service extends Service
     {
         $class = $this->class_name();
         $object = new $class($params->data[$class]);
-        $params->data[$class][$object->get_id_field()] = $object->insert();
+        if ($object->is_validated())
+            $params->data[$class][$object->get_id_field()] = $object->insert();
+        else
+            $params->data[VALIDATION_MESSAGES] = $object->validation_messages();
+
         return $params->data;
     }
 
@@ -75,7 +75,11 @@ class REST_service extends Service
         $class = $this->class_name();
         $object = new $class($params->data[$class]);
         if ($params->id) $object->set_id($params->id);
-        $object->update_all_fields();
+        if ($object->is_validated())
+            $object->update_all_fields();
+        else
+            $params->data[VALIDATION_MESSAGES] = $object->validation_messages();
+            
         return $params->data;
     }
 

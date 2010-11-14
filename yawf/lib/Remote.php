@@ -13,21 +13,21 @@
 
 load_helpers('CURL', 'Data');
 
-class Proxy
+class Remote
 {
     const DEFAULT_TYPE = 'json'; // (it's built into PHP)
 
     private static $defaults = array();
     private $username;      // Do we need a username too?
     private $password;      // Do we need a password too?
-    private $class;         // What class are we proxying?
-    private $object;        // The object that gets proxied
+    private $class;         // What class are we remoting?
+    private $object;        // The object that gets remoted
     private $type;          // What type are we marshalling?
     private $url;           // At what URL is the data found?
-    private $has_changed;   // Have we changed our proxy data?
+    private $has_changed;   // Did we change our remoted data?
     private $response;      // Data we received from the server
 
-    // Create a proxy object behaving *like* a regular model
+    // Create a remote object behaving *like* a regular model
 
     public function __construct($class_or_object, $url = NULL)
     {
@@ -68,7 +68,7 @@ class Proxy
         }
     }
 
-    // Get a proxy default setting (see above)
+    // Get a remote default setting (see above)
 
     public static function get_default($field)
     {
@@ -90,7 +90,7 @@ class Proxy
         $this->url = $url;
     }
 
-    // Proxy a load request
+    // Perform a remote load request
 
     public function load($id = 0)
     {
@@ -104,7 +104,7 @@ class Proxy
         return $this->object->get_id();
     }
 
-    // Proxy a save request
+    // Perform a remote save request
 
     public function save()
     {
@@ -112,7 +112,7 @@ class Proxy
         return $this->object->get_id() ? $this->update() : $this->insert();
     }
 
-    // Proxy an insert request
+    // Perform a remote insert request using the REST "post" method
 
     public function insert()
     {
@@ -130,7 +130,7 @@ class Proxy
         return $id;
     }
 
-    // Proxy an update request
+    // Perform a remote update request using the REST "put" method
 
     public function update()
     {
@@ -146,7 +146,7 @@ class Proxy
         return $this;
     }
 
-    // Proxy a delete request
+    // Perform a remote delete request using the REST "delete" method
 
     public function delete()
     {
@@ -168,7 +168,7 @@ class Proxy
         return ($this->object ? $this->object->$field : NULL);
     }
 
-    // Set a field of proxied object data
+    // Set a field of remoted object data
 
     public function __set($field, $value)
     {
@@ -182,6 +182,13 @@ class Proxy
     public function data()
     {
         return is_object($this->object) ? $this->object->data() : NULL;
+    }
+
+    // Get whether it has changed
+
+    public function has_changed()
+    {
+        return $this->has_changed;
     }
 
     // Return the object ID
@@ -255,4 +262,4 @@ class Proxy
     }
 }
 
-// End of Proxy.php
+// End of Remote.php

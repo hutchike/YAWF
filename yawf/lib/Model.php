@@ -268,7 +268,7 @@ class Model extends YAWF
 
     public function save() // returns true if the object saved or false if not
     {
-        if (!$this->data || !$this->validate_on_save()) return FALSE;
+        if (!$this->data || !$this->is_validated()) return FALSE;
         $saved = $this->get_id() ? $this->update() : $this->insert();
         return $saved ? TRUE : FALSE;
     }
@@ -472,12 +472,17 @@ class Model extends YAWF
         self::$validators[$key][] = array($rule, $args);
     }
 
+    public function validation_messages()
+    {
+        return $this->validation_messages;
+    }
+
     public function validation_message_for($field)
     {
         return array_key($this->validation_messages, $field);
     }
 
-    private function validate_on_save()
+    public function is_validated()
     {
         $messages = array();
         $table = $this->get_table();
