@@ -33,8 +33,8 @@ class Proxy
     {
         if (is_string($class_or_object))
         {
-            $this->class = $class;
-            $this->object = new $class();
+            $this->class = $class_or_object;
+            $this->object = new $class_or_object();
             $this->has_changed = FALSE;
         }
         elseif (is_object($class_or_object))
@@ -44,7 +44,7 @@ class Proxy
             $this->has_changed = TRUE;
         }
         $this->type = array_key(self::$defaults, 'type', self::DEFAULT_TYPE);
-        $this->url = $url ? $url : $this->default_url($class);
+        $this->url = $url ? $url : $this->default_url($this->class);
     }
 
     // Set a default (e.g. "server", "username" & "password")
