@@ -119,7 +119,7 @@ class Remote
     {
         if (!is_object($this->object)) return 0;
         if ($this->object->get_id()) return 0;
-        if (!$this->object->is_validated()) return 0;
+        if (!$this->is_validated()) return 0;
         $class = $this->class;
         $type = $this->type;
         $url = $this->secure_url($this->url);
@@ -138,7 +138,7 @@ class Remote
     {
         if (!is_object($this->object) || !$this->has_changed) return NULL;
         if (!$this->object->get_id()) return NULL;
-        if (!$this->object->is_validated()) return NULL;
+        if (!$this->is_validated()) return NULL;
         $class = $this->class;
         $type = $this->type;
         $url = $this->secure_url($this->url . '/' . $this->object->get_id());
@@ -214,6 +214,16 @@ class Remote
     public function response()
     {
         return array_to_object($this->response);
+    }
+
+    // Validate our object locally
+
+    public function is_validated()
+    {
+        if (!is_object($this->object)) return FALSE;
+        if ($this->object->is_validated()) return TRUE;
+        $this->response = array(Symbol::VALIDATION_MESSAGES => $this->object->validation_messages());
+        return FALSE;
     }
 
     // Return any validation messages
