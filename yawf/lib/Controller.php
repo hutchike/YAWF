@@ -11,37 +11,27 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-class Controller extends YAWF
+class Controller extends Request
 {
-    protected $app;     // either the "App" or the "App_test" object
     protected $view;    // a string naming the view file for display
     protected $type;    // a string with the content type, e.g. html
     protected $lang;    // the two character language code e.g. "en"
     protected $render;  // array of data to be rendered inside views
     protected $params;  // a copy of all the request parameters sent
     protected $title;   // a translation from the titles.yaml config
-    protected $flash;   // an object to send data into the next view
-    protected $cookie;  // an object to get & set $_COOKIE variable,
-    protected $server;  // an object to get & set $_SERVER variable,
-    protected $session; // an object to get & set $_SESSION variable
 
     // Set up this new Controller object for an app with render data
 
     public function setup_for_app($app, &$render)
     {
-        $this->app = $app;
         $this->view = $app->get_file(); // "faq" from "www.yawf.org/project/faq"
         $this->path = $app->get_folder().'/'.$this->view;  // e.g. "project/faq"
         $this->render = $render;        // data to be rendered in views
         $this->set_params();            // request parameters passed in
         $this->set_lang();              // the browser language setting
-        @session_start();               // start a session for the user
         $this->desc = $this->get_path_config_from('descriptions');
         $this->title = $this->get_path_config_from('titles');
-        $this->flash = $this->new_flash_object();
-        $this->cookie = $this->new_cookie_object();
-        $this->server = $this->new_server_object();
-        $this->session = $this->new_session_object();
+        $this->setup_request_for($app); // inherited from Request class
     }
 
     // Render the requested view
@@ -161,57 +151,6 @@ class Controller extends YAWF
         return $this->lang;
     }
 
-    // Get or set a cookie
-
-    protected function cookie($name, $value = NULL, $expires = 0, $path = '/', $domain = COOKIE_DOMAIN, $secure = FALSE)
-    {
-        if (!is_null($value)) $this->cookie->set($name, $value, $expires, $path, $domain, $secure);
-        return $this->cookie->$name;
-    }
-
-    // Get or set a flash message (used by App)
-
-    public function flash($name, $value = NULL) 
-    {
-        return (is_null($value) ? $this->flash->$name
-                                : $this->flash->$name = $value);
-    }
-
-    // Redirect to another URL
-
-    protected function redirect($url, $options = array())
-    {
-        $this->app->redirect($url, $options);
-    }
-
-    // Mail errors to the webmaster
-
-    public function report_errors()
-    {
-        // Get error details
-
-        $errors = $this->app->get_error_messages();
-        if (!count($errors)) return;
-
-        // Send errors email
-
-        $folder = $this->app->get_folder();
-        $file = $this->app->get_file();
-        $render = array(
-                    'to'        => WEBMASTER_EMAIL,
-                    'subject'   => APP_NAME . " errors in $folder/$file",
-                    'errors'    => $errors,
-                    );
-        return $this->send_mail('errors', $render);
-    }
-
-    // Send some mail as text & HTML multipart (depends on the Mail helper)
-
-    protected function send_mail($file, $render)
-    {
-        return $this->app->send_mail($file, $render);
-    }
-
     // Return the title or description config, translated
 
     protected function get_path_config_from($config_file)
@@ -223,128 +162,6 @@ class Controller extends YAWF
             if ($title = array_key($lang, Symbol::DEFAULT_WORD)) return $title;
         }
         return '';
-    }
-
-    // Return new controller flash object
-
-    protected function new_flash_object()
-    {
-        return new Controller_flash();
-    }
-
-    // Return new controller cookie object
-
-    protected function new_cookie_object()
-    {
-        return new Controller_cookie();
-    }
-
-    // Return new controller server object
-
-    protected function new_server_object()
-    {
-        return new Controller_server();
-    }
-
-    // Return new controller session object
-
-    protected function new_session_object()
-    {
-        return new Controller_session();
-    }
-
-    // Assert that something "should" be true
-
-    protected function should($desc, $passed = FALSE, $test_data = NULL)
-    {
-        $this->app->test_case($desc, $passed, $test_data);
-    }
-
-    // Assert that something "should not" be true
-
-    protected function should_not($desc, $failed = TRUE, $test_data = NULL)
-    {
-        $this->app->test_case('not ' . $desc, !$failed, $test_data);
-    }
-}
-
-class Controller_flash
-{
-    const SESSION_KEY = '__flash__';
-    private $flash;
-
-    public function __construct()
-    {
-        $this->flash = array_key($_SESSION, self::SESSION_KEY, array());
-        $_SESSION[self::SESSION_KEY] = array();
-    }
-
-    public function __get($name)
-    {
-        return array_key($this->flash, $name);
-    }
-
-    public function __set($name, $value)
-    {
-        return $name == 'now' ? $this->now('notice', $value)
-                              : $_SESSION[self::SESSION_KEY][$name] = $value;
-    }
-
-    public function now($name, $value = NULL)
-    {
-        if (is_array($name))
-        {
-            foreach ($name as $key => $val) $this->flash[$key] = $val;
-        }
-        else
-        {
-            return is_null($value) ? array_key($this->flash, $name)
-                                   : $this->flash[$name] = $value;
-        }
-    }
-}
-
-class Controller_cookie
-{
-    public function __get($name)
-    {
-        return array_key($_COOKIE, $name);
-    }
-
-    public function __set($name, $value)
-    {
-        return $this->set($name, $value);
-    }
-
-    public function set($name, $value = NULL, $expires = 0, $path = '/', $domain = COOKIE_DOMAIN, $secure = FALSE)
-    {
-        setcookie($name, $value, $expires, $path, $domain, $secure);
-    }
-}
-
-class Controller_server
-{
-    public function __get($key)
-    {
-        return array_key($_SERVER, strtoupper($key));
-    }
-
-    public function __set($key, $value)
-    {
-        $_SERVER[strtoupper($key)] = $value;
-    }
-}
-
-class Controller_session
-{
-    public function __get($key)
-    {
-        return array_key($_SESSION, $key);
-    }
-
-    public function __set($key, $value)
-    {
-        $_SESSION[$key] = $value;
     }
 }
 

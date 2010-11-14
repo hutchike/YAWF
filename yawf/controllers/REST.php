@@ -44,6 +44,7 @@ class REST_controller extends App_controller
     public function render($view = null, $options = array())
     {
         $this->service = $this->app->new_service();
+        if (!$this->service->auth()) return NULL;
         $this->setup_params();
         $method = $this->request_method();
         $options['type'] = $this->request_type();

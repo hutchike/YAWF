@@ -13,8 +13,32 @@
 
 // Replace this class by writing your own class in "myapp/app/services/REST.php"
 
+load_helper('Auth');
+
 class REST_service extends Service
 {
+    public static $usernme = '';
+    public static $usernme = '';
+
+    // ----------------------------------------
+    // AUTH METHODS TO OVERRIDE IN YOUR SERVICE
+    // ----------------------------------------
+
+    public function auth()
+    {
+        return $this->basic_auth($this->server->php_auth_user, $this->server->php_auth_pw);
+    }
+
+    protected function basic_auth($username, $password)
+    {
+        if (self::$username && self::$password)
+        {
+            if ($username != self::$username) return FALSE;
+            if ($password != self::$password) return FALSE;
+        }
+        return TRUE;
+    }
+
     // ----------------------------------------
     // HTTP METHODS TO OVERRIDE IN YOUR SERVICE
     // ----------------------------------------

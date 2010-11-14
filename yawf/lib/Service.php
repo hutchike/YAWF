@@ -11,15 +11,13 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-class Service extends YAWF
+class Service extends Request
 {
-    protected $app;
-
     // Link this service to the web app
 
     public function setup_for_app($app)
     {
-        $this->app = $app;
+        $this->setup_request_for($app);
     }
 
     // Service errors should be arrays

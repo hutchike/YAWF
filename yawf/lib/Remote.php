@@ -87,7 +87,7 @@ class Remote
 
     // Set the URL to request
 
-    public function from($url)
+    public function url($url)
     {
         $this->url = $url;
         return $this;
