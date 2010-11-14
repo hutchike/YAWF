@@ -35,9 +35,19 @@ class CURL extends YAWF
 
     public static function method($method, $url, $headers = array(), $data = NULL)
     {
+        // Parse a "user:password@" URL prefix for basic auth
+
+        $auth = '';
+        if (preg_match('/^(\w+:\w+)@(.*)$/', $url, $matches))
+        {
+            $auth = $matches[1]; 
+            $url = $matches[2];
+        }
+        
         // Get a Curl session
 
         $c = curl_init($url);
+        if ($auth) curl_setopt($c, CURLOPT_USERPWD, $auth);
 
         // Include a payload
 
