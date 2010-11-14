@@ -27,15 +27,24 @@ class Proxy
     private $has_changed;   // Have we changed our proxy data?
     private $response;      // Data we received from the server
 
-    // Create a proxy object behaving *like* a model
+    // Create a proxy object behaving *like* a regular model
 
-    public function __construct($class, $url = NULL)
+    public function __construct($class_or_object, $url = NULL)
     {
-        $this->class = $class;
-        $this->object = new $class();
+        if (is_string($class_or_object))
+        {
+            $this->class = $class;
+            $this->object = new $class();
+            $this->has_changed = FALSE;
+        }
+        elseif (is_object($class_or_object))
+        {
+            $this->class = get_class($class_or_object);
+            $this->object = $class_or_object;
+            $this->has_changed = TRUE;
+        }
         $this->type = array_key(self::$defaults, 'type', self::DEFAULT_TYPE);
         $this->url = $url ? $url : $this->default_url($class);
-        $this->has_changed = FALSE;
     }
 
     // Set a default (e.g. "server", "username" & "password")
@@ -168,20 +177,11 @@ class Proxy
         return $value;
     }
 
-    // Get (or set) this object's data
+    // Get the object data
 
-    public function data($data = NULL)
+    public function data()
     {
-        if (!$this->object) return NULL;
-        if (is_array($data) && count($data) && is_object($this->object))
-        {
-            foreach ($data as $field => $value)
-            {
-                $this->object->$field = $value;
-            }
-            $this->has_changed = TRUE;
-        }
-        return $this->object->data();
+        return is_object($this->object) ? $this->object->data() : NULL;
     }
 
     // Return the object ID
