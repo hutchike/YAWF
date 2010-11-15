@@ -27,8 +27,7 @@ class REST_test_controller extends Rest_controller
 
     public function render($view = null, $options = array())
     {
-        $class = $this->app->get_class_name();
-        $service = $class . '_test';
+        $service = ucfirst($this->app->get_folder()) . '_test';
         $this->service = $this->app->new_service($service);
         return App_controller::render(); // to show test results
     }
