@@ -40,8 +40,8 @@ class REST_service extends Service
 
     public function delete($params)
     {
-        $class = $this->class_name();
-        $object = new $class();
+        $model_name = $this->get_model_name();
+        $object = new $model_name();
         if ($object->load($params->id)) $object->delete();
         return $params->data;
     }
@@ -50,9 +50,9 @@ class REST_service extends Service
 
     public function get($params)
     {
-        $class = $this->class_name();
-        $model = new $class();
-        return $model->load($params->id) ? array($class => $model->data()) : $this->error("id $params->id not found");
+        $model_name = $this->get_model_name();
+        $model = new $model_name();
+        return $model->load($params->id) ? array($model_name => $model->data()) : $this->error("id $params->id not found");
     }
 
     // Override "move" in your service if you wish to support it
@@ -73,10 +73,10 @@ class REST_service extends Service
 
     public function post($params)
     {
-        $class = $this->class_name();
-        $object = new $class($params->data[$class]);
+        $model_name = $this->get_model_name();
+        $object = new $model_name($params->data[$model_name]);
         if ($object->is_validated())
-            $params->data[$class][$object->get_id_field()] = $object->insert();
+            $params->data[$model_name][$object->get_id_field()] = $object->insert();
         else
             $params->data[Symbol::VALIDATION_MESSAGES] = $object->validation_messages();
 
@@ -87,8 +87,8 @@ class REST_service extends Service
 
     public function put($params)
     {
-        $class = $this->class_name();
-        $object = new $class($params->data[$class]);
+        $model_name = $this->get_model_name();
+        $object = new $model_name($params->data[$model_name]);
         if ($params->id) $object->set_id($params->id);
         if ($object->is_validated())
             $object->update_all_fields();
@@ -98,13 +98,13 @@ class REST_service extends Service
         return $params->data;
     }
 
-    // Return the likely class name
+    // Return the data model class name
 
-    protected function class_name()
+    protected function get_model_name()
     {
-        $class = preg_replace('/(_test)_service$/', '', get_class($this));
-        load_model($class); // in case we haven't loaded it already
-        return $class;
+        $model_name = preg_replace('/(_test)?_service$/', '', get_class($this));
+        load_model($model_name); // in case we haven't loaded it already
+        return $model_name;
     }
 }
 

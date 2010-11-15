@@ -17,10 +17,10 @@ class REST_test_controller extends Rest_controller
 {
     private $test_input;
     private $test_input_map = array(
-        'text/xml' => '<root><list><item>this</item><item>that</item></list></root>',
-        'text/json' => '{"list":{"item":["this","that"]}}',
-        'text/serialized' => 'a:1:{s:4:"list";a:1:{s:4:"item";a:2:{i:0;s:4:"this";i:1;s:4:"that";}}}',
-        'text/yaml' => "list:\n  item:[this, that]",
+        'text/xml' => '<root><assoc><list>this</list><list>that</list></assoc></root>',
+        'text/json' => '{"assoc":{"list":["this","that"]}}',
+        'text/serialized' => 'a:1:{s:5:"assoc";a:1:{s:4:"list";a:2:{i:0;s:4:"this";i:1;s:4:"that";}}}',
+        'text/yaml' => "assoc:\n  list:[this, that]",
     );
 
     // Create a test service with test methods to run checks
@@ -88,7 +88,7 @@ class REST_test_controller extends Rest_controller
         $this->test_method('put', 'text/yaml');
     }
 
-    // Test a method by calling it then looking at the data
+    // Test a method by calling it then looking at the returned data
 
     private function test_method($method, $request_type = 'text/xml')
     {
@@ -97,9 +97,12 @@ class REST_test_controller extends Rest_controller
         $this->server->content_type = $request_type;
         $this->test_input = $this->test_input_map[$request_type];
 
-        // Check we have a service, and call a REST method
+        // Check we're using the REST_test_service
 
-        $this->should('have a service', !!$this->service);
+        $this->should('have a REST test service', $this->service instanceof REST_test_service, get_class($this->service));
+
+        // Call the service method and check data
+
         $this->$method();
         $data = $this->render->data;
         $this->should("have called \"$method\"", $data['method'] == $method, $data);
@@ -110,7 +113,7 @@ class REST_test_controller extends Rest_controller
         {
             $parsed = array_key($data, 'data');
             $type = $this->server->content_type;
-            $this->should("have parsed \"$type\" input data using \"$method\"", $parsed['list']['item'][1] == 'that');
+            $this->should("have parsed \"$type\" input data using \"$method\"", $parsed['assoc']['list'][1] == 'that');
         }
     }
 }
