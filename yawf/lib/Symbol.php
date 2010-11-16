@@ -21,6 +21,7 @@ class Symbol extends YAWF
     const JSON = 'json';
     const JSONP = 'jsonp';
     const PATH_CONFIG = 'path_config';
+    const PATH_METHOD = 'path_method';
     const SERIALIZED = 'serialized';
     const TXT = 'txt';
     const VALIDATION_MESSAGES = 'validation_messages';

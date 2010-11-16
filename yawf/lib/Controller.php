@@ -14,6 +14,7 @@
 class Controller extends Request
 {
     protected $view;    // a string naming the view file for display
+    protected $path;    // a string holding the folder and view path
     protected $type;    // a string with the content type, e.g. html
     protected $lang;    // the two character language code e.g. "en"
     protected $render;  // array of data to be rendered inside views
@@ -57,7 +58,7 @@ class Controller extends Request
 
     public function setup_render_data(&$render)
     {
-        $this->setup_path_configs($render);
+        $this->setup_path_data($render);
         $render->app = $this->app;
         $render->view = $this->view;
         $render->path = $this->path;
@@ -66,9 +67,9 @@ class Controller extends Request
         $render->params = $this->params;
     }
 
-    // Setup path configs from render data
+    // Setup path-dependant data to be rendered
 
-    protected function setup_path_configs(&$render)
+    protected function setup_path_data(&$render)
     {
         foreach (get_object_vars($render) as $field => $value)
         {
@@ -76,6 +77,11 @@ class Controller extends Request
             {
                 $config_file = Text::pluralize($field);
                 $render->$field = $this->get_path_config_from($config_file);
+            }
+            elseif ($value === Symbol::PATH_METHOD)
+            {
+                $method = 'get_' . $field; // e.g. "get_title"
+                $render->$field = $this->$method($this->path);
             }
         }
     }
