@@ -68,6 +68,7 @@ class Controller extends Request
     }
 
     // Setup path-dependant data to be rendered
+    // This is useful for titles & descriptions
 
     protected function setup_path_data(&$render)
     {
