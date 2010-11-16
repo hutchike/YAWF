@@ -18,7 +18,6 @@ class Controller extends Request
     protected $lang;    // the two character language code e.g. "en"
     protected $render;  // array of data to be rendered inside views
     protected $params;  // a copy of all the request parameters sent
-    protected $title;   // a translation from the titles.yaml config
 
     // Set up this new Controller object for an app with render data
 
@@ -29,8 +28,6 @@ class Controller extends Request
         $this->render = $render;        // data to be rendered in views
         $this->set_params();            // request parameters passed in
         $this->set_lang();              // the browser language setting
-        $this->desc = $this->get_path_config_from('descriptions');
-        $this->title = $this->get_path_config_from('titles');
         $this->setup_request_for($app); // inherited from Request class
     }
 
@@ -60,14 +57,27 @@ class Controller extends Request
 
     public function setup_render_data(&$render)
     {
+        $this->setup_path_configs($render);
         $render->app = $this->app;
         $render->view = $this->view;
         $render->path = $this->path;
         $render->lang = $this->lang;
-        $render->desc = $this->desc;
-        $render->title = $this->title;
         $render->flash = $this->flash;
         $render->params = $this->params;
+    }
+
+    // Setup path configs from render data
+
+    protected function setup_path_configs(&$render)
+    {
+        foreach (get_object_vars($render) as $field => $value)
+        {
+            if ($value === Symbol::PATH_CONFIG)
+            {
+                $config_file = Text::pluralize($field);
+                $render->$field = $this->get_path_config_from($config_file);
+            }
+        }
     }
 
     // Before there's nothing to do
@@ -151,15 +161,15 @@ class Controller extends Request
         return $this->lang;
     }
 
-    // Return the title or description config, translated
+    // Return a value for a lang from a path config file
 
     protected function get_path_config_from($config_file)
     {
-        $titles = Config::load($config_file);
-        if (is_array($titles) && $lang = array_key($titles, $this->lang))
+        $langs = Config::load($config_file);
+        if (is_array($langs) && $lang = array_key($langs, $this->lang))
         {
-            if ($title = array_key($lang, $this->path)) return $title;
-            if ($title = array_key($lang, Symbol::DEFAULT_WORD)) return $title;
+            if ($value = array_key($lang, $this->path)) return $value;
+            if ($value = array_key($lang, Symbol::DEFAULT_WORD)) return $value;
         }
         return '';
     }

@@ -75,10 +75,6 @@ class App extends YAWF
 
     public function new_controller($class = NULL, $render = NULL)
     {
-        // Allow render data to be passed in
-
-        $render = new Object($render);
-
         // Require the Controller base class
         // ...and the Application controller
 
@@ -103,7 +99,7 @@ class App extends YAWF
 
         $class .= '_controller'; // mandatory suffix
         $this->controller = new $class();
-        $this->controller->setup_for_app($this, $render);
+        $this->controller->setup_for_app($this, new Object($render));
         return $this->controller;
     }
 
