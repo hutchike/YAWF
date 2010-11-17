@@ -258,10 +258,16 @@ class Remote
     protected function secure_url($url = NULL)
     {
         if (is_null($url)) $url = $this->url;
+        $protocol = '';
+        if (preg_match('/^(https?:\/\/)(.*)$/', $url, $matches))
+        {
+            $protocol = $matches[1];
+            $url = $matches[2];
+        }
         $username = first($this->username, self::get_default('username'));
         $password = first($this->password, self::get_default('password'));
         if ($username && $password) $url = "$username:$password" . '@' . $url;
-        return $url;
+        return $protocol . $url;
     }
 
     // Check data returned in the resposne is identical

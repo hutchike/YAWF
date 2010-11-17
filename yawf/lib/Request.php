@@ -19,7 +19,7 @@ class Request extends YAWF
     protected $server;  // an object to get & set $_SERVER variable,
     protected $session; // an object to get & set $_SESSION variable
 
-    protected function setup_request_for($app)
+    protected function setup_request($app)
     {
         @session_start();
         $this->app = $app;

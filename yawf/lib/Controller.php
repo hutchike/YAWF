@@ -29,7 +29,7 @@ class Controller extends Request
         $this->render = $render;        // data to be rendered in views
         $this->set_params();            // request parameters passed in
         $this->set_lang();              // the browser language setting
-        $this->setup_request_for($app); // inherited from Request class
+        $this->setup_request($app);     // inherited from Request class
     }
 
     // Render the requested view

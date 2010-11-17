@@ -17,7 +17,7 @@ class Service extends Request
 
     public function setup_for_app($app)
     {
-        $this->setup_request_for($app);
+        $this->setup_request($app);
     }
 
     // Service errors should be arrays
