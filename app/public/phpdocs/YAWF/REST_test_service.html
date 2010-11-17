@@ -32,11 +32,13 @@
 				
 		<pre><a href="../YAWF/YAWF.html">YAWF</a>
    |
-   --<a href="../YAWF/Service.html">Service</a>
+   --<a href="../YAWF/Request.html">Request</a>
       |
-      --<a href="../YAWF/REST_service.html">REST_service</a>
+      --<a href="../YAWF/Service.html">Service</a>
          |
-         --REST_test_service</pre>
+         --<a href="../YAWF/REST_service.html">REST_service</a>
+            |
+            --REST_test_service</pre>
 	
 			</div>
 </div>
@@ -118,11 +120,27 @@
 			
 							<h4>Inherited Variables</h4>
 				<A NAME='inherited_vars'><!-- --></A>
-									<p>Inherited from <span class="classname"><a href="../YAWF/Service.html">Service</a></span></p>
+									<p>Inherited from <span class="classname"><a href="../YAWF/Request.html">Request</a></span></p>
 					<blockquote>
 													<img src="../media/images/Variable.png" />
 							<span class="var-title">
-								<span class="var-name"><a href="../YAWF/Service.html#var$app">Service::$app</a></span><br>
+								<span class="var-name"><a href="../YAWF/Request.html#var$app">Request::$app</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../YAWF/Request.html#var$cookie">Request::$cookie</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../YAWF/Request.html#var$flash">Request::$flash</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../YAWF/Request.html#var$server">Request::$server</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../YAWF/Request.html#var$session">Request::$session</a></span><br>
 							</span>
 											</blockquote> 
 										
@@ -141,7 +159,7 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methoddelete" id="delete"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -175,7 +193,7 @@
 			
 	</div>
 <a name="methodget" id="get"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -209,7 +227,7 @@
 			
 	</div>
 <a name="methodmove" id="move"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -243,7 +261,7 @@
 			
 	</div>
 <a name="methodoptions" id="options"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -277,7 +295,7 @@
 			
 	</div>
 <a name="methodpost" id="post"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -311,7 +329,7 @@
 			
 	</div>
 <a name="methodput" id="put"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -345,7 +363,7 @@
 			
 	</div>
 <a name="methodtest_data_for" id="test_data_for"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -382,11 +400,15 @@
 					<p>Inherited From <span class="classname"><a href="../YAWF/REST_service.html">REST_service</a></span></p>
 					<blockquote>
 													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/REST_service.html#methodauth">REST_service::auth()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/REST_service.html#methodbasic_auth">REST_service::basic_auth()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/REST_service.html#methoddelete">REST_service::delete()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/REST_service.html#methodget">REST_service::get()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/REST_service.html#methodget_for_id">REST_service::get_for_id()</a></span><br>
+							<span class="method-name"><a href="../YAWF/REST_service.html#methodget_model_name">REST_service::get_model_name()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/REST_service.html#methodmove">REST_service::move()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
@@ -405,6 +427,34 @@
 							<span class="method-name"><a href="../YAWF/Service.html#methodsetup_for_app">Service::setup_for_app()</a></span><br>
 											</blockquote>
 									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../YAWF/Request.html">Request</a></span></p>
+					<blockquote>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodcookie">Request::cookie()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodflash">Request::flash()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodnew_cookie_object">Request::new_cookie_object()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodnew_flash_object">Request::new_flash_object()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodnew_server_object">Request::new_server_object()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodnew_session_object">Request::new_session_object()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodredirect">Request::redirect()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodreport_errors">Request::report_errors()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodsend_mail">Request::send_mail()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodsetup_request_for">Request::setup_request_for()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodshould">Request::should()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodshould_not">Request::should_not()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
 					<p>Inherited From <span class="classname"><a href="../YAWF/YAWF.html">YAWF</a></span></p>
 					<blockquote>
 													<img src="../media/images/Method.png" alt=" "/>
@@ -416,7 +466,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 06 Nov 2010 01:48:33 -0500 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 16 Nov 2010 21:13:55 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
