@@ -163,30 +163,30 @@ class Yet_another_shell extends Command
 
     // Parse lines like "$this->should('work', 1==1)" in yash scripts
 
-    public function should($test, $is_ok, $var = NULL)
+    public function should($test, $passed = FALSE, $test_data = NULL)
     {
-        $text = $is_ok ? 'Pass' : 'Fail';
-        $text .= ": should $test";
-        if ($is_ok)
+        $desc = $passed ? 'Pass' : 'Fail';
+        $desc .= ": should $test";
+        if ($passed)
         {
-            Log::info($text);
+            Log::info($desc);
         }
         else
         {
-            if (!is_null($var)) $text .= "\n\n" . print_r($var, TRUE);
-            Log::error($text);
+            if (!is_null($test_data)) $desc .= "\n\n" . print_r($test_data, TRUE);
+            Log::error($desc);
         }
-        print "$text\n";
+        print "$desc\n";
         $this->tests++;
-        if (!$is_ok) $this->fails++;
-        return $is_ok;
+        if (!$passed) $this->fails++;
+        return $passed;
     }
 
     // Parse lines like "$this->should_not('fail', 1==2)" in yash scripts
 
-    public function should_not($text, $is_ok, $var = NULL)
+    public function should_not($desc, $failed = TRUE, $test_data = NULL)
     {
-        return $this->should("not $text", !$is_ok, $var);
+        return $this->should("not $desc", !$failed, $test_data);
     }
 }
 

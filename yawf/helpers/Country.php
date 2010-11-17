@@ -11,8 +11,22 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+/**
+ * Return the name of a country in a particular language (default is "en").
+ * Feel free to add country names in other languages as you need them for
+ * your application.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Country extends YAWF
 {
+    /**
+     * Return the name associated with a country code, in a language
+     *
+     * @param String $code the country code to lookup
+     * @param String $language the language to use (default is "en")
+     * @return String the name of the country in the language
+     */
     public static function name($code, $language = 'en')
     {
         return array_key(self::$codes[$language], strtoupper($code));

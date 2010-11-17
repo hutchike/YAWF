@@ -128,6 +128,24 @@ $__YAWF_start_time__ = microtime(TRUE);
 
 class YAWF
 {
+    // Relay "$this->should" calls to the global scope "should" method
+
+    public function should($desc, $passed = FALSE, $test_data = NULL)
+    {
+        // "should()" is provided by "yash"
+
+        should($desc, $passed, $test_data);
+    }
+
+    // Relay "$this->should_not" to the global scope "should_not" method
+
+    public function should_not($desc, $failed = TRUE, $test_data = NULL)
+    {
+        // "should_not()" is provided by "yash"
+
+        should_not($desc, $failed, $test_data);
+    }
+
     // Write benchmark info in the log file
 
     public static function benchmark($info)

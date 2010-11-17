@@ -13,7 +13,7 @@
 
 load_helpers('CURL', 'Data');
 
-class Remote
+class Remote extends YAWF
 {
     const DEFAULT_TYPE = Symbol::JSON; // (it's built into PHP)
 
@@ -270,7 +270,7 @@ class Remote
         return $protocol . $url;
     }
 
-    // Check data returned in the resposne is identical
+    // Check data returned in the response is identical
 
     protected function check_response($response = NULL)
     {

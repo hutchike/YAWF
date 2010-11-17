@@ -11,38 +11,90 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+if (!function_exists('curl_init')) {
+    throw new Exception('The YAWF CURL helper needs the cURL PHP extension');
+}
+
+/**
+ * Wrap the PHP cURL extension with handy static function calls
+ * for the HTTP methods "get", "delete", "post" and "put". Note
+ * that the URL in function calls may be prefixed using a basic
+ * authentication login like "https://user:pass@site.com/a/12".
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class CURL extends YAWF
 {
+    /**
+     * Get a resource at a URL
+     *
+     * @param String $url the The URL to request
+     * @param Array $headers optional headers to send
+     * @return String the web server response content
+     */
     public static function get($url, $headers = array())
     {
         return self::method('get', $url, $headers);
     }
 
+    /**
+     * Delete a resource at a URL
+     *
+     * @param String $url the The URL to request
+     * @param Array $headers optional headers to send
+     * @return String the web server response content
+     */
     public static function delete($url, $headers = array())
     {
         return self::method('delete', $url, $headers);
     }
 
+    /**
+     * Post some data to a URL, and return the response content
+     *
+     * @param String $url the The URL to request
+     * @param Array $headers optional headers to send
+     * @return String the web server response content
+     */
     public static function post($url, $data, $headers = array())
     {
         return self::method('post', $url, $headers, $data);
     }
 
+    /**
+     * Put some data to a URL, and return the response content
+     *
+     * @param String $url the The URL to request
+     * @param Array $headers optional headers to send
+     * @return String the web server response content
+     */
     public static function put($url, $data, $headers = array())
     {
         return self::method('put', $url, $headers, $data);
     }
 
+    /**
+     * Perform an HTTP method at a URL with optional headers and data to send
+     *
+     * @param String $method the The HTTP method to use for the request
+     * @param String $url the The URL to request
+     * @param Array $headers optional headers to send
+     * @param String $data optional data to put or post (may also be an Array)
+     * @return String the web server response content
+     */
     public static function method($method, $url, $headers = array(), $data = NULL)
     {
-        // Parse a "user:password@" URL prefix for basic auth
+        // Parse a "user:password@" URL prefix for basic auth by
+        // removing it, like taking the meat out of the sandwich
+        // and being sure to remember the protocol we're using.
 
+        $protocol = '';
         $auth = '';
-        if (preg_match('/^(\w+:\w+)@(.*)$/', $url, $matches))
+        if (preg_match('/^(https?:\/\/)?(\w+:\w+)@(.+)$/', $url, $matches))
         {
-            $auth = $matches[1]; 
-            $url = $matches[2];
+            list($all, $protocol, $auth, $url) = $matches;
         }
+        $url = $protocol . $url;
         
         // Get a Curl session
 
@@ -53,7 +105,6 @@ class CURL extends YAWF
 
         if (!is_null($data))
         {
-            //if (is_string($data)) $data = urlencode($data);
             curl_setopt($c, CURLOPT_POSTFIELDS, $data);
             $headers[] = 'Content-Length: ' . strlen($data);
         }
@@ -67,7 +118,7 @@ class CURL extends YAWF
         elseif ($method == 'post') curl_setopt($c, CURLOPT_POST, TRUE);
         elseif ($method == 'put') curl_setopt($c, CURLOPT_CUSTOMREQUEST, 'PUT');
 
-        // Send the request and receive a response
+        // Send the request and receive the response to return as a string
 
         $received_data = curl_exec($c);
         if ($received_data === FALSE) throw new Exception(curl_error($c));

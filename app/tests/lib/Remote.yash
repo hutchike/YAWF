@@ -1,0 +1,4 @@
+require_once 'lib/test/Remote.php'
+$remote = new Remote_test(new Object())
+$test_run = new TestRun($remote)
+$test_run->run_tests()

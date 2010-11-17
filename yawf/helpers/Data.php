@@ -11,6 +11,19 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+if (!function_exists('json_decode')) {
+    throw new Exception('The YAML Data helper needs the JSON PHP extension');
+}
+
+/**
+ * Encode and decode data into various formats, including JSON,
+ * PHP Serialized, XML and YAML. Note that decoded data is always
+ * returned as an associative array for consistency when working
+ * with multiple data formats. Also note that XML data has a "root"
+ * element automatically added (encode) and removed (decode).
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Data extends YAWF
 {
     // Return a data array by decoding a type
