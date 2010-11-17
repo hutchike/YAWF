@@ -43,7 +43,7 @@ class YAWF_stats_command extends Command
             print "YAWF folder \"$folder\" has $lines lines of code, $funcs functions, $classes classes\n";
         }
         print "YAWF project framework has $total_lines lines of code, $total_funcs functions, $total_classes classes total\n";
-        print "(stats exclude 3rd-party code in the \"yawf/plugins\" directory)\n";
+        print "(stats exclude 3rd-party code in the \"yawf/plugins\" folder)\n";
     }
 
     private function get_stats($folder)
