@@ -1,0 +1,81 @@
+#!/usr/bin/env php
+<?
+// Copyright (c) 2010 Guanoo, Inc.
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public License
+// as published by the Free Software Foundation; either version 3
+// of the License, or (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+
+require getenv('YAWF_ROOT') . '/yawf/lib/Command.php';
+
+class YAWF_stats_command extends Command
+{
+    private static $folders = array(
+        'app/public',
+        'yawf/controllers',
+        'yawf/helpers',
+        'yawf/lib',
+        'yawf/lib/data',
+        'yawf/lib/test',
+        'yawf/services',
+        'yawf/views/en/REST',
+        'yawf/views/en/test',
+        'yawf/views/en/types',
+    );
+
+    public function run()
+    {
+        $total_lines = 0;
+        $total_funcs = 0;
+        $total_classes = 0;
+        foreach (self::$folders as $folder)
+        {
+            $stats = $this->get_stats($folder);
+            $total_lines += $lines = $stats['lines'];
+            $total_funcs += $funcs = $stats['funcs'];
+            $total_classes += $classes = $stats['classes'];
+            print "YAWF folder \"$folder\" has $lines lines of code, $funcs functions, $classes classes\n";
+        }
+        print "YAWF project framework has $total_lines lines of code, $total_funcs functions, $total_classes classes total\n";
+    }
+
+    private function get_stats($folder)
+    {
+        $dir = opendir($folder);
+        $files = array();
+        while ($file = readdir($dir)) $files[] = $file;
+        closedir($dir);
+
+        $lines = 0;
+        $funcs = 0;
+        $classes = 0;
+        foreach ($files as $file)
+        {
+            if (!preg_match('/\.php$/', $file)) continue;
+            $code = file_get_contents("$folder/$file");
+            $lines_of_text = preg_split('/\n/', $code);
+            foreach ($lines_of_text as $line)
+            {
+                $line = trim($line);
+                if ($line == '' || $line == '<?' || $line == '?>') continue;
+                $char = substr($line, 0, 1);
+                if (strpos('/*#', $char) !== FALSE) continue;
+                $lines++;
+                if (preg_match('/function /', $line)) $funcs++;
+                if (preg_match('/class /', $line)) $classes++;
+            }
+        }
+        return array('lines' => $lines, 'funcs' => $funcs, 'classes' => $classes);
+    }
+}
+
+$stats = new YAWF_stats_command();
+$stats->run();
+
+// End of "commands/yawf_stats"
