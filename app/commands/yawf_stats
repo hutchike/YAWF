@@ -18,6 +18,7 @@ class YAWF_stats_command extends Command
 {
     private static $folders = array(
         'app/public',
+        'app/commands',
         'yawf/controllers',
         'yawf/helpers',
         'yawf/lib',
@@ -42,7 +43,7 @@ class YAWF_stats_command extends Command
             $total_classes += $classes = $stats['classes'];
             print "YAWF folder \"$folder\" has $lines lines of code, $funcs functions, $classes classes\n";
         }
-        print "YAWF project framework has $total_lines lines of code, $total_funcs functions, $total_classes classes total\n";
+        print "YAWF project has $total_lines lines of code, $total_funcs functions, $total_classes classes total\n";
         print "(stats exclude 3rd-party code in the \"yawf/plugins\" folder)\n";
     }
 
@@ -58,7 +59,8 @@ class YAWF_stats_command extends Command
         $classes = 0;
         foreach ($files as $file)
         {
-            if (!preg_match('/\.php$/', $file)) continue;
+            $match = ($folder == 'app/commands' ? '/^y\w+$/' : '/\.php$/');
+            if (!preg_match($match, $file)) continue;
             $code = file_get_contents("$folder/$file");
             $lines_of_text = preg_split('/\n/', $code);
             foreach ($lines_of_text as $line)
