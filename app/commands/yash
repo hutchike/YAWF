@@ -37,6 +37,16 @@ class Yet_another_shell extends Command
         $this->if_conds = array();
         $this->tests = 0;
         $this->fails = 0;
+        YAWF::hook('should', 'Yet_another_shell::hook');
+        YAWF::hook('should_not', 'Yet_another_shell::hook');
+    }
+
+    // Hook the "should" and "should_not" calls
+
+    public static function hook($method, $args)
+    {
+        list($test, $passed, $test_data) = $args;
+        $method($test, $passed, $test_data);
     }
 
     // Run the YAWF shell
@@ -201,8 +211,8 @@ function puts($text) { print "$text\n"; return NULL; }
 
 // Add shortcuts to should and should_not functions
 
-function should($text, $is_ok, $var = NULL) { global $yash; return $yash->should($text, $is_ok, $var); }
-function should_not($text, $is_ok, $var = NULL) { global $yash; return $yash->should_not($text, $is_ok, $var); }
+function should($test, $passed = FALSE, $test_data = NULL) { global $yash; return $yash->should($test, $passed, $test_data); }
+function should_not($test, $failed = TRUE, $test_data = NULL) { global $yash; return $yash->should_not($test, $failed, $test_data); }
 
 // Useful functions
 
