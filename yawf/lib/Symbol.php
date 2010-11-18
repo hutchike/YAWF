@@ -24,7 +24,7 @@ class Symbol extends YAWF
     const JS = 'js';
     const JSON = 'json';
     const JSONP = 'jsonp';
-    const MAILER = 'mailer',
+    const MAILER = 'mailer';
     const PATH_CONFIG = 'path_config';
     const PATH_METHOD = 'path_method';
     const SERIALIZED = 'serialized';
