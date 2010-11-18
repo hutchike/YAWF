@@ -161,7 +161,7 @@ class Yet_another_shell extends Command
     {
         if (preg_match('/^(do|for|if|while)/', $line)) return $line;
         $line = preg_replace('/^should\s+not/', 'should_not', $line);
-        return preg_replace('/^(\w+)\s+(.*)$/', '\1(\2)', $line);
+        return preg_replace('/^(\w[\w:]+)\s+(.*)$/', '\1(\2)', $line);
     }
 
     // Say something unless we're being quiet
