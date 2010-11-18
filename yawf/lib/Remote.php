@@ -278,7 +278,7 @@ class Remote extends YAWF
         {
             if (($found = array_key($response, $key)) !== $value)
             {
-Log::error(get_class($found) . ' ' . get_class($value));
+Log::error(serialize($found) . ' ' . serialize($value));
                 $class = $this->class;
                 $message = "Check response \"$key\" for class \"$class\" - expected \"$value\" but received \"$found\"";
                 Log::warn($message);
