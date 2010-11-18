@@ -103,7 +103,7 @@ class Remote extends YAWF
 
     // Perform a remote load request
 
-    public function load($id = 0)
+    public function load($id = 0) // returns the object ID or zero on failure
     {
         $class = $this->class;
         $type = $this->type;
@@ -117,10 +117,11 @@ class Remote extends YAWF
 
     // Perform a remote save request
 
-    public function save()
+    public function save() // returns true if the object saved or false if not
     {
         if (!$this->has_changed) return FALSE;
-        return $this->object->get_id() ? $this->update() : $this->insert();
+        $saved = $this->object->get_id() ? $this->update() : $this->insert();
+        return $saved ? TRUE : FALSE;
     }
 
     // Perform a remote insert request using the REST "post" method
