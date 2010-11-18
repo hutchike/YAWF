@@ -33,6 +33,7 @@ class Command
         if (!is_dir('yawf')) $this->quit('No "yawf" directory in ' . getcwd());
         ini_set('include_path', 'app:yawf:.');
         require_once('lib/utils.php');
+        YAWF::start(); // for benchmarks
 
         // Convert the opts to an Object
 
@@ -58,7 +59,7 @@ class Command
         $name = $this->name;
         $opts = json_encode((array)$this->opts);
         $args = json_encode((array)$this->args);
-        YAWF::benchmark("\"$name\" command completed with opts $opts and args $args");
+        YAWF::finish("\"$name\" command completed with opts $opts and args $args");
     }
 
     // Parse options and arguments on the command line

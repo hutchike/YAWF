@@ -11,25 +11,31 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-$__YAWF_start_time__ = microtime(TRUE);
-
 // Classes should extend YAWF for hooks
 
 class YAWF // Yet Another Web Framework
 {
+    private static $start = 0; // msecs
     private static $hooks = array();
 
-    // Run YAWF on a web request
+    // Note the start time of YAWF
 
-    public static function run()
+    public static function start()
     {
+        self::$start = microtime(TRUE);         // Keep note of our start time
         self::hook('default', 'self::unknown'); // Set the default hook method
+    }
+
+    // YAWF respond to a web request
+
+    public static function respond_to_web_request()
+    {
+        self::start();                          // First setup YAWF resources
         error_reporting(E_ALL | E_STRICT);      // Report all errors (strict)
-        require_once('lib/utils.php');          // Include utility functions,
         $uri = array_key($_SERVER, 'REQUEST_URI'); // and get the request URI
 
         $app_class = preg_match('/_test($|[^\w])/', $uri) ? 'App_test' : 'App';
-        require_once "lib/$app_class.php";      // Load the App or the test App
+        require_once "lib/$app_class.php";      // Load the App or test App to:
         $app = new $app_class();                // 1) Create the Application
         $controller = $app->new_controller();   // 2) Create the Controller
 
@@ -37,6 +43,16 @@ class YAWF // Yet Another Web Framework
         catch (Exception $e) { self::handle_exception($app, $e); }
         if (isset($php_errormsg)) $app->add_error_message($php_errormsg);
         $controller->report_errors();           // ...and report any errors.
+        self::finish('Rendered ' . $uri);       // Finish with some log info
+    }
+
+    // Write performance in the log file
+
+    public static function finish($info)
+    {
+        if (!BENCHMARKING_ON) return;
+        $msecs = (int)( 1000 * ( microtime(TRUE) - self::$start ) );
+        Log::info($info . " after $msecs ms");  // "Log" helper loaded by run()
     }
 
     // Handle an exception by displaying or redirecting
@@ -73,16 +89,6 @@ class YAWF // Yet Another Web Framework
         if (!$method) $method = array_key(self::$hooks, 'default');
         if ($method === 'return') return; // optimization
         elseif ($method) eval("$method(\$name, \$args);");
-    }
-
-    // Write benchmark info in the log file
-
-    public static function benchmark($info)
-    {
-        if (!BENCHMARKING_ON) return;
-        global $__YAWF_start_time__; // Compute benchmark times in milliseconds
-        $msecs = (int)( 1000 * ( microtime(TRUE) - $__YAWF_start_time__ ) );
-        Log::info($info . " after $msecs ms");  // "Log" helper loaded by run()
     }
 }
 
