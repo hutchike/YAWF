@@ -167,7 +167,7 @@ class Request extends YAWF
 
     protected function new_cookie_object()
     {
-        return YWAF::prop(Symbol::COOKIE, new Request_cookie());
+        return YAWF::prop(Symbol::COOKIE, new Request_cookie());
     }
 
     // Return new controller server object
