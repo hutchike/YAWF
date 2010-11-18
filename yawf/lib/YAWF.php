@@ -82,13 +82,13 @@ class YAWF // Yet Another Web Framework
         return array_key(self::$hooks, $method);
     }
 
-    // Get or set a YAWF property, for example an object.
-    // This is useful for registered static hook methods.
+    // Get or set a YAWF prop, for example an object.
+    // This is useful for registering static methods.
 
-    public static function prop($property, $value = NULL)
+    public static function prop($prop, $value = NULL)
     {
-        if (isset($value)) self::$props[$property] = $value;
-        return array_key(self::$props, $property);
+        if (isset($value)) self::$props[$prop] = $value;
+        return array_key(self::$props, $prop);
     }
 
     // Catch all undefined methods calls
