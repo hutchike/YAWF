@@ -46,9 +46,9 @@ class YAWF // Yet Another Web Framework
         self::finish('Rendered ' . $uri);       // Finish with some log info
     }
 
-    // Write performance in the log file
+    // Write benchmarking performance in the log file
 
-    public static function finish($info)
+    public static function finish($info = 'Finished')
     {
         if (!BENCHMARKING_ON) return;
         $msecs = (int)( 1000 * ( microtime(TRUE) - self::$start ) );
