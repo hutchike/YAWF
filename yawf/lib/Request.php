@@ -46,7 +46,7 @@ class Request extends YAWF
     {
         @session_start();
         $this->app = $app;
-        $this->set_params();
+        $this->params = $this->get_params();
         $this->flash = $this->new_flash_object();
         $this->cookie = $this->new_cookie_object();
         $this->server = $this->new_server_object();
@@ -55,12 +55,14 @@ class Request extends YAWF
 
     // Parse the request params (by using the $_REQUEST array by default)
 
-    protected function set_params($request = array(), $options = array())
+    protected function get_params($request = array(), $options = array())
     {
+        if ($params = YAWF::prop(Symbol::PARAMS)) return $params;
+        $params = new Object();
+
         $trim_whitespace = array_key($options, 'trim_whitespace', PARAMS_TRIM_WHITESPACE);
         $format_as_html = array_key($options, 'format_as_html', PARAMS_FORMAT_AS_HTML);
         $strip_slashes = array_key($options, 'strip_slashes', PARAMS_STRIP_SLASHES);
-        $this->params = new Object();
         if (!count($request)) $request = $_REQUEST;
         foreach ($request as $field => $value)
         {
@@ -70,14 +72,15 @@ class Request extends YAWF
             if (strstr($field, '->'))
             {
                 list($object, $field) = preg_split('/\->/', $field);
-                if (!$this->params->$object) $this->params->$object = new Object();
-                $this->params->$object->$field = $value;
+                if (!$params->$object) $params->$object = new Object();
+                $params->$object->$field = $value;
             }
             else
             {
-                $this->params->$field = $value;
+                $params->$field = $value;
             }
         }
+        return YAWF::prop(Symbol::PARAMS, $params);
     }
 
     // Allow method overriding using the "_method" parameter
