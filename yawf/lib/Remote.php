@@ -276,7 +276,8 @@ class Remote extends YAWF
         $response = array_key($response, $this->class, $response);
         foreach ($this->object->data() as $key => $value)
         {
-            if (($found = array_key($response, $key, '')) !== $value)
+            $found = first(array_key($response, $key), ''); // no NULL values
+            if ($found !== $value)
             {
                 $class = $this->class;
                 $message = "Check response \"$key\" for class \"$class\" - expected \"$value\" but received \"$found\"";
