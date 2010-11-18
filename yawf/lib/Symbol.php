@@ -15,6 +15,8 @@
 
 class Symbol extends YAWF
 {
+    const APP = 'app';
+    const CONTROLLER = 'controller';
     const DEFAULT_WORD = 'default';
     const HTML = 'html';
     const JS = 'js';

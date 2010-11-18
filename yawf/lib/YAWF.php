@@ -17,6 +17,7 @@ class YAWF // Yet Another Web Framework
 {
     private static $start = 0; // msecs
     private static $hooks = array();
+    private static $props = array();
 
     // Note the start time of YAWF
 
@@ -35,11 +36,11 @@ class YAWF // Yet Another Web Framework
         $uri = array_key($_SERVER, 'REQUEST_URI'); // and get the request URI
 
         $app_class = preg_match('/_test($|[^\w])/', $uri) ? 'App_test' : 'App';
-        require_once "lib/$app_class.php";      // Load the App or test App to:
-        $app = new $app_class();                // 1) Create the Application
-        $controller = $app->new_controller();   // 2) Create the Controller
+        require_once "lib/$app_class.php";      // Create the app or test app
+        $app = YAWF::prop(Symbol::APP, new $app_class()); // and a controller
+        $controller = YAWF::prop(Symbol::CONTROLLER, $app->new_controller());
 
-        try { echo $controller->render(); }     // 3) Try to render the View
+        try { echo $controller->render(); }     // Try to render the web view
         catch (Exception $e) { self::handle_exception($app, $e); }
         if (isset($php_errormsg)) $app->add_error_message($php_errormsg);
         $controller->report_errors();           // ...and report any errors.
@@ -72,11 +73,22 @@ class YAWF // Yet Another Web Framework
         throw new Exception('Unknown method ' . $name . '() called');
     }
 
-    // Hook a method name to some other method
+    // Hook a method name to some other static method.
+    // This is useful to add dynamic calls at runtime.
 
-    public static function hook($name, $method)
+    public static function hook($name, $method = NULL)
     {
-        self::$hooks[$name] = $method;
+        if (isset($method)) self::$hooks[$name] = $method;
+        return array_key(self::$hooks, $method);
+    }
+
+    // Get or set a YAWF property, for example an object.
+    // This is useful for registered static hook methods.
+
+    public static function prop($property, $value = NULL)
+    {
+        if (isset($value)) self::$props[$property] = $value;
+        return array_key(self::$props, $property);
     }
 
     // Catch all undefined methods calls
