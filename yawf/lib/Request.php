@@ -13,20 +13,93 @@
 
 class Request extends YAWF
 {
+    // A mapping of request content types to file types
+
+    private static $request_types = array(
+        'text/xml' => Symbol::XML,
+        'text/html' => Symbol::HTML,
+        'text/plain' => Symbol::TXT,
+        'text/yaml' => Symbol::YAML,
+        'text/json' => Symbol::JSON,
+        'text/jsonp' => Symbol::JSON,
+        'text/javascript' => Symbol::JSON,
+        'text/serialized' => Symbol::SERIALIZED,
+        'application/json' => Symbol::JSON,
+        'application/jsonp' => Symbol::JSON,
+        'application/javascript' => Symbol::JSON,
+        'application/serialized' => Symbol::SERIALIZED,
+        'application/x-javascript' => Symbol::JSON,
+        'application/xml' => Symbol::XML,
+        'application/yaml' => Symbol::YAML,
+    );
+
     protected $app;     // either the "App" or the "App_test" object
+    protected $params;  // a copy of all the request parameters sent
     protected $flash;   // an object to send data into the next view
     protected $cookie;  // an object to get & set $_COOKIE variable,
     protected $server;  // an object to get & set $_SERVER variable,
     protected $session; // an object to get & set $_SESSION variable
 
+    // Setup some web request data objects
+
     protected function setup_request($app)
     {
         @session_start();
         $this->app = $app;
+        $this->set_params();
         $this->flash = $this->new_flash_object();
         $this->cookie = $this->new_cookie_object();
         $this->server = $this->new_server_object();
         $this->session = $this->new_session_object();
+    }
+
+    // Parse the request params (by using the $_REQUEST array by default)
+
+    protected function set_params($request = array(), $options = array())
+    {
+        $trim_whitespace = array_key($options, 'trim_whitespace', PARAMS_TRIM_WHITESPACE);
+        $format_as_html = array_key($options, 'format_as_html', PARAMS_FORMAT_AS_HTML);
+        $strip_slashes = array_key($options, 'strip_slashes', PARAMS_STRIP_SLASHES);
+        $this->params = new Object();
+        if (!count($request)) $request = $_REQUEST;
+        foreach ($request as $field => $value)
+        {
+            if ($trim_whitespace) $value = trim($value);
+            if ($strip_slashes) $value = stripslashes($value);
+            if ($format_as_html) $value = htmlentities($value);
+            if (strstr($field, '->'))
+            {
+                list($object, $field) = preg_split('/\->/', $field);
+                if (!$this->params->$object) $this->params->$object = new Object();
+                $this->params->$object->$field = $value;
+            }
+            else
+            {
+                $this->params->$field = $value;
+            }
+        }
+    }
+
+    // Allow method overriding using the "_method" parameter
+    // (or the "X_HTTP_METHOD_OVERRIDE" custom HTTP header).
+
+    protected function request_method()
+    {
+        return strtolower(first($this->params->_method,
+                                $this->server->x_http_method_override,
+                                $this->server->request_method));
+    }
+
+    // Return the requested content type set in HTTP headers
+    // Don't return the "x-www-form-urlencoded" content type
+
+    protected function request_type()
+    {
+        $type = strtolower($this->server->content_type);
+        $type = preg_replace('/;charset=.*$/', '', $type); // strip the encoding
+        if ($type == 'application/x-www-form-urlencoded') $type = NULL;
+        return ($type ? array_key(self::$request_types, $type)
+                      : $this->app->get_content_type());
     }
 
     // Get or set a cookie

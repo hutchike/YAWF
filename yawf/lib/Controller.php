@@ -18,7 +18,6 @@ class Controller extends Request
     protected $type;    // a string with the content type, e.g. html
     protected $lang;    // the two character language code e.g. "en"
     protected $render;  // array of data to be rendered inside views
-    protected $params;  // a copy of all the request parameters sent
 
     // Set up this new Controller object for an app with render data
 
@@ -27,7 +26,6 @@ class Controller extends Request
         $this->view = $app->get_file(); // "faq" from "www.yawf.org/project/faq"
         $this->path = $app->get_folder().'/'.$this->view;  // e.g. "project/faq"
         $this->render = $render;        // data to be rendered in views
-        $this->set_params();            // request parameters passed in
         $this->set_lang();              // the browser language setting
         $this->setup_request($app);     // inherited from Request class
     }
@@ -113,33 +111,6 @@ class Controller extends Request
     protected function set_type($type)
     {
         $this->type = $type;
-    }
-
-    // Parse request params (from the $_REQUEST array by default)
-
-    protected function set_params($request = array(), $options = array())
-    {
-        $trim_whitespace = array_key($options, 'trim_whitespace', PARAMS_TRIM_WHITESPACE);
-        $format_as_html = array_key($options, 'format_as_html', PARAMS_FORMAT_AS_HTML);
-        $strip_slashes = array_key($options, 'strip_slashes', PARAMS_STRIP_SLASHES);
-        $this->params = new Object();
-        if (!count($request)) $request = $_REQUEST;
-        foreach ($request as $field => $value)
-        {
-            if ($trim_whitespace) $value = trim($value);
-            if ($strip_slashes) $value = stripslashes($value);
-            if ($format_as_html) $value = htmlentities($value);
-            if (strstr($field, '->'))
-            {
-                list($object, $field) = preg_split('/\->/', $field);
-                if (!$this->params->$object) $this->params->$object = new Object();
-                $this->params->$object->$field = $value;
-            }
-            else
-            {
-                $this->params->$field = $value;
-            }
-        }
     }
 
     // Set the requested language by checking supported languages

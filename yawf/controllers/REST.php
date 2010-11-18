@@ -15,26 +15,6 @@ load_helper('Data');
 
 class REST_controller extends App_controller
 {
-    // A mapping of request content types to file types
-
-    private static $request_types = array(
-        'text/xml' => Symbol::XML,
-        'text/html' => Symbol::HTML,
-        'text/plain' => Symbol::TXT,
-        'text/yaml' => Symbol::YAML,
-        'text/json' => Symbol::JSON,
-        'text/jsonp' => Symbol::JSON,
-        'text/javascript' => Symbol::JSON,
-        'text/serialized' => Symbol::SERIALIZED,
-        'application/json' => Symbol::JSON,
-        'application/jsonp' => Symbol::JSON,
-        'application/javascript' => Symbol::JSON,
-        'application/serialized' => Symbol::SERIALIZED,
-        'application/x-javascript' => Symbol::JSON,
-        'application/xml' => Symbol::XML,
-        'application/yaml' => Symbol::YAML,
-    );
-
     // The REST service
 
     protected $service;
@@ -45,40 +25,19 @@ class REST_controller extends App_controller
     {
         $this->service = $this->app->new_service();
         if (!$this->service->auth()) return NULL;
-        $this->setup_params();
+        $this->setup_REST_params();
         $method = $this->request_method();
         $options['type'] = $this->request_type();
-        $options['folder'] = 'REST';
+        $options['folder'] = 'REST'; // to use the "yawf/views/en/REST" folder
         return parent::render($method, $options);
     }
 
     // Setup the request parameters by looking for ID fields
 
-    protected function setup_params()
+    protected function setup_REST_params()
     {
         $file = $this->app->get_file();
         if (is_numeric($file)) $this->params->id = $file;
-    }
-
-    // Allow method overriding using the "_method" parameter
-    // (or the "X_HTTP_METHOD_OVERRIDE" custom HTTP header).
-
-    protected function request_method()
-    {
-        return strtolower(first($this->params->_method,
-                                $this->server->x_http_method_override,
-                                $this->server->request_method));
-    }
-
-    // Return the requested content type set in HTTP headers
-
-    protected function request_type()
-    {
-        $type = strtolower($this->server->content_type);
-        $type = preg_replace('/;charset=.*$/', '', $type); // strip the encoding
-        if ($type == 'application/x-www-form-urlencoded') $type = NULL;
-        return ($type ? array_key(self::$request_types, $type)
-                      : $this->app->get_content_type());
     }
 
     // Call the REST service "delete" method
