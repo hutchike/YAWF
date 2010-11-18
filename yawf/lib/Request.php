@@ -150,35 +150,38 @@ class Request extends YAWF
 
     protected function send_mail($file, $render)
     {
-        return $this->app->send_mail($file, $render);
+        // Allow the $mailer object to be defined as a YAWF prop
+
+        $mailer = first(YAWF::prop(Symbol::MAILER), $this->app);
+        return $mailer->send_mail($file, $render);
     }
 
     // Return new controller flash object
 
     protected function new_flash_object()
     {
-        return new Request_flash();
+        return YAWF::prop(Symbol::FLASH, new Request_flash());
     }
 
     // Return new controller cookie object
 
     protected function new_cookie_object()
     {
-        return new Request_cookie();
+        return YWAF::prop(Symbol::COOKIE, new Request_cookie());
     }
 
     // Return new controller server object
 
     protected function new_server_object()
     {
-        return new Request_server();
+        return YAWF::prop(Symbol::SERVER, new Request_server());
     }
 
     // Return new controller session object
 
     protected function new_session_object()
     {
-        return new Request_session();
+        return YAWF::prop(Symbol::SESSION, new Request_session());
     }
 
     // Assert that something "should" be true

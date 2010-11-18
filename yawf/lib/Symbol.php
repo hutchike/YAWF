@@ -17,14 +17,19 @@ class Symbol extends YAWF
 {
     const APP = 'app';
     const CONTROLLER = 'controller';
+    const COOKIE = 'cookie';
     const DEFAULT_WORD = 'default';
+    const FLASH = 'flash';
     const HTML = 'html';
     const JS = 'js';
     const JSON = 'json';
     const JSONP = 'jsonp';
+    const MAILER = 'mailer',
     const PATH_CONFIG = 'path_config';
     const PATH_METHOD = 'path_method';
     const SERIALIZED = 'serialized';
+    const SERVER = 'server';
+    const SESSION = 'session';
     const TXT = 'txt';
     const VALIDATION_MESSAGES = 'validation_messages';
     const XML = 'xml';
