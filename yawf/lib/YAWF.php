@@ -37,7 +37,7 @@ class YAWF // Yet Another Web Framework
 
         $app_class = preg_match('/_test($|[^\w])/', $uri) ? 'App_test' : 'App';
         require_once "lib/$app_class.php";
-        $app = new $app_class());
+        $app = new $app_class();
         $controller = $app->new_controller();
 
         try { echo $controller->render(); }
