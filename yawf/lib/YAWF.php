@@ -31,20 +31,20 @@ class YAWF // Yet Another Web Framework
 
     public static function respond_to_web_request()
     {
-        self::start();                          // First setup YAWF resources
-        error_reporting(E_ALL | E_STRICT);      // Report all errors (strict)
-        $uri = array_key($_SERVER, 'REQUEST_URI'); // and get the request URI
+        self::start();
+        error_reporting(E_ALL | E_STRICT);
+        $uri = array_key($_SERVER, 'REQUEST_URI');
 
         $app_class = preg_match('/_test($|[^\w])/', $uri) ? 'App_test' : 'App';
-        require_once "lib/$app_class.php";      // Create the app or test app
-        $app = YAWF::prop(Symbol::APP, new $app_class()); // and a controller
-        $controller = YAWF::prop(Symbol::CONTROLLER, $app->new_controller());
+        require_once "lib/$app_class.php";
+        $app = new $app_class());
+        $controller = $app->new_controller();
 
-        try { echo $controller->render(); }     // Try to render the web view
+        try { echo $controller->render(); }
         catch (Exception $e) { self::handle_exception($app, $e); }
         if (isset($php_errormsg)) $app->add_error_message($php_errormsg);
-        $controller->report_errors();           // ...and report any errors.
-        self::finish('Rendered ' . $uri);       // Finish with some log info
+        $controller->report_errors();
+        self::finish('Rendered ' . $uri);
     }
 
     // Write benchmarking performance in the log file

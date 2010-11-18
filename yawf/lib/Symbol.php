@@ -29,6 +29,7 @@ class Symbol extends YAWF
     const PATH_METHOD = 'path_method';
     const SERIALIZED = 'serialized';
     const SERVER = 'server';
+    const SERVICE = 'service';
     const SESSION = 'session';
     const TXT = 'txt';
     const VALIDATION_MESSAGES = 'validation_messages';

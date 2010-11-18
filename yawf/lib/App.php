@@ -55,6 +55,10 @@ class App extends YAWF
         require_once 'lib/Model.php';
         $model = new Model();
         $model->set_database($this->is_testing ? DB_DATABASE_TEST : DB_DATABASE_LIVE);
+
+        // Register this app as a prop
+
+        YAWF::prop(Symbol::APP, $this);
     }
 
     // Say whether we're testing
@@ -100,7 +104,7 @@ class App extends YAWF
         $class .= '_controller'; // mandatory suffix
         $this->controller = new $class();
         $this->controller->setup_for_app($this, new Object($render));
-        return $this->controller;
+        return YAWF::prop(Symbol::CONTROLLER, $this->controller);
     }
 
     // Create a new service and return it
@@ -122,7 +126,7 @@ class App extends YAWF
         $class .= '_service'; // mandatory suffix
         $this->service = new $class();
         $this->service->setup_for_app($this);
-        return $this->service;
+        return YAWF::prop(Symbol::SERVICE, $this->service);
     }
 
     // Get the folder in the URL (e.g. "default")
