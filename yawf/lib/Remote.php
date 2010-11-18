@@ -130,13 +130,12 @@ class Remote extends YAWF
         if (!is_object($this->object)) return 0;
         if ($this->object->get_id()) return 0;
         if (!$this->is_validated()) return 0;
-        $class = $this->class;
         $type = $this->type;
         $url = $this->secure_url($this->url);
         $data = Data::to($type, array($this->class => $this->object->data()));
         $text = CURL::post($url, $data, $this->headers_for($type));
         $this->response = Data::from($type, $text);
-        $id = Data::get_id($this->response, $class, $this->object->get_id_field());
+        $id = Data::get_id($this->response, $this->class, $this->object->get_id_field());
         if ($id) $this->object->set_id($id);
         $this->check_response();
         return $id;
@@ -149,7 +148,6 @@ class Remote extends YAWF
         if (!is_object($this->object) || !$this->has_changed) return NULL;
         if (!$this->object->get_id()) return NULL;
         if (!$this->is_validated()) return NULL;
-        $class = $this->class;
         $type = $this->type;
         $url = $this->secure_url($this->url . '/' . $this->object->get_id());
         $data = Data::to($type, array($this->class => $this->object->data()));
@@ -165,7 +163,6 @@ class Remote extends YAWF
     {
         if (!is_object($this->object)) return NULL;
         if (!$this->object->get_id()) return NULL;
-        $class = $this->class;
         $type = $this->type;
         $url = $this->secure_url($this->url . '/' . $this->object->get_id());
         $text = CURL::delete($url, $this->headers_for($type));
