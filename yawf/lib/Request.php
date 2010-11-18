@@ -58,7 +58,7 @@ class Request extends YAWF
     protected function get_params($request = array(), $options = array())
     {
         if ($params = YAWF::prop(Symbol::PARAMS)) return $params;
-        $params = new Object();
+        else $params = new Object(); // need to make a new object
 
         $trim_whitespace = array_key($options, 'trim_whitespace', PARAMS_TRIM_WHITESPACE);
         $format_as_html = array_key($options, 'format_as_html', PARAMS_FORMAT_AS_HTML);
@@ -155,7 +155,7 @@ class Request extends YAWF
     {
         // Allow the $mailer object to be defined as a YAWF prop
 
-        $mailer = first(YAWF::prop(Symbol::MAILER), $this->app);
+        $mailer = $this->new_prop(Symbol::MAILER, $this->app);
         return $mailer->send_mail($file, $render);
     }
 
@@ -163,28 +163,36 @@ class Request extends YAWF
 
     protected function new_flash_object()
     {
-        return YAWF::prop(Symbol::FLASH, new Request_flash());
+        return $this->new_prop(Symbol::FLASH, new Request_flash());
     }
 
     // Return new controller cookie object
 
     protected function new_cookie_object()
     {
-        return YAWF::prop(Symbol::COOKIE, new Request_cookie());
+        return $this->new_prop(Symbol::COOKIE, new Request_cookie());
     }
 
     // Return new controller server object
 
     protected function new_server_object()
     {
-        return YAWF::prop(Symbol::SERVER, new Request_server());
+        return $this->new_prop(Symbol::SERVER, new Request_server());
     }
 
     // Return new controller session object
 
     protected function new_session_object()
     {
-        return YAWF::prop(Symbol::SESSION, new Request_session());
+        return $this->new_prop(Symbol::SESSION, new Request_session());
+    }
+
+    // Return a new or existing YAWF prop object
+
+    protected function new_prop($symbol, $object)
+    {
+        if ($prop = YAWF::prop($symbol)) return $prop;
+        else return YAWF::prop($symbol, $object);
     }
 
     // Assert that something "should" be true

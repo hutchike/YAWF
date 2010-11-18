@@ -78,8 +78,8 @@ class YAWF // Yet Another Web Framework
 
     public static function hook($name, $method = NULL)
     {
-        if (isset($method)) self::$hooks[$name] = $method;
-        return array_key(self::$hooks, $method);
+        return (is_null($method) ? array_key(self::$hooks, $method)
+                                 : self::$hooks[$name] = $method);
     }
 
     // Get or set a YAWF prop, for example an object.
@@ -87,8 +87,8 @@ class YAWF // Yet Another Web Framework
 
     public static function prop($prop, $value = NULL)
     {
-        if (isset($value)) self::$props[$prop] = $value;
-        return array_key(self::$props, $prop);
+        return (is_null($value) ? array_key(self::$props, $prop)
+                                : self::$props[$prop] = $value);
     }
 
     // Catch all undefined methods calls
