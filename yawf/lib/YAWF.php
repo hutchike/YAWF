@@ -70,7 +70,8 @@ class YAWF // Yet Another Web Framework
 
     public static function unknown($name, $args)
     {
-        throw new Exception('Unknown method ' . $name . '() called');
+        $info = ($args ? " with args:\n" . dump($args) : '');
+        throw new Exception('Unknown method ' . $name . '() called' . $info);
     }
 
     // Hook a method name to some other static method.

@@ -62,6 +62,13 @@ class Command
         YAWF::finish("\"$name\" command completed with opts $opts and args $args");
     }
 
+    // Catch all undefined methods calls
+
+    public function __call($name, $args)
+    {
+        YAWF::unknown($name, $args);
+    }
+
     // Parse options and arguments on the command line
 
     protected function parse_command_line()
