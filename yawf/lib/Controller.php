@@ -117,6 +117,7 @@ class Controller extends Request
     protected function set_view($view)
     {
         $this->view = $view;
+        return $this;
     }
 
     // Change the display content type
@@ -124,6 +125,7 @@ class Controller extends Request
     protected function set_type($type)
     {
         $this->type = $type;
+        return $this;
     }
 
     // Set the requested language by checking supported languages
@@ -143,6 +145,7 @@ class Controller extends Request
             $lang = DEFAULT_LANGUAGE;
         }
         $this->lang = $lang;
+        return $this;
     }
 
     // Get the language setting
