@@ -47,7 +47,8 @@ class Controller extends Request
         // Get the view (e.g. "index") and the type (e.g. "html")
 
         $this->view = is_null($view) ? $this->view : $view;
-        $this->type = array_key($options, 'type', $this->app->get_content_type());
+        if ($type = array_key($options, 'type')) $this->type = $type;
+        else $this->type = first($this->type, $this->app->get_content_type());
 
         // Call the controller's view method
 
