@@ -44,10 +44,10 @@ class Request extends YAWF
     protected function setup_request($app)
     {
         $this->app = $app;
-        $this->params = $this->new_params_object();
-        $this->cookie = $this->new_cookie_object();
-        $this->server = $this->new_server_object();
-        $this->session = $this->new_session_object();
+        $this->params = $this->params_object();
+        $this->cookie = $this->cookie_object();
+        $this->server = $this->server_object();
+        $this->session = $this->session_object();
     }
 
     // Allow method overriding using the "_method" parameter
@@ -118,12 +118,12 @@ class Request extends YAWF
         return $mailer->send_mail($file, $render);
     }
 
-    // Return a new request params object, using the $_REQUEST array by default
+    // Return a request params object, using the $_REQUEST array by default
 
-    protected function new_params_object($request = array(), $options = array())
+    protected function params_object($request = array(), $options = array())
     {
-        if ($params = YAWF::prop(Symbol::PARAMS)) return $params;
-        else $params = new Object(); // uses regular Object class
+        if (!count($request) && $params = YAWF::prop(Symbol::PARAMS)) return $params;
+        else $params = new Object();
 
         $trim_whitespace = array_key($options, 'trim_whitespace', PARAMS_TRIM_WHITESPACE);
         $format_as_html = array_key($options, 'format_as_html', PARAMS_FORMAT_AS_HTML);
@@ -148,25 +148,25 @@ class Request extends YAWF
         return YAWF::prop(Symbol::PARAMS, $params);
     }
 
-    // Return a new request cookie object
+    // Return a request cookie object
 
-    protected function new_cookie_object()
+    protected function cookie_object()
     {
         if ($cookie = YAWF::prop(Symbol::COOKIE)) return $cookie;
         else return YAWF::prop(Symbol::COOKIE, new Request_cookie());
     }
 
-    // Return a new request server object
+    // Return a request server object
 
-    protected function new_server_object()
+    protected function server_object()
     {
         if ($server = YAWF::prop(Symbol::SERVER)) return $server;
         else return YAWF::prop(Symbol::SERVER, new Request_server());
     }
 
-    // Return a new request session object
+    // Return a request session object
 
-    protected function new_session_object()
+    protected function session_object()
     {
         if ($session =  YAWF::prop(Symbol::SESSION)) return $session;
         else return YAWF::prop(Symbol::SESSION, new Request_session());

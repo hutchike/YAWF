@@ -29,7 +29,7 @@ class Controller extends Request
         $this->render = $render;        // data to be rendered in views
         $this->set_lang();              // the browser language setting
         $this->setup_request($app);     // inherited from Request class
-        $this->flash = $this->new_flash_object();
+        $this->flash = $this->flash_object();
     }
 
     // Get or set a flash message (used by App)
@@ -162,9 +162,9 @@ class Controller extends Request
         return '';
     }
 
-    // Make a new controller flash object
+    // Make a controller flash object
 
-    protected function new_flash_object()
+    protected function flash_object()
     {
         if ($flash = YAWF::prop(Symbol::FLASH)) return $flash;
         else return new Controller_flash();
