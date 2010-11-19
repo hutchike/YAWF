@@ -181,8 +181,8 @@ class Controller_flash extends YAWF
     {
         $this->session = YAWF::prop(Symbol::SESSION);
         $var = self::SESSION_VAR;
-        $this->flash_now = (is_null($array) ? $this->session->$var)
-                                            : new Object($array);
+        $this->flash_now = is_null($array) ? $this->session->$var
+                                           : new Object($array);
         $this->session->$var = $this->flash_next = new Object();
     }
 
