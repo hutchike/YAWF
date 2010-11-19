@@ -166,7 +166,8 @@ class Controller extends Request
 
     protected function new_flash_object()
     {
-        return $this->get_prop(Symbol::FLASH, new Controller_flash());
+        if ($flash = YAWF::prop(Symbol::FLASH)) return $flash;
+        else return new Controller_flash();
     }
 }
 

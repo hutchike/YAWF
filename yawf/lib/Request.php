@@ -114,7 +114,7 @@ class Request extends YAWF
     {
         // Allow the $mailer object to be defined as a YAWF prop
 
-        $mailer = $this->get_prop(Symbol::MAILER, $this->app);
+        $mailer = first(YAWF::prop(Symbol::MAILER), $this->app);
         return $mailer->send_mail($file, $render);
     }
 
@@ -152,30 +152,24 @@ class Request extends YAWF
 
     protected function new_cookie_object()
     {
-        return $this->get_prop(Symbol::COOKIE, new Request_cookie());
+        if ($cookie = YAWF::prop(Symbol::COOKIE)) return $cookie;
+        else return YAWF::prop(Symbol::COOKIE, new Request_cookie());
     }
 
     // Return a new request server object
 
     protected function new_server_object()
     {
-        return $this->get_prop(Symbol::SERVER, new Request_server());
+        if ($server = YAWF::prop(Symbol::SERVER)) return $server;
+        else return YAWF::prop(Symbol::SERVER, new Request_server());
     }
 
     // Return a new request session object
 
     protected function new_session_object()
     {
-        return $this->get_prop(Symbol::SESSION, new Request_session());
-    }
-
-    // Return an existing or new YAWF prop object
-    // This enables mocks to be set up beforehand
-
-    protected function get_prop($symbol, $object)
-    {
-        if ($prop = YAWF::prop($symbol)) return $prop;
-        else return YAWF::prop($symbol, $object);
+        if ($session =  YAWF::prop(Symbol::SESSION)) return $session;
+        else return YAWF::prop(Symbol::SESSION, new Request_session());
     }
 
     // Test that something that "should" be true, indeed is true
