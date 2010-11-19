@@ -75,7 +75,7 @@ class Controller extends Request
         $render->params = $this->params;
     }
 
-    // Setup path-dependant data to be rendered
+    // Setup path-dependent data to be rendered
     // This is useful for titles & descriptions
 
     protected function setup_path_data(&$render)
