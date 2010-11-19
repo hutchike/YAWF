@@ -73,6 +73,9 @@ class Controller extends Request
         $render->lang = $this->lang;
         $render->flash = $this->flash;
         $render->params = $this->params;
+        $render->cookie = $this->cookie;
+        $render->server = $this->server;
+        $render->session = $this->session;
     }
 
     // Setup path-dependent data to be rendered.
