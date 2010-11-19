@@ -29,7 +29,7 @@ class Controller extends Request
         $this->render = $render;        // data to be rendered in views
         $this->set_lang();              // the browser language setting
         $this->setup_request($app);     // inherited from Request class
-        $this->flash = $this->flash_object();
+        $this->flash = $this->flash_object(); // uses a request session
     }
 
     // Get or set a flash message (used by App)
