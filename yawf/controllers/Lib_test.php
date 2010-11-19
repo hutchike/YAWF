@@ -246,7 +246,7 @@ class Lib_test_controller extends Controller
         $this->flash->now = self::TEST_FLASH;
         $this->should("have a flash notice now", $this->flash->notice == self::TEST_FLASH);
         $this->flash->warning = $this->flash->error = self::TEST_FLASH;
-        $this->flash = new Request_flash(); // simulate a new page
+        $this->flash = new Controller_flash(); // simulate a page load
         $this->should("have a flash warning set", $this->flash->warning == self::TEST_FLASH);
         $this->should("have a flash error set", $this->flash->error == self::TEST_FLASH);
     }
