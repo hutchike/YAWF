@@ -155,7 +155,7 @@ class Request extends YAWF
     {
         // Allow the $mailer object to be defined as a YAWF prop
 
-        $mailer = $this->new_prop(Symbol::MAILER, $this->app);
+        $mailer = $this->get_prop(Symbol::MAILER, $this->app);
         return $mailer->send_mail($file, $render);
     }
 
@@ -163,33 +163,33 @@ class Request extends YAWF
 
     protected function new_flash_object()
     {
-        return $this->new_prop(Symbol::FLASH, new Request_flash());
+        return $this->get_prop(Symbol::FLASH, new Request_flash());
     }
 
     // Return new controller cookie object
 
     protected function new_cookie_object()
     {
-        return $this->new_prop(Symbol::COOKIE, new Request_cookie());
+        return $this->get_prop(Symbol::COOKIE, new Request_cookie());
     }
 
     // Return new controller server object
 
     protected function new_server_object()
     {
-        return $this->new_prop(Symbol::SERVER, new Request_server());
+        return $this->get_prop(Symbol::SERVER, new Request_server());
     }
 
     // Return new controller session object
 
     protected function new_session_object()
     {
-        return $this->new_prop(Symbol::SESSION, new Request_session());
+        return $this->get_prop(Symbol::SESSION, new Request_session());
     }
 
-    // Return a new or existing YAWF prop object
+    // Return an existing or new YAWF prop object
 
-    protected function new_prop($symbol, $object)
+    protected function get_prop($symbol, $object)
     {
         if ($prop = YAWF::prop($symbol)) return $prop;
         else return YAWF::prop($symbol, $object);
