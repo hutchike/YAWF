@@ -171,6 +171,45 @@ class Yet_another_shell extends Command
         if (!$this->is_quiet) print $text;
     }
 
+    // Create a mock params object for tests
+
+    public function params($array = array())
+    {
+        YAWF::prop(Symbol::PARAMS, array_to_object($array));
+    }
+
+    // Create a mock cookie object for tests
+
+    public function cookie($array = array())
+    {
+        require_once('lib/Request.php');
+        YAWF::prop(Symbol::COOKIE, new Request_cookie($array));
+    }
+
+    // Create a mock server object for tests
+
+    public function server($array = array())
+    {
+        require_once('lib/Request.php');
+        YAWF::prop(Symbol::SERVER, new Request_server($array));
+    }
+
+    // Create a mock session object for tests
+
+    public function session($array = array())
+    {
+        require_once('lib/Request.php');
+        YAWF::prop(Symbol::SESSION, new Request_session($array));
+    }
+
+    // Create a mock flash object for tests
+
+    public function flash($array = array())
+    {
+        require_once('lib/Controller.php');
+        YAWF::prop(Symbol::FLASH, new Controller_flash($array));
+    }
+
     // Parse lines like "$this->should('work', 1==1)" in yash scripts
 
     public function should($test, $passed = FALSE, $test_data = NULL)
@@ -203,6 +242,14 @@ class Yet_another_shell extends Command
 // Create our very awesome Yet Another Shell object
 
 $yash = new Yet_another_shell(getcwd());
+
+// Add functions to create mock objects for testing
+
+function params($array = array()) { global $yash; $yash->params($array); }
+function cookie($array = array()) { global $yash; $yash->cookie($array); }
+function flash($array = array()) { global $yash; $yash->flash($array); }
+function server($array = array()) { global $yash; $yash->server($array); }
+function session($array = array()) { global $yash; $yash->session($array); }
 
 // Add a couple of rather nice Ruby print functions
 
