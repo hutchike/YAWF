@@ -48,12 +48,13 @@ class App_test extends App
         // Do nothing
     }
 
-    // A variation of the regular "render_view" that will insert test results
+    // Variation of the regular "render_view" that can insert test results
 
     public function render_view($file, $render = NULL, $options = array())
     {
         $render = new Object($render);
-        if (array_key($options, 'folder') === 'types')
+        if (array_key($options, 'folder') === 'types' &&
+            array_key($_SERVER, 'REMOTE_ADDR')) // to check it's a web request
             $this->render_test_run($render);
 
         return parent::render_view($file, $render, $options);
