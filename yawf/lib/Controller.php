@@ -66,7 +66,7 @@ class Controller extends Request
 
     public function setup_render_data(&$render)
     {
-        $this->setup_path_data($render);
+        $this->render_path_data($render);
         $render->app = $this->app;
         $render->view = $this->view;
         $render->path = $this->path;
@@ -75,10 +75,10 @@ class Controller extends Request
         $render->params = $this->params;
     }
 
-    // Setup path-dependent data to be rendered
-    // This is useful for titles & descriptions
+    // Setup path-dependent data to be rendered.
+    // This is useful for titles & descriptions.
 
-    protected function setup_path_data(&$render)
+    protected function render_path_data(&$render)
     {
         foreach (get_object_vars($render) as $field => $value)
         {
@@ -203,12 +203,12 @@ class Controller_flash extends YAWF
     {
         if (is_array($key)) // allow arrays to set key/value pairs
         {
-            foreach ($key as $k => $v) $this->flash_now[$k] = $v;
+            foreach ($key as $k => $v) $this->flash_now->$k = $v;
         }
         else // either set a new value or return the current value
         {
-            return is_null($value) ? array_key($this->flash_now, $key)
-                                   : $this->flash_now[$key] = $value;
+            return is_null($value) ? $this->flash_now->$key
+                                   : $this->flash_now->$key = $value;
         }
     }
 }
