@@ -17,6 +17,7 @@ class Controller extends Request
     protected $path;    // a string holding the folder and view path
     protected $type;    // a string with the content type, e.g. html
     protected $lang;    // the two character language code e.g. "en"
+    protected $flash;   // an object to send data into the next view
     protected $render;  // array of data to be rendered inside views
 
     // Set up this new Controller object for an app with render data
@@ -28,6 +29,15 @@ class Controller extends Request
         $this->render = $render;        // data to be rendered in views
         $this->set_lang();              // the browser language setting
         $this->setup_request($app);     // inherited from Request class
+        $this->flash = $this->new_flash_object();
+    }
+
+    // Get or set a flash message (used by App)
+
+    public function flash($key, $value = NULL) 
+    {
+        return (is_null($value) ? $this->flash->$key
+                                : $this->flash->$key = $value);
     }
 
     // Render the requested view
@@ -150,6 +160,54 @@ class Controller extends Request
             if ($value = array_key($lang, Symbol::DEFAULT_WORD)) return $value;
         }
         return '';
+    }
+
+    // Make a new controller flash object
+
+    protected function new_flash_object()
+    {
+        return $this->get_prop(Symbol::FLASH, new Controller_flash());
+    }
+}
+
+class Controller_flash extends YAWF
+{
+    const SESSION_VAR = '__flash__';
+    private $session;       // A session object that we can "get" and "set"
+    private $flash_now;     // Flash info to display in the current view
+    private $flash_next;    // Flash info to display in the next view
+
+    public function __construct($array = NULL)
+    {
+        $this->session = YAWF::prop(Symbol::SESSION);
+        $var = self::SESSION_VAR;
+        $this->flash_now = (is_null($array) ? $this->session->$var)
+                                            : new Object($array);
+        $this->session->$var = $this->flash_next = new Object();
+    }
+
+    public function __get($key)
+    {
+        return $this->flash_now->$key;
+    }
+
+    public function __set($key, $value)
+    {
+        if ($key == 'now') return $this->now('notice', $value);
+        return $this->flash_next->$key = $value;
+    }
+
+    public function now($key, $value = NULL)
+    {
+        if (is_array($key)) // allow arrays to set key/value pairs
+        {
+            foreach ($key as $k => $v) $this->flash_now[$k] = $v;
+        }
+        else // either set a new value or return the current value
+        {
+            return is_null($value) ? array_key($this->flash_now, $key)
+                                   : $this->flash_now[$key] = $value;
+        }
     }
 }
 

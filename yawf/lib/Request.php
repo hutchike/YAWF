@@ -35,7 +35,6 @@ class Request extends YAWF
 
     protected $app;     // either the "App" or the "App_test" object
     protected $params;  // a copy of all the request parameters sent
-    protected $flash;   // an object to send data into the next view
     protected $cookie;  // an object to get & set $_COOKIE variable,
     protected $server;  // an object to get & set $_SERVER variable,
     protected $session; // an object to get & set $_SESSION variable
@@ -44,43 +43,11 @@ class Request extends YAWF
 
     protected function setup_request($app)
     {
-        @session_start();
         $this->app = $app;
-        $this->params = $this->get_params();
-        $this->flash = $this->new_flash_object();
+        $this->params = $this->new_params_object();
         $this->cookie = $this->new_cookie_object();
         $this->server = $this->new_server_object();
         $this->session = $this->new_session_object();
-    }
-
-    // Parse the request params (by using the $_REQUEST array by default)
-
-    protected function get_params($request = array(), $options = array())
-    {
-        if ($params = YAWF::prop(Symbol::PARAMS)) return $params;
-        else $params = new Object(); // need to make a new object
-
-        $trim_whitespace = array_key($options, 'trim_whitespace', PARAMS_TRIM_WHITESPACE);
-        $format_as_html = array_key($options, 'format_as_html', PARAMS_FORMAT_AS_HTML);
-        $strip_slashes = array_key($options, 'strip_slashes', PARAMS_STRIP_SLASHES);
-        if (!count($request)) $request = $_REQUEST;
-        foreach ($request as $field => $value)
-        {
-            if ($trim_whitespace) $value = trim($value);
-            if ($strip_slashes) $value = stripslashes($value);
-            if ($format_as_html) $value = htmlentities($value);
-            if (strstr($field, '->'))
-            {
-                list($object, $field) = preg_split('/\->/', $field);
-                if (!$params->$object) $params->$object = new Object();
-                $params->$object->$field = $value;
-            }
-            else
-            {
-                $params->$field = $value;
-            }
-        }
-        return YAWF::prop(Symbol::PARAMS, $params);
     }
 
     // Allow method overriding using the "_method" parameter
@@ -111,14 +78,6 @@ class Request extends YAWF
     {
         if (!is_null($value)) $this->cookie->set($name, $value, $expires, $path, $domain, $secure);
         return $this->cookie->$name;
-    }
-
-    // Get or set a flash message (used by App)
-
-    public function flash($name, $value = NULL) 
-    {
-        return (is_null($value) ? $this->flash->$name
-                                : $this->flash->$name = $value);
     }
 
     // Redirect to another URL
@@ -159,28 +118,51 @@ class Request extends YAWF
         return $mailer->send_mail($file, $render);
     }
 
-    // Return new controller flash object
+    // Return a new request params object, using the $_REQUEST array by default
 
-    protected function new_flash_object()
+    protected function new_params_object($request = array(), $options = array())
     {
-        return $this->get_prop(Symbol::FLASH, new Request_flash());
+        if ($params = YAWF::prop(Symbol::PARAMS)) return $params;
+        else $params = new Object(); // uses regular Object class
+
+        $trim_whitespace = array_key($options, 'trim_whitespace', PARAMS_TRIM_WHITESPACE);
+        $format_as_html = array_key($options, 'format_as_html', PARAMS_FORMAT_AS_HTML);
+        $strip_slashes = array_key($options, 'strip_slashes', PARAMS_STRIP_SLASHES);
+        if (!count($request)) $request =& $_REQUEST;
+        foreach ($request as $field => $value)
+        {
+            if ($trim_whitespace) $value = trim($value);
+            if ($strip_slashes) $value = stripslashes($value);
+            if ($format_as_html) $value = htmlentities($value);
+            if (strstr($field, '->'))
+            {
+                list($object, $field) = preg_split('/\->/', $field);
+                if (!$params->$object) $params->$object = new Object();
+                $params->$object->$field = $value;
+            }
+            else
+            {
+                $params->$field = $value;
+            }
+        }
+        return YAWF::prop(Symbol::PARAMS, $params);
     }
 
-    // Return new controller cookie object
+    // Return a new request cookie object
 
     protected function new_cookie_object()
     {
         return $this->get_prop(Symbol::COOKIE, new Request_cookie());
     }
 
-    // Return new controller server object
+    // Return a new request server object
 
     protected function new_server_object()
     {
         return $this->get_prop(Symbol::SERVER, new Request_server());
     }
 
-    // Return new controller session object
+    // Return a new request session object
 
     protected function new_session_object()
     {
@@ -188,6 +170,7 @@ class Request extends YAWF
     }
 
     // Return an existing or new YAWF prop object
+    // This enables mocks to be set up beforehand
 
     protected function get_prop($symbol, $object)
     {
@@ -195,14 +178,14 @@ class Request extends YAWF
         else return YAWF::prop($symbol, $object);
     }
 
-    // Assert that something "should" be true
+    // Test that something that "should" be true, indeed is true
 
     protected function should($desc, $passed = FALSE, $test_data = NULL)
     {
         $this->app->test_case($desc, $passed, $test_data);
     }
 
-    // Assert that something "should not" be true
+    // Test that something "should not" be true, indeed is not true
 
     protected function should_not($desc, $failed = TRUE, $test_data = NULL)
     {
@@ -210,47 +193,20 @@ class Request extends YAWF
     }
 }
 
-class Request_flash
+class Request_cookie extends YAWF
 {
-    const SESSION_KEY = '__flash__';
-    private $flash;
+    private $cookie;
 
-    public function __construct()
+    public function __construct($array = NULL)
     {
-        $this->flash = array_key($_SESSION, self::SESSION_KEY, array());
-        $_SESSION[self::SESSION_KEY] = array();
+        if (is_null($array)) $this->cookie =& $_COOKIE;
+        elseif (is_array($array)) $this->cookie = $array; // to enable mocks
+        else throw new Exception('Cannot create cookie object for request');
     }
 
     public function __get($name)
     {
-        return array_key($this->flash, $name);
-    }
-
-    public function __set($name, $value)
-    {
-        return $name == 'now' ? $this->now('notice', $value)
-                              : $_SESSION[self::SESSION_KEY][$name] = $value;
-    }
-
-    public function now($name, $value = NULL)
-    {
-        if (is_array($name))
-        {
-            foreach ($name as $key => $val) $this->flash[$key] = $val;
-        }
-        else
-        {
-            return is_null($value) ? array_key($this->flash, $name)
-                                   : $this->flash[$name] = $value;
-        }
-    }
-}
-
-class Request_cookie
-{
-    public function __get($name)
-    {
-        return array_key($_COOKIE, $name);
+        return array_key($this->cookie, $name);
     }
 
     public function __set($name, $value)
@@ -264,29 +220,53 @@ class Request_cookie
     }
 }
 
-class Request_server
+class Request_server extends YAWF
 {
+    private $server;
+
+    public function __construct($array = NULL)
+    {
+        if (is_null($array)) $this->server =& $_SERVER;
+        elseif (is_array($array)) $this->server = $array; // to enable mocks
+        else throw new Exception('Cannot create server object for request');
+    }
+
     public function __get($key)
     {
-        return array_key($_SERVER, strtoupper($key));
+        return array_key($this->server, strtoupper($key));
     }
 
     public function __set($key, $value)
     {
-        $_SERVER[strtoupper($key)] = $value;
+        $this->server[strtoupper($key)] = $value;
     }
 }
 
-class Request_session
+class Request_session extends YAWF
 {
+    private $session;
+
+    public function __construct($array = NULL)
+    {
+        @session_start();
+        if (is_null($array)) $this->session =& $_SESSION;
+        elseif (is_array($array)) $this->session = $array; // to enable mocks
+        else throw new Exception('Cannot create session object for request');
+    }
+
     public function __get($key)
     {
-        return array_key($_SESSION, $key);
+        return array_key($this->session, $key);
     }
 
     public function __set($key, $value)
     {
-        $_SESSION[$key] = $value;
+        return $this->session[$key] = $value;
+    }
+
+    public function destroy()
+    {
+        @session_destroy();
     }
 }
 
