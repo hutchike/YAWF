@@ -112,17 +112,17 @@ class Controller extends Request
         // Override in controllers
     }
 
-    // Change the view to be rendered
+    // Set the view to be rendered
 
-    protected function set_view($view)
+    public function set_view($view)
     {
         $this->view = $view;
         return $this;
     }
 
-    // Change the display content type
+    // Set the display content type
 
-    protected function set_type($type)
+    public function set_type($type)
     {
         $this->type = $type;
         return $this;
@@ -130,7 +130,7 @@ class Controller extends Request
 
     // Set the requested language by checking supported languages
 
-    protected function set_lang($lang = NULL, $supported_languages = SUPPORTED_LANGUAGES)
+    public function set_lang($lang = NULL, $supported_languages = SUPPORTED_LANGUAGES)
     {
         // Only web browsers send the HTTP_ACCEPT_LANGUAGE header
 
