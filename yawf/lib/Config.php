@@ -17,15 +17,6 @@ class Config extends YAWF
 {
     protected static $configs = array();
 
-    // Return a config file, optionally a config file section
-
-    public static function get($config_name, $section = NULL)
-    {
-        $config = array_key(self::$configs, $config_name);
-        if (!$config) return NULL;
-        return $section ? array_key($config, $section) : $config;
-    }
-
     // Load a config file, and optionally force a file reload
 
     public static function load($config_name, $reload = FALSE)
