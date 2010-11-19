@@ -175,7 +175,7 @@ class Request extends YAWF
 
     protected function session_object()
     {
-        if ($session =  YAWF::prop(Symbol::SESSION)) return $session;
+        if ($session = YAWF::prop(Symbol::SESSION)) return $session;
         else return YAWF::prop(Symbol::SESSION, new Request_session());
     }
 
