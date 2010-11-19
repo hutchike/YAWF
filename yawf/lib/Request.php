@@ -53,7 +53,7 @@ class Request extends YAWF
     // Allow method overriding using the "_method" parameter
     // (or the "X_HTTP_METHOD_OVERRIDE" custom HTTP header).
 
-    protected function request_method()
+    public function request_method()
     {
         return strtolower(first($this->params->_method,
                                 $this->server->x_http_method_override,
@@ -63,7 +63,7 @@ class Request extends YAWF
     // Return the requested content type set in HTTP headers
     // Don't return the "x-www-form-urlencoded" content type
 
-    protected function request_type()
+    public function request_type()
     {
         $type = strtolower($this->server->content_type);
         $type = preg_replace('/;charset=.*$/', '', $type); // strip the encoding
@@ -72,17 +72,41 @@ class Request extends YAWF
                       : $this->app->get_content_type());
     }
 
-    // Get or set a cookie
+    // Get or set a params value (used by yash)
 
-    protected function cookie($name, $value = NULL, $expires = 0, $path = '/', $domain = COOKIE_DOMAIN, $secure = FALSE)
+    public function params($key, $value = NULL) 
+    {
+        return (is_null($value) ? $this->params->$key
+                                : $this->params->$key = $value);
+    }
+
+    // Get or set a cookie value (used by yash)
+
+    public function cookie($name, $value = NULL, $expires = 0, $path = '/', $domain = COOKIE_DOMAIN, $secure = FALSE)
     {
         if (!is_null($value)) $this->cookie->set($name, $value, $expires, $path, $domain, $secure);
         return $this->cookie->$name;
     }
 
+    // Get or set a server value (used by yash)
+
+    public function server($key, $value = NULL) 
+    {
+        return (is_null($value) ? $this->server->$key
+                                : $this->server->$key = $value);
+    }
+
+    // Get or set a session value (used by yash)
+
+    public function session($key, $value = NULL) 
+    {
+        return (is_null($value) ? $this->session->$key
+                                : $this->session->$key = $value);
+    }
+
     // Redirect to another URL
 
-    protected function redirect($url, $options = array())
+    public function redirect($url, $options = array())
     {
         $this->app->redirect($url, $options);
     }
@@ -110,7 +134,7 @@ class Request extends YAWF
 
     // Send some mail as text & HTML multipart (depends on the Mail helper)
 
-    protected function send_mail($file, $render)
+    public function send_mail($file, $render)
     {
         // Allow the $mailer object to be defined as a YAWF prop
 
@@ -120,9 +144,10 @@ class Request extends YAWF
 
     // Set the request parameters that we use to create the params object
 
-    protected function set_params($request = array(), $options = array())
+    public function set_params($request = array(), $options = array())
     {
-        return $this->params = $this->params_object($request, $options);
+        $this->params = $this->params_object($request, $options);
+        return $this;
     }
 
     // Return a request params object, using the $_REQUEST array by default
