@@ -28,9 +28,10 @@ class App extends YAWF
     {
         // Setup the config, HTML, log file & errors
 
-        AppConfig::configure();
+        $config = AppConfig::configure();
         load_helpers('HTML', 'Log');
         $this->error_messages = array();
+        $this->assert_checking($config);
 
         // Get the content type, URI folder and file
 
@@ -335,6 +336,10 @@ class AppConfig extends YAWF
         Config::define_constants($config['testing']);
         Config::define_constants($config['database'], array('prefix' => 'db_'));
         Config::define_constants($config['content']);
+
+        // Return an array with all the user-defined constants
+
+        return array_key(get_defined_constants(TRUE), 'user');
     }
 }
 

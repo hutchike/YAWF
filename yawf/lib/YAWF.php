@@ -51,7 +51,7 @@ class YAWF // Yet Another Web Framework
 
     public static function finish($info = 'Finished')
     {
-        if (!BENCHMARKING_ON) return;
+        if (!defined('BENCHMARKING_ON')) return;
         $msecs = (int)( 1000 * ( microtime(TRUE) - self::$start ) );
         Log::info($info . " after $msecs ms");  // "Log" helper loaded by run()
     }
@@ -102,6 +102,22 @@ class YAWF // Yet Another Web Framework
         if (!$method) $method = array_key(self::$hooks, 'default');
         if ($method === 'return') return; // optimization
         elseif ($method) eval("$method(\$name, \$args);");
+    }
+
+    // Configure the assert checking by using a config
+
+    public function assert_checking($config = array())
+    {
+        $is_on = (array_key($config, 'ASSERT_CHECK_ON') === TRUE);
+        assert_options(ASSERT_ACTIVE, $is_on);
+        if ($is_on) assert_options(ASSERT_CALLBACK, 'YAWF::assert_failed');
+    }
+
+    // Throw exceptions when assertions fail (if we're checking)
+
+    public static function assert_failed($file, $line, $message)
+    {
+        throw new Exception("Assert failed at line $line in $file: $message");
     }
 }
 
