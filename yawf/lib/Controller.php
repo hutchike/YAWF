@@ -162,7 +162,7 @@ class Controller extends Request
         return '';
     }
 
-    // Make a controller flash object
+    // Get the controller flash object
 
     protected function flash_object()
     {

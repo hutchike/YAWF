@@ -44,7 +44,7 @@ class Request extends YAWF
     protected function setup_request($app)
     {
         $this->app = $app;
-        $this->params = $this->params_object();
+        $this->set_params();
         $this->cookie = $this->cookie_object();
         $this->server = $this->server_object();
         $this->session = $this->session_object();
@@ -116,6 +116,13 @@ class Request extends YAWF
 
         $mailer = first(YAWF::prop(Symbol::MAILER), $this->app);
         return $mailer->send_mail($file, $render);
+    }
+
+    // Set the request parameters that we use to create the params object
+
+    protected function set_params($request = array(), $options = array())
+    {
+        return $this->params = $this->params_object($request, $options);
     }
 
     // Return a request params object, using the $_REQUEST array by default
