@@ -33,6 +33,7 @@ class Symbol extends YAWF
     const SERVICE = 'service';
     const SESSION = 'session';
     const TXT = 'txt';
+    const UTF8 = 'UTF-8';
     const VALIDATION_MESSAGES = 'validation_messages';
     const XML = 'xml';
     const YAML = 'yaml';
