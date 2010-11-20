@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-load_helpers('CURL', 'Data');
+load_helper('REST');
 
 class Remote extends YAWF
 {
@@ -106,10 +106,8 @@ class Remote extends YAWF
     public function load($id = 0) // returns the object ID or zero on failure
     {
         $class = $this->class;
-        $type = $this->type;
         $url = $this->secure_url($this->url . '/' . $id);
-        $text = CURL::get($url, $this->headers_for($type));
-        $data = Data::from($type, $text);
+        $data = REST::get($url, $this->type);
         if (!array_key($data, $class)) return 0;
         $this->object = new $class($data[$class]);
         return $this->object->get_id();
@@ -131,11 +129,9 @@ class Remote extends YAWF
         if (!is_object($this->object)) return 0;
         if ($this->object->get_id()) return 0;
         if (!$this->is_validated()) return 0;
-        $type = $this->type;
         $url = $this->secure_url($this->url);
-        $data = Data::to($type, array($this->class => $this->object->data()));
-        $text = CURL::post($url, $data, $this->headers_for($type));
-        $this->response = Data::from($type, $text);
+        $data = array($this->class => $this->object->data());
+        $this->response = REST::post($url, $data, $this->type);
         $id = Data::get_id($this->response, $this->class, $this->object->get_id_field());
         if ($id) $this->object->set_id($id);
         $this->check_response();
@@ -149,11 +145,9 @@ class Remote extends YAWF
         if (!is_object($this->object) || !$this->has_changed) return NULL;
         if (!$this->object->get_id()) return NULL;
         if (!$this->is_validated()) return NULL;
-        $type = $this->type;
         $url = $this->secure_url($this->url . '/' . $this->object->get_id());
-        $data = Data::to($type, array($this->class => $this->object->data()));
-        $text = CURL::put($url, $data, $this->headers_for($type));
-        $this->response = Data::from($type, $text);
+        $data = array($this->class => $this->object->data());
+        $this->response = REST::put($url, $data, $this->type);
         $this->check_response();
         return $this;
     }
@@ -164,10 +158,8 @@ class Remote extends YAWF
     {
         if (!is_object($this->object)) return NULL;
         if (!$this->object->get_id()) return NULL;
-        $type = $this->type;
         $url = $this->secure_url($this->url . '/' . $this->object->get_id());
-        $text = CURL::delete($url, $this->headers_for($type));
-        $this->response = Data::from($type, $text);
+        $this->response = REST::delete($url, $this->type);
         $this->check_response();
         return $this;
     }
@@ -284,16 +276,6 @@ class Remote extends YAWF
                 Log::warn($message);
             }
         }
-    }
-
-    // Return an array of client headers for the content type
-
-    protected function headers_for($type, $charset = 'UTF-8')
-    {
-        $headers = array();
-        $headers[] = "User-Agent: YAWF (http://yawf.org/)";
-        $headers[] = "Content-Type: application/$type;charset=$charset";
-        return $headers;
     }
 }
 
