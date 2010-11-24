@@ -16,7 +16,7 @@ load_helper('Text'); // for "tableize"
 
 class Model extends YAWF
 {
-    private static $connector;
+    private static $connectors;
     private static $databases;
     private static $validators = array();
     private static $tables = array();
@@ -24,10 +24,11 @@ class Model extends YAWF
     private static $timestamp = array();
     private static $virtual = array();
     private $validation_messages;
-    private $to_update;
-    private $data;
+    private $connector;
     private $database;
     private $table;
+    private $data;
+    private $to_update;
     private $id_field;
     private $order;
     private $limit;
@@ -72,11 +73,28 @@ class Model extends YAWF
         return array_keys($this->data);
     }
 
+    public function set_connector($connector_class, $database = NULL)
+    {
+        if (!is_null($database)) $this->set_database($database);
+        require_once 'lib/data/' . $connector_class . '.php';
+        $connector_class = "Data_$connector_class";
+        $database = $this->get_database();
+        self::$connectors[$database] = new $connector_class();
+        return $this;
+    }
+
+    public function get_connector()
+    {
+        if ($this->connector) return $this->connector;
+        $database = $this->get_database();
+        $this->connector = array_key(self::$connectors, $database, array_key(self::$connectors, 'models'));
+        return $this->connector;
+    }
+
     public function set_database($database)
     {
         $table = $this->get_table();
         $this->database = self::$databases[$table] = $database;
-        if (substr(DB_CONNECTOR, 0, 6) == 'SQLite') self::$connector = NULL;
         return $this;
     }
 
@@ -200,49 +218,45 @@ class Model extends YAWF
         return array_key(self::$virtual, "$table.$field") ? TRUE : FALSE;
     }
 
-    public static function connect($database = NULL, $reconnect = FALSE)
+    public function connect($database = NULL, $reconnect = FALSE)
     {
-        if (is_null($database)) $database = self::$databases['models'];
-        if ($reconnect) self::$connector = NULL;
-        if (is_null(self::$connector))
+        if (is_null($database)) $database = $this->get_database();
+        if ($reconnect) $this->connector = NULL;
+        if (is_null($this->connector))
         {
-            $connector_class = DB_CONNECTOR;
-            require_once 'lib/data/' . $connector_class . '.php';
-            $connector_class = "Data_$connector_class";
-            self::$connector = new $connector_class();
-            self::$connector->connect($database);
+            $this->connector = $this->get_connector()->connect($database);
         }
     }
 
-    public static function disconnect()
+    public function disconnect()
     {
-        self::$connector->disconnect();
-        self::$connector = NULL;
+        $this->get_connector()->disconnect();
+        $this->connector = NULL;
     }
 
-    public static function quote($sql)
+    public function quote($sql)
     {
-        return '"' . self::escape($sql) . '"';
+        return '"' . $this->escape($sql) . '"';
     }
 
-    public static function quote_in($clause)
+    public function quote_in($clause)
     {
         $parts = preg_split('/,\s*/', trim($clause, '()'));
         $quoted = array();
-        foreach ($parts as $part) $quoted[] = self::quote($part);
+        foreach ($parts as $part) $quoted[] = $this->quote($part);
         return '(' . join(',', $quoted) . ')';
     }
 
-    public static function escape($sql)
+    public function escape($sql)
     {
-        self::connect();
-        return self::$connector->escape($sql);
+        $this->connect();
+        return $this->get_connector()->escape($sql);
     }
 
-    public static function query($sql)
+    public function query($sql)
     {
-        self::connect();
-        return self::$connector->query($sql);
+        $this->connect();
+        return $this->get_connector()->query($sql);
     }
 
     public function copy_to($other)
@@ -381,7 +395,7 @@ class Model extends YAWF
         // Return the new ID on the record
 
         $id_field = $this->get_id_field();
-        $this->data[$id_field] = self::$connector->insert_id();
+        $this->data[$id_field] = $this->connector->insert_id();
         return $this->data[$id_field];
     }
 

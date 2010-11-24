@@ -55,7 +55,8 @@ class App extends YAWF
 
         require_once 'lib/Model.php';
         $model = new Model();
-        $model->set_database($this->is_testing ? DB_DATABASE_TEST : DB_DATABASE_LIVE);
+        $database = $this->is_testing ? DB_DATABASE_TEST : DB_DATABASE_LIVE;
+        $model->set_connector(DB_CONNECTOR, $database);
 
         // Register this app as a prop
 
