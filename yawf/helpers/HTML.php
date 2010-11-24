@@ -63,7 +63,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
             $attrs['value'] = array_key($attrs, 'value', h($object->$field));
         }
         $attrs['id'] = array_key($attrs, 'id', str_replace('->', self::$id_format, $name));
-        $attrs['name'] = h($name);
+        $attrs['name'] = h($name); // turn "->" into "-&gt;" (ugly but it works)
         $attrs['type'] = array_key($attrs, 'type', 'text');
         return '<input ' . self::attrs($attrs) . ' />' . "\n";
     }
