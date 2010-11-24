@@ -15,20 +15,22 @@ load_helper('Data');
 
 class Queue extends YAWF
 {
-    const QUEUE_FOLDER = 'app/tmp/queue/';
+    const QUEUE_FOLDER = 'app/tmp/queue';
+    const QUEUE_NAME = Symbol::DEFAULT_WORD;
 
-    public static function enqueue($data)
+    public static function enqueue($data, $queue = NULL)
     {
         $text = Data::to_serialized($data);
         $file = self::get_filename($text);
-        file_put_contents(self::QUEUE_FOLDER . $file, $text);
+        file_put_contents(self::get_folder($queue) . $file, $text);
         return $file;
     }
 
-    public static function dequeue()
+    public static function dequeue($queue = NULL)
     {
+        $folder = self::get_folder($queue);
         $files = array();
-        $dir = opendir(self::QUEUE_FOLDER);
+        $dir = opendir($folder);
         while ($file = readdir($dir)) $files[] = $file;
         closedir($dir);
         sort($files);
@@ -38,16 +40,19 @@ class Queue extends YAWF
         } while (!preg_match('/^\d+/', $file));
         if ($file == '0') return NULL;
         $lockfile = 'lock-' . $file;
-        rename(self::QUEUE_FOLDER . $file, self::QUEUE_FOLDER . $lockfile);
-        $data = self::read($lockfile);
-        unlink(self::QUEUE_FOLDER . $lockfile);
-        return $data;
+        rename($folder . $file, $folder . $lockfile);
+        $text = file_get_contents($folder . $lockfile);
+        $data = Data::from_serialized($text, TRUE); // no array conversion
+        unlink($folder . $lockfile);
+        return $data; // as object
     }
 
-    public static function read($file)
+    public static function get_folder($queue = NULL)
     {
-        $text = file_get_contents(self::QUEUE_FOLDER . $file);
-        return Data::from_serialized($text, TRUE); // no array conversion
+        $folder = self::QUEUE_FOLDER . '/';
+        $folder .= is_null($queue) ? self::QUEUE_NAME : $queue;
+        if (!is_dir($folder)) mkdir($folder);
+        return $folder . '/';
     }
 
     public static function get_filename($text)
