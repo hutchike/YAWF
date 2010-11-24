@@ -1,0 +1,14 @@
+load_helper 'Queue'
+$obj1 = new Object(array('a' => 1))
+$obj2 = new Model(array('b' => 2))
+while (Queue::dequeue()) {}
+Queue::enqueue($obj1)
+Queue::enqueue($obj2)
+$got1 = Queue::dequeue()
+$got2 = Queue::dequeue()
+$got3 = Queue::dequeue()
+should 'get matching queue data for object 1', $obj1->a == $got1->a
+should 'get matching queue class for object 1', get_class($obj1) == get_class($got1)
+should 'get matching queue data for object 2', $obj2->a == $got2->a
+should 'get matching queue class for object 2', get_class($obj2) == get_class($got2)
+should_not 'get a third object', $got3
