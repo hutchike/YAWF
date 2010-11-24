@@ -88,6 +88,7 @@ class Model extends YAWF
         if ($this->connector) return $this->connector;
         $database = $this->get_database();
         $this->connector = array_key(self::$connectors, $database, array_key(self::$connectors, 'models'));
+        if (!$this->connector) throw new Exception("No connector set for database \"$database\"");
         return $this->connector;
     }
 
