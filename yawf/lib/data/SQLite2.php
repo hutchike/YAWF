@@ -24,7 +24,7 @@ class Data_SQLite2 extends YAWF implements Connector
     public function connect($database = DB_DATABASE)
     {
         $error = '';
-        $this->sqlite_db = new SQLiteDatabase($database, self::SQLITE_FILE_PERMISSIONS, &$error);
+        $this->sqlite_db = new SQLiteDatabase($database, self::SQLITE_FILE_PERMISSIONS, $error);
         if ($error) throw new Exception("Database error: $error");
     }
 
