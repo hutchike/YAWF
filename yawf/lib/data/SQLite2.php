@@ -41,7 +41,7 @@ class Data_SQLite2 extends YAWF implements Connector
     public function query($sql)
     {
         $error = '';
-        $result = $this->sqlite_db->query($sql, SQLITE_ASSOC, &$error);
+        $result = $this->sqlite_db->query($sql, SQLITE_ASSOC, $error);
         if ($error) throw new Exception("Database error: $error");
         return new SQLite2_fetcher($result);
     }
