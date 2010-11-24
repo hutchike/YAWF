@@ -58,11 +58,12 @@ class Data extends YAWF
         return json_decode($text, TRUE);
     }
 
-    // Decode the serialized type and return data
+    // Decode the serialized type and return data (defaults to array)
 
-    public static function from_serialized($text)
+    public static function from_serialized($text, $as_object = FALSE)
     {
-        return object_to_array(unserialize($text));
+        $object = unserialize($text);
+        return $as_object ? $object : object_to_array($object);
     }
 
     // Decode the XML type and return data
