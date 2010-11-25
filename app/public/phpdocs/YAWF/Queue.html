@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Queue</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> Queue</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Provide a simple helper to write objects to a queue and read  them from the queue (either by blocking - default behavior -  or non-blocking).</p>
+<p class="description"><p>The objects written and read from the queue retain their PHP  object classes (provided classes are already loaded into the  program). The objects are written as files in queue folders.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_helpers---Queue.php.html">/helpers/Queue.php</a> (line <span class="field">27</span>)
+		</p>
+		
+				
+		<pre><a href="../YAWF/YAWF.html">YAWF</a>
+   |
+   --Queue</pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#QUEUE_FOLDER" title="details" class="const-name">QUEUE_FOLDER</a> = 					<span class="var-type"> 'app/tmp/queue'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#QUEUE_NAME" title="details" class="const-name">QUEUE_NAME</a> = 					<span class="var-type"> Symbol::DEFAULT_WORD</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#QUEUE_PAUSE" title="details" class="const-name">QUEUE_PAUSE</a> = 					<span class="var-type"> 1</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+									<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+												<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+										<a href="#dequeue" title="details" class="method-name">dequeue</a>
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$queue</span> = <span class="var-default">NULL</span>], [<span class="var-type">Bool</span>&nbsp;<span class="var-name">$is_blocking</span> = <span class="var-default">TRUE</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+										<a href="#dequeue_nb" title="details" class="method-name">dequeue_nb</a>
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$queue</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result">String</span>
+										<a href="#enqueue" title="details" class="method-name">enqueue</a>
+											(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$object</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$queue</span> = <span class="var-default">NULL</span>])
+									</div>
+																																							</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+													<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methoddequeue" id="dequeue"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static dequeue</span> (line <span class="line-number">66</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Dequeue an object from a queue (and assume we're blocking)</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the next object in the queue</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+		<span class="method-name">
+			dequeue
+		</span>
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$queue</span> = <span class="var-default">NULL</span>], [<span class="var-type">Bool</span>&nbsp;<span class="var-name">$is_blocking</span> = <span class="var-default">TRUE</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$queue</span><span class="var-description">: the name of the queue (optional)</span>			</li>
+					<li>
+				<span class="var-type">Bool</span>
+				<span class="var-name">$is_blocking</span><span class="var-description">: whether to block (optional)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddequeue_nb" id="dequeue_nb"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static dequeue_nb</span> (line <span class="line-number">54</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Dequeue an object from a queue without blocking</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the next object in the queue</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+		<span class="method-name">
+			dequeue_nb
+		</span>
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$queue</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$queue</span><span class="var-description">: the name of the queue (optional)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodenqueue" id="enqueue"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static enqueue</span> (line <span class="line-number">40</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Enqueue an object on a queue</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the filename of the written object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			enqueue
+		</span>
+					(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$object</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$queue</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$object</span><span class="var-description">: the object to enqueue</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$queue</span><span class="var-description">: the queue name (optional)</span>			</li>
+				</ul>
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../YAWF/YAWF.html">YAWF</a></span></p>
+					<blockquote>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodassert_checking">YAWF::assert_checking()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodassert_failed">YAWF::assert_failed()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodfinish">YAWF::finish()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodhandle_exception">YAWF::handle_exception()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodhook">YAWF::hook()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodprop">YAWF::prop()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodrespond_to_web_request">YAWF::respond_to_web_request()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodstart">YAWF::start()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodunknown">YAWF::unknown()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#method__call">YAWF::__call()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constQUEUE_FOLDER" id="QUEUE_FOLDER"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">QUEUE_FOLDER</span>
+			 = <span class="const-default"> 'app/tmp/queue'</span>
+			(line <span class="line-number">29</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constQUEUE_NAME" id="QUEUE_NAME"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">QUEUE_NAME</span>
+			 = <span class="const-default"> Symbol::DEFAULT_WORD</span>
+			(line <span class="line-number">31</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constQUEUE_PAUSE" id="QUEUE_PAUSE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">QUEUE_PAUSE</span>
+			 = <span class="const-default"> 1</span>
+			(line <span class="line-number">30</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+						
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 25 Nov 2010 11:01:41 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

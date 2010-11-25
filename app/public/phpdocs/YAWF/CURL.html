@@ -24,12 +24,12 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Wrap the PHP cURL extension with handy static function calls</p>
+<p class="short-description">Wrap the PHP cURL extension with handy static function calls  for the HTTP methods &quot;get&quot;, &quot;delete&quot;, &quot;post&quot; and &quot;put&quot;. Note  that the URL in function calls may be prefixed using a basic  authentication login like &quot;https://user:pass@site.com/a/12&quot;.</p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_helpers---CURL.php.html">/helpers/CURL.php</a> (line <span class="field">23</span>)
+			Located in <a class="field" href="_helpers---CURL.php.html">/helpers/CURL.php</a> (line <span class="field">26</span>)
 		</p>
 		
 				
@@ -54,9 +54,9 @@
 			<div class="method-summary">
 												<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">String</span>
 										<a href="#delete" title="details" class="method-name">delete</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
@@ -66,21 +66,21 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">String</span>
 										<a href="#method" title="details" class="method-name">method</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">NULL</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">String</span>
 										<a href="#post" title="details" class="method-name">post</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">String</span>
 										<a href="#put" title="details" class="method-name">put</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>])
 									</div>
 																																																							</div>
 		</div>
@@ -98,49 +98,51 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methoddelete" id="delete"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static delete</span> (line <span class="line-number">37</span>)
+		<span class="method-title">static delete</span> (line <span class="line-number">47</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Delete a resource at a URL</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the web server response content</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			delete
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$url</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$url</span><span class="var-description">: the The URL to request</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$headers</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$headers</span><span class="var-description">: optional headers to send</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodget" id="get"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static get</span> (line <span class="line-number">32</span>)
+		<span class="method-title">static get</span> (line <span class="line-number">35</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Get a resource at a URL</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> The web server response content</li>
+				<li><span class="field">return:</span> the web server response content</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -164,109 +166,115 @@
 			
 	</div>
 <a name="methodmethod" id="method"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static method</span> (line <span class="line-number">52</span>)
+		<span class="method-title">static method</span> (line <span class="line-number">85</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Perform an HTTP method at a URL with optional headers and data to send</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the web server response content</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			method
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">NULL</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$method</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$method</span><span class="var-description">: the The HTTP method to use for the request</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$url</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$url</span><span class="var-description">: the The URL to request</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$headers</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$headers</span><span class="var-description">: optional headers to send</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$data</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$data</span><span class="var-description">: optional data to put or post (may also be an Array)</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodpost" id="post"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static post</span> (line <span class="line-number">42</span>)
+		<span class="method-title">static post</span> (line <span class="line-number">59</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Post some data to a URL, and return the response content</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the web server response content</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			post
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$url</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$url</span><span class="var-description">: the The URL to request</span>			</li>
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$headers</span><span class="var-description">: optional headers to send</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$data</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$headers</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodput" id="put"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static put</span> (line <span class="line-number">47</span>)
+		<span class="method-title">static put</span> (line <span class="line-number">71</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Put some data to a URL, and return the response content</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the web server response content</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			put
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$headers</span> = <span class="var-default">array()</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$url</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$url</span><span class="var-description">: the The URL to request</span>			</li>
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$headers</span><span class="var-description">: optional headers to send</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$data</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$headers</span>			</li>
 				</ul>
 		
 			
@@ -277,7 +285,25 @@
 					<p>Inherited From <span class="classname"><a href="../YAWF/YAWF.html">YAWF</a></span></p>
 					<blockquote>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/YAWF.html#methodbenchmark">YAWF::benchmark()</a></span><br>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodassert_checking">YAWF::assert_checking()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodassert_failed">YAWF::assert_failed()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodfinish">YAWF::finish()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodhandle_exception">YAWF::handle_exception()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodhook">YAWF::hook()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodprop">YAWF::prop()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodrespond_to_web_request">YAWF::respond_to_web_request()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodstart">YAWF::start()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodunknown">YAWF::unknown()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#method__call">YAWF::__call()</a></span><br>
 											</blockquote>
 										
 		</div>
@@ -285,7 +311,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 16 Nov 2010 21:13:52 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Thu, 25 Nov 2010 11:01:39 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

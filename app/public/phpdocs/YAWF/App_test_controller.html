@@ -100,11 +100,11 @@
 					<blockquote>
 													<img src="../media/images/Variable.png" />
 							<span class="var-title">
-								<span class="var-name"><a href="../YAWF/Controller.html#var$lang">Controller::$lang</a></span><br>
+								<span class="var-name"><a href="../YAWF/Controller.html#var$flash">Controller::$flash</a></span><br>
 							</span>
 													<img src="../media/images/Variable.png" />
 							<span class="var-title">
-								<span class="var-name"><a href="../YAWF/Controller.html#var$params">Controller::$params</a></span><br>
+								<span class="var-name"><a href="../YAWF/Controller.html#var$lang">Controller::$lang</a></span><br>
 							</span>
 													<img src="../media/images/Variable.png" />
 							<span class="var-title">
@@ -135,7 +135,7 @@
 							</span>
 													<img src="../media/images/Variable.png" />
 							<span class="var-title">
-								<span class="var-name"><a href="../YAWF/Request.html#var$flash">Request::$flash</a></span><br>
+								<span class="var-name"><a href="../YAWF/Request.html#var$params">Request::$params</a></span><br>
 							</span>
 													<img src="../media/images/Variable.png" />
 							<span class="var-title">
@@ -249,21 +249,23 @@
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Controller.html#methodbefore">Controller::before()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Controller.html#methodflash">Controller::flash()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Controller.html#methodflash_object">Controller::flash_object()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Controller.html#methodget_lang">Controller::get_lang()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Controller.html#methodget_path_config_from">Controller::get_path_config_from()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Controller.html#methodrender">Controller::render()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodsetup_for_app">Controller::setup_for_app()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Controller.html#methodrender_path_data">Controller::render_path_data()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodsetup_path_data">Controller::setup_path_data()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Controller.html#methodsetup_for_app">Controller::setup_for_app()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Controller.html#methodsetup_render_data">Controller::setup_render_data()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Controller.html#methodset_lang">Controller::set_lang()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodset_params">Controller::set_params()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Controller.html#methodset_type">Controller::set_type()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
@@ -275,23 +277,33 @@
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Request.html#methodcookie">Request::cookie()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Request.html#methodflash">Request::flash()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Request.html#methodcookie_object">Request::cookie_object()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Request.html#methodnew_cookie_object">Request::new_cookie_object()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Request.html#methodparams">Request::params()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Request.html#methodnew_flash_object">Request::new_flash_object()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Request.html#methodnew_server_object">Request::new_server_object()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Request.html#methodnew_session_object">Request::new_session_object()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Request.html#methodparams_object">Request::params_object()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Request.html#methodredirect">Request::redirect()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Request.html#methodreport_errors">Request::report_errors()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodrequest_method">Request::request_method()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodrequest_type">Request::request_type()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Request.html#methodsend_mail">Request::send_mail()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Request.html#methodsetup_request_for">Request::setup_request_for()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Request.html#methodserver">Request::server()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodserver_object">Request::server_object()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodsession">Request::session()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodsession_object">Request::session_object()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodsetup_request">Request::setup_request()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodset_params">Request::set_params()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Request.html#methodshould">Request::should()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
@@ -301,7 +313,25 @@
 					<p>Inherited From <span class="classname"><a href="../YAWF/YAWF.html">YAWF</a></span></p>
 					<blockquote>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/YAWF.html#methodbenchmark">YAWF::benchmark()</a></span><br>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodassert_checking">YAWF::assert_checking()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodassert_failed">YAWF::assert_failed()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodfinish">YAWF::finish()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodhandle_exception">YAWF::handle_exception()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodhook">YAWF::hook()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodprop">YAWF::prop()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodrespond_to_web_request">YAWF::respond_to_web_request()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodstart">YAWF::start()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodunknown">YAWF::unknown()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#method__call">YAWF::__call()</a></span><br>
 											</blockquote>
 										
 		</div>
@@ -309,7 +339,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 16 Nov 2010 21:13:51 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Thu, 25 Nov 2010 11:01:38 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
