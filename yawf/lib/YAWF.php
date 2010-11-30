@@ -23,6 +23,7 @@ class YAWF // Yet Another Web Framework
 
     public static function start()
     {
+        if (self::$start) throw new Exception('YAWF has already started');
         self::$start = microtime(TRUE);         // Keep note of our start time
         self::hook('default', 'self::unknown'); // Set the default hook method
     }
@@ -51,9 +52,13 @@ class YAWF // Yet Another Web Framework
 
     public static function finish($info = 'Finished')
     {
-        if (!defined('BENCHMARKING_ON')) return;
-        $msecs = (int)( 1000 * ( microtime(TRUE) - self::$start ) );
-        Log::info($info . " after $msecs ms");  // "Log" helper loaded by run()
+        if (defined('BENCHMARKING_ON'))
+        {
+            load_helper('Log');
+            $msecs = (int)( 1000 * ( microtime(TRUE) - self::$start ) );
+            Log::info($info . " after $msecs ms");
+        }
+        exit;
     }
 
     // Handle an exception by displaying or redirecting
