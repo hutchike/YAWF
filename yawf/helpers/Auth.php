@@ -11,33 +11,67 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+/**
+ * Provide basic auth functionality for web apps by providing the
+ * simple API methods "username", "password", "challenge", "login",
+ * "message" and "realm".
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Auth extends YAWF
 {
     private static $realm = 'Login';
     private static $message = 'Wrong username or password';
-    private static $is_testing = FALSE;
-    private static $test_username = '';
-    private static $test_password = '';
 
-    // Get the authenticated username
-
+    /**
+     * Get the basic auth username
+     *
+     * @return String the basic auth username
+     */
     public static function username()
     {
-        if (self::$is_testing) return self::$test_username;
-        return array_key($_SERVER, 'PHP_AUTH_USER');
+        $server = YAWF::prop(Symbol::SERVER);
+        return $server->php_auth_user;
     }
 
-    // Get the authenticated password
-
+    /**
+     * Get the basic auth password
+     *
+     * @return String the basic auth password
+     */
     public static function password()
     {
-        if (self::$is_testing) return self::$test_password;
-        return array_key($_SERVER, 'PHP_AUTH_PW');
+        $server = YAWF::prop(Symbol::SERVER);
+        return $server->php_auth_pw;
     }
 
-    // Show a basic authentication login dialog pop-up
+    /**
+     * Challenge the web user to provide a username and password
+     *
+     * @param String $message the message to display (optional)
+     * @param String $realm the realm to display (optional)
+     * @return NULL nothing is returned
+     */
+    public static function challenge($message = NULL, $realm = NULL)
+    {
+        if (is_null($message)) $message = self::$message;
+        if (is_null($realm)) $realm = self::$realm;
+        header('WWW-Authenticate: Basic realm="' . $realm . '"');
+        header('HTTP/1.0 401 Unauthorized');
+        print $message;
+    }
 
-    public static function login($username, $password)
+    /**
+     * Require the web user to login using basic auth.
+     * Note that this method will call YAWF::finish()
+     * by default, to cause the web request to finish.
+     *
+     * @param String $username the username required
+     * @param String $password the password required
+     * @param Boolean $do_return whether to always return (default is FALSE)
+     * @return Boolean whether the login succeeded
+     */
+    public static function login($username, $password, $do_return = FALSE)
     {
         if (self::username() == $username && self::password() == $password)
         {
@@ -45,60 +79,34 @@ class Auth extends YAWF
         }
         else // wrong username and/or password
         {
-            header('WWW-Authenticate: Basic realm="' . self::$realm . '"');
-            header('HTTP/1.0 401 Unauthorized');
-            print self::$message;
-            return FALSE;
+            self::challenge();
+            if ($do_return) return FALSE;
+            YAWF::finish(); // this will exit
         }
     }
 
-    // Setup the test login details (returned when testing)
-
-    public static function test_login($username, $password)
-    {
-        self::is_testing(TRUE);
-        self::test_username($username);
-        self::test_password($password);
-    }
-
-    // Set the realm - i.e. user message dialog
-
+    /**
+     * Set the realm for basic auth challenges
+     *
+     * @param String $realm the realm to display (optional)
+     * @return String the currently defined realm
+     */
     public static function realm($realm = NULL)
     {
         if (!is_null($realm)) self::$realm = $realm;
         return self::$realm;
     }
 
-    // Set the message displayed on a login failure
-
+    /**
+     * Set the message for basic auth challenges
+     *
+     * @param String $message the message to display (optional)
+     * @return String the currently defined message
+     */
     public static function message($message = NULL)
     {
         if (!is_null($message)) self::$message = $message;
         return self::$message;
-    }
-
-    // Set whether or not we're in testing mode right now
-
-    public static function is_testing($is_testing = NULL)
-    {
-        if (!is_null($is_testing)) self::$is_testing = $is_testing;
-        return self::$is_testing;
-    }
-
-    // Set the test username (returned for testing)
-
-    public static function test_username($username = NULL)
-    {
-        if (!is_null($username)) self::$test_username = $username;
-        return self::$test_username;
-    }
-
-    // Set the test password (returned for testing)
-
-    public static function test_password($password = NULL)
-    {
-        if (!is_null($password)) self::$test_password = $password;
-        return self::$test_password;
     }
 }
 
