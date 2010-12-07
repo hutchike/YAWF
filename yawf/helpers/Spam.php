@@ -41,6 +41,12 @@ class Spam extends YAWF // and depends on "HTML"
         return array_merge($attrs, array('onsubmit' => 'return(window.form_script?form_script(this):true)'));
     }
 
+    /**
+     * Return HTML for a hidden field to hold spam detection values.
+     * This method should be called from within a view with a form.
+     *
+     * @return String the HTML for a hidden field
+     */
     public static function field()
     {
         $field = self::$field_name;
@@ -48,6 +54,12 @@ class Spam extends YAWF // and depends on "HTML"
         return "<input type=\"hidden\" name=\"$field\" value=\"$addr\"/>\n";
     }
 
+    /**
+     * Return HTML for some JavaScript to perform spam detection.
+     * This method should be called from within a view with a form.
+     *
+     * @return String the HTML for the JavaScript
+     */
     public static function script()
     {
         // Don't write the script twice
@@ -69,6 +81,16 @@ End_of_HTML;
         return $html;
     }
 
+    /**
+     * Get a spam score by checking the form parameters against
+     * a number of tests, including whether we can rename the
+     * form field using JavaScript, whether the browser's clock
+     * is wrongly set, and whether the form was submitted quickly.
+     *
+     * @param Object $params the request parameters submitted
+     * @param Integer $test_score an optional test score to return when testing
+     * @return Integer the spam score between 1 and 10
+     */
     public static function score($params, $test_score = 1)
     {
         if (self::$is_testing) return $test_score;
@@ -106,17 +128,40 @@ End_of_HTML;
         return $score;
     }
 
+    /**
+     * Check whether the form params indicate it looks like spam.
+     * This should be called from within the form controller.
+     *
+     * @param Object $params the request parameters submitted
+     * @param Integer $score an optional spam score threshold
+     * @return Boolean whether it is probably spam
+     */
     public static function is_spam($params, $score = NULL)
     {
         if (is_null($score)) $score = self::$pass_score;
         return self::score($params) > $score;
     }
 
+    /**
+     * Check whether the form params indicate it's not spam.
+     * This should be called from within the form controller.
+     *
+     * @param Object $params the request parameters submitted
+     * @param Integer $score an optional spam score threshold
+     * @return Boolean whether it's probably not spam
+     */
     public static function is_not_spam($params, $score = NULL)
     {
         return !self::is_spam($params, $score);
     }
 
+    /**
+     * Get/set whether we're testing. This should be called by
+     * controller test suites to prevent unwanted spam detection.
+     *
+     * @param Boolean $is_testing whether we're testing (optional)
+     * @return Boolean whether we're testing
+     */
     public static function is_testing($is_testing = NULL)
     {
         if (!is_null($is_testing)) self::$is_testing = $is_testing;

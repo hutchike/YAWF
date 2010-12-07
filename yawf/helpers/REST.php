@@ -35,7 +35,7 @@ class REST extends YAWF
         $type = first($type, self::$type);
         $charset = first($charset, self::$charset);
         $text = CURL::delete($url, self::headers_for($type, $charset));
-        return Data::from($type, $text);
+        return self::decode($type, $text, 'delete');
     }
 
     public static function get($url, $type = NULL, $charset = NULL)
@@ -43,7 +43,7 @@ class REST extends YAWF
         $type = first($type, self::$type);
         $charset = first($charset, self::$charset);
         $text = CURL::get($url, self::headers_for($type));
-        return Data::from($type, $text);
+        return self::decode($type, $text, 'get');
     }
 
     public static function post($url, $data, $type = NULL, $charset = NULL)
@@ -52,7 +52,7 @@ class REST extends YAWF
         $charset = first($charset, self::$charset);
         $data = Data::to($type, $data);
         $text = CURL::post($url, $data, self::headers_for($type));
-        return Data::from($type, $text);
+        return self::decode($type, $text, 'post');
     }
 
     public static function put($url, $data, $type = NULL, $charset = NULL)
@@ -61,7 +61,7 @@ class REST extends YAWF
         $charset = first($charset, self::$charset);
         $data = Data::to($type, $data);
         $text = CURL::put($url, $data, self::headers_for($type));
-        return Data::from($type, $text);
+        return self::decode($type, $text, 'put');
     }
 
     // Return an array of request headers for the content type
@@ -73,6 +73,22 @@ class REST extends YAWF
         $headers[] = "User-Agent: YAWF (http://yawf.org/)";
         $headers[] = "Content-Type: application/$type;charset=$charset";
         return $headers;
+    }
+
+    private static function decode($type, $text, $method = '')
+    {
+        $data = array();
+        try
+        {
+            $data = Data::from($type, $text);
+        }
+        catch (Exception $e)
+        {
+            if (strlen($method) > 0) $method = " $method method";
+            Log::warn("REST$method warning " . $e->getMessage());
+            Log::info("Check that REST permissions are correct");
+        }
+        return $data;
     }
 }
 
