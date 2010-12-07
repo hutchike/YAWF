@@ -76,18 +76,6 @@ class Remote extends YAWF
         return array_key(self::$defaults, $field);
     }
 
-    public static function get_id_from($data, $class = NULL, $id_field = 'id')
-    {
-        if (is_object($data)) $data = object_to_array($data);
-        if (!is_array($data)) return NULL; // data must be an array
-        if ($id = array_key($data, $id_field)) return $id;
-        if (!is_null($class) && $data = array_key($data, $class))
-        {
-            if (is_array($data) && $id = array_key($data, $id_field)) return $id;
-        }
-        return NULL;
-    }
-
     // Set the username and password for auth
 
     public function auth($username, $password)
@@ -144,7 +132,7 @@ class Remote extends YAWF
         $url = $this->secure_url($this->url);
         $data = array($this->class => $this->object->data());
         $this->response = REST::post($url, $data, $this->type);
-        $id = self::get_id_from($this->response, $this->class, $this->object->get_id_field());
+        $id = $this->get_id_from($this->response);
         if ($id) $this->object->set_id($id);
         $this->check_response();
         return $id;
@@ -288,6 +276,20 @@ class Remote extends YAWF
                 Log::warn($message);
             }
         }
+    }
+
+    // Get the ID from a data array response
+
+    private function get_id_from($response)
+    {
+        assert('is_array($response)');
+        if ($data = array_key($response, $this->class))
+        {
+            assert('is_object($this->object)');
+            $id_field = $this->object->get_id_field();
+            if (is_array($data) && $id = array_key($data, $id_field)) return $id;
+        }
+        return NULL;
     }
 }
 
