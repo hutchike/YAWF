@@ -11,6 +11,11 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+/**
+ * Just include the Facebook PHP library as it is with no wrapper.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 load_plugin('Facebook/src/facebook');
 
 // End of Facebook.php
