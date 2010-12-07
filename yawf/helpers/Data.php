@@ -26,8 +26,13 @@ if (!function_exists('json_decode')) {
  */
 class Data extends YAWF
 {
-    // Return a data array by decoding a type
-
+    /**
+     * Return a data array by decoding a type
+     *
+     * @param String $type the data type
+     * @param String $text the text to decode
+     * @return Array the decoded data as an assoc array
+     */
     public static function from($type, $text)
     {
         switch (strtolower($type))
@@ -50,41 +55,64 @@ class Data extends YAWF
         }
     }
 
-    // Decode the JSON type and return data
-
+    /**
+     * Decode the JSON type and return data
+     *
+     * @param String $text the text to decode
+     * @return Array the decoded data as an assoc array
+     */
     public static function from_json($text)
     {
         $text = trim($text, "()\n ");
         return json_decode($text, TRUE);
     }
 
-    // Decode the serialized type and return data (defaults to array)
-
+    /**
+     * Decode the serialized type and return data (an array by default)
+     *
+     * @param String $text the text to decode
+     * @param Boolean $as_object whether to return an object instead
+     * @return Array the decoded data as an assoc array
+     */
     public static function from_serialized($text, $as_object = FALSE)
     {
         $object = unserialize($text);
         return $as_object ? $object : object_to_array($object);
     }
 
-    // Decode the XML type and return data
-
-    public static function from_xml($text)
+    /**
+     * Decode the XML type and return data
+     *
+     * @param String $text the text to decode
+     * @param String $root the root element name (default is "root")
+     * @return Array the decoded data as an assoc array
+     */
+    public static function from_xml($text, $root = Symbol::ROOT)
     {
         load_helper('XML');
         $data = object_to_array(XML::deserialize($text));
-        return array_key($data, 'root', $data); // skip the root element
+        return array_key($data, $root, $data); // skip the root element
     }
 
-    // Decode the YAML type and return data
-
+    /**
+     * Decode the YAML type and return data
+     *
+     * @param String $text the text to decode
+     * @return Array the decoded data as an assoc array
+     */
     public static function from_yaml($text)
     {
         load_helper('YAML');
         return YAML::parse($text);
     }
 
-    // Return some text by encoding a type
-
+    /**
+     * Return some text by encoding data into a type
+     *
+     * @param String $type the data type
+     * @param Array/Object $data the data to encode
+     * @return String the encoded data as text
+     */
     public static function to($type, $data)
     {
         switch (strtolower($type))
@@ -107,48 +135,51 @@ class Data extends YAWF
         }
     }
 
-    // Encode the JSON type & return text
-
+    /**
+     * Encode data as JSON and return JSON text
+     *
+     * @param Array/Object $data the data to encode
+     * @return String the encoded data as JSON text
+     */
     public static function to_json($data)
     {
         return json_encode($data, TRUE);
     }
 
-    // Encode the serialized type & return text
-
+    /**
+     * Encode data as PHP serialized and return PHP serialized text
+     *
+     * @param Array/Object $data the data to encode
+     * @return String the encoded data as PHP serialized text
+     */
     public static function to_serialized($data)
     {
         return serialize($data);
     }
 
-    // Encode the XML type & return text
-
-    public static function to_xml($data)
+    /**
+     * Encode data as XML and return XML text
+     *
+     * @param Array/Object $data the data to encode
+     * @param String $root the root element name (default is "root")
+     * @return String the encoded data as XML text
+     */
+    public static function to_xml($data, $root = Symbol::ROOT)
     {
         load_helper('XML');
-        return XML::serialize($data);
+        return XML::serialize($data, array('rootName' => $root));
     }
 
-    // Encode the YAML type & return text
-
+    /**
+     * Encode data as YAML and return YAML text
+     *
+     * @param Array/Object $data the data to encode
+     * @return String the encoded data as YAML text
+     */
     public static function to_yaml($data)
     {
         load_helper('YAML');
         return YAML::dump(object_to_array($data));
-    }
-
-    // Get the ID from some object data by looking for the class ID field
-
-    public static function get_id($data, $class = NULL, $id_field = 'id')
-    {
-        if (is_object($data)) $data = object_to_array($data);
-        if (!is_array($data)) return NULL; // data must be an array
-        if ($id = array_key($data, $id_field)) return $id;
-        if (!is_null($class) && $data = array_key($data, $class))
-        {
-            if (is_array($data) && $id = array_key($data, $id_field)) return $id;
-        }
-        return NULL;
     }
 }
 

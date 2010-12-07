@@ -28,6 +28,7 @@ class Symbol extends YAWF
     const PARAMS = 'params';
     const PATH_CONFIG = 'path_config';
     const PATH_METHOD = 'path_method';
+    const ROOT = 'root';
     const SERIALIZED = 'serialized';
     const SERVER = 'server';
     const SERVICE = 'service';
