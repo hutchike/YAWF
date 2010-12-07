@@ -81,7 +81,7 @@ class Auth extends YAWF
         {
             self::challenge();
             if ($do_return) return FALSE;
-            YAWF::finish(); // this will exit
+            YAWF::finish(); // this exits
         }
     }
 
