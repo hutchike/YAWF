@@ -11,6 +11,13 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+/**
+ * Provide spam protection for HTML forms (and their controllers),
+ * by using JavaScript to modify a hidden form element to indicate
+ * whether the form was submitted by a real user who took a while.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Spam extends YAWF // and depends on "HTML"
 {
     public static $spam_score = 10;         // Measure out of 10
@@ -21,6 +28,13 @@ class Spam extends YAWF // and depends on "HTML"
     public static $has_script = FALSE;      // Script was shown?
     public static $is_testing = FALSE;      // True when testing
 
+    /**
+     * Return HTML attrs for a form open tag (e.g in "HTML::form_open()")
+     * These attrs will cause a JavaScript anti-spam script to be called.
+     *
+     * @param Array $attrs an optional array of attrs
+     * @return Array the attrs, including anti-spam measures
+     */
     public static function attrs($attrs = array())
     {
         if (array_key($attrs, 'onsubmit')) Log::error('Spam::attrs "onsubmit" conflict!');
