@@ -50,13 +50,13 @@ class YAWF // Yet Another Web Framework
 
     // Write benchmarking performance in the log file
 
-    public static function finish($info = 'Finished')
+    public static function finish($log_info = 'Finished')
     {
         if (defined('BENCHMARKING_ON'))
         {
             load_helper('Log');
             $msecs = (int)( 1000 * ( microtime(TRUE) - self::$start ) );
-            Log::info($info . " after $msecs ms");
+            Log::info($log_info . " after $msecs ms");
         }
         exit;
     }
@@ -67,7 +67,7 @@ class YAWF // Yet Another Web Framework
     {
         $error_message = nl2br($e);
         if (ini_get('display_errors')) echo $error_message;
-        elseif (EXCEPTION_REDIRECT) header('Location: ' . EXCEPTION_REDIRECT);
+        elseif (defined('EXCEPTION_REDIRECT')) $app->redirect(EXCEPTION_REDIRECT);
         $app->add_error_message($error_message);
     }
 
