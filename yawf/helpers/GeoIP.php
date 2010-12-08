@@ -16,6 +16,28 @@
  * simple object-oriented interface to provide the IP address,
  * the country name and code, and the location (i.e. city).
  *
+ * For example, if you're using the GeoIPCity.dat data file:
+ *
+ * load_helper('GeoIP');
+ * $geo = new GeoIP('app/data/GeoIPCity.dat');
+ * $country = $geo->country_name();
+ * $code = $geo->country_code();
+ * $city = $geo->city();
+ * $rgn = $geo->region();
+ * $zip = $geo->zip_code();
+ * $dma = $geo->dma_code();
+ * $lat = $geo->latitude();
+ * $long = $geo->longitude();
+ *
+ * ...or to use the default GeoIP.dat file in /usr/share/GeoIP:
+ *
+ * load_helper('GeoIP');
+ * $geo = new GeoIP('app/data/GeoIPCity.dat');
+ * $country = $geo->country_name();
+ * $code = $geo->country_code();
+ * // Can't use the city data methods
+ * // coz they will just return NULL
+ *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
 class GeoIP
