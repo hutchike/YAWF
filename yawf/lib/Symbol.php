@@ -15,12 +15,16 @@
 
 class Symbol extends YAWF
 {
+    const ALERT = 'alert';
     const APP = 'app';
     const CONTROLLER = 'controller';
     const COOKIE = 'cookie';
+    const DEBUG = 'debug';
     const DEFAULT_WORD = 'default';
+    const ERROR = 'error';
     const FLASH = 'flash';
     const HTML = 'html';
+    const INFO = 'info';
     const JS = 'js';
     const JSON = 'json';
     const JSONP = 'jsonp';
@@ -33,9 +37,11 @@ class Symbol extends YAWF
     const SERVER = 'server';
     const SERVICE = 'service';
     const SESSION = 'session';
+    const TEST = 'test';
     const TXT = 'txt';
     const UTF8 = 'UTF-8';
     const VALIDATION_MESSAGES = 'validation_messages';
+    const WARN = 'warn';
     const XML = 'xml';
     const YAML = 'yaml';
 }

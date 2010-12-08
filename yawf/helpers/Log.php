@@ -19,7 +19,7 @@ class Log extends YAWF
     const ERROR = 3;
     const ALERT = 4;
     const TEST = 5;
-    private static $level_names = array('DEBUG', 'INFO', 'WARN', 'ERROR', 'ALERT', 'TEST');
+    private static $level_names = array(Symbol::DEBUG, Symbol::INFO, Symbol::WARN, Symbol::ERROR, Symbol::ALERT, Symbol::TEST);
     private static $level;
     private static $type;
 
@@ -37,14 +37,14 @@ class Log extends YAWF
 
     public static function level_name($level)
     {
-        return self::$level_names[$level];
+        return strtoupper(self::$level_names[$level]);
     }
 
     public static function line($line, $level = self::INFO)
     {
         if (!LOGGING_ENABLED) return;
         if (is_array($line)) $line = join(' ', $line);
-        if (!self::$level) self::$level = array_search(strtoupper(DEFAULT_LOG_LEVEL), self::$level_names);
+        if (!self::$level) self::$level = array_search(strtolower(DEFAULT_LOG_LEVEL), self::$level_names);
         if ($level < self::$level) return;
         $path = file_exists('app/logs') ? 'app/logs' : 'yawf/logs';
         $date = date('Ymd');
