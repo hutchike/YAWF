@@ -15,7 +15,7 @@ load_helpers('CURL', 'Data');
 
 class REST extends YAWF
 {
-    private static $type = Symbol::XML;
+    private static $type = Symbol::JSON;
     private static $charset = Symbol::UTF8;
 
     public static function type($type = NULL)
