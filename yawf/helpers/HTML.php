@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-/*
+/**
  * This helper makes it easy to insert HTML into views in a clean
  * consistent manner. The form methods support object properties:
  *
@@ -26,9 +26,12 @@
  */
 class HTML extends YAWF // and depends on "AppView" and "Translate"
 {
+    /**
+     * Set HTML::$id_format to Symbol::DASH if you prefer CSS ids like "the-id"
+     */
     public static $id_format = Symbol::UNDERSCORE; // e.g. id="new_user_email"
 
-    /*
+    /**
      * Return HTML text for an array of attribute values
      *
      * @param Array $attrs the array of attribute values
@@ -44,7 +47,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return join(' ', $pairs);
     }
 
-    /*
+    /**
      * Start an HTML form by returning an opening form tag
      *
      * @param String $id the form's id (required)
@@ -61,7 +64,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return '<form ' . self::attrs($attrs) . ">\n";
     }
 
-    /*
+    /**
      * Finish an HTML form by returning a closing form tag
      *
      * @return String the closing HTML form tag
@@ -71,7 +74,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return "</form>\n";
     }
 
-    /*
+    /**
      * Return an HTML frame tag
      *
      * @param String $name the frame's name (required)
@@ -87,7 +90,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return "<$tag " . self::attrs($attrs) . ' />' . "\n";
     }
 
-    /*
+    /**
      * Return an HTML iframe tag
      *
      * @param String $name the iframe's name (required)
@@ -101,7 +104,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return self::frame($name, $src, $attrs);
     }
 
-    /*
+    /**
      * Return an HTML img tag
      *
      * @param String $src the image's source URL (required)
@@ -114,7 +117,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return '<img ' . self::attrs($attrs) . ' />';
     }
 
-    /*
+    /**
      * Return an HTML input tag
      * NOTE: The name can be an object property like "user->name"
      *
@@ -132,7 +135,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return '<input ' . self::attrs($attrs) . ' />' . "\n";
     }
 
-    /*
+    /**
      * Return an HTML input tag of a particular type (e.g. "button")
      * NOTE: The name can be an object property like "user->name"
      *
@@ -149,7 +152,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return self::input($name, $attrs);
     }
 
-    /*
+    /**
      * Return an HTML input tag for a button field
      * NOTE: The name can be an object property like "user->name"
      *
@@ -163,7 +166,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return self::input_type('button', $name, first($value, $name), $attrs);
     }
 
-    /*
+    /**
      * Return an HTML input tag for a checkbox field
      * NOTE: The name can be an object property like "user->name"
      *
@@ -178,7 +181,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return self::input_type('checkbox', $name, $value, $attrs);
     }
 
-    /*
+    /**
      * Return an HTML input tag for a hidden field
      * NOTE: The name can be an object property like "user->name"
      *
@@ -192,7 +195,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return self::input_type('hidden', $name, $value, $attrs);
     }
 
-    /*
+    /**
      * Return an HTML input tag for a password field
      * NOTE: The name can be an object property like "user->name"
      *
@@ -205,7 +208,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return self::input_type('password', $name, '', $attrs); // blank value
     }
 
-    /*
+    /**
      * Return an HTML input tag for a radio field
      * NOTE: The name can be an object property like "user->name"
      *
@@ -220,7 +223,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return self::input_type('radio', $name, $value, $attrs);
     }
 
-    /*
+    /**
      * Return an HTML input tag for a submit field
      * NOTE: The name can be an object property like "user->name"
      *
@@ -234,7 +237,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return self::input_type('submit', $name, first($value, $name), $attrs);
     }
 
-    /*
+    /**
      * Return an HTML "a" link tag
      *
      * @param String $url the URL to link at (required)
@@ -248,7 +251,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return '<a ' . self::attrs($attrs) . '>' . $html . '</a>';
     }
 
-    /*
+    /**
      * Return an HTML unordered list containing some items
      *
      * @param Array $items a list of items
@@ -260,7 +263,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return "<ul>\n$items\n</ul>\n";
     }
 
-    /*
+    /**
      * Return an HTML bullet (i.e. unordered) list containing some items
      *
      * @param Array $items a list of items
@@ -271,7 +274,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return self::unordered_list($items);
     }
 
-    /*
+    /**
      * Return an HTML ordered list containing some items
      *
      * @param Array $items a list of items
@@ -283,7 +286,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return "<ol>\n$items\n</ol>\n";
     }
 
-    /*
+    /**
      * Return an HTML numbered (i.e. ordered) list containing some items
      *
      * @param Array $items a list of items
@@ -294,7 +297,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return self::ordered_list($items);
     }
 
-    /*
+    /**
      * Return an HTML list of items to include in a bullet or number list
      *
      * @param Array $items a list of items
@@ -307,7 +310,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return $html;
     }
 
-    /*
+    /**
      * Return an HTML list item
      *
      * @param String $item an item
@@ -318,7 +321,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return "\t<li>$item</li>\n";
     }
 
-    /*
+    /**
      * Return an HTML link tag (e.g. to include a CSS file)
      *
      * @param String $href the location of the file to link (required)
@@ -333,7 +336,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return '<link ' . self::attrs($attrs) . ' />' . "\n";
     }
 
-    /*
+    /**
      * Return an HTML meta tag
      *
      * @param Array $attrs the meta tag's attributes (required)
@@ -344,7 +347,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return '<meta ' . self::attrs($attrs) . ' />' . "\n";
     }
 
-    /*
+    /**
      * Return an HTML script tag
      *
      * @param String $src the location of the script file (required)
@@ -358,7 +361,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return '<script ' . self::attrs($attrs) . '></script>' . "\n";
     }
 
-    /*
+    /**
      * Return an HTML select tag containing a list of options
      * NOTE: The name can be an object property like "user->name"
      *
@@ -383,7 +386,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return $html . "</select>\n";
     }
 
-    /*
+    /**
      * Return an HTML textarea tag
      *
      * @param String $name the field name (required)
@@ -400,7 +403,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return '<textarea ' . self::attrs($attrs) . ">$text</textarea>\n";
     }
 
-    /*
+    /**
      * Translate a message key into the current language
      *
      * @param String $message_key the message key to translate (e.g. "welcome")
@@ -411,7 +414,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return Translate::into(AppView::get('lang'), $message_key);
     }
 
-    /*
+    /**
      * Return a translated validation message for an object property field
      *
      * @param String $object_name_and_field the object field (e.g. "user->name")
@@ -425,7 +428,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return $message ? '<span class="validation_message">' . self::translate($message) . '</span>' : null;
     }
 
-    /*
+    /**
      * Return the object value for an object name (e.g. "user->name")
      *
      * @param String $name the object name and property (e.g. "user->name")
@@ -443,7 +446,7 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
         return $value;
     }
 
-    /*
+    /**
      * Return the CSS id for an object name (e.g. "user->name")
      *
      * @param String $name the object name and property (e.g. "user->name")

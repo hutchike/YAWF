@@ -11,6 +11,12 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+/**
+ * This helper provides commonly used HTTP status codes via class
+ * constants such as HTTP::OK which just returns 200. Simple huh?
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class HTTP extends YAWF
 {
     // 200 status codes
