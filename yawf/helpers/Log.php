@@ -11,35 +11,80 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+/**
+ * This helper provides logging methods available to all classes.
+ * All methods are static to make logging as simple as possible.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Log extends YAWF
 {
+    /**
+     * The logging levels 0 thru 5 all have class constant names
+     */
     const DEBUG = 0;
     const INFO = 1;
     const WARN = 2;
     const ERROR = 3;
     const ALERT = 4;
     const TEST = 5;
+
+    /**
+     * The logging level names are all symbols from the Symbol library class
+     */
     private static $level_names = array(Symbol::DEBUG, Symbol::INFO, Symbol::WARN, Symbol::ERROR, Symbol::ALERT, Symbol::TEST);
+
+    /**
+     * Logging happens at or above a logging level e.g. Log::DEBUG or Log::INFO
+     */
     private static $level;
+
+    /**
+     * Logging has a type e.g. "test" if we're performing test logging
+     */
     private static $type;
 
+    /**
+     * Get/set the logging level to a number, e.g. Log::DEBUG or Log::INFO
+     *
+     * @param Integer $level the logging level (optional)
+     * @return Integer the current logging level
+     */
     public static function level($level = NULL)
     {
         if (!is_null($level)) self::$level = $level;
         return self::$level;
     }
 
+    /**
+     * Get/set the logging type (e.g. "test" when we're logging test results)
+     *
+     * @param String $type the logging type (optional)
+     * @return String the current logging type (e.g. "test")
+     */
     public static function type($type = NULL)
     {
         if (!is_null($type)) self::$type = $type;
         return self::$type;
     }
 
+    /**
+     * Get the name of a logging level number
+     *
+     * @param Integer $level the logging level (e.g. Log::INFO)
+     * @return String the name of the logging level (e.g. "INFO")
+     */
     public static function level_name($level)
     {
         return strtoupper(self::$level_names[$level]);
     }
 
+    /**
+     * Write a line to the log file
+     *
+     * @param String $line the line to write
+     * @param Integer $level the logging level number (defaults to Log::INFO)
+     */
     public static function line($line, $level = self::INFO)
     {
         if (!LOGGING_ENABLED) return;
@@ -56,31 +101,61 @@ class Log extends YAWF
         fclose($fh);
     }
 
+    /**
+     * Write a debug line to the log file
+     *
+     * @param String $line the line to write
+     */
     public static function debug($line)
     {
         self::line($line, self::DEBUG);
     }
 
+    /**
+     * Write an info line to the log file
+     *
+     * @param String $line the line to write
+     */
     public static function info($line)
     {
         self::line($line, self::INFO);
     }
 
+    /**
+     * Write a warn line to the log file
+     *
+     * @param String $line the line to write
+     */
     public static function warn($line)
     {
         self::line($line, self::WARN);
     }
 
+    /**
+     * Write an error line to the log file
+     *
+     * @param String $line the line to write
+     */
     public static function error($line)
     {
         self::line($line, self::ERROR);
     }
 
+    /**
+     * Write an alert line to the log file
+     *
+     * @param String $line the line to write
+     */
     public static function alert($line)
     {
         self::line($line, self::ALERT);
     }
 
+    /**
+     * Write a test line to the log file
+     *
+     * @param String $line the line to write
+     */
     public static function test($line)
     {
         self::line($line, self::TEST);

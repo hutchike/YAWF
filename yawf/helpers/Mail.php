@@ -11,8 +11,23 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+/**
+ * This helper provides a simple way to send email via PHP using
+ * mime/multipart to include both a text and HTML message version.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Mail extends YAWF
 {
+    /**
+     * Send a mail message by specifying all the message detials in am
+     * array of render data, including "from", "to", "subject", "text"
+     * and optionally "html" (if you wish to send multipart messages).
+     *
+     * @param Array $render an array containing all the mail details
+     * @param Boolean $is_testing whether or not we're testing
+     * @return String the sent message, to be checked when testing
+     */
     public static function send($render, $is_testing = FALSE)
     {
         $render_defaults = array('from' => CONTACT_EMAIL, 'to' => NULL,
@@ -35,7 +50,7 @@ class Mail extends YAWF
                    "X-Mailer: PHP/" . phpversion() . "\r\n";
         if (is_null($html))
         {
-            $message = wordwrap($text, 80);
+            $message = $text;
         }
         else // it's HTML
         {
@@ -65,8 +80,12 @@ End_of_message;
         return $message;
     }
 
-    // Mail fields cannot include returns
-
+    /**
+     * Return a mail field with return/newline characters replaced with spaces
+     *
+     * @param String $value the field value to clean
+     * @return String the field value after its cleaned
+     */
     private static function field($value)
     {
         return strtr($value, "\r\n", '  ');
