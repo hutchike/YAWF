@@ -269,7 +269,7 @@ class Remote extends YAWF
         foreach ($this->object->data() as $key => $value)
         {
             $found = first(array_key($response, $key), ''); // no NULL values
-            if ($found !== (string)$value)
+            if ((string)$found !== (string)$value) // XML data is all strings
             {
                 $class = $this->class;
                 $message = "Check response \"$key\" for class \"$class\" - expected \"$value\" but received \"$found\"";
