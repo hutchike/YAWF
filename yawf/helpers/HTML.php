@@ -177,7 +177,11 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
      */
     public static function checkbox($name, $value, $attrs = array())
     {
-        if (array_key($attrs, Symbol::CHECKED)) $attrs[Symbol::CHECKED] = Symbol::CHECKED;
+        if (array_key($attrs, Symbol::CHECKED) ||
+            $value == self::object_value_for($name))
+        {
+            $attrs[Symbol::CHECKED] = Symbol::CHECKED;
+        }
         return self::input_type('checkbox', $name, $value, $attrs);
     }
 
@@ -219,7 +223,11 @@ class HTML extends YAWF // and depends on "AppView" and "Translate"
      */
     public static function radio($name, $value, $attrs = array())
     {
-        if (array_key($attrs, Symbol::CHECKED)) $attrs[Symbol::CHECKED] = Symbol::CHECKED;
+        if (array_key($attrs, Symbol::CHECKED) ||
+            $value == self::object_value_for($name))
+        {
+            $attrs[Symbol::CHECKED] = Symbol::CHECKED;
+        }
         return self::input_type('radio', $name, $value, $attrs);
     }
 
