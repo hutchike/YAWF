@@ -91,6 +91,7 @@ class REST extends YAWF
      * Perform a REST "post" method at a URL
      *
      * @param String $url the URL to "post"
+     * @param Array $data the data to "post"
      * @param String $type the content type to use (optional)
      * @param String $charset the charset encoding to use (optional)
      * @return Array any decoded data returned from the method
@@ -108,6 +109,7 @@ class REST extends YAWF
      * Perform a REST "put" method at a URL
      *
      * @param String $url the URL to "put"
+     * @param Array $data the data to "post"
      * @param String $type the content type to use (optional)
      * @param String $charset the charset encoding to use (optional)
      * @return Array any decoded data returned from the method
