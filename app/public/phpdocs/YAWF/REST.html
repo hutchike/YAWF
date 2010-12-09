@@ -24,8 +24,12 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Provide REST methods to &quot;get&quot;, &quot;put&quot;, &quot;post&quot; and &quot;delete&quot; data,  and parse any received data so that it's available as an array.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_helpers---REST.php.html">/helpers/REST.php</a> (line <span class="field">16</span>)
+			Located in <a class="field" href="_helpers---REST.php.html">/helpers/REST.php</a> (line <span class="field">22</span>)
 		</p>
 		
 				
@@ -50,39 +54,39 @@
 			<div class="method-summary">
 												<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">String</span>
 										<a href="#charset" title="details" class="method-name">charset</a>
-											([<span class="var-type"></span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">Array</span>
 										<a href="#delete" title="details" class="method-name">delete</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">Array</span>
 										<a href="#get" title="details" class="method-name">get</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">Array</span>
 										<a href="#post" title="details" class="method-name">post</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">Array</span>
 										<a href="#put" title="details" class="method-name">put</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">String</span>
 										<a href="#type" title="details" class="method-name">type</a>
-											([<span class="var-type"></span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>])
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>])
 									</div>
 																																																															</div>
 		</div>
@@ -104,26 +108,28 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static charset</span> (line <span class="line-number">27</span>)
+		<span class="method-title">static charset</span> (line <span class="line-number">52</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get/set the REST character set encoding we're using</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the character set encoding being used (e.g. &quot;UTF-8&quot;)</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			charset
 		</span>
-					([<span class="var-type"></span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$charset</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$charset</span><span class="var-description">: the character set encoding to use (optional)</span>			</li>
 				</ul>
 		
 			
@@ -133,32 +139,34 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static delete</span> (line <span class="line-number">33</span>)
+		<span class="method-title">static delete</span> (line <span class="line-number">66</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Perform a REST &quot;delete&quot; method at a URL</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> any decoded data returned from the method</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			delete
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$url</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$url</span><span class="var-description">: the URL to &quot;delete&quot;</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$type</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$type</span><span class="var-description">: the content type to use (optional)</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$charset</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$charset</span><span class="var-description">: the charset encoding to use (optional)</span>			</li>
 				</ul>
 		
 			
@@ -168,32 +176,34 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static get</span> (line <span class="line-number">41</span>)
+		<span class="method-title">static get</span> (line <span class="line-number">82</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Perform a REST &quot;get&quot; method at a URL</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> any decoded data returned from the method</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			get
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$url</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$url</span><span class="var-description">: the URL to &quot;get&quot;</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$type</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$type</span><span class="var-description">: the content type to use (optional)</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$charset</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$charset</span><span class="var-description">: the charset encoding to use (optional)</span>			</li>
 				</ul>
 		
 			
@@ -203,35 +213,37 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static post</span> (line <span class="line-number">49</span>)
+		<span class="method-title">static post</span> (line <span class="line-number">98</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Perform a REST &quot;post&quot; method at a URL</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> any decoded data returned from the method</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			post
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$url</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$url</span><span class="var-description">: the URL to &quot;post&quot;</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$type</span><span class="var-description">: the content type to use (optional)</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$charset</span><span class="var-description">: the charset encoding to use (optional)</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$data</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$type</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$charset</span>			</li>
 				</ul>
 		
 			
@@ -241,35 +253,37 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static put</span> (line <span class="line-number">58</span>)
+		<span class="method-title">static put</span> (line <span class="line-number">115</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Perform a REST &quot;put&quot; method at a URL</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> any decoded data returned from the method</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			put
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$charset</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$url</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$url</span><span class="var-description">: the URL to &quot;put&quot;</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$type</span><span class="var-description">: the content type to use (optional)</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$charset</span><span class="var-description">: the charset encoding to use (optional)</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$data</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$type</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$charset</span>			</li>
 				</ul>
 		
 			
@@ -279,26 +293,28 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static type</span> (line <span class="line-number">21</span>)
+		<span class="method-title">static type</span> (line <span class="line-number">40</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get/set the REST content type we're using</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the content type being used (e.g. &quot;JSON&quot;)</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			type
 		</span>
-					([<span class="var-type"></span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>])
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$type</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$type</span><span class="var-description">: the content type to use (optional)</span>			</li>
 				</ul>
 		
 			
@@ -335,7 +351,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 09 Dec 2010 00:05:15 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Thu, 09 Dec 2010 01:16:16 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

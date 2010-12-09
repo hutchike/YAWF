@@ -26,8 +26,13 @@
 			</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This helper provides logging methods available to all classes.</p>
+<p class="description"><p>All methods are static to make logging as simple as possible.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_helpers---Log.php.html">/helpers/Log.php</a> (line <span class="field">14</span>)
+			Located in <a class="field" href="_helpers---Log.php.html">/helpers/Log.php</a> (line <span class="field">20</span>)
 		</p>
 		
 				
@@ -101,61 +106,61 @@
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">void</span>
 										<a href="#alert" title="details" class="method-name">alert</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$line</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">void</span>
 										<a href="#debug" title="details" class="method-name">debug</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$line</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">void</span>
 										<a href="#error" title="details" class="method-name">error</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$line</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">void</span>
 										<a href="#info" title="details" class="method-name">info</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$line</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">Integer</span>
 										<a href="#level" title="details" class="method-name">level</a>
-											([<span class="var-type"></span>&nbsp;<span class="var-name">$level</span> = <span class="var-default">NULL</span>])
+											([<span class="var-type">Integer</span>&nbsp;<span class="var-name">$level</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">String</span>
 										<a href="#level_name" title="details" class="method-name">level_name</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$level</span>)
+											(<span class="var-type">Integer</span>&nbsp;<span class="var-name">$level</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">void</span>
 										<a href="#line" title="details" class="method-name">line</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$line</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$level</span> = <span class="var-default">self::INFO</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$line</span>, [<span class="var-type">Integer</span>&nbsp;<span class="var-name">$level</span> = <span class="var-default">self::INFO</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">void</span>
 										<a href="#test" title="details" class="method-name">test</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$line</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">String</span>
 										<a href="#type" title="details" class="method-name">type</a>
-											([<span class="var-type"></span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>])
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">void</span>
 										<a href="#warn" title="details" class="method-name">warn</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$line</span>)
 									</div>
 																																																																																															</div>
 		</div>
@@ -177,10 +182,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static alert</span> (line <span class="line-number">79</span>)
+		<span class="method-title">static alert</span> (line <span class="line-number">149</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Write an alert line to the log file</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -190,13 +196,13 @@
 		<span class="method-name">
 			alert
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$line</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$line</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$line</span><span class="var-description">: the line to write</span>			</li>
 				</ul>
 		
 			
@@ -206,10 +212,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static debug</span> (line <span class="line-number">59</span>)
+		<span class="method-title">static debug</span> (line <span class="line-number">109</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Write a debug line to the log file</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -219,13 +226,13 @@
 		<span class="method-name">
 			debug
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$line</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$line</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$line</span><span class="var-description">: the line to write</span>			</li>
 				</ul>
 		
 			
@@ -235,10 +242,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static error</span> (line <span class="line-number">74</span>)
+		<span class="method-title">static error</span> (line <span class="line-number">139</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Write an error line to the log file</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -248,13 +256,13 @@
 		<span class="method-name">
 			error
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$line</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$line</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$line</span><span class="var-description">: the line to write</span>			</li>
 				</ul>
 		
 			
@@ -264,10 +272,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static info</span> (line <span class="line-number">64</span>)
+		<span class="method-title">static info</span> (line <span class="line-number">119</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Write an info line to the log file</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -277,13 +286,13 @@
 		<span class="method-name">
 			info
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$line</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$line</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$line</span><span class="var-description">: the line to write</span>			</li>
 				</ul>
 		
 			
@@ -293,26 +302,28 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static level</span> (line <span class="line-number">26</span>)
+		<span class="method-title">static level</span> (line <span class="line-number">53</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get/set the logging level to a number, e.g. Log::DEBUG or Log::INFO</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the current logging level</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Integer</span>
 		<span class="method-name">
 			level
 		</span>
-					([<span class="var-type"></span>&nbsp;<span class="var-name">$level</span> = <span class="var-default">NULL</span>])
+					([<span class="var-type">Integer</span>&nbsp;<span class="var-name">$level</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$level</span>			</li>
+				<span class="var-type">Integer</span>
+				<span class="var-name">$level</span><span class="var-description">: the logging level (optional)</span>			</li>
 				</ul>
 		
 			
@@ -322,26 +333,28 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static level_name</span> (line <span class="line-number">38</span>)
+		<span class="method-title">static level_name</span> (line <span class="line-number">77</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the name of a logging level number</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the name of the logging level (e.g. &quot;INFO&quot;)</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			level_name
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$level</span>)
+					(<span class="var-type">Integer</span>&nbsp;<span class="var-name">$level</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$level</span>			</li>
+				<span class="var-type">Integer</span>
+				<span class="var-name">$level</span><span class="var-description">: the logging level (e.g. Log::INFO)</span>			</li>
 				</ul>
 		
 			
@@ -351,10 +364,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static line</span> (line <span class="line-number">43</span>)
+		<span class="method-title">static line</span> (line <span class="line-number">88</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Write a line to the log file</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -364,16 +378,16 @@
 		<span class="method-name">
 			line
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$line</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$level</span> = <span class="var-default">self::INFO</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$line</span>, [<span class="var-type">Integer</span>&nbsp;<span class="var-name">$level</span> = <span class="var-default">self::INFO</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$line</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$line</span><span class="var-description">: the line to write</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$level</span>			</li>
+				<span class="var-type">Integer</span>
+				<span class="var-name">$level</span><span class="var-description">: the logging level number (defaults to Log::INFO)</span>			</li>
 				</ul>
 		
 			
@@ -383,10 +397,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static test</span> (line <span class="line-number">84</span>)
+		<span class="method-title">static test</span> (line <span class="line-number">159</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Write a test line to the log file</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -396,13 +411,13 @@
 		<span class="method-name">
 			test
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$line</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$line</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$line</span><span class="var-description">: the line to write</span>			</li>
 				</ul>
 		
 			
@@ -412,26 +427,28 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static type</span> (line <span class="line-number">32</span>)
+		<span class="method-title">static type</span> (line <span class="line-number">65</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get/set the logging type (e.g. &quot;test&quot; when we're logging test results)</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the current logging type (e.g. &quot;test&quot;)</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			type
 		</span>
-					([<span class="var-type"></span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>])
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$type</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$type</span><span class="var-description">: the logging type (optional)</span>			</li>
 				</ul>
 		
 			
@@ -441,10 +458,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static warn</span> (line <span class="line-number">69</span>)
+		<span class="method-title">static warn</span> (line <span class="line-number">129</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Write a warn line to the log file</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -454,13 +472,13 @@
 		<span class="method-name">
 			warn
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$line</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$line</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$line</span><span class="var-description">: the line to write</span>			</li>
 				</ul>
 		
 			
@@ -516,7 +534,7 @@
 		<span class="const-title">
 			<span class="const-name">ALERT</span>
 			 = <span class="const-default"> 4</span>
-			(line <span class="line-number">20</span>)
+			(line <span class="line-number">29</span>)
 		</span>
 	</div>
 
@@ -532,11 +550,12 @@
 		<span class="const-title">
 			<span class="const-name">DEBUG</span>
 			 = <span class="const-default"> 0</span>
-			(line <span class="line-number">16</span>)
+			(line <span class="line-number">25</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The logging levels 0 thru 5 all have class constant names</p>
 	
 	
 </div>
@@ -548,7 +567,7 @@
 		<span class="const-title">
 			<span class="const-name">ERROR</span>
 			 = <span class="const-default"> 3</span>
-			(line <span class="line-number">19</span>)
+			(line <span class="line-number">28</span>)
 		</span>
 	</div>
 
@@ -564,7 +583,7 @@
 		<span class="const-title">
 			<span class="const-name">INFO</span>
 			 = <span class="const-default"> 1</span>
-			(line <span class="line-number">17</span>)
+			(line <span class="line-number">26</span>)
 		</span>
 	</div>
 
@@ -580,7 +599,7 @@
 		<span class="const-title">
 			<span class="const-name">TEST</span>
 			 = <span class="const-default"> 5</span>
-			(line <span class="line-number">21</span>)
+			(line <span class="line-number">30</span>)
 		</span>
 	</div>
 
@@ -596,7 +615,7 @@
 		<span class="const-title">
 			<span class="const-name">WARN</span>
 			 = <span class="const-default"> 2</span>
-			(line <span class="line-number">18</span>)
+			(line <span class="line-number">27</span>)
 		</span>
 	</div>
 
@@ -609,7 +628,7 @@
 	</div>
 	
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 09 Dec 2010 00:05:13 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Thu, 09 Dec 2010 01:16:14 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

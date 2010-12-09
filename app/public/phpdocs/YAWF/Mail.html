@@ -24,8 +24,12 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This helper provides a simple way to send email via PHP using  mime/multipart to include both a text and HTML message version.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_helpers---Mail.php.html">/helpers/Mail.php</a> (line <span class="field">14</span>)
+			Located in <a class="field" href="_helpers---Mail.php.html">/helpers/Mail.php</a> (line <span class="field">20</span>)
 		</p>
 		
 				
@@ -50,9 +54,9 @@
 			<div class="method-summary">
 												<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">String</span>
 										<a href="#send" title="details" class="method-name">send</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$render</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$is_testing</span> = <span class="var-default">FALSE</span>])
+											(<span class="var-type">Array</span>&nbsp;<span class="var-name">$render</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$is_testing</span> = <span class="var-default">FALSE</span>])
 									</div>
 																							</div>
 		</div>
@@ -74,29 +78,31 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static send</span> (line <span class="line-number">16</span>)
+		<span class="method-title">static send</span> (line <span class="line-number">31</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Send a mail message by specifying all the message detials in am  array of render data, including &quot;from&quot;, &quot;to&quot;, &quot;subject&quot;, &quot;text&quot;  and optionally &quot;html&quot; (if you wish to send multipart messages).</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the sent message, to be checked when testing</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			send
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$render</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$is_testing</span> = <span class="var-default">FALSE</span>])
+					(<span class="var-type">Array</span>&nbsp;<span class="var-name">$render</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$is_testing</span> = <span class="var-default">FALSE</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$render</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$render</span><span class="var-description">: an array containing all the mail details</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$is_testing</span>			</li>
+				<span class="var-type">Boolean</span>
+				<span class="var-name">$is_testing</span><span class="var-description">: whether or not we're testing</span>			</li>
 				</ul>
 		
 			
@@ -133,7 +139,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 09 Dec 2010 00:05:13 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Thu, 09 Dec 2010 01:16:14 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
