@@ -230,6 +230,18 @@ function h($text)
     return htmlentities($text);
 }
 
+// Copy the Ruby "p()" and "puts()"
+
+function p($thing)
+{
+    print_r($thing);
+}
+
+function puts($text)
+{
+    print "$text\n";
+}
+
 // Indent some text with whitespace
 
 function indent($text, $chars = 2)

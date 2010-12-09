@@ -16,14 +16,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <title>Test Runner</title>
-    <?= HTML::script('scripts/test/test.js') ?>
-    <?= HTML::script('scripts/test/' . $script) ?>
+    <?= HTML::script_tag('scripts/test/test.js') ?>
+    <?= HTML::script_tag('scripts/test/' . $script) ?>
   </head>
   <frameset cols="*" rows="36,*,0">
     <?= HTML::frame('browser', 'test/browser.part?url=' . urlencode($url) . '&amp;script=' . urlencode($script)) ?>
     <frameset cols="250,*" rows="*">
       <?= HTML::frame('console', 'test/console.part') ?>
-      <?= HTML::frame('view', '') ?>
+      <?= HTML::frame('view') ?>
     </frameset>
     <?= HTML::frame('logger', 'test/logger.part') ?>
   </frameset>

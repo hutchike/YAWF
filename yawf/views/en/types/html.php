@@ -8,7 +8,7 @@
     <meta name="robots" content="index, follow" />
     <?= HTML::link_tag('images/y.png', array('rel' => 'shortcut icon', 'type' => 'image/png')) ?>
     <?= HTML::link_tag('styles/base.css') ?>
-    <?= HTML::script('scripts/jquery.js') ?>
+    <?= HTML::script_tag('scripts/jquery.js') ?>
 </head>
 <body>
 <?= $content ?>

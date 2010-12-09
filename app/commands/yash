@@ -155,13 +155,13 @@ class Yet_another_shell extends Command
         return $content;
     }
 
-    // Parse "p", "puts", "should", "should_not" and similar commands
+    // Parse "should", "should_not" and similar commands
 
     protected function parse($line)
     {
         if (preg_match('/^(do|for|if|while)/', $line)) return $line;
         $line = preg_replace('/^should\s+not/', 'should_not', $line);
-        return preg_replace('/^(\w[\w:]+)\s+(.*)$/', '\1(\2)', $line);
+        return preg_replace('/^(\w[\w:]*)\s+(.*)$/', '\1(\2)', $line);
     }
 
     // Say something unless we're being quiet
@@ -265,11 +265,6 @@ function cookie($array = array()) { global $yash; $yash->cookie($array); }
 function flash($array = array()) { global $yash; $yash->flash($array); }
 function server($array = array()) { global $yash; $yash->server($array); }
 function session($array = array()) { global $yash; $yash->session($array); }
-
-// Add a couple of rather nice Ruby print functions
-
-function p($text) { print_r($text); return NULL; }
-function puts($text) { print "$text\n"; return NULL; }
 
 // Add shortcuts to should and should_not functions
 

@@ -21,11 +21,34 @@
 					<span class="disabled">Description</span> |
 															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 						
-					</div>
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This helper wraps the &quot;Net/GeoIP&quot; plugin from MaxMind with a  simple object-oriented interface to provide the IP address,  the country name and code, and the location (i.e. city).</p>
+<p class="description"><p>For example, if you're using the GeoIPCity.dat data file:</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<a href="../YAWF/_lib---utils.php.html#functionload_helper">load_helper</a><span class="src-sym">(</span><span class="src-str">'GeoIP'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$geo&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../YAWF/GeoIP.html">GeoIP</a></span><span class="src-sym">(</span><span class="src-str">'app/data/GeoIPCity.dat'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$country&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methodcountry_name">country_name</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$code&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methodcountry_code">country_code</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$city&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methodcity">city</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$rgn&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methodregion">region</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$zip&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methodzip_code">zip_code</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$dma&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methoddma_code">dma_code</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$lat&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methodlatitude">latitude</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$long&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methodlongitude">longitude</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p><p>...or to use the default GeoIP.dat file in /usr/share/GeoIP:</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<a href="../YAWF/_lib---utils.php.html#functionload_helper">load_helper</a><span class="src-sym">(</span><span class="src-str">'GeoIP'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$geo&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../YAWF/GeoIP.html">GeoIP</a></span><span class="src-sym">(</span><span class="src-str">'app/data/GeoIPCity.dat'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$country&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methodcountry_name">country_name</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$code&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methodcountry_code">country_code</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;Can't&nbsp;use&nbsp;the&nbsp;city&nbsp;data&nbsp;methods</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;coz&nbsp;they&nbsp;will&nbsp;just&nbsp;return&nbsp;NULL</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_helpers---GeoIP.php.html">/helpers/GeoIP.php</a> (line <span class="field">2</span>)
+			Located in <a class="field" href="_helpers---GeoIP.php.html">/helpers/GeoIP.php</a> (line <span class="field">47</span>)
 		</p>
 		
 				
@@ -35,6 +58,26 @@
 </div>
 
 
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#DEFAULT_FILENAME" title="details" class="const-name">DEFAULT_FILENAME</a> = 					<span class="var-type"> '/usr/share/GeoIP/GeoIP.dat'</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
 
 
 	<a name="sec-method-summary"></a>
@@ -42,39 +85,83 @@
 		<div class="info-box-title">Method Summary</span></div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+									<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																								<div class="method-definition">
-					<img src="../media/images/Constructor.png" alt=" "/>
-											<span class="method-result">GeoIP</span>
-										<a href="#__construct" title="details" class="method-name">__construct</a>
-										()
+																																																																																																																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#area_code" title="details" class="method-name">area_code</a>
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
+										<a href="#city" title="details" class="method-name">city</a>
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
 										<a href="#country_code" title="details" class="method-name">country_code</a>
-											([<span class="var-type"></span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#country_name" title="details" class="method-name">country_name</a>
-											([<span class="var-type"></span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Constructor.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/GeoIP.html">GeoIP</a></span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$filename</span> = <span class="var-default">self::DEFAULT_FILENAME</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
+										<a href="#dma_code" title="details" class="method-name">dma_code</a>
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
 										<a href="#ip" title="details" class="method-name">ip</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
+										<a href="#latitude" title="details" class="method-name">latitude</a>
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 										<a href="#location" title="details" class="method-name">location</a>
-											([<span class="var-type"></span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#longitude" title="details" class="method-name">longitude</a>
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#region" title="details" class="method-name">region</a>
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#zip_code" title="details" class="method-name">zip_code</a>
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
 									</div>
 											</div>
 		</div>
@@ -91,103 +178,209 @@
 		</div>
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
-<a name="method__construct" id="__construct"><!-- --></a>
+<a name="methodarea_code" id="area_code"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">6</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">GeoIP</span>
-		<span class="method-name">
-			__construct
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodcountry_code" id="country_code"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">country_code</span> (line <span class="line-number">17</span>)
+		<span class="method-title">area_code</span> (line <span class="line-number">148</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the telephone area code for an IP address  NOTE: This method requires the MaxMiind GeoIP City database</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the area code for the IP address</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
-			country_code
+			area_code
 		</span>
-					([<span class="var-type"></span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$client_ip</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$client_ip</span><span class="var-description">: the client's IP address (optional)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcity" id="city"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">city</span> (line <span class="line-number">100</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the city name for an IP address  NOTE: This method requires the MaxMiind GeoIP City database</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the city name for the IP address</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			city
+		</span>
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$client_ip</span><span class="var-description">: the client's IP address (optional)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcountry_code" id="country_code"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">country_code</span> (line <span class="line-number">85</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the country code (2 letters) for an IP address</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the country code for the IP address</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			country_code
+		</span>
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$client_ip</span><span class="var-description">: the client's IP address (optional)</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodcountry_name" id="country_name"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">country_name</span> (line <span class="line-number">11</span>)
+		<span class="method-title">country_name</span> (line <span class="line-number">71</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the country name for an IP address</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the country name for the IP address</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			country_name
 		</span>
-					([<span class="var-type"></span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$client_ip</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$client_ip</span><span class="var-description">: the client's IP address (optional)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Constructor.png" />
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">59</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create a GeoIP wrapper object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a new GeoIP wrapper object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/GeoIP.html">GeoIP</a></span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$filename</span> = <span class="var-default">self::DEFAULT_FILENAME</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$filename</span><span class="var-description">: the filename of the GeoIP data file (optional)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddma_code" id="dma_code"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">dma_code</span> (line <span class="line-number">136</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the DMA (Direct Marketing Association) code for an IP address  NOTE: This method requires the MaxMiind GeoIP City database</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the DMA code for the IP address</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			dma_code
+		</span>
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$client_ip</span><span class="var-description">: the client's IP address (optional)</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodip" id="ip"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">ip</span> (line <span class="line-number">31</span>)
+		<span class="method-title">ip</span> (line <span class="line-number">182</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the client's IP address</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the client's IP address</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			ip
 		</span>
@@ -197,31 +390,158 @@
 		
 			
 	</div>
+<a name="methodlatitude" id="latitude"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">latitude</span> (line <span class="line-number">172</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the latitude for an IP address  NOTE: This method requires the MaxMiind GeoIP City database</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the latitude for the IP address</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			latitude
+		</span>
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$client_ip</span><span class="var-description">: the client's IP address (optional)</span>			</li>
+				</ul>
+		
+			
+	</div>
 <a name="methodlocation" id="location"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">location</span> (line <span class="line-number">23</span>)
+		<span class="method-title">location</span> (line <span class="line-number">196</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a location object for an IP address.</p>
+<p class="description"><p>Note that this method requires the MaxMiind GeoIP City database.</p></p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the location object for the IP address</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 		<span class="method-name">
 			location
 		</span>
-					([<span class="var-type"></span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$client_ip</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$client_ip</span><span class="var-description">: the client's IP address (optional)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlongitude" id="longitude"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">longitude</span> (line <span class="line-number">160</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the longitude for an IP address  NOTE: This method requires the MaxMiind GeoIP City database</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the longitude for the IP address</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			longitude
+		</span>
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$client_ip</span><span class="var-description">: the client's IP address (optional)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodregion" id="region"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">region</span> (line <span class="line-number">112</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the region for an IP address  NOTE: This method requires the MaxMiind GeoIP City database</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the region (e.g. &quot;CA&quot;) the IP address</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			region
+		</span>
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$client_ip</span><span class="var-description">: the client's IP address (optional)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodzip_code" id="zip_code"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">zip_code</span> (line <span class="line-number">124</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the zip code for an IP address  NOTE: This method requires the MaxMiind GeoIP City database</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the zip code for the IP address</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			zip_code
+		</span>
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$client_ip</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$client_ip</span><span class="var-description">: the client's IP address (optional)</span>			</li>
 				</ul>
 		
 			
@@ -230,9 +550,41 @@
 		</div>
 	</div>
 
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constDEFAULT_FILENAME" id="DEFAULT_FILENAME"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">DEFAULT_FILENAME</span>
+			 = <span class="const-default"> '/usr/share/GeoIP/GeoIP.dat'</span>
+			(line <span class="line-number">49</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+						
+		</div>
+	</div>
 	
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 25 Nov 2010 08:25:37 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Wed, 08 Dec 2010 23:35:16 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
