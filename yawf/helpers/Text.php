@@ -13,6 +13,13 @@
 
 load_plugin('Text/AkInflector'); // from the Akelos PHP Framework
 
+/**
+ * Provide useful text manipulation methods via the AkInflector
+ * class kindly provided by the Akelos PHP framework - for info
+ * see http://www.akelos.org/ for more information.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Text extends YAWF
 {
     // Use the excellent AkInflector
