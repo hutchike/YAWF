@@ -249,7 +249,8 @@ load_tool('Translate');
 function t($lookup, $replacements = array())
 {
     $app = YAWF::prop(Symbol::APP);
-    return Translate::into($app->get_lang(), $lookup, $replacements);
+    return $app ? Translate::into($app->get_lang(), $lookup, $replacements)
+                : NULL;
 }
 
 // Copy the Ruby "p()" and "puts()"
