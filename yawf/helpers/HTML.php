@@ -419,7 +419,7 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
      */
     public static function validation_message($object_name_and_field)
     {
-        list($object_name, $field) = preg_split('/\->/', $object_name_and_field);
+        list($object_name, $field) = explode(Symbol::ARROW, $object_name_and_field);
         $object = AppView::get($object_name);
         $message = $object->validation_message_for($field);
         return $message ? '<span class="validation_message">' . t($message) . '</span>' : null;
@@ -434,9 +434,9 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
     private static function object_value_for($name)
     {
         $value = NULL;
-        if (strstr($name, '->')) // special case for "object->field"
+        if (strstr($name, Symbol::ARROW)) // special case for "object->field"
         {
-            list($object_name, $field) = preg_split('/\->/', $name);
+            list($object_name, $field) = explode(Symbol::ARROW, $name);
             $object = AppView::get($object_name);
             $value = h($object->$field);
         }
@@ -453,7 +453,7 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
     private static function css_id_for($name, &$attrs)
     {
         if ($id = array_key($attrs, Symbol::ID)) return $id;
-        else return str_replace('->', self::$id_format, $name);
+        else return str_replace(Symbol::ARROW, self::$id_format, $name);
     }   
 }
 
