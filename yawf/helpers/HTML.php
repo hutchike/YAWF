@@ -11,8 +11,6 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-load_helper('Translate');
-
 /**
  * This helper makes it easy to insert HTML into views in a clean
  * consistent manner. The form methods support object properties:
@@ -414,17 +412,6 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
     }
 
     /**
-     * Translate a message key into the current language
-     *
-     * @param String $message_key the message key to translate (e.g. "welcome")
-     * @return String the translation (e.g. "bienvenido" if we prefer Spanish)
-     */
-    public static function translate($message_key)
-    {
-        return Translate::into(AppView::get('lang'), $message_key);
-    }
-
-    /**
      * Return a translated validation message for an object property field
      *
      * @param String $object_name_and_field the object field (e.g. "user->name")
@@ -435,7 +422,7 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
         list($object_name, $field) = preg_split('/\->/', $object_name_and_field);
         $object = AppView::get($object_name);
         $message = $object->validation_message_for($field);
-        return $message ? '<span class="validation_message">' . self::translate($message) . '</span>' : null;
+        return $message ? '<span class="validation_message">' . t($message) . '</span>' : null;
     }
 
     /**
