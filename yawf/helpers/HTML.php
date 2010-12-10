@@ -11,6 +11,8 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+load_helper('Translate');
+
 /**
  * This helper makes it easy to insert HTML into views in a clean
  * consistent manner. The form methods support object properties:
@@ -24,7 +26,7 @@
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class HTML extends YAWF // and depends on "AppView" and "Translate"
+class HTML extends YAWF // and depends on "AppView" class in "App.php"
 {
     /**
      * Set HTML::$id_format to Symbol::DASH if you prefer CSS ids like "the-id"

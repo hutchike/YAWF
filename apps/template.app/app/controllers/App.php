@@ -1,6 +1,4 @@
 <?
-load_helpers('Translate');
-
 class App_controller extends Controller
 {
     public function before()
