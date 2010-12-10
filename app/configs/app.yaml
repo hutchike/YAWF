@@ -11,13 +11,14 @@ ini:
 settings:
     testing_enabled: true
     logging_enabled: true
+    assert_check_on: true
     benchmarking_on: true
     exception_redirect: NULL
     default_log_level: info
     params_trim_whitespace: true
     params_format_as_html: true
     params_strip_slashes: true
-    supported_languages: [en]
+    supported_languages: [en, es]
     default_language: en
     cookie_domain: .yawf.org
     cache_expiry_secs: 3600
@@ -26,7 +27,7 @@ testing:
     contact_email: kevin.hutchinson@guanoo.com  # PLEASE CHANGE THIS
     webmaster_email: webmaster@yawf.org         # PLEASE CHANGE THIS
     app_name: YAWF - Yet Another Web Framework
-    app_test_controller_list: [Admin, Project]
+    app_test_controller_list: [Admin, Project, REST]
     app_test_view_path_list: [/, admin/login, admin/signup, project/terms, project/contact]
 
 database:
