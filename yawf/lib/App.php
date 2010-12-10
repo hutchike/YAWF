@@ -19,7 +19,6 @@ class App extends YAWF
     protected $folder;      // views folder name e.g. "default"
     protected $file;        // the view file name e.g. "index"
     protected $lang;        // the language if set in the URL
-    protected $prefix;      // an optional URI prefix string
     protected $is_silent;   // "TRUE" after we've redirected
     protected $is_testing;
     protected $error_messages;
@@ -51,7 +50,7 @@ class App extends YAWF
             }
         }
         $this->set_lang($lang);
-        $this->prefix = $prefix;
+        AppView::prefix($prefix);
         $uri_no_fluff = preg_replace('/[\?#].*/', '', $uri);
         $content_type = preg_match('/\.([^\/]+)$/', $uri_no_fluff, $matches) ? $matches[1] : DEFAULT_CONTENT_TYPE;
         if ($content_type === 'test' && !TESTING_ENABLED) $content_type = DEFAULT_CONTENT_TYPE;
@@ -239,7 +238,7 @@ class App extends YAWF
 
         // Use class "AppView" to limit view capability
 
-        return AppView::render($path, $render, $this->prefix);
+        return AppView::render($path, $render);
     }
 
     // Render a content-type file in the "types" folder
@@ -283,6 +282,8 @@ class App extends YAWF
         {
             $url .= '.' . $this->content_type;
         }
+print 'Location: ' . AppView::url($url);
+exit;
 
         // Set a location header and optional status
 
@@ -333,15 +334,20 @@ class App extends YAWF
 
 class AppView extends YAWF
 {
-    private static $render;
     private static $prefix;
+    private static $render;
+
+    public static function prefix($prefix = NULL)
+    {
+        return is_null($prefix) ? self::$prefix
+                                : self::$prefix = $prefix;
+    }
 
     // Render the view path by extracting the render array
 
-    public static function render($__path_to_the_view_file, &$render, $prefix = '')
+    public static function render($__path_to_the_view_file, &$render)
     {
         self::$render = $render;
-        self::$prefix = $prefix;
         ob_start();
         extract((array)$render);
         include $__path_to_the_view_file;
