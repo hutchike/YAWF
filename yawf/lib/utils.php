@@ -241,7 +241,7 @@ function h($text)
 
 // Copy the Ruby on Rails "t()" translate function
 
-load_helper('Translate');
+load_tool('Translate');
 function t($lookup, $replacements = array())
 {
     $app = YAWF::prop(Symbol::APP);
