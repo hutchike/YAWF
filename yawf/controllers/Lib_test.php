@@ -76,8 +76,8 @@ class Lib_test_controller extends Controller
                       is_array((array)$this->render) && count((array)$this->render) === 0, $this->render);
         $this->should('have an "Object" called $this->params',
                       $this->params instanceof Object, $this->params);
-        $this->should('have "' . DEFAULT_LANGUAGE . '" set as $this->lang',
-                      $this->lang === DEFAULT_LANGUAGE, $this->lang);
+        $this->should('have "' . DEFAULT_LANGUAGE . '" set as $this->lang()',
+                      $this->lang() === DEFAULT_LANGUAGE, $this->lang());
         $this->should('have a seesion',
                       is_array($_SESSION), $_SESSION);
         $this->should('have a flash object', $this->flash instanceof Controller_flash, $this->flash);
@@ -181,24 +181,23 @@ class Lib_test_controller extends Controller
 
     public function set_lang_test()
     {
-        $this->set_lang('es');
+        $this->app->set_lang('de');
         $this->should_not('set an unsupported language code',
-                          $this->lang === 'es', $this->lang);
+                          $this->lang() === 'de', $this->lang());
 
-        $this->set_lang('es', 'en,es');
+        $this->app->set_lang('de', 'en,es,de');
         $this->should('set the language code',
-                      $this->lang === 'es', $this->lang);
+                      $this->lang() === 'de', $this->lang());
 
-        $this->lang = DEFAULT_LANGUAGE; // for the next test, and to render the results
+        $this->app->set_lang(DEFAULT_LANGUAGE); // for the next test, and to render the results
     }
 
     // Test that we can get the language code
 
     public function get_lang_test()
     {
-        $lang = $this->get_lang();
         $this->should('return the current language code',
-                      $lang === DEFAULT_LANGUAGE);
+                      $this->lang() === DEFAULT_LANGUAGE);
     }
 
     // Test that we cannot redirect when testing
