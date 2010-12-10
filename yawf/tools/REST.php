@@ -23,6 +23,7 @@ class REST extends YAWF
 {
     /**
      * By default, REST uses the JSON type for parsing speed
+     * and because JSON retains string and number data types
      */
     private static $type = Symbol::JSON;
 

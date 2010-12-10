@@ -13,18 +13,41 @@
 
 load_plugin('YAML/spyc');
 
+/**
+ * Provide YAML methods to "parse" and "dump" YAML data.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class YAML extends YAWF
 {
+    /**
+     * Parse a text string of YAML data into a data array
+     *
+     * @param String $yaml the string of YAML data to parse
+     * @return Array a data array containing the YAML data
+     */
     public static function parse($yaml)
     {
         return Spyc::YAMLLoadString($yaml);
     }
 
-    public static function load_file($yaml_file)
+    /**
+     * Parse a text file of YAML data into a data array
+     *
+     * @param String $yaml_file the filename containing YAML data to parse
+     * @return Array a data array containing the YAML data
+     */
+    public static function parse_file($yaml_file)
     {
         return Spyc::YAMLLoad($yaml_file);
     }
 
+    /**
+     * Dump an array of data as a YAML text string
+     *
+     * @param Array $array the array of data to dump as YAML text
+     * @return String a text string of YAML data
+     */
     public static function dump($array, $indent = FALSE, $wordwrap = FALSE)
     {
         return Spyc::YAMLDump($array, $indent, $wordwrap);
