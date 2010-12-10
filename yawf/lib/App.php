@@ -282,8 +282,6 @@ class App extends YAWF
         {
             $url .= '.' . $this->content_type;
         }
-print 'Location: ' . AppView::url($url);
-exit;
 
         // Set a location header and optional status
 
