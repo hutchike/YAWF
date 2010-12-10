@@ -11,8 +11,6 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-load_tool('Translate');
-
 class App extends YAWF
 {
     protected $content_type;// derived from the file extension
@@ -33,7 +31,7 @@ class App extends YAWF
 
         $config = AppConfig::configure();
         load_helper('HTML'); // for views
-        load_tool('Log'); // to log info
+        load_tools('Log', 'Translate');
         $this->error_messages = array();
         $this->assert_checking($config);
 
