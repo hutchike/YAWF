@@ -85,10 +85,4 @@ class Translate extends YAWF
     }
 }
 
-/**
- * Application translations are kept in "app/configs"
- */
-Translate::add_translations(Config::load('validate'));
-Translate::add_translations(Config::load('translate'));
-
 // End of Translate.php

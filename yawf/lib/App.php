@@ -11,6 +11,8 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+load_tool('Translate');
+
 class App extends YAWF
 {
     protected $content_type;// derived from the file extension
@@ -72,6 +74,11 @@ class App extends YAWF
         $model = new Model();
         $database = $this->is_testing ? DB_DATABASE_TEST : DB_DATABASE_LIVE;
         $model->set_connector(DB_CONNECTOR, $database);
+
+        // Setup the language translations
+
+        Translate::add_translations(Config::load('validate'));
+        Translate::add_translations(Config::load('translate'));
 
         // Register this app as a prop
 
