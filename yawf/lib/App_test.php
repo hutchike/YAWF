@@ -22,7 +22,7 @@ class App_test extends App
     public function __construct($uri = NULL)
     {
         parent::__construct($uri);
-        if (TESTING_ENABLED !== TRUE) parent::redirect('', TRUE); // exit!
+        if (TESTING_ENABLED !== TRUE) parent::redirect('', array('exit' => TRUE));
         $this->reset_folder();
         $this->test_run = NULL;
 
@@ -32,6 +32,10 @@ class App_test extends App
         $model->set_connector(DB_CONNECTOR, DB_DATABASE_TEST);
         $this->is_testing = TRUE;
         Log::type('test');
+
+        // Translations need validating
+
+        Translate::validate();
     }
 
     // Remove "_test" from the folder

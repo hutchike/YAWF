@@ -90,6 +90,5 @@ class Translate extends YAWF
  */
 Translate::add_translations(Config::load('validate'));
 Translate::add_translations(Config::load('translate'));
-if (TESTING_ENABLED) Translate::validate();
 
 // End of Translate.php
