@@ -54,7 +54,7 @@ class YAWF // Yet Another Web Framework
     {
         if (defined('BENCHMARKING_ON'))
         {
-            load_helper('Log');
+            load_tool('Log');
             $msecs = (int)( 1000 * ( microtime(TRUE) - self::$start ) );
             Log::info($log_info . " after $msecs ms");
         }
