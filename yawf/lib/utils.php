@@ -153,16 +153,20 @@ function split_list($list)
 
 // Load some PHP files with "require_once"
 
+$__YAWF_loaded_files__ = array();
 function load_files($dir, $files)
 {
+    global $__YAWF_loaded_files__;
     foreach ($files as $file)
     {
         $path = $dir . '/' . $file . '.php';
-        if (!file_found($path))
+        if (array_key($__YAWF_loaded_files__, $path)) continue;
+        if (!file_found($path)) // to prevent fatal YAWF errors
         {
             throw new Exception("File \"$path\" not found");
         }
         require_once $path;
+        $__YAWF_loaded_files__[$path] = TRUE;
     }
 }
 
