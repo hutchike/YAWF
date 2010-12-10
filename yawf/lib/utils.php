@@ -216,6 +216,15 @@ function load_services() // list of services
     load_files('services', $services);
 }
 
+// Load some tools 
+
+function load_tool($tool) { load_tools($tool); }
+function load_tools() // list of tools
+{
+    $tools = func_get_args();
+    load_files('tools', $tools);
+}
+
 // Autoload classes in the "lib"
 
 function __autoload($class_name)

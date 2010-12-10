@@ -19,7 +19,7 @@
  * For example, if you're using the GeoIPCity.dat data file:
  *
  * <code>
- * load_helper('GeoIP');
+ * load_tool('GeoIP');
  * $geo = new GeoIP('app/data/GeoIPCity.dat');
  * $country = $geo->country_name();
  * $code = $geo->country_code();
@@ -34,7 +34,7 @@
  * ...or to use the default GeoIP.dat file in /usr/share/GeoIP:
  *
  * <code>
- * load_helper('GeoIP');
+ * load_tool('GeoIP');
  * $geo = new GeoIP('app/data/GeoIPCity.dat');
  * $country = $geo->country_name();
  * $code = $geo->country_code();

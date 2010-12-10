@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-load_helper('Data');
+load_tool('Data');
 
 class REST_controller extends App_controller
 {

@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-load_helper('Data');
+load_tool('Data');
 
 /**
  * Provide a simple helper to write objects to a queue and read

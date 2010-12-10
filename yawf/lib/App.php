@@ -29,7 +29,8 @@ class App extends YAWF
         // Setup the config, HTML, log file & errors
 
         $config = AppConfig::configure();
-        load_helpers('HTML', 'Log');
+        load_helper('HTML'); // for views
+        load_tool('Log'); // to log info
         $this->error_messages = array();
         $this->assert_checking($config);
 
@@ -265,7 +266,7 @@ class App extends YAWF
     public function send_mail($file, $render = NULL)
     {
         $render = new Object($render);
-        load_helper('Mail');
+        load_tool('Mail');
         $text = $this->render_view($file, $render, array('ext' => '.mail.txt', 'must_find' => TRUE));
         $html = $this->render_view($file, $render, array('ext' => '.mail.html', 'must_find' => TRUE));
         $render->text = $text;

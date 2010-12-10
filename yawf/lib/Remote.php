@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-load_helper('REST');
+load_tool('REST');
 
 class Remote extends YAWF
 {

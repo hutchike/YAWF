@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-load_helpers('CURL', 'Data');
+load_tool('CURL', 'Data');
 
 /**
  * Provide REST methods to "get", "put", "post" and "delete" data,

@@ -89,7 +89,7 @@ class Data extends YAWF
      */
     public static function from_xml($text, $root = Symbol::ROOT)
     {
-        load_helper('XML');
+        load_tool('XML');
         $data = object_to_array(XML::deserialize($text));
         return array_key($data, $root, $data); // skip the root element
     }
@@ -102,7 +102,7 @@ class Data extends YAWF
      */
     public static function from_yaml($text)
     {
-        load_helper('YAML');
+        load_tool('YAML');
         return YAML::parse($text);
     }
 
@@ -166,7 +166,7 @@ class Data extends YAWF
      */
     public static function to_xml($data, $root = Symbol::ROOT)
     {
-        load_helper('XML');
+        load_tool('XML');
         return XML::serialize($data, array('rootName' => $root));
     }
 
@@ -178,7 +178,7 @@ class Data extends YAWF
      */
     public static function to_yaml($data)
     {
-        load_helper('YAML');
+        load_tool('YAML');
         return YAML::dump(object_to_array($data));
     }
 }
