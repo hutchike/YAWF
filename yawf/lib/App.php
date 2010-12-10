@@ -18,7 +18,7 @@ class App extends YAWF
     protected $service;     // a service to enable web services
     protected $folder;      // views folder name e.g. "default"
     protected $file;        // the view file name e.g. "index"
-    protected $lang;        // the language if set in the URL
+    protected $lang;        // the language code (two letters)
     protected $is_silent;   // "TRUE" after we've redirected
     protected $is_testing;
     protected $error_messages;
@@ -27,30 +27,19 @@ class App extends YAWF
 
     public function __construct($uri = NULL)
     {
-        // Setup the config, HTML, log file & errors
+        if (is_null($uri)) $uri = $_SERVER['REQUEST_URI'];
+
+        // Setup the config, prefix and assert checks
 
         $config = AppConfig::configure();
+        $prefix = $this->set_prefix($uri);
         load_helper('HTML'); // for views
         load_tools('Log', 'Translate');
         $this->error_messages = array();
         $this->assert_checking($config);
 
-        // Get the URI lang, folder, file and content type
+        // Set the folder, file and content type
 
-        if (is_null($uri)) $uri = $_SERVER['REQUEST_URI'];
-        $lang = NULL;
-        $prefix = VIEW_URL_PREFIX;
-        if (preg_match('/^\/(\w{2})(\/?).*/', $uri, $matches))
-        {
-            if (stristr(SUPPORTED_LANGUAGES, $matches[1]))
-            {
-                $lang = $matches[1];
-                $prefix = "/$lang$prefix";
-                if (!$matches[2]) $uri .= '/';
-            }
-        }
-        $this->set_lang($lang);
-        AppView::prefix($prefix);
         $uri_no_fluff = preg_replace('/[\?#].*/', '', $uri);
         $content_type = preg_match('/\.([^\/]+)$/', $uri_no_fluff, $matches) ? $matches[1] : DEFAULT_CONTENT_TYPE;
         if ($content_type === 'test' && !TESTING_ENABLED) $content_type = DEFAULT_CONTENT_TYPE;
@@ -196,6 +185,25 @@ class App extends YAWF
             $lang = DEFAULT_LANGUAGE;
         }
         $this->lang = $lang;
+    }
+
+    // Set the view prefix and language
+
+    protected function set_prefix($uri)
+    {
+        $lang = NULL;
+        $prefix = VIEW_URL_PREFIX;
+        if (preg_match('/^\/(\w{2})(\/?).*/', $uri, $matches))
+        {
+            if (stristr(SUPPORTED_LANGUAGES, $matches[1]))
+            {
+                $lang = $matches[1];
+                $prefix = "/$lang$prefix";
+                if (!$matches[2]) $uri .= '/';
+            }
+        }
+        $this->set_lang($lang);
+        return AppView::prefix($prefix);
     }
 
     // Get the path to a view file by looking in many places
