@@ -232,11 +232,19 @@ function __autoload($class_name)
     require_once('lib/' . $class_name . '.php');
 }
 
-// Copy the Ruby on Rails "h()"
+// Copy the Ruby on Rails "h()" HTML function
 
 function h($text)
 {
     return htmlentities($text);
+}
+
+// Copy the Ruby on Rails "t()" translate function
+
+function t($lookup, $replacements = array())
+{
+    $app = YAWF::prop(Symbol::APP);
+    return Translate::into($app->get_lang(), $lookup, $replacements);
 }
 
 // Copy the Ruby "p()" and "puts()"

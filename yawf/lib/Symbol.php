@@ -17,6 +17,7 @@ class Symbol extends YAWF
 {
     const ALERT = 'alert';
     const APP = 'app';
+    const ARROW = '->';
     const CHECKED = 'checked';
     const CONTROLLER = 'controller';
     const COOKIE = 'cookie';

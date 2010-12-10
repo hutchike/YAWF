@@ -72,6 +72,13 @@ class Request extends YAWF
                       : $this->app->get_content_type());
     }
 
+    // Return the language
+
+    public function lang()
+    {
+        return $this->app->get_lang();
+    }
+
     // Get or set a params value (used by yash)
 
     public function params($key, $value = NULL) 
@@ -166,9 +173,9 @@ class Request extends YAWF
             if ($trim_whitespace) $value = trim($value);
             if ($strip_slashes) $value = stripslashes($value);
             if ($format_as_html) $value = htmlentities($value);
-            if (strstr($field, '->'))
+            if (strstr($field, Symbol::ARROW))
             {
-                list($object, $field) = preg_split('/\->/', $field);
+                list($object, $field) = explode(Symbol::ARROW, $field);
                 if (!$params->$object) $params->$object = new Object();
                 $params->$object->$field = $value;
             }

@@ -18,6 +18,8 @@ class App extends YAWF
     protected $service;     // a service to enable web services
     protected $folder;      // views folder name e.g. "default"
     protected $file;        // the view file name e.g. "index"
+    protected $lang;        // the language if set in the URL
+    protected $prefix;      // an optional URI prefix string
     protected $is_silent;   // "TRUE" after we've redirected
     protected $is_testing;
     protected $error_messages;
@@ -34,14 +36,27 @@ class App extends YAWF
         $this->error_messages = array();
         $this->assert_checking($config);
 
-        // Get the content type, URI folder and file
+        // Get the URI lang, folder, file and content type
 
         if (is_null($uri)) $uri = $_SERVER['REQUEST_URI'];
+        $lang = NULL;
+        $prefix = VIEW_URL_PREFIX;
+        if (preg_match('/^\/(\w{2})(\/?).*/', $uri, $matches))
+        {
+            if (stristr(SUPPORTED_LANGUAGES, $matches[1]))
+            {
+                $lang = $matches[1];
+                $prefix = "/$lang$prefix";
+                if (!$matches[2]) $uri .= '/';
+            }
+        }
+        $this->set_lang($lang);
+        $this->prefix = $prefix;
         $uri_no_fluff = preg_replace('/[\?#].*/', '', $uri);
         $content_type = preg_match('/\.([^\/]+)$/', $uri_no_fluff, $matches) ? $matches[1] : DEFAULT_CONTENT_TYPE;
         if ($content_type === 'test' && !TESTING_ENABLED) $content_type = DEFAULT_CONTENT_TYPE;
-        if (substr($uri_no_fluff, 0, strlen(VIEW_URL_PREFIX)) === VIEW_URL_PREFIX) $uri_no_fluff = substr($uri_no_fluff, strlen(VIEW_URL_PREFIX));
-        list($folder, $file) = preg_split('/\//', $uri_no_fluff . '//');
+        if (substr($uri_no_fluff, 0, strlen($prefix)) === $prefix) $uri_no_fluff = substr($uri_no_fluff, strlen($prefix));
+        list($folder, $file) = explode('/', $uri_no_fluff . '//');
         $folder = preg_replace('/\.\w+$/', '', $folder);
         $file = preg_replace('/\.\w+$/', '', $file);
 
@@ -153,6 +168,32 @@ class App extends YAWF
         return $this->get_folder() . '/' . $this->get_file();
     }
 
+    // Get the language setting
+
+    public function get_lang()
+    {
+        return $this->lang;
+    }
+
+    // Set the requested language by checking supported languages
+
+    public function set_lang($lang = NULL, $supported_languages = SUPPORTED_LANGUAGES)
+    {
+        // Only web browsers send the HTTP_ACCEPT_LANGUAGE header
+
+        if (!$lang) $lang = array_key($_SERVER, 'HTTP_ACCEPT_LANGUAGE', '');
+        $lang = substr($lang, 0, 2); // take the primary language
+
+        // Check that the language is supported by our app config
+
+        $lang = strtolower($lang);
+        if (!$lang || !stristr($supported_languages, $lang))
+        {
+            $lang = DEFAULT_LANGUAGE;
+        }
+        $this->lang = $lang;
+    }
+
     // Get the path to a view file by looking in many places
 
     protected function get_view_path($file, $options = array())
@@ -160,7 +201,7 @@ class App extends YAWF
         // Read any options that were passed, e.g. extension
 
         $must_find = array_key($options, 'must_find', FALSE);
-        $lang = array_key($options, 'lang', $this->controller->get_lang());
+        $lang = array_key($options, 'lang', $this->lang);
         $folder = array_key($options, 'folder', $this->folder);
         $type = array_key($options, 'type', $this->content_type);
         $ext = array_key($options, 'ext', DEFAULT_EXTENSION);
@@ -198,7 +239,7 @@ class App extends YAWF
 
         // Use class "AppView" to limit view capability
 
-        return AppView::render($path, $render);
+        return AppView::render($path, $render, $this->prefix);
     }
 
     // Render a content-type file in the "types" folder
@@ -293,12 +334,14 @@ class App extends YAWF
 class AppView extends YAWF
 {
     private static $render;
+    private static $prefix;
 
     // Render the view path by extracting the render array
 
-    public static function render($__path_to_the_view_file, &$render)
+    public static function render($__path_to_the_view_file, &$render, $prefix = '')
     {
         self::$render = $render;
+        self::$prefix = $prefix;
         ob_start();
         extract((array)$render);
         include $__path_to_the_view_file;
@@ -312,7 +355,7 @@ class AppView extends YAWF
     public static function url($url, $prefix = NULL)
     {
         if (preg_match('/^\w+:/', $url)) return $url; // coz it's absolute
-        return first($prefix, VIEW_URL_PREFIX) . $url; // or it's local
+        return first($prefix, self::$prefix) . $url; // or it's local
     }
 
     // Get data from the render object

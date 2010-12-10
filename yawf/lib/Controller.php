@@ -16,7 +16,6 @@ class Controller extends Request
     protected $view;    // a string naming the view file for display
     protected $path;    // a string holding the folder and view path
     protected $type;    // a string with the content type, e.g. html
-    protected $lang;    // the two character language code e.g. "en"
     protected $flash;   // an object to send data into the next view
     protected $render;  // array of data to be rendered inside views
 
@@ -27,7 +26,6 @@ class Controller extends Request
         $this->view = $app->get_file(); // "faq" from "www.yawf.org/project/faq"
         $this->path = $app->get_folder().'/'.$this->view;  // e.g. "project/faq"
         $this->render = $render;        // data to be rendered in views
-        $this->set_lang();              // the browser language setting
         $this->setup_request($app);     // inherited from Request class
         $this->flash = $this->flash_object(); // uses a request session
     }
@@ -71,7 +69,6 @@ class Controller extends Request
         $render->app = $this->app;
         $render->view = $this->view;
         $render->path = $this->path;
-        $render->lang = $this->lang;
         $render->flash = $this->flash;
         $render->params = $this->params;
         $render->cookie = $this->cookie;
@@ -129,39 +126,12 @@ class Controller extends Request
         return $this;
     }
 
-    // Set the requested language by checking supported languages
-
-    public function set_lang($lang = NULL, $supported_languages = SUPPORTED_LANGUAGES)
-    {
-        // Only web browsers send the HTTP_ACCEPT_LANGUAGE header
-
-        if (!$lang) $lang = array_key($_SERVER, 'HTTP_ACCEPT_LANGUAGE', '');
-        $lang = substr($lang, 0, 2); // take the primary language
-
-        // Check that the language is supported by our app config
-
-        $lang = strtolower($lang);
-        if (!$lang || !preg_match("/$lang,/i", $supported_languages . ','))
-        {
-            $lang = DEFAULT_LANGUAGE;
-        }
-        $this->lang = $lang;
-        return $this;
-    }
-
-    // Get the language setting
-
-    public function get_lang()
-    {
-        return $this->lang;
-    }
-
     // Return a value for a lang from a path config file
 
     protected function get_path_config_from($config_file)
     {
         $langs = Config::load($config_file);
-        if (is_array($langs) && $lang = array_key($langs, $this->lang))
+        if (is_array($langs) && $lang = array_key($langs, $this->lang()))
         {
             if ($value = array_key($lang, $this->path)) return $value;
             if ($value = array_key($lang, Symbol::DEFAULT_WORD)) return $value;
