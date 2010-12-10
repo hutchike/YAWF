@@ -13,13 +13,25 @@
 
 load_tool('YAML');
 
+/**
+ * Provide useful text translation methods after loading the YAML
+ * "validate" and "translate" config files from the app "configs"
+ * folder. The methods provided are "add_translations" to add new
+ * translations overriding current ones, "into" to translate some
+ * text and "validate" to check that translations aren't missing.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Translate extends YAWF
 {
     private static $translations = array();
 
-    // Add to the translations table as an array of XX language codes
-    // where each array is an array of phrase codes with translations.
-
+    /**
+     * Add to the translations table as an array of XX language codes
+     * where each array is an array of phrase codes with translations.
+     *
+     * @param Array $translations an array of translations keyed by language
+     */
     public static function add_translations($translations)
     {
         foreach ($translations as $lang => $map)
@@ -31,9 +43,15 @@ class Translate extends YAWF
         }
     }
 
-    // Translate a word into a language, optionally with replacements
-    // for example "array('NAME', $user->name)" would insert the name.
-
+    /**
+     * Translate a word into a language, optionally with replacements
+     * for example "array('NAME', $user->name)" would insert the name.
+     *
+     * @param String $lang the language to translate into
+     * @param String $lookup the string to lookup in the translations
+     * @param Array $replacements an optional array of replacements to make
+     * @return String the translated string in the chosen language
+     */
     public static function into($lang, $lookup, $replacements = array())
     {
         $text = array_key(self::$translations[$lang], strtolower($lookup));
@@ -45,8 +63,11 @@ class Translate extends YAWF
         return $text;
     }
 
-    // Compare the translation lists to find any missing translations
-
+    /**
+     * Compare the translation lists to find any missing translations
+     *
+     * @throws Exception thrown if a translation is missing from a language
+     */
     public static function validate()
     {
         $langs = array_keys(self::$translations);
@@ -64,8 +85,9 @@ class Translate extends YAWF
     }
 }
 
-// Application translations are kept in "app/configs"
-
+/**
+ * Application translations are kept in "app/configs"
+ */
 Translate::add_translations(Config::load('validate'));
 Translate::add_translations(Config::load('translate'));
 if (TESTING_ENABLED) Translate::validate();

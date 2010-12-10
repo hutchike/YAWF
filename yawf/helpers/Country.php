@@ -32,8 +32,20 @@ class Country extends YAWF
         return array_key(self::$codes[$language], strtoupper($code));
     }
 
-// Code list from http://www.iso.org/iso/english_country_names_and_code_elements
+    /**
+     * Return an array of country codes and names in a language
+     *
+     * @param String $language the language to use (default is "en")
+     * @return Array the array of country codes and names in the language
+     */
+    public static function names($language = 'en')
+    {
+        return array_key(self::$codes, $language);
+    }
 
+/**
+ * Code list from http://www.iso.org/iso/english_country_names_and_code_elements
+ */
 private static $codes = array('en' => array(
 'AF' => 'Afghanistan',
 'AX' => 'Åland Islands',
