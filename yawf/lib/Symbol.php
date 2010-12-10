@@ -46,7 +46,7 @@ class Symbol extends YAWF
     const TEST = 'test';
     const TXT = 'txt';
     const UNDERSCORE = '_';
-    const UTF8 = 'UTF-8';
+    const UTF8 = 'UTF8';
     const VALIDATION_MESSAGES = 'validation_messages';
     const WARN = 'warn';
     const XML = 'xml';

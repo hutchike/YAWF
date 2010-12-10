@@ -30,9 +30,9 @@ class Config extends YAWF
 
         $file = '/configs/' . $config_name . '.yaml';
         if (file_exists('app' . $file))
-            self::$configs[$config_name] = YAML::load_file('app' . $file);
+            self::$configs[$config_name] = YAML::parse_file('app' . $file);
         elseif (file_exists('yawf' . $file))
-            self::$configs[$config_name] = YAML::load_file('yawf' . $file);
+            self::$configs[$config_name] = YAML::parse_file('yawf' . $file);
         else
             throw new Exception("Config file \"$config_name.yaml\" not found");
 
