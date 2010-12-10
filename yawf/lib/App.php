@@ -32,19 +32,18 @@ class App extends YAWF
         // Setup the config, prefix and assert checks
 
         $config = AppConfig::configure();
-        $prefix = $this->set_prefix($uri);
         load_helper('HTML'); // for views
         load_tools('Log', 'Translate');
         $this->error_messages = array();
         $this->assert_checking($config);
 
-        // Set the folder, file and content type
+        // Set the content type, folder and file
 
-        $uri_no_fluff = preg_replace('/[\?#].*/', '', $uri);
-        $content_type = preg_match('/\.([^\/]+)$/', $uri_no_fluff, $matches) ? $matches[1] : DEFAULT_CONTENT_TYPE;
+        $uri = preg_replace('/[\?#].*/', '', $uri);
+        $content_type = preg_match('/\.(\w+)$/', $uri, $matches) ? $matches[1] : DEFAULT_CONTENT_TYPE;
         if ($content_type === 'test' && !TESTING_ENABLED) $content_type = DEFAULT_CONTENT_TYPE;
-        if (substr($uri_no_fluff, 0, strlen($prefix)) === $prefix) $uri_no_fluff = substr($uri_no_fluff, strlen($prefix));
-        list($folder, $file) = explode('/', $uri_no_fluff . '//');
+        $uri = $this->set_lang_and_prefix($uri);
+        list($folder, $file) = explode('/', $uri . '//');
         $folder = preg_replace('/\.\w+$/', '', $folder);
         $file = preg_replace('/\.\w+$/', '', $file);
 
@@ -187,13 +186,15 @@ class App extends YAWF
         $this->lang = $lang;
     }
 
-    // Set the view prefix and language
+    // Set the view language and apply the prefix
 
-    protected function set_prefix($uri)
+    protected function set_lang_and_prefix($uri)
     {
+        // Set the language and prefix
+
         $lang = NULL;
         $prefix = VIEW_URL_PREFIX;
-        if (preg_match('/^\/(\w{2})(\/?).*/', $uri, $matches))
+        if (preg_match('/^\/(\w{2})($|\/)/', $uri, $matches))
         {
             if (stristr(SUPPORTED_LANGUAGES, $matches[1]))
             {
@@ -203,7 +204,15 @@ class App extends YAWF
             }
         }
         $this->set_lang($lang);
-        return AppView::prefix($prefix);
+        AppView::prefix($prefix);
+
+        // Apply the prefix to the URI
+
+        if (substr($uri, 0, strlen($prefix)) === $prefix)
+        {
+            $uri = substr($uri, strlen($prefix));
+        }
+        return $uri;
     }
 
     // Get the path to a view file by looking in many places
