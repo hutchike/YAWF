@@ -24,8 +24,12 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Provide YAML methods to &quot;parse&quot; and &quot;dump&quot; YAML data.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_helpers---YAML.php.html">/helpers/YAML.php</a> (line <span class="field">16</span>)
+			Located in <a class="field" href="_tools---YAML.php.html">/tools/YAML.php</a> (line <span class="field">21</span>)
 		</p>
 		
 				
@@ -50,21 +54,21 @@
 			<div class="method-summary">
 												<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">String</span>
 										<a href="#dump" title="details" class="method-name">dump</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$indent</span> = <span class="var-default">FALSE</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$wordwrap</span> = <span class="var-default">FALSE</span>])
+											(<span class="var-type">Array</span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$indent</span> = <span class="var-default">FALSE</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$wordwrap</span> = <span class="var-default">FALSE</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
-										<a href="#load_file" title="details" class="method-name">load_file</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$yaml_file</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">Array</span>
 										<a href="#parse" title="details" class="method-name">parse</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$yaml</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$yaml</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+											static <span class="method-result">Array</span>
+										<a href="#parse_file" title="details" class="method-name">parse_file</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$yaml_file</span>)
 									</div>
 																																							</div>
 		</div>
@@ -82,30 +86,32 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methoddump" id="dump"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static dump</span> (line <span class="line-number">28</span>)
+		<span class="method-title">static dump</span> (line <span class="line-number">51</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Dump an array of data as a YAML text string</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> a text string of YAML data</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			dump
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$indent</span> = <span class="var-default">FALSE</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$wordwrap</span> = <span class="var-default">FALSE</span>])
+					(<span class="var-type">Array</span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$indent</span> = <span class="var-default">FALSE</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$wordwrap</span> = <span class="var-default">FALSE</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$array</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$array</span><span class="var-description">: the array of data to dump as YAML text</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$indent</span>			</li>
@@ -116,60 +122,64 @@
 		
 			
 	</div>
-<a name="methodload_file" id="load_file"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static load_file</span> (line <span class="line-number">23</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			load_file
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$yaml_file</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$yaml_file</span>			</li>
-				</ul>
-		
-			
-	</div>
 <a name="methodparse" id="parse"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static parse</span> (line <span class="line-number">18</span>)
+		<span class="method-title">static parse</span> (line <span class="line-number">29</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parse a text string of YAML data into a data array</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> a data array containing the YAML data</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			parse
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$yaml</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$yaml</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$yaml</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$yaml</span><span class="var-description">: the string of YAML data to parse</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodparse_file" id="parse_file"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static parse_file</span> (line <span class="line-number">40</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parse a text file of YAML data into a data array</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a data array containing the YAML data</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Array</span>
+		<span class="method-name">
+			parse_file
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$yaml_file</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$yaml_file</span><span class="var-description">: the filename containing YAML data to parse</span>			</li>
 				</ul>
 		
 			
@@ -206,7 +216,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 09 Dec 2010 01:19:51 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sat, 11 Dec 2010 01:49:40 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

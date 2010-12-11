@@ -11,8 +11,11 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-// PHP doesn't have symbols like Ruby, but we can use constants instead
-
+/**
+ * PHP doesn't have symbols like Ruby, but we can use constants instead
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Symbol extends YAWF
 {
     const ALERT = 'alert';

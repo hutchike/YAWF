@@ -25,8 +25,13 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The YAWF App_command class provides a standard interface to</p>
+<p class="description"><p>web app admin commands. Each web app has an admin command with  a name that corresponds to the web app. It may be run by using  options such as &quot;webapp -start&quot;, &quot;webapp -stop&quot;, &quot;webapp -test&quot;  and suchlike. Run &quot;webapp -usage&quot; for a list of all the options.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_lib---App_command.php.html">/lib/App_command.php</a> (line <span class="field">18</span>)
+			Located in <a class="field" href="_lib---App_command.php.html">/lib/App_command.php</a> (line <span class="field">27</span>)
 		</p>
 		
 				
@@ -52,7 +57,13 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																<div class="method-definition">
+																																																																																								<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#daemons" title="details" class="method-name">daemons</a>
+										()
+									</div>
+																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#restart" title="details" class="method-name">restart</a>
@@ -92,7 +103,7 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#test" title="details" class="method-name">test</a>
-											([<span class="var-type"></span>&nbsp;<span class="var-name">$test_dir</span> = <span class="var-default">'app/tests'</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$check_args</span> = <span class="var-default">TRUE</span>])
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$test_dir</span> = <span class="var-default">'app/tests'</span>], [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$check_args</span> = <span class="var-default">TRUE</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -158,15 +169,41 @@
 		</div>
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
-<a name="methodrestart" id="restart"><!-- --></a>
+<a name="methoddaemons" id="daemons"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">restart</span> (line <span class="line-number">46</span>)
+		<span class="method-title">daemons</span> (line <span class="line-number">52</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a list of all the daemons run by this web app</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			daemons
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodrestart" id="restart"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">restart</span> (line <span class="line-number">91</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Restart the web app daemon(s)</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -183,14 +220,15 @@
 			
 	</div>
 <a name="methodrun" id="run"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">run</span> (line <span class="line-number">20</span>)
+		<span class="method-title">run</span> (line <span class="line-number">33</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Run an app command such as &quot;start&quot;, &quot;stop&quot;, &quot;restart&quot;, &quot;status&quot;  or &quot;test&quot; by checking the options passed on the command line.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -207,14 +245,15 @@
 			
 	</div>
 <a name="methodstart" id="start"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">start</span> (line <span class="line-number">36</span>)
+		<span class="method-title">start</span> (line <span class="line-number">60</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Start the web app daemon(s)</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -231,14 +270,15 @@
 			
 	</div>
 <a name="methodstart_directory" id="start_directory"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">start_directory</span> (line <span class="line-number">64</span>)
+		<span class="method-title">start_directory</span> (line <span class="line-number">117</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the default start directory (the app commands folder)</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -260,14 +300,15 @@
 			
 	</div>
 <a name="methodstatus" id="status"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">status</span> (line <span class="line-number">52</span>)
+		<span class="method-title">status</span> (line <span class="line-number">100</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Check the status of the web app daemon(s)</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -284,14 +325,15 @@
 			
 	</div>
 <a name="methodstop" id="stop"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">stop</span> (line <span class="line-number">41</span>)
+		<span class="method-title">stop</span> (line <span class="line-number">82</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Stop the web app daemon(s)</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -308,14 +350,15 @@
 			
 	</div>
 <a name="methodtest" id="test"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">test</span> (line <span class="line-number">71</span>)
+		<span class="method-title">test</span> (line <span class="line-number">128</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Run &quot;yash&quot; test files in the &quot;app/tests&quot; folder</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -325,29 +368,30 @@
 		<span class="method-name">
 			test
 		</span>
-					([<span class="var-type"></span>&nbsp;<span class="var-name">$test_dir</span> = <span class="var-default">'app/tests'</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$check_args</span> = <span class="var-default">TRUE</span>])
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$test_dir</span> = <span class="var-default">'app/tests'</span>], [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$check_args</span> = <span class="var-default">TRUE</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$test_dir</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$test_dir</span><span class="var-description">: the test directory (default is &quot;app/tests&quot;)</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$check_args</span>			</li>
+				<span class="var-type">Boolean</span>
+				<span class="var-name">$check_args</span><span class="var-description">: whether to run tests listed in command args</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodusage" id="usage"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">usage</span> (line <span class="line-number">57</span>)
+		<span class="method-title">usage</span> (line <span class="line-number">109</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Display a usage message</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -389,7 +433,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 09 Dec 2010 01:19:42 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sat, 11 Dec 2010 01:49:29 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

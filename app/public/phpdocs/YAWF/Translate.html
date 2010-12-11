@@ -24,8 +24,13 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Provide useful text translation methods after loading the YAML</p>
+<p class="description"><p>&quot;validate&quot; and &quot;translate&quot; config files from the app &quot;configs&quot;  folder. The methods provided are &quot;add_translations&quot; to add new  translations overriding current ones, &quot;into&quot; to translate some  text and &quot;validate&quot; to check that translations aren't missing.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_helpers---Translate.php.html">/helpers/Translate.php</a> (line <span class="field">16</span>)
+			Located in <a class="field" href="_tools---Translate.php.html">/tools/Translate.php</a> (line <span class="field">25</span>)
 		</p>
 		
 				
@@ -52,13 +57,13 @@
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">void</span>
 										<a href="#add_translations" title="details" class="method-name">add_translations</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$translations</span>)
+											(<span class="var-type">Array</span>&nbsp;<span class="var-name">$translations</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">String</span>
 										<a href="#into" title="details" class="method-name">into</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$lang</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$lookup</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$replacements</span> = <span class="var-default">array()</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$lang</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$lookup</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$replacements</span> = <span class="var-default">array()</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
@@ -86,10 +91,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static add_translations</span> (line <span class="line-number">23</span>)
+		<span class="method-title">static add_translations</span> (line <span class="line-number">35</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add to the translations table as an array of XX language codes  where each array is an array of phrase codes with translations.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -99,13 +105,13 @@
 		<span class="method-name">
 			add_translations
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$translations</span>)
+					(<span class="var-type">Array</span>&nbsp;<span class="var-name">$translations</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$translations</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$translations</span><span class="var-description">: an array of translations keyed by language</span>			</li>
 				</ul>
 		
 			
@@ -115,32 +121,34 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static into</span> (line <span class="line-number">37</span>)
+		<span class="method-title">static into</span> (line <span class="line-number">55</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Translate a word into a language, optionally with replacements  for example &quot;array('NAME', $user-&gt;name)&quot; would insert the name.</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the translated string in the chosen language</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			into
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$lang</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$lookup</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$replacements</span> = <span class="var-default">array()</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$lang</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$lookup</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$replacements</span> = <span class="var-default">array()</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$lang</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$lang</span><span class="var-description">: the language to translate into</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$lookup</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$lookup</span><span class="var-description">: the string to lookup in the translations</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$replacements</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$replacements</span><span class="var-description">: an optional array of replacements to make</span>			</li>
 				</ul>
 		
 			
@@ -150,11 +158,13 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static validate</span> (line <span class="line-number">50</span>)
+		<span class="method-title">static validate</span> (line <span class="line-number">71</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Compare the translation lists to find any missing translations</p>
 	<ul class="tags">
+				<li><span class="field">throws:</span> Exception thrown if a translation is missing from a language</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -201,7 +211,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 09 Dec 2010 01:19:50 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sat, 11 Dec 2010 01:49:39 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

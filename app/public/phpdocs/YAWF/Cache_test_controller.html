@@ -27,6 +27,11 @@
 			</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The YAWF object responds to web requests by creating an &quot;App&quot;  object, a &quot;Controller&quot; object, then rendering a web response.</p>
+<p class="description"><p>The YAWF class should be inherited by all classes so that it  may handle exceptions and unknown method calls. It provides  useful static methods such as &quot;hook&quot; to hook unknown method  calls, and &quot;prop&quot; to register props for mock tests or other  kinds of dependency injection.</p><p>The safe way to finish responding to a web request is to  call the YAWF::finish() method because this will perform  logging and benchmarking, unlike a simple &quot;exit&quot; call.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
 		<p class="notes">
 			Located in <a class="field" href="_controllers---Cache_test.php.html">/controllers/Cache_test.php</a> (line <span class="field">18</span>)
 		</p>
@@ -224,10 +229,6 @@
 							</span>
 													<img src="../media/images/Variable.png" />
 							<span class="var-title">
-								<span class="var-name"><a href="../YAWF/Controller.html#var$lang">Controller::$lang</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
 								<span class="var-name"><a href="../YAWF/Controller.html#var$path">Controller::$path</a></span><br>
 							</span>
 													<img src="../media/images/Variable.png" />
@@ -282,7 +283,7 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
@@ -306,7 +307,7 @@
 			
 	</div>
 <a name="methodcache_days_test" id="cache_days_test"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -330,7 +331,7 @@
 			
 	</div>
 <a name="methodcache_expires_test" id="cache_expires_test"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -354,7 +355,7 @@
 			
 	</div>
 <a name="methodcache_hours_test" id="cache_hours_test"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -378,7 +379,7 @@
 			
 	</div>
 <a name="methodcache_mins_test" id="cache_mins_test"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -402,7 +403,7 @@
 			
 	</div>
 <a name="methodcache_options_test" id="cache_options_test"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -426,7 +427,7 @@
 			
 	</div>
 <a name="methodcache_secs_test" id="cache_secs_test"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -450,7 +451,7 @@
 			
 	</div>
 <a name="methodclean_cache_test" id="clean_cache_test"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -474,7 +475,7 @@
 			
 	</div>
 <a name="methodexample_view" id="example_view"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -498,7 +499,7 @@
 			
 	</div>
 <a name="methodread_and_write_cache_test" id="read_and_write_cache_test"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -522,7 +523,7 @@
 			
 	</div>
 <a name="methodrender_test" id="render_test"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -546,7 +547,7 @@
 			
 	</div>
 <a name="methodset_cache_path_test" id="set_cache_path_test"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -613,8 +614,6 @@
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Controller.html#methodflash_object">Controller::flash_object()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodget_lang">Controller::get_lang()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Controller.html#methodget_path_config_from">Controller::get_path_config_from()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Controller.html#methodrender">Controller::render()</a></span><br>
@@ -624,8 +623,6 @@
 							<span class="method-name"><a href="../YAWF/Controller.html#methodsetup_for_app">Controller::setup_for_app()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Controller.html#methodsetup_render_data">Controller::setup_render_data()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodset_lang">Controller::set_lang()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Controller.html#methodset_type">Controller::set_type()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
@@ -638,6 +635,8 @@
 							<span class="method-name"><a href="../YAWF/Request.html#methodcookie">Request::cookie()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Request.html#methodcookie_object">Request::cookie_object()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodlang">Request::lang()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Request.html#methodparams">Request::params()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
@@ -712,7 +711,7 @@
 					</div>
 		<div class="info-box-body">
 			<a name="constHOURS_IN_DAY" id="HOURS_IN_DAY"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
@@ -728,7 +727,7 @@
 	
 </div>
 <a name="constMINS_IN_HOUR" id="MINS_IN_HOUR"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
@@ -744,7 +743,7 @@
 	
 </div>
 <a name="constSECS_IN_MIN" id="SECS_IN_MIN"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
@@ -760,7 +759,7 @@
 	
 </div>
 <a name="constTEST_CACHE_SECS" id="TEST_CACHE_SECS"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
@@ -776,7 +775,7 @@
 	
 </div>
 <a name="constTEST_CONTENTS" id="TEST_CONTENTS"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
@@ -796,7 +795,7 @@
 	</div>
 	
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 09 Dec 2010 01:19:42 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sat, 11 Dec 2010 01:49:30 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

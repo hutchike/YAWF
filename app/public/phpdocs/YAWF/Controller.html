@@ -26,6 +26,11 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The YAWF object responds to web requests by creating an &quot;App&quot;  object, a &quot;Controller&quot; object, then rendering a web response.</p>
+<p class="description"><p>The YAWF class should be inherited by all classes so that it  may handle exceptions and unknown method calls. It provides  useful static methods such as &quot;hook&quot; to hook unknown method  calls, and &quot;prop&quot; to register props for mock tests or other  kinds of dependency injection.</p><p>The safe way to finish responding to a web request is to  call the YAWF::finish() method because this will perform  logging and benchmarking, unlike a simple &quot;exit&quot; call.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
 		<p class="notes">
 			Located in <a class="field" href="_lib---Controller.php.html">/lib/Controller.php</a> (line <span class="field">14</span>)
 		</p>
@@ -65,7 +70,7 @@
 						<a href="../YAWF/App_controller.html">App_controller</a>
 					</td>
 					<td>
-											
+											The YAWF object responds to web requests by creating an &quot;App&quot;  object, a &quot;Controller&quot; object, then rendering a web response.
 										</td>
 				</tr>
 								<tr>
@@ -77,7 +82,7 @@
 						<a href="../YAWF/Lib_test_controller.html">Lib_test_controller</a>
 					</td>
 					<td>
-											
+											The YAWF object responds to web requests by creating an &quot;App&quot;  object, a &quot;Controller&quot; object, then rendering a web response.
 										</td>
 				</tr>
 							</table>
@@ -98,15 +103,10 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																																																<div class="var-title">
+																																																								<div class="var-title">
 					<img src="../media/images/Variable.png" alt=" " />
 					<span class="var-type">mixed</span>
 					<a href="#$flash" title="details" class="var-name">$flash</a>
-				</div>
-																<div class="var-title">
-					<img src="../media/images/Variable.png" alt=" " />
-					<span class="var-type">mixed</span>
-					<a href="#$lang" title="details" class="var-name">$lang</a>
 				</div>
 																<div class="var-title">
 					<img src="../media/images/Variable.png" alt=" " />
@@ -145,7 +145,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																																								<div class="method-definition">
+																																																																																																								<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#after" title="details" class="method-name">after</a>
@@ -167,12 +167,6 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#flash_object" title="details" class="method-name">flash_object</a>
-										()
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#get_lang" title="details" class="method-name">get_lang</a>
 										()
 									</div>
 																<div class="method-definition">
@@ -208,12 +202,6 @@
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
-										<a href="#set_lang" title="details" class="method-name">set_lang</a>
-											([<span class="var-type"></span>&nbsp;<span class="var-name">$lang</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$supported_languages</span> = <span class="var-default">SUPPORTED_LANGUAGES</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
 										<a href="#set_type" title="details" class="method-name">set_type</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$type</span>)
 									</div>
@@ -243,35 +231,13 @@
 		<div class="info-box-body">
 			
 <a name="var$flash" id="$flash"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<img src="../media/images/Variable.png" />
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$flash</span>
-						(line <span class="line-number">20</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$lang" id="$lang"><!-- --></A>
 <div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">mixed</span>
-			<span class="var-name">$lang</span>
+			<span class="var-name">$flash</span>
 						(line <span class="line-number">19</span>)
 		</span>
 	</div>
@@ -316,7 +282,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$render</span>
-						(line <span class="line-number">21</span>)
+						(line <span class="line-number">20</span>)
 		</span>
 	</div>
 
@@ -420,7 +386,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">after</span> (line <span class="line-number">111</span>)
+		<span class="method-title">after</span> (line <span class="line-number">109</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -451,7 +417,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">before</span> (line <span class="line-number">104</span>)
+		<span class="method-title">before</span> (line <span class="line-number">102</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -488,7 +454,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">flash</span> (line <span class="line-number">37</span>)
+		<span class="method-title">flash</span> (line <span class="line-number">35</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -520,7 +486,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">flash_object</span> (line <span class="line-number">174</span>)
+		<span class="method-title">flash_object</span> (line <span class="line-number">145</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -539,36 +505,12 @@
 		
 			
 	</div>
-<a name="methodget_lang" id="get_lang"><!-- --></a>
+<a name="methodget_path_config_from" id="get_path_config_from"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_lang</span> (line <span class="line-number">154</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			get_lang
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodget_path_config_from" id="get_path_config_from"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">get_path_config_from</span> (line <span class="line-number">161</span>)
+		<span class="method-title">get_path_config_from</span> (line <span class="line-number">132</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -593,11 +535,11 @@
 			
 	</div>
 <a name="methodrender" id="render"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">render</span> (line <span class="line-number">45</span>)
+		<span class="method-title">render</span> (line <span class="line-number">43</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -635,11 +577,11 @@
 				</ul>
 	</div>
 <a name="methodrender_path_data" id="render_path_data"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">render_path_data</span> (line <span class="line-number">85</span>)
+		<span class="method-title">render_path_data</span> (line <span class="line-number">83</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -664,11 +606,11 @@
 			
 	</div>
 <a name="methodsetup_for_app" id="setup_for_app"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setup_for_app</span> (line <span class="line-number">25</span>)
+		<span class="method-title">setup_for_app</span> (line <span class="line-number">24</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -696,11 +638,11 @@
 			
 	</div>
 <a name="methodsetup_render_data" id="setup_render_data"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setup_render_data</span> (line <span class="line-number">68</span>)
+		<span class="method-title">setup_render_data</span> (line <span class="line-number">67</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -724,44 +666,12 @@
 		
 			
 	</div>
-<a name="methodset_lang" id="set_lang"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">set_lang</span> (line <span class="line-number">134</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			set_lang
-		</span>
-					([<span class="var-type"></span>&nbsp;<span class="var-name">$lang</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$supported_languages</span> = <span class="var-default">SUPPORTED_LANGUAGES</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$lang</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$supported_languages</span>			</li>
-				</ul>
-		
-			
-	</div>
 <a name="methodset_type" id="set_type"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_type</span> (line <span class="line-number">126</span>)
+		<span class="method-title">set_type</span> (line <span class="line-number">124</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -790,7 +700,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_view</span> (line <span class="line-number">118</span>)
+		<span class="method-title">set_view</span> (line <span class="line-number">116</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -823,6 +733,8 @@
 							<span class="method-name"><a href="../YAWF/Request.html#methodcookie">Request::cookie()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Request.html#methodcookie_object">Request::cookie_object()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Request.html#methodlang">Request::lang()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Request.html#methodparams">Request::params()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
@@ -884,7 +796,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 09 Dec 2010 01:19:42 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sat, 11 Dec 2010 01:49:30 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

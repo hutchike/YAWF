@@ -26,6 +26,11 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The YAWF object responds to web requests by creating an &quot;App&quot;  object, a &quot;Controller&quot; object, then rendering a web response.</p>
+<p class="description"><p>The YAWF class should be inherited by all classes so that it  may handle exceptions and unknown method calls. It provides  useful static methods such as &quot;hook&quot; to hook unknown method  calls, and &quot;prop&quot; to register props for mock tests or other  kinds of dependency injection.</p><p>The safe way to finish responding to a web request is to  call the YAWF::finish() method because this will perform  logging and benchmarking, unlike a simple &quot;exit&quot; call.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
 		<p class="notes">
 			Located in <a class="field" href="_lib---Request.php.html">/lib/Request.php</a> (line <span class="field">14</span>)
 		</p>
@@ -63,7 +68,7 @@
 						<a href="../YAWF/Service.html">Service</a>
 					</td>
 					<td>
-											
+											The YAWF object responds to web requests by creating an &quot;App&quot;  object, a &quot;Controller&quot; object, then rendering a web response.
 										</td>
 				</tr>
 								<tr>
@@ -75,7 +80,7 @@
 						<a href="../YAWF/Controller.html">Controller</a>
 					</td>
 					<td>
-											
+											The YAWF object responds to web requests by creating an &quot;App&quot;  object, a &quot;Controller&quot; object, then rendering a web response.
 										</td>
 				</tr>
 							</table>
@@ -138,7 +143,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																																																																								<div class="method-definition">
+																																																																																																																																																																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#cookie" title="details" class="method-name">cookie</a>
@@ -148,6 +153,12 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#cookie_object" title="details" class="method-name">cookie_object</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#lang" title="details" class="method-name">lang</a>
 										()
 									</div>
 																<div class="method-definition">
@@ -390,7 +401,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">cookie</span> (line <span class="line-number">85</span>)
+		<span class="method-title">cookie</span> (line <span class="line-number">92</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -434,7 +445,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">cookie_object</span> (line <span class="line-number">185</span>)
+		<span class="method-title">cookie_object</span> (line <span class="line-number">193</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -453,12 +464,36 @@
 		
 			
 	</div>
-<a name="methodparams" id="params"><!-- --></a>
+<a name="methodlang" id="lang"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">params</span> (line <span class="line-number">77</span>)
+		<span class="method-title">lang</span> (line <span class="line-number">77</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			lang
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodparams" id="params"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">params</span> (line <span class="line-number">84</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -486,11 +521,11 @@
 			
 	</div>
 <a name="methodparams_object" id="params_object"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">params_object</span> (line <span class="line-number">155</span>)
+		<span class="method-title">params_object</span> (line <span class="line-number">163</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -518,11 +553,11 @@
 			
 	</div>
 <a name="methodredirect" id="redirect"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">redirect</span> (line <span class="line-number">109</span>)
+		<span class="method-title">redirect</span> (line <span class="line-number">116</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -550,11 +585,11 @@
 			
 	</div>
 <a name="methodreport_errors" id="report_errors"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">report_errors</span> (line <span class="line-number">116</span>)
+		<span class="method-title">report_errors</span> (line <span class="line-number">123</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -574,7 +609,7 @@
 			
 	</div>
 <a name="methodrequest_method" id="request_method"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -598,7 +633,7 @@
 			
 	</div>
 <a name="methodrequest_type" id="request_type"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -622,11 +657,11 @@
 			
 	</div>
 <a name="methodsend_mail" id="send_mail"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">send_mail</span> (line <span class="line-number">137</span>)
+		<span class="method-title">send_mail</span> (line <span class="line-number">144</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -654,11 +689,11 @@
 			
 	</div>
 <a name="methodserver" id="server"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">server</span> (line <span class="line-number">93</span>)
+		<span class="method-title">server</span> (line <span class="line-number">100</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -686,11 +721,11 @@
 			
 	</div>
 <a name="methodserver_object" id="server_object"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">server_object</span> (line <span class="line-number">193</span>)
+		<span class="method-title">server_object</span> (line <span class="line-number">201</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -710,11 +745,11 @@
 			
 	</div>
 <a name="methodsession" id="session"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">session</span> (line <span class="line-number">101</span>)
+		<span class="method-title">session</span> (line <span class="line-number">108</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -742,11 +777,11 @@
 			
 	</div>
 <a name="methodsession_object" id="session_object"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">session_object</span> (line <span class="line-number">201</span>)
+		<span class="method-title">session_object</span> (line <span class="line-number">209</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -766,7 +801,7 @@
 			
 	</div>
 <a name="methodsetup_request" id="setup_request"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -795,11 +830,11 @@
 			
 	</div>
 <a name="methodset_params" id="set_params"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_params</span> (line <span class="line-number">147</span>)
+		<span class="method-title">set_params</span> (line <span class="line-number">155</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -827,11 +862,11 @@
 			
 	</div>
 <a name="methodshould" id="should"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">should</span> (line <span class="line-number">209</span>)
+		<span class="method-title">should</span> (line <span class="line-number">217</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -862,11 +897,11 @@
 			
 	</div>
 <a name="methodshould_not" id="should_not"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">should_not</span> (line <span class="line-number">216</span>)
+		<span class="method-title">should_not</span> (line <span class="line-number">224</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -928,7 +963,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 09 Dec 2010 01:19:47 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sat, 11 Dec 2010 01:49:35 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

@@ -27,7 +27,7 @@
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">This helper wraps the &quot;Net/GeoIP&quot; plugin from MaxMind with a  simple object-oriented interface to provide the IP address,  the country name and code, and the location (i.e. city).</p>
-<p class="description"><p>For example, if you're using the GeoIPCity.dat data file:</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<a href="../YAWF/_lib---utils.php.html#functionload_helper">load_helper</a><span class="src-sym">(</span><span class="src-str">'GeoIP'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<p class="description"><p>For example, if you're using the GeoIPCity.dat data file:</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<a href="../YAWF/_lib---utils.php.html#functionload_tool">load_tool</a><span class="src-sym">(</span><span class="src-str">'GeoIP'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$geo&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../YAWF/GeoIP.html">GeoIP</a></span><span class="src-sym">(</span><span class="src-str">'app/data/GeoIPCity.dat'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$country&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methodcountry_name">country_name</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$code&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methodcountry_code">country_code</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
@@ -37,7 +37,7 @@
 <li><div class="src-line">&nbsp;<span class="src-var">$dma&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methoddma_code">dma_code</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$lat&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methodlatitude">latitude</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$long&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methodlongitude">longitude</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-</ol></div></p><p>...or to use the default GeoIP.dat file in /usr/share/GeoIP:</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<a href="../YAWF/_lib---utils.php.html#functionload_helper">load_helper</a><span class="src-sym">(</span><span class="src-str">'GeoIP'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p><p>...or to use the default GeoIP.dat file in /usr/share/GeoIP:</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<a href="../YAWF/_lib---utils.php.html#functionload_tool">load_tool</a><span class="src-sym">(</span><span class="src-str">'GeoIP'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$geo&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../YAWF/GeoIP.html">GeoIP</a></span><span class="src-sym">(</span><span class="src-str">'app/data/GeoIPCity.dat'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$country&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methodcountry_name">country_name</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$code&nbsp;</span>=&nbsp;<span class="src-var">$geo</span><span class="src-sym">-&gt;</span><a href="../YAWF/GeoIP.html#methodcountry_code">country_code</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
@@ -48,7 +48,7 @@
 				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_helpers---GeoIP.php.html">/helpers/GeoIP.php</a> (line <span class="field">47</span>)
+			Located in <a class="field" href="_tools---GeoIP.php.html">/tools/GeoIP.php</a> (line <span class="field">47</span>)
 		</p>
 		
 				
@@ -584,7 +584,7 @@
 	</div>
 	
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 09 Dec 2010 01:19:44 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sat, 11 Dec 2010 01:49:33 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
