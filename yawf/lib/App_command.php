@@ -15,8 +15,21 @@ error_reporting(E_ALL | E_STRICT);
 
 require_once('Command.php');
 
+/**
+ * The YAWF App_command class provides a standard interface to
+ * web app admin commands. Each web app has an admin command with
+ * a name that corresponds to the web app. It may be run by using
+ * options such as "webapp -start", "webapp -stop", "webapp -test"
+ * and suchlike. Run "webapp -usage" for a list of all the options.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class App_command extends Command
 {
+    /**
+     * Run an app command such as "start", "stop", "restart", "status"
+     * or "test" by checking the options passed on the command line.
+     */
     public function run()
     {
         if ($this->opts->start)
@@ -33,41 +46,85 @@ class App_command extends Command
             $this->usage();
     }
 
+    /**
+     * Return a list of all the daemons run by this web app
+     */
+    protected function daemons()
+    {
+        return array(); // this should be overriden by your web app
+    }
+
+    /**
+     * Start the web app daemon(s)
+     */
     protected function start()
     {
-        // Override this method
+        foreach ($this->daemons() as $daemon)
+        {
+            // Check to see if the daemon is already running
+
+            $pipe = popen("yawf_daemon status $daemon", 'r');
+            $status = fgets($pipe);
+            pclose($pipe);
+
+            // Start the daemon if it's not already running
+
+            if (strpos($status, 'is not running') > 0)
+            {
+                system("yawf_daemon start $daemon");
+            }
+        }
     }
 
+    /**
+     * Stop the web app daemon(s)
+     */
     protected function stop()
     {
-        // Override this method
+        $daemons = join(' ', $this->daemons());
+        system("yawf_daemon stop $daemons");
     }
 
+    /**
+     * Restart the web app daemon(s)
+     */
     protected function restart()
     {
         $this->stop();
         $this->start();
     }
 
+    /**
+     * Check the status of the web app daemon(s)
+     */
     protected function status()
     {
-        // Override this method
+        $daemons = join(' ', $this->daemons());
+        system("yawf_daemon status $daemons");
     }
 
+    /**
+     * Display a usage message
+     */
     protected function usage()
     {
         $this->quit("usage: $this->name [-start] [-stop] [-restart] [-status] [-test]");
     }
 
-    // Return the default start directory
-
+    /**
+     * Return the default start directory (the app commands folder)
+     */
     protected function start_directory()
     {
         return dirname($this->path); // App commands start from their own path
     }
 
-    // Run "yash" test files in the "app/tests" folder
-
+    /**
+     * Run "yash" test files in the "app/tests" folder
+     *
+     * @param String $test_dir the test directory (default is "app/tests")
+     * @param Boolean $check_args whether to run tests listed in command args
+     */
     protected function test($test_dir = 'app/tests', $check_args = TRUE)
     {
         // Which directory holds the YASH test files?

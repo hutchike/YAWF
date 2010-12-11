@@ -13,7 +13,7 @@
 # GNU Lesser General Public License for more details.
 
 command=$1; shift
-usage="usage: yawf_daemon start|stop daemon [daemon2...]"
+usage="usage: yawf_daemon start|stop|status daemon [daemon2...]"
 if [ $# -eq 0 ] ; then
   echo $usage; exit 1
 fi
@@ -47,6 +47,14 @@ for daemon in $*; do
       rm -f $pid_file
     else
       echo "Daemon $daemon is not running"
+    fi
+    ;;
+  status)
+    pid_file="$app_dir/tmp/pids/$daemon.pid"
+    if [ -f $pid_file ] ; then
+      echo "$daemon is running"
+    else
+      echo "$daemon is not running"
     fi
     ;;
   *)
