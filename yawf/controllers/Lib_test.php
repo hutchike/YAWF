@@ -37,7 +37,7 @@ class Lib_test_controller extends Controller
             $this->cookie->remember_the_time_now = $time_now;
             $this->session->remember_the_time_now = $time_now;
             $type = $this->app->get_content_type();
-            header('Location: ' . VIEW_URL_PREFIX . "lib_test.$type?$time_now");
+            header('Location: ' . uri("lib_test.$type?$time_now"));
             exit;
         }
 
