@@ -23,7 +23,7 @@ class User_controller extends App_controller
             }
             else
             {
-                $this->render->flash = t('FORGOT_PASSWORD_QUESTION', array('LINK' => AppView::url("user/forgot_password?email=$user->email")));
+                $this->flash->now = t('FORGOT_PASSWORD_QUESTION', array('LINK' => uri("user/forgot_password?email=$user->email")));
             }
         }
         else // email or password missing
