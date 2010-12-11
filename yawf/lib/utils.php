@@ -11,26 +11,53 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-// A simple "Object" class for field/value objects
-
+/**
+ * A simple "Object" class for field/value objects
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Object
 {
+    /**
+     * Create a new object
+     *
+     * @param Object $data the initialization data (may be an Array)
+     */
     public function __construct($data = NULL)
     {
         $data = (array)$data;
         foreach ($data as $field => $value) $this->$field = $value;
     }
 
+    /**
+     * Get the value of an object field
+     *
+     * @param String $field the object field
+     * @return Object whatever the value is (can be any type)
+     */
     public function __get($field)
     {
         return isset($this->$field) ? $this->$field : NULL;
     }
 
+    /**
+     * Set the value of an object field
+     *
+     * @param String $field the object field
+     * @param Object $value the object value (can be any type)
+     * @return Object whatever the value is (can be any type)
+     */
     public function __set($field, $value)
     {
         return $this->$field = $value;
     }
 
+    /**
+     * Merge another object with this one
+     *
+     * @param Object $other the other object to merge with this one
+     * @param Boolean $override whether to override this object's values (FALSE)
+     */
     public function merge($other, $override = FALSE)
     {
         $other = (array)$other;
@@ -42,8 +69,13 @@ class Object
     }
 }
 
-// Turn an array into an object (or NULL when empty)
-
+/**
+ * Turn an array into an object (or NULL when empty)
+ *
+ * @param Array $array the array to convert
+ * @param Boolean $lists_too whether to convert lists to objects also (FALSE)
+ * @return Object the resultant object
+ */
 function array_to_object($array, $lists_too = FALSE)
 {
     if (!is_array($array)) return NULL;
@@ -59,8 +91,12 @@ function array_to_object($array, $lists_too = FALSE)
     return $object;
 }
 
-// Turn an object into an array
-
+/**
+ * Turn an object into an array
+ *
+ * @param Object $object the object to convert
+ * @return Array the resultant array
+ */
 function object_to_array($object)
 {
     if(!is_object($object) && !is_array($object)) return $object;
@@ -68,22 +104,35 @@ function object_to_array($object)
     return count($object) ? array_map('object_to_array', $object) : NULL;
 }
 
-// Return a key from an array or the default value
-
+/**
+ * Return a key from an array or the default value (NULL by default)
+ *
+ * @param Array $array the array to lookup
+ * @param String $key the key to find in the array
+ * @return Object the value or the default (returned value can be any type)
+ */
 function array_key($array, $key, $default = NULL)
 {
     return array_key_exists($key, $array) ? $array[$key] : $default;
 }
 
-// Return a random value from an array
-
+/**
+ * Return a random value from an array
+ *
+ * @param Array $array the array
+ * @return Object a random value from the array (can be any type)
+ */
 function array_rand_value($array)
 {
     return $array[array_rand($array)];
 }
 
-// Return the first non-null value in the argument list
-
+/**
+ * Return the first non-null value in the argument list
+ *
+ * @param Array a list of arguments of any length
+ * @return Object the first non-null argument or NULL (value can be any type)
+ */
 function first()
 {
     $args = func_get_args();
