@@ -39,8 +39,8 @@ database:
     database_test: app/data/YAWF_test.db    # For MySQL, use a database *name*
 
 content:
-    file_url_prefix: /
-    view_url_prefix: /
+    file_uri_prefix: /
+    view_uri_prefix: /
     default_content_type: html
     default_controller: App
     default_folder: default

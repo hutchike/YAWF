@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-// See this test controller run at URL "/app_test"
+// See this test controller run at URI "/app_test"
 
 class App_test_controller extends App_controller
 {
@@ -30,7 +30,7 @@ class App_test_controller extends App_controller
         foreach ($this->controllers as $controller)
         {
             if (strtolower($controller) === 'app') continue; // recursion!
-            $output .= url_get_contents('/' . $controller . '_test.part');
+            $output .= uri_get_contents('/' . $controller . '_test.part');
         }
         $this->should_not('find failures in test output',
                           preg_match('/failed/', $output) > 0, $output);
@@ -40,7 +40,7 @@ class App_test_controller extends App_controller
     {
         foreach ($this->view_paths as $view_path)
         {
-            $html = url_get_contents(AppView::url($view_path));
+            $html = uri_get_contents(AppView::uri($view_path));
             $errors = $this->app->xhtml_errors($html);
             $this->should("validate \"$view_path\" as XHTML",
                           !$errors, $errors);

@@ -160,16 +160,24 @@ function file_contents($path)
     return NULL;
 }
 
-// Get the contents at a URL
+// Get a normalized URI for the app
 
-function url_get_contents($url, $options = array())
+function uri($uri, $prefix = NULL)
 {
-    if (!preg_match('/^http/', $url))
+    return AppView::uri($uri, $prefix);
+}
+
+// Get the contents at a URI
+
+function uri_get_contents($uri, $options = array())
+{
+    if (!preg_match('/^http/i', $uri))
     {
-        $url = 'http://' . $_SERVER['HTTP_HOST'] . $url;
+        $prefix = array_key($options, 'prefix');
+        $uri = 'http://' . $_SERVER['HTTP_HOST'] . uri($uri, $prefix);
     }
 
-    $contents = file_get_contents($url);
+    $contents = file_get_contents($uri);
 
     if (array_key($options, 'strip_xml_declaration'))
     {

@@ -188,9 +188,9 @@ class App extends YAWF implements Mailer
     }
 
     /**
-     * Get the folder in the URL (e.g. "default")
+     * Get the folder in the URI (e.g. "default")
      *
-     * @return String the folder in the URL
+     * @return String the folder in the URI
      */
     public function get_folder()
     {
@@ -198,9 +198,9 @@ class App extends YAWF implements Mailer
     }
 
     /**
-     * Get the file in the URL (e.g. "index")
+     * Get the file in the URI (e.g. "index")
      *
-     * @return String the file in the URL
+     * @return String the file in the URI
      */
     public function get_file()
     {
@@ -210,7 +210,7 @@ class App extends YAWF implements Mailer
     /**
      * Get the path (i.e. "folder/file")
      *
-     * @return String the path in the URL
+     * @return String the path in the URI
      */
     public function get_path()
     {
@@ -260,7 +260,7 @@ class App extends YAWF implements Mailer
     protected function set_lang_and_remove_prefix($uri)
     {
         $lang = NULL;
-        $prefix = VIEW_URL_PREFIX;
+        $prefix = VIEW_URI_PREFIX;
 
         // Set the language by checking the URI against supported languages
 
@@ -277,7 +277,7 @@ class App extends YAWF implements Mailer
 
         // Remove the URI prefix from the URI
 
-        AppView::prefix($prefix); // remember the prefix in "AppView::url" calls
+        AppView::prefix($prefix); // remember the prefix in "AppView::uri" calls
         if (substr($uri, 0, strlen($prefix)) === $prefix)
         {
             $uri = substr($uri, strlen($prefix));
@@ -370,17 +370,17 @@ class App extends YAWF implements Mailer
 
         $options['folder'] = 'types';
         $content = $this->render_view($type, $render, $options);
-        if (is_null($content)) $content = url_get_contents('/not/found');
+        if (is_null($content)) $content = uri_get_contents('not/found');
         return $content;
     }
 
     /**
-     * Redirect to another URL, and possibly exit
+     * Redirect to another URI, and possibly exit
      *
-     * @param String $url the URL to redirect at
+     * @param String $uri the URI to redirect at
      * @param Array $options an optional array of options (e.g. "exit")
      */
-    public function redirect($url, $options = array())
+    public function redirect($uri, $options = array())
     {
         // Set flash messages to be shown on the next view page
 
@@ -393,12 +393,12 @@ class App extends YAWF implements Mailer
 
         if ($this->content_type !== DEFAULT_CONTENT_TYPE)
         {
-            $url .= '.' . $this->content_type;
+            $uri .= '.' . $this->content_type;
         }
 
         // Set a location header and optional status
 
-        $header = 'Location: ' . AppView::url($url);
+        $header = 'Location: ' . AppView::uri($uri);
         if ($status = array_key($options, 'status'))
         {
             header($header, TRUE, $status); // set user-defined HTTP status code
@@ -455,18 +455,18 @@ class App extends YAWF implements Mailer
 }
 
 /**
- * The AppView class renders views and normalizes URLs by applying a prefix.
+ * The AppView class renders views and normalizes URIs by applying a prefix.
  */
 class AppView extends YAWF
 {
-    private static $prefix;
-    private static $render;
+    private static $prefix = '';    // string value
+    private static $render = NULL;  // object value
 
     /**
-     * Get/set the prefix to apply to URLs
+     * Get/set the prefix to apply to URIs
      *
-     * @param String $prefix an optional prefix to apply to URLs
-     * @return String the current prefix being applied to URLs
+     * @param String $prefix an optional prefix to apply to URIs
+     * @return String the current prefix being applied to URIs
      */
     public static function prefix($prefix = NULL)
     {
@@ -494,16 +494,16 @@ class AppView extends YAWF
     }
 
     /**
-     * Modify a view URL by adding an optional prefix
+     * Modify a view URI by adding an optional prefix
      *
-     * @param String $url the URL to modify by applying the prefix
-     * @param String $prefix an optional prefix to apply to the URL
-     * @return String the URL with the prefix applied
+     * @param String $uri the URI to modify by applying the prefix
+     * @param String $prefix an optional prefix to apply to the URI
+     * @return String the URI with the prefix applied
      */
-    public static function url($url, $prefix = NULL)
+    public static function uri($uri, $prefix = NULL)
     {
-        if (preg_match('/^\w+:/', $url)) return $url; // coz it's absolute
-        return first($prefix, self::$prefix) . $url; // or it's local
+        if (preg_match('/^\w+:/', $uri)) return $uri; // coz it's absolute
+        return first($prefix, self::$prefix) . $uri; // or it's local
     }
 
     /**

@@ -59,7 +59,7 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
     {
         if (is_null($action) && $app = YAWF::prop(Symbol::APP)) $action = $app->get_path();
         $attrs['id'] = $id;
-        $attrs['action'] = AppView::url($action, array_key($attrs, 'prefix'));
+        $attrs['action'] = AppView::uri($action, array_key($attrs, 'prefix'));
         $attrs['method'] = array_key($attrs, 'method', 'post'); // by default
         return '<form ' . self::attrs($attrs) . ">\n";
     }
@@ -78,14 +78,14 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
      * Return an HTML frame tag
      *
      * @param String $name the frame's name (required)
-     * @param String $src the frame's source URL (optional)
+     * @param String $src the frame's source URI (optional)
      * @param Array $attrs the frame tag's attributes (optional)
      * @return String the HTML frame tag
      */
     public static function frame($name, $src = '', $attrs = array())
     {
         $attrs['name'] = $name;
-        $attrs['src'] = AppView::url($src, array_key($attrs, 'prefix'));
+        $attrs['src'] = AppView::uri($src, array_key($attrs, 'prefix'));
         $tag = array_key($attrs, Symbol::TAG, Symbol::FRAME);
         return "<$tag " . self::attrs($attrs) . ' />' . "\n";
     }
@@ -94,7 +94,7 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
      * Return an HTML iframe tag
      *
      * @param String $name the iframe's name (required)
-     * @param String $src the iframe's source URL (optional)
+     * @param String $src the iframe's source URI (optional)
      * @param Array $attrs the iframe tag's attributes (optional)
      * @return String the HTML iframe tag
      */
@@ -107,13 +107,13 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
     /**
      * Return an HTML img tag
      *
-     * @param String $src the image's source URL (required)
+     * @param String $src the image's source URI (required)
      * @param Array $attrs the img tag's attributes (optional)
      * @return String the HTML img tag
      */
     public static function img($src, $attrs = array())
     {
-        $attrs['src'] = AppView::url($src, array_key($attrs, 'prefix', FILE_URL_PREFIX));
+        $attrs['src'] = AppView::uri($src, array_key($attrs, 'prefix', FILE_URI_PREFIX));
         return '<img ' . self::attrs($attrs) . ' />';
     }
 
@@ -248,14 +248,14 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
     /**
      * Return an HTML "a" link tag
      *
-     * @param String $url the URL to link at (required)
+     * @param String $uri the URI to link at (required)
      * @param String $html the HTML to display as a link (required)
      * @param Array $attrs the "a" link tag's attributes (optional)
      * @return String the HTML "a" link tag
      */
-    public static function link($url, $html, $attrs = array())
+    public static function link($uri, $html, $attrs = array())
     {
-        $attrs['href'] = AppView::url($url, array_key($attrs, 'prefix'));
+        $attrs['href'] = AppView::uri($uri, array_key($attrs, 'prefix'));
         return '<a ' . self::attrs($attrs) . '>' . $html . '</a>';
     }
 
@@ -338,7 +338,7 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
      */
     public static function link_tag($href, $attrs = array())
     {
-        $attrs['href'] = AppView::url($href, array_key($attrs, 'prefix', FILE_URL_PREFIX));
+        $attrs['href'] = AppView::uri($href, array_key($attrs, 'prefix', FILE_URI_PREFIX));
         $attrs['type'] = array_key($attrs, 'type', 'text/css');
         $attrs['rel'] = array_key($attrs, 'rel', 'stylesheet');
         return '<link ' . self::attrs($attrs) . ' />' . "\n";
@@ -364,7 +364,7 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
      */
     public static function script_tag($src, $attrs = array())
     {
-        $attrs['src'] = AppView::url($src, array_key($attrs, 'prefix', FILE_URL_PREFIX));
+        $attrs['src'] = AppView::uri($src, array_key($attrs, 'prefix', FILE_URI_PREFIX));
         $attrs['type'] = array_key($attrs, 'type', 'text/javascript'); // by default
         return '<script ' . self::attrs($attrs) . '></script>' . "\n";
     }

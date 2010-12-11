@@ -113,9 +113,9 @@ class Request extends YAWF
 
     // Redirect to another URL
 
-    public function redirect($url, $options = array())
+    public function redirect($uri, $options = array())
     {
-        $this->app->redirect($url, $options);
+        $this->app->redirect($uri, $options);
     }
 
     // Mail errors to the webmaster
