@@ -174,7 +174,6 @@ class Request extends YAWF
             if ($trim_whitespace) $value = trim($value);
             if ($strip_slashes) $value = stripslashes($value);
             if ($format_as_html) $value = htmlentities($value);
-            if (preg_match('/^[\[\{]/', $value)) $value = json_decode($value);
             if (strstr($field, Symbol::ARROW))
             {
                 list($object, $field) = explode(Symbol::ARROW, $field);
