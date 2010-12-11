@@ -93,6 +93,7 @@ class Lib_test_controller extends Controller
         $original_view = $this->view;
 
         $this->set_view(self::TEST_VIEW);
+        $this->render->title = self::TEST_TEXT;
         $html = $this->render();
         $this->should('render the index page with our test text',
                       strstr($html, self::TEST_TEXT) !== FALSE, $html);
