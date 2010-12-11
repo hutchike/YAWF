@@ -13,14 +13,31 @@
 
 // Classes should extend YAWF for hooks
 
+/**
+ * The YAWF object responds to web requests by creating an "App"
+ * object, a "Controller" object, then rendering a web response.
+ *
+ * The YAWF class should be inherited by all classes so that it
+ * may handle exceptions and unknown method calls. It provides
+ * useful static methods such as "hook" to hook unknown method
+ * calls, and "prop" to register props for mock tests or other
+ * kinds of dependency injection.
+ *
+ * The safe way to finish responding to a web request is to
+ * call the YAWF::finish() method because this will perform
+ * logging and benchmarking, unlike a simple "exit" call.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class YAWF // Yet Another Web Framework
 {
     private static $start = 0; // msecs
     private static $hooks = array();
     private static $props = array();
 
-    // Note the start time of YAWF
-
+    /**
+     * Note the start time of YAWF
+     */
     public static function start()
     {
         if (self::$start) throw new Exception('YAWF has already started');
@@ -28,8 +45,9 @@ class YAWF // Yet Another Web Framework
         self::hook('default', 'self::unknown'); // Set the default hook method
     }
 
-    // YAWF respond to a web request
-
+    /**
+     * Respond to a web request
+     */
     public static function respond_to_web_request()
     {
         self::start();
@@ -48,8 +66,11 @@ class YAWF // Yet Another Web Framework
         self::finish('Rendered ' . $uri);
     }
 
-    // Write benchmarking performance in the log file
-
+    /**
+     * Write benchmarking performance in the log file, then exit
+     *
+     * @param String $log_info info written to the log (default is "Finished")
+     */
     public static function finish($log_info = 'Finished')
     {
         if (defined('BENCHMARKING_ON'))
@@ -61,8 +82,12 @@ class YAWF // Yet Another Web Framework
         exit;
     }
 
-    // Handle an exception by displaying or redirecting
-
+    /**
+     * Handle an exception by displaying (via the app) or redirecting
+     *
+     * @param App $app the app
+     * @param Exception $e the exception to handle
+     */
     protected static function handle_exception($app, $e)
     {
         $error_message = nl2br($e);
@@ -71,34 +96,52 @@ class YAWF // Yet Another Web Framework
         $app->add_error_message($error_message);
     }
 
-    // Throw an "Unknown method" exception
-
+    /**
+     * Throw an "Unknown method" exception
+     *
+     * @param String $name the name of the unknown method
+     * @param Array $args the arguments passed to the unknown method
+     */
     public static function unknown($name, $args)
     {
         $info = ($args ? " with args:\n" . dump($args) : '');
         throw new Exception('Unknown method ' . $name . '() called' . $info);
     }
 
-    // Hook a method name to some other static method.
-    // This is useful to add dynamic calls at runtime.
-
+    /**
+     * Get or set a YAWF hook name to route unknown method calls.
+     * This is useful to add dynamic calls at runtime.
+     *
+     * @param String $name the name of the hooked method (e.g. "my_alias")
+     * @param String $method the method to call (e.g. "Class::my_method")
+     * @return String the method hooked to the name
+     */
     public static function hook($name, $method = NULL)
     {
-        return (is_null($method) ? array_key(self::$hooks, $method)
+        return (is_null($method) ? array_key(self::$hooks, $name)
                                  : self::$hooks[$name] = $method);
     }
 
-    // Get or set a YAWF prop, for example an object.
-    // This is useful for registering static methods.
-
+    /**
+     * Get or set a YAWF prop, which is typically an object.
+     * This is useful for applying dependency injection.
+     *
+     * @param String $prop the name of the prop (e.g. "Symbol::APP")
+     * @param String $value the value of the prop (e.g. "new App()")
+     * @return String the value of the prop
+     */
     public static function prop($prop, $value = NULL)
     {
         return (is_null($value) ? array_key(self::$props, $prop)
                                 : self::$props[$prop] = $value);
     }
 
-    // Catch all undefined methods calls
-
+    /**
+     * Catch all undefined methods calls by calling a hooked method
+     *
+     * @param String $name the name of the unknown method
+     * @param Array $args the arguments passed to the unknown method
+     */
     public function __call($name, $args)
     {
         // Look for a hooked method to call
@@ -109,8 +152,11 @@ class YAWF // Yet Another Web Framework
         elseif ($method) eval("$method(\$name, \$args);");
     }
 
-    // Configure the assert checking by using a config
-
+    /**
+     * Configure the assert checking by using a config
+     *
+     * @param Array $config an array of user-defined constants
+     */
     public function assert_checking($config = array())
     {
         $is_on = (array_key($config, 'ASSERT_CHECK_ON') === TRUE);
@@ -118,8 +164,13 @@ class YAWF // Yet Another Web Framework
         if ($is_on) assert_options(ASSERT_CALLBACK, 'YAWF::assert_failed');
     }
 
-    // Throw exceptions when assertions fail (if we're checking)
-
+    /**
+     * Throw exceptions when assertions fail (if "ASSERT_CHECK_ON" is true)
+     *
+     * @param String $file the file where the assertion failed
+     * @param String $line the line number where the assertion failed
+     * @param String $message the assertion failure message to display
+     */
     public static function assert_failed($file, $line, $message)
     {
         throw new Exception("Assert failed at line $line in $file: $message");
