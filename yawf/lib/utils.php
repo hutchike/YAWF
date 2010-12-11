@@ -141,16 +141,25 @@ function first()
     return NULL;
 }
 
-// Find a file in the "app" or "yawf" folders
-
+/**
+ * Return whether a file exists in either of the "app" or "yawf" folders.
+ * If the file path begins with a "/" then the absolute path is checked.
+ *
+ * @param String $path the file path to find
+ * @return Boolean whether the file exists in at least one of the folders
+ */
 function file_found($path)
 {
     if (substr($path, 0, 1) === '/') return file_exists($path);
     return file_exists('app/' . $path) || file_exists('yawf/' . $path);
 }
 
-// Find a file in the "app" or "yawf" folders, and return its contents
-
+/**
+*  Return the contents of  a file in the "app" or "yawf" folders
+ *
+ * @param String $path the path of the file to read
+ * @return String the file contents
+ */
 function file_contents($path)
 {
     if (substr($path, 0, 1) === '/')
@@ -160,15 +169,25 @@ function file_contents($path)
     return NULL;
 }
 
-// Get a normalized URI for the app
-
+/**
+ * Get a normalized URI, using the current app's prefix settings
+ *
+ * @param String $uri the URI to normalize (e.g. "user/sign-up")
+ * @param String $prefix an optional URI prefix
+ * @return String the normalized URI
+ */
 function uri($uri, $prefix = NULL)
 {
     return AppView::uri($uri, $prefix);
 }
 
-// Get the contents at a URI
-
+/**
+ * Get the contents at a URI
+ *
+ * @param String $uri the URI to read
+ * @param Array $options an optional array of options (such as "prefix")
+ * @return String the contents read from the URI
+ */
 function uri_get_contents($uri, $options = array())
 {
     if (!preg_match('/^http/i', $uri))
@@ -186,8 +205,13 @@ function uri_get_contents($uri, $options = array())
     return $contents;
 }
 
-// Encode array as query string
-
+/**
+ * Encode an assoc array as a query string. Any values that
+ * are arrays are JSON encoded to represent their structure.
+ *
+ * @param Array $array an assoc array of data to URL encode
+ * @return String a query string containing URL encoded data
+ */
 function urlencode_array($array)
 {
     $query = '';
@@ -195,21 +219,29 @@ function urlencode_array($array)
     {
         if ($query) $query .= '&';
         $query .= urlencode($key) . '=';
-        $query .= is_array($value) ? urlencode(serialize($value)) : urlencode($value);
+        $query .= is_array($value) ? urlencode(json_encode($value)) : urlencode($value);
     }
     return $query;
 }
 
-// Split a comma-separated list
-
-function split_list($list)
+/**
+ * Split a comma-separated list
+ *
+ * @param String $text_list a comma-separated list (e.g. "this, that,other");
+ * @return Array an array of list items
+ */
+function split_list($text_list)
 {
     $list = preg_split('/,\s*/', $list);
     return count($list) == 1 && $list[0] == '' ? array() : $list;
 }
 
-// Load some PHP files with "require_once"
-
+/**
+ * Load some PHP files with "require_once"
+ *
+ * @param String $dir the directory from which to load the files
+ * @param Array $files a list of files to load from the directory
+ */
 function load_files($dir, $files)
 {
     static $loaded = array();
@@ -226,27 +258,54 @@ function load_files($dir, $files)
     }
 }
 
-// Load some controllers 
-
+/**
+ * Load a controller
+ *
+ * @param String $controller the controller to load
+ */
 function load_controller($controller) { load_controllers($controller); }
+
+/**
+ * Load a list of controllers, passed as function arguments
+ *
+ * @param Array a list of controllers passed as function arguments
+ */
 function load_controllers() // list of controllers
 {
     $controllers = func_get_args();
     load_files('controllers', $controllers);
 }
 
-// Load some helpers
-
+/**
+ * Load a helper
+ *
+ * @param String $controller the controller to load
+ */
 function load_helper($helper) { load_helpers($helper); }
+
+/**
+ * Load a list of helpers, passed as function arguments
+ *
+ * @param Array a list of helpers passed as function arguments
+ */
 function load_helpers() // list of helpers
 {
     $helpers = func_get_args();
     load_files('helpers', $helpers);
 }
 
-// Load some models
-
+/**
+ * Load a model
+ *
+ * @param String $controller the controller to load
+ */
 function load_model($model) { load_models($model); }
+
+/**
+ * Load a list of models, passed as function arguments
+ *
+ * @param Array a list of models passed as function arguments
+ */
 function load_models() // list of models
 {
     $models = func_get_args();
@@ -258,50 +317,89 @@ function load_models() // list of models
     }
 }
 
-// Load some plugins
-
+/**
+ * Load a plugin
+ *
+ * @param String $controller the controller to load
+ */
 function load_plugin($plugin) { load_plugins($plugin); }
+
+/**
+ * Load a list of plugins, passed as function arguments
+ *
+ * @param Array a list of plugins passed as function arguments
+ */
 function load_plugins() // list of plugins
 {
     $plugins = func_get_args();
     load_files('plugins', $plugins);
 }
 
-// Load some services 
-
+/**
+ * Load a service
+ *
+ * @param String $controller the controller to load
+ */
 function load_service($service) { load_services($service); }
+
+/**
+ * Load a list of services, passed as function arguments
+ *
+ * @param Array a list of services passed as function arguments
+ */
 function load_services() // list of services
 {
     $services = func_get_args();
     load_files('services', $services);
 }
 
-// Load some tools 
-
+/**
+ * Load a tool
+ *
+ * @param String $controller the controller to load
+ */
 function load_tool($tool) { load_tools($tool); }
+
+/**
+ * Load a list of tools, passed as function arguments
+ *
+ * @param Array a list of tools passed as function arguments
+ */
 function load_tools() // list of tools
 {
     $tools = func_get_args();
     load_files('tools', $tools);
 }
 
-// Autoload classes in the "lib"
-
+/**
+ * Autoload classes in the "lib"
+ *
+ * @param String $class_name the class to autoload from the "lib" directory
+ */
 function __autoload($class_name)
 {
     require_once('lib/' . $class_name . '.php');
 }
 
-// Copy the Ruby on Rails "h()" HTML function
-
+/**
+ * Copy the Ruby on Rails "h()" HTML function to prepare text for HTML display
+ *
+ * @param String $text the text to clean by replacing HTML with HTML entities
+ * @return String the text prepared for HTML display
+ */
 function h($text)
 {
     return htmlentities($text);
 }
 
-// Copy the Ruby on Rails "t()" translate function
-
 load_tool('Translate');
+/**
+ * Copy the Ruby on Rails "t()" translate function to translate some text
+ *
+ * @param String $lookup the lookup string (see "configs/translate.yaml" file)
+ * @param Array $replacements an optional array of text replacements to make
+ * @return String the translated text after any replacements have been made
+ */
 function t($lookup, $replacements = array())
 {
     $app = YAWF::prop(Symbol::APP);
@@ -309,8 +407,11 @@ function t($lookup, $replacements = array())
                 : NULL;
 }
 
-// Copy the Ruby "p()" and "puts()"
-
+/**
+ * Copy the Ruby "p()" function (except this version doesn't return anything)
+ *
+ * @param Object $thing the thing to print out
+ */
 function p($thing)
 {
     print_r($thing);
@@ -319,13 +420,23 @@ function p($thing)
     // - use dump() if you want to see the data.
 }
 
+/**
+ * Copy the Ruby "puts()" function by writing a line of text
+ *
+ * @param String $text the text to print out with a newline
+ */
 function puts($text)
 {
     print "$text\n";
 }
 
-// Indent some text with whitespace
-
+/**
+ * Indent some text with whitespace
+ *
+ * @param String $text the text to indent
+ * @param Integer $chars the number of characters to indent (default is 2)
+ * @return String the indented text
+ */
 function indent($text, $chars = 2)
 {
     $spaces = '                                                '; // enough?
@@ -333,8 +444,12 @@ function indent($text, $chars = 2)
     return $indent . join("\n$indent", explode("\n", trim($text))) . "\n";
 }
 
-// Dump data in object
-
+/**
+ * Return a string representing all the data in object
+ *
+ * @param Object $object the object to dump
+ * @return String the object's data, dumped out in a user-friendly format
+ */
 function dump($object)
 {
     return print_r($object, TRUE);
