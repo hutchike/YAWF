@@ -11,6 +11,18 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+/**
+ * The YAWF App object creates controller and service objects to
+ * handle web requests. It also manages the request file, folder
+ * content type, language and any URI prefix.
+ *
+ * An App object has the side-effect of creating some YAWF::prop
+ * objects such as "app", "service" and "controller" props. This
+ * enables independent parts of the code to access these objects
+ * and makes it easier to test with mock objects.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class App extends YAWF
 {
     protected $content_type;// derived from the file extension
@@ -23,8 +35,12 @@ class App extends YAWF
     protected $is_testing;
     protected $error_messages;
 
-    // Construct a new App object
 
+    /**
+     * Construct a new App object
+     *
+     * @param String $uri an optional relative URI (e.g. "/folder/file")
+     */
     public function __construct($uri = NULL)
     {
         if (is_null($uri)) $uri = $_SERVER['REQUEST_URI'];
@@ -71,22 +87,35 @@ class App extends YAWF
         YAWF::prop(Symbol::APP, $this);
     }
 
-    // Say whether we're testing
-
+    /**
+     * Say whether we're testing
+     *
+     * @return Boolean whether we're testing
+     */
     public function is_testing()
     {
         return $this->is_testing;
     }
 
-    // Return the request content type
-
+    /**
+     * Return the request content type
+     *
+     * @return String the content type
+     */
     public function get_content_type()
     {
         return $this->content_type;
     }
 
-    // Create a new controller and return it
-
+    /**
+     * Create a new controller and return it. If the controller is in the
+     * REST service list, then a REST controller will be created and this
+     * REST controller will ask this $app object to create a REST service.
+     *
+     * @param String $class an optional class name
+     * @param Object $render optional render data (can also be an array)
+     * @return App_controller the new controller
+     */
     public function new_controller($class = NULL, $render = NULL)
     {
         // Require the Controller base class
@@ -117,8 +146,12 @@ class App extends YAWF
         return YAWF::prop(Symbol::CONTROLLER, $this->controller);
     }
 
-    // Create a new service and return it
-
+    /**
+     * Create a new service and return it
+     *
+     * @param String $class an optional class name
+     * @return Service the new service
+     */
     public function new_service($class = NULL)
     {
         // Require the Service base class
@@ -139,29 +172,41 @@ class App extends YAWF
         return YAWF::prop(Symbol::SERVICE, $this->service);
     }
 
-    // Get the folder in the URL (e.g. "default")
-
+    /**
+     * Get the folder in the URL (e.g. "default")
+     *
+     * @return String the folder in the URL
+     */
     public function get_folder()
     {
         return $this->folder;
     }
 
-    // Get the file in the URL (e.g. "index")
-
+    /**
+     * Get the file in the URL (e.g. "index")
+     *
+     * @return String the file in the URL
+     */
     public function get_file()
     {
         return $this->file;
     }
 
-    // Get the path (i.e. "folder/file")
-
+    /**
+     * Get the path (i.e. "folder/file")
+     *
+     * @return String the path in the URL
+     */
     public function get_path()
     {
         return $this->get_folder() . '/' . $this->get_file();
     }
 
-    // Get the language setting
-
+    /**
+     * Get the language setting (e.g. "en")
+     *
+     * @return String the language setting
+     */
     public function get_lang()
     {
         return $this->lang;
