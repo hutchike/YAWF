@@ -23,9 +23,10 @@ class Mail extends YAWF
      * Send a mail message by specifying all the message detials in am
      * array of render data, including "from", "to", "subject", "text"
      * and optionally "html" (if you wish to send multipart messages).
+     * If we're testing then the mail is not sent, it's only returned.
      *
-     * @param Array $render an array containing all the mail details
-     * @param Boolean $is_testing whether or not we're testing
+     * @param Object $render an object containing the mail details
+     * @param Boolean $is_testing is it a mail test? (FALSE by default)
      * @return String the sent message, to be checked when testing
      */
     public static function send($render, $is_testing = FALSE)
