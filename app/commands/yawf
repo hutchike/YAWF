@@ -206,7 +206,7 @@ End_of_usage;
         // Load the app config file and schema
 
         load_tool('YAML');
-        $config = YAML::load_file("$app_dir/configs/app.yaml");
+        $config = YAML::parse_file("$app_dir/configs/app.yaml");
         $database = $config['database'];
         $connector = array_key($database, 'connector');
         $username = array_key($database, 'username', 'root');
