@@ -17,7 +17,7 @@
   <script type="text/javascript">
     function setup() {
       top.YAWF.browser = document.forms.browser;
-      top.YAWF.prefix = '<?= VIEW_URL_PREFIX ?>';
+      top.YAWF.prefix = '<?= uri('') ?>';
       top.YAWF.open(document.forms.browser.url.value);
     }
 
