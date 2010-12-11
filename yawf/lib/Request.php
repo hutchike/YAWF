@@ -146,7 +146,8 @@ class Request extends YAWF
         // Allow the $mailer object to be defined as a YAWF prop
 
         $mailer = first(YAWF::prop(Symbol::MAILER), $this->app);
-        return $mailer->send_mail($file, $render);
+        if ($mailer instanceof Mailer) return $mailer->send_mail($file, $render);
+        else throw new Exception('The mailer should implement the "Mailer" interface');
     }
 
     // Set the request parameters that we use to create the params object

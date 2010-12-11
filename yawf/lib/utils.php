@@ -124,7 +124,7 @@ function url_get_contents($url, $options = array())
 
     if (array_key($options, 'strip_xml_declaration'))
     {
-        $contents = preg_replace('/<\?xml [^\?]+\?>\n?/i', '', $contents);
+        $contents = preg_replace('/<\?xml [^\?]+\?\>\n?/i', '', $contents);
     }
     return $contents;
 }

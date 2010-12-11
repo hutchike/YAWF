@@ -12,6 +12,22 @@
 // GNU Lesser General Public License for more details.
 
 /**
+ * The Mailer interface defines a single method to send email.
+ * See the Request class to see how the Mailer interface is used.
+ */
+interface Mailer
+{
+    /**
+     * Send a mail message
+     *
+     * @param String $file the file to send (e.g. "welcome")
+     * @param Object $render optional data to render (can be an Array)
+     * @return String the raw content of the message that was sent
+     */
+    public function send_mail($file, $render = NULL);
+}
+
+/**
  * The YAWF App object creates controller and service objects to
  * handle web requests. It also manages the request file, folder
  * content type, language and any URI prefix.
@@ -23,7 +39,7 @@
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class App extends YAWF
+class App extends YAWF implements Mailer
 {
     protected $content_type;// derived from the file extension
     protected $controller;  // a controller to render the view
@@ -34,7 +50,6 @@ class App extends YAWF
     protected $is_silent;   // "TRUE" after we've redirected
     protected $is_testing;
     protected $error_messages;
-
 
     /**
      * Construct a new App object
@@ -58,7 +73,7 @@ class App extends YAWF
         $uri = preg_replace('/[\?#].*/', '', $uri);
         $content_type = preg_match('/\.(\w+)$/', $uri, $matches) ? $matches[1] : DEFAULT_CONTENT_TYPE;
         if ($content_type === 'test' && !TESTING_ENABLED) $content_type = DEFAULT_CONTENT_TYPE;
-        $uri = $this->set_lang_and_prefix($uri);
+        $uri = $this->set_lang_and_remove_prefix($uri);
         list($folder, $file) = explode('/', $uri . '//');
         $folder = preg_replace('/\.\w+$/', '', $folder);
         $file = preg_replace('/\.\w+$/', '', $file);
@@ -212,8 +227,13 @@ class App extends YAWF
         return $this->lang;
     }
 
-    // Set the requested language by checking supported languages
-
+    /**
+     * Set the requested language by checking supported languages
+     *
+     * @param String $lang the two-letter language setting (optional)
+     * @param String $supported_languages an optional list of language settings
+     * @return String the new language setting (must be a supported language)
+     */
     public function set_lang($lang = NULL, $supported_languages = SUPPORTED_LANGUAGES)
     {
         // Only web browsers send the HTTP_ACCEPT_LANGUAGE header
@@ -228,31 +248,36 @@ class App extends YAWF
         {
             $lang = DEFAULT_LANGUAGE;
         }
-        $this->lang = $lang;
+        return $this->lang = $lang;
     }
 
-    // Set the view language and apply the prefix
-
-    protected function set_lang_and_prefix($uri)
+    /**
+     * Set the language and remove the URI prefix
+     *
+     * @param String $uri the URI of the request (e.g. "/en/folder/file.txt")
+     * @return String $uri the URI with the URI prefix removed
+     */
+    protected function set_lang_and_remove_prefix($uri)
     {
-        // Set the language and prefix
-
         $lang = NULL;
         $prefix = VIEW_URL_PREFIX;
+
+        // Set the language by checking the URI against supported languages
+
         if (preg_match('/^\/(\w{2})($|\/)/', $uri, $matches))
         {
             if (stristr(SUPPORTED_LANGUAGES, $matches[1]))
             {
                 $lang = $matches[1];
-                $prefix = "/$lang$prefix";
+                $prefix = "/$lang$prefix"; // include the lang in the URI prefix
                 if (!$matches[2]) $uri .= '/';
             }
         }
-        $this->set_lang($lang);
-        AppView::prefix($prefix);
+        $this->set_lang($lang); // this will default to the web browser language
 
-        // Apply the prefix to the URI
+        // Remove the URI prefix from the URI
 
+        AppView::prefix($prefix); // remember the prefix in "AppView::url" calls
         if (substr($uri, 0, strlen($prefix)) === $prefix)
         {
             $uri = substr($uri, strlen($prefix));
@@ -260,8 +285,13 @@ class App extends YAWF
         return $uri;
     }
 
-    // Get the path to a view file by looking in many places
-
+    /**
+     * Get the path to a view file by looking in many places
+     *
+     * @param String $file the view file to find by searching the views folders
+     * @param Array $options an optional array of options (e.g. "must_find")
+     * @return String the path to the view file
+     */
     protected function get_view_path($file, $options = array())
     {
         // Read any options that were passed, e.g. extension
@@ -290,12 +320,18 @@ class App extends YAWF
         return NULL; // path not found
     }
 
-    // Render a view file
-
+    /**
+     * Render a view file
+     *
+     * @param String $view the view file to render
+     * @param Object $render an optional Object containing render data
+     * @param Array $options an optional array of options (e.g. "must_find")
+     * @return String the rendered output to be returned to the client
+     */
     public function render_view($view, $render = NULL, $options = array())
     {
         if ($this->is_silent) return ''; // if redirect
-        $render = new Object($render);
+        $render = new Object($render); // Object needed
 
         // Setup the render data and the view file path
 
@@ -308,8 +344,14 @@ class App extends YAWF
         return AppView::render($path, $render);
     }
 
-    // Render a content-type file in the "types" folder
-
+    /**
+     * Render a content-type file in the "types" folder
+     *
+     * @param String $type the type file to render
+     * @param Object $render an optional Object containing render data
+     * @param Array $options an optional array of options (e.g. "must_find")
+     * @return String the rendered output to be returned to the client
+     */
     public function render_type($type, $render, $options = array())
     {
         $options['must_find'] = TRUE;
@@ -332,8 +374,12 @@ class App extends YAWF
         return $content;
     }
 
-    // Redirect to another URL, and possibly exit
-
+    /**
+     * Redirect to another URL, and possibly exit
+     *
+     * @param String $url the URL to redirect at
+     * @param Array $options an optional array of options (e.g. "exit")
+     */
     public function redirect($url, $options = array())
     {
         // Set flash messages to be shown on the next view page
@@ -368,8 +414,13 @@ class App extends YAWF
         if (array_key($options, 'exit')) exit; // careful! it stops our logging!
     }
 
-    // Send some mail (this depends on the Mail helper)
-
+    /**
+     * Send a mail message (this depends on the Mail tool)
+     *
+     * @param String $file the file to send (e.g. "welcome")
+     * @param Object $render optional data to render (can be an Array)
+     * @return String the raw content of the message that was sent
+     */
     public function send_mail($file, $render = NULL)
     {
         $render = new Object($render);
@@ -381,36 +432,57 @@ class App extends YAWF
         return Mail::send($render, $this->is_testing);
     }
 
-    // Add a new error message to the list of messages
-
+    /**
+     * Add a new error message to the list of messages
+     *
+     * @param String $error_message the error message to add to the list
+     */
     public function add_error_message($error_message)
     {
         $this->error_messages[] = $error_message;
         Log::error($error_message); // log it too
     }
 
-    // Get the list of error messages
-
+    /**
+     * Get the list of error messages
+     *
+     * @return Array the list of error messages
+     */
     public function get_error_messages()
     {
         return $this->error_messages;
     }
 }
 
+/**
+ * The AppView class renders views and normalizes URLs by applying a prefix.
+ */
 class AppView extends YAWF
 {
     private static $prefix;
     private static $render;
 
+    /**
+     * Get/set the prefix to apply to URLs
+     *
+     * @param String $prefix an optional prefix to apply to URLs
+     * @return String the current prefix being applied to URLs
+     */
     public static function prefix($prefix = NULL)
     {
         return is_null($prefix) ? self::$prefix
                                 : self::$prefix = $prefix;
     }
 
-    // Render the view path by extracting the render array
 
-    public static function render($__path_to_the_view_file, &$render)
+    /**
+     * Render the view path by extracting the render array
+     *
+     * @param String $__path_to_the_view_file the path to the view file
+     * @param Object $render the data to render in the view
+     * @return String the rendered output to be returned to the client
+     */
+    public static function render($__path_to_the_view_file, $render)
     {
         self::$render = $render;
         ob_start();
@@ -421,26 +493,41 @@ class AppView extends YAWF
         return ob_get_clean();
     }
 
-    // Modify a view URL by adding an optional prefix
-
+    /**
+     * Modify a view URL by adding an optional prefix
+     *
+     * @param String $url the URL to modify by applying the prefix
+     * @param String $prefix an optional prefix to apply to the URL
+     * @return String the URL with the prefix applied
+     */
     public static function url($url, $prefix = NULL)
     {
         if (preg_match('/^\w+:/', $url)) return $url; // coz it's absolute
         return first($prefix, self::$prefix) . $url; // or it's local
     }
 
-    // Get data from the render object
-
+    /**
+     * Get data from the render object
+     *
+     * @param String $field the render object field to read
+     * @return String the value of the render object field
+     */
     public static function get($field)
     {
         return self::$render->$field;
     }
 }
 
+/**
+ * The AppConfig class reads the "app.yaml" config file to configure the app.
+ */
 class AppConfig extends YAWF
 {
-    // Configure application constants
-
+    /**
+     * Configure application constants
+     *
+     * @return Array an assoc array containing all the user-defined constants
+     */
     public static function configure()
     {
         require_once 'lib/Config.php';
