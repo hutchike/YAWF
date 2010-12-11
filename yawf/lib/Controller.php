@@ -173,8 +173,15 @@ class Controller_flash extends YAWF
 
     public function __set($key, $value)
     {
-        if ($key == 'now') return $this->now('notice', $value);
-        return $this->flash_next->$key = $value;
+        if ($key == 'now') $key = 'notice_now';
+        if (preg_match('/^(\w+)_now$/', $key, $matches))
+        {
+            return $this->now($matches[1], $value);
+        }
+        else
+        {
+            return $this->flash_next->$key = $value;
+        }
     }
 
     public function now($key, $value = NULL)
