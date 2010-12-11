@@ -314,6 +314,9 @@ function t($lookup, $replacements = array())
 function p($thing)
 {
     print_r($thing);
+
+    // unlike Ruby, this doesn't return anything
+    // - use dump() if you want to see the data.
 }
 
 function puts($text)
