@@ -13,6 +13,12 @@
 
 require_once 'lib/App.php';
 
+/**
+ * The YAWF App_test class adds unit testing methods to the standard
+ * App class.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class App_test extends App
 {
     protected $test_run;
@@ -66,7 +72,7 @@ class App_test extends App
 
     // Render the test run to show test results
 
-    protected function render_test_run(&$render)
+    protected function render_test_run($render)
     {
         if ($this->test_run) return; // so we don't repeat the tests
         $testee = (defined('REST_SERVICE_LIST') && in_array($this->folder, split_list(REST_SERVICE_LIST)) ? $this->service : $this->controller);
@@ -134,8 +140,8 @@ class App_test extends App
 
 class TestRun
 {
-    private $controller;        // the test controller with test methods
-    private $test_cases;        // an array of arrays of TestCase objects
+    private $testee;            // the testee controller or service object
+    private $test_cases;        // the array of arrays of TestCase objects
     private $test_output;       // string of test output from the test run
 
     public function __construct($testee)

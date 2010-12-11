@@ -24,7 +24,7 @@ class Controller extends Request
     public function setup_for_app($app, &$render)
     {
         $this->view = $app->get_file(); // "faq" from "www.yawf.org/project/faq"
-        $this->path = $app->get_folder().'/'.$this->view;  // e.g. "project/faq"
+        $this->path = $app->get_path(); // e.g. "project/faq"
         $this->render = $render;        // data to be rendered in views
         $this->setup_request($app);     // inherited from Request class
         $this->flash = $this->flash_object(); // uses a request session
@@ -44,9 +44,10 @@ class Controller extends Request
     {
         // Get the view (e.g. "index") and the type (e.g. "html")
 
-        $this->view = is_null($view) ? $this->view : $view;
-        if ($type = array_key($options, 'type')) $this->type = $type;
-        else $this->type = first($this->type, $this->app->get_content_type());
+        $this->view = first($view, $this->view);
+        $this->type = first(array_key($options, 'type'),
+                            $this->type,
+                            $this->app->get_content_type());
 
         // Call the controller's view method
 
