@@ -11,8 +11,19 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+/**
+ * The Remote_test class is used to test the Remote class in the
+ * YAWF "lib" folder. The tests are run by the "yash" test files
+ * in the "app/tests/lib" folder, which may be started with the
+ * simple command "yawf test lib"
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Remote_test extends Remote
 {
+    /**
+     * Test the secure_url() method of the Remote class
+     */
     public function secure_url_test()
     {
         // Test that we don't add empty username and password
@@ -37,3 +48,5 @@ class Remote_test extends Remote
         $this->should('add a username and password when they are provided for HTTPS URLs', $secure_url === 'https://user2:pass2@blah.com/whatever', $secure_url);
     }
 }
+
+// End of Remote.php
