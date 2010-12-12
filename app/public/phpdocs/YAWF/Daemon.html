@@ -25,8 +25,13 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The Daemon class is a type of command that is designed to run</p>
+<p class="description"><p>in the background without any duplicate processes. It achieves  this by keeping note of its PID in a pidfile in the &quot;/tmp/pids&quot;  directory. A Daemon object can't be created if another daemon  is running simultaneously.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_lib---Daemon.php.html">/lib/Daemon.php</a> (line <span class="field">18</span>)
+			Located in <a class="field" href="_lib---Daemon.php.html">/lib/Daemon.php</a> (line <span class="field">27</span>)
 		</p>
 		
 				
@@ -56,7 +61,7 @@
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">Daemon</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											([<span class="var-type"></span>&nbsp;<span class="var-name">$dir</span> = <span class="var-default">NULL</span>])
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$dir</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Destructor.png" alt=" "/>
@@ -72,31 +77,31 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Boolean</span>
 										<a href="#is_running" title="details" class="method-name">is_running</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Integer</span>
 										<a href="#pid" title="details" class="method-name">pid</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#pid_file" title="details" class="method-name">pid_file</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#read_pid_from_file" title="details" class="method-name">read_pid_from_file</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#start_directory" title="details" class="method-name">start_directory</a>
 										()
 									</div>
@@ -169,10 +174,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">24</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">36</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Quit if we're already running, or start by creating a new PID file</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -182,19 +188,20 @@
 		<span class="method-name">
 			__construct
 		</span>
-					([<span class="var-type"></span>&nbsp;<span class="var-name">$dir</span> = <span class="var-default">NULL</span>])
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$dir</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$dir</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$dir</span><span class="var-description">: an optional starting directory to change from</span>			</li>
 				</ul>
 		
 			<hr class="separator" />
 		<div class="notes">Redefinition of:</div>
 		<dl>
 			<dt><a href="../YAWF/Command.html#method__construct">Command::__construct()</a></dt>
+						<dd>Create a new Command object</dd>
 					</dl>
 			
 	</div>
@@ -203,10 +210,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Destructor.png" />
-		<span class="method-title">Destructor __destruct</span> (line <span class="line-number">33</span>)
+		<span class="method-title">Destructor __destruct</span> (line <span class="line-number">46</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Delete our PID file and finish</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -224,6 +232,7 @@
 		<div class="notes">Redefinition of:</div>
 		<dl>
 			<dt><a href="../YAWF/Command.html#method__destruct">Command::__destruct()</a></dt>
+						<dd>Log the time it took to run the command, given the options and arguments</dd>
 					</dl>
 			
 	</div>
@@ -232,10 +241,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete_pid_file</span> (line <span class="line-number">96</span>)
+		<span class="method-title">delete_pid_file</span> (line <span class="line-number">123</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Delete a PID file if the PID matches ours</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -256,16 +266,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">is_running</span> (line <span class="line-number">62</span>)
+		<span class="method-title">is_running</span> (line <span class="line-number">84</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return whether our process is already running</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> whether an identical daemon process is already running</li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Boolean</span>
 		<span class="method-name">
 			is_running
 		</span>
@@ -280,16 +292,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">pid</span> (line <span class="line-number">41</span>)
+		<span class="method-title">pid</span> (line <span class="line-number">57</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the PID of our process</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the PID of this process</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Integer</span>
 		<span class="method-name">
 			pid
 		</span>
@@ -304,16 +318,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">pid_file</span> (line <span class="line-number">49</span>)
+		<span class="method-title">pid_file</span> (line <span class="line-number">68</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the path to our process's PID file</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the path to this process's PID file</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			pid_file
 		</span>
@@ -328,16 +344,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">read_pid_from_file</span> (line <span class="line-number">79</span>)
+		<span class="method-title">read_pid_from_file</span> (line <span class="line-number">104</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Read a PID from our process's PID file</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the PID number in a pidfile for this process</li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			read_pid_from_file
 		</span>
@@ -352,16 +370,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">start_directory</span> (line <span class="line-number">106</span>)
+		<span class="method-title">start_directory</span> (line <span class="line-number">136</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the default start directory</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the path to this daemon command</li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			start_directory
 		</span>
@@ -381,10 +401,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">write_pid_to_file</span> (line <span class="line-number">89</span>)
+		<span class="method-title">write_pid_to_file</span> (line <span class="line-number">115</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Write our PID to a PID file</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -426,7 +447,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 11 Dec 2010 01:49:31 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 12 Dec 2010 05:26:21 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

@@ -1,0 +1,1851 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class SQL_model</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> SQL_model</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|													<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The SQL_model class links data objects to storage engines  that support SQL queries such as MySQL, SQLite2 &amp; SQLite3.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_lib---Model.php.html">/lib/Model.php</a> (line <span class="field">23</span>)
+		</p>
+		
+				
+		<pre><a href="../YAWF/YAWF.html">YAWF</a>
+   |
+   --SQL_model</pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"
+								 style="vertical-align: center"/>
+						<a href="../YAWF/Model.html">Model</a>
+					</td>
+					<td>
+											The Model class extends the SQL_model class by adding  validation methods to validate the data field values.
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendants</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																																																																																																																																																																																																																																																																<div class="method-definition">
+					<img src="../media/images/Constructor.png" alt=" "/>
+											<span class="method-result">SQL_model</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">Array</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">array()</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#connect" title="details" class="method-name">connect</a>
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$database</span> = <span class="var-default">NULL</span>], [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$reconnect</span> = <span class="var-default">FALSE</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#copy_to" title="details" class="method-name">copy_to</a>
+											(<span class="var-type"><a href="../YAWF/SQL_model.html">SQL_model</a></span>&nbsp;<span class="var-name">$other</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Array</span>
+										<a href="#data" title="details" class="method-name">data</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+										<a href="#delete" title="details" class="method-name">delete</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+										<a href="#delete_all" title="details" class="method-name">delete_all</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#disconnect" title="details" class="method-name">disconnect</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+										<a href="#drop" title="details" class="method-name">drop</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#escape" title="details" class="method-name">escape</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$sql</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Array</span>
+										<a href="#fields" title="details" class="method-name">fields</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Array</span>
+										<a href="#find_all" title="details" class="method-name">find_all</a>
+											([<span class="var-type">Array</span>&nbsp;<span class="var-name">$conditions</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+										<a href="#find_first" title="details" class="method-name">find_first</a>
+											([<span class="var-type">Array</span>&nbsp;<span class="var-name">$conditions</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">SQL_model(s)</span>
+										<a href="#find_id" title="details" class="method-name">find_id</a>
+											(<span class="var-type">Integer</span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+										<a href="#find_last" title="details" class="method-name">find_last</a>
+											([<span class="var-type">Array</span>&nbsp;<span class="var-name">$conditions</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Array</span>
+										<a href="#find_where" title="details" class="method-name">find_where</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$clause</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+										<a href="#get_connector" title="details" class="method-name">get_connector</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#get_database" title="details" class="method-name">get_database</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#get_db_table" title="details" class="method-name">get_db_table</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Integer</span>
+										<a href="#get_id" title="details" class="method-name">get_id</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#get_id_field" title="details" class="method-name">get_id_field</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Integer</span>
+										<a href="#get_limit" title="details" class="method-name">get_limit</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Integer</span>
+										<a href="#get_offset" title="details" class="method-name">get_offset</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#get_table" title="details" class="method-name">get_table</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Boolean</span>
+										<a href="#has_timestamp" title="details" class="method-name">has_timestamp</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Integer</span>
+										<a href="#insert" title="details" class="method-name">insert</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Boolean</span>
+										<a href="#is_virtual" title="details" class="method-name">is_virtual</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Integer</span>
+										<a href="#load" title="details" class="method-name">load</a>
+											([<span class="var-type">Integer</span>&nbsp;<span class="var-name">$id</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#password" title="details" class="method-name">password</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$text</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+										<a href="#query" title="details" class="method-name">query</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$sql</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#quote" title="details" class="method-name">quote</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$sql</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#quote_in" title="details" class="method-name">quote_in</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$clause</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Boolean</span>
+										<a href="#save" title="details" class="method-name">save</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#setup" title="details" class="method-name">setup</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+										<a href="#set_connector" title="details" class="method-name">set_connector</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$connector_class</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+										<a href="#set_database" title="details" class="method-name">set_database</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$database</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+										<a href="#set_id" title="details" class="method-name">set_id</a>
+											(<span class="var-type">Integer</span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+										<a href="#set_id_field" title="details" class="method-name">set_id_field</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+										<a href="#set_limit" title="details" class="method-name">set_limit</a>
+											(<span class="var-type">Integer</span>&nbsp;<span class="var-name">$limit</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+										<a href="#set_offset" title="details" class="method-name">set_offset</a>
+											(<span class="var-type">Integer</span>&nbsp;<span class="var-name">$offset</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+										<a href="#set_order" title="details" class="method-name">set_order</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$order</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+										<a href="#set_table" title="details" class="method-name">set_table</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$table</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+										<a href="#set_timestamp" title="details" class="method-name">set_timestamp</a>
+											(<span class="var-type">Array</span>&nbsp;<span class="var-name">0</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+										<a href="#set_virtual" title="details" class="method-name">set_virtual</a>
+											(<span class="var-type">Array</span>&nbsp;<span class="var-name">0</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+										<a href="#update" title="details" class="method-name">update</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+										<a href="#update_all_fields" title="details" class="method-name">update_all_fields</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#where_clause" title="details" class="method-name">where_clause</a>
+											([<span class="var-type">Array</span>&nbsp;<span class="var-name">$conditions</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#__get" title="details" class="method-name">__get</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#__set" title="details" class="method-name">__set</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+													<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Constructor.png" />
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">67</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create a new SQL model object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">SQL_model</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$data</span><span class="var-description">: the data to initialize the object (may be an object)</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../YAWF/Model.html#method__construct">Model::__construct()</a>
+								: Create a new model object
+							</li>
+				</ul>
+	</div>
+<a name="methodconnect" id="connect"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">connect</span> (line <span class="line-number">390</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Connect this model to a database, optionally forcing a reconnection</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			connect
+		</span>
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$database</span> = <span class="var-default">NULL</span>], [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$reconnect</span> = <span class="var-default">FALSE</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$database</span><span class="var-description">: the database name</span>			</li>
+					<li>
+				<span class="var-type">Boolean</span>
+				<span class="var-name">$reconnect</span><span class="var-description">: whether or not to reconnect (FALSE by default)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcopy_to" id="copy_to"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">copy_to</span> (line <span class="line-number">463</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Copy data from this model object to another model object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			copy_to
+		</span>
+					(<span class="var-type"><a href="../YAWF/SQL_model.html">SQL_model</a></span>&nbsp;<span class="var-name">$other</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+				<span class="var-name">$other</span><span class="var-description">: the other model object</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddata" id="data"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">data</span> (line <span class="line-number">102</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get an assoc array of data stored in this model object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the assoc array of data stored in this model object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Array</span>
+		<span class="method-name">
+			data
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methoddelete" id="delete"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">delete</span> (line <span class="line-number">714</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Delete this model object's data from the database via the connector</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> this model object for chaining, or NULL upon failure</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+		<span class="method-name">
+			delete
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methoddelete_all" id="delete_all"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">delete_all</span> (line <span class="line-number">734</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Delete all the model object data in the database for this model class!!!</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> this model object for chaining</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+		<span class="method-name">
+			delete_all
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methoddisconnect" id="disconnect"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">disconnect</span> (line <span class="line-number">403</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Disonnect this model from a database</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			disconnect
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methoddrop" id="drop"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">drop</span> (line <span class="line-number">746</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Drop the database table for this model class!!!</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> this model object for chaining</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+		<span class="method-name">
+			drop
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodescape" id="escape"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">escape</span> (line <span class="line-number">440</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Escape some SQL to make it safe to execute in database queries</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the quoted SQL, safe for executing in database queries</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			escape
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$sql</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$sql</span><span class="var-description">: the SQL to escape by calling the connector object</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfields" id="fields"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">fields</span> (line <span class="line-number">112</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get a list array of data fields for this model object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the list array of data fields for this model object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Array</span>
+		<span class="method-name">
+			fields
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodfind_all" id="find_all"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">find_all</span> (line <span class="line-number">507</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Find all model objects that match the conditions or the object's fields</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a list of model objects that match the conditions or fields</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Array</span>
+		<span class="method-name">
+			find_all
+		</span>
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">$conditions</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$conditions</span><span class="var-description">: an optional array of conditions to match</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfind_first" id="find_first"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">find_first</span> (line <span class="line-number">550</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Find the first model object that matches some conditions or field values</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the first matching model object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+		<span class="method-name">
+			find_first
+		</span>
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">$conditions</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$conditions</span><span class="var-description">: an array of conditions to match (optional)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfind_id" id="find_id"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">find_id</span> (line <span class="line-number">536</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Find model objects with a particular ID, or array of IDs</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the found model(s)</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">SQL_model(s)</span>
+		<span class="method-name">
+			find_id
+		</span>
+					(<span class="var-type">Integer</span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Integer</span>
+				<span class="var-name">$id</span><span class="var-description">: the model ID to find (may also be an array of IDs)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfind_last" id="find_last"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">find_last</span> (line <span class="line-number">564</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Find the last model object that matches some conditions or field values</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the last matching model object (may take some time!)</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+		<span class="method-name">
+			find_last
+		</span>
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">$conditions</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$conditions</span><span class="var-description">: an array of conditions to match (optional)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfind_where" id="find_where"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">find_where</span> (line <span class="line-number">576</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Find model objects that match a SQL &quot;where&quot; clause</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a list of model objects that match the SQL &quot;where&quot; clause</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Array</span>
+		<span class="method-name">
+			find_where
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$clause</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$clause</span><span class="var-description">: a SQL &quot;where&quot; clause to match</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_connector" id="get_connector"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">get_connector</span> (line <span class="line-number">140</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the connector object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the connector object for this model object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+		<span class="method-name">
+			get_connector
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_database" id="get_database"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">get_database</span> (line <span class="line-number">167</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the database used by this model object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the database used by this model object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			get_database
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_db_table" id="get_db_table"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">get_db_table</span> (line <span class="line-number">206</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the database and table used by this model object (e.g. &quot;app.users&quot;)</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the database and table used by this model object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			get_db_table
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_id" id="get_id"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">get_id</span> (line <span class="line-number">300</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the ID number for this model object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the ID number for this model object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Integer</span>
+		<span class="method-name">
+			get_id
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_id_field" id="get_id_field"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">get_id_field</span> (line <span class="line-number">287</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the ID field name for this model object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the ID field name for this model object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			get_id_field
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_limit" id="get_limit"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">get_limit</span> (line <span class="line-number">242</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the limit for data result sets (e.g. 20)</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the data result set limit (e.g. 20)</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Integer</span>
+		<span class="method-name">
+			get_limit
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_offset" id="get_offset"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">get_offset</span> (line <span class="line-number">264</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the offset for data result sets (e.g. 10)</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the data result set offset (e.g. 10)</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Integer</span>
+		<span class="method-name">
+			get_offset
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget_table" id="get_table"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">get_table</span> (line <span class="line-number">192</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the table used by this model object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the table used by this model object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			get_table
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodhas_timestamp" id="has_timestamp"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">has_timestamp</span> (line <span class="line-number">354</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get whether or not this model class has a particular timestamp field</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> whether this model class has a particular timestamp field</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Boolean</span>
+		<span class="method-name">
+			has_timestamp
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$field</span><span class="var-description">: the name of the timestamp field to look for</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodinsert" id="insert"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">insert</span> (line <span class="line-number">618</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Insert this model object's data into the database via the connector</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the ID of the inserted row, or 0 upon failure</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Integer</span>
+		<span class="method-name">
+			insert
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodis_virtual" id="is_virtual"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">is_virtual</span> (line <span class="line-number">378</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get whether or not a particular field is virtual on this model class</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> whether the field is a virtual field on this model class</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Boolean</span>
+		<span class="method-name">
+			is_virtual
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$field</span><span class="var-description">: the name of the virtual field to look for</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodload" id="load"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">load</span> (line <span class="line-number">477</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load a model object by ID or by the other fields that have been set</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the ID of the loaded model object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Integer</span>
+		<span class="method-name">
+			load
+		</span>
+					([<span class="var-type">Integer</span>&nbsp;<span class="var-name">$id</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Integer</span>
+				<span class="var-name">$id</span><span class="var-description">: an optional ID value to load</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodpassword" id="password"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">password</span> (line <span class="line-number">759</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return an encrypted password ready to store in the database</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> an encrypted password ready to store in the database</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			password
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$text</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$text</span><span class="var-description">: the unencrypted password text to be encrypted</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodquery" id="query"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">query</span> (line <span class="line-number">452</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Execute a database query and return the result set data fetcher object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a result set data fetcher object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+		<span class="method-name">
+			query
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$sql</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$sql</span><span class="var-description">: the SQL to execute in the database query</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodquote" id="quote"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">quote</span> (line <span class="line-number">415</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Quote some SQL to make it safe for executing in database queries</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the quoted SQL, safe for executing in database queries</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			quote
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$sql</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$sql</span><span class="var-description">: the SQL to quote</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodquote_in" id="quote_in"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">quote_in</span> (line <span class="line-number">426</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Quote an SQL &quot;in&quot; clause to make it safe to execute in database queries</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the quoted SQL, safe for executing in database queries</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			quote_in
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$clause</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$clause</span><span class="var-description">: the SQL &quot;in&quot; clause to quote</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsave" id="save"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">save</span> (line <span class="line-number">495</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Save this model object by inserting or updating it (if it has an ID)</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> whether or not this model object was saved</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Boolean</span>
+		<span class="method-name">
+			save
+		</span>
+				()
+			</div>
+	
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../YAWF/Model.html#methodsave">Model::save()</a>
+								: Save this model object after validating its data fields
+							</li>
+				</ul>
+	</div>
+<a name="methodsetup" id="setup"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">setup</span> (line <span class="line-number">57</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Setup a model by calling methods such as &quot;set_id_field&quot;, &quot;set_virtual&quot;  and &quot;set_timestamp&quot;. This method should be overriden in your subclass:</p>
+<p class="description"><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;Subclass&nbsp;in&nbsp;your&nbsp;models&nbsp;like&nbsp;this:</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><a href="../YAWF/SQL_model.html#methodsetup">setup</a><span class="src-sym">(</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../YAWF/SQL_model.html#methodset_id_field">set_id_field</a><span class="src-sym">(</span><span class="src-str">'table_id_field'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../YAWF/SQL_model.html#methodset_virtual">set_virtual</a><span class="src-sym">(</span><span class="src-str">'transient_field'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../YAWF/SQL_model.html#methodset_timestamp">set_timestamp</a><span class="src-sym">(</span><span class="src-str">'created_at'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'updated_at'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-id">validates</span><span class="src-sym">(</span><span class="src-str">'email'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'is_valid_email'</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;when&nbsp;a&nbsp;&quot;Model&quot;&nbsp;object</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">}</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setup
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodset_connector" id="set_connector"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">set_connector</span> (line <span class="line-number">124</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the connector (e.g. &quot;MySQLi&quot;) and optionally the database name</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> this model object for method chaining</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+		<span class="method-name">
+			set_connector
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$connector_class</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$connector_class</span><span class="var-description">: the connector class name</span>			</li>
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$options</span><span class="var-description">: an array of options (e.g. &quot;database&quot;, &quot;hostname&quot;)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_database" id="set_database"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">set_database</span> (line <span class="line-number">155</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the database used by this model object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> this model object for method chaining</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+		<span class="method-name">
+			set_database
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$database</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$database</span><span class="var-description">: the database name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_id" id="set_id"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">set_id</span> (line <span class="line-number">312</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the ID number for this model object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> this model object for method chaining</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+		<span class="method-name">
+			set_id
+		</span>
+					(<span class="var-type">Integer</span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Integer</span>
+				<span class="var-name">$id</span><span class="var-description">: the ID number for this model object</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_id_field" id="set_id_field"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">set_id_field</span> (line <span class="line-number">275</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the ID field name for this model object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> this model object for method chaining</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+		<span class="method-name">
+			set_id_field
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$field</span><span class="var-description">: the ID field name for this model object</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_limit" id="set_limit"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">set_limit</span> (line <span class="line-number">231</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the limit for data result sets (e.g. 20)</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> this model object for method chaining</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+		<span class="method-name">
+			set_limit
+		</span>
+					(<span class="var-type">Integer</span>&nbsp;<span class="var-name">$limit</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Integer</span>
+				<span class="var-name">$limit</span><span class="var-description">: the data result set limit (e.g. 20)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_offset" id="set_offset"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">set_offset</span> (line <span class="line-number">253</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the offset for data result sets (e.g. 10)</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> this model object for method chaining</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+		<span class="method-name">
+			set_offset
+		</span>
+					(<span class="var-type">Integer</span>&nbsp;<span class="var-name">$offset</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Integer</span>
+				<span class="var-name">$offset</span><span class="var-description">: the data result set offset (e.g. 10)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_order" id="set_order"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">set_order</span> (line <span class="line-number">219</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the order for data result sets (i.e. &quot;asc&quot; or &quot;desc&quot;)</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> this model object for method chaining</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+		<span class="method-name">
+			set_order
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$order</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$order</span><span class="var-description">: the data result set order (i.e. &quot;asc&quot; or &quot;desc&quot;)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_table" id="set_table"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">set_table</span> (line <span class="line-number">181</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the table used by this model object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> this model object for method chaining</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+		<span class="method-name">
+			set_table
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$table</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$table</span><span class="var-description">: the table name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_timestamp" id="set_timestamp"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">set_timestamp</span> (line <span class="line-number">342</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set some fields as being timestamp fields on this model class</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> this model object for method chaining</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+		<span class="method-name">
+			set_timestamp
+		</span>
+					(<span class="var-type">Array</span>&nbsp;<span class="var-name">0</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">0</span><span class="var-description">: an argument list of timestamp field names</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_virtual" id="set_virtual"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">set_virtual</span> (line <span class="line-number">366</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set some fields as being virtual fields to exclude from any SQL queries</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> this model object for method chaining</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+		<span class="method-name">
+			set_virtual
+		</span>
+					(<span class="var-type">Array</span>&nbsp;<span class="var-name">0</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">0</span><span class="var-description">: an argument list of virtual field names for this model class</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodupdate" id="update"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">update</span> (line <span class="line-number">660</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Update this model object's data in the database via the connector.</p>
+<p class="description"><p>Note that this method will only update the fields that have changed.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> this model object for chaining, or NULL upon failure</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+		<span class="method-name">
+			update
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodupdate_all_fields" id="update_all_fields"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">update_all_fields</span> (line <span class="line-number">703</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Update this model object's data in the database via the connector.</p>
+<p class="description"><p>Note that this method will update *all* this model object's fields.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> this model object for chaining, or NULL upon failure</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+		<span class="method-name">
+			update_all_fields
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodwhere_clause" id="where_clause"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">where_clause</span> (line <span class="line-number">587</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a SQL &quot;where&quot; clause for an array of conditions, or field values</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a SQL &quot;where&quot; clause from the conditions or field values</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			where_clause
+		</span>
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">$conditions</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$conditions</span><span class="var-description">: an array of conditions (optional)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method__get" id="__get"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">__get</span> (line <span class="line-number">79</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get a data field value from this model object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the value of the data field</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			__get
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$field</span><span class="var-description">: the data field to read</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method__set" id="__set"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">__set</span> (line <span class="line-number">90</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set a data field value in this model object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the value of the newly updated data field</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			__set
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$field</span><span class="var-description">: the data field to write</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$value</span>			</li>
+				</ul>
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../YAWF/YAWF.html">YAWF</a></span></p>
+					<blockquote>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodassert_checking">YAWF::assert_checking()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodassert_failed">YAWF::assert_failed()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodfinish">YAWF::finish()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodhandle_exception">YAWF::handle_exception()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodhook">YAWF::hook()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodprop">YAWF::prop()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodrespond_to_web_request">YAWF::respond_to_web_request()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodstart">YAWF::start()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodunknown">YAWF::unknown()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#method__call">YAWF::__call()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+	
+	<p class="notes" id="credit">
+		Documentation generated on Sun, 12 Dec 2010 05:26:25 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

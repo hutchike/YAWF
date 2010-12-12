@@ -68,7 +68,7 @@
 						<a href="../YAWF/Service.html">Service</a>
 					</td>
 					<td>
-											The YAWF object responds to web requests by creating an &quot;App&quot;  object, a &quot;Controller&quot; object, then rendering a web response.
+											The Service class responds to requests for web services, such  as REST web services. See the &quot;REST_service&quot; child class for  an example of a Service.
 										</td>
 				</tr>
 								<tr>
@@ -177,7 +177,7 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#redirect" title="details" class="method-name">redirect</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$uri</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -271,7 +271,7 @@
 		<div class="info-box-body">
 			
 <a name="var$app" id="$app"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
@@ -293,7 +293,7 @@
 
 </div>
 <a name="var$cookie" id="$cookie"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
@@ -315,7 +315,7 @@
 
 </div>
 <a name="var$params" id="$params"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
@@ -337,7 +337,7 @@
 
 </div>
 <a name="var$server" id="$server"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
@@ -359,7 +359,7 @@
 
 </div>
 <a name="var$session" id="$session"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
@@ -397,7 +397,7 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodcookie" id="cookie"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -441,7 +441,7 @@
 			
 	</div>
 <a name="methodcookie_object" id="cookie_object"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -465,7 +465,7 @@
 			
 	</div>
 <a name="methodlang" id="lang"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -489,7 +489,7 @@
 			
 	</div>
 <a name="methodparams" id="params"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -521,7 +521,7 @@
 			
 	</div>
 <a name="methodparams_object" id="params_object"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -553,7 +553,7 @@
 			
 	</div>
 <a name="methodredirect" id="redirect"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -570,13 +570,13 @@
 		<span class="method-name">
 			redirect
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$uri</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type"></span>
-				<span class="var-name">$url</span>			</li>
+				<span class="var-name">$uri</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$options</span>			</li>
@@ -585,7 +585,7 @@
 			
 	</div>
 <a name="methodreport_errors" id="report_errors"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -609,7 +609,7 @@
 			
 	</div>
 <a name="methodrequest_method" id="request_method"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -633,7 +633,7 @@
 			
 	</div>
 <a name="methodrequest_type" id="request_type"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -657,7 +657,7 @@
 			
 	</div>
 <a name="methodsend_mail" id="send_mail"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -689,7 +689,7 @@
 			
 	</div>
 <a name="methodserver" id="server"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -721,7 +721,7 @@
 			
 	</div>
 <a name="methodserver_object" id="server_object"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -745,7 +745,7 @@
 			
 	</div>
 <a name="methodsession" id="session"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -777,7 +777,7 @@
 			
 	</div>
 <a name="methodsession_object" id="session_object"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -801,7 +801,7 @@
 			
 	</div>
 <a name="methodsetup_request" id="setup_request"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -830,7 +830,7 @@
 			
 	</div>
 <a name="methodset_params" id="set_params"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -862,7 +862,7 @@
 			
 	</div>
 <a name="methodshould" id="should"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -897,7 +897,7 @@
 			
 	</div>
 <a name="methodshould_not" id="should_not"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -963,7 +963,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 11 Dec 2010 01:49:35 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 12 Dec 2010 05:26:27 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

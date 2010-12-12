@@ -82,25 +82,25 @@
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">App_test</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											([<span class="var-type"></span>&nbsp;<span class="var-name">$uri</span> = <span class="var-default">NULL</span>])
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$uri</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#redirect" title="details" class="method-name">redirect</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$uri</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#render_test_run" title="details" class="method-name">render_test_run</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$render</span>)
+											(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$render</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#render_view" title="details" class="method-name">render_view</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$file</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$render</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$file</span>, [<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$render</span> = <span class="var-default">NULL</span>], [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -112,13 +112,13 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#test_case" title="details" class="method-name">test_case</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$desc</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$passed</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$test_data</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$method</span> = <span class="var-default">NULL</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$desc</span>, <span class="var-type">Boolean</span>&nbsp;<span class="var-name">$passed</span>, [<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$test_data</span> = <span class="var-default">NULL</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$method</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Array</span>
 										<a href="#xhtml_errors" title="details" class="method-name">xhtml_errors</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$html</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$html</span>)
 									</div>
 											</div>
 		</div>
@@ -221,10 +221,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">28</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">31</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Construct a new App_test object</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -234,13 +235,13 @@
 		<span class="method-name">
 			__construct
 		</span>
-					([<span class="var-type"></span>&nbsp;<span class="var-name">$uri</span> = <span class="var-default">NULL</span>])
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$uri</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$uri</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$uri</span><span class="var-description">: an optional relative URI (e.g. &quot;/folder/file&quot;)</span>			</li>
 				</ul>
 		
 			<hr class="separator" />
@@ -256,10 +257,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">redirect</span> (line <span class="line-number">56</span>)
+		<span class="method-title">redirect</span> (line <span class="line-number">65</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">It's important that tests cannot make redirects</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -269,23 +271,23 @@
 		<span class="method-name">
 			redirect
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$uri</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$url</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$uri</span><span class="var-description">: the URI that would normally be shown on redirection</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$options</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$options</span><span class="var-description">: an optional array of options (ignored for testing)</span>			</li>
 				</ul>
 		
 			<hr class="separator" />
 		<div class="notes">Redefinition of:</div>
 		<dl>
 			<dt><a href="../YAWF/App.html#methodredirect">App::redirect()</a></dt>
-						<dd>Redirect to another URL, and possibly exit</dd>
+						<dd>Redirect to another URI, and possibly exit</dd>
 					</dl>
 			
 	</div>
@@ -294,10 +296,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">render_test_run</span> (line <span class="line-number">75</span>)
+		<span class="method-title">render_test_run</span> (line <span class="line-number">93</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Render the test run by modifying a render object to include the results</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -307,13 +310,13 @@
 		<span class="method-name">
 			render_test_run
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$render</span>)
+					(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$render</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$render</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$render</span><span class="var-description">: the render object to modify with test results</span>			</li>
 				</ul>
 		
 			
@@ -323,32 +326,34 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">render_view</span> (line <span class="line-number">63</span>)
+		<span class="method-title">render_view</span> (line <span class="line-number">78</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Variation of the regular &quot;render_view&quot; that can insert test results</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the contents to send in response to the client</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			render_view
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$file</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$render</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$file</span>, [<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$render</span> = <span class="var-default">NULL</span>], [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$file</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$file</span><span class="var-description">: blah</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$render</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$render</span><span class="var-description">: data to render in the view</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$options</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$options</span><span class="var-description">: an array of rendering options (optional)</span>			</li>
 				</ul>
 		
 			<hr class="separator" />
@@ -364,10 +369,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">reset_folder</span> (line <span class="line-number">49</span>)
+		<span class="method-title">reset_folder</span> (line <span class="line-number">54</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Remove &quot;_test&quot; from the folder</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -388,10 +394,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">test_case</span> (line <span class="line-number">92</span>)
+		<span class="method-title">test_case</span> (line <span class="line-number">116</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The testing controller runs test cases by calling this method on its $app</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -401,22 +408,22 @@
 		<span class="method-name">
 			test_case
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$desc</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$passed</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$test_data</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$method</span> = <span class="var-default">NULL</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$desc</span>, <span class="var-type">Boolean</span>&nbsp;<span class="var-name">$passed</span>, [<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$test_data</span> = <span class="var-default">NULL</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$method</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$desc</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$desc</span><span class="var-description">: a description of the test</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$passed</span>			</li>
+				<span class="var-type">Boolean</span>
+				<span class="var-name">$passed</span><span class="var-description">: whether the test passed</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$test_data</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$test_data</span><span class="var-description">: the data used in the test (optional)</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$method</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$method</span><span class="var-description">: the method that is running tests (optional)</span>			</li>
 				</ul>
 		
 			
@@ -426,26 +433,28 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">xhtml_errors</span> (line <span class="line-number">110</span>)
+		<span class="method-title">xhtml_errors</span> (line <span class="line-number">138</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Validate some HTML as XHTML and return any errors</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> an array of validation errors, or NULL</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			xhtml_errors
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$html</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$html</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$html</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$html</span><span class="var-description">: the HTML to validate as XHTML</span>			</li>
 				</ul>
 		
 			
@@ -522,7 +531,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 11 Dec 2010 01:49:29 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 12 Dec 2010 05:26:20 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

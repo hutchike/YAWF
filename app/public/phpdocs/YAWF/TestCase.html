@@ -24,8 +24,9 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">A class to hold details about a particular test case</p>
 		<p class="notes">
-			Located in <a class="field" href="_lib---App_test.php.html">/lib/App_test.php</a> (line <span class="field">244</span>)
+			Located in <a class="field" href="_lib---App_test.php.html">/lib/App_test.php</a> (line <span class="field">337</span>)
 		</p>
 		
 				
@@ -50,29 +51,29 @@
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">TestCase</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$desc</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$passed</span> = <span class="var-default">FALSE</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">NULL</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$desc</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$passed</span> = <span class="var-default">FALSE</span>], [<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Boolean</span>
 										<a href="#failed" title="details" class="method-name">failed</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#get_data_as_text" title="details" class="method-name">get_data_as_text</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#get_desc" title="details" class="method-name">get_desc</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Boolean</span>
 										<a href="#passed" title="details" class="method-name">passed</a>
 										()
 									</div>
@@ -96,10 +97,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">250</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">350</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create a new TestCase object</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -109,19 +111,19 @@
 		<span class="method-name">
 			__construct
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$desc</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$passed</span> = <span class="var-default">FALSE</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">NULL</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$desc</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$passed</span> = <span class="var-default">FALSE</span>], [<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$desc</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$desc</span><span class="var-description">: a description of the test case</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$passed</span>			</li>
+				<span class="var-type">Boolean</span>
+				<span class="var-name">$passed</span><span class="var-description">: whether the test case passed (FALSE by default)</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$data</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$data</span><span class="var-description">: test data used to perform the test (optional)</span>			</li>
 				</ul>
 		
 			
@@ -131,16 +133,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">failed</span> (line <span class="line-number">267</span>)
+		<span class="method-title">failed</span> (line <span class="line-number">382</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return whether the test case failed</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> whether the test case failed</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Boolean</span>
 		<span class="method-name">
 			failed
 		</span>
@@ -155,16 +159,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_data_as_text</span> (line <span class="line-number">272</span>)
+		<span class="method-title">get_data_as_text</span> (line <span class="line-number">392</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the test case data as text to be displayed in the results</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> a text representation of the test case data</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			get_data_as_text
 		</span>
@@ -179,16 +185,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_desc</span> (line <span class="line-number">257</span>)
+		<span class="method-title">get_desc</span> (line <span class="line-number">362</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the description of the test case</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the test case description</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			get_desc
 		</span>
@@ -203,16 +211,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">passed</span> (line <span class="line-number">262</span>)
+		<span class="method-title">passed</span> (line <span class="line-number">372</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return whether the test case passed</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> whether the test case passed</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Boolean</span>
 		<span class="method-name">
 			passed
 		</span>
@@ -228,7 +238,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 11 Dec 2010 01:49:29 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 12 Dec 2010 05:26:20 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

@@ -47,7 +47,7 @@
 						<a href="../YAWF/Object.html">Object</a>
 					</td>
 					<td>
-											
+											A simple &quot;Object&quot; class for field/value objects
 										</td>
 				</tr>
 							</table>
@@ -67,29 +67,33 @@
 		</div>
 		<div class="info-box-body">	
 			<a name="functionarray_key" id="functionarray_key"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">array_key</span> (line <span class="line-number">73</span>)
+		<span class="method-title">array_key</span> (line <span class="line-number">114</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a key from an array or the default value (NULL by default)</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the value or the default (returned value can be any type)</li>
+			</ul>
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 		<span class="method-name">
 			array_key
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$array</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$key</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$default</span> = <span class="var-default">NULL</span>])
+					(<span class="var-type">Array</span>&nbsp;<span class="var-name">$array</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$key</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$default</span> = <span class="var-default">NULL</span>])
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$array</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$array</span><span class="var-description">: the array to lookup</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$key</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$key</span><span class="var-description">: the key to find in the array</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$default</span>			</li>
@@ -98,297 +102,347 @@
 	
 </div>
 <a name="functionarray_rand_value" id="functionarray_rand_value"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">array_rand_value</span> (line <span class="line-number">80</span>)
+		<span class="method-title">array_rand_value</span> (line <span class="line-number">125</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a random value from an array</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a random value from the array (can be any type)</li>
+			</ul>
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 		<span class="method-name">
 			array_rand_value
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$array</span>)
+					(<span class="var-type">Array</span>&nbsp;<span class="var-name">$array</span>)
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$array</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$array</span><span class="var-description">: the array</span>			</li>
 				</ul>
 		
 	
 </div>
 <a name="functionarray_to_object" id="functionarray_to_object"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">array_to_object</span> (line <span class="line-number">47</span>)
+		<span class="method-title">array_to_object</span> (line <span class="line-number">79</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Turn an array into an object (or NULL when empty)</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the resultant object</li>
+			</ul>
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 		<span class="method-name">
 			array_to_object
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$lists_too</span> = <span class="var-default">FALSE</span>])
+					(<span class="var-type">Array</span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$lists_too</span> = <span class="var-default">FALSE</span>])
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$array</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$array</span><span class="var-description">: the array to convert</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$lists_too</span>			</li>
+				<span class="var-type">Boolean</span>
+				<span class="var-name">$lists_too</span><span class="var-description">: whether to convert lists to objects also (FALSE)</span>			</li>
 				</ul>
 		
 	
 </div>
 <a name="functiondump" id="functiondump"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">dump</span> (line <span class="line-number">278</span>)
+		<span class="method-title">dump</span> (line <span class="line-number">453</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a string representing all the data in object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the object's data, dumped out in a user-friendly format</li>
+			</ul>
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			dump
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$object</span>)
+					(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$object</span>)
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$object</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$object</span><span class="var-description">: the object to dump</span>			</li>
 				</ul>
 		
 	
 </div>
 <a name="functionfile_contents" id="functionfile_contents"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">file_contents</span> (line <span class="line-number">105</span>)
+		<span class="method-title">file_contents</span> (line <span class="line-number">163</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the contents of  a file in the &quot;app&quot; or &quot;yawf&quot; folders</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the file contents</li>
+			</ul>
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			file_contents
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$path</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$path</span>)
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$path</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$path</span><span class="var-description">: the path of the file to read</span>			</li>
 				</ul>
 		
 	
 </div>
 <a name="functionfile_found" id="functionfile_found"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">file_found</span> (line <span class="line-number">97</span>)
+		<span class="method-title">file_found</span> (line <span class="line-number">151</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return whether a file exists in either of the &quot;app&quot; or &quot;yawf&quot; folders.</p>
+<p class="description"><p>If the file path begins with a &quot;/&quot; then the absolute path is checked.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> whether the file exists in at least one of the folders</li>
+			</ul>
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Boolean</span>
 		<span class="method-name">
 			file_found
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$path</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$path</span>)
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$path</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$path</span><span class="var-description">: the file path to find</span>			</li>
 				</ul>
 		
 	
 </div>
 <a name="functionfirst" id="functionfirst"><!-- --></a>
-<div class="evenrow">
-	
-	<div>
-		<img src="../media/images/Function.png" />
-		<span class="method-title">first</span> (line <span class="line-number">87</span>)
-	</div> 
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			first
-		</span>
-				()
-			</div>
-
-		
-	
-</div>
-<a name="functionh" id="functionh"><!-- --></a>
 <div class="oddrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">h</span> (line <span class="line-number">240</span>)
+		<span class="method-title">first</span> (line <span class="line-number">136</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the first non-null value in the argument list</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the first non-null argument or NULL (value can be any type)</li>
+			</ul>
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 		<span class="method-name">
-			h
+			first
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$text</span>)
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">0</span> = <span class="var-default">a list of arguments of any length</span>])
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$text</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">0</span><span class="var-description">: a list of arguments of any length</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionh" id="functionh"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<img src="../media/images/Function.png" />
+		<span class="method-title">h</span> (line <span class="line-number">390</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Copy the Ruby on Rails &quot;h()&quot; HTML function to prepare text for HTML display</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the text prepared for HTML display</li>
+			</ul>
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			h
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$text</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$text</span><span class="var-description">: the text to clean by replacing HTML with HTML entities</span>			</li>
 				</ul>
 		
 	
 </div>
 <a name="functionindent" id="functionindent"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">indent</span> (line <span class="line-number">269</span>)
+		<span class="method-title">indent</span> (line <span class="line-number">440</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Indent some text with whitespace</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the indented text</li>
+			</ul>
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			indent
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$text</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$chars</span> = <span class="var-default">2</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$text</span>, [<span class="var-type">Integer</span>&nbsp;<span class="var-name">$chars</span> = <span class="var-default">2</span>])
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$text</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$text</span><span class="var-description">: the text to indent</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$chars</span>			</li>
+				<span class="var-type">Integer</span>
+				<span class="var-name">$chars</span><span class="var-description">: the number of characters to indent (default is 2)</span>			</li>
 				</ul>
 		
 	
 </div>
 <a name="functionload_controller" id="functionload_controller"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">load_controller</span> (line <span class="line-number">174</span>)
+		<span class="method-title">load_controller</span> (line <span class="line-number">266</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load a controller</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			load_controller
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$controller</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$controller</span>)
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$controller</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$controller</span><span class="var-description">: the controller to load</span>			</li>
 				</ul>
 		
 	
 </div>
 <a name="functionload_controllers" id="functionload_controllers"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">load_controllers</span> (line <span class="line-number">175</span>)
+		<span class="method-title">load_controllers</span> (line <span class="line-number">273</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load a list of controllers, passed as function arguments</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			load_controllers
 		</span>
-				()
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">0</span> = <span class="var-default">a list of controllers passed as function arguments</span>])
 			</div>
 
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">0</span><span class="var-description">: a list of controllers passed as function arguments</span>			</li>
+				</ul>
 		
 	
 </div>
 <a name="functionload_files" id="functionload_files"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">load_files</span> (line <span class="line-number">156</span>)
+		<span class="method-title">load_files</span> (line <span class="line-number">245</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load some PHP files with &quot;require_once&quot;</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			load_files
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$dir</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$files</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$dir</span>, <span class="var-type">Array</span>&nbsp;<span class="var-name">$files</span>)
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$dir</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$dir</span><span class="var-description">: the directory from which to load the files</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$files</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$files</span><span class="var-description">: a list of files to load from the directory</span>			</li>
 				</ul>
 		
 	
 </div>
 <a name="functionload_helper" id="functionload_helper"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">load_helper</span> (line <span class="line-number">183</span>)
+		<span class="method-title">load_helper</span> (line <span class="line-number">284</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load a helper</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			load_helper
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$helper</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$helper</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$controller</span>)
 			</div>
 
 			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$controller</span><span class="var-description">: the controller to load</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$helper</span>			</li>
@@ -397,43 +451,53 @@
 	
 </div>
 <a name="functionload_helpers" id="functionload_helpers"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">load_helpers</span> (line <span class="line-number">184</span>)
+		<span class="method-title">load_helpers</span> (line <span class="line-number">291</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load a list of helpers, passed as function arguments</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			load_helpers
 		</span>
-				()
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">0</span> = <span class="var-default">a list of helpers passed as function arguments</span>])
 			</div>
 
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">0</span><span class="var-description">: a list of helpers passed as function arguments</span>			</li>
+				</ul>
 		
 	
 </div>
 <a name="functionload_model" id="functionload_model"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">load_model</span> (line <span class="line-number">192</span>)
+		<span class="method-title">load_model</span> (line <span class="line-number">302</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load a model</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			load_model
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$model</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$model</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$controller</span>)
 			</div>
 
 			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$controller</span><span class="var-description">: the controller to load</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$model</span>			</li>
@@ -442,43 +506,53 @@
 	
 </div>
 <a name="functionload_models" id="functionload_models"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">load_models</span> (line <span class="line-number">193</span>)
+		<span class="method-title">load_models</span> (line <span class="line-number">309</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load a list of models, passed as function arguments</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			load_models
 		</span>
-				()
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">0</span> = <span class="var-default">a list of models passed as function arguments</span>])
 			</div>
 
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">0</span><span class="var-description">: a list of models passed as function arguments</span>			</li>
+				</ul>
 		
 	
 </div>
 <a name="functionload_plugin" id="functionload_plugin"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">load_plugin</span> (line <span class="line-number">206</span>)
+		<span class="method-title">load_plugin</span> (line <span class="line-number">325</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load a plugin</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			load_plugin
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$plugin</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$plugin</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$controller</span>)
 			</div>
 
 			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$controller</span><span class="var-description">: the controller to load</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$plugin</span>			</li>
@@ -487,43 +561,53 @@
 	
 </div>
 <a name="functionload_plugins" id="functionload_plugins"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">load_plugins</span> (line <span class="line-number">207</span>)
+		<span class="method-title">load_plugins</span> (line <span class="line-number">332</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load a list of plugins, passed as function arguments</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			load_plugins
 		</span>
-				()
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">0</span> = <span class="var-default">a list of plugins passed as function arguments</span>])
 			</div>
 
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">0</span><span class="var-description">: a list of plugins passed as function arguments</span>			</li>
+				</ul>
 		
 	
 </div>
 <a name="functionload_service" id="functionload_service"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">load_service</span> (line <span class="line-number">215</span>)
+		<span class="method-title">load_service</span> (line <span class="line-number">343</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load a service</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			load_service
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$service</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$service</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$controller</span>)
 			</div>
 
 			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$controller</span><span class="var-description">: the controller to load</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$service</span>			</li>
@@ -532,43 +616,53 @@
 	
 </div>
 <a name="functionload_services" id="functionload_services"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">load_services</span> (line <span class="line-number">216</span>)
+		<span class="method-title">load_services</span> (line <span class="line-number">350</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load a list of services, passed as function arguments</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			load_services
 		</span>
-				()
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">0</span> = <span class="var-default">a list of services passed as function arguments</span>])
 			</div>
 
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">0</span><span class="var-description">: a list of services passed as function arguments</span>			</li>
+				</ul>
 		
 	
 </div>
 <a name="functionload_tool" id="functionload_tool"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">load_tool</span> (line <span class="line-number">224</span>)
+		<span class="method-title">load_tool</span> (line <span class="line-number">361</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load a tool</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			load_tool
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$tool</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$tool</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$controller</span>)
 			</div>
 
 			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$controller</span><span class="var-description">: the controller to load</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$tool</span>			</li>
@@ -577,202 +671,262 @@
 	
 </div>
 <a name="functionload_tools" id="functionload_tools"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">load_tools</span> (line <span class="line-number">225</span>)
+		<span class="method-title">load_tools</span> (line <span class="line-number">368</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load a list of tools, passed as function arguments</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			load_tools
 		</span>
-				()
-			</div>
-
-		
-	
-</div>
-<a name="functionobject_to_array" id="functionobject_to_array"><!-- --></a>
-<div class="evenrow">
-	
-	<div>
-		<img src="../media/images/Function.png" />
-		<span class="method-title">object_to_array</span> (line <span class="line-number">64</span>)
-	</div> 
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			object_to_array
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$object</span>)
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">0</span> = <span class="var-default">a list of tools passed as function arguments</span>])
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$object</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">0</span><span class="var-description">: a list of tools passed as function arguments</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionobject_to_array" id="functionobject_to_array"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<img src="../media/images/Function.png" />
+		<span class="method-title">object_to_array</span> (line <span class="line-number">100</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Turn an object into an array</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the resultant array</li>
+			</ul>
+	<div class="method-signature">
+		<span class="method-result">Array</span>
+		<span class="method-name">
+			object_to_array
+		</span>
+					(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$object</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$object</span><span class="var-description">: the object to convert</span>			</li>
 				</ul>
 		
 	
 </div>
 <a name="functionp" id="functionp"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">p</span> (line <span class="line-number">257</span>)
+		<span class="method-title">p</span> (line <span class="line-number">415</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Copy the Ruby &quot;p()&quot; function (except this version doesn't return anything)</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			p
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$thing</span>)
+					(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$thing</span>)
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$thing</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$thing</span><span class="var-description">: the thing to print out</span>			</li>
 				</ul>
 		
 	
 </div>
 <a name="functionputs" id="functionputs"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">puts</span> (line <span class="line-number">262</span>)
+		<span class="method-title">puts</span> (line <span class="line-number">428</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Copy the Ruby &quot;puts()&quot; function by writing a line of text</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			puts
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$text</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$text</span>)
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$text</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$text</span><span class="var-description">: the text to print out with a newline</span>			</li>
 				</ul>
 		
 	
 </div>
 <a name="functionsplit_list" id="functionsplit_list"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">split_list</span> (line <span class="line-number">148</span>)
+		<span class="method-title">split_list</span> (line <span class="line-number">233</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Split a comma-separated list</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> an array of list items</li>
+			</ul>
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			split_list
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$list</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$text_list</span>)
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$list</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$text_list</span><span class="var-description">: a comma-separated list (e.g. &quot;this, that,other&quot;);</span>			</li>
 				</ul>
 		
 	
 </div>
 <a name="functiont" id="functiont"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">t</span> (line <span class="line-number">248</span>)
+		<span class="method-title">t</span> (line <span class="line-number">403</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Copy the Ruby on Rails &quot;t()&quot; translate function to translate some text</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the translated text after any replacements have been made</li>
+			</ul>
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			t
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$lookup</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$replacements</span> = <span class="var-default">array()</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$lookup</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$replacements</span> = <span class="var-default">array()</span>])
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$lookup</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$lookup</span><span class="var-description">: the lookup string (see &quot;configs/translate.yaml&quot; file)</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$replacements</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$replacements</span><span class="var-description">: an optional array of text replacements to make</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionuri" id="functionuri"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<img src="../media/images/Function.png" />
+		<span class="method-title">uri</span> (line <span class="line-number">179</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get a normalized URI, using the current app's prefix settings</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the normalized URI</li>
+			</ul>
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			uri
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$uri</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$prefix</span> = <span class="var-default">NULL</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$uri</span><span class="var-description">: the URI to normalize (e.g. &quot;user/sign-up&quot;)</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$prefix</span><span class="var-description">: an optional URI prefix</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionuri_get_contents" id="functionuri_get_contents"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<img src="../media/images/Function.png" />
+		<span class="method-title">uri_get_contents</span> (line <span class="line-number">191</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the contents at a URI</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the contents read from the URI</li>
+			</ul>
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			uri_get_contents
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$uri</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$uri</span><span class="var-description">: the URI to read</span>			</li>
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$options</span><span class="var-description">: an optional array of options (such as &quot;prefix&quot;)</span>			</li>
 				</ul>
 		
 	
 </div>
 <a name="functionurlencode_array" id="functionurlencode_array"><!-- --></a>
-<div class="oddrow">
-	
-	<div>
-		<img src="../media/images/Function.png" />
-		<span class="method-title">urlencode_array</span> (line <span class="line-number">134</span>)
-	</div> 
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			urlencode_array
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$array</span>)
-			</div>
-
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$array</span>			</li>
-				</ul>
-		
-	
-</div>
-<a name="functionurl_get_contents" id="functionurl_get_contents"><!-- --></a>
 <div class="evenrow">
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">url_get_contents</span> (line <span class="line-number">116</span>)
+		<span class="method-title">urlencode_array</span> (line <span class="line-number">215</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Encode an assoc array as a query string. Any values that  are arrays are JSON encoded to represent their structure.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a query string containing URL encoded data</li>
+			</ul>
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
-			url_get_contents
+			urlencode_array
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+					(<span class="var-type">Array</span>&nbsp;<span class="var-name">$array</span>)
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$url</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$options</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$array</span><span class="var-description">: an assoc array of data to URL encode</span>			</li>
 				</ul>
 		
 	
@@ -782,22 +936,23 @@
 	
 	<div>
 		<img src="../media/images/Function.png" />
-		<span class="method-title">__autoload</span> (line <span class="line-number">233</span>)
+		<span class="method-title">__autoload</span> (line <span class="line-number">379</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Autoload classes in the &quot;lib&quot;</p>
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
 			__autoload
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$class_name</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$class_name</span>)
 			</div>
 
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$class_name</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$class_name</span><span class="var-description">: the class to autoload from the &quot;lib&quot; directory</span>			</li>
 				</ul>
 		
 	
@@ -806,7 +961,7 @@
 	</div>
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 11 Dec 2010 01:49:40 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 12 Dec 2010 05:26:32 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

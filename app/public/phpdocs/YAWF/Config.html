@@ -25,13 +25,12 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The YAWF object responds to web requests by creating an &quot;App&quot;  object, a &quot;Controller&quot; object, then rendering a web response.</p>
-<p class="description"><p>The YAWF class should be inherited by all classes so that it  may handle exceptions and unknown method calls. It provides  useful static methods such as &quot;hook&quot; to hook unknown method  calls, and &quot;prop&quot; to register props for mock tests or other  kinds of dependency injection.</p><p>The safe way to finish responding to a web request is to  call the YAWF::finish() method because this will perform  logging and benchmarking, unlike a simple &quot;exit&quot; call.</p></p>
+<p class="short-description">The Config class reads and parses config files written in YAML.</p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_lib---Config.php.html">/lib/Config.php</a> (line <span class="field">16</span>)
+			Located in <a class="field" href="_lib---Config.php.html">/lib/Config.php</a> (line <span class="field">21</span>)
 		</p>
 		
 				
@@ -81,13 +80,13 @@
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">void</span>
 										<a href="#define_constants" title="details" class="method-name">define_constants</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+											(<span class="var-type">Array</span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+											static <span class="method-result">Array</span>
 										<a href="#load" title="details" class="method-name">load</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$config_name</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$reload</span> = <span class="var-default">FALSE</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$config_name</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$reload</span> = <span class="var-default">FALSE</span>])
 									</div>
 																															</div>
 		</div>
@@ -114,7 +113,7 @@
 		<span class="var-title">
 			static <span class="var-type">mixed</span>
 			<span class="var-name">$configs</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">18</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">23</span>)
 		</span>
 	</div>
 
@@ -149,10 +148,12 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static define_constants</span> (line <span class="line-number">46</span>)
+		<span class="method-title">static define_constants</span> (line <span class="line-number">62</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Define some constants by reading a PHP array of keys and values.</p>
+<p class="description"><p>Note that the constant names will always be uppercase.  By setting a &quot;prefix&quot; option, constant names can be &quot;DB_*&quot; for example.</p></p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -162,16 +163,16 @@
 		<span class="method-name">
 			define_constants
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+					(<span class="var-type">Array</span>&nbsp;<span class="var-name">$array</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$array</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$array</span><span class="var-description">: the array of constant names and values</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$options</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$options</span><span class="var-description">: optional settings such as &quot;prefix&quot; and &quot;suffix&quot;</span>			</li>
 				</ul>
 		
 			
@@ -181,29 +182,31 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static load</span> (line <span class="line-number">22</span>)
+		<span class="method-title">static load</span> (line <span class="line-number">32</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load a config file, and optionally force a file reload</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the config data as an assoc array</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			load
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$config_name</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$reload</span> = <span class="var-default">FALSE</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$config_name</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$reload</span> = <span class="var-default">FALSE</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$config_name</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$config_name</span><span class="var-description">: the name of the config to load (excl &quot;.yaml&quot;)</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$reload</span>			</li>
+				<span class="var-type">Boolean</span>
+				<span class="var-name">$reload</span><span class="var-description">: whether to reload a file that's already loaded</span>			</li>
 				</ul>
 		
 			
@@ -240,7 +243,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 11 Dec 2010 01:49:30 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 12 Dec 2010 05:26:21 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

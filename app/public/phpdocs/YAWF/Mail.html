@@ -56,7 +56,7 @@
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">String</span>
 										<a href="#send" title="details" class="method-name">send</a>
-											(<span class="var-type">Array</span>&nbsp;<span class="var-name">$render</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$is_testing</span> = <span class="var-default">FALSE</span>])
+											(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$render</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$is_testing</span> = <span class="var-default">FALSE</span>])
 									</div>
 																							</div>
 		</div>
@@ -78,11 +78,12 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static send</span> (line <span class="line-number">31</span>)
+		<span class="method-title">static send</span> (line <span class="line-number">32</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Send a mail message by specifying all the message detials in am  array of render data, including &quot;from&quot;, &quot;to&quot;, &quot;subject&quot;, &quot;text&quot;  and optionally &quot;html&quot; (if you wish to send multipart messages).</p>
+<p class="description"><p>If we're testing then the mail is not sent, it's only returned.</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> the sent message, to be checked when testing</li>
 				<li><span class="field">access:</span> public</li>
@@ -93,16 +94,16 @@
 		<span class="method-name">
 			send
 		</span>
-					(<span class="var-type">Array</span>&nbsp;<span class="var-name">$render</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$is_testing</span> = <span class="var-default">FALSE</span>])
+					(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$render</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$is_testing</span> = <span class="var-default">FALSE</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">Array</span>
-				<span class="var-name">$render</span><span class="var-description">: an array containing all the mail details</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$render</span><span class="var-description">: an object containing the mail details</span>			</li>
 					<li>
 				<span class="var-type">Boolean</span>
-				<span class="var-name">$is_testing</span><span class="var-description">: whether or not we're testing</span>			</li>
+				<span class="var-name">$is_testing</span><span class="var-description">: is it a mail test? (FALSE by default)</span>			</li>
 				</ul>
 		
 			
@@ -139,7 +140,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 11 Dec 2010 01:49:34 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 12 Dec 2010 05:26:24 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

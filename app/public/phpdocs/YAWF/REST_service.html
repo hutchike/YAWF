@@ -26,8 +26,7 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The YAWF object responds to web requests by creating an &quot;App&quot;  object, a &quot;Controller&quot; object, then rendering a web response.</p>
-<p class="description"><p>The YAWF class should be inherited by all classes so that it  may handle exceptions and unknown method calls. It provides  useful static methods such as &quot;hook&quot; to hook unknown method  calls, and &quot;prop&quot; to register props for mock tests or other  kinds of dependency injection.</p><p>The safe way to finish responding to a web request is to  call the YAWF::finish() method because this will perform  logging and benchmarking, unlike a simple &quot;exit&quot; call.</p></p>
+<p class="short-description">The Service class responds to requests for web services, such  as REST web services. See the &quot;REST_service&quot; child class for  an example of a Service.</p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
 			</ul>
@@ -72,7 +71,7 @@
 						<a href="../YAWF/REST_test_service.html">REST_test_service</a>
 					</td>
 					<td>
-											The YAWF object responds to web requests by creating an &quot;App&quot;  object, a &quot;Controller&quot; object, then rendering a web response.
+											The Service class responds to requests for web services, such  as REST web services. See the &quot;REST_service&quot; child class for  an example of a Service.
 										</td>
 				</tr>
 							</table>
@@ -209,7 +208,7 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodauth" id="auth"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -233,7 +232,7 @@
 			
 	</div>
 <a name="methodbasic_auth" id="basic_auth"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -265,7 +264,7 @@
 			
 	</div>
 <a name="methoddelete" id="delete"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -301,7 +300,7 @@
 				</ul>
 	</div>
 <a name="methodget" id="get"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -337,7 +336,7 @@
 				</ul>
 	</div>
 <a name="methodget_model_name" id="get_model_name"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -361,7 +360,7 @@
 			
 	</div>
 <a name="methodmove" id="move"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -397,7 +396,7 @@
 				</ul>
 	</div>
 <a name="methodoptions" id="options"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -433,7 +432,7 @@
 				</ul>
 	</div>
 <a name="methodpost" id="post"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -469,7 +468,7 @@
 				</ul>
 	</div>
 <a name="methodput" id="put"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -584,7 +583,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 11 Dec 2010 01:49:36 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 12 Dec 2010 05:26:28 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

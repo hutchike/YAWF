@@ -25,8 +25,12 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">A simple &quot;Object&quot; class for field/value objects</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_lib---utils.php.html">/lib/utils.php</a> (line <span class="field">16</span>)
+			Located in <a class="field" href="_lib---utils.php.html">/lib/utils.php</a> (line <span class="field">19</span>)
 		</p>
 		
 				
@@ -82,25 +86,25 @@
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">Object</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											([<span class="var-type"></span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">NULL</span>])
+											([<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#merge" title="details" class="method-name">merge</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$other</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$override</span> = <span class="var-default">FALSE</span>])
+											(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$other</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$override</span> = <span class="var-default">FALSE</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 										<a href="#__get" title="details" class="method-name">__get</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$field</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 										<a href="#__set" title="details" class="method-name">__set</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$field</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>, <span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$value</span>)
 									</div>
 											</div>
 		</div>
@@ -119,14 +123,15 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">18</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">26</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create a new object</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -136,26 +141,27 @@
 		<span class="method-name">
 			__construct
 		</span>
-					([<span class="var-type"></span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">NULL</span>])
+					([<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$data</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$data</span><span class="var-description">: the initialization data (may be an Array)</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodmerge" id="merge"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">merge</span> (line <span class="line-number">34</span>)
+		<span class="method-title">merge</span> (line <span class="line-number">61</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Merge another object with this one</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -165,77 +171,81 @@
 		<span class="method-name">
 			merge
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$other</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$override</span> = <span class="var-default">FALSE</span>])
+					(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$other</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$override</span> = <span class="var-default">FALSE</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$other</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$other</span><span class="var-description">: the other object to merge with this one</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$override</span>			</li>
+				<span class="var-type">Boolean</span>
+				<span class="var-name">$override</span><span class="var-description">: whether to override this object's values (FALSE)</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="method__get" id="__get"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">__get</span> (line <span class="line-number">24</span>)
+		<span class="method-title">__get</span> (line <span class="line-number">38</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the value of an object field</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> whatever the value is (can be any type)</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 		<span class="method-name">
 			__get
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$field</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$field</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$field</span><span class="var-description">: the object field</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="method__set" id="__set"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">__set</span> (line <span class="line-number">29</span>)
+		<span class="method-title">__set</span> (line <span class="line-number">50</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the value of an object field</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> whatever the value is (can be any type)</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 		<span class="method-name">
 			__set
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$field</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>, <span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$value</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$field</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$field</span><span class="var-description">: the object field</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$value</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$value</span><span class="var-description">: the object value (can be any type)</span>			</li>
 				</ul>
 		
 			
@@ -246,7 +256,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 11 Dec 2010 01:49:40 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 12 Dec 2010 05:26:32 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

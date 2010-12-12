@@ -24,8 +24,9 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">A class to hold details about a test run for a Controller or Service object</p>
 		<p class="notes">
-			Located in <a class="field" href="_lib---App_test.php.html">/lib/App_test.php</a> (line <span class="field">141</span>)
+			Located in <a class="field" href="_lib---App_test.php.html">/lib/App_test.php</a> (line <span class="field">170</span>)
 		</p>
 		
 				
@@ -50,59 +51,59 @@
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">TestRun</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$testee</span>)
+											(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$testee</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#add_method" title="details" class="method-name">add_method</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$test_method</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$test_method</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#add_output" title="details" class="method-name">add_output</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$output</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$output</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#add_test_case" title="details" class="method-name">add_test_case</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$desc</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$passed</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$test_data</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$method</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$desc</span>, <span class="var-type">Boolean</span>&nbsp;<span class="var-name">$passed</span>, <span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$test_data</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$method</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Integer</span>
 										<a href="#count_test_cases" title="details" class="method-name">count_test_cases</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Integer</span>
 										<a href="#count_test_cases_that_failed" title="details" class="method-name">count_test_cases_that_failed</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Integer</span>
 										<a href="#count_test_cases_that_passed" title="details" class="method-name">count_test_cases_that_passed</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#get_output" title="details" class="method-name">get_output</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#get_testee_name" title="details" class="method-name">get_testee_name</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Array</span>
 										<a href="#get_test_cases" title="details" class="method-name">get_test_cases</a>
 										()
 									</div>
@@ -132,10 +133,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">147</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">181</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create a new TestRun object</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -145,13 +147,13 @@
 		<span class="method-name">
 			__construct
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$testee</span>)
+					(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$testee</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$testee</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$testee</span><span class="var-description">: a Controller or Service object to test</span>			</li>
 				</ul>
 		
 			
@@ -161,10 +163,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">add_method</span> (line <span class="line-number">198</span>)
+		<span class="method-title">add_method</span> (line <span class="line-number">261</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add a test method to the array of test cases for this test run</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -174,13 +177,13 @@
 		<span class="method-name">
 			add_method
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$test_method</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$test_method</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$test_method</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$test_method</span><span class="var-description">: the test method to add to the test cases</span>			</li>
 				</ul>
 		
 			
@@ -190,10 +193,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">add_output</span> (line <span class="line-number">183</span>)
+		<span class="method-title">add_output</span> (line <span class="line-number">231</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add some output to the test output that will be displayed in the results</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -203,13 +207,13 @@
 		<span class="method-name">
 			add_output
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$output</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$output</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$output</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$output</span><span class="var-description">: the output to append to the test output</span>			</li>
 				</ul>
 		
 			
@@ -219,10 +223,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">add_test_case</span> (line <span class="line-number">204</span>)
+		<span class="method-title">add_test_case</span> (line <span class="line-number">275</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add a test case to the array of test cases for this test method</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -232,22 +237,22 @@
 		<span class="method-name">
 			add_test_case
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$desc</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$passed</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$test_data</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$method</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$desc</span>, <span class="var-type">Boolean</span>&nbsp;<span class="var-name">$passed</span>, <span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$test_data</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$method</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$desc</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$desc</span><span class="var-description">: a description of the test case</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$passed</span>			</li>
+				<span class="var-type">Boolean</span>
+				<span class="var-name">$passed</span><span class="var-description">: whether the test case passed</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$test_data</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$test_data</span><span class="var-description">: test data used in the test</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$method</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$method</span><span class="var-description">: the name of the testing method</span>			</li>
 				</ul>
 		
 			
@@ -257,16 +262,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">count_test_cases</span> (line <span class="line-number">226</span>)
+		<span class="method-title">count_test_cases</span> (line <span class="line-number">308</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a count of all the test cases</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> a count of all the test cases</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Integer</span>
 		<span class="method-name">
 			count_test_cases
 		</span>
@@ -281,16 +288,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">count_test_cases_that_failed</span> (line <span class="line-number">236</span>)
+		<span class="method-title">count_test_cases_that_failed</span> (line <span class="line-number">328</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a count of all the test cases that failed</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> a count of all the test cases that failed</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Integer</span>
 		<span class="method-name">
 			count_test_cases_that_failed
 		</span>
@@ -305,16 +314,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">count_test_cases_that_passed</span> (line <span class="line-number">231</span>)
+		<span class="method-title">count_test_cases_that_passed</span> (line <span class="line-number">318</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a count of all the test cases that passed</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> a count of all the test cases that passed</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Integer</span>
 		<span class="method-name">
 			count_test_cases_that_passed
 		</span>
@@ -329,16 +340,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_output</span> (line <span class="line-number">188</span>)
+		<span class="method-title">get_output</span> (line <span class="line-number">241</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the output from the tests that have been run</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the output from the tests that have been run</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			get_output
 		</span>
@@ -353,16 +366,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_testee_name</span> (line <span class="line-number">178</span>)
+		<span class="method-title">get_testee_name</span> (line <span class="line-number">221</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the name of the testee object (with any &quot;_test&quot; suffix removed)</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the name of the testee object (a Controller or Service)</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			get_testee_name
 		</span>
@@ -377,16 +392,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_test_cases</span> (line <span class="line-number">193</span>)
+		<span class="method-title">get_test_cases</span> (line <span class="line-number">251</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return an array of all the test cases in this test run</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> an array of all the test cases in this test run</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			get_test_cases
 		</span>
@@ -401,10 +418,12 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">run_tests</span> (line <span class="line-number">155</span>)
+		<span class="method-title">run_tests</span> (line <span class="line-number">193</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Run test methods on the testee object (i.e. methods ending in &quot;_test&quot;).</p>
+<p class="description"><p>Note that the &quot;setup&quot; and &quot;teardown&quot; methods are called when available.</p></p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -426,7 +445,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 11 Dec 2010 01:49:29 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 12 Dec 2010 05:26:20 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

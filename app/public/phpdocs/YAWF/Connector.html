@@ -24,8 +24,12 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">All the connector classes should implement this Connector  interface to provide the methods &quot;connect&quot;, &quot;disconnect&quot;,  &quot;escape&quot;, &quot;query&quot;, &quot;insert_id&quot; and &quot;error&quot;.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_lib---data---Connector.php.html">/lib/data/Connector.php</a> (line <span class="field">14</span>)
+			Located in <a class="field" href="_lib---data---Connector.php.html">/lib/data/Connector.php</a> (line <span class="field">21</span>)
 		</p>
 		
 				
@@ -50,7 +54,7 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#connect" title="details" class="method-name">connect</a>
-											([<span class="var-type"></span>&nbsp;<span class="var-name">$db</span> = <span class="var-default">''</span>])
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$db</span> = <span class="var-default">''</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -60,27 +64,27 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#error" title="details" class="method-name">error</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#escape" title="details" class="method-name">escape</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$sql</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$sql</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Integer</span>
 										<a href="#insert_id" title="details" class="method-name">insert_id</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 										<a href="#query" title="details" class="method-name">query</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$sql</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$sql</span>)
 									</div>
 											</div>
 		</div>
@@ -102,10 +106,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">connect</span> (line <span class="line-number">16</span>)
+		<span class="method-title">connect</span> (line <span class="line-number">28</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Connect to a database</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -115,13 +120,13 @@
 		<span class="method-name">
 			connect
 		</span>
-					([<span class="var-type"></span>&nbsp;<span class="var-name">$db</span> = <span class="var-default">''</span>])
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$db</span> = <span class="var-default">''</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$db</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$db</span><span class="var-description">: the database name (optional)</span>			</li>
 				</ul>
 		
 			
@@ -131,10 +136,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">disconnect</span> (line <span class="line-number">17</span>)
+		<span class="method-title">disconnect</span> (line <span class="line-number">33</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Disconnect from a database</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -155,16 +161,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">error</span> (line <span class="line-number">21</span>)
+		<span class="method-title">error</span> (line <span class="line-number">63</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return any error text about the most recent query</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> any error text about the most recent query</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			error
 		</span>
@@ -179,26 +187,28 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">escape</span> (line <span class="line-number">18</span>)
+		<span class="method-title">escape</span> (line <span class="line-number">41</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Escape a string of SQL so that it's safe to execute</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> safe SQL ready for executing in a query</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			escape
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$sql</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$sql</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$sql</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$sql</span><span class="var-description">: the string of SQL to escape</span>			</li>
 				</ul>
 		
 			
@@ -208,16 +218,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">insert_id</span> (line <span class="line-number">20</span>)
+		<span class="method-title">insert_id</span> (line <span class="line-number">56</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the last insert ID after an insert query has been executed</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the last insert ID number</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Integer</span>
 		<span class="method-name">
 			insert_id
 		</span>
@@ -232,26 +244,28 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">query</span> (line <span class="line-number">19</span>)
+		<span class="method-title">query</span> (line <span class="line-number">49</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Execute an SQL query and return a result object fetcher</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> a fetcher object with &quot;fetch_object&quot; and &quot;close&quot; methods</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 		<span class="method-name">
 			query
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$sql</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$sql</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$sql</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$sql</span><span class="var-description">: the SQL to execute in the query</span>			</li>
 				</ul>
 		
 			
@@ -262,7 +276,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 11 Dec 2010 01:49:30 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 12 Dec 2010 05:26:21 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
