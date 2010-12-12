@@ -196,6 +196,9 @@ class Controller extends Request
 /**
  * The Controller_flash class manages flash messages in this request and
  * the next one. It does this by storing future messages in the session.
+ * Although flash objects typically store "notice", "warning" and "error"
+ * messages, they can also be used to store any kind of data object at all.
+ * This makes flash objects a powerful and flexible way to add useful logic.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
