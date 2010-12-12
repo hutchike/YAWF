@@ -13,12 +13,22 @@
 
 load_tool('YAML');
 
+/**
+ * The Config class reads and parses config files written in YAML.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Config extends YAWF
 {
     protected static $configs = array();
 
-    // Load a config file, and optionally force a file reload
-
+    /**
+     * Load a config file, and optionally force a file reload
+     *
+     * @param String $config_name the name of the config to load (excl ".yaml")
+     * @param Boolean $reload whether to reload a file that's already loaded
+     * @return Array the config data as an assoc array
+     */
     public static function load($config_name, $reload = FALSE)
     {
         // Return a matching loaded config (unless reloading)
@@ -41,14 +51,20 @@ class Config extends YAWF
         return self::$configs[$config_name];
     }
 
-    // Define some constants by reading a PHP array of keys and values
-
+    /**
+     * Define some constants by reading a PHP array of keys and values.
+     * Note that the constant names will always be uppercase.
+     * By setting a "prefix" option, constant names can be "DB_*" for example.
+     *
+     * @param Array $array the array of constant names and values
+     * @param Array $options optional settings such as "prefix" and "suffix"
+     */
     public static function define_constants($array, $options = array())
     {
         foreach ($array as $key => $value)
         {
-            $prefix = array_key($options, 'prefix');
-            $suffix = array_key($options, 'suffix');
+            $prefix = array_key($options, 'prefix', '');
+            $suffix = array_key($options, 'suffix', '');
             if (is_array($value)) $value = join(', ', $value);
             $name = strtoupper($prefix . $key . $suffix);
             if (!defined($name)) define($name, $value);
