@@ -25,8 +25,7 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The YAWF object responds to web requests by creating an &quot;App&quot;  object, a &quot;Controller&quot; object, then rendering a web response.</p>
-<p class="description"><p>The YAWF class should be inherited by all classes so that it  may handle exceptions and unknown method calls. It provides  useful static methods such as &quot;hook&quot; to hook unknown method  calls, and &quot;prop&quot; to register props for mock tests or other  kinds of dependency injection.</p><p>The safe way to finish responding to a web request is to  call the YAWF::finish() method because this will perform  logging and benchmarking, unlike a simple &quot;exit&quot; call.</p></p>
+<p class="short-description">The Controller class executes application logic and renders views.</p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
 			</ul>
@@ -507,6 +506,7 @@
 		<div class="notes">Redefinition of:</div>
 		<dl>
 			<dt><a href="../YAWF/Controller.html#methodrender">Controller::render()</a></dt>
+						<dd>Render the requested view by calling methods on the controller subclass  including &quot;before&quot;, the view method, &quot;after&quot;, then rendering view data.</dd>
 					</dl>
 			
 	</div>
@@ -638,7 +638,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 12 Dec 2010 05:26:28 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 12 Dec 2010 06:13:25 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
