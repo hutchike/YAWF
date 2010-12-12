@@ -60,6 +60,7 @@ class Symbol extends YAWF
     const WARN = 'warn';
     const XML = 'xml';
     const YAML = 'yaml';
+    const YAWF = 'yawf';
 }
 
 // End of Symbol.php

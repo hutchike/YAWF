@@ -532,7 +532,7 @@ class AppConfig extends YAWF
     public static function configure()
     {
         require_once 'lib/Config.php';
-        $config = Config::load('app');
+        $config = Config::load(Symbol::APP);
         foreach ($config['ini'] as $field => $value) ini_set($field, $value);
         date_default_timezone_set(ini_get('date.timezone'));
 
