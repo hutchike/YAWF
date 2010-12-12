@@ -1,0 +1,2 @@
+Cached files of resized images are stored in this directory,
+so it needs to be writable by the web server. It just works.
