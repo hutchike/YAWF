@@ -13,7 +13,20 @@
 
 error_reporting(E_ALL | E_STRICT);
 
-class Command
+/**
+ * The Command class provides a base class to write commands to
+ * run from the command line. Commands have a path, a name, some
+ * options (optionally) and some arguments (optionally). Options
+ * take the form "-opt1=a -opt2=b" on the command line, whereas
+ * arguments are simply listed at the end like "arg1 arg2 arg3".
+ *
+ * Command logging is written to a ".command" log, or to the
+ * ".command.test" log when we're running command tests, for
+ * example when the "-test" option is passed to the command.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
+class Command // cannot extend YAWF coz "utils" not yet loaded
 {
     // Command properties are all public for convenience
 
@@ -21,6 +34,11 @@ class Command
     public $path, $name;
     public $opts, $args;
 
+    /**
+     * Create a new Command object
+     *
+     * @param String $dir an optional starting directory to change from
+     */
     public function __construct($dir = NULL)
     {
         // Parse options and arguments, and run in the project's root directory
@@ -52,8 +70,9 @@ class Command
         return $this;
     }
 
-    // Log the time it took to run the command, given the options and arguments
-
+    /**
+     * Log the time it took to run the command, given the options and arguments
+     */
     public function __destruct()
     {
         $name = $this->name;
@@ -62,15 +81,21 @@ class Command
         YAWF::finish("\"$name\" command completed with opts $opts and args $args");
     }
 
-    // Catch all undefined methods calls
-
+    /**
+     * Catch all undefined methods calls by calling YAWF::unknown
+     * to throw an exception.
+     *
+     * @param String $name the name of the unknown method call
+     * @param Array $args the arguments passed to the unknown method
+     */
     public function __call($name, $args)
     {
         YAWF::unknown($name, $args);
     }
 
-    // Parse options and arguments on the command line
-
+    /**
+     * Parse options and arguments on the command line
+     */
     protected function parse_command_line()
     {
         if (!array_key_exists('argv', $_SERVER))
@@ -101,8 +126,12 @@ class Command
         return getcwd(); // Regular commands start from the current directory
     }
 
-    // Change to the project's root directory, containing the "app" directory
-
+    /**
+     * Change to a project's root directory containing "app" and "yawf" dirs.
+     * This method calls the "start_directory" method which may be overriden.
+     *
+     * @param String $dir an optional directory to begin searching from
+     */
     protected function change_directory($dir = NULL)
     {
         if (is_null($dir)) $dir = $this->start_directory();
@@ -122,8 +151,11 @@ class Command
         if ($last_dir) chdir(dirname($this->path) . '/../..');
     }
 
-    // Quit the command, and write an optional message
-
+    /**
+     * Quit the command by logging an optional message then calling "exit"
+     *
+     * @param String $message an optional message to write to the log
+     */
     protected function quit($message = NULL)
     {
         if (!is_null($message)) print "\n$message\n\n";
