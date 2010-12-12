@@ -72,7 +72,7 @@ class App extends YAWF implements Mailer
 
         $uri = preg_replace('/[\?#].*/', '', $uri);
         $content_type = preg_match('/\.(\w+)$/', $uri, $matches) ? $matches[1] : DEFAULT_CONTENT_TYPE;
-        if ($content_type === 'test' && !TESTING_ENABLED) $content_type = DEFAULT_CONTENT_TYPE;
+        if ($content_type === Symbol::TEST && !TESTING_ENABLED) $content_type = DEFAULT_CONTENT_TYPE;
         $uri = $this->set_lang_and_remove_prefix($uri);
         list($folder, $file) = explode('/', $uri . '//');
         $folder = preg_replace('/\.\w+$/', '', $folder);
@@ -83,7 +83,7 @@ class App extends YAWF implements Mailer
         $this->content_type = strtolower($content_type); // e.g. "html", "test"
         $this->folder = ($folder ? $folder : DEFAULT_FOLDER);
         $this->file = ($file ? $file : DEFAULT_FILE);
-        $this->is_testing = array_key($_REQUEST, 'test') || $content_type === 'test';
+        $this->is_testing = array_key($_REQUEST, Symbol::TEST) || $content_type === Symbol::TEST;
 
         // If we're testing then use a test database
 
@@ -299,7 +299,7 @@ class App extends YAWF implements Mailer
 
         $must_find = array_key($options, 'must_find', FALSE);
         $lang = array_key($options, 'lang', $this->lang);
-        $folder = array_key($options, 'folder', $this->folder);
+        $folder = array_key($options, Symbol::FOLDER, $this->folder);
         $type = array_key($options, 'type', $this->content_type);
         $ext = array_key($options, 'ext', DEFAULT_EXTENSION);
 
@@ -362,14 +362,14 @@ class App extends YAWF implements Mailer
         $layout = $render->layout;
         if ($layout)
         {
-            $options['folder'] = 'layouts';
+            $options[Symbol::FOLDER] = 'layouts';
             $content = $this->render_view("$layout.$type", $render, $options);
             if (isset($content)) $render->content = $content;
         }
 
         // Render the content in a content-type wrapper
 
-        $options['folder'] = 'types';
+        $options[Symbol::FOLDER] = 'types';
         $content = $this->render_view($type, $render, $options);
         if (is_null($content)) $content = uri_get_contents('not/found');
         return $content;

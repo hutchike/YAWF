@@ -41,7 +41,7 @@ class App_test extends App
         $model->set_connector(DB_CONNECTOR,
                               array(Symbol::DATABASE => DB_DATABASE_TEST));
         $this->is_testing = TRUE;
-        Log::type('test');
+        Log::type(Symbol::TEST);
 
         // Translations need validating
 
@@ -78,7 +78,7 @@ class App_test extends App
     public function render_view($file, $render = NULL, $options = array())
     {
         $render = new Object($render);
-        if (array_key($options, 'folder') === 'types' &&
+        if (array_key($options, Symbol::FOLDER) === 'types' &&
             array_key($_SERVER, 'REMOTE_ADDR')) // to check it's a web request
             $this->render_test_run($render);
 
@@ -102,7 +102,7 @@ class App_test extends App
         $render->count_failed = $test_run->count_test_cases_that_failed();
         $render->testee_name = $test_run->get_testee_name();
         $render->title = 'Testing "' . $test_run->get_testee_name() . '"';
-        $render->content = parent::render_view('test_run', $render, array('folder' => 'test'));
+        $render->content = parent::render_view('test_run', $render, array(Symbol::FOLDER => Symbol::TEST));
     }
 
     /**

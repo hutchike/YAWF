@@ -30,6 +30,7 @@ class Symbol extends YAWF
     const DEFAULT_WORD = 'default';
     const ERROR = 'error';
     const FLASH = 'flash';
+    const FOLDER = 'folder';
     const FRAME = 'frame';
     const HOSTNAME = 'hostname';
     const HTML = 'html';
