@@ -25,11 +25,13 @@ class Symbol extends YAWF
     const CONTROLLER = 'controller';
     const COOKIE = 'cookie';
     const DASH = '-';
+    const DATABASE = 'database';
     const DEBUG = 'debug';
     const DEFAULT_WORD = 'default';
     const ERROR = 'error';
     const FLASH = 'flash';
     const FRAME = 'frame';
+    const HOSTNAME = 'hostname';
     const HTML = 'html';
     const ID = 'id';
     const IFRAME = 'iframe';
@@ -39,6 +41,7 @@ class Symbol extends YAWF
     const JSONP = 'jsonp';
     const MAILER = 'mailer';
     const PARAMS = 'params';
+    const PASSWORD = 'password';
     const PATH_CONFIG = 'path_config';
     const PATH_METHOD = 'path_method';
     const ROOT = 'root';
@@ -50,6 +53,7 @@ class Symbol extends YAWF
     const TEST = 'test';
     const TXT = 'txt';
     const UNDERSCORE = '_';
+    const USERNAME = 'username';
     const UTF8 = 'UTF8';
     const VALIDATION_MESSAGES = 'validation_messages';
     const WARN = 'warn';

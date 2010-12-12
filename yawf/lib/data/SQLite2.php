@@ -24,11 +24,9 @@ class Data_SQLite2 extends YAWF implements Connector
     /**
      * Create a new Data_SQLite2 object
      *
-     * @param String $hostname not used by SQLite (optional)
-     * @param String $username not used by SQLite (optional)
-     * @param String $password not used by SQLite (optional)
+     * @param Array $options not used by SQLite (optional)
      */
-    public function __construct($hostname = '', $username = '', $password = '')
+    public function __construct($options = array())
     {
         // Nothing to do
     }

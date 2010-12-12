@@ -26,15 +26,13 @@ class Data_MySQL extends YAWF implements Connector
     /**
      * Create a new Data_MySQL object
      *
-     * @param String $hostname the hostname (defaults to DB_HOSTNAME constant)
-     * @param String $username the username (defaults to DB_USERNAME constant)
-     * @param String $password the password (defaults to DB_PASSWORD constant)
+     * @param Array $options an array of options (hostname, username, password)
      */
-    public function __construct($hostname = '', $username = '', $password = '')
+    public function __construct($options = array())
     {
-        $this->hostname = ($hostname ? $hostname : DB_HOSTNAME);
-        $this->username = ($username ? $username : DB_USERNAME);
-        $this->password = ($password ? $password : DB_PASSWORD);
+        $this->hostname = array_key($options, Symbol::HOSTNAME, DB_HOSTNAME);
+        $this->username = array_key($options, Symbol::USERNAME, DB_USERNAME);
+        $this->password = array_key($options, Symbol::PASSWORD, DB_PASSWORD);
     }
 
     /**

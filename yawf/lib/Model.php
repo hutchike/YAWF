@@ -14,16 +14,20 @@
 require_once "lib/data/Connector.php";
 load_helper('Text'); // for "tableize"
 
-class Model extends YAWF
+/**
+ * The SQL_model class links data objects to storage engines
+ * that support SQL queries such as MySQL, SQLite2 & SQLite3.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
+class SQL_model extends YAWF
 {
     private static $connectors;
     private static $databases;
-    private static $validators = array();
     private static $tables = array();
     private static $id_fields = array();
     private static $timestamp = array();
     private static $virtual = array();
-    private $validation_messages;
     private $connector;
     private $database;
     private $table;
@@ -34,28 +38,55 @@ class Model extends YAWF
     private $limit;
     private $offset;
 
+    /**
+     * Setup a model by calling methods such as "set_id_field", "set_virtual"
+     * and "set_timestamp". This method should be overriden in your subclass:
+     *
+     * <code>
+     * // Subclass in your models like this:
+     *
+     * public function setup()
+     * {
+     *     $this->set_id_field('table_id_field');
+     *     $this->set_virtual('transient_field');
+     *     $this->set_timestamp('created_at', 'updated_at');
+     *     $this->validates('email', 'is_valid_email'); // when a "Model" object
+     * }
+     * </code>
+     */
     public function setup()
     {
-        // Subclass in your models like this:
-
-        // $this->set_id_field('table_id_field');
-        // $this->set_virtual('transient_field');
-        // $this->set_timestamp('created_at', 'updated_at');
-        // $this->validates('email', 'is_valid_email');
+        // Override this method in your subclasses
     }
 
+    /**
+     * Create a new SQL model object
+     *
+     * @param Array $data the data to initialize the object (may be an object)
+     */
     public function __construct($data = array())
     {
-        $this->validation_messages = array();
         $this->to_update = array();
         $this->data = (array)$data;
     }
 
+    /**
+     * Get a data field value from this model object
+     *
+     * @param String $field the data field to read
+     * @return String the value of the data field
+     */
     public function __get($field)
     {
         return array_key($this->data, $field);
     }
 
+    /**
+     * Set a data field value in this model object
+     *
+     * @param String $field the data field to write
+     * @return String the value of the newly updated data field
+     */
     public function __set($field, $value)
     {
         $this->to_update[$field] = TRUE;
@@ -63,26 +94,49 @@ class Model extends YAWF
         return $value;
     }
 
+    /**
+     * Get an assoc array of data stored in this model object
+     *
+     * @return Array the assoc array of data stored in this model object
+     */
     public function data()
     {
         return $this->data;
     }
 
+    /**
+     * Get a list array of data fields for this model object
+     *
+     * @return Array the list array of data fields for this model object
+     */
     public function fields()
     {
         return array_keys($this->data);
     }
 
-    public function set_connector($connector_class, $database = NULL)
+    /**
+     * Set the connector (e.g. "MySQLi") and optionally the database name
+     *
+     * @param String $connector_class the connector class name
+     * @param Array $options an array of options (e.g. "database", "hostname")
+     * @return Object this model object for method chaining
+     */
+    public function set_connector($connector_class, $options = array())
     {
+        $database = array_key($options, Symbol::DATABASE);
         if (!is_null($database)) $this->set_database($database);
         require_once 'lib/data/' . $connector_class . '.php';
         $connector_class = "Data_$connector_class";
         $database = $this->get_database();
-        self::$connectors[$database] = new $connector_class();
+        self::$connectors[$database] = new $connector_class($options);
         return $this;
     }
 
+    /**
+     * Get the connector object
+     *
+     * @return Object the connector object for this model object
+     */
     public function get_connector()
     {
         if ($this->connector) return $this->connector;
@@ -92,6 +146,12 @@ class Model extends YAWF
         return $this->connector;
     }
 
+    /**
+     * Set the database used by this model object
+     *
+     * @param String $database the database name
+     * @return Object this model object for method chaining
+     */
     public function set_database($database)
     {
         $table = $this->get_table();
@@ -99,6 +159,11 @@ class Model extends YAWF
         return $this;
     }
 
+    /**
+     * Get the database used by this model object
+     *
+     * @return String the database used by this model object
+     */
     public function get_database()
     {
         if ($this->database) return $this->database;
@@ -107,12 +172,23 @@ class Model extends YAWF
         return $this->database;
     }
 
+    /**
+     * Set the table used by this model object
+     *
+     * @param String $table the table name
+     * @return Object this model object for method chaining
+     */
     public function set_table($table)
     {
         $this->table = self::$tables[get_class($this)] = $table;
         return $this;
     }
 
+    /**
+     * Get the table used by this model object
+     *
+     * @return String the table used by this model object
+     */
     public function get_table()
     {
         if ($this->table) return $this->table;
@@ -122,6 +198,11 @@ class Model extends YAWF
         return $this->table;
     }
 
+    /**
+     * Get the database and table used by this model object (e.g. "app.users")
+     *
+     * @return String the database and table used by this model object
+     */
     public function get_db_table()
     {
         $database = $this->get_database() . '.';        // MySQL databases
@@ -129,34 +210,68 @@ class Model extends YAWF
         return $database . $this->get_table();
     }
 
+    /**
+     * Set the order for data result sets (i.e. "asc" or "desc")
+     *
+     * @param String $order the data result set order (i.e. "asc" or "desc")
+     * @return Object this model object for method chaining
+     */
     public function set_order($order)
     {
         $this->order = $order;
         return $this;
     }
 
+    /**
+     * Set the limit for data result sets (e.g. 20)
+     *
+     * @param Integer $limit the data result set limit (e.g. 20)
+     * @return Object this model object for method chaining
+     */
     public function set_limit($limit)
     {
         $this->limit = $limit + 0;
         return $this;
     }
 
+    /**
+     * Get the limit for data result sets (e.g. 20)
+     *
+     * @return Integer the data result set limit (e.g. 20)
+     */
     public function get_limit()
     {
         return $this->limit + 0;
     }
 
+    /**
+     * Set the offset for data result sets (e.g. 10)
+     *
+     * @param Integer $offset the data result set offset (e.g. 10)
+     * @return Object this model object for method chaining
+     */
     public function set_offset($offset)
     {
         $this->offset = $offset + 0;
         return $this;
     }
 
+    /**
+     * Get the offset for data result sets (e.g. 10)
+     *
+     * @return Integer the data result set offset (e.g. 10)
+     */
     public function get_offset()
     {
         return $this->offset + 0;
     }
 
+    /**
+     * Set the ID field name for this model object
+     *
+     * @param String $field the ID field name for this model object
+     * @return Object this model object for method chaining
+     */
     public function set_id_field($field)
     {
         $table = $this->get_table();
@@ -164,6 +279,11 @@ class Model extends YAWF
         return $this;
     }
 
+    /**
+     * Get the ID field name for this model object
+     *
+     * @return String the ID field name for this model object
+     */
     public function get_id_field()
     {
         if ($this->id_field) return $this->id_field;
@@ -172,12 +292,23 @@ class Model extends YAWF
         return $this->id_field;
     }
 
+    /**
+     * Get the ID number for this model object
+     *
+     * @return Integer the ID number for this model object
+     */
     public function get_id()
     {
         $id_field = $this->get_id_field();
         return $this->$id_field;
     }
 
+    /**
+     * Set the ID number for this model object
+     *
+     * @param Integer the ID number for this model object
+     * @return Object this model object for method chaining
+     */
     public function set_id($id)
     {
         $id_field = $this->get_id_field();
@@ -185,6 +316,13 @@ class Model extends YAWF
         return $this;
     }
 
+    /**
+     * Set some field flags (e.g. in the "virtual" or "timestamp" flag arrays)
+     *
+     * @param Array $array the array of field flags (e.g. "virtual")
+     * @param Array $fields a list of fields to flag as TRUE
+     * @return Object this model object for method chaining
+     */
     private function set_field_flags(&$array, $fields)
     {
         $table = $this->get_table();
@@ -195,30 +333,60 @@ class Model extends YAWF
         return $this;
     }
 
+    /**
+     * Set some fields as being timestamp fields on this model class
+     *
+     * @param Array an argument list of timestamp field names
+     * @return Object this model object for method chaining
+     */
     public function set_timestamp() // field list
     {
         $fields = func_get_args();
         return $this->set_field_flags(self::$timestamp, $fields);
     }
 
+    /**
+     * Get whether or not this model class has a particular timestamp field
+     *
+     * @param String the name of the timestamp field to look for
+     * @return Boolean whether this model class has a particular timestamp field
+     */
     public function has_timestamp($field)
     {
         $table = $this->get_table();
         return array_key(self::$timestamp, "$table.$field") ? TRUE : FALSE;
     }
 
+    /**
+     * Set some fields as being virtual fields to exclude from any SQL queries
+     *
+     * @param Array an argument list of virtual field names for this model class
+     * @return Object this model object for method chaining
+     */
     public function set_virtual() // field list
     {
         $fields = func_get_args();
         return $this->set_field_flags(self::$virtual, $fields);
     }
 
+    /**
+     * Get whether or not a particular field is virtual on this model class
+     *
+     * @param String the name of the virtual field to look for
+     * @return Boolean whether the field is a virtual field on this model class
+     */
     public function is_virtual($field)
     {
         $table = $this->get_table();
         return array_key(self::$virtual, "$table.$field") ? TRUE : FALSE;
     }
 
+    /**
+     * Connect this model to a database, optionally forcing a reconnection
+     *
+     * @param String $database the database name
+     * @param Boolean $reconnect whether or not to reconnect (FALSE by default)
+     */
     public function connect($database = NULL, $reconnect = FALSE)
     {
         if (is_null($database)) $database = $this->get_database();
@@ -229,17 +397,32 @@ class Model extends YAWF
         }
     }
 
+    /**
+     * Disonnect this model from a database
+     */
     public function disconnect()
     {
         $this->get_connector()->disconnect();
         $this->connector = NULL;
     }
 
+    /**
+     * Quote some SQL to make it safe for executing in database queries
+     *
+     * @param String $sql the SQL to quote
+     * @return String the quoted SQL, safe for executing in database queries
+     */
     public function quote($sql)
     {
         return '"' . $this->escape($sql) . '"';
     }
 
+    /**
+     * Quote an SQL "in" clause to make it safe to execute in database queries
+     *
+     * @param String $clause the SQL "in" clause to quote
+     * @return String the quoted SQL, safe for executing in database queries
+     */
     public function quote_in($clause)
     {
         $parts = preg_split('/,\s*/', trim($clause, '()'));
@@ -248,18 +431,35 @@ class Model extends YAWF
         return '(' . join(',', $quoted) . ')';
     }
 
+    /**
+     * Escape some SQL to make it safe to execute in database queries
+     *
+     * @param String $sql the SQL to escape by calling the connector object
+     * @return String the quoted SQL, safe for executing in database queries
+     */
     public function escape($sql)
     {
         $this->connect();
         return $this->get_connector()->escape($sql);
     }
 
+    /**
+     * Execute a database query and return the result set data fetcher object
+     *
+     * @param String $sql the SQL to execute in the database query
+     * @return Object a result set data fetcher object
+     */
     public function query($sql)
     {
         $this->connect();
         return $this->get_connector()->query($sql);
     }
 
+    /**
+     * Copy data from this model object to another model object
+     *
+     * @param SQL_model $other the other model object
+     */
     public function copy_to($other)
     {
         foreach ($this->data() as $field => $value)
@@ -268,9 +468,15 @@ class Model extends YAWF
         }
     }
 
+    /**
+     * Load a model object by ID or by the other fields that have been set
+     *
+     * @param Integer $id an optional ID value to load
+     * @return Integer the ID of the loaded model object
+     */
     public function load($id = 0) // returns the object ID or zero on failure
     {
-        if (is_null($id)) return 0;
+        if (is_null($id)) return 0; // to catch NULL parameters
         if ($id) $this->set_id($id);
         if ($found = $this->find_first())
         {
@@ -281,13 +487,23 @@ class Model extends YAWF
         return 0;
     }
 
+    /**
+     * Save this model object by inserting or updating it (if it has an ID)
+     *
+     * @return Boolean whether or not this model object was saved
+     */
     public function save() // returns true if the object saved or false if not
     {
-        if (!$this->data || !$this->is_validated()) return FALSE;
         $saved = $this->get_id() ? $this->update() : $this->insert();
         return $saved ? TRUE : FALSE;
     }
 
+    /**
+     * Find all model objects that match the conditions or the object's fields
+     *
+     * @param Array $conditions an optional array of conditions to match
+     * @return Array a list of model objects that match the conditions or fields
+     */
     public function find_all($conditions = NULL) // returns array of objects
     {
         // Query the database
@@ -311,6 +527,12 @@ class Model extends YAWF
         return $objects;
     }
 
+    /**
+     * Find model objects with a particular ID, or array of IDs
+     *
+     * @param Integer $id the model ID to find (may also be an array of IDs)
+     * @return SQL_model(s) the found model(s)
+     */
     public function find_id($id) // returns an array of objects, or an object
     {
         $id_field = $this->get_id_field();
@@ -319,6 +541,12 @@ class Model extends YAWF
             $this->find_first(array($id_field => $id + 0));
     }
 
+    /**
+     * Find the first model object that matches some conditions or field values
+     *
+     * @param Array $conditions an array of conditions to match (optional)
+     * @return SQL_model the first matching model object
+     */
     public function find_first($conditions = NULL) // returns an object or null
     {
         $old_limit = $this->get_limit();
@@ -327,17 +555,35 @@ class Model extends YAWF
         return count($objects) ? $objects[0] : NULL;
     }
 
+    /**
+     * Find the last model object that matches some conditions or field values
+     *
+     * @param Array $conditions an array of conditions to match (optional)
+     * @return SQL_model the last matching model object (may take some time!)
+     */
     public function find_last($conditions = NULL) // returns an object or null
     {
         $objects = $this->find_all($conditions);
         return count($objects) ? $objects[count($objects) - 1] : NULL;
     }
 
+    /**
+     * Find model objects that match a SQL "where" clause
+     *
+     * @param String $clause a SQL "where" clause to match
+     * @return Array a list of model objects that match the SQL "where" clause
+     */
     public function find_where($clause) // returns an array of objects
     {
         return $this->find_all(array('where' => $clause));
     }
 
+    /**
+     * Return a SQL "where" clause for an array of conditions, or field values
+     *
+     * @param Array $conditions an array of conditions (optional)
+     * @return String a SQL "where" clause from the conditions or field values
+     */
     protected function where_clause($conditions = NULL) // returns SQL
     {
         $conditions = is_null($conditions) ? $this->data : (array)$conditions;
@@ -364,6 +610,11 @@ class Model extends YAWF
         return $clause ? "where $clause" : '';
     }
 
+    /**
+     * Insert this model object's data into the database via the connector
+     *
+     * @return Integer the ID of the inserted row, or 0 upon failure
+     */
     public function insert() // returns the ID of the inserted row, or zero
     {
         // Check there is no ID yet
@@ -400,6 +651,12 @@ class Model extends YAWF
         return $this->data[$id_field];
     }
 
+    /**
+     * Update this model object's data in the database via the connector.
+     * Note that this method will only update the fields that have changed.
+     *
+     * @return SQL_model this model object for chaining, or NULL upon failure
+     */
     public function update() // returns the object unless it has no ID field
     {
         // Check there's an ID value
@@ -437,12 +694,23 @@ class Model extends YAWF
         return $this;
     }
 
+    /**
+     * Update this model object's data in the database via the connector.
+     * Note that this method will update *all* this model object's fields.
+     *
+     * @return SQL_model this model object for chaining, or NULL upon failure
+     */
     public function update_all_fields()
     {
         foreach ($this->fields() as $field) $this->to_update[$field] = TRUE;
         return $this->update();
     }
 
+    /**
+     * Delete this model object's data from the database via the connector
+     *
+     * @return SQL_model this model object for chaining, or NULL upon failure
+     */
     public function delete() // returns the object unless it has no ID field
     {
         // Check there's an ID value
@@ -458,6 +726,11 @@ class Model extends YAWF
         return $this;
     }
 
+    /**
+     * Delete all the model object data in the database for this model class!!!
+     *
+     * @return SQL_model this model object for chaining
+     */
     public function delete_all()
     {
         $db_table = $this->get_db_table();
@@ -465,6 +738,11 @@ class Model extends YAWF
         return $this;
     }
 
+    /**
+     * Drop the database table for this model class!!!
+     *
+     * @return SQL_model this model object for chaining
+     */
     public function drop()
     {
         $db_table = $this->get_db_table();
@@ -472,13 +750,60 @@ class Model extends YAWF
         return $this;
     }
 
+    /**
+     * Return an encrypted password ready to store in the database
+     *
+     * @param String $text the unencrypted password text to be encrypted
+     * @return String an encrypted password ready to store in the database
+     */
     protected function password($text)
     {
         return sha1(md5($text));
     }
+}
 
-    // ----------------------- Model validation methods ------------------------
+/**
+ * The Model class extends the SQL_model class by adding
+ * validation methods to validate the data field values.
+ * At present all models are SQL models, but there may
+ * be a time when models could map to NoSQL databases?
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
+class Model extends SQL_model
+{
+    private static $validators = array();
+    private $validation_messages;
 
+    /**
+     * Create a new model object
+     *
+     * @param Array $data the data to initialize the object (may be an object)
+     */
+    public function __construct($data = array())
+    {
+        $this->validation_messages = array();
+        parent::__construct($data);
+    }
+
+    /**
+     * Save this model object after validating its data fields
+     *
+     * @return Boolean whether this model was successfully saved
+     */
+    public function save() // returns true if the object saved or false if not
+    {
+        if (!$this->data() || !$this->is_validated()) return FALSE;
+        return parent::save();
+    }
+
+    /**
+     * Setup this model to validate a data field with a rule and optional args
+     *
+     * @param String $field the data field name to validate
+     * @param String $rule the rule to check (a method name)
+     * @param Array $args any optional args to pass to the rule
+     */
     protected function validates($field, $rule, $args = NULL)
     {
         $table = $this->get_table();
@@ -487,40 +812,88 @@ class Model extends YAWF
         self::$validators[$key][] = array($rule, $args);
     }
 
+    /**
+     * Return an assoc array of validation messages, keyed by model data field
+     *
+     * @return Array an assoc array of validation messages, keyed by data field
+     */
     public function validation_messages()
     {
         return $this->validation_messages;
     }
 
-    public function validation_message_for($field)
+    /**
+     * Return all the validation messages for a model object data field
+     *
+     * @param String $field the model object data field to check
+     * @return Array an array of validation messages for the data field
+     */
+    public function validation_messages_for($field)
     {
-        return array_key($this->validation_messages, $field);
+        return array_key($this->validation_messages, $field, array());
     }
 
+    /**
+     * Return the first validation message for a model object data field
+     *
+     * @param String $field the model object data field to check
+     * @return String the first validation message for the data field (or NULL)
+     */
+    public function validation_message_for($field)
+    {
+        $messages = $this->validation_messages_for($field);
+        return (count($messages) ? $messages[0] : NULL);
+    }
+
+    /**
+     * Return whether this model object is validated against validation methods
+     *
+     * @return Boolean whether this model validates against validation methods
+     */
     public function is_validated()
     {
         $messages = array();
         $table = $this->get_table();
-        foreach ($this->data as $field => $value)
+        foreach ($this->data() as $field => $value)
         {
             $rules = array_key(self::$validators, "$table.$field", array());
             foreach ($rules as $rule_and_args)
             {
                 list($rule, $args) = $rule_and_args;
-                $message = $args ? $this->$rule($value, $args) : $this->$rule($value);
-                if ($message) $messages[$field] = $message;
+                $message = $args ? $this->$rule($value, $args)
+                                 : $this->$rule($value);
+                if ($message)
+                {
+                    if (NULL === array_key($messages, $field))
+                    {
+                        $messages[$field] = array();
+                    }
+                    $messages[$field][] = $message;
+                }
             }
         }
         $this->validation_messages = $messages;
         return !$messages;
     }
 
+    /**
+     * Return whether a data field appears to be a valid person name
+     *
+     * @param String $name the data field value (a person name)
+     * @return Boolean whether the data field appears to be a valid person name
+     */
     protected function is_valid_person_name($name)
     {
         if (preg_match('/^[\w\s,\.\'\-]+$/', $name)) return NULL;
         return 'VALID_NAME_CAN_ONLY_INCLUDE_WORDS';
     }
 
+    /**
+     * Return whether a data field looks like a valid email address
+     *
+     * @param String $email the data field value (an email address)
+     * @return Boolean whether the data field looks like a valid email address
+     */
     protected function is_valid_email($email)
     {
         $at = strpos($email, '@');
@@ -533,6 +906,13 @@ class Model extends YAWF
         if ($dot === strlen($email)-1) return 'VALID_EMAIL_CANNOT_END_WITH_DOT';
     }
 
+    /**
+     * Return whether a data field is a valid length by applying length args
+     *
+     * @param String $value the data field value to check
+     * @param Array $args an assoc array with keys "shortest" and/or "longest"
+     * @return Boolean whether the data field is a valid length
+     */
     protected function is_valid_length($value, $args)
     {
         $shortest = array_key($args, 'shortest');
@@ -541,9 +921,16 @@ class Model extends YAWF
         if ($longest && strlen($value) > $longest) return 'VALID_LENGTH_TOO_LONG';
     }
 
-    protected function is_valid_password($value, $password_repeat_field)
+    /**
+     * Return whether a password value is valid by comparing it to confirm
+     *
+     * @param String $value the value of the password that was entered
+     * @param String $password_confirm_field the name of the confirmation field
+     * @return Boolean whether the password value matches the confirmation field
+     */
+    protected function is_valid_password($value, $password_confirm_field)
     {
-        if ($value != $this->$password_repeat_field) return 'VALID_PASSWORDS_DO_NOT_MATCH';
+        if ($value != $this->$password_confirm_field) return 'VALID_PASSWORDS_DO_NOT_MATCH';
     }
 }
 

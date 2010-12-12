@@ -38,7 +38,8 @@ class App_test extends App
         // Models connect to the test database
 
         $model = new Model();
-        $model->set_connector(DB_CONNECTOR, DB_DATABASE_TEST);
+        $model->set_connector(DB_CONNECTOR,
+                              array(Symbol::DATABASE => DB_DATABASE_TEST));
         $this->is_testing = TRUE;
         Log::type('test');
 
