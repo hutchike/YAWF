@@ -21,7 +21,7 @@ class Controller extends Request
 
     // Set up this new Controller object for an app with render data
 
-    public function setup_for_app($app, &$render)
+    public function setup_for_app($app, $render)
     {
         $this->view = $app->get_file(); // "faq" from "www.yawf.org/project/faq"
         $this->path = $app->get_path(); // e.g. "project/faq"
@@ -64,7 +64,7 @@ class Controller extends Request
 
     // Set up render data defaults (called by $this->app)
 
-    public function setup_render_data(&$render)
+    public function setup_render_data($render)
     {
         $this->render_path_data($render);
         $render->app = $this->app;
@@ -80,7 +80,7 @@ class Controller extends Request
     // Setup path-dependent data to be rendered.
     // This is useful for titles & descriptions.
 
-    protected function render_path_data(&$render)
+    protected function render_path_data($render)
     {
         foreach (get_object_vars($render) as $field => $value)
         {
