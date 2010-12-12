@@ -163,7 +163,7 @@ End_of_usage;
 
         // Make some directories writable
 
-        $writable_dirs = array('logs', 'tmp/cache', 'tmp/queue', 'tmp/sessions', 'tmp/uploads');
+        $writable_dirs = array('logs', 'tmp/cache', 'tmp/queue', 'tmp/sessions', 'tmp/uploads', 'public/images/cache');
         foreach ($writable_dirs as $dir)
         {
             $writeable_dir = "$app_dir/$dir";
