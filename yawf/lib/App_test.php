@@ -23,8 +23,11 @@ class App_test extends App
 {
     protected $test_run;
 
-    // Construct a new App_test object
-
+    /**
+     * Construct a new App_test object
+     *
+     * @param String $uri an optional relative URI (e.g. "/folder/file")
+     */
     public function __construct($uri = NULL)
     {
         parent::__construct($uri);
@@ -44,22 +47,33 @@ class App_test extends App
         Translate::validate();
     }
 
-    // Remove "_test" from the folder
-
+    /**
+     * Remove "_test" from the folder
+     */
     protected function reset_folder()
     {
         $this->folder = preg_replace('/_test$/', '', $this->folder);
     }
 
-    // It's important that tests cannot make redirects
-
-    public function redirect($url, $options = array())
+    /**
+     * It's important that tests cannot make redirects
+     *
+     * @param String $uri the URI that would normally be shown on redirection
+     * @param Array $options an optional array of options (ignored for testing)
+     */
+    public function redirect($uri, $options = array())
     {
         // Do nothing
     }
 
-    // Variation of the regular "render_view" that can insert test results
-
+    /**
+     * Variation of the regular "render_view" that can insert test results
+     *
+     * @param String $file blah
+     * @param Object $render data to render in the view
+     * @param Array $options an array of rendering options (optional)
+     * @return String the contents to send in response to the client
+     */
     public function render_view($file, $render = NULL, $options = array())
     {
         $render = new Object($render);
@@ -70,8 +84,11 @@ class App_test extends App
         return parent::render_view($file, $render, $options);
     }
 
-    // Render the test run to show test results
-
+    /**
+     * Render the test run by modifying a render object to include the results
+     *
+     * @param Object $render the render object to modify with test results
+     */
     protected function render_test_run($render)
     {
         if ($this->test_run) return; // so we don't repeat the tests
@@ -87,8 +104,14 @@ class App_test extends App
         $render->content = parent::render_view('test_run', $render, array('folder' => 'test'));
     }
 
-    // The testing controller runs test cases by calling this method on its $app
-
+    /**
+     * The testing controller runs test cases by calling this method on its $app
+     *
+     * @param String $desc a description of the test
+     * @param Boolean $passed whether the test passed
+     * @param Object $test_data the data used in the test (optional)
+     * @param String $method the method that is running tests (optional)
+     */
     public function test_case($desc, $passed, $test_data = NULL, $method = NULL)
     {
         if (!is_bool($passed))
@@ -105,8 +128,12 @@ class App_test extends App
         $this->test_run->add_test_case($desc, $passed, $test_data, $method);
     }
 
-    // Validate some HTML as XHTML and return any errors
-
+    /**
+     * Validate some HTML as XHTML and return any errors
+     *
+     * @param String $html the HTML to validate as XHTML
+     * @return Array an array of validation errors, or NULL
+     */
     public function xhtml_errors($html)
     {
         // Create an XHTML validator
@@ -136,14 +163,20 @@ class App_test extends App
     }
 }
 
-// A class with details about a test run for the "test/test_run" view
-
+/**
+ * A class to hold details about a test run for a Controller or Service object
+ */
 class TestRun
 {
     private $testee;            // the testee controller or service object
     private $test_cases;        // the array of arrays of TestCase objects
     private $test_output;       // string of test output from the test run
 
+    /**
+     * Create a new TestRun object
+     *
+     * @param Object $testee a Controller or Service object to test
+     */
     public function __construct($testee)
     {
         $this->testee = $testee;
@@ -152,6 +185,10 @@ class TestRun
         Log::test('testing: ' . $this->get_testee_name());
     }
 
+    /**
+     * Run test methods on the testee object (i.e. methods ending in "_test").
+     * Note that the "setup" and "teardown" methods are called when available.
+     */
     public function run_tests()
     {
         $methods = get_class_methods($this->testee);
@@ -175,32 +212,65 @@ class TestRun
         if (in_array('teardown', $methods)) $this->testee->teardown();
     }
 
+    /**
+     * Get the name of the testee object (with any "_test" suffix removed)
+     *
+     * @return String the name of the testee object (a Controller or Service)
+     */
     public function get_testee_name()
     {
         return preg_replace('/_test/', '', get_class($this->testee));
     }
 
+    /**
+     * Add some output to the test output that will be displayed in the results
+     *
+     * @param String $output the output to append to the test output
+     */
     public function add_output($output)
     {
         $this->test_output .= $output;
     }
 
+    /**
+     * Return the output from the tests that have been run
+     *
+     * @return String the output from the tests that have been run
+     */
     public function get_output()
     {
         return $this->test_output;
     }
     
+    /**
+     * Return an array of all the test cases in this test run
+     *
+     * @return Array an array of all the test cases in this test run
+     */
     public function get_test_cases()
     {
         return $this->test_cases;
     }
 
+    /**
+     * Add a test method to the array of test cases for this test run
+     *
+     * @param String $test_method the test method to add to the test cases
+     */
     public function add_method($test_method)
     {
         $this->test_cases[$test_method] = array();
         Log::test('method: ' . $test_method . '()');
     }
 
+    /**
+     * Add a test case to the array of test cases for this test method
+     *
+     * @param String $desc a description of the test case
+     * @param Boolean $passed whether the test case passed
+     * @param Object $test_data test data used in the test
+     * @param String $method the name of the testing method
+     */
     public function add_test_case($desc, $passed, $test_data, $method)
     {
         $this->test_cases[$method][] = new TestCase($desc, $passed, $test_data);
@@ -208,6 +278,12 @@ class TestRun
         if ($passed === FALSE) Log::test('data: ' . dump($test_data));
     }
 
+    /**
+     * Return a count of test results after applying a filter
+     *
+     * @param String $filter the filter applied (e.g. "all", "failed", "passed")
+     * @return Integer a count of the test cases matching the filter
+     */
     private function filter_test_cases($filter = 'all')
     {
         $count = 0;
@@ -223,30 +299,53 @@ class TestRun
         return $count;
     }
 
+    /**
+     * Return a count of all the test cases
+     *
+     * @return Integer a count of all the test cases
+     */
     public function count_test_cases()
     {
         return $this->filter_test_cases();
     }
 
+    /**
+     * Return a count of all the test cases that passed
+     *
+     * @return Integer a count of all the test cases that passed
+     */
     public function count_test_cases_that_passed()
     {
         return $this->filter_test_cases('passed');
     }
 
+    /**
+     * Return a count of all the test cases that failed
+     *
+     * @return Integer a count of all the test cases that failed
+     */
     public function count_test_cases_that_failed()
     {
         return $this->filter_test_cases('failed');
     }
 }
 
-// A class with details about a test case for the "test/test_run" view
-
+/**
+ * A class to hold details about a particular test case
+ */
 class TestCase
 {
     private $desc;      // a string to describe the test case
     private $passed;    // a boolean, true if the case passes
     private $data;      // mixed test data, shown if it fails
 
+    /**
+     * Create a new TestCase object
+     *
+     * @param String $desc a description of the test case
+     * @param Boolean $passed whether the test case passed (FALSE by default)
+     * @param Object $data test data used to perform the test (optional)
+     */
     public function __construct($desc, $passed = FALSE, $data = NULL)
     {
         $this->desc = $desc;
@@ -254,21 +353,41 @@ class TestCase
         $this->data = $data;
     }
 
+    /**
+     * Return the description of the test case
+     *
+     * @return String the test case description
+     */
     public function get_desc()
     {
         return $this->desc;
     }
 
+    /**
+     * Return whether the test case passed
+     *
+     * @return Boolean whether the test case passed
+     */
     public function passed()
     {
         return $this->passed;
     }
 
+    /**
+     * Return whether the test case failed
+     *
+     * @return Boolean whether the test case failed
+     */
     public function failed()
     {
         return !$this->passed;
     }
 
+    /**
+     * Return the test case data as text to be displayed in the results
+     *
+     * @return String a text representation of the test case data
+     */
     public function get_data_as_text()
     {
         return var_export($this->data);
