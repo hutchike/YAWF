@@ -1,4 +1,4 @@
-load_helper 'Queue'
+load_tool 'Queue'
 $obj1 = new Object(array('a' => 1))
 $obj2 = new Model(array('b' => 2))
 while (Queue::dequeue_nb()) {}

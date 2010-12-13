@@ -4,7 +4,7 @@ $obj->b = 'kevin';
 $obj->c = new Object();
 $obj->c->d = 123;
 $obj->c->id = 45;
-load_helper 'Data'
+load_tool 'Data'
 $xml = dump(Data::from('xml', Data::to('xml', $obj)))
 $json = dump(Data::from('json', Data::to('json', $obj)))
 $php = dump(Data::from('serialized', Data::to('serialized', $obj)))
@@ -14,4 +14,3 @@ should "have matching xml dump data", $xml == $orig
 should "have matching json dump data", $json == $orig
 should "have matching php dump data", $php == $orig
 should "have matching yaml dump data", $yaml == $orig
-should "find the ID", Data::get_id($obj, 'c') == 45
