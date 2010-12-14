@@ -232,7 +232,7 @@ function urlencode_array($array)
  */
 function split_list($text_list)
 {
-    $list = preg_split('/,\s*/', $list);
+    $list = preg_split('/,\s*/', $text_list);
     return count($list) == 1 && $list[0] == '' ? array() : $list;
 }
 
