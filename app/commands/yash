@@ -177,6 +177,7 @@ class Yet_another_shell extends Command
     {
         $model = new Model();
         $result = $model->query($sql);
+        if (!is_object($result)) return;
         while ($object = $result->fetch_object())
         {
             foreach ($object as $field => $value)
