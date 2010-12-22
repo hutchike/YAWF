@@ -763,14 +763,12 @@ class SQL_model extends YAWF
 }
 
 /**
- * The Model class extends the SQL_model class by adding
- * validation methods to validate the data field values.
- * At present all models are SQL models, but there may
- * be a time when models could map to NoSQL databases?
+ * The Valid_SQL_model class extends the SQL_model class with
+ * extra validation methods to validate the data field values.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Model extends SQL_model
+class Valid_SQL_model extends SQL_model
 {
     private static $validators = array();
     private $validation_messages;
@@ -932,6 +930,16 @@ class Model extends SQL_model
     {
         if ($value != $this->$password_confirm_field) return 'VALID_PASSWORDS_DO_NOT_MATCH';
     }
+}
+
+/**
+ * The Model class is just an alias for the Valid_SQL_model class.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
+class Model extends Valid_SQL_model
+{
+    // Don't add anything here!
 }
 
 // End of Model.php
