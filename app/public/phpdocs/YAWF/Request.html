@@ -26,13 +26,12 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The YAWF object responds to web requests by creating an &quot;App&quot;  object, a &quot;Controller&quot; object, then rendering a web response.</p>
-<p class="description"><p>The YAWF class should be inherited by all classes so that it  may handle exceptions and unknown method calls. It provides  useful static methods such as &quot;hook&quot; to hook unknown method  calls, and &quot;prop&quot; to register props for mock tests or other  kinds of dependency injection.</p><p>The safe way to finish responding to a web request is to  call the YAWF::finish() method because this will perform  logging and benchmarking, unlike a simple &quot;exit&quot; call.</p></p>
+<p class="short-description">The Request class provides Controller and Service objects with  access to form and query parameters, cookies, the web session  and the web server environment. It also makes the app language  available, and the requested content type and HTTP method.</p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_lib---Request.php.html">/lib/Request.php</a> (line <span class="field">14</span>)
+			Located in <a class="field" href="_lib---Request.php.html">/lib/Request.php</a> (line <span class="field">22</span>)
 		</p>
 		
 				
@@ -145,85 +144,85 @@
 			<div class="method-summary">
 																																																																																																																																																																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#cookie" title="details" class="method-name">cookie</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$expires</span> = <span class="var-default">0</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">'/'</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$domain</span> = <span class="var-default">COOKIE_DOMAIN</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$secure</span> = <span class="var-default">FALSE</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$expires</span> = <span class="var-default">0</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">'/'</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$domain</span> = <span class="var-default">COOKIE_DOMAIN</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$is_secure</span> = <span class="var-default">FALSE</span>], <span class="var-type">String</span>&nbsp;<span class="var-name">$vaue</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result"><a href="../YAWF/Request_cookie.html">Request_cookie</a></span>
 										<a href="#cookie_object" title="details" class="method-name">cookie_object</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#lang" title="details" class="method-name">lang</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#params" title="details" class="method-name">params</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$key</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$key</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>], <span class="var-type">String</span>&nbsp;<span class="var-name">$vaue</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 										<a href="#params_object" title="details" class="method-name">params_object</a>
-											([<span class="var-type"></span>&nbsp;<span class="var-name">$request</span> = <span class="var-default">array()</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+											([<span class="var-type">Array</span>&nbsp;<span class="var-name">$request</span> = <span class="var-default">array()</span>], [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#redirect" title="details" class="method-name">redirect</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$uri</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$uri</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#report_errors" title="details" class="method-name">report_errors</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#request_method" title="details" class="method-name">request_method</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#request_type" title="details" class="method-name">request_type</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#send_mail" title="details" class="method-name">send_mail</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$file</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$render</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$file</span>, <span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$render</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#server" title="details" class="method-name">server</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$key</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$key</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>], <span class="var-type">String</span>&nbsp;<span class="var-name">$vaue</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result"><a href="../YAWF/Request_server.html">Request_server</a></span>
 										<a href="#server_object" title="details" class="method-name">server_object</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#session" title="details" class="method-name">session</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$key</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$key</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>], <span class="var-type">String</span>&nbsp;<span class="var-name">$vaue</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result"><a href="../YAWF/Request_session.html">Request_session</a></span>
 										<a href="#session_object" title="details" class="method-name">session_object</a>
 										()
 									</div>
@@ -231,25 +230,25 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#setup_request" title="details" class="method-name">setup_request</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$app</span>)
+											(<span class="var-type"><a href="../YAWF/App.html">App</a></span>&nbsp;<span class="var-name">$app</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result"><a href="../YAWF/Request.html">Request</a></span>
 										<a href="#set_params" title="details" class="method-name">set_params</a>
-											([<span class="var-type"></span>&nbsp;<span class="var-name">$request</span> = <span class="var-default">array()</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+											([<span class="var-type">Array</span>&nbsp;<span class="var-name">$request</span> = <span class="var-default">array()</span>], [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#should" title="details" class="method-name">should</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$desc</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$passed</span> = <span class="var-default">FALSE</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$test_data</span> = <span class="var-default">NULL</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$desc</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$passed</span> = <span class="var-default">FALSE</span>], [<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$test_data</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#should_not" title="details" class="method-name">should_not</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$desc</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$failed</span> = <span class="var-default">TRUE</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$test_data</span> = <span class="var-default">NULL</span>])
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$desc</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$failed</span> = <span class="var-default">TRUE</span>], [<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$test_data</span> = <span class="var-default">NULL</span>])
 									</div>
 											</div>
 		</div>
@@ -278,7 +277,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$app</span>
-						(line <span class="line-number">36</span>)
+						(line <span class="line-number">45</span>)
 		</span>
 	</div>
 
@@ -300,7 +299,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$cookie</span>
-						(line <span class="line-number">38</span>)
+						(line <span class="line-number">47</span>)
 		</span>
 	</div>
 
@@ -322,7 +321,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$params</span>
-						(line <span class="line-number">37</span>)
+						(line <span class="line-number">46</span>)
 		</span>
 	</div>
 
@@ -344,7 +343,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$server</span>
-						(line <span class="line-number">39</span>)
+						(line <span class="line-number">48</span>)
 		</span>
 	</div>
 
@@ -366,7 +365,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$session</span>
-						(line <span class="line-number">40</span>)
+						(line <span class="line-number">49</span>)
 		</span>
 	</div>
 
@@ -401,41 +400,46 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">cookie</span> (line <span class="line-number">92</span>)
+		<span class="method-title">cookie</span> (line <span class="line-number">127</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get or set a cookie value</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the value of the cookie</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			cookie
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$expires</span> = <span class="var-default">0</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">'/'</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$domain</span> = <span class="var-default">COOKIE_DOMAIN</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$secure</span> = <span class="var-default">FALSE</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$expires</span> = <span class="var-default">0</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">'/'</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$domain</span> = <span class="var-default">COOKIE_DOMAIN</span>], [<span class="var-type">String</span>&nbsp;<span class="var-name">$is_secure</span> = <span class="var-default">FALSE</span>], <span class="var-type">String</span>&nbsp;<span class="var-name">$vaue</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$name</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$name</span><span class="var-description">: the name of the cookie to get or set</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$vaue</span><span class="var-description">: the cookie value to set (optional)</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$expires</span><span class="var-description">: the cookie expiry setting (optional)</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$path</span><span class="var-description">: the cookie path setting (default is &quot;/&quot;)</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$domain</span><span class="var-description">: the cookie domain (default is set by COOKIE_DOMAIN)</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$is_secure</span><span class="var-description">: whether the cookie is secure (default is FALSE)</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$value</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$expires</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$path</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$domain</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$secure</span>			</li>
 				</ul>
 		
 			
@@ -445,16 +449,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">cookie_object</span> (line <span class="line-number">193</span>)
+		<span class="method-title">cookie_object</span> (line <span class="line-number">263</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a request cookie object</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> a request cookie object holding cookie values</li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../YAWF/Request_cookie.html">Request_cookie</a></span>
 		<span class="method-name">
 			cookie_object
 		</span>
@@ -469,16 +475,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">lang</span> (line <span class="line-number">77</span>)
+		<span class="method-title">lang</span> (line <span class="line-number">98</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the language</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the language setting (as a two-letter language code)</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			lang
 		</span>
@@ -493,26 +501,31 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">params</span> (line <span class="line-number">84</span>)
+		<span class="method-title">params</span> (line <span class="line-number">110</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get or set a params value</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the value of the parameter key</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			params
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$key</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$key</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>], <span class="var-type">String</span>&nbsp;<span class="var-name">$vaue</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$key</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$key</span><span class="var-description">: the parameter key to get or set</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$vaue</span><span class="var-description">: the parameter value to set (optional)</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$value</span>			</li>
@@ -525,29 +538,31 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">params_object</span> (line <span class="line-number">163</span>)
+		<span class="method-title">params_object</span> (line <span class="line-number">230</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a request params object, using the $_REQUEST array by default</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> an object holding all the parameter values after parsing</li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 		<span class="method-name">
 			params_object
 		</span>
-					([<span class="var-type"></span>&nbsp;<span class="var-name">$request</span> = <span class="var-default">array()</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">$request</span> = <span class="var-default">array()</span>], [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$request</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$request</span><span class="var-description">: An array of request params (get, post, put, etc.)</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$options</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$options</span><span class="var-description">: An array of options to use when parsing the params</span>			</li>
 				</ul>
 		
 			
@@ -557,10 +572,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">redirect</span> (line <span class="line-number">116</span>)
+		<span class="method-title">redirect</span> (line <span class="line-number">165</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Redirect to another URI</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -570,16 +586,16 @@
 		<span class="method-name">
 			redirect
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$uri</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$uri</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$uri</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$uri</span><span class="var-description">: the URI to redirect to</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$options</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$options</span><span class="var-description">: options such as &quot;finish&quot; to force an early finish</span>			</li>
 				</ul>
 		
 			
@@ -589,16 +605,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">report_errors</span> (line <span class="line-number">123</span>)
+		<span class="method-title">report_errors</span> (line <span class="line-number">175</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Mail errors to the webmaster</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the mail message that was sent (if any)</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			report_errors
 		</span>
@@ -613,16 +631,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">request_method</span> (line <span class="line-number">56</span>)
+		<span class="method-title">request_method</span> (line <span class="line-number">71</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Allow method overriding using the &quot;_method&quot; parameter  (or the &quot;X_HTTP_METHOD_OVERRIDE&quot; custom HTTP header).</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the request method (as a lowercase string)</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			request_method
 		</span>
@@ -637,16 +657,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">request_type</span> (line <span class="line-number">66</span>)
+		<span class="method-title">request_type</span> (line <span class="line-number">84</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the requested content type set in HTTP headers  Don't return the &quot;x-www-form-urlencoded&quot; content type</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the requested content type (as a lowercase string)</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			request_type
 		</span>
@@ -661,29 +683,31 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">send_mail</span> (line <span class="line-number">144</span>)
+		<span class="method-title">send_mail</span> (line <span class="line-number">201</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Send some mail as text &amp; HTML multipart (depends on the Mail helper)</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the mail message that was sent</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			send_mail
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$file</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$render</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$file</span>, <span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$render</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$file</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$file</span><span class="var-description">: The file name of the mail view to render</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$render</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$render</span><span class="var-description">: Render data to include in the mai view</span>			</li>
 				</ul>
 		
 			
@@ -693,26 +717,31 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">server</span> (line <span class="line-number">100</span>)
+		<span class="method-title">server</span> (line <span class="line-number">140</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get or set a server value</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the value of the server key</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			server
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$key</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$key</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>], <span class="var-type">String</span>&nbsp;<span class="var-name">$vaue</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$key</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$key</span><span class="var-description">: the server key to get or set</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$vaue</span><span class="var-description">: the server value to set (optional)</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$value</span>			</li>
@@ -725,16 +754,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">server_object</span> (line <span class="line-number">201</span>)
+		<span class="method-title">server_object</span> (line <span class="line-number">274</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a request server object</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> a request server object holding server values</li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../YAWF/Request_server.html">Request_server</a></span>
 		<span class="method-name">
 			server_object
 		</span>
@@ -749,26 +780,31 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">session</span> (line <span class="line-number">108</span>)
+		<span class="method-title">session</span> (line <span class="line-number">153</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get or set a session value</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the value of the session key</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			session
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$key</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$key</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>], <span class="var-type">String</span>&nbsp;<span class="var-name">$vaue</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$key</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$key</span><span class="var-description">: the session key to get or set</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$vaue</span><span class="var-description">: the session value to set (optional)</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$value</span>			</li>
@@ -781,16 +817,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">session_object</span> (line <span class="line-number">209</span>)
+		<span class="method-title">session_object</span> (line <span class="line-number">285</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a request session object</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> a request session object holding session values</li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../YAWF/Request_session.html">Request_session</a></span>
 		<span class="method-name">
 			session_object
 		</span>
@@ -805,10 +843,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setup_request</span> (line <span class="line-number">44</span>)
+		<span class="method-title">setup_request</span> (line <span class="line-number">56</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Setup some web request data objects</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -818,13 +857,13 @@
 		<span class="method-name">
 			setup_request
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$app</span>)
+					(<span class="var-type"><a href="../YAWF/App.html">App</a></span>&nbsp;<span class="var-name">$app</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$app</span>			</li>
+				<span class="var-type"><a href="../YAWF/App.html">App</a></span>
+				<span class="var-name">$app</span><span class="var-description">: the web application object</span>			</li>
 				</ul>
 		
 			
@@ -834,29 +873,31 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_params</span> (line <span class="line-number">155</span>)
+		<span class="method-title">set_params</span> (line <span class="line-number">217</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the request parameters that we use to create the params object</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> this object</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../YAWF/Request.html">Request</a></span>
 		<span class="method-name">
 			set_params
 		</span>
-					([<span class="var-type"></span>&nbsp;<span class="var-name">$request</span> = <span class="var-default">array()</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">$request</span> = <span class="var-default">array()</span>], [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$request</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$request</span><span class="var-description">: An array of request params (get, post, put, etc.)</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$options</span>			</li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$options</span><span class="var-description">: An array of options to use when parsing the params</span>			</li>
 				</ul>
 		
 			
@@ -866,10 +907,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">should</span> (line <span class="line-number">217</span>)
+		<span class="method-title">should</span> (line <span class="line-number">298</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Test that something that &quot;should&quot; be true, indeed is true</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -879,19 +921,19 @@
 		<span class="method-name">
 			should
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$desc</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$passed</span> = <span class="var-default">FALSE</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$test_data</span> = <span class="var-default">NULL</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$desc</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$passed</span> = <span class="var-default">FALSE</span>], [<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$test_data</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$desc</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$desc</span><span class="var-description">: A description of the test case</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$passed</span>			</li>
+				<span class="var-type">Boolean</span>
+				<span class="var-name">$passed</span><span class="var-description">: Whether the test case passed</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$test_data</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$test_data</span><span class="var-description">: Test data to display when the test case fails</span>			</li>
 				</ul>
 		
 			
@@ -901,10 +943,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">should_not</span> (line <span class="line-number">224</span>)
+		<span class="method-title">should_not</span> (line <span class="line-number">310</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Test that something &quot;should not&quot; be true, indeed is not true</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -914,19 +957,19 @@
 		<span class="method-name">
 			should_not
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$desc</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$failed</span> = <span class="var-default">TRUE</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$test_data</span> = <span class="var-default">NULL</span>])
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$desc</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$failed</span> = <span class="var-default">TRUE</span>], [<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$test_data</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$desc</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$desc</span><span class="var-description">: A description of the test case</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$failed</span>			</li>
+				<span class="var-type">Boolean</span>
+				<span class="var-name">$failed</span><span class="var-description">: Whether the test case failed</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$test_data</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$test_data</span><span class="var-description">: Test data to display when the test case passes</span>			</li>
 				</ul>
 		
 			
@@ -963,7 +1006,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 12 Dec 2010 06:19:19 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 26 Dec 2010 07:52:15 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

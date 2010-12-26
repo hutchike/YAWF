@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Valid_SQL_model</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> Valid_SQL_model</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|													<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The Valid_SQL_model class extends the SQL_model class with  extra validation methods to validate the data field values.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_lib---Model.php.html">/lib/Model.php</a> (line <span class="field">782</span>)
+		</p>
+		
+				
+		<pre><a href="../YAWF/YAWF.html">YAWF</a>
+   |
+   --<a href="../YAWF/SQL_model.html">SQL_model</a>
+      |
+      --Valid_SQL_model</pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"
+								 style="vertical-align: center"/>
+						<a href="../YAWF/Model.html">Model</a>
+					</td>
+					<td>
+											The Model class is just an alias for the Valid_SQL_model class.
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendants</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																								<div class="method-definition">
+					<img src="../media/images/Constructor.png" alt=" "/>
+											<span class="method-result">Valid_SQL_model</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">Array</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">array()</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Boolean</span>
+										<a href="#is_validated" title="details" class="method-name">is_validated</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Boolean</span>
+										<a href="#is_valid_email" title="details" class="method-name">is_valid_email</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$email</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Boolean</span>
+										<a href="#is_valid_length" title="details" class="method-name">is_valid_length</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">Array</span>&nbsp;<span class="var-name">$args</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Boolean</span>
+										<a href="#is_valid_password" title="details" class="method-name">is_valid_password</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$password_confirm_field</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Boolean</span>
+										<a href="#is_valid_person_name" title="details" class="method-name">is_valid_person_name</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Boolean</span>
+										<a href="#save" title="details" class="method-name">save</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#validates" title="details" class="method-name">validates</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$rule</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Array</span>
+										<a href="#validation_messages" title="details" class="method-name">validation_messages</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Array</span>
+										<a href="#validation_messages_for" title="details" class="method-name">validation_messages_for</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#validation_message_for" title="details" class="method-name">validation_message_for</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+													<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Constructor.png" />
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">792</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create a new model object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Valid_SQL_model</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$data</span><span class="var-description">: the data to initialize the object (may be an object)</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/SQL_model.html#method__construct">SQL_model::__construct()</a></dt>
+						<dd>Create a new SQL model object</dd>
+					</dl>
+			
+	</div>
+<a name="methodis_validated" id="is_validated"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">is_validated</span> (line <span class="line-number">862</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return whether this model object is validated against validation methods</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> whether this model validates against validation methods</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Boolean</span>
+		<span class="method-name">
+			is_validated
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodis_valid_email" id="is_valid_email"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">is_valid_email</span> (line <span class="line-number">906</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return whether a data field looks like a valid email address</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> whether the data field looks like a valid email address</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Boolean</span>
+		<span class="method-name">
+			is_valid_email
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$email</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$email</span><span class="var-description">: the data field value (an email address)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodis_valid_length" id="is_valid_length"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">is_valid_length</span> (line <span class="line-number">925</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return whether a data field is a valid length by applying length args</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> whether the data field is a valid length</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Boolean</span>
+		<span class="method-name">
+			is_valid_length
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">Array</span>&nbsp;<span class="var-name">$args</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$value</span><span class="var-description">: the data field value to check</span>			</li>
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$args</span><span class="var-description">: an assoc array with keys &quot;shortest&quot; and/or &quot;longest&quot;</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodis_valid_password" id="is_valid_password"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">is_valid_password</span> (line <span class="line-number">940</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return whether a password value is valid by comparing it to confirm</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> whether the password value matches the confirmation field</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Boolean</span>
+		<span class="method-name">
+			is_valid_password
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$password_confirm_field</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$value</span><span class="var-description">: the value of the password that was entered</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$password_confirm_field</span><span class="var-description">: the name of the confirmation field</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodis_valid_person_name" id="is_valid_person_name"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">is_valid_person_name</span> (line <span class="line-number">894</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return whether a data field appears to be a valid person name</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> whether the data field appears to be a valid person name</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Boolean</span>
+		<span class="method-name">
+			is_valid_person_name
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$name</span><span class="var-description">: the data field value (a person name)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsave" id="save"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">save</span> (line <span class="line-number">803</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Save this model object after validating its data fields</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> whether this model was successfully saved</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Boolean</span>
+		<span class="method-name">
+			save
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/SQL_model.html#methodsave">SQL_model::save()</a></dt>
+						<dd>Save this model object by inserting or updating it (if it has an ID)</dd>
+					</dl>
+			
+	</div>
+<a name="methodvalidates" id="validates"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">validates</span> (line <span class="line-number">816</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Setup this model to validate a data field with a rule and optional args</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			validates
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$rule</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$field</span><span class="var-description">: the data field name to validate</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$rule</span><span class="var-description">: the rule to check (a method name)</span>			</li>
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$args</span><span class="var-description">: any optional args to pass to the rule</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodvalidation_messages" id="validation_messages"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">validation_messages</span> (line <span class="line-number">829</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return an assoc array of validation messages, keyed by model data field</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> an assoc array of validation messages, keyed by data field</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Array</span>
+		<span class="method-name">
+			validation_messages
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodvalidation_messages_for" id="validation_messages_for"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">validation_messages_for</span> (line <span class="line-number">840</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return all the validation messages for a model object data field</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> an array of validation messages for the data field</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Array</span>
+		<span class="method-name">
+			validation_messages_for
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$field</span><span class="var-description">: the model object data field to check</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodvalidation_message_for" id="validation_message_for"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">validation_message_for</span> (line <span class="line-number">851</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the first validation message for a model object data field</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the first validation message for the data field (or NULL)</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			validation_message_for
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$field</span><span class="var-description">: the model object data field to check</span>			</li>
+				</ul>
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../YAWF/SQL_model.html">SQL_model</a></span></p>
+					<blockquote>
+													<img src="../media/images/Constructor.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#method__construct">SQL_model::__construct()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodconnect">SQL_model::connect()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodcopy_to">SQL_model::copy_to()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methoddata">SQL_model::data()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methoddelete">SQL_model::delete()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methoddelete_all">SQL_model::delete_all()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methoddisconnect">SQL_model::disconnect()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methoddrop">SQL_model::drop()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodescape">SQL_model::escape()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodfields">SQL_model::fields()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodfind_all">SQL_model::find_all()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodfind_first">SQL_model::find_first()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodfind_id">SQL_model::find_id()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodfind_last">SQL_model::find_last()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodfind_where">SQL_model::find_where()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_connector">SQL_model::get_connector()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_database">SQL_model::get_database()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_db_table">SQL_model::get_db_table()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_id">SQL_model::get_id()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_id_field">SQL_model::get_id_field()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_limit">SQL_model::get_limit()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_offset">SQL_model::get_offset()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_table">SQL_model::get_table()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodhas_changed">SQL_model::has_changed()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodhas_timestamp">SQL_model::has_timestamp()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodinsert">SQL_model::insert()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodis_virtual">SQL_model::is_virtual()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodload">SQL_model::load()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodpassword">SQL_model::password()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodquery">SQL_model::query()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodquote">SQL_model::quote()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodquote_in">SQL_model::quote_in()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodsave">SQL_model::save()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodsetup">SQL_model::setup()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_connector">SQL_model::set_connector()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_database">SQL_model::set_database()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_id">SQL_model::set_id()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_id_field">SQL_model::set_id_field()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_limit">SQL_model::set_limit()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_offset">SQL_model::set_offset()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_order">SQL_model::set_order()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_table">SQL_model::set_table()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_timestamp">SQL_model::set_timestamp()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_virtual">SQL_model::set_virtual()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodupdate">SQL_model::update()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodupdate_all_fields">SQL_model::update_all_fields()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodwhere_clause">SQL_model::where_clause()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#method__get">SQL_model::__get()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#method__set">SQL_model::__set()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../YAWF/YAWF.html">YAWF</a></span></p>
+					<blockquote>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodassert_checking">YAWF::assert_checking()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodassert_failed">YAWF::assert_failed()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodfinish">YAWF::finish()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodhandle_exception">YAWF::handle_exception()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodhook">YAWF::hook()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodprop">YAWF::prop()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodrespond_to_web_request">YAWF::respond_to_web_request()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodstart">YAWF::start()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#methodunknown">YAWF::unknown()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/YAWF.html#method__call">YAWF::__call()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+	
+	<p class="notes" id="credit">
+		Documentation generated on Sun, 26 Dec 2010 07:52:12 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

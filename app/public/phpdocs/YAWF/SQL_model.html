@@ -62,10 +62,10 @@
 								 alt=" class"
 								 title=" class"
 								 style="vertical-align: center"/>
-						<a href="../YAWF/Model.html">Model</a>
+						<a href="../YAWF/Valid_SQL_model.html">Valid_SQL_model</a>
 					</td>
 					<td>
-											The Model class extends the SQL_model class by adding  validation methods to validate the data field values.
+											The Valid_SQL_model class extends the SQL_model class with  extra validation methods to validate the data field values.
 										</td>
 				</tr>
 							</table>
@@ -84,7 +84,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																																																																																																																																																																																																																																																																																																																																<div class="method-definition">
+																																																																																																																																																																																																																																																																																																																																																																																																																								<div class="method-definition">
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">SQL_model</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
@@ -220,6 +220,12 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">String</span>
 										<a href="#get_table" title="details" class="method-name">get_table</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Boolean</span>
+										<a href="#has_changed" title="details" class="method-name">has_changed</a>
 										()
 									</div>
 																<div class="method-definition">
@@ -370,7 +376,7 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">String</span>
 										<a href="#__set" title="details" class="method-name">__set</a>
-											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$value</span>)
 									</div>
 											</div>
 		</div>
@@ -421,7 +427,7 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../YAWF/Model.html#method__construct">Model::__construct()</a>
+				<a href="../YAWF/Valid_SQL_model.html#method__construct">Valid_SQL_model::__construct()</a>
 								: Create a new model object
 							</li>
 				</ul>
@@ -431,7 +437,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">connect</span> (line <span class="line-number">390</span>)
+		<span class="method-title">connect</span> (line <span class="line-number">401</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -464,7 +470,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">copy_to</span> (line <span class="line-number">463</span>)
+		<span class="method-title">copy_to</span> (line <span class="line-number">474</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -494,7 +500,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">data</span> (line <span class="line-number">102</span>)
+		<span class="method-title">data</span> (line <span class="line-number">103</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -520,7 +526,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete</span> (line <span class="line-number">714</span>)
+		<span class="method-title">delete</span> (line <span class="line-number">725</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -546,7 +552,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete_all</span> (line <span class="line-number">734</span>)
+		<span class="method-title">delete_all</span> (line <span class="line-number">745</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -572,7 +578,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">disconnect</span> (line <span class="line-number">403</span>)
+		<span class="method-title">disconnect</span> (line <span class="line-number">414</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -597,7 +603,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">drop</span> (line <span class="line-number">746</span>)
+		<span class="method-title">drop</span> (line <span class="line-number">757</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -623,7 +629,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">escape</span> (line <span class="line-number">440</span>)
+		<span class="method-title">escape</span> (line <span class="line-number">451</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -654,7 +660,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">fields</span> (line <span class="line-number">112</span>)
+		<span class="method-title">fields</span> (line <span class="line-number">123</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -680,7 +686,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">find_all</span> (line <span class="line-number">507</span>)
+		<span class="method-title">find_all</span> (line <span class="line-number">518</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -711,7 +717,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">find_first</span> (line <span class="line-number">550</span>)
+		<span class="method-title">find_first</span> (line <span class="line-number">561</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -742,7 +748,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">find_id</span> (line <span class="line-number">536</span>)
+		<span class="method-title">find_id</span> (line <span class="line-number">547</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -773,7 +779,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">find_last</span> (line <span class="line-number">564</span>)
+		<span class="method-title">find_last</span> (line <span class="line-number">575</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -804,7 +810,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">find_where</span> (line <span class="line-number">576</span>)
+		<span class="method-title">find_where</span> (line <span class="line-number">587</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -835,7 +841,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_connector</span> (line <span class="line-number">140</span>)
+		<span class="method-title">get_connector</span> (line <span class="line-number">151</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -861,7 +867,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_database</span> (line <span class="line-number">167</span>)
+		<span class="method-title">get_database</span> (line <span class="line-number">178</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -887,7 +893,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_db_table</span> (line <span class="line-number">206</span>)
+		<span class="method-title">get_db_table</span> (line <span class="line-number">217</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -913,7 +919,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_id</span> (line <span class="line-number">300</span>)
+		<span class="method-title">get_id</span> (line <span class="line-number">311</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -939,7 +945,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_id_field</span> (line <span class="line-number">287</span>)
+		<span class="method-title">get_id_field</span> (line <span class="line-number">298</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -965,7 +971,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_limit</span> (line <span class="line-number">242</span>)
+		<span class="method-title">get_limit</span> (line <span class="line-number">253</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -991,7 +997,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_offset</span> (line <span class="line-number">264</span>)
+		<span class="method-title">get_offset</span> (line <span class="line-number">275</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1017,7 +1023,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_table</span> (line <span class="line-number">192</span>)
+		<span class="method-title">get_table</span> (line <span class="line-number">203</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1038,12 +1044,38 @@
 		
 			
 	</div>
-<a name="methodhas_timestamp" id="has_timestamp"><!-- --></a>
+<a name="methodhas_changed" id="has_changed"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">has_timestamp</span> (line <span class="line-number">354</span>)
+		<span class="method-title">has_changed</span> (line <span class="line-number">113</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return whether this model object has changed</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> whether this model object has changed</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Boolean</span>
+		<span class="method-name">
+			has_changed
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodhas_timestamp" id="has_timestamp"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">has_timestamp</span> (line <span class="line-number">365</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1070,11 +1102,11 @@
 			
 	</div>
 <a name="methodinsert" id="insert"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">insert</span> (line <span class="line-number">618</span>)
+		<span class="method-title">insert</span> (line <span class="line-number">629</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1096,11 +1128,11 @@
 			
 	</div>
 <a name="methodis_virtual" id="is_virtual"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">is_virtual</span> (line <span class="line-number">378</span>)
+		<span class="method-title">is_virtual</span> (line <span class="line-number">389</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1127,11 +1159,11 @@
 			
 	</div>
 <a name="methodload" id="load"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">load</span> (line <span class="line-number">477</span>)
+		<span class="method-title">load</span> (line <span class="line-number">488</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1158,11 +1190,11 @@
 			
 	</div>
 <a name="methodpassword" id="password"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">password</span> (line <span class="line-number">759</span>)
+		<span class="method-title">password</span> (line <span class="line-number">770</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1189,11 +1221,11 @@
 			
 	</div>
 <a name="methodquery" id="query"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">query</span> (line <span class="line-number">452</span>)
+		<span class="method-title">query</span> (line <span class="line-number">463</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1220,11 +1252,11 @@
 			
 	</div>
 <a name="methodquote" id="quote"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">quote</span> (line <span class="line-number">415</span>)
+		<span class="method-title">quote</span> (line <span class="line-number">426</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1251,11 +1283,11 @@
 			
 	</div>
 <a name="methodquote_in" id="quote_in"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">quote_in</span> (line <span class="line-number">426</span>)
+		<span class="method-title">quote_in</span> (line <span class="line-number">437</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1282,11 +1314,11 @@
 			
 	</div>
 <a name="methodsave" id="save"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">save</span> (line <span class="line-number">495</span>)
+		<span class="method-title">save</span> (line <span class="line-number">506</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1310,13 +1342,13 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../YAWF/Model.html#methodsave">Model::save()</a>
+				<a href="../YAWF/Valid_SQL_model.html#methodsave">Valid_SQL_model::save()</a>
 								: Save this model object after validating its data fields
 							</li>
 				</ul>
 	</div>
 <a name="methodsetup" id="setup"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1351,11 +1383,11 @@
 			
 	</div>
 <a name="methodset_connector" id="set_connector"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_connector</span> (line <span class="line-number">124</span>)
+		<span class="method-title">set_connector</span> (line <span class="line-number">135</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1385,11 +1417,11 @@
 			
 	</div>
 <a name="methodset_database" id="set_database"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_database</span> (line <span class="line-number">155</span>)
+		<span class="method-title">set_database</span> (line <span class="line-number">166</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1416,11 +1448,11 @@
 			
 	</div>
 <a name="methodset_id" id="set_id"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_id</span> (line <span class="line-number">312</span>)
+		<span class="method-title">set_id</span> (line <span class="line-number">323</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1447,11 +1479,11 @@
 			
 	</div>
 <a name="methodset_id_field" id="set_id_field"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_id_field</span> (line <span class="line-number">275</span>)
+		<span class="method-title">set_id_field</span> (line <span class="line-number">286</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1478,11 +1510,11 @@
 			
 	</div>
 <a name="methodset_limit" id="set_limit"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_limit</span> (line <span class="line-number">231</span>)
+		<span class="method-title">set_limit</span> (line <span class="line-number">242</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1509,11 +1541,11 @@
 			
 	</div>
 <a name="methodset_offset" id="set_offset"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_offset</span> (line <span class="line-number">253</span>)
+		<span class="method-title">set_offset</span> (line <span class="line-number">264</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1540,11 +1572,11 @@
 			
 	</div>
 <a name="methodset_order" id="set_order"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_order</span> (line <span class="line-number">219</span>)
+		<span class="method-title">set_order</span> (line <span class="line-number">230</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1571,11 +1603,11 @@
 			
 	</div>
 <a name="methodset_table" id="set_table"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_table</span> (line <span class="line-number">181</span>)
+		<span class="method-title">set_table</span> (line <span class="line-number">192</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1602,11 +1634,11 @@
 			
 	</div>
 <a name="methodset_timestamp" id="set_timestamp"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_timestamp</span> (line <span class="line-number">342</span>)
+		<span class="method-title">set_timestamp</span> (line <span class="line-number">353</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1633,11 +1665,11 @@
 			
 	</div>
 <a name="methodset_virtual" id="set_virtual"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_virtual</span> (line <span class="line-number">366</span>)
+		<span class="method-title">set_virtual</span> (line <span class="line-number">377</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1664,11 +1696,11 @@
 			
 	</div>
 <a name="methodupdate" id="update"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">update</span> (line <span class="line-number">660</span>)
+		<span class="method-title">update</span> (line <span class="line-number">671</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1691,11 +1723,11 @@
 			
 	</div>
 <a name="methodupdate_all_fields" id="update_all_fields"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">update_all_fields</span> (line <span class="line-number">703</span>)
+		<span class="method-title">update_all_fields</span> (line <span class="line-number">714</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1718,11 +1750,11 @@
 			
 	</div>
 <a name="methodwhere_clause" id="where_clause"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">where_clause</span> (line <span class="line-number">587</span>)
+		<span class="method-title">where_clause</span> (line <span class="line-number">598</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1749,7 +1781,7 @@
 			
 	</div>
 <a name="method__get" id="__get"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1780,11 +1812,11 @@
 			
 	</div>
 <a name="method__set" id="__set"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">__set</span> (line <span class="line-number">90</span>)
+		<span class="method-title">__set</span> (line <span class="line-number">91</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1799,7 +1831,7 @@
 		<span class="method-name">
 			__set
 		</span>
-					(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$value</span>)
 			</div>
 	
 			<ul class="parameters">
@@ -1807,8 +1839,8 @@
 				<span class="var-type">String</span>
 				<span class="var-name">$field</span><span class="var-description">: the data field to write</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$value</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$value</span><span class="var-description">: the data value to write</span>			</li>
 				</ul>
 		
 			
@@ -1845,7 +1877,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 12 Dec 2010 06:19:17 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 26 Dec 2010 07:52:12 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
