@@ -11,10 +11,19 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+/**
+ * The Request class provides Controller and Service objects with
+ * access to form and query parameters, cookies, the web session
+ * and the web server environment. It also makes the app language
+ * available, and the requested content type and HTTP method.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Request extends YAWF
 {
-    // A mapping of request content types to file types
-
+    /**
+     * A mapping of request content types to file types
+     */
     private static $request_types = array(
         'text/xml' => Symbol::XML,
         'text/html' => Symbol::HTML,
@@ -39,8 +48,11 @@ class Request extends YAWF
     protected $server;  // an object to get & set $_SERVER variable,
     protected $session; // an object to get & set $_SESSION variable
 
-    // Setup some web request data objects
-
+    /**
+     * Setup some web request data objects
+     *
+     * @param App $app the web application object
+     */
     protected function setup_request($app)
     {
         $this->app = $app;
@@ -50,9 +62,12 @@ class Request extends YAWF
         $this->session = $this->session_object();
     }
 
-    // Allow method overriding using the "_method" parameter
-    // (or the "X_HTTP_METHOD_OVERRIDE" custom HTTP header).
-
+    /**
+     * Allow method overriding using the "_method" parameter
+     * (or the "X_HTTP_METHOD_OVERRIDE" custom HTTP header).
+     *
+     * @return String the request method (as a lowercase string)
+     */
     public function request_method()
     {
         return strtolower(first($this->params->_method,
@@ -60,9 +75,12 @@ class Request extends YAWF
                                 $this->server->request_method));
     }
 
-    // Return the requested content type set in HTTP headers
-    // Don't return the "x-www-form-urlencoded" content type
-
+    /**
+     * Return the requested content type set in HTTP headers
+     * Don't return the "x-www-form-urlencoded" content type
+     *
+     * @return String the requested content type (as a lowercase string)
+     */
     public function request_type()
     {
         $type = strtolower($this->server->content_type);
@@ -72,54 +90,88 @@ class Request extends YAWF
                       : $this->app->get_content_type());
     }
 
-    // Return the language
-
+    /**
+     * Return the language
+     *
+     * @return String the language setting (as a two-letter language code)
+     */
     public function lang()
     {
         return $this->app->get_lang();
     }
 
-    // Get or set a params value (used by yash)
-
+    /**
+     * Get or set a params value
+     *
+     * @param String $key the parameter key to get or set
+     * @param String $vaue the parameter value to set (optional)
+     * @return String the value of the parameter key
+     */
     public function params($key, $value = NULL) 
     {
         return (is_null($value) ? $this->params->$key
                                 : $this->params->$key = $value);
     }
 
-    // Get or set a cookie value (used by yash)
-
-    public function cookie($name, $value = NULL, $expires = 0, $path = '/', $domain = COOKIE_DOMAIN, $secure = FALSE)
+    /**
+     * Get or set a cookie value
+     *
+     * @param String $name the name of the cookie to get or set
+     * @param String $vaue the cookie value to set (optional)
+     * @param String $expires the cookie expiry setting (optional)
+     * @param String $path the cookie path setting (default is "/")
+     * @param String $domain the cookie domain (default is set by COOKIE_DOMAIN)
+     * @param String $is_secure whether the cookie is secure (default is FALSE)
+     * @return String the value of the cookie
+     */
+    public function cookie($name, $value = NULL, $expires = 0, $path = '/', $domain = COOKIE_DOMAIN, $is_secure = FALSE)
     {
-        if (!is_null($value)) $this->cookie->set($name, $value, $expires, $path, $domain, $secure);
+        if (!is_null($value)) $this->cookie->set($name, $value, $expires, $path, $domain, $is_secure);
         return $this->cookie->$name;
     }
 
-    // Get or set a server value (used by yash)
-
+    /**
+     * Get or set a server value
+     *
+     * @param String $key the server key to get or set
+     * @param String $vaue the server value to set (optional)
+     * @return String the value of the server key
+     */
     public function server($key, $value = NULL) 
     {
         return (is_null($value) ? $this->server->$key
                                 : $this->server->$key = $value);
     }
 
-    // Get or set a session value (used by yash)
-
+    /**
+     * Get or set a session value
+     *
+     * @param String $key the session key to get or set
+     * @param String $vaue the session value to set (optional)
+     * @return String the value of the session key
+     */
     public function session($key, $value = NULL) 
     {
         return (is_null($value) ? $this->session->$key
                                 : $this->session->$key = $value);
     }
 
-    // Redirect to another URL
-
+    /**
+     * Redirect to another URI
+     *
+     * @param String $uri the URI to redirect to
+     * @param Array $options options such as "finish" to force an early finish
+     */
     public function redirect($uri, $options = array())
     {
         $this->app->redirect($uri, $options);
     }
 
-    // Mail errors to the webmaster
-
+    /**
+     * Mail errors to the webmaster
+     *
+     * @return String the mail message that was sent (if any)
+     */
     public function report_errors()
     {
         // Get error details
@@ -139,8 +191,13 @@ class Request extends YAWF
         return $this->send_mail('errors', $render);
     }
 
-    // Send some mail as text & HTML multipart (depends on the Mail helper)
-
+    /**
+     * Send some mail as text & HTML multipart (depends on the Mail helper)
+     *
+     * @param String $file The file name of the mail view to render
+     * @param Object $render Render data to include in the mai view
+     * @return String the mail message that was sent
+     */
     public function send_mail($file, $render)
     {
         // Allow the $mailer object to be defined as a YAWF prop
@@ -150,16 +207,26 @@ class Request extends YAWF
         else throw new Exception('The mailer should implement the "Mailer" interface');
     }
 
-    // Set the request parameters that we use to create the params object
-
+    /**
+     * Set the request parameters that we use to create the params object
+     *
+     * @param Array $request An array of request params (get, post, put, etc.)
+     * @param Array $options An array of options to use when parsing the params
+     * @return Request this object
+     */
     public function set_params($request = array(), $options = array())
     {
         $this->params = $this->params_object($request, $options);
         return $this;
     }
 
-    // Return a request params object, using the $_REQUEST array by default
-
+    /**
+     * Return a request params object, using the $_REQUEST array by default
+     *
+     * @param Array $request An array of request params (get, post, put, etc.)
+     * @param Array $options An array of options to use when parsing the params
+     * @return Object an object holding all the parameter values after parsing
+     */
     protected function params_object($request = array(), $options = array())
     {
         if (!count($request) && $params = YAWF::prop(Symbol::PARAMS)) return $params;
@@ -188,49 +255,78 @@ class Request extends YAWF
         return YAWF::prop(Symbol::PARAMS, $params);
     }
 
-    // Return a request cookie object
-
+    /**
+     * Return a request cookie object
+     *
+     * @return Request_cookie a request cookie object holding cookie values
+     */
     protected function cookie_object()
     {
         if ($cookie = YAWF::prop(Symbol::COOKIE)) return $cookie;
         else return YAWF::prop(Symbol::COOKIE, new Request_cookie());
     }
 
-    // Return a request server object
-
+    /**
+     * Return a request server object
+     *
+     * @return Request_server a request server object holding server values
+     */
     protected function server_object()
     {
         if ($server = YAWF::prop(Symbol::SERVER)) return $server;
         else return YAWF::prop(Symbol::SERVER, new Request_server());
     }
 
-    // Return a request session object
-
+    /**
+     * Return a request session object
+     *
+     * @return Request_session a request session object holding session values
+     */
     protected function session_object()
     {
         if ($session = YAWF::prop(Symbol::SESSION)) return $session;
         else return YAWF::prop(Symbol::SESSION, new Request_session());
     }
 
-    // Test that something that "should" be true, indeed is true
-
+    /**
+     * Test that something that "should" be true, indeed is true
+     *
+     * @param String $desc A description of the test case
+     * @param Boolean $passed Whether the test case passed
+     * @param Object $test_data Test data to display when the test case fails
+     */
     protected function should($desc, $passed = FALSE, $test_data = NULL)
     {
         $this->app->test_case($desc, $passed, $test_data);
     }
 
-    // Test that something "should not" be true, indeed is not true
-
+    /**
+     * Test that something "should not" be true, indeed is not true
+     *
+     * @param String $desc A description of the test case
+     * @param Boolean $failed Whether the test case failed
+     * @param Object $test_data Test data to display when the test case passes
+     */
     protected function should_not($desc, $failed = TRUE, $test_data = NULL)
     {
         $this->app->test_case('not ' . $desc, !$failed, $test_data);
     }
 }
 
+/**
+ * The Request_cookie class enables the app to get and set HTTP cookies
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Request_cookie extends YAWF
 {
     private $cookie;
 
+    /**
+     * Create a Request_cookie object
+     *
+     * @param Array $array an optional array of data to use instead of $_COOKIE
+     */
     public function __construct($array = NULL)
     {
         if (is_null($array)) $this->cookie =& $_COOKIE;
@@ -238,26 +334,61 @@ class Request_cookie extends YAWF
         else throw new Exception('Cannot create cookie object for request');
     }
 
+    /**
+     * Get a cookie value for a name (e.g. "username")
+     *
+     * @param String $name the name to find in the cookie object
+     * @return String the value corresponding to the cookie name
+     */
     public function __get($name)
     {
         return array_key($this->cookie, $name);
     }
 
+    /**
+     * Set a cookie value for a name (e.g. "username")
+     *
+     * @param String $name the name to set in the cookie object
+     * @param String $value the value to set in the cookie object
+     * @return String the value corresponding to the cookie name
+     */
     public function __set($name, $value)
     {
         return $this->set($name, $value);
     }
 
+    /**
+     * Set a cookie value for a name, with optional extra cookie parameters
+     *
+     * @param String $name the name to set in the cookie object
+     * @param String $value the value to set in the cookie object
+     * @param String $expires the expiry epoch time of the cookie (default is 0)
+     * @param String $path the cookie path (default is "/")
+     * @param String $domain the cookie domain (default is COOKIE_DOMAIN config)
+     * @param Boolean $secure whether the cookie is secure (default is FALSE)
+     * @return String the value corresponding to the cookie name
+     */
     public function set($name, $value = NULL, $expires = 0, $path = '/', $domain = COOKIE_DOMAIN, $secure = FALSE)
     {
         setcookie($name, $value, $expires, $path, $domain, $secure);
+        return $value;
     }
 }
 
+/**
+ * The Request_server class enables the app to get (and set!) server settings
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Request_server extends YAWF
 {
     private $server;
 
+    /**
+     * Create a Request_cookie object
+     *
+     * @param Array $array an optional array of data to use instead of $_SERVER
+     */
     public function __construct($array = NULL)
     {
         if (is_null($array)) $this->server =& $_SERVER;
@@ -265,21 +396,44 @@ class Request_server extends YAWF
         else throw new Exception('Cannot create server object for request');
     }
 
+    /**
+     * Get a server value for a key (e.g. "remote_addr")
+     *
+     * @param String $key the key to find in the server object
+     * @return String the value corresponding to the server key
+     */
     public function __get($key)
     {
         return array_key($this->server, strtoupper($key));
     }
 
+    /**
+     * Set a server value for a key (e.g. "remote_addr")
+     *
+     * @param String $key the key to set in the server object
+     * @param String $value the value to set in the server object
+     * @return String the value corresponding to the server key
+     */
     public function __set($key, $value)
     {
         $this->server[strtoupper($key)] = $value;
     }
 }
 
+/**
+ * The Request_session class enables the app to get and set session variables
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Request_session extends YAWF
 {
     private $session;
 
+    /**
+     * Create a Request_cookie object
+     *
+     * @param Array $array an optional array of data to use instead of $_SESSION
+     */
     public function __construct($array = NULL)
     {
         @session_start();
@@ -288,19 +442,36 @@ class Request_session extends YAWF
         else throw new Exception('Cannot create session object for request');
     }
 
+    /**
+     * Get a session value for a key
+     *
+     * @param String $key the key to find in the session object
+     * @return Object the value corresponding to the session key
+     */
     public function __get($key)
     {
         return array_key($this->session, $key);
     }
 
+    /**
+     * Set a session value for a key
+     *
+     * @param String $key the key to set in the session object
+     * @param Object $value the value to set in the session object
+     * @return Object the value corresponding to the session key
+     */
     public function __set($key, $value)
     {
         return $this->session[$key] = $value;
     }
 
+    /**
+     * Destroy the session
+     */
     public function destroy()
     {
         @session_destroy();
+        $this->session = array();
     }
 }
 

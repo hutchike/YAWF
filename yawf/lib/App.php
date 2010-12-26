@@ -399,7 +399,8 @@ class App extends YAWF implements Mailer
 
         // Set a location header and optional status
 
-        $header = 'Location: ' . AppView::uri($uri);
+        $view_uri = AppView::uri($uri);
+        $header = "Location: $view_uri";
         if ($status = array_key($options, 'status'))
         {
             header($header, TRUE, $status); // set user-defined HTTP status code
@@ -409,10 +410,11 @@ class App extends YAWF implements Mailer
             header($header);
         }
 
-        // Remain silent, and optionally exit
+        // Remain silent, and optionally exit or finish (preferred for logging)
 
         $this->is_silent = TRUE;
         if (array_key($options, 'exit')) exit; // careful! it stops our logging!
+        if (array_key($options, 'finish')) YAWF::finish("Redirected to $view_uri");
     }
 
     /**
