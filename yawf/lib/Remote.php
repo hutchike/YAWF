@@ -13,7 +13,14 @@
 
 load_tool('REST');
 
-class Remote extends YAWF
+/**
+ * The Remote class provides remote data manipulation capabilities via REST
+ * by providing a facade to the Model class via the Modelled and Validated
+ * interfaces.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
+class Remote extends YAWF implements Modelled, Validated // from Model.php
 {
     const DEFAULT_TYPE = Symbol::JSON; // (it's built into PHP)
 
@@ -27,8 +34,12 @@ class Remote extends YAWF
     private $has_changed;   // Did we change our remoted data?
     private $response;      // Data we received from the server
 
-    // Create a remote object behaving *like* a regular model
-
+    /**
+     * Create a remote object behaving *like* a regular model
+     *
+     * @param String/Object $class_or_object the model class or an actual object
+     * @param String $url the URL of the model REST service at the remote server
+     */
     public function __construct($class_or_object, $url = NULL)
     {
         if (is_string($class_or_object))
@@ -48,8 +59,12 @@ class Remote extends YAWF
         $this->response = NULL;
     }
 
-    // Set a default (e.g. "server", "username" & "password")
-
+    /**
+     * Set a default (e.g. "server", "username" & "password")
+     *
+     * @param String $field the default field to set (e.g. "server")
+     * @param String $value the default value to set (e.g. "localhost")
+     */
     public static function set_default($field, $value = NULL)
     {
         if (is_array($field) && is_null($value))
@@ -69,40 +84,60 @@ class Remote extends YAWF
         }
     }
 
-    // Get a remote default setting (see above)
-
+    /**
+     * Get a default setting (see above)
+     *
+     * @param String $field the default field to get (e.g. "server")
+     */
     public static function get_default($field)
     {
         return array_key(self::$defaults, $field);
     }
 
-    // Set the username and password for auth
-
-    public function auth($username, $password)
+    /**
+     * Set the username and password for auth
+     *
+     * @param String $username the auth username
+     * @param String $password the auth password
+     * @return Remote this object for method chaining
+     */
+    public function set_auth($username, $password)
     {
         $this->username = $username;
         $this->password = $password;
         return $this;
     }
 
-    // Set the URL to request
-
-    public function url($url)
+    /**
+     * Set the URL to request
+     *
+     * @param String $url the URL of the model REST service at the remote server
+     * @return Remote this object for method chaining
+     */
+    public function set_url($url)
     {
         $this->url = $url;
         return $this;
     }
 
-    // Set the data content type
-
-    public function type($type)
+    /**
+     * Set the data content type
+     *
+     * @param String $type the content type to marshall the model object data
+     * @return Remote this object for method chaining
+     */
+    public function set_type($type)
     {
         $this->type = $type;
         return $this;
     }
 
-    // Perform a remote load request
-
+    /**
+     * Perform a remote load request
+     *
+     * @param Integer $id the ID of the model object to load (default is 0)
+     * @return Integer the ID of the loaded model object
+     */
     public function load($id = 0) // returns the object ID or zero on failure
     {
         $class = $this->class;
@@ -113,8 +148,11 @@ class Remote extends YAWF
         return $this->object->get_id();
     }
 
-    // Perform a remote save request
-
+    /**
+     * Perform a remote save request
+     *
+     * @return Boolean whether the object was remotely saved
+     */
     public function save() // returns true if the object saved or false if not
     {
         if (!$this->has_changed) return FALSE;
@@ -122,8 +160,11 @@ class Remote extends YAWF
         return $saved ? TRUE : FALSE;
     }
 
-    // Perform a remote insert request using the REST "post" method
-
+    /**
+     * Perform a remote insert request using the REST "post" method
+     *
+     * @return Integer the ID of the inserted model object
+     */
     public function insert()
     {
         if (!is_object($this->object)) return 0;
@@ -138,8 +179,11 @@ class Remote extends YAWF
         return $id;
     }
 
-    // Perform a remote update request using the REST "put" method
-
+    /**
+     * Perform a remote update request using the REST "put" method
+     *
+     * @return Remote this object for method chaining
+     */
     public function update()
     {
         if (!is_object($this->object) || !$this->has_changed) return NULL;
@@ -152,8 +196,21 @@ class Remote extends YAWF
         return $this;
     }
 
-    // Perform a remote delete request using the REST "delete" method
+    /**
+     * Perform a remote update request using the REST "put" method
+     *
+     * @return Remote this object for method chaining
+     */
+    public function update_all_fields() // to honor the Modelled interface
+    {
+        return $this->update();
+    }
 
+    /**
+     * Perform a remote delete request using the REST "delete" method
+     *
+     * @return Remote this object for method chaining
+     */
     public function delete()
     {
         if (!is_object($this->object)) return NULL;
@@ -164,15 +221,24 @@ class Remote extends YAWF
         return $this;
     }
 
-    // Get a field of object data
-
+    /**
+     * Get a field of object data
+     *
+     * @param String $field the object field to get
+     * @return String the value of the object field
+     */
     public function __get($field)
     {
         return ($this->object ? $this->object->$field : NULL);
     }
 
-    // Set a field of remoted object data
-
+    /**
+     * Set a field of remoted object data
+     *
+     * @param String $field the object field to set
+     * @param String $value the object value to set
+     * @return String the value of the object field
+     */
     public function __set($field, $value)
     {
         if ($this->object) $this->object->$field = $value;
@@ -180,44 +246,73 @@ class Remote extends YAWF
         return $value;
     }
 
-    // Get the object data
-
+    /**
+     * Get the object data
+     *
+     * @return Array the remoted object data array
+     */
     public function data()
     {
         return is_object($this->object) ? $this->object->data() : NULL;
     }
 
-    // Get whether it has changed
-
+    /**
+     * Get whether it has changed
+     *
+     * @return Boolean whether the remoted object's data has been changed
+     */
     public function has_changed()
     {
         return $this->has_changed;
     }
 
-    // Return the object ID
+    /**
+     * Get the object fields
+     *
+     * @return Array the remoted object's fields
+     */
+    public function fields()
+    {
+        return is_object($this->object) ? $this->object->fields() : array();
+    }
 
+    /**
+     * Return the object ID
+     *
+     * @return Integer the remoted object's ID, or zero if it's not available
+     */
     public function get_id()
     {
         return is_object($this->object) ? $this->object->get_id() : 0;
     }
 
-    // Set the object ID number
-
+    /**
+     * Set the object ID number
+     *
+     * @param Integer $id the remoted object's ID
+     * @return Remote this object for method chaining
+     */
     public function set_id($id)
     {
         if (is_object($this->object)) $this->object->set_id($id);
         return $this; // just like normal models do
     }
 
-    // Return response object
-
+    /**
+     * Return the REST response as an object
+     *
+     * @return Object the REST response as an object
+     */
     public function response()
     {
         return array_to_object($this->response);
     }
 
-    // Validate our object locally
-
+    /**
+     * Return whether the remoted object's field values are locally validated
+     *
+     * @return Boolean whether the field values are locally validated
+     */
     public function is_validated()
     {
         if (!is_object($this->object)) return FALSE;
@@ -226,16 +321,23 @@ class Remote extends YAWF
         return FALSE;
     }
 
-    // Return any validation messages
-
+    /**
+     * Return any validation messages
+     *
+     * @return Array an array of validation messages
+     */
     public function validation_messages()
     {
         return is_array($this->response) ?
-                        array_key($this->response, Symbol::VALIDATION_MESSAGES) : NULL;
+                        array_key($this->response, Symbol::VALIDATION_MESSAGES) : array();
     }
 
-    // Return the default URL for an object class
-
+    /**
+     * Return the default URL for the REST service of a remoted object class
+     *
+     * @param String $class the class name for the remoted model
+     * @return String the default URL for the remoted model's REST service
+     */
     protected function default_url($class = NULL)
     {
         $default_url = array_key(self::$defaults, 'server', '');
@@ -243,8 +345,12 @@ class Remote extends YAWF
         return $default_url;
     }
 
-    // Prefix a username and password to a URL
-
+    /**
+     * Prefix a username and password to a URL
+     *
+     * @param String $url an optional URL (defaults to the object's URL)
+     * @return String the secure URL for the remoted model's REST service
+     */
     protected function secure_url($url = NULL)
     {
         if (is_null($url)) $url = $this->url;
@@ -260,8 +366,11 @@ class Remote extends YAWF
         return $protocol . $url;
     }
 
-    // Check data returned in the response is identical
-
+    /**
+     * Check data returned in the response is identical by writing log warnings
+     *
+     * @param Object $response an optional response object to check
+     */
     protected function check_response($response = NULL)
     {
         if (is_null($response)) $response = $this->response;
@@ -278,8 +387,12 @@ class Remote extends YAWF
         }
     }
 
-    // Get the ID from a data array response
-
+    /**
+     * Get the ID from a data array response received from the REST service
+     *
+     * @param Array $response the response from which to return the object ID
+     * @return Integer the ID from a data array response from the REST service
+     */
     private function get_id_from($response)
     {
         assert('is_array($response)');
@@ -289,7 +402,7 @@ class Remote extends YAWF
             $id_field = $this->object->get_id_field();
             if (is_array($data) && $id = array_key($data, $id_field)) return $id;
         }
-        return NULL;
+        return 0;
     }
 }
 
