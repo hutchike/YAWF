@@ -11,20 +11,42 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-// Replace this class by writing your own class in "myapp/app/services/REST.php"
-
+/**
+ * The Rest_service class may be subclassed by service classes in your app's
+ * "services" directory. It provides standard REST HTTP methods as methods to
+ * override in your subclass - e.g. "get", "post", "put", "delete" and others.
+ * It also provides a hook for a "basic_auth" method to check a username and
+ * password before providing access to the service.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class REST_service extends Service
 {
     // ----------------------------------------
     // AUTH METHODS TO OVERRIDE IN YOUR SERVICE
     // ----------------------------------------
 
+    /**
+     * Return whether a web user is authorized to access this service.
+     * This method calls the "basic_auth" method - override to modify.
+     *
+     * @return Boolean TRUE if authorized or FALSE otherwise
+     */
     public function auth()
     {
         return $this->basic_auth($this->server->php_auth_user,
                                  $this->server->php_auth_pw);
     }
 
+    /**
+     * Return whether a web user is authorized to access this service.
+     * This method should be overriden in your subclass to check the
+     * username and password and return whether they're authorized.
+     *
+     * @param String $username the username to authorize
+     * @param string $password the password to authorize
+     * @return Boolean TRUE if authorized or FALSE otherwise
+     */
     protected function basic_auth($username, $password)
     {
         // Override this method in your service
@@ -36,8 +58,12 @@ class REST_service extends Service
     // HTTP METHODS TO OVERRIDE IN YOUR SERVICE
     // ----------------------------------------
 
-    // Default "delete" method behavior is "delete"
-
+    /**
+     * The default "delete" method behavior is to delete the model object
+     *
+     * @param Object $params the HTTP params
+     * @return Array the "data" HTTP param containing all the REST data
+     */
     public function delete($params)
     {
         $model_name = $this->get_model_name();
@@ -46,8 +72,13 @@ class REST_service extends Service
         return $params->data;
     }
 
-    // Default "get" method behavior is "load"
 
+    /**
+     * The default "get" method behavior is to load the model object
+     *
+     * @param Object $params the HTTP params
+     * @return Array the "data" HTTP param containing REST data, or an error
+     */
     public function get($params)
     {
         $model_name = $this->get_model_name();
@@ -55,22 +86,34 @@ class REST_service extends Service
         return $model->load($params->id) ? array($model_name => $model->data()) : $this->error("id $params->id not found");
     }
 
-    // Override "move" in your service if you wish to support it
-
+    /**
+     * Override "move" in your service if you wish to support it
+     *
+     * @param Object $params the HTTP params
+     * @return Array an error saying this HTTP REST method isn't yet supported
+     */
     public function move($params)
     {
         return $this->error('method "move" not supported');
     }
 
-    // Override "options" in your service if you wish to support it
-
+    /**
+     * Override "options" in your service if you wish to support it
+     *
+     * @param Object $params the HTTP params
+     * @return Array an error saying this HTTP REST method isn't yet supported
+     */
     public function options($params)
     {
         return $this->error('method "options" not supported');
     }
 
-    // Default "post" method behavior is "insert"
-
+    /**
+     * The default "post" method behavior is to insert the model object
+     *
+     * @param Object $params the HTTP params
+     * @return Array the "data" HTTP param containing all the REST data
+     */
     public function post($params)
     {
         $model_name = $this->get_model_name();
@@ -83,8 +126,12 @@ class REST_service extends Service
         return $params->data;
     }
 
-    // Default "put" method behavior is "update"
-
+    /**
+     * The default "put" method behavior is to update the model object
+     *
+     * @param Object $params the HTTP params
+     * @return Array the "data" HTTP param containing all the REST data
+     */
     public function put($params)
     {
         $model_name = $this->get_model_name();
@@ -98,8 +145,11 @@ class REST_service extends Service
         return $params->data;
     }
 
-    // Return the data model class name
-
+    /**
+     * Return the data model class name (and ensure it has been loaded)
+     *
+     * @return String the name of the model (e.g. "User")
+     */
     protected function get_model_name()
     {
         $model_name = preg_replace('/(_test)?_service$/', '', get_class($this));
