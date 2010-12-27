@@ -1,0 +1,776 @@
+<?
+// Copyright (c) 2010 Guanoo, Inc.
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public License
+// as published by the Free Software Foundation; either version 3
+// of the License, or (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+
+require_once "lib/data/Connector.php";
+load_helper('Text'); // for "tableize"
+
+/**
+ * The SQL_model class links data objects to storage engines
+ * that support SQL queries such as MySQL, SQLite2 & SQLite3.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
+class SQL_model extends YAWF implements Modelled
+{
+    private static $connectors;
+    private static $databases;
+    private static $tables = array();
+    private static $id_fields = array();
+    private static $timestamp = array();
+    private static $virtual = array();
+    private $connector;
+    private $database;
+    private $table;
+    private $data;
+    private $to_update;
+    private $id_field;
+    private $order;
+    private $limit;
+    private $offset;
+
+    /**
+     * Setup a model by calling methods such as "set_id_field", "set_virtual"
+     * and "set_timestamp". This method should be overriden in your subclass:
+     *
+     * <code>
+     * // Subclass in your models like this:
+     *
+     * public function setup()
+     * {
+     *     $this->set_id_field('table_id_field');
+     *     $this->set_virtual('transient_field');
+     *     $this->set_timestamp('created_at', 'updated_at');
+     *     $this->validates('email', 'is_valid_email'); // when a "Model" object
+     * }
+     * </code>
+     */
+    public function setup()
+    {
+        // Override this method in your subclasses
+    }
+
+    /**
+     * Create a new SQL model object
+     *
+     * @param Array $data the data to initialize the object (may be an object)
+     */
+    public function __construct($data = array())
+    {
+        $this->to_update = array();
+        $this->data = (array)$data;
+    }
+
+    /**
+     * Get a data field value from this model object
+     *
+     * @param String $field the data field to read
+     * @return String the value of the data field
+     */
+    public function __get($field)
+    {
+        return array_key($this->data, $field);
+    }
+
+    /**
+     * Set a data field value in this model object
+     *
+     * @param String $field the data field to write
+     * @param String $value the data value to write
+     * @return String the value of the newly updated data field
+     */
+    public function __set($field, $value)
+    {
+        $this->to_update[$field] = TRUE;
+        $this->data[$field] = $value;
+        return $value;
+    }
+
+    /**
+     * Get an assoc array of data stored in this model object
+     *
+     * @return Array the assoc array of data stored in this model object
+     */
+    public function data()
+    {
+        return $this->data;
+    }
+
+    /**
+     * Return whether this model object has changed
+     *
+     * @return Boolean whether this model object has changed
+     */
+    public function has_changed()
+    {
+        return count($this->to_update) ? TRUE : FALSE;
+    }
+
+    /**
+     * Get a list array of data fields for this model object
+     *
+     * @return Array the list array of data fields for this model object
+     */
+    public function fields()
+    {
+        return array_keys($this->data);
+    }
+
+    /**
+     * Set the connector (e.g. "MySQLi") and optionally the database name
+     *
+     * @param String $connector_class the connector class name
+     * @param Array $options an array of options (e.g. "database", "hostname")
+     * @return Object this model object for method chaining
+     */
+    public function set_connector($connector_class, $options = array())
+    {
+        $database = array_key($options, Symbol::DATABASE);
+        if (!is_null($database)) $this->set_database($database);
+        require_once 'lib/data/' . $connector_class . '.php';
+        $connector_class = "Data_$connector_class";
+        $database = $this->get_database();
+        self::$connectors[$database] = new $connector_class($options);
+        return $this;
+    }
+
+    /**
+     * Get the connector object
+     *
+     * @return Object the connector object for this model object
+     */
+    public function get_connector()
+    {
+        if ($this->connector) return $this->connector;
+        $database = $this->get_database();
+        $this->connector = array_key(self::$connectors, $database, array_key(self::$connectors, 'models'));
+        if (!$this->connector) throw new Exception("No connector set for database \"$database\"");
+        return $this->connector;
+    }
+
+    /**
+     * Set the database used by this model object
+     *
+     * @param String $database the database name
+     * @return Object this model object for method chaining
+     */
+    public function set_database($database)
+    {
+        $table = $this->get_table();
+        $this->database = self::$databases[$table] = $database;
+        return $this;
+    }
+
+    /**
+     * Get the database used by this model object
+     *
+     * @return String the database used by this model object
+     */
+    public function get_database()
+    {
+        if ($this->database) return $this->database;
+        $table = $this->get_table();
+        $this->database = array_key(self::$databases, $table, array_key(self::$databases, 'models'));
+        return $this->database;
+    }
+
+    /**
+     * Set the table used by this model object
+     *
+     * @param String $table the table name
+     * @return Object this model object for method chaining
+     */
+    public function set_table($table)
+    {
+        $this->table = self::$tables[get_class($this)] = $table;
+        return $this;
+    }
+
+    /**
+     * Get the table used by this model object
+     *
+     * @return String the table used by this model object
+     */
+    public function get_table()
+    {
+        if ($this->table) return $this->table;
+        $this->table = array_key(self::$tables, get_class($this));
+        if ($this->table) return $this->table;
+        $this->set_table(Text::tableize(get_class($this)));
+        return $this->table;
+    }
+
+    /**
+     * Get the database and table used by this model object (e.g. "app.users")
+     *
+     * @return String the database and table used by this model object
+     */
+    public function get_db_table()
+    {
+        $database = $this->get_database() . '.';        // MySQL databases
+        if (strpos($database, '/') > 0) $database = ''; // SQLite file path
+        return $database . $this->get_table();
+    }
+
+    /**
+     * Set the order for data result sets (i.e. "asc" or "desc")
+     *
+     * @param String $order the data result set order (i.e. "asc" or "desc")
+     * @return Object this model object for method chaining
+     */
+    public function set_order($order)
+    {
+        $this->order = $order;
+        return $this;
+    }
+
+    /**
+     * Set the limit for data result sets (e.g. 20)
+     *
+     * @param Integer $limit the data result set limit (e.g. 20)
+     * @return Object this model object for method chaining
+     */
+    public function set_limit($limit)
+    {
+        $this->limit = $limit + 0;
+        return $this;
+    }
+
+    /**
+     * Get the limit for data result sets (e.g. 20)
+     *
+     * @return Integer the data result set limit (e.g. 20)
+     */
+    public function get_limit()
+    {
+        return $this->limit + 0;
+    }
+
+    /**
+     * Set the offset for data result sets (e.g. 10)
+     *
+     * @param Integer $offset the data result set offset (e.g. 10)
+     * @return Object this model object for method chaining
+     */
+    public function set_offset($offset)
+    {
+        $this->offset = $offset + 0;
+        return $this;
+    }
+
+    /**
+     * Get the offset for data result sets (e.g. 10)
+     *
+     * @return Integer the data result set offset (e.g. 10)
+     */
+    public function get_offset()
+    {
+        return $this->offset + 0;
+    }
+
+    /**
+     * Set the ID field name for this model object
+     *
+     * @param String $field the ID field name for this model object
+     * @return Object this model object for method chaining
+     */
+    public function set_id_field($field)
+    {
+        $table = $this->get_table();
+        $this->id_field = self::$id_fields[$table] = $field;
+        return $this;
+    }
+
+    /**
+     * Get the ID field name for this model object
+     *
+     * @return String the ID field name for this model object
+     */
+    public function get_id_field()
+    {
+        if ($this->id_field) return $this->id_field;
+        $table = $this->get_table();
+        $this->id_field = array_key(self::$id_fields, $table, 'id');
+        return $this->id_field;
+    }
+
+    /**
+     * Get the ID number for this model object
+     *
+     * @return Integer the ID number for this model object
+     */
+    public function get_id()
+    {
+        $id_field = $this->get_id_field();
+        return $this->$id_field;
+    }
+
+    /**
+     * Set the ID number for this model object
+     *
+     * @param Integer the ID number for this model object
+     * @return Object this model object for method chaining
+     */
+    public function set_id($id)
+    {
+        $id_field = $this->get_id_field();
+        $this->$id_field = $id + 0;
+        return $this;
+    }
+
+    /**
+     * Set some field flags (e.g. in the "virtual" or "timestamp" flag arrays)
+     *
+     * @param Array $array the array of field flags (e.g. "virtual")
+     * @param Array $fields a list of fields to flag as TRUE
+     * @return Object this model object for method chaining
+     */
+    private function set_field_flags(&$array, $fields)
+    {
+        $table = $this->get_table();
+        foreach ($fields as $field)
+        {
+            $array["$table.$field"] = TRUE;
+        }
+        return $this;
+    }
+
+    /**
+     * Set some fields as being timestamp fields on this model class
+     *
+     * @param Array an argument list of timestamp field names
+     * @return Object this model object for method chaining
+     */
+    public function set_timestamp() // field list
+    {
+        $fields = func_get_args();
+        return $this->set_field_flags(self::$timestamp, $fields);
+    }
+
+    /**
+     * Get whether or not this model class has a particular timestamp field
+     *
+     * @param String the name of the timestamp field to look for
+     * @return Boolean whether this model class has a particular timestamp field
+     */
+    public function has_timestamp($field)
+    {
+        $table = $this->get_table();
+        return array_key(self::$timestamp, "$table.$field") ? TRUE : FALSE;
+    }
+
+    /**
+     * Set some fields as being virtual fields to exclude from any SQL queries
+     *
+     * @param Array an argument list of virtual field names for this model class
+     * @return Object this model object for method chaining
+     */
+    public function set_virtual() // field list
+    {
+        $fields = func_get_args();
+        return $this->set_field_flags(self::$virtual, $fields);
+    }
+
+    /**
+     * Get whether or not a particular field is virtual on this model class
+     *
+     * @param String the name of the virtual field to look for
+     * @return Boolean whether the field is a virtual field on this model class
+     */
+    public function is_virtual($field)
+    {
+        $table = $this->get_table();
+        return array_key(self::$virtual, "$table.$field") ? TRUE : FALSE;
+    }
+
+    /**
+     * Connect this model to a database, optionally forcing a reconnection
+     *
+     * @param String $database the database name
+     * @param Boolean $reconnect whether or not to reconnect (FALSE by default)
+     */
+    public function connect($database = NULL, $reconnect = FALSE)
+    {
+        if (is_null($database)) $database = $this->get_database();
+        if ($reconnect) $this->connector = NULL;
+        if (is_null($this->connector))
+        {
+            $this->connector = $this->get_connector()->connect($database);
+        }
+    }
+
+    /**
+     * Disonnect this model from a database
+     */
+    public function disconnect()
+    {
+        $this->get_connector()->disconnect();
+        $this->connector = NULL;
+    }
+
+    /**
+     * Quote some SQL to make it safe for executing in database queries
+     *
+     * @param String $sql the SQL to quote
+     * @return String the quoted SQL, safe for executing in database queries
+     */
+    public function quote($sql)
+    {
+        return '"' . $this->escape($sql) . '"';
+    }
+
+    /**
+     * Quote an SQL "in" clause to make it safe to execute in database queries
+     *
+     * @param String $clause the SQL "in" clause to quote
+     * @return String the quoted SQL, safe for executing in database queries
+     */
+    public function quote_in($clause)
+    {
+        $parts = preg_split('/,\s*/', trim($clause, '()'));
+        $quoted = array();
+        foreach ($parts as $part) $quoted[] = $this->quote($part);
+        return '(' . join(',', $quoted) . ')';
+    }
+
+    /**
+     * Escape some SQL to make it safe to execute in database queries
+     *
+     * @param String $sql the SQL to escape by calling the connector object
+     * @return String the quoted SQL, safe for executing in database queries
+     */
+    public function escape($sql)
+    {
+        $this->connect();
+        return $this->get_connector()->escape($sql);
+    }
+
+    /**
+     * Execute a database query and return the result set data fetcher object
+     *
+     * @param String $sql the SQL to execute in the database query
+     * @return Object a result set data fetcher object
+     */
+    public function query($sql)
+    {
+        $this->connect();
+        return $this->get_connector()->query($sql);
+    }
+
+    /**
+     * Copy data from this model object to another model object
+     *
+     * @param SQL_model $other the other model object
+     */
+    public function copy_to($other)
+    {
+        foreach ($this->data() as $field => $value)
+        {
+            $other->$field = $value;
+        }
+    }
+
+    /**
+     * Load a model object by ID or by the other fields that have been set
+     *
+     * @param Integer $id an optional ID value to load
+     * @return Integer the ID of the loaded model object
+     */
+    public function load($id = 0) // returns the object ID or zero on failure
+    {
+        if (is_null($id)) return 0; // to catch NULL parameters
+        if ($id) $this->set_id($id);
+        if ($found = $this->find_first())
+        {
+            $this->to_update = array();
+            $this->data = $found->data;
+            return $this->get_id();
+        }
+        return 0;
+    }
+
+    /**
+     * Save this model object by inserting or updating it (if it has an ID)
+     *
+     * @return Boolean whether or not this model object was saved
+     */
+    public function save() // returns true if the object saved or false if not
+    {
+        $saved = $this->get_id() ? $this->update() : $this->insert();
+        return $saved ? TRUE : FALSE;
+    }
+
+    /**
+     * Find all model objects that match the conditions or the object's fields
+     *
+     * @param Array $conditions an optional array of conditions to match
+     * @return Array a list of model objects that match the conditions or fields
+     */
+    public function find_all($conditions = NULL) // returns array of objects
+    {
+        // Query the database
+
+        $db_table = $this->get_db_table();
+        $clause = $this->where_clause($conditions);
+        $clause .= ($this->order ? ' order by ' . $this->order : '');
+        $clause .= ($this->limit ? ' limit ' . $this->limit : '');
+        $clause .= ($this->offset ? ' offset ' . $this->offset : '');
+        $result = $this->query("select * from $db_table $clause");
+
+        // ...to make objects
+
+        $objects = array();
+        $class = get_class($this);
+        while ($object = $result->fetch_object())
+        {
+            $objects[] = new $class($object);
+        }
+        $result->close();
+        return $objects;
+    }
+
+    /**
+     * Find model objects with a particular ID, or array of IDs
+     *
+     * @param Integer $id the model ID to find (may also be an array of IDs)
+     * @return SQL_model(s) the found model(s)
+     */
+    public function find_id($id) // returns an array of objects, or an object
+    {
+        $id_field = $this->get_id_field();
+        return is_array($id) ?
+            $this->find_all(array($id_field => 'in (' . join(',', $id) . ')')) :
+            $this->find_first(array($id_field => $id + 0));
+    }
+
+    /**
+     * Find the first model object that matches some conditions or field values
+     *
+     * @param Array $conditions an array of conditions to match (optional)
+     * @return SQL_model the first matching model object
+     */
+    public function find_first($conditions = NULL) // returns an object or null
+    {
+        $old_limit = $this->get_limit();
+        $objects = $this->set_limit(1)->find_all($conditions);
+        $this->set_limit($old_limit);
+        return count($objects) ? $objects[0] : NULL;
+    }
+
+    /**
+     * Find the last model object that matches some conditions or field values
+     *
+     * @param Array $conditions an array of conditions to match (optional)
+     * @return SQL_model the last matching model object (may take some time!)
+     */
+    public function find_last($conditions = NULL) // returns an object or null
+    {
+        $objects = $this->find_all($conditions);
+        return count($objects) ? $objects[count($objects) - 1] : NULL;
+    }
+
+    /**
+     * Find model objects that match a SQL "where" clause
+     *
+     * @param String $clause a SQL "where" clause to match
+     * @return Array a list of model objects that match the SQL "where" clause
+     */
+    public function find_where($clause) // returns an array of objects
+    {
+        return $this->find_all(array('where' => $clause));
+    }
+
+    /**
+     * Return a SQL "where" clause for an array of conditions, or field values
+     *
+     * @param Array $conditions an array of conditions (optional)
+     * @return String a SQL "where" clause from the conditions or field values
+     */
+    protected function where_clause($conditions = NULL) // returns SQL
+    {
+        $conditions = is_null($conditions) ? $this->data : (array)$conditions;
+        if ($clause = array_key($conditions, 'where')) return "where $clause";
+        foreach ($conditions as $field => $condition)
+        {
+            if ($this->is_virtual($field)) continue;
+            $op = ($condition !== trim($condition, '%') ? ' like ' : '=');
+            if (preg_match('/^([<>]=?)\s*(.*)$/', $condition, $matches))
+            {
+                $op = $matches[1];
+                $condition = $matches[2];
+            }
+            elseif (preg_match('/^in \((.*)\)$/', $condition, $matches))
+            {
+                $op = 'in';
+                $condition = $this->quote_in($matches[1]);
+            }
+            if ($clause) $clause .= ' and ';
+            if ($field === 'password') $condition = $this->password($condition);
+            if ($op != 'in') $condition = $this->quote($condition);
+            $clause .= "$field $op $condition";
+        }
+        return $clause ? "where $clause" : '';
+    }
+
+    /**
+     * Insert this model object's data into the database via the connector
+     *
+     * @return Integer the ID of the inserted row, or 0 upon failure
+     */
+    public function insert() // returns the ID of the inserted row, or zero
+    {
+        // Check there is no ID yet
+
+        $id_field = $this->get_id_field();
+        if (array_key($this->data, $id_field)) return 0; // already has ID!
+
+        // Apply an optional "created_at" timestamp
+
+        if ($this->has_timestamp('created_at'))
+            $this->data['created_at'] = date('Y-m-d H:i:s');
+
+        // Insert the new record into the table
+
+        $db_table = $this->get_db_table();
+        $fields = '';
+        $values = '';
+        foreach ($this->data as $field => $value)
+        {
+            if ($field == $id_field || $this->is_virtual($field)) continue;
+
+            if ($fields) $fields .= ',';
+            $fields .= $field;
+            if ($values) $values .= ',';
+            if ($field === 'password') $value = $this->password($value);
+            $values .= $this->quote($value);
+        }
+        $this->query("insert into $db_table ($fields) values ($values)");
+
+        // Return the new ID on the record
+
+        $id_field = $this->get_id_field();
+        $this->data[$id_field] = $this->connector->insert_id();
+        return $this->data[$id_field];
+    }
+
+    /**
+     * Update this model object's data in the database via the connector.
+     * Note that this method will only update the fields that have changed.
+     *
+     * @return SQL_model this model object for chaining, or NULL upon failure
+     */
+    public function update() // returns the object unless it has no ID field
+    {
+        // Check there's an ID value
+
+        $id_field = $this->get_id_field();
+        if (!array_key($this->data, $id_field)) return NULL; // no ID field!
+
+        // Apply an optional "updated_at" timestamp
+
+        if ($this->has_timestamp('updated_at'))
+            $this->updated_at = date('Y-m-d H:i:s');
+
+        // Did we provide a list of fields to update?
+
+        $field_list = func_get_args();
+        foreach ($field_list as $field) $this->to_update[$field] = TRUE;
+
+        // Update the record values that have changed
+
+        $db_table = $this->get_db_table();
+        $updates = '';
+        foreach ($this->data as $field => $value)
+        {
+            if ($field == $id_field || $this->is_virtual($field)) continue;
+            if (!array_key_exists($field, $this->to_update)) continue;
+
+            if ($field === 'password') $value = $this->password($value);
+            $updates .= $field . '=' . $this->quote($value) . ',';
+        }
+        $updates = rtrim($updates, ','); // remove final comma
+        if (!$updates) return $this;
+        $updates .= " where $id_field=" . $this->data[$id_field];
+        $this->query("update $db_table set $updates");
+        $this->to_update = array();
+        return $this;
+    }
+
+    /**
+     * Update this model object's data in the database via the connector.
+     * Note that this method will update *all* this model object's fields.
+     *
+     * @return SQL_model this model object for chaining, or NULL upon failure
+     */
+    public function update_all_fields()
+    {
+        foreach ($this->fields() as $field) $this->to_update[$field] = TRUE;
+        return $this->update();
+    }
+
+    /**
+     * Delete this model object's data from the database via the connector
+     *
+     * @return SQL_model this model object for chaining, or NULL upon failure
+     */
+    public function delete() // returns the object unless it has no ID field
+    {
+        // Check there's an ID value
+
+        $id_field = $this->get_id_field();
+        if (!array_key($this->data, $id_field)) return NULL; // no ID field!
+
+        // Delete the record from the table
+
+        $db_table = $this->get_db_table();
+        $this->query("delete from $db_table where $id_field=" . $this->quote($this->data[$id_field]));
+        $this->data[$id_field] = NULL;
+        return $this;
+    }
+
+    /**
+     * Delete all the model object data in the database for this model class!!!
+     *
+     * @return SQL_model this model object for chaining
+     */
+    public function delete_all()
+    {
+        $db_table = $this->get_db_table();
+        $this->query("delete from $db_table");
+        return $this;
+    }
+
+    /**
+     * Drop the database table for this model class!!!
+     *
+     * @return SQL_model this model object for chaining
+     */
+    public function drop()
+    {
+        $db_table = $this->get_db_table();
+        $this->query("drop table $db_table");
+        return $this;
+    }
+
+    /**
+     * Return an encrypted password ready to store in the database
+     *
+     * @param String $text the unencrypted password text to be encrypted
+     * @return String an encrypted password ready to store in the database
+     */
+    protected function password($text)
+    {
+        return sha1(md5($text));
+    }
+}
+
+// End of SQL_model.php
