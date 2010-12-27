@@ -11,15 +11,15 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-load_interfaces('Modelled', 'Persisted', 'Validated');
+load_interfaces('Modelled', 'Validated');
 
 /**
- * The Valid_SQL_model class extends the SQL_model class with
+ * The Valid_model class extends the Simple_model class with
  * extra validation methods to validate the data field values.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Valid_SQL_model extends SQL_model implements Modelled, Persisted, Validated
+class Valid_model extends Simple_model implements Modelled, Validated
 {
     private static $validators = array();
     private $validation_messages;
@@ -33,17 +33,6 @@ class Valid_SQL_model extends SQL_model implements Modelled, Persisted, Validate
     {
         $this->validation_messages = array();
         parent::__construct($data);
-    }
-
-    /**
-     * Save this model object after validating its data fields
-     *
-     * @return Boolean whether this model was successfully saved
-     */
-    public function save() // returns true if the object saved or false if not
-    {
-        if (!$this->data() || !$this->is_validated()) return FALSE;
-        return parent::save();
     }
 
     /**
@@ -183,4 +172,4 @@ class Valid_SQL_model extends SQL_model implements Modelled, Persisted, Validate
     }
 }
 
-// End of Valid_SQL_model.php
+// End of Valid_model.php

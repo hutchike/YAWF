@@ -12,7 +12,7 @@
 // GNU Lesser General Public License for more details.
 
 load_helper('Text'); // for "tableize"
-load_interfaces('Modelled', 'Persisted');
+load_interfaces('Modelled', 'Persisted', 'Validated');
 
 /**
  * The SQL_model class links data objects to storage engines
@@ -20,7 +20,7 @@ load_interfaces('Modelled', 'Persisted');
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class SQL_model extends Simple_model implements Modelled, Persisted
+class SQL_model extends Valid_model implements Modelled, Persisted, Validated
 {
     private static $connectors;
     private static $databases;
@@ -381,9 +381,9 @@ class SQL_model extends Simple_model implements Modelled, Persisted
      * Load a model object by ID or by the other fields that have been set
      *
      * @param Integer $id an optional ID value to load
-     * @return Integer the ID of the loaded model object
+     * @return Integer the ID of the loaded model object, or zero on failure
      */
-    public function load($id = 0) // returns the object ID or zero on failure
+    public function load($id = 0)
     {
         if (is_null($id)) return 0; // to catch NULL parameters
         if ($id) $this->set_id($id);
@@ -401,8 +401,9 @@ class SQL_model extends Simple_model implements Modelled, Persisted
      *
      * @return Boolean whether or not this model object was saved
      */
-    public function save() // returns true if the object saved or false if not
+    public function save()
     {
+        if (!$this->data() || !$this->is_validated()) return FALSE;
         $saved = $this->get_id() ? $this->update() : $this->insert();
         return $saved ? TRUE : FALSE;
     }
@@ -413,7 +414,7 @@ class SQL_model extends Simple_model implements Modelled, Persisted
      * @param Array $conditions an optional array of conditions to match
      * @return Array a list of model objects that match the conditions or fields
      */
-    public function find_all($conditions = NULL) // returns array of objects
+    public function find_all($conditions = NULL)
     {
         // Query the database
 
@@ -442,7 +443,7 @@ class SQL_model extends Simple_model implements Modelled, Persisted
      * @param Integer $id the model ID to find (may also be an array of IDs)
      * @return SQL_model(s) the found model(s)
      */
-    public function find_id($id) // returns an array of objects, or an object
+    public function find_id($id)
     {
         $id_field = $this->get_id_field();
         return is_array($id) ?
@@ -454,9 +455,9 @@ class SQL_model extends Simple_model implements Modelled, Persisted
      * Find the first model object that matches some conditions or field values
      *
      * @param Array $conditions an array of conditions to match (optional)
-     * @return SQL_model the first matching model object
+     * @return SQL_model the first matching model object, or NULL if none found
      */
-    public function find_first($conditions = NULL) // returns an object or null
+    public function find_first($conditions = NULL)
     {
         $old_limit = $this->get_limit();
         $objects = $this->set_limit(1)->find_all($conditions);
@@ -470,7 +471,7 @@ class SQL_model extends Simple_model implements Modelled, Persisted
      * @param Array $conditions an array of conditions to match (optional)
      * @return SQL_model the last matching model object (may take some time!)
      */
-    public function find_last($conditions = NULL) // returns an object or null
+    public function find_last($conditions = NULL)
     {
         $objects = $this->find_all($conditions);
         return count($objects) ? $objects[count($objects) - 1] : NULL;
@@ -482,7 +483,7 @@ class SQL_model extends Simple_model implements Modelled, Persisted
      * @param String $clause a SQL "where" clause to match
      * @return Array a list of model objects that match the SQL "where" clause
      */
-    public function find_where($clause) // returns an array of objects
+    public function find_where($clause)
     {
         return $this->find_all(array('where' => $clause));
     }
@@ -493,7 +494,7 @@ class SQL_model extends Simple_model implements Modelled, Persisted
      * @param Array $conditions an array of conditions (optional)
      * @return String a SQL "where" clause from the conditions or field values
      */
-    protected function where_clause($conditions = NULL) // returns SQL
+    protected function where_clause($conditions = NULL)
     {
         $conditions = is_null($conditions) ? $this->data : (array)$conditions;
         if ($clause = array_key($conditions, 'where')) return "where $clause";
@@ -522,9 +523,9 @@ class SQL_model extends Simple_model implements Modelled, Persisted
     /**
      * Insert this model object's data into the database via the connector
      *
-     * @return Integer the ID of the inserted row, or 0 upon failure
+     * @return Integer the ID of the inserted row, or zero on failure
      */
-    public function insert() // returns the ID of the inserted row, or zero
+    public function insert()
     {
         // Check there is no ID yet
 
@@ -564,9 +565,9 @@ class SQL_model extends Simple_model implements Modelled, Persisted
      * Update this model object's data in the database via the connector.
      * Note that this method will only update the fields that have changed.
      *
-     * @return SQL_model this model object for chaining, or NULL upon failure
+     * @return SQL_model this model object for chaining, or NULL on failure
      */
-    public function update() // returns the object unless it has no ID field
+    public function update()
     {
         // Check there's an ID value
 
@@ -607,7 +608,7 @@ class SQL_model extends Simple_model implements Modelled, Persisted
      * Update this model object's data in the database via the connector.
      * Note that this method will update *all* this model object's fields.
      *
-     * @return SQL_model this model object for chaining, or NULL upon failure
+     * @return SQL_model this model object for chaining, or NULL on failure
      */
     public function update_all_fields()
     {
@@ -618,9 +619,9 @@ class SQL_model extends Simple_model implements Modelled, Persisted
     /**
      * Delete this model object's data from the database via the connector
      *
-     * @return SQL_model this model object for chaining, or NULL upon failure
+     * @return SQL_model this model object for chaining, or NULL on failure
      */
-    public function delete() // returns the object unless it has no ID field
+    public function delete()
     {
         // Check there's an ID value
 
