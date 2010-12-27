@@ -20,7 +20,7 @@ load_helper('Text'); // for "tableize"
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class SQL_model extends YAWF implements Modelled
+class SQL_model extends Basic_model implements Modelled
 {
     private static $connectors;
     private static $databases;
@@ -31,8 +31,6 @@ class SQL_model extends YAWF implements Modelled
     private $connector;
     private $database;
     private $table;
-    private $data;
-    private $to_update;
     private $id_field;
     private $order;
     private $limit;
@@ -57,72 +55,6 @@ class SQL_model extends YAWF implements Modelled
     public function setup()
     {
         // Override this method in your subclasses
-    }
-
-    /**
-     * Create a new SQL model object
-     *
-     * @param Array $data the data to initialize the object (may be an object)
-     */
-    public function __construct($data = array())
-    {
-        $this->to_update = array();
-        $this->data = (array)$data;
-    }
-
-    /**
-     * Get a data field value from this model object
-     *
-     * @param String $field the data field to read
-     * @return String the value of the data field
-     */
-    public function __get($field)
-    {
-        return array_key($this->data, $field);
-    }
-
-    /**
-     * Set a data field value in this model object
-     *
-     * @param String $field the data field to write
-     * @param String $value the data value to write
-     * @return String the value of the newly updated data field
-     */
-    public function __set($field, $value)
-    {
-        $this->to_update[$field] = TRUE;
-        $this->data[$field] = $value;
-        return $value;
-    }
-
-    /**
-     * Get an assoc array of data stored in this model object
-     *
-     * @return Array the assoc array of data stored in this model object
-     */
-    public function data()
-    {
-        return $this->data;
-    }
-
-    /**
-     * Return whether this model object has changed
-     *
-     * @return Boolean whether this model object has changed
-     */
-    public function has_changed()
-    {
-        return count($this->to_update) ? TRUE : FALSE;
-    }
-
-    /**
-     * Get a list array of data fields for this model object
-     *
-     * @return Array the list array of data fields for this model object
-     */
-    public function fields()
-    {
-        return array_keys($this->data);
     }
 
     /**
@@ -467,19 +399,6 @@ class SQL_model extends YAWF implements Modelled
     }
 
     /**
-     * Copy data from this model object to another model object
-     *
-     * @param SQL_model $other the other model object
-     */
-    public function copy_to($other)
-    {
-        foreach ($this->data() as $field => $value)
-        {
-            $other->$field = $value;
-        }
-    }
-
-    /**
      * Load a model object by ID or by the other fields that have been set
      *
      * @param Integer $id an optional ID value to load
@@ -759,17 +678,6 @@ class SQL_model extends YAWF implements Modelled
         $db_table = $this->get_db_table();
         $this->query("drop table $db_table");
         return $this;
-    }
-
-    /**
-     * Return an encrypted password ready to store in the database
-     *
-     * @param String $text the unencrypted password text to be encrypted
-     * @return String an encrypted password ready to store in the database
-     */
-    protected function password($text)
-    {
-        return sha1(md5($text));
     }
 }
 

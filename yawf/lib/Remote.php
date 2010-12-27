@@ -20,7 +20,7 @@ load_tool('REST');
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Remote extends YAWF implements Modelled, Validated // from Model.php
+class Remote extends Basic_model implements Modelled, Validated
 {
     const DEFAULT_TYPE = Symbol::JSON; // (it's built into PHP)
 
@@ -247,17 +247,17 @@ class Remote extends YAWF implements Modelled, Validated // from Model.php
     }
 
     /**
-     * Get the object data
+     * Get the remoted object's data
      *
-     * @return Array the remoted object data array
+     * @return Array the remoted object data array, or an empty array
      */
     public function data()
     {
-        return is_object($this->object) ? $this->object->data() : NULL;
+        return is_object($this->object) ? $this->object->data() : array();
     }
 
     /**
-     * Get whether it has changed
+     * Return whether the remoted object's data has changed
      *
      * @return Boolean whether the remoted object's data has been changed
      */
@@ -267,17 +267,7 @@ class Remote extends YAWF implements Modelled, Validated // from Model.php
     }
 
     /**
-     * Get the object fields
-     *
-     * @return Array the remoted object's fields
-     */
-    public function fields()
-    {
-        return is_object($this->object) ? $this->object->fields() : array();
-    }
-
-    /**
-     * Return the object ID
+     * Return the remoted object's ID number
      *
      * @return Integer the remoted object's ID, or zero if it's not available
      */
@@ -287,7 +277,7 @@ class Remote extends YAWF implements Modelled, Validated // from Model.php
     }
 
     /**
-     * Set the object ID number
+     * Set the remoted object's ID number
      *
      * @param Integer $id the remoted object's ID
      * @return Remote this object for method chaining

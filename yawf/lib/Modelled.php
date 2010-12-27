@@ -77,6 +77,13 @@ interface Modelled
     public function __set($field, $value);
 
     /**
+     * Copy the model object's data to another object
+     *
+     * @param Object $other the other object receiving the model object's data
+     */
+    public function copy_to($other);
+
+    /**
      * Get an assoc array of data stored in the model object
      *
      * @return Array the assoc array of data stored in the model object
@@ -84,18 +91,18 @@ interface Modelled
     public function data();
 
     /**
-     * Return whether the model object has changed
-     *
-     * @return Boolean whether the model object has changed
-     */
-    public function has_changed();
-
-    /**
      * Get a list array of data fields for the model object
      *
      * @return Array the list array of data fields for the model object
      */
     public function fields();
+
+    /**
+     * Return whether the model object has changed
+     *
+     * @return Boolean whether the model object has changed
+     */
+    public function has_changed();
 
     /**
      * Get the ID number for the model object
