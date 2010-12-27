@@ -32,7 +32,6 @@ class Remote extends Basic_model implements Modelled, Persisted, Validated
     private $object;        // The object that gets remoted
     private $type;          // What type are we marshalling?
     private $url;           // At what URL is the data found?
-    private $has_changed;   // Did we change our remoted data?
     private $response;      // Data we received from the server
 
     /**
@@ -47,13 +46,11 @@ class Remote extends Basic_model implements Modelled, Persisted, Validated
         {
             $this->class = $class_or_object;
             $this->object = new $class_or_object();
-            $this->has_changed = FALSE;
         }
         elseif (is_object($class_or_object))
         {
             $this->class = get_class($class_or_object);
             $this->object = $class_or_object;
-            $this->has_changed = TRUE;
         }
         $this->type = array_key(self::$defaults, 'type', self::DEFAULT_TYPE);
         $this->url = $url ? $url : $this->default_url($this->class);
@@ -156,7 +153,7 @@ class Remote extends Basic_model implements Modelled, Persisted, Validated
      */
     public function save() // returns true if the object saved or false if not
     {
-        if (!$this->has_changed) return FALSE;
+        if (!$this->has_changed()) return FALSE;
         $saved = $this->object->get_id() ? $this->update() : $this->insert();
         return $saved ? TRUE : FALSE;
     }
@@ -197,7 +194,7 @@ class Remote extends Basic_model implements Modelled, Persisted, Validated
      */
     public function update_all_fields()
     {
-        if (!is_object($this->object) || !$this->has_changed) return NULL;
+        if (!is_object($this->object) || !$this->has_changed()) return NULL;
         if (!$this->object->get_id()) return NULL;
         if (!$this->is_validated()) return NULL;
         $url = $this->secure_url($this->url . '/' . $this->object->get_id());
@@ -243,7 +240,6 @@ class Remote extends Basic_model implements Modelled, Persisted, Validated
     public function __set($field, $value)
     {
         if ($this->object) $this->object->$field = $value;
-        $this->has_changed = TRUE;
         return $value;
     }
 
@@ -264,7 +260,7 @@ class Remote extends Basic_model implements Modelled, Persisted, Validated
      */
     public function has_changed()
     {
-        return $this->has_changed;
+        return is_object($this->object) ? $this->object->has_changed() : FALSE;
     }
 
     /**
