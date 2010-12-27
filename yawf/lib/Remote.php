@@ -16,7 +16,7 @@ load_tool('REST');
 
 /**
  * The Remote class provides remote data manipulation capabilities via REST
- * by providing a facade to a SQL_model object via the Modelled, Persisted
+ * by providing a facade to a data model object via the Modelled, Persisted
  * and Validated interfaces.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
@@ -58,7 +58,9 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
 
         // Assert some postconditions
 
-        assert('$this->object instanceof SQL_model');
+        assert('$this->object instanceof Modelled');
+        assert('$this->object instanceof Persisted');
+        assert('$this->object instanceof Validated');
     }
 
     /**
