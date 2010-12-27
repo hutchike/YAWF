@@ -95,14 +95,15 @@ class Simple_model extends YAWF implements Modelled
      */
     public function copy_to($other)
     {
-        foreach ($this->data() as $field => $value)
+        foreach ($this->data() as $field => $value) // important to call data()
         {
             $other->$field = $value;
         }
     }
 
     /**
-     * Get an assoc array of data stored in this model object
+     * Get an assoc array of data stored in this model object.
+     * This method may be overriden in subclasses, e.g. Remote.
      *
      * @return Array the assoc array of data stored in this model object
      */
@@ -118,7 +119,7 @@ class Simple_model extends YAWF implements Modelled
      */
     public function fields()
     {
-        return array_keys($this->data());
+        return array_keys($this->data()); // important to call data()
     }
 
     /**
