@@ -11,12 +11,14 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+load_interface('SQL_connector');
+
 /**
  * Connect to a SQLite2 database via the older SQLite PHP extension.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Data_SQLite2 extends YAWF implements Connector
+class Data_SQLite2 extends YAWF implements SQL_connector
 {
     const SQLITE_FILE_PERMISSIONS = 0666; // everyone can read and write
     private $sqlite_db;

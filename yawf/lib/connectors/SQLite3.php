@@ -11,12 +11,14 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+load_interface('SQL_connector');
+
 /**
  * Connect to a SQLite3 database via the PDO SQLite PHP extension.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Data_SQLite3 extends YAWF implements Connector
+class Data_SQLite3 extends YAWF implements SQL_connector
 {
     private $sqlite_db;
 

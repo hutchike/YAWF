@@ -11,20 +11,22 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+load_interface('SQL_connector');
+
 /**
- * Connect to a MySQL database via the older MySQL PHP extension.
+ * Connect to a MySQL database via the MySQLi PHP extension.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Data_MySQL extends YAWF implements Connector
+class Data_MySQLi extends YAWF implements SQL_connector
 {
     private $hostname;
     private $username;
     private $password;
-    private $dbh;
+    private $mysqli;
 
     /**
-     * Create a new Data_MySQL object
+     * Create a new Data_MySQLi object
      *
      * @param Array $options an array of options (hostname, username, password)
      */
@@ -42,9 +44,8 @@ class Data_MySQL extends YAWF implements Connector
      */
     public function connect($database = DB_DATABASE)
     {
-        $this->dbh = mysql_connect($this->hostname, $this->username, $this->password);
-        if (!$this->dbh) throw new Exception('Cannot connect: ' . var_export($this, TRUE));
-        mysql_select_db($database, $this->dbh);
+        $this->mysqli = new mysqli($this->hostname, $this->username, $this->password, $database);
+        if (mysqli_connect_errno()) throw new Exception('Cannot connect: ' . var_export($this, TRUE));
     }
 
     /**
@@ -52,7 +53,7 @@ class Data_MySQL extends YAWF implements Connector
      */
     public function disconnect()
     {
-        mysql_close($this->dbh);
+        $this->mysqli->close();
     }
 
     /**
@@ -63,7 +64,7 @@ class Data_MySQL extends YAWF implements Connector
      */
     public function escape($sql)
     {
-        return mysql_real_escape_string($sql);
+        return $this->mysqli->real_escape_string($sql);
     }
 
     /**
@@ -74,10 +75,10 @@ class Data_MySQL extends YAWF implements Connector
      */
     public function query($sql)
     {
-        $result = mysql_query($sql, $this->dbh);
+        $result = $this->mysqli->query($sql);
         $error = $this->error();
         if ($error) throw new Exception("Database error: $error");
-        return new MySQL_fetcher($result);
+        return $result;
     }
 
     /**
@@ -87,7 +88,7 @@ class Data_MySQL extends YAWF implements Connector
      */
     public function insert_id()
     {
-        return mysql_insert_id($this->dbh);
+        return $this->mysqli->insert_id;
     }
 
     /**
@@ -97,47 +98,8 @@ class Data_MySQL extends YAWF implements Connector
      */
     public function error()
     {
-        return mysql_error($this->dbh);
+        return $this->mysqli->error;
     }
 }
 
-/**
- * Fetch result set rows from a MySQL database as objects
- *
- * @author Kevin Hutchinson <kevin@guanoo.com>
- */
-class MySQL_fetcher extends YAWF
-{
-    private $result;
-
-    /**
-     * Create a new MySQL_fetcher object
-     *
-     * @param Object $result a result set
-     */
-    public function __construct($result)
-    {
-        $this->result = $result;
-    }
-
-    /**
-     * Close the result set
-     */
-    public function close()
-    {
-        mysql_free_result($this->result);
-        $this->result = NULL;
-    }
-
-    /**
-     * Fetch the next object from the result set
-     *
-     * @return Object the next object from the result set, or NULL when done
-     */
-    public function fetch_object()
-    {
-        return mysql_fetch_object($this->result);
-    }
-}
-
-// End of MySQL.php
+// End of MySQLi.php

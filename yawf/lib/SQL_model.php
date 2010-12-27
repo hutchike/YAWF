@@ -11,7 +11,6 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-require_once "lib/data/Connector.php";
 load_helper('Text'); // for "tableize"
 load_interfaces('Modelled', 'Persisted');
 
@@ -48,7 +47,7 @@ class SQL_model extends Basic_model implements Modelled, Persisted
     {
         $database = array_key($options, Symbol::DATABASE);
         if (!is_null($database)) $this->set_database($database);
-        require_once 'lib/data/' . $connector_class . '.php';
+        require_once 'lib/connectors/' . $connector_class . '.php';
         $connector_class = "Data_$connector_class";
         $database = $this->get_database();
         self::$connectors[$database] = new $connector_class($options);
