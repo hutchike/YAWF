@@ -390,7 +390,7 @@ class SQL_model extends Basic_model implements Modelled, Persisted
         if ($id) $this->set_id($id);
         if ($found = $this->find_first())
         {
-            $this->to_update = array();
+            $this->changed = array();
             $this->data = $found->data;
             return $this->get_id();
         }
@@ -582,7 +582,7 @@ class SQL_model extends Basic_model implements Modelled, Persisted
         // Did we provide a list of fields to update?
 
         $field_list = func_get_args();
-        foreach ($field_list as $field) $this->to_update[$field] = TRUE;
+        foreach ($field_list as $field) $this->changed[$field] = TRUE;
 
         // Update the record values that have changed
 
@@ -591,7 +591,7 @@ class SQL_model extends Basic_model implements Modelled, Persisted
         foreach ($this->data as $field => $value)
         {
             if ($field == $id_field || $this->is_virtual($field)) continue;
-            if (!array_key_exists($field, $this->to_update)) continue;
+            if (!array_key_exists($field, $this->changed)) continue;
 
             if ($field === 'password') $value = $this->password($value);
             $updates .= $field . '=' . $this->quote($value) . ',';
@@ -600,7 +600,7 @@ class SQL_model extends Basic_model implements Modelled, Persisted
         if (!$updates) return $this;
         $updates .= " where $id_field=" . $this->data[$id_field];
         $this->query("update $db_table set $updates");
-        $this->to_update = array();
+        $this->changed = array();
         return $this;
     }
 
@@ -612,7 +612,7 @@ class SQL_model extends Basic_model implements Modelled, Persisted
      */
     public function update_all_fields()
     {
-        foreach ($this->fields() as $field) $this->to_update[$field] = TRUE;
+        foreach ($this->fields() as $field) $this->changed[$field] = TRUE;
         return $this->update();
     }
 

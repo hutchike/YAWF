@@ -21,8 +21,15 @@ load_interface('Modelled');
  */
 class Basic_model extends YAWF implements Modelled
 {
+    /**
+     * The <code>$data</code> Array holds the basic model data
+     */
     protected $data;
-    protected $to_update;
+
+    /**
+     * The <code>$changed</code> Array holds data fields whose values changed
+     */
+    protected $changed;
 
     /**
      * Create a new basic model object
@@ -32,7 +39,7 @@ class Basic_model extends YAWF implements Modelled
     public function __construct($data = array())
     {
         $this->data = (array)$data;
-        $this->to_update = array();
+        $this->changed = array();
     }
 
     /**
@@ -76,7 +83,7 @@ class Basic_model extends YAWF implements Modelled
      */
     public function __set($field, $value)
     {
-        $this->to_update[$field] = TRUE;
+        $this->changed[$field] = TRUE;
         $this->data[$field] = $value;
         return $value;
     }
@@ -121,7 +128,7 @@ class Basic_model extends YAWF implements Modelled
      */
     public function has_changed()
     {
-        return count($this->to_update) ? TRUE : FALSE;
+        return count($this->changed) ? TRUE : FALSE;
     }
 
     /**
