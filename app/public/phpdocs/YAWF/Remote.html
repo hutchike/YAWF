@@ -20,7 +20,8 @@
 	<div class="nav-bar">
 					<span class="disabled">Description</span> |
 							<a href="#sec-descendents">Descendents</a>
-			|													<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+			|											<a href="#sec-vars">Vars</a>
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 						
 											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
 						
@@ -29,21 +30,23 @@
                 <p class="implements">
             Implements interfaces:
             <ul>
-                <li><a href="../YAWF/Modelled.html">Modelled</a></li><li><a href="../YAWF/Validated.html">Validated</a></li>            </ul>
+                <li><a href="../YAWF/Modelled.html">Modelled</a></li><li><a href="../YAWF/Persisted.html">Persisted</a></li><li><a href="../YAWF/Validated.html">Validated</a></li>            </ul>
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The Remote class provides remote data manipulation capabilities via REST  by providing a facade to the Model class via the Modelled and Validated  interfaces.</p>
+<p class="short-description">The Remote class provides remote data manipulation capabilities via REST  by providing a facade to the Valid_SQL_model class via the Modelled,  Persisted and Validated interfaces.</p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_lib---Remote.php.html">/lib/Remote.php</a> (line <span class="field">23</span>)
+			Located in <a class="field" href="_lib---Remote.php.html">/lib/Remote.php</a> (line <span class="field">24</span>)
 		</p>
 		
 				
 		<pre><a href="../YAWF/YAWF.html">YAWF</a>
    |
-   --Remote</pre>
+   --<a href="../YAWF/Basic_model.html">Basic_model</a>
+      |
+      --Remote</pre>
 	
 			</div>
 </div>
@@ -54,7 +57,8 @@
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
 			<span class="disabled">Descendents</span>
-			|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+			|												<a href="#sec-vars">Vars</a>
+								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 							
 															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
 							
@@ -88,6 +92,9 @@
 			<a href="#sec-description">Description</a> |
 							<a href="#sec-descendents">Descendants</a> |
 						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-vars">Vars</a>
+				 
+				|
 										| 
 									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 							
@@ -112,11 +119,14 @@
 							<a href="#sec-descendents">Descendants</a> |
 															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
 							
-									<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+															<a href="#sec-vars">Vars</a>
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																												<div class="method-definition">
+																																																				<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">void</span>
 										<a href="#get_default" title="details" class="method-name">get_default</a>
@@ -129,12 +139,6 @@
 											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>])
 									</div>
 																																																																																				<div class="method-definition">
-					<img src="../media/images/Constructor.png" alt=" "/>
-											<span class="method-result">Remote</span>
-										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type">String/Object</span>&nbsp;<span class="var-name">$class_or_object</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span> = <span class="var-default">NULL</span>])
-									</div>
-																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#check_response" title="details" class="method-name">check_response</a>
@@ -147,6 +151,12 @@
 										()
 									</div>
 																<div class="method-definition">
+					<img src="../media/images/Constructor.png" alt=" "/>
+											<span class="method-result">Remote</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">String/Object</span>&nbsp;<span class="var-name">$class_or_object</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">String</span>
 										<a href="#default_url" title="details" class="method-name">default_url</a>
@@ -156,12 +166,6 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result"><a href="../YAWF/Remote.html">Remote</a></span>
 										<a href="#delete" title="details" class="method-name">delete</a>
-										()
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">Array</span>
-										<a href="#fields" title="details" class="method-name">fields</a>
 										()
 									</div>
 																								<div class="method-definition">
@@ -270,6 +274,39 @@
 		</div>
 	</div>		
 
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../YAWF/Basic_model.html">Basic_model</a></span></p>
+					<blockquote>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../YAWF/Basic_model.html#var$changed">Basic_model::$changed</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../YAWF/Basic_model.html#var$data">Basic_model::$data</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
 	
 	<a name="sec-methods"></a>
 	<div class="info-box">
@@ -277,17 +314,18 @@
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
 							<a href="#sec-descendents">Descendents</a> |
-													<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+															<a href="#sec-vars">Vars</a>
+														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
 						
 		</div>
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodget_default" id="get_default"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static get_default</span> (line <span class="line-number">92</span>)
+		<span class="method-title">static get_default</span> (line <span class="line-number">93</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -313,11 +351,11 @@
 			
 	</div>
 <a name="methodset_default" id="set_default"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static set_default</span> (line <span class="line-number">68</span>)
+		<span class="method-title">static set_default</span> (line <span class="line-number">69</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -345,45 +383,12 @@
 		
 			
 	</div>
-<a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">43</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Create a remote object behaving *like* a regular model</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">Remote</span>
-		<span class="method-name">
-			__construct
-		</span>
-					(<span class="var-type">String/Object</span>&nbsp;<span class="var-name">$class_or_object</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span> = <span class="var-default">NULL</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">String/Object</span>
-				<span class="var-name">$class_or_object</span><span class="var-description">: the model class or an actual object</span>			</li>
-					<li>
-				<span class="var-type">String</span>
-				<span class="var-name">$url</span><span class="var-description">: the URL of the model REST service at the remote server</span>			</li>
-				</ul>
-		
-			
-	</div>
 <a name="methodcheck_response" id="check_response"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">check_response</span> (line <span class="line-number">374</span>)
+		<span class="method-title">check_response</span> (line <span class="line-number">365</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -413,13 +418,13 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">data</span> (line <span class="line-number">254</span>)
+		<span class="method-title">data</span> (line <span class="line-number">255</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Get the object data</p>
+<p class="short-description">Get the remoted object's data</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> the remoted object data array</li>
+				<li><span class="field">return:</span> the remoted object data array, or an empty array</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -432,6 +437,12 @@
 			</div>
 	
 		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/Basic_model.html#methoddata">Basic_model::data()</a></dt>
+						<dd>Get an assoc array of data stored in this model object</dd>
+					</dl>
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
@@ -440,12 +451,51 @@
 					</dl>
 			
 	</div>
-<a name="methoddefault_url" id="default_url"><!-- --></a>
+<a name="method__construct" id="__construct"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
+		<img src="../media/images/Constructor.png" />
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">44</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create a remote object behaving *like* a regular model</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Remote</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">String/Object</span>&nbsp;<span class="var-name">$class_or_object</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$url</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String/Object</span>
+				<span class="var-name">$class_or_object</span><span class="var-description">: the model class or an actual object</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$url</span><span class="var-description">: the URL of the model REST service at the remote server</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/Basic_model.html#method__construct">Basic_model::__construct()</a></dt>
+						<dd>Create a new basic model object</dd>
+					</dl>
+			
+	</div>
+<a name="methoddefault_url" id="default_url"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">default_url</span> (line <span class="line-number">341</span>)
+		<span class="method-title">default_url</span> (line <span class="line-number">332</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -472,11 +522,11 @@
 			
 	</div>
 <a name="methoddelete" id="delete"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete</span> (line <span class="line-number">214</span>)
+		<span class="method-title">delete</span> (line <span class="line-number">215</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -498,40 +548,8 @@
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
-			<dt><a href="../YAWF/Modelled.html#methoddelete">Modelled::delete()</a></dt>
+			<dt><a href="../YAWF/Persisted.html#methoddelete">Persisted::delete()</a></dt>
 						<dd>Delete a model object in the database</dd>
-					</dl>
-			
-	</div>
-<a name="methodfields" id="fields"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">fields</span> (line <span class="line-number">274</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Get the object fields</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> the remoted object's fields</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">Array</span>
-		<span class="method-name">
-			fields
-		</span>
-				()
-			</div>
-	
-		
-				<hr class="separator" />
-		<div class="notes">Implementation of:</div>
-			<dl>
-			<dt><a href="../YAWF/Modelled.html#methodfields">Modelled::fields()</a></dt>
-						<dd>Get a list array of data fields for the model object</dd>
 					</dl>
 			
 	</div>
@@ -540,11 +558,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_id</span> (line <span class="line-number">284</span>)
+		<span class="method-title">get_id</span> (line <span class="line-number">275</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Return the object ID</p>
+<p class="short-description">Return the remoted object's ID number</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> the remoted object's ID, or zero if it's not available</li>
 				<li><span class="field">access:</span> public</li>
@@ -562,7 +580,7 @@
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
-			<dt><a href="../YAWF/Modelled.html#methodget_id">Modelled::get_id()</a></dt>
+			<dt><a href="../YAWF/Persisted.html#methodget_id">Persisted::get_id()</a></dt>
 						<dd>Get the ID number for the model object</dd>
 					</dl>
 			
@@ -572,11 +590,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">has_changed</span> (line <span class="line-number">264</span>)
+		<span class="method-title">has_changed</span> (line <span class="line-number">265</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Get whether it has changed</p>
+<p class="short-description">Return whether the remoted object's data has changed</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> whether the remoted object's data has been changed</li>
 				<li><span class="field">access:</span> public</li>
@@ -591,6 +609,12 @@
 			</div>
 	
 		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/Basic_model.html#methodhas_changed">Basic_model::has_changed()</a></dt>
+						<dd>Return whether this model object has changed</dd>
+					</dl>
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
@@ -604,7 +628,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">insert</span> (line <span class="line-number">168</span>)
+		<span class="method-title">insert</span> (line <span class="line-number">169</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -626,7 +650,7 @@
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
-			<dt><a href="../YAWF/Modelled.html#methodinsert">Modelled::insert()</a></dt>
+			<dt><a href="../YAWF/Persisted.html#methodinsert">Persisted::insert()</a></dt>
 						<dd>Insert a model object</dd>
 					</dl>
 			
@@ -636,7 +660,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">is_validated</span> (line <span class="line-number">316</span>)
+		<span class="method-title">is_validated</span> (line <span class="line-number">307</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -668,7 +692,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">load</span> (line <span class="line-number">141</span>)
+		<span class="method-title">load</span> (line <span class="line-number">142</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -695,7 +719,7 @@
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
-			<dt><a href="../YAWF/Modelled.html#methodload">Modelled::load()</a></dt>
+			<dt><a href="../YAWF/Persisted.html#methodload">Persisted::load()</a></dt>
 						<dd>Load a model object (optionally specify the model object's ID number)</dd>
 					</dl>
 			
@@ -705,7 +729,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">response</span> (line <span class="line-number">306</span>)
+		<span class="method-title">response</span> (line <span class="line-number">297</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -731,7 +755,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">save</span> (line <span class="line-number">156</span>)
+		<span class="method-title">save</span> (line <span class="line-number">157</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -753,7 +777,7 @@
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
-			<dt><a href="../YAWF/Modelled.html#methodsave">Modelled::save()</a></dt>
+			<dt><a href="../YAWF/Persisted.html#methodsave">Persisted::save()</a></dt>
 						<dd>Save a model object</dd>
 					</dl>
 			
@@ -763,7 +787,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">secure_url</span> (line <span class="line-number">354</span>)
+		<span class="method-title">secure_url</span> (line <span class="line-number">345</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -794,7 +818,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_auth</span> (line <span class="line-number">104</span>)
+		<span class="method-title">set_auth</span> (line <span class="line-number">105</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -828,11 +852,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_id</span> (line <span class="line-number">295</span>)
+		<span class="method-title">set_id</span> (line <span class="line-number">286</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Set the object ID number</p>
+<p class="short-description">Set the remoted object's ID number</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> this object for method chaining</li>
 				<li><span class="field">access:</span> public</li>
@@ -855,7 +879,7 @@
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
-			<dt><a href="../YAWF/Modelled.html#methodset_id">Modelled::set_id()</a></dt>
+			<dt><a href="../YAWF/Persisted.html#methodset_id">Persisted::set_id()</a></dt>
 						<dd>Set the ID number for the model object</dd>
 					</dl>
 			
@@ -865,7 +889,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_type</span> (line <span class="line-number">129</span>)
+		<span class="method-title">set_type</span> (line <span class="line-number">130</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -896,7 +920,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_url</span> (line <span class="line-number">117</span>)
+		<span class="method-title">set_url</span> (line <span class="line-number">118</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -927,7 +951,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">update</span> (line <span class="line-number">187</span>)
+		<span class="method-title">update</span> (line <span class="line-number">188</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -949,7 +973,7 @@
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
-			<dt><a href="../YAWF/Modelled.html#methodupdate">Modelled::update()</a></dt>
+			<dt><a href="../YAWF/Persisted.html#methodupdate">Persisted::update()</a></dt>
 						<dd>Update a model object</dd>
 					</dl>
 			
@@ -959,7 +983,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">update_all_fields</span> (line <span class="line-number">204</span>)
+		<span class="method-title">update_all_fields</span> (line <span class="line-number">198</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -981,7 +1005,7 @@
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
-			<dt><a href="../YAWF/Modelled.html#methodupdate_all_fields">Modelled::update_all_fields()</a></dt>
+			<dt><a href="../YAWF/Persisted.html#methodupdate_all_fields">Persisted::update_all_fields()</a></dt>
 						<dd>Update all the model object's fields</dd>
 					</dl>
 			
@@ -991,7 +1015,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">validation_messages</span> (line <span class="line-number">329</span>)
+		<span class="method-title">validation_messages</span> (line <span class="line-number">320</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1023,7 +1047,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">__get</span> (line <span class="line-number">230</span>)
+		<span class="method-title">__get</span> (line <span class="line-number">231</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1047,6 +1071,12 @@
 				<span class="var-name">$field</span><span class="var-description">: the object field to get</span>			</li>
 				</ul>
 		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/Basic_model.html#method__get">Basic_model::__get()</a></dt>
+						<dd>Get a data field value from this model object</dd>
+					</dl>
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
@@ -1060,7 +1090,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">__set</span> (line <span class="line-number">242</span>)
+		<span class="method-title">__set</span> (line <span class="line-number">243</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1087,6 +1117,12 @@
 				<span class="var-name">$value</span><span class="var-description">: the object value to set</span>			</li>
 				</ul>
 		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/Basic_model.html#method__set">Basic_model::__set()</a></dt>
+						<dd>Set a data field value in this model object</dd>
+					</dl>
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
@@ -1097,6 +1133,28 @@
 	</div>
 							<h4>Inherited Methods</h4>
 				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../YAWF/Basic_model.html">Basic_model</a></span></p>
+					<blockquote>
+													<img src="../media/images/Constructor.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#method__construct">Basic_model::__construct()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#methodcopy_to">Basic_model::copy_to()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#methoddata">Basic_model::data()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#methodfields">Basic_model::fields()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#methodhas_changed">Basic_model::has_changed()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#methodpassword">Basic_model::password()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#methodsetup">Basic_model::setup()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#method__get">Basic_model::__get()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#method__set">Basic_model::__set()</a></span><br>
+											</blockquote>
 									<!-- =========== Summary =========== -->
 					<p>Inherited From <span class="classname"><a href="../YAWF/YAWF.html">YAWF</a></span></p>
 					<blockquote>
@@ -1134,7 +1192,8 @@
 										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
 						
 			
-										| 
+												<a href="#sec-vars">Vars</a>
+														| 
 									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 							
 					</div>
@@ -1147,7 +1206,7 @@
 		<span class="const-title">
 			<span class="const-name">DEFAULT_TYPE</span>
 			 = <span class="const-default"> Symbol::JSON</span>
-			(line <span class="line-number">25</span>)
+			(line <span class="line-number">26</span>)
 		</span>
 	</div>
 
@@ -1160,7 +1219,7 @@
 	</div>
 	
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 27 Dec 2010 06:39:29 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 27 Dec 2010 08:09:10 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

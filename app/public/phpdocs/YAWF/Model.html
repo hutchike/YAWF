@@ -19,32 +19,36 @@
 	<div class="info-box-title">Description</div>
 	<div class="nav-bar">
 					<span class="disabled">Description</span> |
-															<a href="#sec-methods">Methods</a>
+													<a href="#sec-vars">Vars</a>
+						|											<a href="#sec-methods">Methods</a>
 						
 					</div>
 	<div class="info-box-body">
                 <p class="implements">
             Implements interfaces:
             <ul>
-                <li><a href="../YAWF/Modelled.html">Modelled</a></li><li><a href="../YAWF/Validated.html">Validated</a></li>            </ul>
+                <li><a href="../YAWF/Modelled.html">Modelled</a></li><li><a href="../YAWF/Persisted.html">Persisted</a></li><li><a href="../YAWF/Validated.html">Validated</a></li>            </ul>
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">The Model class is just an alias for the Valid_SQL_model class.</p>
+<p class="description"><p>If you'd like a different kind of model, then just add your own  &quot;Model&quot; class in your own &quot;app&quot; directory et voila - easy huh?</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_lib---Model.php.html">/lib/Model.php</a> (line <span class="field">1074</span>)
+			Located in <a class="field" href="_lib---Model.php.html">/lib/Model.php</a> (line <span class="field">24</span>)
 		</p>
 		
 				
 		<pre><a href="../YAWF/YAWF.html">YAWF</a>
    |
-   --<a href="../YAWF/SQL_model.html">SQL_model</a>
+   --<a href="../YAWF/Basic_model.html">Basic_model</a>
       |
-      --<a href="../YAWF/Valid_SQL_model.html">Valid_SQL_model</a>
+      --<a href="../YAWF/SQL_model.html">SQL_model</a>
          |
-         --Model</pre>
+         --<a href="../YAWF/Valid_SQL_model.html">Valid_SQL_model</a>
+            |
+            --Model</pre>
 	
 			</div>
 </div>
@@ -53,13 +57,44 @@
 
 
 
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<span class="disabled">Vars</span>
+						
+			
+										| 
+									<a href="#sec-methods">Methods</a>
+							
+					</div>
+		<div class="info-box-body">
+			
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../YAWF/Basic_model.html">Basic_model</a></span></p>
+					<blockquote>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../YAWF/Basic_model.html#var$changed">Basic_model::$changed</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../YAWF/Basic_model.html#var$data">Basic_model::$data</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
 	
 	<a name="sec-methods"></a>
 	<div class="info-box">
 		<div class="info-box-title">Methods</div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-													<span class="disabled">Methods</span>
+															<a href="#sec-vars">Vars</a>
+														<span class="disabled">Methods</span>
 						
 		</div>
 		<div class="info-box-body">
@@ -95,14 +130,8 @@
 									<!-- =========== Summary =========== -->
 					<p>Inherited From <span class="classname"><a href="../YAWF/SQL_model.html">SQL_model</a></span></p>
 					<blockquote>
-													<img src="../media/images/Constructor.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/SQL_model.html#method__construct">SQL_model::__construct()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodconnect">SQL_model::connect()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/SQL_model.html#methodcopy_to">SQL_model::copy_to()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/SQL_model.html#methoddata">SQL_model::data()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methoddelete">SQL_model::delete()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
@@ -113,8 +142,6 @@
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methoddrop">SQL_model::drop()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodescape">SQL_model::escape()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/SQL_model.html#methodfields">SQL_model::fields()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodfind_all">SQL_model::find_all()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
@@ -142,8 +169,6 @@
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_table">SQL_model::get_table()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/SQL_model.html#methodhas_changed">SQL_model::has_changed()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodhas_timestamp">SQL_model::has_timestamp()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodinsert">SQL_model::insert()</a></span><br>
@@ -152,8 +177,6 @@
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodload">SQL_model::load()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/SQL_model.html#methodpassword">SQL_model::password()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodquery">SQL_model::query()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodquote">SQL_model::quote()</a></span><br>
@@ -161,8 +184,6 @@
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodquote_in">SQL_model::quote_in()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodsave">SQL_model::save()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/SQL_model.html#methodsetup">SQL_model::setup()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_connector">SQL_model::set_connector()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
@@ -189,10 +210,28 @@
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodupdate_all_fields">SQL_model::update_all_fields()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodwhere_clause">SQL_model::where_clause()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../YAWF/Basic_model.html">Basic_model</a></span></p>
+					<blockquote>
+													<img src="../media/images/Constructor.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#method__construct">Basic_model::__construct()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/SQL_model.html#method__get">SQL_model::__get()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#methodcopy_to">Basic_model::copy_to()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/SQL_model.html#method__set">SQL_model::__set()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#methoddata">Basic_model::data()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#methodfields">Basic_model::fields()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#methodhas_changed">Basic_model::has_changed()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#methodpassword">Basic_model::password()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#methodsetup">Basic_model::setup()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#method__get">Basic_model::__get()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Basic_model.html#method__set">Basic_model::__set()</a></span><br>
 											</blockquote>
 									<!-- =========== Summary =========== -->
 					<p>Inherited From <span class="classname"><a href="../YAWF/YAWF.html">YAWF</a></span></p>
@@ -224,7 +263,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 27 Dec 2010 06:39:26 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 27 Dec 2010 08:09:07 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
