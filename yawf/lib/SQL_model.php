@@ -659,6 +659,17 @@ class SQL_model extends Basic_model implements Modelled, Persisted
         $this->query("drop table $db_table");
         return $this;
     }
+
+    /**
+     * Return an encrypted password ready to store in the database
+     *
+     * @param String $text the unencrypted password text to be encrypted
+     * @return String an encrypted password ready to store in the database
+     */
+    protected function password($text)
+    {
+        return sha1(md5($text));
+    }
 }
 
 // End of SQL_model.php

@@ -130,17 +130,6 @@ class Basic_model extends YAWF implements Modelled
     {
         return count($this->changed) ? TRUE : FALSE;
     }
-
-    /**
-     * Return an encrypted password ready to store in the database
-     *
-     * @param String $text the unencrypted password text to be encrypted
-     * @return String an encrypted password ready to store in the database
-     */
-    protected function password($text)
-    {
-        return sha1(md5($text));
-    }
 }
 
 // End of Basic_model.php

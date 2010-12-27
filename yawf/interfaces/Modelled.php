@@ -19,7 +19,7 @@ interface Modelled
 {
     /**
      * Setup a model, for example by setting timestamp and validation fields.
-     * This method is called once when a model is loaded with "load_model()".
+     * This method is called by <code>load_model()</code> when loading models.
      */
     public function setup();
 
