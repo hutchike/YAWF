@@ -13,6 +13,7 @@
 
 require_once "lib/data/Connector.php";
 load_helper('Text'); // for "tableize"
+load_interfaces('Modelled', 'Persisted');
 
 /**
  * The SQL_model class links data objects to storage engines
@@ -20,7 +21,7 @@ load_helper('Text'); // for "tableize"
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class SQL_model extends Basic_model implements Modelled
+class SQL_model extends Basic_model implements Modelled, Persisted
 {
     private static $connectors;
     private static $databases;
@@ -35,27 +36,6 @@ class SQL_model extends Basic_model implements Modelled
     private $order;
     private $limit;
     private $offset;
-
-    /**
-     * Setup a model by calling methods such as "set_id_field", "set_virtual"
-     * and "set_timestamp". This method should be overriden in your subclass:
-     *
-     * <code>
-     * // Subclass in your models like this:
-     *
-     * public function setup()
-     * {
-     *     $this->set_id_field('table_id_field');
-     *     $this->set_virtual('transient_field');
-     *     $this->set_timestamp('created_at', 'updated_at');
-     *     $this->validates('email', 'is_valid_email'); // when a "Model" object
-     * }
-     * </code>
-     */
-    public function setup()
-    {
-        // Override this method in your subclasses
-    }
 
     /**
      * Set the connector (e.g. "MySQLi") and optionally the database name

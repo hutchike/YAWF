@@ -11,16 +11,17 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+load_interfaces('Modelled', 'Persisted', 'Validated');
 load_tool('REST');
 
 /**
  * The Remote class provides remote data manipulation capabilities via REST
- * by providing a facade to the Model class via the Modelled and Validated
- * interfaces.
+ * by providing a facade to the Valid_SQL_model class via the Modelled,
+ * Persisted and Validated interfaces.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Remote extends Basic_model implements Modelled, Validated
+class Remote extends Basic_model implements Modelled, Persisted, Validated
 {
     const DEFAULT_TYPE = Symbol::JSON; // (it's built into PHP)
 
@@ -186,6 +187,16 @@ class Remote extends Basic_model implements Modelled, Validated
      */
     public function update()
     {
+        return $this->update_all_fields();
+    }
+
+    /**
+     * Perform a remote update request using the REST "put" method
+     *
+     * @return Remote this object for method chaining
+     */
+    public function update_all_fields()
+    {
         if (!is_object($this->object) || !$this->has_changed) return NULL;
         if (!$this->object->get_id()) return NULL;
         if (!$this->is_validated()) return NULL;
@@ -194,16 +205,6 @@ class Remote extends Basic_model implements Modelled, Validated
         $this->response = REST::put($url, $data, $this->type);
         $this->check_response();
         return $this;
-    }
-
-    /**
-     * Perform a remote update request using the REST "put" method
-     *
-     * @return Remote this object for method chaining
-     */
-    public function update_all_fields() // to honor the Modelled interface
-    {
-        return $this->update();
     }
 
     /**

@@ -12,10 +12,10 @@
 // GNU Lesser General Public License for more details.
 
 /**
- * The Modelled interface ensures compatibility between the Model and Remote
- * classes, so that they support the same essential public methods.
+ * The Persisted interface is a contract for persisted objects that
+ * can be loaded, saved, inserted, updated and deleted.
  */
-interface Modelled
+interface Persisted
 {
     /**
      * Load a model object (optionally specify the model object's ID number)
@@ -60,51 +60,6 @@ interface Modelled
     public function delete();
 
     /**
-     * Get a data field value from the model object
-     *
-     * @param String $field the data field to read
-     * @return String the value of the data field
-     */
-    public function __get($field);
-
-    /**
-     * Set a data field value in the model object
-     *
-     * @param String $field the data field to write
-     * @param String $value the data value to write
-     * @return String the value of the newly updated data field
-     */
-    public function __set($field, $value);
-
-    /**
-     * Copy the model object's data to another object
-     *
-     * @param Object $other the other object receiving the model object's data
-     */
-    public function copy_to($other);
-
-    /**
-     * Get an assoc array of data stored in the model object
-     *
-     * @return Array the assoc array of data stored in the model object
-     */
-    public function data();
-
-    /**
-     * Get a list array of data fields for the model object
-     *
-     * @return Array the list array of data fields for the model object
-     */
-    public function fields();
-
-    /**
-     * Return whether the model object has changed
-     *
-     * @return Boolean whether the model object has changed
-     */
-    public function has_changed();
-
-    /**
      * Get the ID number for the model object
      *
      * @return Integer the ID number for the model object
@@ -120,4 +75,4 @@ interface Modelled
     public function set_id($id);
 }
 
-// End of Modelled.php
+// End of Persisted.php

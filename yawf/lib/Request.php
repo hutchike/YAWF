@@ -11,6 +11,8 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+load_interface('Mailed');
+
 /**
  * The Request class provides Controller and Service objects with
  * access to form and query parameters, cookies, the web session
@@ -19,7 +21,7 @@
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Request extends YAWF
+class Request extends YAWF implements Mailed
 {
     /**
      * A mapping of request content types to file types
@@ -198,7 +200,7 @@ class Request extends YAWF
      * @param Object $render Render data to include in the mai view
      * @return String the mail message that was sent
      */
-    public function send_mail($file, $render)
+    public function send_mail($file, $render = NULL)
     {
         // Allow the $mailer object to be defined as a YAWF prop
 

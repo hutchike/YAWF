@@ -295,6 +295,24 @@ function load_helpers() // list of helpers
 }
 
 /**
+ * Load an interface
+ *
+ * @param String $controller the controller to load
+ */
+function load_interface($interface) { load_interfaces($interface); }
+
+/**
+ * Load a list of interfaces, passed as function arguments
+ *
+ * @param Array a list of interfaces passed as function arguments
+ */
+function load_interfaces() // list of interfaces
+{
+    $interfaces = func_get_args();
+    load_files('interfaces', $interfaces);
+}
+
+/**
  * Load a model
  *
  * @param String $controller the controller to load

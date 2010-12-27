@@ -11,21 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-/**
- * The Mailer interface defines a single method to send email.
- * See the Request class to see how the Mailer interface is used.
- */
-interface Mailer
-{
-    /**
-     * Send a mail message
-     *
-     * @param String $file the file to send (e.g. "welcome")
-     * @param Object $render optional data to render (can be an Array)
-     * @return String the raw content of the message that was sent
-     */
-    public function send_mail($file, $render = NULL);
-}
+load_interface('Mailed');
 
 /**
  * The YAWF App object creates controller and service objects to
@@ -39,7 +25,7 @@ interface Mailer
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class App extends YAWF implements Mailer
+class App extends YAWF implements Mailed
 {
     protected $content_type;// derived from the file extension
     protected $controller;  // a controller to render the view

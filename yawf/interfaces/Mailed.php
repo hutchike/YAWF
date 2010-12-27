@@ -11,19 +11,20 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-load_interfaces('Modelled', 'Persisted', 'Validated');
-
 /**
- * The Model class is just an alias for the Valid_SQL_model class.
- * If you'd like a different kind of model, then just add your own
- * "Model" class in your own "app" directory et voila - easy huh?
- *
- * @author Kevin Hutchinson <kevin@guanoo.com>
+ * The Mailed interface defines a single method to send email messages.
+ * The App and Request classes show how the Mailed interface is used.
  */
-
-class Model extends Valid_SQL_model implements Modelled, Persisted, Validated
+interface Mailed
 {
-    // Don't add anything here!
+    /**
+     * Send a mail message
+     *
+     * @param String $file the file to send (e.g. "welcome")
+     * @param Object $render optional data to render (can be an Array)
+     * @return String the raw content of the message that was sent
+     */
+    public function send_mail($file, $render = NULL);
 }
 
-// End of Model.php
+// End of Mailed.php

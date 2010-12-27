@@ -11,13 +11,15 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+load_interfaces('Modelled', 'Persisted', 'Validated');
+
 /**
  * The Valid_SQL_model class extends the SQL_model class with
  * extra validation methods to validate the data field values.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Valid_SQL_model extends SQL_model implements Modelled, Validated
+class Valid_SQL_model extends SQL_model implements Modelled, Persisted, Validated
 {
     private static $validators = array();
     private $validation_messages;

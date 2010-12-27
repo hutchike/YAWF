@@ -11,13 +11,15 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+load_interface('Modelled');
+
 /**
  * The Basic_model class provides a foundation class from which
  * to build your own model classes using alternative data stores.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Basic_model extends YAWF
+class Basic_model extends YAWF implements Modelled
 {
     protected $data;
     protected $to_update;
@@ -31,6 +33,27 @@ class Basic_model extends YAWF
     {
         $this->data = (array)$data;
         $this->to_update = array();
+    }
+
+    /**
+     * Setup a model by calling methods such as "set_id_field", "set_virtual"
+     * and "set_timestamp". This method should be overriden in your subclass:
+     *
+     * <code>
+     * // Subclass in your models like this (depending on model capabilities):
+     *
+     * public function setup()
+     * {
+     *     $this->set_id_field('table_id_field');
+     *     $this->set_virtual('transient_field');
+     *     $this->set_timestamp('created_at', 'updated_at');
+     *     $this->validates('email', 'is_valid_email');
+     * }
+     * </code>
+     */
+    public function setup()
+    {
+        // Override this method in your subclasses
     }
 
     /**
