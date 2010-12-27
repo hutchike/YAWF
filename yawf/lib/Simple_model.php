@@ -14,15 +14,15 @@
 load_interface('Modelled');
 
 /**
- * The Basic_model class provides a foundation class from which
+ * The Simple_model class provides a foundation class from which
  * to build your own model classes using alternative data stores.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Basic_model extends YAWF implements Modelled
+class Simple_model extends YAWF implements Modelled
 {
     /**
-     * The <code>$data</code> Array holds the basic model data
+     * The <code>$data</code> Array holds the simple model data
      */
     protected $data;
 
@@ -32,7 +32,7 @@ class Basic_model extends YAWF implements Modelled
     protected $changed;
 
     /**
-     * Create a new basic model object
+     * Create a new simple model object
      *
      * @param Array $data the data to initialize the object (may be an object)
      */
@@ -91,7 +91,7 @@ class Basic_model extends YAWF implements Modelled
     /**
      * Copy data from this model object to another model object
      *
-     * @param Basic_model $other the other model object
+     * @param Simple_model $other the other model object
      */
     public function copy_to($other)
     {
@@ -132,4 +132,4 @@ class Basic_model extends YAWF implements Modelled
     }
 }
 
-// End of Basic_model.php
+// End of Simple_model.php

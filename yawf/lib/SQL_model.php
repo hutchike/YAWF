@@ -20,7 +20,7 @@ load_interfaces('Modelled', 'Persisted');
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class SQL_model extends Basic_model implements Modelled, Persisted
+class SQL_model extends Simple_model implements Modelled, Persisted
 {
     private static $connectors;
     private static $databases;

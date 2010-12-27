@@ -21,7 +21,7 @@ load_tool('REST');
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Remote extends Basic_model implements Modelled, Persisted, Validated
+class Remote extends Simple_model implements Modelled, Persisted, Validated
 {
     const DEFAULT_TYPE = Symbol::JSON; // (it's built into PHP)
 
