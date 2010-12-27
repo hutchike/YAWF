@@ -29,10 +29,13 @@ body {
 }
 
 #menu li a {
+    background-image: url(/images/shade.png);
+    background-position: 0px -10px;
 	background-color: #bdf;
 }
 
 #menu li.active a {
+    background-image: url(/images/1x1.gif);
 	background-color: #93c;
 	color: white;
 }

@@ -26,12 +26,13 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The Service class responds to requests for web services, such  as REST web services. See the &quot;REST_service&quot; child class for  an example of a Service.</p>
+<p class="short-description">The Rest_service class may be subclassed by service classes in your app's  &quot;services&quot; directory. It provides standard REST HTTP methods as methods to  override in your subclass - e.g. &quot;get&quot;, &quot;post&quot;, &quot;put&quot;, &quot;delete&quot; and others.</p>
+<p class="description"><p>It also provides a hook for a &quot;basic_auth&quot; method to check a username and  password before providing access to the service.</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_services---REST.php.html">/services/REST.php</a> (line <span class="field">16</span>)
+			Located in <a class="field" href="_services---REST.php.html">/services/REST.php</a> (line <span class="field">23</span>)
 		</p>
 		
 				
@@ -71,7 +72,7 @@
 						<a href="../YAWF/REST_test_service.html">REST_test_service</a>
 					</td>
 					<td>
-											The Service class responds to requests for web services, such  as REST web services. See the &quot;REST_service&quot; child class for  an example of a Service.
+											The REST_test_service class is used to test the REST controller.
 										</td>
 				</tr>
 							</table>
@@ -95,57 +96,57 @@
 			<div class="method-summary">
 																																																																																								<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Boolean</span>
 										<a href="#auth" title="details" class="method-name">auth</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Boolean</span>
 										<a href="#basic_auth" title="details" class="method-name">basic_auth</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$username</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$password</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$username</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$password</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Array</span>
 										<a href="#delete" title="details" class="method-name">delete</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+											(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$params</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Array</span>
 										<a href="#get" title="details" class="method-name">get</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+											(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$params</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">String</span>
 										<a href="#get_model_name" title="details" class="method-name">get_model_name</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Array</span>
 										<a href="#move" title="details" class="method-name">move</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+											(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$params</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Array</span>
 										<a href="#options" title="details" class="method-name">options</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+											(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$params</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Array</span>
 										<a href="#post" title="details" class="method-name">post</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+											(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$params</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result">Array</span>
 										<a href="#put" title="details" class="method-name">put</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+											(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$params</span>)
 									</div>
 											</div>
 		</div>
@@ -212,16 +213,19 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">auth</span> (line <span class="line-number">22</span>)
+		<span class="method-title">auth</span> (line <span class="line-number">35</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return whether a web user is authorized to access this service.</p>
+<p class="description"><p>This method calls the &quot;basic_auth&quot; method - override to modify.</p></p>
 	<ul class="tags">
+				<li><span class="field">return:</span> TRUE if authorized or FALSE otherwise</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Boolean</span>
 		<span class="method-name">
 			auth
 		</span>
@@ -236,29 +240,32 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">basic_auth</span> (line <span class="line-number">28</span>)
+		<span class="method-title">basic_auth</span> (line <span class="line-number">50</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return whether a web user is authorized to access this service.</p>
+<p class="description"><p>This method should be overriden in your subclass to check the  username and password and return whether they're authorized.</p></p>
 	<ul class="tags">
+				<li><span class="field">return:</span> TRUE if authorized or FALSE otherwise</li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Boolean</span>
 		<span class="method-name">
 			basic_auth
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$username</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$password</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$username</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$password</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$username</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$username</span><span class="var-description">: the username to authorize</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$password</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$password</span><span class="var-description">: the password to authorize</span>			</li>
 				</ul>
 		
 			
@@ -268,26 +275,28 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete</span> (line <span class="line-number">41</span>)
+		<span class="method-title">delete</span> (line <span class="line-number">67</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The default &quot;delete&quot; method behavior is to delete the model object</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the &quot;data&quot; HTTP param containing all the REST data</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			delete
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+					(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$params</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$params</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$params</span><span class="var-description">: the HTTP params</span>			</li>
 				</ul>
 		
 			
@@ -296,6 +305,7 @@
 		<ul class="redefinitions">
 					<li>
 				<a href="../YAWF/REST_test_service.html#methoddelete">REST_test_service::delete()</a>
+								: Provide a mock &quot;delete&quot; method for testing
 							</li>
 				</ul>
 	</div>
@@ -304,26 +314,28 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get</span> (line <span class="line-number">51</span>)
+		<span class="method-title">get</span> (line <span class="line-number">82</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The default &quot;get&quot; method behavior is to load the model object</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the &quot;data&quot; HTTP param containing REST data, or an error</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			get
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+					(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$params</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$params</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$params</span><span class="var-description">: the HTTP params</span>			</li>
 				</ul>
 		
 			
@@ -332,6 +344,7 @@
 		<ul class="redefinitions">
 					<li>
 				<a href="../YAWF/REST_test_service.html#methodget">REST_test_service::get()</a>
+								: Provide a mock &quot;get&quot; method for testing
 							</li>
 				</ul>
 	</div>
@@ -340,16 +353,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_model_name</span> (line <span class="line-number">103</span>)
+		<span class="method-title">get_model_name</span> (line <span class="line-number">153</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the data model class name (and ensure it has been loaded)</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the name of the model (e.g. &quot;User&quot;)</li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">String</span>
 		<span class="method-name">
 			get_model_name
 		</span>
@@ -364,26 +379,28 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">move</span> (line <span class="line-number">60</span>)
+		<span class="method-title">move</span> (line <span class="line-number">95</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Override &quot;move&quot; in your service if you wish to support it</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> an error saying this HTTP REST method isn't yet supported</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			move
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+					(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$params</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$params</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$params</span><span class="var-description">: the HTTP params</span>			</li>
 				</ul>
 		
 			
@@ -392,6 +409,7 @@
 		<ul class="redefinitions">
 					<li>
 				<a href="../YAWF/REST_test_service.html#methodmove">REST_test_service::move()</a>
+								: Provide a mock &quot;move&quot; method for testing
 							</li>
 				</ul>
 	</div>
@@ -400,26 +418,28 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">options</span> (line <span class="line-number">67</span>)
+		<span class="method-title">options</span> (line <span class="line-number">106</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Override &quot;options&quot; in your service if you wish to support it</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> an error saying this HTTP REST method isn't yet supported</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			options
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+					(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$params</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$params</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$params</span><span class="var-description">: the HTTP params</span>			</li>
 				</ul>
 		
 			
@@ -428,6 +448,7 @@
 		<ul class="redefinitions">
 					<li>
 				<a href="../YAWF/REST_test_service.html#methodoptions">REST_test_service::options()</a>
+								: Provide a mock &quot;options&quot; method for testing
 							</li>
 				</ul>
 	</div>
@@ -436,26 +457,28 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">post</span> (line <span class="line-number">74</span>)
+		<span class="method-title">post</span> (line <span class="line-number">117</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The default &quot;post&quot; method behavior is to insert the model object</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the &quot;data&quot; HTTP param containing all the REST data</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			post
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+					(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$params</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$params</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$params</span><span class="var-description">: the HTTP params</span>			</li>
 				</ul>
 		
 			
@@ -464,6 +487,7 @@
 		<ul class="redefinitions">
 					<li>
 				<a href="../YAWF/REST_test_service.html#methodpost">REST_test_service::post()</a>
+								: Provide a mock &quot;post&quot; method for testing
 							</li>
 				</ul>
 	</div>
@@ -472,26 +496,28 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">put</span> (line <span class="line-number">88</span>)
+		<span class="method-title">put</span> (line <span class="line-number">135</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The default &quot;put&quot; method behavior is to update the model object</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the &quot;data&quot; HTTP param containing all the REST data</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			put
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$params</span>)
+					(<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>&nbsp;<span class="var-name">$params</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$params</span>			</li>
+				<span class="var-type"><a href="../YAWF/Object.html">Object</a></span>
+				<span class="var-name">$params</span><span class="var-description">: the HTTP params</span>			</li>
 				</ul>
 		
 			
@@ -500,6 +526,7 @@
 		<ul class="redefinitions">
 					<li>
 				<a href="../YAWF/REST_test_service.html#methodput">REST_test_service::put()</a>
+								: Provide a mock &quot;put&quot; method for testing
 							</li>
 				</ul>
 	</div>
@@ -583,7 +610,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 26 Dec 2010 07:52:15 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 27 Dec 2010 06:39:30 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
