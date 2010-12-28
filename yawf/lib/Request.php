@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-load_interface('Mailed');
+load_interface('Mailer');
 
 /**
  * The Request class provides Controller and Service objects with
@@ -21,7 +21,7 @@ load_interface('Mailed');
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Request extends YAWF implements Mailed
+class Request extends YAWF implements Mailer
 {
     /**
      * A mapping of request content types to file types

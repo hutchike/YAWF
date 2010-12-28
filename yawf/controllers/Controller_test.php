@@ -14,7 +14,15 @@
 // Base controller "lib/Controller.php" tests here
 // See this test controller run at URL "/lib_test"
 
-class Lib_test_controller extends Controller
+/**
+ * The Controller_test_controller class tests the "Controller" and "App"
+ * classes in the YAWF "lib" directory by checking that they provide the
+ * services expected, e.g. flashes, cookies, sessions, params, redirects.
+ * Basically, it's a controller to test controllers. All a bit recursive.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
+class Controller_test_controller extends Controller
 {
     const TEST_VIEW = 'test_view'; // in the "default" folder so we can find it
     const TEST_TEXT = 'Just some text to test things';
@@ -37,7 +45,7 @@ class Lib_test_controller extends Controller
             $this->cookie->remember_the_time_now = $time_now;
             $this->session->remember_the_time_now = $time_now;
             $type = $this->app->get_content_type();
-            header('Location: ' . uri("lib_test.$type?$time_now"));
+            header('Location: ' . uri("controller_test.$type?$time_now"));
             exit;
         }
 
@@ -103,7 +111,7 @@ class Lib_test_controller extends Controller
 
     protected function test_view() // for render_test() above
     {
-        $this->render->text = Lib_test_controller::TEST_TEXT;
+        $this->render->text = Controller_test_controller::TEST_TEXT;
     }
 
     // Test that we can setup render data with "app", "view" and "params" data
@@ -206,7 +214,7 @@ class Lib_test_controller extends Controller
     public function redirect_test()
     {
         $state_before = $this->get_state();
-        $this->redirect('lib_test');
+        $this->redirect('controller_test');
         $state_after = $this->get_state();
         $this->should('do nothing',
                       $state_before === $state_after);
@@ -304,4 +312,4 @@ class Lib_test_controller extends Controller
     }
 }
 
-// End of Lib_test.php
+// End of Controller_test.php

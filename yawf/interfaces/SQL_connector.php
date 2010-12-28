@@ -14,7 +14,8 @@
 /**
  * All the connector classes should implement this SQL_connector
  * interface to make available methods "connect", "disconnect",
- * "escape", "query", "insert_id" and "error".
+ * "escape", "query", "insert_id" and "error". Any subclass of
+ * SQL_model will connect to the database via a SQL_connector.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */

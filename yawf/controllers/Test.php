@@ -13,6 +13,13 @@
 
 Log::type('test');
 
+/**
+ * The Test_controller class displays the web page GUI test framework
+ * so that JavaScript tests may be run to check the website usability.
+ * See your "app/public/scritps/test/runner.js" file to add some tests.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Test_controller extends App_controller
 {
     const SCRIPT_RUNNER = 'runner.js';
@@ -20,6 +27,9 @@ class Test_controller extends App_controller
     protected $url;
     protected $script;
 
+    /**
+     * Setup render data for the website testing framework
+     */
     public function before()
     {
         $this->url = $this->render->url = first($this->params->url, '/');
@@ -27,6 +37,9 @@ class Test_controller extends App_controller
         $this->render->error = '';
     }
 
+    /**
+     * Redirect to "test/runner.part" to ensure the app layout is not rendered
+     */
     public function runner()
     {
         if (!TESTING_ENABLED) $this->app->redirect('', array('exit' => TRUE));
@@ -38,6 +51,9 @@ class Test_controller extends App_controller
         }
     }
 
+    /**
+     * Log all the lines passed in the HTTP param "lines" into the test log
+     */
     public function logger()
     {
         $lines = preg_split('/\n/', html_entity_decode($this->params->lines));
@@ -53,6 +69,9 @@ class Test_controller extends App_controller
         $this->render->count_lines_logged = $count;
     }
 
+    /**
+     * Display the "test/browser" view to select a web page to test
+     */
     public function browser()
     {
         $scripts = array();
@@ -72,17 +91,28 @@ class Test_controller extends App_controller
             $this->render->error = 'Folder "' . self::SCRIPT_DIR . '" is empty?';
     }
 
+    /**
+     * Display the "test/console" view to display test passes and failures
+     */
     public function console()
     {
         // Nothing to do
     }
 
+    /**
+     * Display a JavaScript testing script in the main "view" frame
+     */
     public function script()
     {
         $this->render->file_path = self::SCRIPT_DIR . '/' . $this->script;
     }
 
-    protected function new_flash_object()
+    /**
+     * Don't create a flash object because it overwrites that of the tested page
+     *
+     * @return NULL no flash object
+     */
+    protected function flash_object()
     {
         return NULL; // so we don't affect the tested controller's flash object
     }

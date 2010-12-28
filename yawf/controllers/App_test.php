@@ -13,29 +13,49 @@
 
 // See this test controller run at URI "/app_test"
 
+/**
+ * The App_test_controller class runs tests over the controllers
+ * listed by the APP_TEST_CONTROLLER_LIST constant, and the views
+ * listed by the APP_TEST_VIEW_PATH_LIST constant. These tests are
+ * run at the URI "/app_test" in your web application.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class App_test_controller extends App_controller
 {
     private $controllers;
     private $view_paths;
 
+    /**
+     * Setup the tests to run by looking at the config constants
+     * APP_TEST_CONTROLLER_LIST and APP_TEST_VIEW_PATH_LIST.
+     */
     public function setup()
     {
         $this->controllers = split_list(APP_TEST_CONTROLLER_LIST);
         $this->view_paths = split_list(APP_TEST_VIEW_PATH_LIST);
     }
 
+    /**
+     * Test the controllers listed in config constant APP_TEST_CONTROLLER_LIST
+     * by looking for any failures in each controller's test output.
+     */
     public function controllers_test()
     {
         $output = '';
         foreach ($this->controllers as $controller)
         {
             if (strtolower($controller) === 'app') continue; // recursion!
-            $output .= uri_get_contents('/' . $controller . '_test.part');
+            $output .= uri_get_contents($controller . '_test.part');
         }
         $this->should_not('find failures in test output',
                           preg_match('/failed/', $output) > 0, $output);
     }
 
+    /**
+     * Test the view paths listed in config constant APP_TEST_VIEW_PATH_LIST
+     * by validating the HTML as well-formatted and legal XHTML.
+     */
     public function view_paths_test()
     {
         foreach ($this->view_paths as $view_path)

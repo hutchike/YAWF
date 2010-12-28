@@ -12,10 +12,10 @@
 // GNU Lesser General Public License for more details.
 
 /**
- * The Mailed interface defines a single method to send email messages.
- * The App and Request classes show how the Mailed interface is used.
+ * The Mailer interface defines a single method to send email messages.
+ * The App and Request classes show how the Mailer interface is used.
  */
-interface Mailed
+interface Mailer
 {
     /**
      * Send a mail message
@@ -27,4 +27,4 @@ interface Mailed
     public function send_mail($file, $render = NULL);
 }
 
-// End of Mailed.php
+// End of Mailer.php

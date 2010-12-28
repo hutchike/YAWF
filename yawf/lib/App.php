@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-load_interface('Mailed');
+load_interface('Mailer');
 
 /**
  * The YAWF App object creates controller and service objects to
@@ -25,7 +25,7 @@ load_interface('Mailed');
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class App extends YAWF implements Mailed
+class App extends YAWF implements Mailer
 {
     protected $content_type;// derived from the file extension
     protected $controller;  // a controller to render the view
