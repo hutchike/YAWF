@@ -21,7 +21,7 @@ load_interfaces('Modelled', 'Persisted', 'Validated');
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
 
-class Model extends SQL_model implements Modelled, Persisted, Validated
+class Model extends Relating_model implements Modelled, Persisted, Validated
 {
     // Don't add anything here!
 }

@@ -67,7 +67,9 @@ class Text extends YAWF
      */
     public static function pluralize($word)
     {
-        return self::singleton()->pluralize($word);
+        static $pluralized = array();
+        if ($found = array_key($pluralized, $word)) return $found;
+        return $pluralized[$word] = self::singleton()->pluralize($word);
     }
 
     /**
@@ -78,7 +80,9 @@ class Text extends YAWF
      */
     public static function singularize($word)
     {
-        return self::singleton()->singularize($word);
+        static $singularized = array();
+        if ($found = array_key($singularized, $word)) return $found;
+        return $singularized[$word] = self::singleton()->singularize($word);
     }
 
     /**
@@ -91,7 +95,10 @@ class Text extends YAWF
      */
     public static function titleize($word, $uppercase = '')
     {
-        return self::singleton()->titleize($word, $uppercase); // 'first' or 'all' (default)
+        static $titleized = array();
+        $key = "$word.$uppercase";
+        if ($found = array_key($titleized, $key)) return $found;
+        return $titleized[$key] = self::singleton()->titleize($word, $uppercase); // 'first' or 'all' (default)
     }
 
     /**
@@ -103,7 +110,9 @@ class Text extends YAWF
      */
     public static function camelize($word)
     {
-        return self::singleton()->camelize($word);
+        static $camelized = array();
+        if ($found = array_key($camelized, $word)) return $found;
+        return $camelized[$word] = self::singleton()->camelize($word);
     }
 
     /**
@@ -115,7 +124,9 @@ class Text extends YAWF
      */
     public static function underscore($word)
     {
-        return self::singleton()->underscore($word);
+        static $underscored = array();
+        if ($found = array_key($underscored, $word)) return $found;
+        return $underscored[$word] = self::singleton()->underscore($word);
     }
 
     /**
@@ -127,7 +138,10 @@ class Text extends YAWF
      */
     public static function humanize($method, $capitalize = '')
     {
-        return self::singleton()->humanize($method, $capitalize); // 'all' or 'first' (default)
+        static $humanized = array();
+        $key = "$method.$capitalize";
+        if ($found = array_key($humanized, $key)) return $found;
+        return $humanized[$key] = self::singleton()->humanize($method, $capitalize); // 'all' or 'first' (default)
     }
 
     /**
@@ -139,7 +153,9 @@ class Text extends YAWF
      */
     public static function variablize($word)
     {
-        return self::singleton()->variablize($word);
+        static $variablized = array();
+        if ($found = array_key($variablized, $word)) return $found;
+        return $variablized[$word] = self::singleton()->variablize($word);
     }
 
     /**
@@ -151,7 +167,9 @@ class Text extends YAWF
      */
     public static function tableize($class_name)
     {
-        return self::singleton()->tableize($class_name);
+        static $tableized = array();
+        if ($found = array_key($tableized, $class_name)) return $found;
+        return $tableized[$class_name] = self::singleton()->tableize($class_name);
     }
 
     /**
@@ -163,7 +181,9 @@ class Text extends YAWF
      */
     public static function classify($table_name)
     {
-        return self::singleton()->classify($table_name);
+        static $classified = array();
+        if ($found = array_key($classified, $table_name)) return $found;
+        return $classified[$table_name] = self::singleton()->classify($table_name);
     }
 
     /**
@@ -175,7 +195,9 @@ class Text extends YAWF
      */
     public static function ordinalize($number)
     {
-        return self::singleton()->ordinalize($number);
+        static $ordinalized = array();
+        if ($found = array_key($ordinalized, $number)) return $found;
+        return $ordinalized[$number] = self::singleton()->ordinalize($number);
     }
 
     /**
@@ -187,7 +209,9 @@ class Text extends YAWF
      */
     public static function urlize($word)
     {
-        return self::singleton()->urlize($word);
+        static $urlized = array();
+        if ($found = array_key($urlized, $word)) return $found;
+        return $urlized[$word] = self::singleton()->urlize($word);
     }
 }
 
