@@ -66,10 +66,10 @@
 								 alt=" class"
 								 title=" class"
 								 style="vertical-align: center"/>
-						<a href="../YAWF/App_controller.html">App_controller</a>
+						<a href="../YAWF/Controller_test_controller.html">Controller_test_controller</a>
 					</td>
 					<td>
-											The Controller class executes application logic and renders views.
+											The Controller_test_controller class tests the &quot;Controller&quot; and &quot;App&quot;  classes in the YAWF &quot;lib&quot; directory by checking that they provide the  services expected, e.g. flashes, cookies, sessions, params, redirects.
 										</td>
 				</tr>
 								<tr>
@@ -78,10 +78,10 @@
 								 alt=" class"
 								 title=" class"
 								 style="vertical-align: center"/>
-						<a href="../YAWF/Lib_test_controller.html">Lib_test_controller</a>
+						<a href="../YAWF/App_controller.html">App_controller</a>
 					</td>
 					<td>
-											The Controller class executes application logic and renders views.
+											The App_controller class should be overriden by placing an  App_controller class (a file called &quot;App.php&quot;) in your own  &quot;app/controllers&quot; folder.
 										</td>
 				</tr>
 							</table>
@@ -178,7 +178,7 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">String</span>
 										<a href="#render" title="details" class="method-name">render</a>
-											([<span class="var-type">String</span>&nbsp;<span class="var-name">$view</span> = <span class="var-default">null</span>], [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+											([<span class="var-type">String</span>&nbsp;<span class="var-name">$view</span> = <span class="var-default">NULL</span>], [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -230,7 +230,7 @@
 		<div class="info-box-body">
 			
 <a name="var$flash" id="$flash"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
@@ -252,7 +252,7 @@
 
 </div>
 <a name="var$path" id="$path"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
@@ -274,7 +274,7 @@
 
 </div>
 <a name="var$render" id="$render"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
@@ -296,7 +296,7 @@
 
 </div>
 <a name="var$type" id="$type"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
@@ -318,7 +318,7 @@
 
 </div>
 <a name="var$view" id="$view"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
@@ -381,7 +381,7 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodafter" id="after"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -408,12 +408,12 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../YAWF/Lib_test_controller.html#methodafter">Lib_test_controller::after()</a>
+				<a href="../YAWF/Controller_test_controller.html#methodafter">Controller_test_controller::after()</a>
 							</li>
 				</ul>
 	</div>
 <a name="methodbefore" id="before"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -440,18 +440,20 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
+				<a href="../YAWF/Controller_test_controller.html#methodbefore">Controller_test_controller::before()</a>
+							</li>
+					<li>
 				<a href="../YAWF/App_controller.html#methodbefore">App_controller::before()</a>
+								: This is an example of a method to include in your &quot;App_controller&quot; class
 							</li>
 					<li>
 				<a href="../YAWF/Test_controller.html#methodbefore">Test_controller::before()</a>
-							</li>
-					<li>
-				<a href="../YAWF/Lib_test_controller.html#methodbefore">Lib_test_controller::before()</a>
+								: Setup render data for the website testing framework
 							</li>
 				</ul>
 	</div>
 <a name="methodflash" id="flash"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -485,7 +487,7 @@
 			
 	</div>
 <a name="methodflash_object" id="flash_object"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -509,9 +511,17 @@
 	
 		
 			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../YAWF/Test_controller.html#methodflash_object">Test_controller::flash_object()</a>
+								: Don't create a flash object because it overwrites that of the tested page
+							</li>
+				</ul>
 	</div>
 <a name="methodget_path_config_from" id="get_path_config_from"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -542,7 +552,7 @@
 			
 	</div>
 <a name="methodrender" id="render"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -561,7 +571,7 @@
 		<span class="method-name">
 			render
 		</span>
-					([<span class="var-type">String</span>&nbsp;<span class="var-name">$view</span> = <span class="var-default">null</span>], [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+					([<span class="var-type">String</span>&nbsp;<span class="var-name">$view</span> = <span class="var-default">NULL</span>], [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 			</div>
 	
 			<ul class="parameters">
@@ -579,14 +589,16 @@
 		<ul class="redefinitions">
 					<li>
 				<a href="../YAWF/Cache_controller.html#methodrender">Cache_controller::render()</a>
+								: Render the requested view by using the cache
 							</li>
 					<li>
 				<a href="../YAWF/REST_controller.html#methodrender">REST_controller::render()</a>
+								: Call a REST method, then render the REST service view
 							</li>
 				</ul>
 	</div>
 <a name="methodrender_path_data" id="render_path_data"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -616,7 +628,7 @@
 			
 	</div>
 <a name="methodsetup_for_app" id="setup_for_app"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -649,7 +661,7 @@
 			
 	</div>
 <a name="methodsetup_render_data" id="setup_render_data"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -679,7 +691,7 @@
 			
 	</div>
 <a name="methodset_type" id="set_type"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -710,7 +722,7 @@
 			
 	</div>
 <a name="methodset_view" id="set_view"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -812,7 +824,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 27 Dec 2010 08:09:04 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 28 Dec 2010 08:08:14 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

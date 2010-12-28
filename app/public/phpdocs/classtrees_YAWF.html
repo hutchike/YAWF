@@ -13,13 +13,9 @@
 <H2>
 	
 </H2>
-<h2>Root interface Connector</h2>
+<h2>Root interface Mailer</h2>
 <ul>
-<li><a href="YAWF/Connector.html">Connector</a></li></ul>
-
-<h2>Root interface Mailed</h2>
-<ul>
-<li><a href="YAWF/Mailed.html">Mailed</a></li></ul>
+<li><a href="YAWF/Mailer.html">Mailer</a></li></ul>
 
 <h2>Root interface Modelled</h2>
 <ul>
@@ -28,6 +24,10 @@
 <h2>Root interface Persisted</h2>
 <ul>
 <li><a href="YAWF/Persisted.html">Persisted</a></li></ul>
+
+<h2>Root interface SQL_connector</h2>
+<ul>
+<li><a href="YAWF/SQL_connector.html">SQL_connector</a></li></ul>
 
 <h2>Root interface Validated</h2>
 <ul>
@@ -80,29 +80,29 @@
 <h2>Root class YAWF</h2>
 <ul>
 <li><a href="YAWF/YAWF.html">YAWF</a><ul>
-<li><a href="YAWF/App.html">App</a> (implements <a href="YAWF/Mailed.html">Mailed</a>)<ul>
+<li><a href="YAWF/App.html">App</a> (implements <a href="YAWF/Mailer.html">Mailer</a>)<ul>
 <li><a href="YAWF/App_test.html">App_test</a></li></ul></li>
-<li><a href="YAWF/AppConfig.html">AppConfig</a></li><li><a href="YAWF/AppView.html">AppView</a></li><li><a href="YAWF/Auth.html">Auth</a></li><li><a href="YAWF/Basic_model.html">Basic_model</a> (implements <a href="YAWF/Modelled.html">Modelled</a>)<ul>
-<li><a href="YAWF/Remote.html">Remote</a> (implements <a href="YAWF/Modelled.html">Modelled</a>, <a href="YAWF/Persisted.html">Persisted</a><a href="YAWF/Validated.html">Validated</a>)<ul>
-<li><a href="YAWF/Remote_test.html">Remote_test</a></li></ul></li>
-<li><a href="YAWF/SQL_model.html">SQL_model</a> (implements <a href="YAWF/Modelled.html">Modelled</a><a href="YAWF/Persisted.html">Persisted</a>)<ul>
-<li><a href="YAWF/Valid_SQL_model.html">Valid_SQL_model</a> (implements <a href="YAWF/Modelled.html">Modelled</a>, <a href="YAWF/Persisted.html">Persisted</a><a href="YAWF/Validated.html">Validated</a>)<ul>
-<li><a href="YAWF/Model.html">Model</a></li></ul></li>
-</ul></li>
-</ul></li>
-<li><a href="YAWF/Config.html">Config</a></li><li><a href="YAWF/Controller_flash.html">Controller_flash</a></li><li><a href="YAWF/Country.html">Country</a></li><li><a href="YAWF/CURL.html">CURL</a></li><li><a href="YAWF/Data.html">Data</a></li><li><a href="YAWF/Data_MySQL.html">Data_MySQL</a></li><li><a href="YAWF/Data_MySQLi.html">Data_MySQLi</a></li><li><a href="YAWF/Data_SQLite2.html">Data_SQLite2</a></li><li><a href="YAWF/Data_SQLite3.html">Data_SQLite3</a></li><li><a href="YAWF/HTML.html">HTML</a></li><li><a href="YAWF/HTTP.html">HTTP</a></li><li><a href="YAWF/Log.html">Log</a></li><li><a href="YAWF/Mail.html">Mail</a></li><li><a href="YAWF/MySQL_fetcher.html">MySQL_fetcher</a></li><li><a href="YAWF/Queue.html">Queue</a></li><li><a href="YAWF/Request.html">Request</a> (implements <a href="YAWF/Mailed.html">Mailed</a>)<ul>
+<li><a href="YAWF/AppConfig.html">AppConfig</a></li><li><a href="YAWF/AppView.html">AppView</a></li><li><a href="YAWF/Auth.html">Auth</a></li><li><a href="YAWF/Config.html">Config</a></li><li><a href="YAWF/Controller_flash.html">Controller_flash</a></li><li><a href="YAWF/Country.html">Country</a></li><li><a href="YAWF/CURL.html">CURL</a></li><li><a href="YAWF/Data.html">Data</a></li><li><a href="YAWF/Data_MySQL.html">Data_MySQL</a></li><li><a href="YAWF/Data_MySQLi.html">Data_MySQLi</a></li><li><a href="YAWF/Data_SQLite2.html">Data_SQLite2</a></li><li><a href="YAWF/Data_SQLite3.html">Data_SQLite3</a></li><li><a href="YAWF/HTML.html">HTML</a></li><li><a href="YAWF/HTTP.html">HTTP</a></li><li><a href="YAWF/Log.html">Log</a></li><li><a href="YAWF/Mail.html">Mail</a></li><li><a href="YAWF/MySQL_fetcher.html">MySQL_fetcher</a></li><li><a href="YAWF/Queue.html">Queue</a></li><li><a href="YAWF/Request.html">Request</a> (implements <a href="YAWF/Mailer.html">Mailer</a>)<ul>
 <li><a href="YAWF/Controller.html">Controller</a><ul>
 <li><a href="YAWF/App_controller.html">App_controller</a><ul>
 <li><a href="YAWF/App_test_controller.html">App_test_controller</a></li><li><a href="YAWF/Cache_controller.html">Cache_controller</a><ul>
 <li><a href="YAWF/Cache_test_controller.html">Cache_test_controller</a></li></ul></li>
 <li><a href="YAWF/REST_controller.html">REST_controller</a></li><li><a href="YAWF/Test_controller.html">Test_controller</a></li></ul></li>
-<li><a href="YAWF/Lib_test_controller.html">Lib_test_controller</a></li></ul></li>
+<li><a href="YAWF/Controller_test_controller.html">Controller_test_controller</a></li></ul></li>
 <li><a href="YAWF/Service.html">Service</a><ul>
 <li><a href="YAWF/REST_service.html">REST_service</a><ul>
 <li><a href="YAWF/REST_test_service.html">REST_test_service</a></li></ul></li>
 </ul></li>
 </ul></li>
-<li><a href="YAWF/Request_cookie.html">Request_cookie</a></li><li><a href="YAWF/Request_server.html">Request_server</a></li><li><a href="YAWF/Request_session.html">Request_session</a></li><li><a href="YAWF/REST.html">REST</a></li><li><a href="YAWF/Spam.html">Spam</a></li><li><a href="YAWF/SQLite2_fetcher.html">SQLite2_fetcher</a></li><li><a href="YAWF/SQLite3_fetcher.html">SQLite3_fetcher</a></li><li><a href="YAWF/Symbol.html">Symbol</a></li><li><a href="YAWF/Text.html">Text</a></li><li><a href="YAWF/Translate.html">Translate</a></li><li><a href="YAWF/XML.html">XML</a></li><li><a href="YAWF/YAML.html">YAML</a></li></ul></li>
+<li><a href="YAWF/Request_cookie.html">Request_cookie</a></li><li><a href="YAWF/Request_server.html">Request_server</a></li><li><a href="YAWF/Request_session.html">Request_session</a></li><li><a href="YAWF/REST.html">REST</a></li><li><a href="YAWF/Simple_model.html">Simple_model</a> (implements <a href="YAWF/Modelled.html">Modelled</a>)<ul>
+<li><a href="YAWF/Remote.html">Remote</a> (implements <a href="YAWF/Modelled.html">Modelled</a>, <a href="YAWF/Persisted.html">Persisted</a><a href="YAWF/Validated.html">Validated</a>)<ul>
+<li><a href="YAWF/Remote_test.html">Remote_test</a></li></ul></li>
+<li><a href="YAWF/Valid_model.html">Valid_model</a> (implements <a href="YAWF/Modelled.html">Modelled</a><a href="YAWF/Validated.html">Validated</a>)<ul>
+<li><a href="YAWF/SQL_model.html">SQL_model</a> (implements <a href="YAWF/Modelled.html">Modelled</a>, <a href="YAWF/Persisted.html">Persisted</a><a href="YAWF/Validated.html">Validated</a>)<ul>
+<li><a href="YAWF/Model.html">Model</a></li></ul></li>
+</ul></li>
+</ul></li>
+<li><a href="YAWF/Spam.html">Spam</a></li><li><a href="YAWF/SQLite2_fetcher.html">SQLite2_fetcher</a></li><li><a href="YAWF/SQLite3_fetcher.html">SQLite3_fetcher</a></li><li><a href="YAWF/Symbol.html">Symbol</a></li><li><a href="YAWF/Text.html">Text</a></li><li><a href="YAWF/Translate.html">Translate</a></li><li><a href="YAWF/XML.html">XML</a></li><li><a href="YAWF/YAML.html">YAML</a></li></ul></li>
 </ul>
 
 <h2>Root class Exception</h2>
@@ -118,7 +118,7 @@
 <li><a href="YAWF/REST_test_controller.html">REST_test_controller</a></li></ul>
 
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 27 Dec 2010 08:08:59 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 28 Dec 2010 08:08:11 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</body>
 </html>

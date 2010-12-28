@@ -26,12 +26,12 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The Controller class executes application logic and renders views.</p>
+<p class="short-description">The App_controller class should be overriden by placing an  App_controller class (a file called &quot;App.php&quot;) in your own  &quot;app/controllers&quot; folder.</p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_controllers---App.php.html">/controllers/App.php</a> (line <span class="field">14</span>)
+			Located in <a class="field" href="_controllers---App.php.html">/controllers/App.php</a> (line <span class="field">21</span>)
 		</p>
 		
 				
@@ -71,7 +71,7 @@
 						<a href="../YAWF/Cache_controller.html">Cache_controller</a>
 					</td>
 					<td>
-											The Controller class executes application logic and renders views.
+											The Cache_controller class allows app controllers to implement  page caching by calling a method like &quot;$this-&gt;cache_mins(15)&quot;.
 										</td>
 				</tr>
 								<tr>
@@ -83,7 +83,7 @@
 						<a href="../YAWF/REST_controller.html">REST_controller</a>
 					</td>
 					<td>
-											The Controller class executes application logic and renders views.
+											The REST_controller class connects REST service classes to the  web application via view methosd that correspond to HTTP methods  such as &quot;get&quot;, &quot;post&quot;, &quot;put&quot;, etc.
 										</td>
 				</tr>
 								<tr>
@@ -95,7 +95,7 @@
 						<a href="../YAWF/App_test_controller.html">App_test_controller</a>
 					</td>
 					<td>
-											The Controller class executes application logic and renders views.
+											The App_test_controller class runs tests over the controllers  listed by the APP_TEST_CONTROLLER_LIST constant, and the views  listed by the APP_TEST_VIEW_PATH_LIST constant. These tests are  run at the URI &quot;/app_test&quot; in your web application.
 										</td>
 				</tr>
 								<tr>
@@ -107,7 +107,7 @@
 						<a href="../YAWF/Test_controller.html">Test_controller</a>
 					</td>
 					<td>
-											The Controller class executes application logic and renders views.
+											The Test_controller class displays the web page GUI test framework  so that JavaScript tests may be run to check the website usability.
 										</td>
 				</tr>
 							</table>
@@ -223,10 +223,11 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">before</span> (line <span class="line-number">18</span>)
+		<span class="method-title">before</span> (line <span class="line-number">26</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is an example of a method to include in your &quot;App_controller&quot; class</p>
 	
 	<div class="method-signature">
 		<span class="method-result">void</span>
@@ -249,6 +250,7 @@
 		<ul class="redefinitions">
 					<li>
 				<a href="../YAWF/Test_controller.html#methodbefore">Test_controller::before()</a>
+								: Setup render data for the website testing framework
 							</li>
 				</ul>
 	</div>
@@ -350,7 +352,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 27 Dec 2010 08:09:00 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 28 Dec 2010 08:08:12 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

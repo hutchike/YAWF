@@ -28,7 +28,7 @@
                 <p class="implements">
             Implements interfaces:
             <ul>
-                <li><a href="../YAWF/Modelled.html">Modelled</a></li><li><a href="../YAWF/Persisted.html">Persisted</a></li>            </ul>
+                <li><a href="../YAWF/Modelled.html">Modelled</a></li><li><a href="../YAWF/Persisted.html">Persisted</a></li><li><a href="../YAWF/Validated.html">Validated</a></li>            </ul>
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">The SQL_model class links data objects to storage engines  that support SQL queries such as MySQL, SQLite2 &amp; SQLite3.</p>
@@ -36,15 +36,17 @@
 				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_lib---SQL_model.php.html">/lib/SQL_model.php</a> (line <span class="field">24</span>)
+			Located in <a class="field" href="_lib---SQL_model.php.html">/lib/SQL_model.php</a> (line <span class="field">23</span>)
 		</p>
 		
 				
 		<pre><a href="../YAWF/YAWF.html">YAWF</a>
    |
-   --<a href="../YAWF/Basic_model.html">Basic_model</a>
+   --<a href="../YAWF/Simple_model.html">Simple_model</a>
       |
-      --SQL_model</pre>
+      --<a href="../YAWF/Valid_model.html">Valid_model</a>
+         |
+         --SQL_model</pre>
 	
 			</div>
 </div>
@@ -71,10 +73,10 @@
 								 alt=" class"
 								 title=" class"
 								 style="vertical-align: center"/>
-						<a href="../YAWF/Valid_SQL_model.html">Valid_SQL_model</a>
+						<a href="../YAWF/Model.html">Model</a>
 					</td>
 					<td>
-											The Valid_SQL_model class extends the SQL_model class with  extra validation methods to validate the data field values.
+											The Model class is just a simple alias for the SQL_model class.
 										</td>
 				</tr>
 							</table>
@@ -96,7 +98,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																																																																																																																																																																																																																																																																<div class="method-definition">
+																																																																																																																																																																																																																																																																																																																																																								<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#connect" title="details" class="method-name">connect</a>
@@ -236,6 +238,12 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#password" title="details" class="method-name">password</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$text</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 										<a href="#query" title="details" class="method-name">query</a>
 											(<span class="var-type">String</span>&nbsp;<span class="var-name">$sql</span>)
@@ -357,15 +365,15 @@
 			
 							<h4>Inherited Variables</h4>
 				<A NAME='inherited_vars'><!-- --></A>
-									<p>Inherited from <span class="classname"><a href="../YAWF/Basic_model.html">Basic_model</a></span></p>
+									<p>Inherited from <span class="classname"><a href="../YAWF/Simple_model.html">Simple_model</a></span></p>
 					<blockquote>
 													<img src="../media/images/Variable.png" />
 							<span class="var-title">
-								<span class="var-name"><a href="../YAWF/Basic_model.html#var$changed">Basic_model::$changed</a></span><br>
+								<span class="var-name"><a href="../YAWF/Simple_model.html#var$changed">Simple_model::$changed</a></span><br>
 							</span>
 													<img src="../media/images/Variable.png" />
 							<span class="var-title">
-								<span class="var-name"><a href="../YAWF/Basic_model.html#var$data">Basic_model::$data</a></span><br>
+								<span class="var-name"><a href="../YAWF/Simple_model.html#var$data">Simple_model::$data</a></span><br>
 							</span>
 											</blockquote> 
 										
@@ -385,11 +393,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodconnect" id="connect"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">connect</span> (line <span class="line-number">313</span>)
+		<span class="method-title">connect</span> (line <span class="line-number">312</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -418,7 +426,7 @@
 			
 	</div>
 <a name="methoddelete" id="delete"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -428,7 +436,7 @@
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Delete this model object's data from the database via the connector</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> this model object for chaining, or NULL upon failure</li>
+				<li><span class="field">return:</span> this model object for chaining, or NULL on failure</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -450,7 +458,7 @@
 			
 	</div>
 <a name="methoddelete_all" id="delete_all"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -476,11 +484,11 @@
 			
 	</div>
 <a name="methoddisconnect" id="disconnect"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">disconnect</span> (line <span class="line-number">326</span>)
+		<span class="method-title">disconnect</span> (line <span class="line-number">325</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -501,7 +509,7 @@
 			
 	</div>
 <a name="methoddrop" id="drop"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -527,11 +535,11 @@
 			
 	</div>
 <a name="methodescape" id="escape"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">escape</span> (line <span class="line-number">363</span>)
+		<span class="method-title">escape</span> (line <span class="line-number">362</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -558,7 +566,7 @@
 			
 	</div>
 <a name="methodfind_all" id="find_all"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -589,7 +597,7 @@
 			
 	</div>
 <a name="methodfind_first" id="find_first"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -599,7 +607,7 @@
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Find the first model object that matches some conditions or field values</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> the first matching model object</li>
+				<li><span class="field">return:</span> the first matching model object, or NULL if none found</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -620,7 +628,7 @@
 			
 	</div>
 <a name="methodfind_id" id="find_id"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -651,7 +659,7 @@
 			
 	</div>
 <a name="methodfind_last" id="find_last"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -682,7 +690,7 @@
 			
 	</div>
 <a name="methodfind_where" id="find_where"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -713,11 +721,11 @@
 			
 	</div>
 <a name="methodget_connector" id="get_connector"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_connector</span> (line <span class="line-number">63</span>)
+		<span class="method-title">get_connector</span> (line <span class="line-number">62</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -739,11 +747,11 @@
 			
 	</div>
 <a name="methodget_database" id="get_database"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_database</span> (line <span class="line-number">90</span>)
+		<span class="method-title">get_database</span> (line <span class="line-number">89</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -765,11 +773,11 @@
 			
 	</div>
 <a name="methodget_db_table" id="get_db_table"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_db_table</span> (line <span class="line-number">129</span>)
+		<span class="method-title">get_db_table</span> (line <span class="line-number">128</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -791,11 +799,11 @@
 			
 	</div>
 <a name="methodget_id" id="get_id"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_id</span> (line <span class="line-number">223</span>)
+		<span class="method-title">get_id</span> (line <span class="line-number">222</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -823,11 +831,11 @@
 			
 	</div>
 <a name="methodget_id_field" id="get_id_field"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_id_field</span> (line <span class="line-number">210</span>)
+		<span class="method-title">get_id_field</span> (line <span class="line-number">209</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -849,11 +857,11 @@
 			
 	</div>
 <a name="methodget_limit" id="get_limit"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_limit</span> (line <span class="line-number">165</span>)
+		<span class="method-title">get_limit</span> (line <span class="line-number">164</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -875,11 +883,11 @@
 			
 	</div>
 <a name="methodget_offset" id="get_offset"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_offset</span> (line <span class="line-number">187</span>)
+		<span class="method-title">get_offset</span> (line <span class="line-number">186</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -901,11 +909,11 @@
 			
 	</div>
 <a name="methodget_table" id="get_table"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_table</span> (line <span class="line-number">115</span>)
+		<span class="method-title">get_table</span> (line <span class="line-number">114</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -927,11 +935,11 @@
 			
 	</div>
 <a name="methodhas_timestamp" id="has_timestamp"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">has_timestamp</span> (line <span class="line-number">277</span>)
+		<span class="method-title">has_timestamp</span> (line <span class="line-number">276</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -958,7 +966,7 @@
 			
 	</div>
 <a name="methodinsert" id="insert"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -968,7 +976,7 @@
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Insert this model object's data into the database via the connector</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> the ID of the inserted row, or 0 upon failure</li>
+				<li><span class="field">return:</span> the ID of the inserted row, or zero on failure</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -990,11 +998,11 @@
 			
 	</div>
 <a name="methodis_virtual" id="is_virtual"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">is_virtual</span> (line <span class="line-number">301</span>)
+		<span class="method-title">is_virtual</span> (line <span class="line-number">300</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1021,17 +1029,17 @@
 			
 	</div>
 <a name="methodload" id="load"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">load</span> (line <span class="line-number">387</span>)
+		<span class="method-title">load</span> (line <span class="line-number">386</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Load a model object by ID or by the other fields that have been set</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> the ID of the loaded model object</li>
+				<li><span class="field">return:</span> the ID of the loaded model object, or zero on failure</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -1057,12 +1065,43 @@
 					</dl>
 			
 	</div>
+<a name="methodpassword" id="password"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">password</span> (line <span class="line-number">669</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return an encrypted password ready to store in the database</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> an encrypted password ready to store in the database</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			password
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$text</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$text</span><span class="var-description">: the unencrypted password text to be encrypted</span>			</li>
+				</ul>
+		
+			
+	</div>
 <a name="methodquery" id="query"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">query</span> (line <span class="line-number">375</span>)
+		<span class="method-title">query</span> (line <span class="line-number">374</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1093,7 +1132,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">quote</span> (line <span class="line-number">338</span>)
+		<span class="method-title">quote</span> (line <span class="line-number">337</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1124,7 +1163,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">quote_in</span> (line <span class="line-number">349</span>)
+		<span class="method-title">quote_in</span> (line <span class="line-number">348</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1155,7 +1194,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">save</span> (line <span class="line-number">405</span>)
+		<span class="method-title">save</span> (line <span class="line-number">404</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1181,21 +1220,13 @@
 						<dd>Save a model object</dd>
 					</dl>
 			
-			<hr class="separator" />
-		<div class="notes">Redefined in descendants as:</div>
-		<ul class="redefinitions">
-					<li>
-				<a href="../YAWF/Valid_SQL_model.html#methodsave">Valid_SQL_model::save()</a>
-								: Save this model object after validating its data fields
-							</li>
-				</ul>
 	</div>
 <a name="methodset_connector" id="set_connector"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_connector</span> (line <span class="line-number">47</span>)
+		<span class="method-title">set_connector</span> (line <span class="line-number">46</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1229,7 +1260,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_database</span> (line <span class="line-number">78</span>)
+		<span class="method-title">set_database</span> (line <span class="line-number">77</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1260,7 +1291,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_id</span> (line <span class="line-number">235</span>)
+		<span class="method-title">set_id</span> (line <span class="line-number">234</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1297,7 +1328,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_id_field</span> (line <span class="line-number">198</span>)
+		<span class="method-title">set_id_field</span> (line <span class="line-number">197</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1328,7 +1359,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_limit</span> (line <span class="line-number">154</span>)
+		<span class="method-title">set_limit</span> (line <span class="line-number">153</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1359,7 +1390,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_offset</span> (line <span class="line-number">176</span>)
+		<span class="method-title">set_offset</span> (line <span class="line-number">175</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1390,7 +1421,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_order</span> (line <span class="line-number">142</span>)
+		<span class="method-title">set_order</span> (line <span class="line-number">141</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1421,7 +1452,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_table</span> (line <span class="line-number">104</span>)
+		<span class="method-title">set_table</span> (line <span class="line-number">103</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1452,7 +1483,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_timestamp</span> (line <span class="line-number">265</span>)
+		<span class="method-title">set_timestamp</span> (line <span class="line-number">264</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1483,7 +1514,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_virtual</span> (line <span class="line-number">289</span>)
+		<span class="method-title">set_virtual</span> (line <span class="line-number">288</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1521,7 +1552,7 @@
 <p class="short-description">Update this model object's data in the database via the connector.</p>
 <p class="description"><p>Note that this method will only update the fields that have changed.</p></p>
 	<ul class="tags">
-				<li><span class="field">return:</span> this model object for chaining, or NULL upon failure</li>
+				<li><span class="field">return:</span> this model object for chaining, or NULL on failure</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -1554,7 +1585,7 @@
 <p class="short-description">Update this model object's data in the database via the connector.</p>
 <p class="description"><p>Note that this method will update *all* this model object's fields.</p></p>
 	<ul class="tags">
-				<li><span class="field">return:</span> this model object for chaining, or NULL upon failure</li>
+				<li><span class="field">return:</span> this model object for chaining, or NULL on failure</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -1609,26 +1640,48 @@
 							<h4>Inherited Methods</h4>
 				<a name='inherited_methods'><!-- --></a>	
 									<!-- =========== Summary =========== -->
-					<p>Inherited From <span class="classname"><a href="../YAWF/Basic_model.html">Basic_model</a></span></p>
+					<p>Inherited From <span class="classname"><a href="../YAWF/Valid_model.html">Valid_model</a></span></p>
 					<blockquote>
 													<img src="../media/images/Constructor.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#method__construct">Basic_model::__construct()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#method__construct">Valid_model::__construct()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#methodcopy_to">Basic_model::copy_to()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodis_validated">Valid_model::is_validated()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#methoddata">Basic_model::data()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodis_valid_email">Valid_model::is_valid_email()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#methodfields">Basic_model::fields()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodis_valid_length">Valid_model::is_valid_length()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#methodhas_changed">Basic_model::has_changed()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodis_valid_password">Valid_model::is_valid_password()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#methodpassword">Basic_model::password()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodis_valid_person_name">Valid_model::is_valid_person_name()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#methodsetup">Basic_model::setup()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodvalidates">Valid_model::validates()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#method__get">Basic_model::__get()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodvalidation_messages">Valid_model::validation_messages()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#method__set">Basic_model::__set()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodvalidation_messages_for">Valid_model::validation_messages_for()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodvalidation_message_for">Valid_model::validation_message_for()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../YAWF/Simple_model.html">Simple_model</a></span></p>
+					<blockquote>
+													<img src="../media/images/Constructor.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#method__construct">Simple_model::__construct()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#methodcopy_to">Simple_model::copy_to()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#methoddata">Simple_model::data()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#methodfields">Simple_model::fields()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#methodhas_changed">Simple_model::has_changed()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#methodsetup">Simple_model::setup()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#method__get">Simple_model::__get()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#method__set">Simple_model::__set()</a></span><br>
 											</blockquote>
 									<!-- =========== Summary =========== -->
 					<p>Inherited From <span class="classname"><a href="../YAWF/YAWF.html">YAWF</a></span></p>
@@ -1660,7 +1713,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 27 Dec 2010 08:09:13 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 28 Dec 2010 08:08:24 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

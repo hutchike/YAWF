@@ -30,7 +30,7 @@
                 <li><a href="../YAWF/Modelled.html">Modelled</a></li><li><a href="../YAWF/Persisted.html">Persisted</a></li><li><a href="../YAWF/Validated.html">Validated</a></li>            </ul>
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The Model class is just an alias for the Valid_SQL_model class.</p>
+<p class="short-description">The Model class is just a simple alias for the SQL_model class.</p>
 <p class="description"><p>If you'd like a different kind of model, then just add your own  &quot;Model&quot; class in your own &quot;app&quot; directory et voila - easy huh?</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
@@ -42,11 +42,11 @@
 				
 		<pre><a href="../YAWF/YAWF.html">YAWF</a>
    |
-   --<a href="../YAWF/Basic_model.html">Basic_model</a>
+   --<a href="../YAWF/Simple_model.html">Simple_model</a>
       |
-      --<a href="../YAWF/SQL_model.html">SQL_model</a>
+      --<a href="../YAWF/Valid_model.html">Valid_model</a>
          |
-         --<a href="../YAWF/Valid_SQL_model.html">Valid_SQL_model</a>
+         --<a href="../YAWF/SQL_model.html">SQL_model</a>
             |
             --Model</pre>
 	
@@ -73,15 +73,15 @@
 			
 							<h4>Inherited Variables</h4>
 				<A NAME='inherited_vars'><!-- --></A>
-									<p>Inherited from <span class="classname"><a href="../YAWF/Basic_model.html">Basic_model</a></span></p>
+									<p>Inherited from <span class="classname"><a href="../YAWF/Simple_model.html">Simple_model</a></span></p>
 					<blockquote>
 													<img src="../media/images/Variable.png" />
 							<span class="var-title">
-								<span class="var-name"><a href="../YAWF/Basic_model.html#var$changed">Basic_model::$changed</a></span><br>
+								<span class="var-name"><a href="../YAWF/Simple_model.html#var$changed">Simple_model::$changed</a></span><br>
 							</span>
 													<img src="../media/images/Variable.png" />
 							<span class="var-title">
-								<span class="var-name"><a href="../YAWF/Basic_model.html#var$data">Basic_model::$data</a></span><br>
+								<span class="var-name"><a href="../YAWF/Simple_model.html#var$data">Simple_model::$data</a></span><br>
 							</span>
 											</blockquote> 
 										
@@ -101,32 +101,6 @@
 			<A NAME='method_detail'></A>
 							<h4>Inherited Methods</h4>
 				<a name='inherited_methods'><!-- --></a>	
-									<!-- =========== Summary =========== -->
-					<p>Inherited From <span class="classname"><a href="../YAWF/Valid_SQL_model.html">Valid_SQL_model</a></span></p>
-					<blockquote>
-													<img src="../media/images/Constructor.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Valid_SQL_model.html#method__construct">Valid_SQL_model::__construct()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Valid_SQL_model.html#methodis_validated">Valid_SQL_model::is_validated()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Valid_SQL_model.html#methodis_valid_email">Valid_SQL_model::is_valid_email()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Valid_SQL_model.html#methodis_valid_length">Valid_SQL_model::is_valid_length()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Valid_SQL_model.html#methodis_valid_password">Valid_SQL_model::is_valid_password()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Valid_SQL_model.html#methodis_valid_person_name">Valid_SQL_model::is_valid_person_name()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Valid_SQL_model.html#methodsave">Valid_SQL_model::save()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Valid_SQL_model.html#methodvalidates">Valid_SQL_model::validates()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Valid_SQL_model.html#methodvalidation_messages">Valid_SQL_model::validation_messages()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Valid_SQL_model.html#methodvalidation_messages_for">Valid_SQL_model::validation_messages_for()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Valid_SQL_model.html#methodvalidation_message_for">Valid_SQL_model::validation_message_for()</a></span><br>
-											</blockquote>
 									<!-- =========== Summary =========== -->
 					<p>Inherited From <span class="classname"><a href="../YAWF/SQL_model.html">SQL_model</a></span></p>
 					<blockquote>
@@ -177,6 +151,8 @@
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodload">SQL_model::load()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodpassword">SQL_model::password()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodquery">SQL_model::query()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodquote">SQL_model::quote()</a></span><br>
@@ -212,26 +188,48 @@
 							<span class="method-name"><a href="../YAWF/SQL_model.html#methodwhere_clause">SQL_model::where_clause()</a></span><br>
 											</blockquote>
 									<!-- =========== Summary =========== -->
-					<p>Inherited From <span class="classname"><a href="../YAWF/Basic_model.html">Basic_model</a></span></p>
+					<p>Inherited From <span class="classname"><a href="../YAWF/Valid_model.html">Valid_model</a></span></p>
 					<blockquote>
 													<img src="../media/images/Constructor.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#method__construct">Basic_model::__construct()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#method__construct">Valid_model::__construct()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#methodcopy_to">Basic_model::copy_to()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodis_validated">Valid_model::is_validated()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#methoddata">Basic_model::data()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodis_valid_email">Valid_model::is_valid_email()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#methodfields">Basic_model::fields()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodis_valid_length">Valid_model::is_valid_length()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#methodhas_changed">Basic_model::has_changed()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodis_valid_password">Valid_model::is_valid_password()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#methodpassword">Basic_model::password()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodis_valid_person_name">Valid_model::is_valid_person_name()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#methodsetup">Basic_model::setup()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodvalidates">Valid_model::validates()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#method__get">Basic_model::__get()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodvalidation_messages">Valid_model::validation_messages()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Basic_model.html#method__set">Basic_model::__set()</a></span><br>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodvalidation_messages_for">Valid_model::validation_messages_for()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodvalidation_message_for">Valid_model::validation_message_for()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../YAWF/Simple_model.html">Simple_model</a></span></p>
+					<blockquote>
+													<img src="../media/images/Constructor.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#method__construct">Simple_model::__construct()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#methodcopy_to">Simple_model::copy_to()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#methoddata">Simple_model::data()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#methodfields">Simple_model::fields()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#methodhas_changed">Simple_model::has_changed()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#methodsetup">Simple_model::setup()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#method__get">Simple_model::__get()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#method__set">Simple_model::__set()</a></span><br>
 											</blockquote>
 									<!-- =========== Summary =========== -->
 					<p>Inherited From <span class="classname"><a href="../YAWF/YAWF.html">YAWF</a></span></p>
@@ -263,7 +261,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 27 Dec 2010 08:09:07 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 28 Dec 2010 08:08:18 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
