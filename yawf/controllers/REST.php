@@ -13,15 +13,28 @@
 
 load_tool('Data');
 
+/**
+ * The REST_controller class connects REST service classes to the
+ * web application via view methosd that correspond to HTTP methods
+ * such as "get", "post", "put", etc.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class REST_controller extends App_controller
 {
-    // The REST service
-
+    /**
+     * The REST service to provide
+     */
     protected $service;
 
-    // Call a REST method, then render the REST service view
-
-    public function render($view = null, $options = array())
+    /**
+     * Call a REST method, then render the REST service view
+     *
+     * @param String $view the view to render (ignored)
+     * @param Array $options an array of rendering options (ignored)
+     * @return String the contents to render (REST data in a content type)
+     */
+    public function render($view = NULL, $options = array())
     {
         $this->service = $this->app->new_service();
         if (!$this->service->auth()) return NULL;
@@ -32,67 +45,78 @@ class REST_controller extends App_controller
         return parent::render($method, $options);
     }
 
-    // Setup the request parameters by looking for ID fields
-
+    /**
+     * Setup the request parameters by looking for ID fields
+     */
     protected function setup_REST_params()
     {
         $file = $this->app->get_file();
         if (is_numeric($file)) $this->params->id = $file;
     }
 
-    // Call the REST service "delete" method
-
+    /**
+     * Call the REST service "delete" method
+     */
     public function delete()
     {
         $this->call_method('delete');
     }
 
-    // Call the REST service "get" method
-
+    /**
+     * Call the REST service "get" method
+     */
     public function get()
     {
         $this->call_method('get');
     }
 
-    // Call the REST service "move" method
-
+    /**
+     * Call the REST service "move" method
+     */
     public function move() // WEBDAV method
     {
         $this->call_method('move');
     }
 
-    // Call the REST service "options" method
-
+    /**
+     * Call the REST service "options" method
+     */
     public function options() // WEBDAV method
     {
         $this->call_method('options');
     }
 
-    // Call the REST service "post" method
-
+    /**
+     * Call the REST service "post" method
+     */
     public function post()
     {
         $this->parse_input();
         $this->call_method('post');
     }
 
-    // Call the REST service "put" method
-
+    /**
+     * Call the REST service "put" method
+     */
     public function put()
     {
         $this->parse_input();
         $this->call_method('put');
     }
 
-    // Get any input for PUT and POST methods
-
+    /**
+     * Get any input for "put" and "post" methods
+     *
+     * @return String the input data sent to "put" and "post" HTTP methods
+     */
     protected function get_input()
     {
         return file_get_contents('php://input');
     }
 
-    // Parse any input data according to type
-
+    /**
+     * Parse any input data according to type
+     */
     protected function parse_input()
     {
         if ($input = $this->get_input())
@@ -102,8 +126,12 @@ class REST_controller extends App_controller
         }
     }
 
-    // Call a REST method on the REST service
-
+    /**
+     * Call a REST method on the REST service. Note that "before" and "after"
+     * methods will also be called if they're provided by the REST service.
+     *
+     * @param String $method the REST method to call on the REST service
+     */
     protected function call_method($method)
     {
         if ($this->service && method_exists($this->service, $method))

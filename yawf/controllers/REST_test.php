@@ -13,6 +13,11 @@
 
 load_controller('REST');
 
+/**
+ * The REST_test_controller class tests the REST_controller class.
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class REST_test_controller extends Rest_controller
 {
     private $test_input;
@@ -23,52 +28,65 @@ class REST_test_controller extends Rest_controller
         'text/yaml' => "assoc:\n  list:[this, that]",
     );
 
-    // Create a test service with test methods to run checks
-
-    public function render($view = null, $options = array())
+    /**
+     * Create a test service with test methods to run checks
+     *
+     * @param String $view the view to render (ignored)
+     * @param Array $options the render options (ignored)
+     * @return String the contents to render as test results
+     */
+    public function render($view = NULL, $options = array())
     {
         $service = ucfirst($this->app->get_folder()) . '_test';
         $this->service = $this->app->new_service($service);
         return App_controller::render(); // to show test results
     }
 
-    // Override the "get_input" method for testing
-
+    /**
+     * Override the "get_input" method for testing "put" and "post" HTTP methods
+     *
+     * @return String the test input string for testing "put" and "post" methods
+     */
     protected function get_input()
     {
         return $this->test_input;
     }
 
-    // Test the "delete" method
-
+    /**
+     * Test the "delete" method
+     */
     public function delete_test()
     {
         $this->test_method('delete');
     }
 
-    // Test the "get" method
-
+    /**
+     * Test the "get" method
+     */
     public function get_test()
     {
         $this->test_method('get');
     }
 
-    // Test the "move" method
-
+    /**
+     * Test the "move" method
+     */
     public function move_test()
     {
         $this->test_method('move');
     }
 
-    // Test the "options" method
-
+    /**
+     * Test the "options" method
+     */
     public function options_test()
     {
         $this->test_method('options');
     }
 
-    // Test the "post" method
-
+    /**
+     * Test the "post" method
+     */
     public function post_test()
     {
         $this->test_method('post', 'text/xml');
@@ -77,8 +95,9 @@ class REST_test_controller extends Rest_controller
         $this->test_method('post', 'text/yaml');
     }
 
-    // Test the "put" method
-
+    /**
+     * Test the "put" method
+     */
     public function put_test()
     {
         $this->test_method('put', 'text/xml');
@@ -87,8 +106,12 @@ class REST_test_controller extends Rest_controller
         $this->test_method('put', 'text/yaml');
     }
 
-    // Test a method by calling it then looking at the returned data
-
+    /**
+     * Test a method by calling it then looking at the returned data
+     *
+     * @param String $method the HTTP method to test
+     * @param String $request_type requested content type (default "text/xml")
+     */
     private function test_method($method, $request_type = 'text/xml')
     {
         // Set the request type, and test input data

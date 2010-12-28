@@ -11,14 +11,23 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
+/**
+ * The Cache_controller class allows app controllers to implement
+ * page caching by calling a method like "$this->cache_mins(15)".
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Cache_controller extends App_controller
 {
     protected $cache_path;
     protected $cache_secs;
     protected $cache_options;
 
-    // Render the requested view
-
+    /**
+     * Render the requested view by using the cache
+     *
+     * @return String the view contents to render
+     */
     public function render($view = null, $options = array())
     {
         // First look for cached contents
@@ -34,36 +43,52 @@ class Cache_controller extends App_controller
         return $contents;
     }
 
-    // Set the number of seconds to cache the render output
-
+    /**
+     * Set the number of seconds to cache the render output
+     *
+     * @param Integer $secs the number of seconds to cache views for
+     */
     protected function cache_secs($secs)
     {
         $this->cache_secs = $secs;
     }
     
-    // Set the number of minutes to cache the render output
-
+    /**
+     * Set the number of minutes to cache the render output
+     *
+     * @param Integer $mins the number of minutes to cache views for
+     */
     protected function cache_mins($mins)
     {
         $this->cache_secs = $mins * 60;
     }
 
-    // Set the number of hours to cache the render output
-
+    /**
+     * Set the number of hours to cache the render output
+     *
+     * @param Integer $hours the number of hours to cache views for
+     */
     protected function cache_hours($hours)
     {
         $this->cache_secs = $hours * 60 * 60;
     }
 
-    // Set the number of days to cache the render output
-
+    /**
+     * Set the number of days to cache the render output
+     *
+     * @param Integer $days the number of days to cache views for
+     */
     protected function cache_days($days)
     {
         $this->cache_secs = $days * 60 * 60 * 24;
     }
 
-    // Get/set the cache options
-
+    /**
+     * Get/set the cache options
+     *
+     * @param Array $options caching options such as "no_query" and "no_anchor"
+     * @return Array the cache options
+     */
     protected function cache_options($options = NULL)
     {
         if (is_array($options)) $this->cache_options = $options;
@@ -71,8 +96,12 @@ class Cache_controller extends App_controller
         return $this->cache_options;
     }
 
-    // Set the cache path by taking the checksum of the full request URI
-
+    /**
+     * Set the cache path by taking the checksum of the full request URI
+     *
+     * @param String $uri the URI to transform into a path to a cached file
+     * @return String the cache path (used for testing only)
+     */
     protected function set_cache_path($uri = NULL)
     {
         $options = $this->cache_options();
@@ -84,8 +113,11 @@ class Cache_controller extends App_controller
         return $this->cache_path; // for testing
     }
 
-    // Read some contents from the cache, using the first line as an expiry time
-
+    /**
+     * Read some contents from the cache, using the first line as an expiry time
+     *
+     * @return String the cached contents, or NULL if not found or expired
+     */
     protected function read_cache()
     {
         if (!file_exists($this->cache_path)) return NULL;
@@ -99,8 +131,11 @@ class Cache_controller extends App_controller
         return NULL;
     }
 
-    // Write some contents to the cache, using the first line as an expiry time
-
+    /**
+     * Write some contents to the cache, using the first line as an expiry time
+     *
+     * @param String $contents the contents to write to the cache
+     */
     protected function write_cache($contents)
     {
         $expires = time() + $this->cache_secs;
@@ -108,9 +143,12 @@ class Cache_controller extends App_controller
         file_put_contents($this->cache_path, $contents);
     }
 
-    // Clean the cache every hour with a crontab entry like this:
-    // 0 * * * * /usr/bin/curl -s www.website.com/folder/clean_cache > /dev/null
-
+    /**
+     * Clean the cache every hour with a crontab entry like this:
+     * 0 * * * * /usr/bin/curl -s www.website.com/folder/clean_cache > /dev/null
+     *
+     * @param Integer $expiry_secs the maximum age of a cached file in the cache
+     */
     protected function clean_cache($expiry_secs = CACHE_EXPIRY_SECS)
     {
         $time_now = time();

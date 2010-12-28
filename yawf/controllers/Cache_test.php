@@ -13,8 +13,12 @@
 
 load_controller('Cache');
 
-// See this test controller run at URL "/cache_test"
-
+/**
+ * The Cache_test_controller class tests the Cache_controller class.
+ * See this test controller run at URL "/cache_test"
+ *
+ * @author Kevin Hutchinson <kevin@guanoo.com>
+ */
 class Cache_test_controller extends Cache_controller
 {
     const SECS_IN_MIN = 60;
@@ -25,13 +29,17 @@ class Cache_test_controller extends Cache_controller
 
     private $counter;
     
+    /**
+     * Create a new cache test controller object
+     */
     public function __construct()
     {
         $this->counter = 0;
     }
 
-    // Test that an "example_view" can cache itself for exactly 1 second
-
+    /**
+     * Test that an "example_view" can cache itself for exactly 1 second
+     */
     public function render_test()
     {
         $original_view = $this->view;
@@ -56,16 +64,18 @@ class Cache_test_controller extends Cache_controller
         $this->set_view($original_view);
     }
 
-    // Just an "exampe_view" method for the "render_test" above
-
+    /**
+     * Just an "exampe_view" method for the "render_test" above
+     */
     protected function example_view()
     {
         $this->cache_secs(self::TEST_CACHE_SECS);
         $this->counter++;
     }
 
-    // Test that we can set the cache secs
-
+    /**
+     * Test that we can set the cache secs
+     */
     public function cache_secs_test()
     {
         $test_secs = rand(1, 100);
@@ -77,8 +87,9 @@ class Cache_test_controller extends Cache_controller
         $this->cache_secs(0); // or we'll cache the test results!
     }
 
-    // Test that we can set the cache mins
-
+    /**
+     * Test that we can set the cache mins
+     */
     public function cache_mins_test()
     {
         $test_mins = rand(1, 100);
@@ -90,8 +101,9 @@ class Cache_test_controller extends Cache_controller
         $this->cache_secs(0); // or we'll cache the test results!
     }
 
-    // Test that we can set the cache hours
-
+    /**
+     * Test that we can set the cache hours
+     */
     public function cache_hours_test()
     {
         $test_hours = rand(1, 100);
@@ -103,8 +115,9 @@ class Cache_test_controller extends Cache_controller
         $this->cache_secs(0); // or we'll cache the test results!
     }
 
-    // Test that we can set the cache days
-
+    /**
+     * Test that we can set the cache days
+     */
     public function cache_days_test()
     {
         $test_days = rand(1, 100);
@@ -116,8 +129,9 @@ class Cache_test_controller extends Cache_controller
         $this->cache_secs(0); // or we'll cache the test results!
     }
 
-    // Test that the cache options work
-
+    /**
+     * Test that the cache options work
+     */
     public function cache_options_test()
     {
         $this->cache_options(array());
@@ -139,8 +153,9 @@ class Cache_test_controller extends Cache_controller
                       $path1 === $path2, array($path1, $path2));
     }
 
-    // Test that we can set the cache path
-
+    /**
+     * Test that we can set the cache path
+     */
     public function set_cache_path_test()
     {
         $this->set_cache_path();
@@ -153,8 +168,9 @@ class Cache_test_controller extends Cache_controller
                       $cache_file === md5($_SERVER['REQUEST_URI']));
     }
 
-    // Test that we can write contents to the cache, then read them back again
-
+    /**
+     * Test that we can write contents to the cache, then read them back again
+     */
     public function read_and_write_cache_test()
     {
         $this->cache_secs(self::TEST_CACHE_SECS);
@@ -164,8 +180,9 @@ class Cache_test_controller extends Cache_controller
                       self::TEST_CONTENTS === $contents, $contents);
     }
 
-    // Test that a cached file expires when it should
-
+    /**
+     * Test that a cached file expires when it should
+     */
     public function cache_expires_test()
     {
         // This test must follow the "read_and_write_cache_test()" method
@@ -176,8 +193,9 @@ class Cache_test_controller extends Cache_controller
                       is_null($contents), $contents);
     }
 
-    // Test that we can clean the cache
-
+    /**
+     * Test that we can clean the cache
+     */
     public function clean_cache_test()
     {
         $this->write_cache(self::TEST_CONTENTS);

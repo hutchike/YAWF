@@ -60,7 +60,7 @@ class Controller extends Request
      * @param Array $options rendering options (e.g. "type" to set content type)
      * @return String the content to display in the response to the client
      */
-    public function render($view = null, $options = array())
+    public function render($view = NULL, $options = array())
     {
         // Get the view (e.g. "index") and the type (e.g. "html")
 
