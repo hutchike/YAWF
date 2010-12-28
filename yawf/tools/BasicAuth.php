@@ -18,7 +18,7 @@
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Auth extends YAWF
+class BasicAuth extends YAWF
 {
     private static $realm = 'Login';
     private static $message = 'Wrong username or password';
@@ -110,4 +110,4 @@ class Auth extends YAWF
     }
 }
 
-// End of Auth.php
+// End of BasicAuth.php

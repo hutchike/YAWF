@@ -22,12 +22,12 @@ load_interface('Modelled');
 class Simple_model extends YAWF implements Modelled
 {
     /**
-     * The <code>$data</code> Array holds the simple model data
+     * The $data Array holds data fields and values for the simple model object
      */
     protected $data;
 
     /**
-     * The <code>$changed</code> Array holds data fields whose values changed
+     * The $changed Array holds data fields whose values have been changed
      */
     protected $changed;
 
