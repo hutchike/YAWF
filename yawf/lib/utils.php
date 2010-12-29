@@ -238,14 +238,16 @@ function split_list($text_list)
 }
 
 /**
- * Load some PHP files with "require_once"
+ * Load some PHP files with "require_once", only if they are not already loaded
  *
  * @param String $dir the directory from which to load the files
  * @param Array $files a list of files to load from the directory
+ * @return Array a list of the files that were loaded with "require_once"
  */
 function load_files($dir, $files)
 {
-    static $loaded = array();
+    static $loaded = array();   // to skip loading files that were loaded before
+    $required_files = array();  // to return a list of files that are now loaded
     foreach ($files as $file)
     {
         $path = $dir . '/' . $file . '.php';
@@ -256,7 +258,9 @@ function load_files($dir, $files)
         }
         require_once $path;
         $loaded[$path] = TRUE;
+        $required_files[] = $file;
     }
+    return $required_files;
 }
 
 /**
@@ -328,8 +332,8 @@ function load_model($model) { load_models($model); }
 function load_models() // list of models
 {
     $models = func_get_args();
-    load_files('models', $models);
-    foreach ($models as $model)
+    $loaded = load_files('models', $models);
+    foreach ($loaded as $model)
     {
         $object = new $model();
         $object->setup();

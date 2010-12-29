@@ -139,7 +139,8 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
     }
 
     /**
-     * Setup a relationship whereby this model has a relation with other models
+     * Setup a relationship whereby this model has a relation with other models.
+     * As a side-effect the models will all be loaded and "setup" ready for use.
      *
      * @param Array $models a list of models that this model has a relation with
      * @param Array $options an array of options, including the relation type
@@ -157,6 +158,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
                 $model = $model['model'];
             }
             $this->set_relation($model, $relation, $options);
+            load_model($model);
         }
     }
 
