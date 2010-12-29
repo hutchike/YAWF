@@ -113,6 +113,7 @@ function object_to_array($object)
  */
 function array_key($array, $key, $default = NULL)
 {
+    assert('is_array($array)');
     return array_key_exists($key, $array) ? $array[$key] : $default;
 }
 
