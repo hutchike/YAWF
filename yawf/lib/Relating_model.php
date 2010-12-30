@@ -159,6 +159,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
     {
         $conditions = array();
         if (is_null($join_model)) return $conditions;
+
         $table = Text::tableize($model);
         $join_table = Text::tableize($join_model);
         $id_field = Text::singularize($join_table) . '_id';
