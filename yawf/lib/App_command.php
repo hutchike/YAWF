@@ -134,41 +134,59 @@ class App_command extends Command
         // Create an array of YASH test files to run
 
         $tests = array();
-        if (file_exists("$test_dir/setup.yash")) $tests[] = 'setup.yash';
         if ($check_args && $this->args) // look at the args list
         {
             foreach ($this->args as $test)
             {
-                if (is_dir("$test_dir/$test")) $this->test("$test_dir/$test", FALSE);
-                elseif (file_exists("$test_dir/$test")) $tests[] = $test;
+                if (file_exists("$test_dir/$test")) $tests[] = $test;
                 elseif (file_exists("$test_dir/$test.yash")) $tests[] = "$test.yash";
                 else $this->quit("Test file \"$test_dir/$test\" does not exist");
             }
         }
         else // find all test folders and files in the directory
         {
+            // Get a sorted list of files and folders
+
             $dir = opendir($test_dir);
             while ($test = readdir($dir))
             {
                 if (substr($test, 0, 1) == '.') continue;
-                if (is_dir("$test_dir/$test")) $this->test("$test_dir/$test");
-                if (preg_match('/^(setup|teardown)\.yash$/', $test)) continue;
-                if (!preg_match('/\.yash$/', $test)) continue; // must be yash
                 $tests[] = $test;
             }
             closedir($dir);
+            usort($tests, 'App_command::sort_for_setup_and_teardown');
         }
-        if (file_exists("$test_dir/teardown.yash")) $tests[] = 'teardown.yash';
 
-        // Run all the YASH test files in order
+        // Run the test files and folders in order
 
         foreach ($tests as $test)
         {
+            if (is_dir("$test_dir/$test")) $this->test("$test_dir/$test", FALSE);
+            if (!preg_match('/\.yash$/', $test)) continue; // must be yash
             print "Running test file \"$test_dir/$test\":\n";
             system("yash -quiet -test < $test_dir/$test");
             print "\n";
         }
+
         if (!$this->args && !$tests) print "No test files found in \"$test_dir\"\n\n";
+    }
+
+    /**
+     * Compare one file/folder name with another, putting "setup" first and
+     * "teardown" last. This is a static user-defined comparison function.
+     *
+     * @param String $left the left test file or folder name to compare
+     * @param String $right the right test file or folder name to compare
+     * @return Integer -1 if $a is less than $b, 1 if $a is greater than $b
+     */
+    private static function sort_for_setup_and_teardown($left, $right)
+    {
+        if (substr($left, 0, 5) == 'setup') return -1;
+        if (substr($right, 0, 5) == 'setup') return 1;
+        if (substr($left, 0, 8) == 'teardown') return 1;
+        if (substr($right, 0, 8) == 'teardown') return -1;
+        if ($left == $right) return 0;
+        return $left < $right ? -1 : 1;
     }
 }
 
