@@ -86,7 +86,10 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
         {
             case self::BELONGS_TO:
                 $model_id = $field_or_model . '_id';
-                return $this->find_one_related($field_or_model, 'id = ' . $this->$model_id);
+                if ($id = $this->$model_id)
+                    return $this->find_one_related($field_or_model, "id = $id");
+                else
+                    return new SQL_model();
 
             case self::HAS_A:
                 $id_field = $this->get_related_id_field();
@@ -108,7 +111,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
      * @param String $model the name of the model
      * @param String $clause the SQL "where" clause
      * @param String $join_model an optional model name to join onto
-     * @return SQL_model the related model object that was found, or NULL
+     * @return SQL_model the related model object that was found, or a blank
      */
     private function find_one_related($model, $clause, $join_model = NULL)
     {
@@ -116,7 +119,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
         $object = self::new_model_object_for($model);
         $conditions = self::get_conditions($model, $join_model);
         $found = $object->set_limit(1)->find_where($clause, $conditions);
-        return is_array($found) ? $found[0] : NULL;
+        return is_array($found) ? $found[0] : new SQL_model();
     }
 
     /**
@@ -133,7 +136,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
         $object = self::new_model_object_for($model);
         $conditions = $this->get_conditions($model, $join_model);
         $found = $object->find_where($clause, $conditions);
-        return is_array($found) ? $found : NULL;
+        return is_array($found) ? $found : array();
     }
 
     /**
