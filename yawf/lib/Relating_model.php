@@ -75,6 +75,12 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
     {
         $relation = $this->get_relation($field_or_model);
         if (is_null($relation)) return parent::__get($field_or_model);
+        if (is_array($relation))
+        {
+            $join_model = $relation['join_model'];
+            $relation = $relation['relation'];
+        }
+        else $join_model = NULL;
 
         switch ($relation)
         {
@@ -84,11 +90,11 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
 
             case self::HAS_A:
                 $id_field = $this->get_related_id_field();
-                return $this->find_one_related($field_or_model, "$id_field = " . $this->get_id());
+                return $this->find_one_related($field_or_model, "$id_field = " . $this->get_id(), $join_model);
 
             case self::HAS_MANY:
                 $id_field = $this->get_related_id_field();
-                return $this->find_all_related($field_or_model, "$id_field = " . $this->get_id());
+                return $this->find_all_related($field_or_model, "$id_field = " . $this->get_id(), $join_model);
                 break;
 
             default:
@@ -101,13 +107,15 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
      *
      * @param String $model the name of the model
      * @param String $clause the SQL "where" clause
+     * @param String $join_model an optional model name to join onto
      * @return SQL_model the related model object that was found, or NULL
      */
-    private function find_one_related($model, $clause)
+    private function find_one_related($model, $clause, $join_model = NULL)
     {
         $model = array_key(self::$aliases, $model, $model);
         $object = self::new_model_object_for($model);
-        $found = $object->set_limit(1)->find_where($clause);
+        $conditions = self::get_conditions($model, $join_model);
+        $found = $object->set_limit(1)->find_where($clause, $conditions);
         return is_array($found) ? $found[0] : NULL;
     }
 
@@ -116,13 +124,15 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
      *
      * @param String $model the name of the model
      * @param String $clause the SQL "where" clause
+     * @param String $join_model an optional model name to join onto
      * @return Array the related model objects that were found, or NULL
      */
-    private function find_all_related($model, $clause)
+    private function find_all_related($model, $clause, $join_model = NULL)
     {
         $model = array_key(self::$aliases, $model, $model);
         $object = self::new_model_object_for($model);
-        $found = $object->find_where($clause);
+        $conditions = $this->get_conditions($model, $join_model);
+        $found = $object->find_where($clause, $conditions);
         return is_array($found) ? $found : NULL;
     }
 
@@ -136,6 +146,24 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
     {
         $class = Text::classify($model);
         return new $class();
+    }
+
+    /**
+     * Return a conditions array, with an optional join clause
+     *
+     * @param String $model the name of model behaving as the joiner
+     * @param String $join_model the optional name of the model to join onto
+     * @return Array a conditions array, with an optional join clause
+     */
+    private function get_conditions($model, $join_model = NULL)
+    {
+        $conditions = array();
+        if (is_null($join_model)) return $conditions;
+        $table = Text::tableize($model);
+        $join_table = Text::tableize($join_model);
+        $id_field = Text::singularize($join_table) . '_id';
+        $conditions['join'] = "$join_table on $join_table.id = $table.$id_field";
+        return $conditions;
     }
 
     /**
@@ -154,8 +182,10 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
             $options = array('is_singular' => $is_singular);
             if (is_array($model))
             {
+                $options['join'] = array_key($model, 'join');
                 $options['alias'] = array_key($model, 'alias');
                 $model = $model['model'];
+                if ($join_model = $options['join']) load_model($join_model);
             }
             $this->set_relation($model, $relation, $options);
             load_model($model);
@@ -172,9 +202,14 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
     private function set_relation($model, $relation, $options = array())
     {
         $is_singular = array_key($options, 'is_singular', FALSE);
+        if ($join = array_key($options, 'join'))
+        {
+            $relation = array('relation' => $relation, 'join_model' => $join);
+        }
+
+        $table = $this->get_table();
         $other_table = $is_singular ? Text::underscore($model)
                                     : Text::tableize($model);
-        $table = $this->get_table();
         if ($alias = array_key($options, 'alias'))
         {
             self::$aliases[$alias] = $other_table;
