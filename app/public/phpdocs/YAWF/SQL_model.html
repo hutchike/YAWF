@@ -98,7 +98,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																																																																																																																																																																																																																																																																								<div class="method-definition">
+																																																																																																																																																																																																																																																																																																																																																																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#connect" title="details" class="method-name">connect</a>
@@ -162,7 +162,7 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">Array</span>
 										<a href="#find_where" title="details" class="method-name">find_where</a>
-											(<span class="var-type">String</span>&nbsp;<span class="var-name">$clause</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$clause</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$conditions</span> = <span class="var-default">array()</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -229,6 +229,12 @@
 											<span class="method-result">Boolean</span>
 										<a href="#is_virtual" title="details" class="method-name">is_virtual</a>
 											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#join_clause" title="details" class="method-name">join_clause</a>
+											([<span class="var-type">Array</span>&nbsp;<span class="var-name">$conditions</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -430,7 +436,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete</span> (line <span class="line-number">624</span>)
+		<span class="method-title">delete</span> (line <span class="line-number">640</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -462,7 +468,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete_all</span> (line <span class="line-number">644</span>)
+		<span class="method-title">delete_all</span> (line <span class="line-number">660</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -513,7 +519,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">drop</span> (line <span class="line-number">656</span>)
+		<span class="method-title">drop</span> (line <span class="line-number">672</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -601,7 +607,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">find_first</span> (line <span class="line-number">460</span>)
+		<span class="method-title">find_first</span> (line <span class="line-number">461</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -632,7 +638,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">find_id</span> (line <span class="line-number">446</span>)
+		<span class="method-title">find_id</span> (line <span class="line-number">447</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -663,7 +669,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">find_last</span> (line <span class="line-number">474</span>)
+		<span class="method-title">find_last</span> (line <span class="line-number">475</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -694,7 +700,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">find_where</span> (line <span class="line-number">486</span>)
+		<span class="method-title">find_where</span> (line <span class="line-number">488</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -709,13 +715,16 @@
 		<span class="method-name">
 			find_where
 		</span>
-					(<span class="var-type">String</span>&nbsp;<span class="var-name">$clause</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$clause</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$conditions</span> = <span class="var-default">array()</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type">String</span>
 				<span class="var-name">$clause</span><span class="var-description">: a SQL &quot;where&quot; clause to match</span>			</li>
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$conditions</span><span class="var-description">: an array of conditions, e.g. a &quot;join&quot; clause</span>			</li>
 				</ul>
 		
 			
@@ -970,7 +979,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">insert</span> (line <span class="line-number">528</span>)
+		<span class="method-title">insert</span> (line <span class="line-number">544</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1028,8 +1037,39 @@
 		
 			
 	</div>
-<a name="methodload" id="load"><!-- --></a>
+<a name="methodjoin_clause" id="join_clause"><!-- --></a>
 <div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">join_clause</span> (line <span class="line-number">500</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a SQL &quot;join&quot; clause for an array of conditions, or field values</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a SQL &quot;where&quot; clause from the conditions or field values</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			join_clause
+		</span>
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">$conditions</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$conditions</span><span class="var-description">: an array of conditions (optional)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodload" id="load"><!-- --></a>
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1066,11 +1106,11 @@
 			
 	</div>
 <a name="methodpassword" id="password"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">password</span> (line <span class="line-number">669</span>)
+		<span class="method-title">password</span> (line <span class="line-number">685</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1097,7 +1137,7 @@
 			
 	</div>
 <a name="methodquery" id="query"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1128,7 +1168,7 @@
 			
 	</div>
 <a name="methodquote" id="quote"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1159,7 +1199,7 @@
 			
 	</div>
 <a name="methodquote_in" id="quote_in"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1190,7 +1230,7 @@
 			
 	</div>
 <a name="methodsave" id="save"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1222,7 +1262,7 @@
 			
 	</div>
 <a name="methodset_connector" id="set_connector"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1256,7 +1296,7 @@
 			
 	</div>
 <a name="methodset_database" id="set_database"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1287,7 +1327,7 @@
 			
 	</div>
 <a name="methodset_id" id="set_id"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1324,7 +1364,7 @@
 			
 	</div>
 <a name="methodset_id_field" id="set_id_field"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1355,7 +1395,7 @@
 			
 	</div>
 <a name="methodset_limit" id="set_limit"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1386,7 +1426,7 @@
 			
 	</div>
 <a name="methodset_offset" id="set_offset"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1417,7 +1457,7 @@
 			
 	</div>
 <a name="methodset_order" id="set_order"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1448,7 +1488,7 @@
 			
 	</div>
 <a name="methodset_table" id="set_table"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1479,7 +1519,7 @@
 			
 	</div>
 <a name="methodset_timestamp" id="set_timestamp"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1510,7 +1550,7 @@
 			
 	</div>
 <a name="methodset_virtual" id="set_virtual"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1541,11 +1581,11 @@
 			
 	</div>
 <a name="methodupdate" id="update"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">update</span> (line <span class="line-number">570</span>)
+		<span class="method-title">update</span> (line <span class="line-number">586</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1574,11 +1614,11 @@
 			
 	</div>
 <a name="methodupdate_all_fields" id="update_all_fields"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">update_all_fields</span> (line <span class="line-number">613</span>)
+		<span class="method-title">update_all_fields</span> (line <span class="line-number">629</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1607,11 +1647,11 @@
 			
 	</div>
 <a name="methodwhere_clause" id="where_clause"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">where_clause</span> (line <span class="line-number">497</span>)
+		<span class="method-title">where_clause</span> (line <span class="line-number">513</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1713,7 +1753,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 30 Dec 2010 00:49:24 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Thu, 30 Dec 2010 03:55:59 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
