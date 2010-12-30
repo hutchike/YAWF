@@ -36,7 +36,7 @@ class Daemon extends Command
     public function __construct($dir = NULL)
     {
         parent::__construct($dir);
-        if ($pid = $this->is_running()) $this->quit("Daemon \"$this->name\" is already running with PID $pid");
+        if ($pid = $this->is_running()) $this->quit();
         $this->write_pid_to_file();
     }
 
