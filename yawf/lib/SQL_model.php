@@ -500,7 +500,7 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
     protected function join_clause($conditions = NULL)
     {
         if (!is_array($conditions)) return '';
-        if ($join = array_key($conditions, 'join')) return "join $join";
+        if ($join = array_key($conditions, 'join')) return "left join $join";
         return '';
     }
 
