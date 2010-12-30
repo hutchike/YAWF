@@ -27,7 +27,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
     const HAS_MANY = 'has_many';
 
     private static $relations = array();
-    private static $aliases = array();
+    private static $renamings = array();
 
     /**
      * Setup a relationship whereby this model belongs to some other models
@@ -112,7 +112,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
      */
     private function find_one_related($model, $clause, $join_model = NULL)
     {
-        $model = array_key(self::$aliases, $model, $model);
+        $model = array_key(self::$renamings, $model, $model);
         $object = self::new_model_object_for($model);
         $conditions = self::get_conditions($model, $join_model);
         $found = $object->set_limit(1)->find_where($clause, $conditions);
@@ -129,7 +129,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
      */
     private function find_all_related($model, $clause, $join_model = NULL)
     {
-        $model = array_key(self::$aliases, $model, $model);
+        $model = array_key(self::$renamings, $model, $model);
         $object = self::new_model_object_for($model);
         $conditions = $this->get_conditions($model, $join_model);
         $found = $object->find_where($clause, $conditions);
@@ -184,7 +184,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
             if (is_array($model))
             {
                 $options['join'] = array_key($model, 'join');
-                $options['alias'] = array_key($model, 'alias');
+                $options['as'] = array_key($model, 'as');
                 $model = $model['model'];
                 if ($join_model = $options['join']) load_model($join_model);
             }
@@ -198,7 +198,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
      *
      * @param String $model the name of the other model
      * @param String $relation the relation type, e.g. "belongs_to"
-     * @param Array $options relationship options (e.g. "alias", "is_singular")
+     * @param Array $options relationship options (e.g. "as", "is_singular")
      */
     private function set_relation($model, $relation, $options = array())
     {
@@ -211,10 +211,10 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
         $table = $this->get_table();
         $other_table = $is_singular ? Text::underscore($model)
                                     : Text::tableize($model);
-        if ($alias = array_key($options, 'alias'))
+        if ($as = array_key($options, 'as'))
         {
-            self::$aliases[$alias] = $other_table;
-            $other_table .= '.' . $alias;
+            self::$renamings[$as] = $other_table;
+            $other_table .= '.' . $as;
         }
         self::$relations["$table.$other_table"] = $relation;
     }
@@ -228,7 +228,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
     private function get_relation($other_table)
     {
         $table = $this->get_table();
-        if ($real_table = array_key(self::$aliases, $other_table))
+        if ($real_table = array_key(self::$renamings, $other_table))
         {
             $other_table = "$real_table.$other_table";
         }
