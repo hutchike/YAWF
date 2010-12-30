@@ -12,9 +12,9 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 
-require getenv('YAWF_ROOT') . '/yawf/lib/Command.php';
+require getenv('YAWF_ROOT') . '/yawf/lib/App_command.php';
 
-class YAWF_stats_command extends Command
+class YAWF_stats_command extends App_command
 {
     private static $folders = array(
         'app/public',
