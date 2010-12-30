@@ -419,11 +419,12 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
         // Query the database
 
         $db_table = $this->get_db_table();
-        $clause = $this->where_clause($conditions);
-        $clause .= ($this->order ? ' order by ' . $this->order : '');
-        $clause .= ($this->limit ? ' limit ' . $this->limit : '');
-        $clause .= ($this->offset ? ' offset ' . $this->offset : '');
-        $result = $this->query("select * from $db_table $clause");
+        $join = $this->join_clause($conditions);
+        $where = $this->where_clause($conditions);
+        $where .= ($this->order ? ' order by ' . $this->order : '');
+        $where .= ($this->limit ? ' limit ' . $this->limit : '');
+        $where .= ($this->offset ? ' offset ' . $this->offset : '');
+        $result = $this->query("select * from $db_table $join $where");
 
         // ...to make objects
 
@@ -481,11 +482,26 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
      * Find model objects that match a SQL "where" clause
      *
      * @param String $clause a SQL "where" clause to match
+     * @param Array $conditions an array of conditions, e.g. a "join" clause
      * @return Array a list of model objects that match the SQL "where" clause
      */
-    public function find_where($clause)
+    public function find_where($clause, $conditions = array())
     {
-        return $this->find_all(array('where' => $clause));
+        $conditions['where'] = $clause;
+        return $this->find_all($conditions);
+    }
+
+    /**
+     * Return a SQL "join" clause for an array of conditions, or field values
+     *
+     * @param Array $conditions an array of conditions (optional)
+     * @return String a SQL "where" clause from the conditions or field values
+     */
+    protected function join_clause($conditions = NULL)
+    {
+        if (!is_array($conditions)) return '';
+        if ($join = array_key($conditions, 'join')) return "join $join";
+        return '';
     }
 
     /**
