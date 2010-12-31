@@ -433,7 +433,7 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
      * @param String $name the object name and property (e.g. "user->name")
      * @return String the object value or NULL if it was not found
      */
-    private static function object_value_for($name)
+    public static function object_value_for($name)
     {
         $value = NULL;
         if (strstr($name, Symbol::ARROW)) // special case for "object->field"
@@ -452,7 +452,7 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
      * @param Array $attrs an array of HTML attributes (optional)
      * @return String the CSS id for the object name (e.g. "user_name")
      */
-    private static function css_id_for($name, &$attrs)
+    public static function css_id_for($name, $attrs = array())
     {
         if ($id = array_key($attrs, Symbol::ID)) return $id;
         else return str_replace(Symbol::ARROW, self::$id_format, $name);
