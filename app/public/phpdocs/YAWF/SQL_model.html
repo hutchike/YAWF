@@ -330,7 +330,7 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
 										<a href="#update_all_fields" title="details" class="method-name">update_all_fields</a>
-										()
+											(<span class="var-type">Array</span>&nbsp;<span class="var-name">0</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -436,7 +436,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete</span> (line <span class="line-number">641</span>)
+		<span class="method-title">delete</span> (line <span class="line-number">647</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -468,7 +468,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete_all</span> (line <span class="line-number">661</span>)
+		<span class="method-title">delete_all</span> (line <span class="line-number">667</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -519,7 +519,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">drop</span> (line <span class="line-number">673</span>)
+		<span class="method-title">drop</span> (line <span class="line-number">679</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1078,7 +1078,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">password</span> (line <span class="line-number">686</span>)
+		<span class="method-title">password</span> (line <span class="line-number">692</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1549,12 +1549,12 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">update_all_fields</span> (line <span class="line-number">630</span>)
+		<span class="method-title">update_all_fields</span> (line <span class="line-number">632</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Update this model object's data in the database via the connector.</p>
-<p class="description"><p>Note that this method will update *all* this model object's fields.</p></p>
+<p class="description"><p>Note that this method will update *all* this model object's fields  that are included in this model object's data array - see data().</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> this model object for chaining, or NULL on failure</li>
 				<li><span class="field">access:</span> public</li>
@@ -1565,9 +1565,14 @@
 		<span class="method-name">
 			update_all_fields
 		</span>
-				()
+					(<span class="var-type">Array</span>&nbsp;<span class="var-name">0</span>)
 			</div>
 	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">0</span><span class="var-description">: optional list of fields to update (updates all by default)</span>			</li>
+				</ul>
 		
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
@@ -1781,7 +1786,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 31 Dec 2010 07:44:42 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Fri, 31 Dec 2010 17:10:09 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

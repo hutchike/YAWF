@@ -623,13 +623,19 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
 
     /**
      * Update this model object's data in the database via the connector.
-     * Note that this method will update *all* this model object's fields.
+     * Note that this method will update *all* this model object's fields
+     * that are included in this model object's data array - see data().
      *
+     * @param Array optional list of fields to update (updates all by default)
      * @return SQL_model this model object for chaining, or NULL on failure
      */
     public function update_all_fields()
     {
-        foreach ($this->fields() as $field) $this->changed[$field] = TRUE;
+        $fields = func_get_args();
+        $count = count($fields);
+        if ($count == 0) $fields = $this->fields(); // the most usual case
+        elseif ($count == 1 && is_array($fields[0])) $fields = $fields[0];
+        foreach ($fields as $field) $this->changed[$field] = TRUE;
         return $this->update();
     }
 
