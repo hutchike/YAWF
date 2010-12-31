@@ -73,8 +73,18 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
      */
     public function __get($field_or_model)
     {
+        // Look whether the requested field is a relation
+
         $relation = $this->get_relation($field_or_model);
         if (is_null($relation)) return parent::__get($field_or_model);
+
+        // Look whether the requested field was already cached
+
+        $cached_field = '__' . $field_or_model;
+        if ($cached = parent::__get($cached_field)) return $cached;
+
+        // Handle the case where relations are complex
+
         if (is_array($relation))
         {
             $join_model = $relation['join_model'];
@@ -82,22 +92,24 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
         }
         else $join_model = NULL;
 
+        // Perform the relation
+
         switch ($relation)
         {
             case self::BELONGS_TO:
                 $model_id = $field_or_model . '_id';
                 if ($id = $this->$model_id)
-                    return $this->find_one_related($field_or_model, "id = $id");
+                    return $this->$cached_field = $this->find_one_related($field_or_model, "id = $id");
                 else
                     return new SQL_model();
 
             case self::HAS_A:
                 $id_field = $this->get_related_id_field();
-                return $this->find_one_related($field_or_model, "$id_field = " . $this->get_id(), $join_model);
+                return $this->$cached_field = $this->find_one_related($field_or_model, "$id_field = " . $this->get_id(), $join_model);
 
             case self::HAS_MANY:
                 $id_field = $this->get_related_id_field();
-                return $this->find_all_related($field_or_model, "$id_field = " . $this->get_id(), $join_model);
+                return $this->$cached_field = $this->find_all_related($field_or_model, "$id_field = " . $this->get_id(), $join_model);
                 break;
 
             default:
