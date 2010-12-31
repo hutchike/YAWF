@@ -32,7 +32,8 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
     public static $id_format = Symbol::UNDERSCORE; // e.g. id="new_user_email"
 
     /**
-     * Return HTML text for an array of attribute values
+     * Return HTML text for an array of attribute values.
+     * Note that emtpy attribute values are just skipped.
      *
      * @param Array $attrs the array of attribute values
      * @return String some HTML text of the form: attr1="this" attr2="that"...
