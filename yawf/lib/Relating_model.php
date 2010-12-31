@@ -131,7 +131,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
         $object = self::new_model_object_for($model);
         $conditions = self::get_conditions($model, $join_model);
         $found = $object->set_limit(1)->find_where($clause, $conditions);
-        return is_array($found) ? $found[0] : new SQL_model();
+        return count($found) ? $found[0] : new SQL_model();
     }
 
     /**
@@ -147,8 +147,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
         $model = array_key(self::$renamings, $model, $model);
         $object = self::new_model_object_for($model);
         $conditions = $this->get_conditions($model, $join_model);
-        $found = $object->find_where($clause, $conditions);
-        return is_array($found) ? $found : array();
+        return $object->find_where($clause, $conditions);
     }
 
     /**
