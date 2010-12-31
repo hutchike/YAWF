@@ -42,6 +42,7 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
         $pairs = array();
         foreach ($attrs as $attr => $value)
         {
+            if (strlen($value) == 0) continue;
             $pairs[] = $attr . '="' . $value . '"';
         }
         return join(' ', $pairs);
