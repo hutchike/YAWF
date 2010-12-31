@@ -32,6 +32,11 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
     public static $id_format = Symbol::UNDERSCORE; // e.g. id="new_user_email"
 
     /**
+     * Set HTML::$class_for_type['text'] = 'css-class-name' to set CSS classes
+     */
+    public static $class_for_type = array();
+
+    /**
      * Return HTML text for an array of attribute values.
      * Note that emtpy attribute values are just skipped.
      *
@@ -45,6 +50,7 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
         {
             if (strlen($value) == 0) continue;
             $pairs[] = $attr . '="' . $value . '"';
+            if ($attr == 'type' && $class = array_key(self::$class_for_type, $value)) $pairs[] = 'class="' . $class . '"';
         }
         return join(' ', $pairs);
     }
