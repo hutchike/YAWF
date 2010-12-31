@@ -18,7 +18,7 @@ class User_controller extends App_controller
             if ($user->load())
             {
                 if ($remember_me) $this->cookie('user_email', $user->email, time()+60*60*24*30);
-                $this->session->user_id = $user->get_id();
+                $this->session->user_id = $user->id;
                 $this->session->user_name = $user->name;
             }
             else

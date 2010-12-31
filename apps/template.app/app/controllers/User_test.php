@@ -35,7 +35,7 @@ class User_test_controller extends User_controller
                         ));
         list($user) = $this->login();
         $this->should('find a matching user', $user && $user->email === $this->test_user->email, $user);
-        $this->should('start a user session', $user->get_id() > 0 && $user->get_id() === $this->session->user_id, $user);
+        $this->should('start a user session', $user->id > 0 && $user->id === $this->session->user_id, $user);
 
         // Test that we cannot login with the wrong details
 
@@ -44,7 +44,7 @@ class User_test_controller extends User_controller
                         'user->password'    => 'WRONG',
                         ));
         list($user) = $this->login();
-        $this->should_not('login with the wrong details', $user->get_id(), $user);
+        $this->should_not('login with the wrong details', $user->id, $user);
     }
 
     public function logout_test()

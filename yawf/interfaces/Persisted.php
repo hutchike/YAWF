@@ -58,21 +58,6 @@ interface Persisted
      * @return Object the object
      */
     public function delete();
-
-    /**
-     * Get the ID number for the model object
-     *
-     * @return Integer the ID number for the model object
-     */
-    public function get_id();
-
-    /**
-     * Set the ID number for the model object
-     *
-     * @param Integer the ID number for the model object
-     * @return Object the model object for method chaining
-     */
-    public function set_id($id);
 }
 
 // End of Persisted.php
