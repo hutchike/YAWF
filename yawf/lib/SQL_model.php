@@ -210,32 +210,33 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
     {
         if ($this->id_field) return $this->id_field;
         $table = $this->get_table();
-        $this->id_field = array_key(self::$id_fields, $table, 'id');
+        $this->id_field = array_key(self::$id_fields, $table, Symbol::ID);
         return $this->id_field;
     }
 
     /**
-     * Get the ID number for this model object
+     * Get a data field value from this model object (with ID field mapping)
      *
-     * @return Integer the ID number for this model object
+     * @param String $field the data field to read
+     * @return String the value of the data field
      */
-    public function get_id()
+    public function __get($field)
     {
-        $id_field = $this->get_id_field();
-        return $this->$id_field;
+        if ($field == Symbol::ID) $field = $this->get_id_field();
+        return parent::__get($field);
     }
 
     /**
-     * Set the ID number for this model object
+     * Set a data field value in this model object (with ID field mapping)
      *
-     * @param Integer the ID number for this model object
-     * @return Object this model object for method chaining
+     * @param String $field the data field to write
+     * @param String $value the data value to write
+     * @return String the value of the newly updated data field
      */
-    public function set_id($id)
+    public function __set($field, $value)
     {
-        $id_field = $this->get_id_field();
-        $this->$id_field = $id + 0;
-        return $this;
+        if ($field == Symbol::ID) $field = $this->get_id_field();
+        return parent::__set($field, $value);
     }
 
     /**
@@ -386,12 +387,12 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
     public function load($id = 0)
     {
         if (is_null($id)) return 0; // to catch NULL parameters
-        if ($id) $this->set_id($id);
+        if ($id) $this->id = $id;
         if ($found = $this->find_first())
         {
             $this->changed = array();
             $this->data = $found->data;
-            return $this->get_id();
+            return $this->id;
         }
         return 0;
     }
@@ -404,7 +405,7 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
     public function save()
     {
         if (!$this->data() || !$this->is_validated()) return FALSE;
-        $saved = $this->get_id() ? $this->update() : $this->insert();
+        $saved = $this->id ? $this->update() : $this->insert();
         return $saved ? TRUE : FALSE;
     }
 

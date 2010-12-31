@@ -105,11 +105,11 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
 
             case self::HAS_A:
                 $id_field = $this->get_related_id_field();
-                return $this->$cached_field = $this->find_one_related($field_or_model, "$id_field = " . $this->get_id(), $join_model);
+                return $this->$cached_field = $this->find_one_related($field_or_model, "$id_field = " . $this->id, $join_model);
 
             case self::HAS_MANY:
                 $id_field = $this->get_related_id_field();
-                return $this->$cached_field = $this->find_all_related($field_or_model, "$id_field = " . $this->get_id(), $join_model);
+                return $this->$cached_field = $this->find_all_related($field_or_model, "$id_field = " . $this->id, $join_model);
                 break;
 
             default:

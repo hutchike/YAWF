@@ -149,7 +149,7 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
         $data = REST::get($url, $this->type);
         if (!array_key($data, $class)) return 0;
         $this->object = new $class($data[$class]);
-        return $this->object->get_id();
+        return $this->object->id;
     }
 
     /**
@@ -160,7 +160,7 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
     public function save() // returns true if the object saved or false if not
     {
         if (!$this->has_changed()) return FALSE;
-        $saved = $this->object->get_id() ? $this->update() : $this->insert();
+        $saved = $this->object->id ? $this->update() : $this->insert();
         return $saved ? TRUE : FALSE;
     }
 
@@ -172,13 +172,13 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
     public function insert()
     {
         if (!is_object($this->object)) return 0;
-        if ($this->object->get_id()) return 0;
+        if ($this->object->id) return 0;
         if (!$this->is_validated()) return 0;
         $url = $this->secure_url($this->url);
         $data = array($this->class => $this->object->data());
         $this->response = REST::post($url, $data, $this->type);
-        $id = $this->get_id_from($this->response);
-        if ($id) $this->object->set_id($id);
+        $id = $this->get_id_from_response();
+        if ($id) $this->object->id = $id;
         $this->check_response();
         return $id;
     }
@@ -201,9 +201,9 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
     public function update_all_fields()
     {
         if (!is_object($this->object) || !$this->has_changed()) return NULL;
-        if (!$this->object->get_id()) return NULL;
+        if (!$this->object->id) return NULL;
         if (!$this->is_validated()) return NULL;
-        $url = $this->secure_url($this->url . '/' . $this->object->get_id());
+        $url = $this->secure_url($this->url . '/' . $this->object->id);
         $data = array($this->class => $this->object->data());
         $this->response = REST::put($url, $data, $this->type);
         $this->check_response();
@@ -218,8 +218,8 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
     public function delete()
     {
         if (!is_object($this->object)) return NULL;
-        if (!$this->object->get_id()) return NULL;
-        $url = $this->secure_url($this->url . '/' . $this->object->get_id());
+        if (!$this->object->id) return NULL;
+        $url = $this->secure_url($this->url . '/' . $this->object->id);
         $this->response = REST::delete($url, $this->type);
         $this->check_response();
         return $this;
@@ -267,28 +267,6 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
     public function has_changed()
     {
         return is_object($this->object) ? $this->object->has_changed() : FALSE;
-    }
-
-    /**
-     * Return the remoted object's ID number
-     *
-     * @return Integer the remoted object's ID, or zero if it's not available
-     */
-    public function get_id()
-    {
-        return is_object($this->object) ? $this->object->get_id() : 0;
-    }
-
-    /**
-     * Set the remoted object's ID number
-     *
-     * @param Integer $id the remoted object's ID
-     * @return Remote this object for method chaining
-     */
-    public function set_id($id)
-    {
-        if (is_object($this->object)) $this->object->set_id($id);
-        return $this; // just like normal models do
     }
 
     /**
@@ -381,15 +359,14 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
     }
 
     /**
-     * Get the ID from a data array response received from the REST service
+     * Get the ID from the data array response received from the REST service
      *
-     * @param Array $response the response from which to return the object ID
-     * @return Integer the ID from a data array response from the REST service
+     * @return Integer the ID from the data array response from the REST service
      */
-    private function get_id_from($response)
+    private function get_id_from_response
     {
-        assert('is_array($response)');
-        if ($data = array_key($response, $this->class))
+        assert('is_array($this->response)');
+        if ($data = array_key($this->response, $this->class))
         {
             assert('is_object($this->object)');
             $id_field = $this->object->get_id_field();
