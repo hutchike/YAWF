@@ -105,6 +105,22 @@ function object_to_array($object)
 }
 
 /**
+ * Return a list of field values from a list of objects
+ *
+ * @param Array $objects the list of objects
+ * @param String $field the field whose value is returned
+ * @return Array a list of field values from the list of objects
+ */
+function object_fields($objects, $field)
+{
+    assert('is_array($objects)');
+    assert('is_string($field)');
+    $values = array();
+    foreach ($objects as $object) $values[] = $object->$field;
+    return $values;
+}
+
+/**
  * Return a key from an array or the default value (NULL by default)
  *
  * @param Array $array the array to lookup
