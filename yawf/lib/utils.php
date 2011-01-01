@@ -472,12 +472,14 @@ function puts($text)
 /**
  * Indent some text with whitespace
  *
- * @param String $text the text to indent
  * @param Integer $chars the number of characters to indent (default is 2)
+ * @param String $text the text to indent
  * @return String the indented text
  */
-function indent($text, $chars = 2)
+function indent($chars, $text)
 {
+    assert('is_int($chars)');
+    assert('is_string($text)');
     $spaces = '                                                '; // enough?
     $indent = substr($spaces, 0, $chars);
     return $indent . join("\n$indent", explode("\n", trim($text))) . "\n";
