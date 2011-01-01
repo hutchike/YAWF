@@ -363,7 +363,7 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
      *
      * @return Integer the ID from the data array response from the REST service
      */
-    private function get_id_from_response
+    private function get_id_from_response()
     {
         assert('is_array($this->response)');
         if ($data = array_key($this->response, $this->class))
