@@ -145,6 +145,18 @@ function array_rand_value($array)
 }
 
 /**
+ * Return whether an assoc array is passed to this function as an argument
+ *
+ * @param Array $array the array to test (or any variable at all really)
+ * @return Boolean whether an assoc array was passed as an argument or not
+ */
+function is_assoc_array($array)
+{
+    return is_array($array) &&
+           array_keys($array) !== range(0, count($array) - 1); 
+} 
+
+/**
  * Return the first non-null value in the argument list
  *
  * @param Array a list of arguments of any length

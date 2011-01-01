@@ -393,10 +393,11 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
         $attrs['id'] = self::css_id_for($name, $attrs);
         $attrs['name'] = h($name);
         $html = '<select ' . self::attrs($attrs) . ">\n";
+        $is_assoc = is_assoc_array($options);
         foreach ($options as $value => $text)
         {
             $choose = ($value === $selected || $text === $selected) ? ' selected="selected"' : NULL;
-            $value = is_int($value) ? NULL : ' value="' . $value . '"';
+            $value = $is_assoc ? ' value="' . $value . '"' : NULL;
             $html .= "<option$value$choose>$text</option>\n";
         }
         return $html . "</select>\n";
