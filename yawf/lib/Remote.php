@@ -177,6 +177,7 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
         $url = $this->secure_url($this->url);
         $data = array($this->class => $this->object->data());
         $this->response = REST::post($url, $data, $this->type);
+        if (is_null($this->response)) return 0;
         $id = $this->get_id_from_response();
         if ($id) $this->object->id = $id;
         $this->check_response();
@@ -205,8 +206,7 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
         if (!$this->is_validated()) return NULL;
         $url = $this->secure_url($this->url . '/' . $this->object->id);
         $data = array($this->class => $this->object->data());
-        $this->response = REST::put($url, $data, $this->type);
-        $this->check_response();
+        if ($this->response = REST::put($url, $data, $this->type)) $this->check_response();
         return $this;
     }
 
@@ -220,8 +220,7 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
         if (!is_object($this->object)) return NULL;
         if (!$this->object->id) return NULL;
         $url = $this->secure_url($this->url . '/' . $this->object->id);
-        $this->response = REST::delete($url, $this->type);
-        $this->check_response();
+        if ($this->response = REST::delete($url, $this->type)) $this->check_response();
         return $this;
     }
 
