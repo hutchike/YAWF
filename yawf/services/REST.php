@@ -20,7 +20,7 @@
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class REST_service extends Service
+class REST_service extends Web_service
 {
     // ----------------------------------------
     // AUTH METHODS TO OVERRIDE IN YOUR SERVICE

@@ -12,16 +12,16 @@
 // GNU Lesser General Public License for more details.
 
 /**
- * The Service class responds to requests for web services, such
- * as REST web services. See the "REST_service" child class for
- * an example of a Service.
+ * The Web_service class responds to requests for web services,
+ * such as REST web services. See the "REST_service" child class
+ * for an example of a Service.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Service extends Request
+class Web_service extends Request
 {
     /**
-     * Link this service to the web app
+     * Link this web service to the web app
      *
      * @param App $app the app
      */
@@ -31,8 +31,7 @@ class Service extends Request
     }
 
     /**
-     * Service errors should be arrays
-     * for easy formatting as XML/JSON
+     * Web service errors should be arrays for easy formatting as XML/JSON
      *
      * @param String $message the error message
      * @return Array the error message with details about the service class
@@ -44,4 +43,4 @@ class Service extends Request
     }
 }
 
-// End of Service.php
+// End of Web_service.php
