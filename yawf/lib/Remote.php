@@ -277,6 +277,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         $params['offset'] = $this->get_offset();
         $url = $this->secure_url() . '?' . http_build_query($params);
         $data = REST::get($url, $this->type);
+        if (!is_array($data)) return array();
 
         // Return a list of new model objects
 
