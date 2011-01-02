@@ -21,7 +21,7 @@ load_tool('REST');
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-class Remote extends Simple_model implements Modelled, Persisted, Validated
+class Remote extends Relating_model implements Modelled, Persisted, Validated
 {
     const DEFAULT_TYPE = Symbol::JSON; // (it's built into PHP)
 
@@ -52,6 +52,8 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
             $this->class = get_class($class_or_object);
             $this->object = $class_or_object;
         }
+        $this->data =& $this->object->data;
+        $this->changed =& $this->object->changed;
         $this->type = array_key(self::$defaults, 'type', self::DEFAULT_TYPE);
         $this->url = $url ? $url : $this->default_url($this->class);
         $this->response = NULL;
@@ -149,6 +151,8 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
         $data = REST::get($url, $this->type);
         if (!array_key($data, $class)) return 0;
         $this->object = new $class($data[$class]);
+        $this->data =& $this->object->data;
+        $this->changed =& $this->object->changed;
         return $this->object->id;
     }
 
@@ -225,30 +229,6 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
     }
 
     /**
-     * Get a field of object data
-     *
-     * @param String $field the object field to get
-     * @return String the value of the object field
-     */
-    public function __get($field)
-    {
-        return ($this->object ? $this->object->$field : NULL);
-    }
-
-    /**
-     * Set a field of remoted object data
-     *
-     * @param String $field the object field to set
-     * @param String $value the object value to set
-     * @return String the value of the object field
-     */
-    public function __set($field, $value)
-    {
-        if ($this->object) $this->object->$field = $value;
-        return $value;
-    }
-
-    /**
      * Get the remoted object's data
      *
      * @return Array the remoted object data array, or an empty array
@@ -266,6 +246,73 @@ class Remote extends Simple_model implements Modelled, Persisted, Validated
     public function has_changed()
     {
         return is_object($this->object) ? $this->object->has_changed() : FALSE;
+    }
+
+    /**
+     * Return the modelled object's table
+     *
+     * @return String the modelled object's table
+     */
+    public function get_table()
+    {
+        return is_object($this->object) ? $this->object->get_table() : NULL;
+    }
+
+    /**
+     * Find model objects that match a SQL "where" clause
+     *
+     * @param String $clause a SQL "where" clause to match
+     * @param Array $conditions an array of conditions, e.g. a "join" clause
+     * @return Array a list of model objects that match the SQL "where" clause
+     */
+    public function find_where($clause, $conditions = array())
+    {
+        // Use a REST service to get matching "find_where" data
+
+        $url = $this->secure_url($this->url . '?where=' . urlencode($clause));
+        if ($join = array_key($conditions, 'join')) $url .= '&join=' . urlencode($join);
+        if ($order = $this->get_order()) $url .= "&order=$order";
+        if ($limit = $this->get_limit()) $url .= "&limit=$limit";
+        if ($offset = $this->get_offset()) $url .= "&offset=$offset";
+        $data = REST::get($url, $this->type);
+
+        // Return a list of new model objects
+
+        $class = $this->class;
+        $objects = array();
+        if ($found = array_key($data, $class))
+        {
+            foreach ($found as $data)
+            {
+                $object = $this->new_model_object_for($class);
+                $object->data = $data;
+                $objects[] = $object;
+            }
+        }
+        return $objects;
+    }
+
+    /**
+     * Return a new model object, given a model name like "user_config"
+     *
+     * @param String $model the model name, normally with underscores
+     * @return SQL_model a new model object
+     */
+    protected function new_model_object_for($model)
+    {
+        return new Remote(parent::new_model_object_for($model));
+    }
+
+    /**
+     * Set an SQL limit
+     *
+     * @param Integer $limit the number of rows to return
+     * @return Remote this remote object for method chaining
+     */
+    public function set_limit($limit)
+    {
+        if (is_object($this->object)) $this->object->set_limit($limit);
+        return $this;
     }
 
     /**

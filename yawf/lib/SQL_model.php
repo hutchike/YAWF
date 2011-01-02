@@ -145,6 +145,16 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
     }
 
     /**
+     * Get the order for data result sets (i.e. "asc" or "desc")
+     *
+     * @return String the order for data result sets
+     */
+    public function get_order()
+    {
+        return $this->order;
+    }
+
+    /**
      * Set the limit for data result sets (e.g. 20)
      *
      * @param Integer $limit the data result set limit (e.g. 20)

@@ -128,8 +128,8 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
     private function find_one_related($model, $clause, $join_model = NULL)
     {
         $model = array_key(self::$renamings, $model, $model);
-        $object = self::new_model_object_for($model);
-        $conditions = self::get_conditions($model, $join_model);
+        $object = $this->new_model_object_for($model);
+        $conditions = $this->get_conditions($model, $join_model);
         $found = $object->set_limit(1)->find_where($clause, $conditions);
         return count($found) ? $found[0] : new SQL_model();
     }
@@ -145,7 +145,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
     private function find_all_related($model, $clause, $join_model = NULL)
     {
         $model = array_key(self::$renamings, $model, $model);
-        $object = self::new_model_object_for($model);
+        $object = $this->new_model_object_for($model);
         $conditions = $this->get_conditions($model, $join_model);
         return $object->find_where($clause, $conditions);
     }
@@ -156,7 +156,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
      * @param String $model the model name, normally with underscores
      * @return SQL_model a new model object
      */
-    private static function new_model_object_for($model)
+    protected function new_model_object_for($model)
     {
         $class = Text::classify($model);
         return new $class();

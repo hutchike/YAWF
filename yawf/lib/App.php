@@ -157,8 +157,10 @@ class App extends YAWF implements Mailer
     public function new_service($class = NULL)
     {
         // Require the Web_service base class
+        // ...and the Application web service
 
         require_once 'lib/Web_service.php';
+        require_once 'services/App.php';
 
         // Require the service's subclass
 

@@ -82,8 +82,30 @@ class REST_service extends Web_service
     public function get($params)
     {
         $model_name = $this->get_model_name();
-        $model = new $model_name();
-        return $model->load($params->id) ? array($model_name => $model->data()) : $this->error("id $params->id not found");
+        $object = new $model_name();
+        if ($where = $this->params->where)
+        {
+            // Run the "find_where" query using the params
+
+            if ($order = $this->params->order) $object->set_order($order);
+            if ($limit = $this->params->limit) $object->set_limit($limit);
+            if ($offset = $this->params->offset) $object->set_offset($offset);
+            $objects = $object->find_where($where, array('join' => $this->params->join));
+
+            // Return a list of model objects matching a "where" clause
+
+            $data = array();
+            foreach ($objects as $object) $data[] = $object->data();
+            return array($model_name => $data);
+        }
+        else
+        {
+            // Return a single model object matching an ID, or an error message
+
+            return $object->load($params->id) ?
+                    array($model_name => $object->data()) :
+                    $this->error("id $params->id not found");
+        }
     }
 
     /**
