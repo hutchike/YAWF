@@ -3,7 +3,7 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class App_controller</title>
+			<title>Docs For Class Web_service</title>
 			<link rel="stylesheet" href="../media/stylesheet.css" />
 			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
 		</head>
@@ -12,7 +12,7 @@
 <h2 class="class-name"><img src="../media/images/Class_logo.png"
 														alt=" Class"
 														title=" Class"
-														style="vertical-align: middle"> App_controller</h2>
+														style="vertical-align: middle"> Web_service</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
@@ -26,12 +26,12 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The App_controller class should be overriden by placing an  App_controller class (a file called &quot;App.php&quot;) in your own  &quot;app/controllers&quot; folder.</p>
+<p class="short-description">The Web_service class responds to requests for web services,  such as REST web services. See the &quot;REST_service&quot; child class  for an example of a Service.</p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Kevin Hutchinson &lt;<a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a>&gt;</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_controllers---App.php.html">/controllers/App.php</a> (line <span class="field">21</span>)
+			Located in <a class="field" href="_lib---Web_service.php.html">/lib/Web_service.php</a> (line <span class="field">21</span>)
 		</p>
 		
 				
@@ -39,9 +39,7 @@
    |
    --<a href="../YAWF/Request.html">Request</a>
       |
-      --<a href="../YAWF/Controller.html">Controller</a>
-         |
-         --App_controller</pre>
+      --Web_service</pre>
 	
 			</div>
 </div>
@@ -68,10 +66,10 @@
 								 alt=" class"
 								 title=" class"
 								 style="vertical-align: center"/>
-						<a href="../YAWF/Cache_controller.html">Cache_controller</a>
+						<a href="../YAWF/App_service.html">App_service</a>
 					</td>
 					<td>
-											The Cache_controller class allows app controllers to implement  page caching by calling a method like &quot;$this-&gt;cache_mins(15)&quot;.
+											The App_service class should be overriden by placing an  App_service class (a file called &quot;App.php&quot;) in your own  &quot;app/service&quot; folder.
 										</td>
 				</tr>
 								<tr>
@@ -80,34 +78,10 @@
 								 alt=" class"
 								 title=" class"
 								 style="vertical-align: center"/>
-						<a href="../YAWF/REST_controller.html">REST_controller</a>
+						<a href="../YAWF/REST_service.html">REST_service</a>
 					</td>
 					<td>
-											The REST_controller class connects REST service classes to the  web application via view methosd that correspond to HTTP methods  such as &quot;get&quot;, &quot;post&quot;, &quot;put&quot;, etc.
-										</td>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em; white-space: nowrap">
-						<img src="../media/images/Class.png"
-								 alt=" class"
-								 title=" class"
-								 style="vertical-align: center"/>
-						<a href="../YAWF/App_test_controller.html">App_test_controller</a>
-					</td>
-					<td>
-											The App_test_controller class runs tests over the controllers  listed by the APP_TEST_CONTROLLER_LIST constant, and the views  listed by the APP_TEST_VIEW_PATH_LIST constant. These tests are  run at the URI &quot;/app_test&quot; in your web application.
-										</td>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em; white-space: nowrap">
-						<img src="../media/images/Class.png"
-								 alt=" class"
-								 title=" class"
-								 style="vertical-align: center"/>
-						<a href="../YAWF/Test_controller.html">Test_controller</a>
-					</td>
-					<td>
-											The Test_controller class displays the web page GUI test framework  so that JavaScript tests may be run to check the website usability.
+											The Rest_service class may be subclassed by service classes in your app's  &quot;services&quot; directory. It provides standard REST HTTP methods as methods to  override in your subclass - e.g. &quot;get&quot;, &quot;post&quot;, &quot;put&quot;, &quot;delete&quot; and others.
 										</td>
 				</tr>
 							</table>
@@ -129,11 +103,17 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																								<div class="method-definition">
+																																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Array</span>
+										<a href="#error" title="details" class="method-name">error</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$message</span>)
+									</div>
+																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
-										<a href="#before" title="details" class="method-name">before</a>
-										()
+										<a href="#setup_for_app" title="details" class="method-name">setup_for_app</a>
+											(<span class="var-type"><a href="../YAWF/App.html">App</a></span>&nbsp;<span class="var-name">$app</span>)
 									</div>
 											</div>
 		</div>
@@ -156,29 +136,6 @@
 			
 							<h4>Inherited Variables</h4>
 				<A NAME='inherited_vars'><!-- --></A>
-									<p>Inherited from <span class="classname"><a href="../YAWF/Controller.html">Controller</a></span></p>
-					<blockquote>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../YAWF/Controller.html#var$flash">Controller::$flash</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../YAWF/Controller.html#var$path">Controller::$path</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../YAWF/Controller.html#var$render">Controller::$render</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../YAWF/Controller.html#var$type">Controller::$type</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../YAWF/Controller.html#var$view">Controller::$view</a></span><br>
-							</span>
-											</blockquote> 
 									<p>Inherited from <span class="classname"><a href="../YAWF/Request.html">Request</a></span></p>
 					<blockquote>
 													<img src="../media/images/Variable.png" />
@@ -218,70 +175,69 @@
 		</div>
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
-<a name="methodbefore" id="before"><!-- --></a>
+<a name="methoderror" id="error"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">error</span> (line <span class="line-number">39</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Web service errors should be arrays for easy formatting as XML/JSON</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the error message with details about the service class</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Array</span>
+		<span class="method-name">
+			error
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$message</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$message</span><span class="var-description">: the error message</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetup_for_app" id="setup_for_app"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">before</span> (line <span class="line-number">26</span>)
+		<span class="method-title">setup_for_app</span> (line <span class="line-number">28</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This is an example of a method to include in your &quot;App_controller&quot; class</p>
+<p class="short-description">Link this web service to the web app</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
 	
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			before
+			setup_for_app
 		</span>
-				()
+					(<span class="var-type"><a href="../YAWF/App.html">App</a></span>&nbsp;<span class="var-name">$app</span>)
 			</div>
 	
-		
-			<hr class="separator" />
-		<div class="notes">Redefinition of:</div>
-		<dl>
-			<dt><a href="../YAWF/Controller.html#methodbefore">Controller::before()</a></dt>
-						<dd>Before there's nothing to do (override this in your controller subclass)</dd>
-					</dl>
-			
-			<hr class="separator" />
-		<div class="notes">Redefined in descendants as:</div>
-		<ul class="redefinitions">
+			<ul class="parameters">
 					<li>
-				<a href="../YAWF/Test_controller.html#methodbefore">Test_controller::before()</a>
-								: Setup render data for the website testing framework
-							</li>
+				<span class="var-type"><a href="../YAWF/App.html">App</a></span>
+				<span class="var-name">$app</span><span class="var-description">: the app</span>			</li>
 				</ul>
+		
+			
 	</div>
 							<h4>Inherited Methods</h4>
 				<a name='inherited_methods'><!-- --></a>	
-									<!-- =========== Summary =========== -->
-					<p>Inherited From <span class="classname"><a href="../YAWF/Controller.html">Controller</a></span></p>
-					<blockquote>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodafter">Controller::after()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodbefore">Controller::before()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodflash">Controller::flash()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodflash_object">Controller::flash_object()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodget_path_config_from">Controller::get_path_config_from()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodrender">Controller::render()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodrender_path_data">Controller::render_path_data()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodsetup_for_app">Controller::setup_for_app()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodsetup_render_data">Controller::setup_render_data()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodset_type">Controller::set_type()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../YAWF/Controller.html#methodset_view">Controller::set_view()</a></span><br>
-											</blockquote>
 									<!-- =========== Summary =========== -->
 					<p>Inherited From <span class="classname"><a href="../YAWF/Request.html">Request</a></span></p>
 					<blockquote>
@@ -352,7 +308,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 02 Jan 2011 09:38:43 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 02 Jan 2011 09:38:59 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

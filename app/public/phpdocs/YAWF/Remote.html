@@ -46,7 +46,13 @@
    |
    --<a href="../YAWF/Simple_model.html">Simple_model</a>
       |
-      --Remote</pre>
+      --<a href="../YAWF/Valid_model.html">Valid_model</a>
+         |
+         --<a href="../YAWF/SQL_model.html">SQL_model</a>
+            |
+            --<a href="../YAWF/Relating_model.html">Relating_model</a>
+               |
+               --Remote</pre>
 	
 			</div>
 </div>
@@ -126,19 +132,19 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																				<div class="method-definition">
+																																																												<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">void</span>
 										<a href="#get_default" title="details" class="method-name">get_default</a>
 											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
 									</div>
-																																																																																<div class="method-definition">
+																																																																																																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">void</span>
 										<a href="#set_default" title="details" class="method-name">set_default</a>
 											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>])
 									</div>
-																																																																												<div class="method-definition">
+																																																												<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#check_response" title="details" class="method-name">check_response</a>
@@ -168,7 +174,19 @@
 										<a href="#delete" title="details" class="method-name">delete</a>
 										()
 									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Array</span>
+										<a href="#find_all" title="details" class="method-name">find_all</a>
+											([<span class="var-type">Array</span>&nbsp;<span class="var-name">$conditions</span> = <span class="var-default">array()</span>])
+									</div>
 																								<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#get_table" title="details" class="method-name">get_table</a>
+										()
+									</div>
+																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">Boolean</span>
 										<a href="#has_changed" title="details" class="method-name">has_changed</a>
@@ -191,6 +209,12 @@
 											<span class="method-result">Integer</span>
 										<a href="#load" title="details" class="method-name">load</a>
 											([<span class="var-type">Integer</span>&nbsp;<span class="var-name">$id</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+										<a href="#new_model_object_for" title="details" class="method-name">new_model_object_for</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$model</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -245,18 +269,6 @@
 											<span class="method-result">Array</span>
 										<a href="#validation_messages" title="details" class="method-name">validation_messages</a>
 										()
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">String</span>
-										<a href="#__get" title="details" class="method-name">__get</a>
-											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">String</span>
-										<a href="#__set" title="details" class="method-name">__set</a>
-											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$value</span>)
 									</div>
 											</div>
 		</div>
@@ -313,7 +325,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static get_default</span> (line <span class="line-number">96</span>)
+		<span class="method-title">static get_default</span> (line <span class="line-number">98</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -343,7 +355,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static set_default</span> (line <span class="line-number">72</span>)
+		<span class="method-title">static set_default</span> (line <span class="line-number">74</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -376,7 +388,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">check_response</span> (line <span class="line-number">345</span>)
+		<span class="method-title">check_response</span> (line <span class="line-number">383</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -406,7 +418,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">data</span> (line <span class="line-number">257</span>)
+		<span class="method-title">data</span> (line <span class="line-number">237</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -473,8 +485,8 @@
 			<hr class="separator" />
 		<div class="notes">Redefinition of:</div>
 		<dl>
-			<dt><a href="../YAWF/Simple_model.html#method__construct">Simple_model::__construct()</a></dt>
-						<dd>Create a new simple model object</dd>
+			<dt><a href="../YAWF/Valid_model.html#method__construct">Valid_model::__construct()</a></dt>
+						<dd>Create a new model object</dd>
 					</dl>
 			
 	</div>
@@ -483,7 +495,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">default_url</span> (line <span class="line-number">312</span>)
+		<span class="method-title">default_url</span> (line <span class="line-number">350</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -514,13 +526,13 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete</span> (line <span class="line-number">218</span>)
+		<span class="method-title">delete</span> (line <span class="line-number">223</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Perform a remote delete request using the REST &quot;delete&quot; method</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> this object for method chaining</li>
+				<li><span class="field">return:</span> this object for method chaining, or NULL on failure</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -533,6 +545,12 @@
 			</div>
 	
 		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/SQL_model.html#methoddelete">SQL_model::delete()</a></dt>
+						<dd>Delete this model object's data from the database via the connector</dd>
+					</dl>
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
@@ -541,12 +559,81 @@
 					</dl>
 			
 	</div>
+<a name="methodfind_all" id="find_all"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">find_all</span> (line <span class="line-number">268</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Find all remote model objects that match some conditions</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a list of model objects that match the SQL &quot;where&quot; clause</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Array</span>
+		<span class="method-name">
+			find_all
+		</span>
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">$conditions</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$conditions</span><span class="var-description">: an array of conditions, e.g. a &quot;join&quot; clause</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/SQL_model.html#methodfind_all">SQL_model::find_all()</a></dt>
+						<dd>Find all model objects that match the conditions or the object's fields</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_table" id="get_table"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">get_table</span> (line <span class="line-number">257</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the modelled object's table</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the modelled object's table</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			get_table
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/SQL_model.html#methodget_table">SQL_model::get_table()</a></dt>
+						<dd>Get the table used by this model object</dd>
+					</dl>
+			
+	</div>
 <a name="methodhas_changed" id="has_changed"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">has_changed</span> (line <span class="line-number">267</span>)
+		<span class="method-title">has_changed</span> (line <span class="line-number">247</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -584,13 +671,13 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">insert</span> (line <span class="line-number">172</span>)
+		<span class="method-title">insert</span> (line <span class="line-number">176</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Perform a remote insert request using the REST &quot;post&quot; method</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> the ID of the inserted model object</li>
+				<li><span class="field">return:</span> the ID of the inserted model object, or zero on failure</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -603,6 +690,12 @@
 			</div>
 	
 		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/SQL_model.html#methodinsert">SQL_model::insert()</a></dt>
+						<dd>Insert this model object's data into the database via the connector</dd>
+					</dl>
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
@@ -616,7 +709,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">is_validated</span> (line <span class="line-number">287</span>)
+		<span class="method-title">is_validated</span> (line <span class="line-number">325</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -635,6 +728,12 @@
 			</div>
 	
 		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/Valid_model.html#methodis_validated">Valid_model::is_validated()</a></dt>
+						<dd>Return whether this model object is validated against validation methods</dd>
+					</dl>
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
@@ -648,13 +747,13 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">load</span> (line <span class="line-number">145</span>)
+		<span class="method-title">load</span> (line <span class="line-number">147</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Perform a remote load request</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> the ID of the loaded model object</li>
+				<li><span class="field">return:</span> the ID of the loaded model object, or zero on failure</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -672,6 +771,12 @@
 				<span class="var-name">$id</span><span class="var-description">: the ID of the model object to load (default is 0)</span>			</li>
 				</ul>
 		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/SQL_model.html#methodload">SQL_model::load()</a></dt>
+						<dd>Load a model object by ID or by the other fields that have been set</dd>
+					</dl>
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
@@ -680,12 +785,49 @@
 					</dl>
 			
 	</div>
-<a name="methodresponse" id="response"><!-- --></a>
+<a name="methodnew_model_object_for" id="new_model_object_for"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">response</span> (line <span class="line-number">277</span>)
+		<span class="method-title">new_model_object_for</span> (line <span class="line-number">305</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a new model object, given a model name like &quot;user_config&quot;</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a new model object</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/SQL_model.html">SQL_model</a></span>
+		<span class="method-name">
+			new_model_object_for
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$model</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$model</span><span class="var-description">: the model name, normally with underscores</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/Relating_model.html#methodnew_model_object_for">Relating_model::new_model_object_for()</a></dt>
+						<dd>Return a new model object, given a model name like &quot;user_config&quot;</dd>
+					</dl>
+			
+	</div>
+<a name="methodresponse" id="response"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">response</span> (line <span class="line-number">315</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -707,11 +849,11 @@
 			
 	</div>
 <a name="methodsave" id="save"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">save</span> (line <span class="line-number">160</span>)
+		<span class="method-title">save</span> (line <span class="line-number">164</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -730,6 +872,12 @@
 			</div>
 	
 		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/SQL_model.html#methodsave">SQL_model::save()</a></dt>
+						<dd>Save this model object by inserting or updating it (if it has an ID)</dd>
+					</dl>
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
@@ -739,11 +887,11 @@
 			
 	</div>
 <a name="methodsecure_url" id="secure_url"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">secure_url</span> (line <span class="line-number">325</span>)
+		<span class="method-title">secure_url</span> (line <span class="line-number">363</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -770,11 +918,11 @@
 			
 	</div>
 <a name="methodset_auth" id="set_auth"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_auth</span> (line <span class="line-number">108</span>)
+		<span class="method-title">set_auth</span> (line <span class="line-number">110</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -804,11 +952,11 @@
 			
 	</div>
 <a name="methodset_type" id="set_type"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_type</span> (line <span class="line-number">133</span>)
+		<span class="method-title">set_type</span> (line <span class="line-number">135</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -835,11 +983,11 @@
 			
 	</div>
 <a name="methodset_url" id="set_url"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_url</span> (line <span class="line-number">121</span>)
+		<span class="method-title">set_url</span> (line <span class="line-number">123</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -866,17 +1014,17 @@
 			
 	</div>
 <a name="methodupdate" id="update"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">update</span> (line <span class="line-number">191</span>)
+		<span class="method-title">update</span> (line <span class="line-number">196</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Perform a remote update request using the REST &quot;put&quot; method</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> this object for method chaining</li>
+				<li><span class="field">return:</span> this object for method chaining, or NULL on failure</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -889,6 +1037,12 @@
 			</div>
 	
 		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/SQL_model.html#methodupdate">SQL_model::update()</a></dt>
+						<dd>Update this model object's data in the database via the connector.</dd>
+					</dl>
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
@@ -898,17 +1052,17 @@
 			
 	</div>
 <a name="methodupdate_all_fields" id="update_all_fields"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">update_all_fields</span> (line <span class="line-number">201</span>)
+		<span class="method-title">update_all_fields</span> (line <span class="line-number">207</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Perform a remote update request using the REST &quot;put&quot; method</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> this object for method chaining</li>
+				<li><span class="field">return:</span> this object for method chaining, or NULL on failure</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -921,6 +1075,12 @@
 			</div>
 	
 		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/SQL_model.html#methodupdate_all_fields">SQL_model::update_all_fields()</a></dt>
+						<dd>Update this model object's data in the database via the connector.</dd>
+					</dl>
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
@@ -930,11 +1090,11 @@
 			
 	</div>
 <a name="methodvalidation_messages" id="validation_messages"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">validation_messages</span> (line <span class="line-number">300</span>)
+		<span class="method-title">validation_messages</span> (line <span class="line-number">338</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -953,6 +1113,12 @@
 			</div>
 	
 		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/Valid_model.html#methodvalidation_messages">Valid_model::validation_messages()</a></dt>
+						<dd>Return an assoc array of validation messages, keyed by model data field</dd>
+					</dl>
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
@@ -961,97 +1127,136 @@
 					</dl>
 			
 	</div>
-<a name="method__get" id="__get"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">__get</span> (line <span class="line-number">234</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Get a field of object data</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> the value of the object field</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">String</span>
-		<span class="method-name">
-			__get
-		</span>
-					(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">String</span>
-				<span class="var-name">$field</span><span class="var-description">: the object field to get</span>			</li>
-				</ul>
-		
-			<hr class="separator" />
-		<div class="notes">Redefinition of:</div>
-		<dl>
-			<dt><a href="../YAWF/Simple_model.html#method__get">Simple_model::__get()</a></dt>
-						<dd>Get a data field value from this model object</dd>
-					</dl>
-				<hr class="separator" />
-		<div class="notes">Implementation of:</div>
-			<dl>
-			<dt><a href="../YAWF/Modelled.html#method__get">Modelled::__get()</a></dt>
-						<dd>Get a data field value from the model object</dd>
-					</dl>
-			
-	</div>
-<a name="method__set" id="__set"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">__set</span> (line <span class="line-number">246</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Set a field of remoted object data</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> the value of the object field</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">String</span>
-		<span class="method-name">
-			__set
-		</span>
-					(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$value</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">String</span>
-				<span class="var-name">$field</span><span class="var-description">: the object field to set</span>			</li>
-					<li>
-				<span class="var-type">String</span>
-				<span class="var-name">$value</span><span class="var-description">: the object value to set</span>			</li>
-				</ul>
-		
-			<hr class="separator" />
-		<div class="notes">Redefinition of:</div>
-		<dl>
-			<dt><a href="../YAWF/Simple_model.html#method__set">Simple_model::__set()</a></dt>
-						<dd>Set a data field value in this model object</dd>
-					</dl>
-				<hr class="separator" />
-		<div class="notes">Implementation of:</div>
-			<dl>
-			<dt><a href="../YAWF/Modelled.html#method__set">Modelled::__set()</a></dt>
-						<dd>Set a data field value in the model object</dd>
-					</dl>
-			
-	</div>
 							<h4>Inherited Methods</h4>
 				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../YAWF/Relating_model.html">Relating_model</a></span></p>
+					<blockquote>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Relating_model.html#methodbelongs_to">Relating_model::belongs_to()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Relating_model.html#methodhas_a">Relating_model::has_a()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Relating_model.html#methodhas_many">Relating_model::has_many()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Relating_model.html#methodnew_model_object_for">Relating_model::new_model_object_for()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Relating_model.html#method__get">Relating_model::__get()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../YAWF/SQL_model.html">SQL_model</a></span></p>
+					<blockquote>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodconnect">SQL_model::connect()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methoddelete">SQL_model::delete()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methoddelete_all">SQL_model::delete_all()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methoddisconnect">SQL_model::disconnect()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methoddrop">SQL_model::drop()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodescape">SQL_model::escape()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodfind_all">SQL_model::find_all()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodfind_first">SQL_model::find_first()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodfind_id">SQL_model::find_id()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodfind_last">SQL_model::find_last()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodfind_where">SQL_model::find_where()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_connector">SQL_model::get_connector()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_database">SQL_model::get_database()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_db_table">SQL_model::get_db_table()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_id_field">SQL_model::get_id_field()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_limit">SQL_model::get_limit()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_offset">SQL_model::get_offset()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_order">SQL_model::get_order()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodget_table">SQL_model::get_table()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodhas_timestamp">SQL_model::has_timestamp()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodinsert">SQL_model::insert()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodis_virtual">SQL_model::is_virtual()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodjoin_clause">SQL_model::join_clause()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodload">SQL_model::load()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodpassword">SQL_model::password()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodquery">SQL_model::query()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodquote">SQL_model::quote()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodquote_in">SQL_model::quote_in()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodsave">SQL_model::save()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_connector">SQL_model::set_connector()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_database">SQL_model::set_database()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_id_field">SQL_model::set_id_field()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_limit">SQL_model::set_limit()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_offset">SQL_model::set_offset()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_order">SQL_model::set_order()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_table">SQL_model::set_table()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_timestamp">SQL_model::set_timestamp()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodset_virtual">SQL_model::set_virtual()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodupdate">SQL_model::update()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodupdate_all_fields">SQL_model::update_all_fields()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#methodwhere_clause">SQL_model::where_clause()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#method__get">SQL_model::__get()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/SQL_model.html#method__set">SQL_model::__set()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../YAWF/Valid_model.html">Valid_model</a></span></p>
+					<blockquote>
+													<img src="../media/images/Constructor.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#method__construct">Valid_model::__construct()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodis_validated">Valid_model::is_validated()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodis_valid_email">Valid_model::is_valid_email()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodis_valid_length">Valid_model::is_valid_length()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodis_valid_password">Valid_model::is_valid_password()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodis_valid_person_name">Valid_model::is_valid_person_name()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodvalidates">Valid_model::validates()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodvalidation_messages">Valid_model::validation_messages()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodvalidation_messages_for">Valid_model::validation_messages_for()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Valid_model.html#methodvalidation_message_for">Valid_model::validation_message_for()</a></span><br>
+											</blockquote>
 									<!-- =========== Summary =========== -->
 					<p>Inherited From <span class="classname"><a href="../YAWF/Simple_model.html">Simple_model</a></span></p>
 					<blockquote>
@@ -1116,7 +1321,7 @@
 					</div>
 		<div class="info-box-body">
 			<a name="constDEFAULT_TYPE" id="DEFAULT_TYPE"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
@@ -1131,12 +1336,29 @@
 	
 	
 </div>
-						
+							<h4>Inherited Constants</h4>
+				<A NAME='inherited_consts'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../YAWF/Relating_model.html">Relating_model</a></span></p>
+					<blockquote>
+													<img src="../media/images/Variable.png" />
+							<span class="const-title">
+								<span class="const-name"><a href="../YAWF/Relating_model.html#constBELONGS_TO">Relating_model::BELONGS_TO</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="const-title">
+								<span class="const-name"><a href="../YAWF/Relating_model.html#constHAS_A">Relating_model::HAS_A</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="const-title">
+								<span class="const-name"><a href="../YAWF/Relating_model.html#constHAS_MANY">Relating_model::HAS_MANY</a></span><br>
+							</span>
+											</blockquote> 
+										
 		</div>
 	</div>
 	
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 31 Dec 2010 20:50:05 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 02 Jan 2011 09:38:52 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

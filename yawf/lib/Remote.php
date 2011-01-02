@@ -142,9 +142,9 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
      * Perform a remote load request
      *
      * @param Integer $id the ID of the model object to load (default is 0)
-     * @return Integer the ID of the loaded model object
+     * @return Integer the ID of the loaded model object, or zero on failure
      */
-    public function load($id = 0) // returns the object ID or zero on failure
+    public function load($id = 0)
     {
         $class = $this->class;
         $url = $this->secure_url() . '/' . $id;
@@ -171,7 +171,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     /**
      * Perform a remote insert request using the REST "post" method
      *
-     * @return Integer the ID of the inserted model object
+     * @return Integer the ID of the inserted model object, or zero on failure
      */
     public function insert()
     {
@@ -191,21 +191,22 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     /**
      * Perform a remote update request using the REST "put" method
      *
-     * @return Remote this object for method chaining
+     * @return Remote this object for method chaining, or NULL on failure
      */
     public function update()
     {
+        if (!is_object($this->object) || !$this->has_changed()) return NULL;
         return $this->update_all_fields();
     }
 
     /**
      * Perform a remote update request using the REST "put" method
      *
-     * @return Remote this object for method chaining
+     * @return Remote this object for method chaining, or NULL on failure
      */
     public function update_all_fields()
     {
-        if (!is_object($this->object) || !$this->has_changed()) return NULL;
+        if (!is_object($this->object)) return NULL;
         if (!$this->object->id) return NULL;
         if (!$this->is_validated()) return NULL;
         $url = $this->secure_url() . '/' . $this->object->id;
@@ -217,7 +218,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     /**
      * Perform a remote delete request using the REST "delete" method
      *
-     * @return Remote this object for method chaining
+     * @return Remote this object for method chaining, or NULL on failure
      */
     public function delete()
     {

@@ -159,7 +159,7 @@ class REST_service extends Web_service
     {
         $model_name = $this->get_model_name();
         $object = new $model_name($params->data[$model_name]);
-        if ($params->id) $object->set_id($params->id);
+        if ($params->id) $object->id = $params->id;
         if ($object->is_validated())
             $object->update_all_fields();
         else
