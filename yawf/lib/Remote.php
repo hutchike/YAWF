@@ -147,7 +147,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     public function load($id = 0) // returns the object ID or zero on failure
     {
         $class = $this->class;
-        $url = $this->secure_url($this->url . '/' . $id);
+        $url = $this->secure_url() . '/' . $id;
         $data = REST::get($url, $this->type);
         if (!array_key($data, $class)) return 0;
         $this->object = new $class($data[$class]);
@@ -178,7 +178,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         if (!is_object($this->object)) return 0;
         if ($this->object->id) return 0;
         if (!$this->is_validated()) return 0;
-        $url = $this->secure_url($this->url);
+        $url = $this->secure_url();
         $data = array($this->class => $this->object->data());
         $this->response = REST::post($url, $data, $this->type);
         if (is_null($this->response)) return 0;
@@ -208,7 +208,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         if (!is_object($this->object) || !$this->has_changed()) return NULL;
         if (!$this->object->id) return NULL;
         if (!$this->is_validated()) return NULL;
-        $url = $this->secure_url($this->url . '/' . $this->object->id);
+        $url = $this->secure_url() . '/' . $this->object->id;
         $data = array($this->class => $this->object->data());
         if ($this->response = REST::put($url, $data, $this->type)) $this->check_response();
         return $this;
@@ -223,7 +223,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     {
         if (!is_object($this->object)) return NULL;
         if (!$this->object->id) return NULL;
-        $url = $this->secure_url($this->url . '/' . $this->object->id);
+        $url = $this->secure_url() . '/' . $this->object->id;
         if ($this->response = REST::delete($url, $this->type)) $this->check_response();
         return $this;
     }
@@ -259,21 +259,23 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     }
 
     /**
-     * Find model objects that match a SQL "where" clause
+     * Find all remote model objects that match some conditions
      *
-     * @param String $clause a SQL "where" clause to match
      * @param Array $conditions an array of conditions, e.g. a "join" clause
      * @return Array a list of model objects that match the SQL "where" clause
      */
-    public function find_where($clause, $conditions = array())
+    public function find_all($conditions = array())
     {
         // Use a REST service to get matching "find_where" data
 
-        $url = $this->secure_url($this->url . '?where=' . urlencode($clause));
-        if ($join = array_key($conditions, 'join')) $url .= '&join=' . urlencode($join);
-        if ($order = $this->get_order()) $url .= "&order=$order";
-        if ($limit = $this->get_limit()) $url .= "&limit=$limit";
-        if ($offset = $this->get_offset()) $url .= "&offset=$offset";
+        $params = array();
+        if ($where = array_key($conditions, 'where')) $params['where'] = $where;
+        else $params['where'] = $this->where_clause();
+        $params['join'] = array_key($conditions, 'join');
+        $params['order'] = $this->get_order();
+        $params['limit'] = $this->get_limit();
+        $params['offset'] = $this->get_offset();
+        $url = $this->secure_url() . '?' . http_build_query($params);
         $data = REST::get($url, $this->type);
 
         // Return a list of new model objects

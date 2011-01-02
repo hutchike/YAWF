@@ -87,6 +87,7 @@ class REST_service extends Web_service
         {
             // Run the "find_where" query using the params
 
+            $where = preg_replace('/^where /', '', $where); // no prefix
             if ($order = $this->params->order) $object->set_order($order);
             if ($limit = $this->params->limit) $object->set_limit($limit);
             if ($offset = $this->params->offset) $object->set_offset($offset);
