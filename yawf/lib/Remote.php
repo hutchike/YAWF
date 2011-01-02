@@ -304,18 +304,6 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     }
 
     /**
-     * Set an SQL limit
-     *
-     * @param Integer $limit the number of rows to return
-     * @return Remote this remote object for method chaining
-     */
-    public function set_limit($limit)
-    {
-        if (is_object($this->object)) $this->object->set_limit($limit);
-        return $this;
-    }
-
-    /**
      * Return the REST response as an object
      *
      * @return Object the REST response as an object
