@@ -480,6 +480,17 @@ function p($thing)
 }
 
 /**
+ * Return a trimmed line of text with a single newline at the end
+ *
+ * @param String $line a line of text with possible whitespace at each end
+ * @return String a trimmed line of text with a single newline at the end
+ */
+function nl($line = '')
+{
+    return trim($line) . "\n";
+}
+
+/**
  * Copy the Ruby "puts()" function by writing a line of text
  *
  * @param String $text the text to print out with a newline
