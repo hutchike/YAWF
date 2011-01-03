@@ -5,8 +5,8 @@ model object in a "Remote" object like this:
 Remote::set_default("server", "http://some.website.com");
 $u = new User(array("name" => "Mr Smith"));
 $u = new Remote($u); // wrap in remote object
-$id = $u->save(); // save to the remove server
-print "id is $id"; // get the object\'s ID
+$u->save(); // save to the remote server
+print "id is " . $u->id; // get the user\'s ID
 ') ?>
 
 <h4>Nov 3, 2010: Added REST web services</h4>

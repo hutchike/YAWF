@@ -40,6 +40,7 @@ class Simple_model extends YAWF implements Modelled
     {
         $this->data = (array)$data;
         $this->changed = array();
+        foreach ($this->data as $field => $value) $this->changed[$field] = TRUE;
     }
 
     /**

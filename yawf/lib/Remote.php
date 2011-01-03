@@ -185,6 +185,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         $id = $this->get_id_from_response();
         if ($id) $this->object->id = $id;
         $this->check_response();
+        $this->object->changed = array();
         return $id;
     }
 
@@ -212,6 +213,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         $url = $this->secure_url() . '/' . $this->object->id;
         $data = array($this->class => $this->object->data());
         if ($this->response = REST::put($url, $data, $this->type)) $this->check_response();
+        $this->object->changed = array();
         return $this;
     }
 
@@ -237,16 +239,6 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     public function data()
     {
         return is_object($this->object) ? $this->object->data() : array();
-    }
-
-    /**
-     * Return whether the remoted object's data has changed
-     *
-     * @return Boolean whether the remoted object's data has been changed
-     */
-    public function has_changed()
-    {
-        return is_object($this->object) ? $this->object->has_changed() : FALSE;
     }
 
     /**
