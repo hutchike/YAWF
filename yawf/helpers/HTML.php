@@ -382,8 +382,8 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
      * NOTE: The name can be an object property like "user->name"
      *
      * @param String $name the field name (required)
-     * @param Array $options the options as value/text pairs (required)
-     * @param String $selected the selected option value or text (optional)
+     * @param Array $options the options as a label list or label=>value pairs
+     * @param String $selected the selected option value or label (optional)
      * @param Array $attrs the select tag's attributes (optional)
      * @return String the HTML select tag containing a list of options
      */
@@ -394,11 +394,11 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
         $attrs['name'] = h($name);
         $html = '<select ' . self::attrs($attrs) . ">\n";
         $is_assoc = is_assoc_array($options);
-        foreach ($options as $value => $text)
+        foreach ($options as $label => $value)
         {
-            $choose = ($value === $selected || $text === $selected) ? ' selected="selected"' : NULL;
-            $value = $is_assoc ? ' value="' . $value . '"' : NULL;
-            $html .= "<option$value$choose>$text</option>\n";
+            if (!$is_assoc) $label = $value;
+            $choose = ($value === $selected || $label === $selected) ? ' selected="selected"' : NULL;
+            $html .= "<option value=\"$value\"$choose>$label</option>\n";
         }
         return $html . "</select>\n";
     }
