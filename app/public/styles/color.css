@@ -2,6 +2,11 @@ body {
     background: url(/yawf/images/back.gif) #d0e0f0 repeat-x left top;
 }
 
+.highlight {
+    background-color: #eef;
+    border: 1px solid #dde;
+}
+
 #container {
     background-color: #fff;
     border-top: 2px solid #fff;
