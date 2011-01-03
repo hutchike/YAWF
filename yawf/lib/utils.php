@@ -105,18 +105,26 @@ function object_to_array($object)
 }
 
 /**
- * Return a list of field values from a list of objects
+ * Return a list of field values from a list of objects.
+ * If a single field is passed, then a list is returned.
+ * If two fields are passed, an assoc array is returned,
+ * with field1 as the array key and field2 as the value.
  *
  * @param Array $objects the list of objects
- * @param String $field the field whose value is returned
+ * @param String $field1 the field whose value is returned
+ * @param String $field2 the field whose value is returned (for assoc arrays)
  * @return Array a list of field values from the list of objects
  */
-function object_fields($objects, $field)
+function object_fields($objects, $field1, $field2 = NULL)
 {
     assert('is_array($objects)');
-    assert('is_string($field)');
+    assert('is_string($field1)');
     $values = array();
-    foreach ($objects as $object) $values[] = $object->$field;
+    foreach ($objects as $object)
+    {
+        if (is_null($field2)) $values[] = $object->$field1;
+        else $values[$object->field1] = $object->field2;
+    }
     return $values;
 }
 
