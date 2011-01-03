@@ -123,7 +123,7 @@ function object_fields($objects, $field1, $field2 = NULL)
     foreach ($objects as $object)
     {
         if (is_null($field2)) $values[] = $object->$field1;
-        else $values[$object->field1] = $object->field2;
+        else $values[$object->$field1] = $object->$field2;
     }
     return $values;
 }
