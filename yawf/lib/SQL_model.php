@@ -585,6 +585,7 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
 
         $id_field = $this->get_id_field();
         $this->data[$id_field] = $this->connector->insert_id();
+        $this->changed = array();
         return $this->data[$id_field];
     }
 
