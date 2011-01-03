@@ -516,4 +516,19 @@ function dump($object)
     return print_r($object, TRUE);
 }
 
+/**
+ * Return some highlighted code
+ *
+ * @param String $code the code to highlight
+ * @return String the highlighted code
+ */
+function highlight($code)
+{
+    $pretty = highlight_string('<'.'?' . $code . '?'.'>', TRUE);
+    $pretty = preg_replace('/&lt;\?/', '', $pretty);      // remove PHP open
+    $pretty = preg_replace('/\?&gt;/', '', $pretty);      // remove PHP close
+    $pretty = preg_replace('/"><br \/>/', '">', $pretty); // remove first <br/>
+    return '<div class="highlight">' . $pretty . '</div>';// wrap up in a <div>
+}
+
 // End of utils.php
