@@ -26,6 +26,7 @@ class Symbol extends YAWF
     const COOKIE = 'cookie';
     const DASH = '-';
     const DATABASE = 'database';
+    const DAY = 'day';
     const DEBUG = 'debug';
     const DEFAULT_WORD = 'default';
     const ERROR = 'error';
@@ -33,6 +34,7 @@ class Symbol extends YAWF
     const FOLDER = 'folder';
     const FRAME = 'frame';
     const HOSTNAME = 'hostname';
+    const HOUR = 'hour';
     const HTML = 'html';
     const ID = 'id';
     const IFRAME = 'iframe';
@@ -41,6 +43,7 @@ class Symbol extends YAWF
     const JSON = 'json';
     const JSONP = 'jsonp';
     const MAILER = 'mailer';
+    const MINUTE = 'minute';
     const PARAMS = 'params';
     const PASSWORD = 'password';
     const PATH_CONFIG = 'path_config';
@@ -58,9 +61,11 @@ class Symbol extends YAWF
     const UTF8 = 'UTF8';
     const VALIDATION_MESSAGES = 'validation_messages';
     const WARN = 'warn';
+    const WEEK = 'week';
     const XML = 'xml';
     const YAML = 'yaml';
     const YAWF = 'yawf';
+    const YEAR = 'year';
 }
 
 // End of Symbol.php
