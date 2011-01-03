@@ -3,7 +3,7 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class PEAR5</title>
+			<title>Docs For Class Time</title>
 			<link rel="stylesheet" href="../media/stylesheet.css" />
 			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
 		</head>
@@ -12,7 +12,7 @@
 <h2 class="class-name"><img src="../media/images/Class_logo.png"
 														alt=" Class"
 														title=" Class"
-														style="vertical-align: middle"> PEAR5</h2>
+														style="vertical-align: middle"> Time</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
@@ -24,10 +24,8 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This is only meant for PHP 5 to get rid of certain strict warning</p>
-<p class="description"><p>that doesn't get hidden since it's in the shutdown function</p></p>
 		<p class="notes">
-			Located in <a class="field" href="_plugins---PEAR---PEAR5.php.html">/plugins/PEAR/PEAR5.php</a> (line <span class="field">6</span>)
+			Located in <a class="field" href="_helpers---Time.php.html">/helpers/Time.php</a> (line <span class="field">14</span>)
 		</p>
 		
 				
@@ -50,9 +48,9 @@
 			<div class="method-summary">
 												<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">mixed</span>
-										<a href="#getStaticProperty" title="details" class="method-name">&amp;getStaticProperty</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$class</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$var</span>)
+											static <span class="method-result">Integer</span>
+										<a href="#secs_in" title="details" class="method-name">secs_in</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$period</span>)
 									</div>
 																							</div>
 		</div>
@@ -69,37 +67,33 @@
 		</div>
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
-<a name="methodgetStaticProperty" id="getStaticProperty"><!-- --></a>
+<a name="methodsecs_in" id="secs_in"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static getStaticProperty</span> (line <span class="line-number">20</span>)
+		<span class="method-title">static secs_in</span> (line <span class="line-number">21</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">If you have a class that's mostly/entirely static, and you need static</p>
-<p class="description"><p>properties, you can use this method to simulate them. Eg. in your method(s)  do this: $myVar = &amp;PEAR5::getStaticProperty('myclass', 'myVar');  You MUST use a reference, or they will not persist!</p></p>
+<p class="short-description">Return the number of seconds in a period e.g. &quot;day&quot;, &quot;week&quot;, &quot;month&quot;</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> A reference to the variable. If not set it will be                  auto initialised to NULL.</li>
+				<li><span class="field">return:</span> the number of seconds in a period, or zero if confused</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">mixed</span>
+		<span class="method-result">Integer</span>
 		<span class="method-name">
-			&amp;getStaticProperty
+			secs_in
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$class</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$var</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$period</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$class</span><span class="var-description">: The calling classname, to prevent clashes</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$var</span><span class="var-description">: The variable to retrieve.</span>			</li>
+				<span class="var-type"></span>
+				<span class="var-name">$period</span>			</li>
 				</ul>
 		
 			
@@ -110,7 +104,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 03 Jan 2011 14:49:28 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 03 Jan 2011 14:49:37 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
