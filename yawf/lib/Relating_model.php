@@ -127,7 +127,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
      */
     private function find_one_related($model, $clause, $join_model = NULL)
     {
-        $model = array_key(self::$renamings, $model, $model);
+        $model = first($this->get_renaming_for($model), $model);
         $object = $this->new_model_object_for($model);
         $conditions = $this->get_conditions($model, $join_model);
         $found = $object->set_limit(1)->find_where($clause, $conditions);
@@ -144,7 +144,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
      */
     private function find_all_related($model, $clause, $join_model = NULL)
     {
-        $model = array_key(self::$renamings, $model, $model);
+        $model = first($this->get_renaming_for($model), $model);
         $object = $this->new_model_object_for($model);
         $conditions = $this->get_conditions($model, $join_model);
         return $object->find_where($clause, $conditions);
@@ -225,10 +225,10 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
         $table = $this->get_table();
         $other_table = $is_singular ? Text::underscore($model)
                                     : Text::tableize($model);
-        if ($as = array_key($options, 'as'))
+        if ($alias = array_key($options, 'as'))
         {
-            self::$renamings[$as] = $other_table;
-            $other_table .= '.' . $as;
+            $this->set_renaming_for($other_table, $alias);
+            $other_table .= '.' . $alias;
         }
         self::$relations["$table.$other_table"] = $relation;
     }
@@ -242,11 +242,35 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
     private function get_relation($other_table)
     {
         $table = $this->get_table();
-        if ($real_table = array_key(self::$renamings, $other_table))
+        if ($real_table = $this->get_renaming_for($other_table))
         {
             $other_table = "$real_table.$other_table";
         }
         return array_key(self::$relations, "$table.$other_table");
+    }
+
+    /**
+     * Set the name of a table for an alias
+     *
+     * @param String $other_table the name of the other table being aliased
+     * @param String $alias the alias, e.g. "parent"
+     */
+    private function set_renaming_for($other_table, $alias)
+    {
+        $table = $this->get_table();
+        self::$renamings["$table.$alias"] = $other_table;
+    }
+
+    /**
+     * Get a table that matches an alias, or return NULL if no alias was setup
+     *
+     * @param String $alias the alias, e.g. "parent"
+     * @return String the aliased table, or NULL if no alias was setup
+     */
+    private function get_renaming_for($alias)
+    {
+        $table = $this->get_table();
+        return array_key(self::$renamings, "$table.$alias");
     }
 
     /**
