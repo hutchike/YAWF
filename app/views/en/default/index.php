@@ -22,8 +22,10 @@
     If you'd like to know more, please email <a href="mailto:kevin@guanoo.com">kevin@guanoo.com</a> for more information.
 </p>
 
+<hr/>
+
 <p>
-    If you're looking for a PHP framework that's been around for longer,<br/>
+    Or if you're looking for a PHP framework that's been around for longer,<br/>
     and has a much larger following of dedicated coders, here are some:
     <ul>
         <li><a href="http://www.akelos.org/">Akelos</a></li>
