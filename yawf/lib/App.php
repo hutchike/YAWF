@@ -415,8 +415,8 @@ class App extends YAWF implements Mailer
     {
         $render = new Object($render);
         load_tool('Mail');
-        $text = $this->render_view($file, $render, array('ext' => '.mail.txt', 'must_find' => TRUE));
-        $html = $this->render_view($file, $render, array('ext' => '.mail.html', 'must_find' => TRUE));
+        $text = $this->render_view($file, $render, array('ext' => '.text.php', 'must_find' => TRUE));
+        $html = $this->render_view($file, $render, array('ext' => '.html.php', 'must_find' => TRUE));
         $render->text = $text;
         $render->html = $html;
         return Mail::send($render, $this->is_testing);
