@@ -405,7 +405,8 @@ class App extends YAWF implements Mailer
     }
 
     /**
-     * Send a mail message (this depends on the Mail tool)
+     * Send a mail message (this depends on the Mail tool) by reading an
+     * HTML file and a text file from a "mail" folder in a views folder.
      *
      * @param String $file the file to send (e.g. "welcome")
      * @param Object $render optional data to render (can be an Array)
@@ -413,6 +414,7 @@ class App extends YAWF implements Mailer
      */
     public function send_mail($file, $render = NULL)
     {
+        $file = "mail/$file";
         $render = new Object($render);
         load_tool('Mail');
         $text = $this->render_view($file, $render, array('ext' => '.text.php', 'must_find' => TRUE));
