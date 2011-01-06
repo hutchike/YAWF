@@ -102,7 +102,7 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
      */
     public function set_table($table)
     {
-        $this->table = self::$tables[get_class($this)] = $table;
+        $this->table = self::$tables[$this->get_class()] = $table;
         return $this;
     }
 
@@ -114,9 +114,9 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
     public function get_table()
     {
         if ($this->table) return $this->table;
-        $this->table = array_key(self::$tables, get_class($this));
+        $this->table = array_key(self::$tables, $this->get_class());
         if ($this->table) return $this->table;
-        $this->set_table(Text::tableize(get_class($this)));
+        $this->set_table(Text::tableize($this->get_class()));
         return $this->table;
     }
 
@@ -440,7 +440,7 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
         // ...to make objects
 
         $objects = array();
-        $class = get_class($this);
+        $class = $this->get_class();
         while ($object = $result->fetch_object())
         {
             $objects[] = new $class($object, FALSE); // FALSE == has not changed
