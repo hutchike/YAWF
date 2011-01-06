@@ -89,9 +89,10 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
         {
             $join_model = array_key($relation, 'join_model');
             $cast_model = array_key($relation, 'cast_model');
+            $id_field = array_key($relation, 'id_field');
             $relation = $relation['relation'];
         }
-        else $join_model = $cast_model = NULL;
+        else $join_model = $cast_model = $id_field = NULL;
 
         // Perform the relation
 
@@ -105,11 +106,11 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
                     return new SQL_model();
 
             case self::HAS_A:
-                $id_field = $this->get_related_id_field();
+                $id_field = first($id_field, $this->get_related_id_field());
                 return $this->$cached_field = $this->find_related(Symbol::ONE, $field_or_model, "$id_field = " . $this->id, $join_model, $cast_model);
 
             case self::HAS_MANY:
-                $id_field = $this->get_related_id_field();
+                $id_field = first($id_field, $this->get_related_id_field());
                 return $this->$cached_field = $this->find_related(Symbol::ALL, $field_or_model, "$id_field = " . $this->id, $join_model, $cast_model);
                 break;
 
@@ -184,7 +185,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
 
         $table = Text::tableize($model);
         $join_table = Text::tableize($join_model);
-        $id_field = Text::singularize($join_table) . '_id';
+        $id_field = Text::singularize($join_table) . '_id'; // TODO: user set?
         $conditions['join'] = "$join_table on $join_table.id = $table.$id_field";
         return $conditions;
     }
@@ -241,10 +242,8 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
         if ($join = array_key($options, 'join'))
         {
             $relation = array('relation' => $relation, 'join_model' => $join);
-            if ($cast = array_key($options, 'cast'))
-            {
-                $relation['cast_model'] = $cast;
-            }
+            $relation['cast_model'] = array_key($options, 'cast');
+            $relation['id_field'] = array_key($options, 'id');
         }
 
         $table = $this->get_table();
