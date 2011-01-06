@@ -443,7 +443,7 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
         $class = get_class($this);
         while ($object = $result->fetch_object())
         {
-            $objects[] = new $class($object);
+            $objects[] = new $class($object, FALSE); // FALSE == has not changed
         }
         $result->close();
         return $objects;

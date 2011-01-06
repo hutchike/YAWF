@@ -35,12 +35,19 @@ class Simple_model extends YAWF implements Modelled
      * Create a new simple model object
      *
      * @param Array $data the data to initialize the object (may be an object)
+     * @param Boolean $has_changed whether the new object has changed (optional)
      */
-    public function __construct($data = array())
+    public function __construct($data = array(), $has_changed = TRUE)
     {
         $this->data = (array)$data;
         $this->changed = array();
-        foreach ($this->data as $field => $value) $this->changed[$field] = TRUE;
+        if ($has_changed)
+        {
+            foreach ($this->data as $field => $value)
+            {
+                $this->changed[$field] = TRUE;
+            }
+        }
     }
 
     /**
