@@ -442,7 +442,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete</span> (line <span class="line-number">658</span>)
+		<span class="method-title">delete</span> (line <span class="line-number">659</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -482,7 +482,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete_all</span> (line <span class="line-number">678</span>)
+		<span class="method-title">delete_all</span> (line <span class="line-number">679</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -533,7 +533,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">drop</span> (line <span class="line-number">690</span>)
+		<span class="method-title">drop</span> (line <span class="line-number">691</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -958,14 +958,6 @@
 	
 		
 			
-			<hr class="separator" />
-		<div class="notes">Redefined in descendants as:</div>
-		<ul class="redefinitions">
-					<li>
-				<a href="../YAWF/Remote.html#methodget_table">Remote::get_table()</a>
-								: Return the modelled object's table
-							</li>
-				</ul>
 	</div>
 <a name="methodhas_timestamp" id="has_timestamp"><!-- --></a>
 <div class="evenrow">
@@ -1150,7 +1142,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">password</span> (line <span class="line-number">703</span>)
+		<span class="method-title">password</span> (line <span class="line-number">704</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1637,12 +1629,12 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">update_all_fields</span> (line <span class="line-number">643</span>)
+		<span class="method-title">update_all_fields</span> (line <span class="line-number">644</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Update this model object's data in the database via the connector.</p>
-<p class="description"><p>Note that this method will update *all* this model object's fields  that are included in this model object's data array - see data().</p></p>
+<p class="description"><p>Note that this method will update *all* this model object's fields  that are included in this model object's data array - see fields().  You can override this by providing an arg list of fields to update.</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> this model object for chaining, or NULL on failure</li>
 				<li><span class="field">access:</span> public</li>
@@ -1674,7 +1666,7 @@
 		<ul class="redefinitions">
 					<li>
 				<a href="../YAWF/Remote.html#methodupdate_all_fields">Remote::update_all_fields()</a>
-								: Perform a remote update request using the REST &quot;put&quot; method
+								: Perform a remote update request using the REST &quot;put&quot; method.
 							</li>
 				</ul>
 	</div>
@@ -1838,11 +1830,17 @@
 													<img src="../media/images/Constructor.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Simple_model.html#method__construct">Simple_model::__construct()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#methodcast_into">Simple_model::cast_into()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Simple_model.html#methodcopy_to">Simple_model::copy_to()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Simple_model.html#methoddata">Simple_model::data()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Simple_model.html#methodfields">Simple_model::fields()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#methodget_changed">Simple_model::get_changed()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../YAWF/Simple_model.html#methodget_class">Simple_model::get_class()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../YAWF/Simple_model.html#methodhas_changed">Simple_model::has_changed()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
@@ -1882,7 +1880,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 04 Jan 2011 08:29:00 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Thu, 06 Jan 2011 13:54:24 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

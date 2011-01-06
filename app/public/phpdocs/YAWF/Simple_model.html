@@ -120,11 +120,17 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																<div class="method-definition">
+																																																																																																								<div class="method-definition">
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">Simple_model</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											([<span class="var-type">Array</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">array()</span>])
+											([<span class="var-type">Array</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">array()</span>], [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$has_changed</span> = <span class="var-default">TRUE</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Simple_model.html">Simple_model</a></span>
+										<a href="#cast_into" title="details" class="method-name">cast_into</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$new_class</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$has_changed</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -136,12 +142,24 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">Array</span>
 										<a href="#data" title="details" class="method-name">data</a>
-										()
+											([<span class="var-type">Array</span>&nbsp;<span class="var-name">$fields</span> = <span class="var-default">array()</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">Array</span>
 										<a href="#fields" title="details" class="method-name">fields</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">Array</span>
+										<a href="#get_changed" title="details" class="method-name">get_changed</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#get_class" title="details" class="method-name">get_class</a>
 										()
 									</div>
 																<div class="method-definition">
@@ -188,7 +206,7 @@
 		<div class="info-box-body">
 			
 <a name="var$changed" id="$changed"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
@@ -211,7 +229,7 @@
 
 </div>
 <a name="var$data" id="$data"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
@@ -250,11 +268,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">39</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">40</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -268,13 +286,16 @@
 		<span class="method-name">
 			__construct
 		</span>
-					([<span class="var-type">Array</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">array()</span>])
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">array()</span>], [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$has_changed</span> = <span class="var-default">TRUE</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type">Array</span>
 				<span class="var-name">$data</span><span class="var-description">: the data to initialize the object (may be an object)</span>			</li>
+					<li>
+				<span class="var-type">Boolean</span>
+				<span class="var-name">$has_changed</span><span class="var-description">: whether the new object has changed (optional)</span>			</li>
 				</ul>
 		
 			
@@ -291,12 +312,60 @@
 							</li>
 				</ul>
 	</div>
+<a name="methodcast_into" id="cast_into"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">cast_into</span> (line <span class="line-number">168</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Cast this model object into another model class</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a new model object of the new class</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Simple_model.html">Simple_model</a></span>
+		<span class="method-name">
+			cast_into
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$new_class</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$has_changed</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$new_class</span><span class="var-description">: a model class into which to cast this object</span>			</li>
+					<li>
+				<span class="var-type">Boolean</span>
+				<span class="var-name">$has_changed</span><span class="var-description">: whether the new object has changed or not</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../YAWF/Modelled.html#methodcast_into">Modelled::cast_into()</a></dt>
+						<dd>Cast this model object into another model class</dd>
+					</dl>
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../YAWF/Remote.html#methodcast_into">Remote::cast_into()</a>
+								: Cast this remote model object into another model class
+							</li>
+				</ul>
+	</div>
 <a name="methodcopy_to" id="copy_to"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">copy_to</span> (line <span class="line-number">97</span>)
+		<span class="method-title">copy_to</span> (line <span class="line-number">104</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -332,7 +401,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">data</span> (line <span class="line-number">111</span>)
+		<span class="method-title">data</span> (line <span class="line-number">119</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -348,32 +417,29 @@
 		<span class="method-name">
 			data
 		</span>
-				()
+					([<span class="var-type">Array</span>&nbsp;<span class="var-name">$fields</span> = <span class="var-default">array()</span>])
 			</div>
 	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$fields</span><span class="var-description">: an optional list of fields to return</span>			</li>
+				</ul>
 		
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
 			<dt><a href="../YAWF/Modelled.html#methoddata">Modelled::data()</a></dt>
-						<dd>Get an assoc array of data stored in the model object</dd>
+						<dd>Get an assoc array of data stored in this model object.</dd>
 					</dl>
 			
-			<hr class="separator" />
-		<div class="notes">Redefined in descendants as:</div>
-		<ul class="redefinitions">
-					<li>
-				<a href="../YAWF/Remote.html#methoddata">Remote::data()</a>
-								: Get the remoted object's data
-							</li>
-				</ul>
 	</div>
 <a name="methodfields" id="fields"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">fields</span> (line <span class="line-number">121</span>)
+		<span class="method-title">fields</span> (line <span class="line-number">131</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -400,12 +466,84 @@
 					</dl>
 			
 	</div>
+<a name="methodget_changed" id="get_changed"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">get_changed</span> (line <span class="line-number">151</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return an assoc array of changed data</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> an assoc array of changed data</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Array</span>
+		<span class="method-name">
+			get_changed
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../YAWF/Modelled.html#methodget_changed">Modelled::get_changed()</a></dt>
+						<dd>Return an assoc array of changed data</dd>
+					</dl>
+			
+	</div>
+<a name="methodget_class" id="get_class"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">get_class</span> (line <span class="line-number">179</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return this model object's class name</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the model object's class name</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			get_class
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../YAWF/Modelled.html#methodget_class">Modelled::get_class()</a></dt>
+						<dd>Return this model object's class name</dd>
+					</dl>
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../YAWF/Remote.html#methodget_class">Remote::get_class()</a>
+								: Return this remote model object's class name
+							</li>
+				</ul>
+	</div>
 <a name="methodhas_changed" id="has_changed"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">has_changed</span> (line <span class="line-number">131</span>)
+		<span class="method-title">has_changed</span> (line <span class="line-number">141</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -437,7 +575,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setup</span> (line <span class="line-number">62</span>)
+		<span class="method-title">setup</span> (line <span class="line-number">69</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -478,7 +616,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">__get</span> (line <span class="line-number">73</span>)
+		<span class="method-title">__get</span> (line <span class="line-number">80</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -527,7 +665,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">__set</span> (line <span class="line-number">85</span>)
+		<span class="method-title">__set</span> (line <span class="line-number">92</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -602,7 +740,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 04 Jan 2011 08:28:59 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Thu, 06 Jan 2011 13:54:23 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
