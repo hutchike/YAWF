@@ -197,6 +197,18 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
             $options = array('is_singular' => $is_singular);
             if (is_array($model))
             {
+                // Turn "through" relations into "join" relations
+
+                if ($through = array_key($model, 'through'))
+                {
+                    $join = $model['join'] = $model['model'];
+                    $model['model'] = $through;
+                    $model['as'] = array_key($model, 'as', Text::tableize($join));
+                    
+                }
+
+                // Extract model arrays into relation options
+
                 $options['join'] = array_key($model, 'join');
                 $options['as'] = array_key($model, 'as');
                 $model = $model['model'];
