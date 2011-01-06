@@ -28,7 +28,6 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     private static $defaults = array();
     private $username;      // Do we need a username too?
     private $password;      // Do we need a password too?
-    private $class;         // What class are we remoting?
     private $object;        // The object that gets remoted
     private $type;          // What type are we marshalling?
     private $url;           // At what URL is the data found?
@@ -44,18 +43,16 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     {
         if (is_string($class_or_object))
         {
-            $this->class = $class_or_object;
             $this->object = new $class_or_object();
         }
         elseif (is_object($class_or_object))
         {
-            $this->class = get_class($class_or_object);
             $this->object = $class_or_object;
         }
         $this->data =& $this->object->data;
         $this->changed =& $this->object->changed;
         $this->type = array_key(self::$defaults, 'type', self::DEFAULT_TYPE);
-        $this->url = $url ? $url : $this->default_url($this->class);
+        $this->url = $url ? $url : $this->default_url($this->get_class());
         $this->response = NULL;
 
         // Assert some postconditions
@@ -146,7 +143,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
      */
     public function load($id = 0)
     {
-        $class = $this->class;
+        $class = $this->get_class();
         $url = $this->secure_url() . '/' . $id;
         $data = REST::get($url, $this->type);
         if (!array_key($data, $class)) return 0;
@@ -179,7 +176,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         if ($this->object->id) return 0;
         if (!$this->is_validated()) return 0;
         $url = $this->secure_url();
-        $data = array($this->class => $this->object->data());
+        $data = array($this->get_class() => $this->object->data());
         $this->response = REST::post($url, $data, $this->type);
         if (is_null($this->response)) return 0;
         $id = $this->get_id_from_response();
@@ -220,7 +217,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         elseif ($count == 1 && is_array($fields[0])) $fields = $fields[0];
 
         $url = $this->secure_url() . '/' . $this->object->id;
-        $data = array($this->class => $this->object->data($fields));
+        $data = array($this->get_class() => $this->object->data($fields));
         if ($this->response = REST::put($url, $data, $this->type)) $this->check_response();
         $this->object->changed = array();
         return $this;
@@ -263,7 +260,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
 
         // Return a list of new model objects
 
-        $class = $this->class;
+        $class = $this->get_class();
         $objects = array();
         if ($found = array_key($data, $class))
         {
@@ -358,19 +355,16 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
 
     /**
      * Check data returned in the response is identical by writing log warnings
-     *
-     * @param Object $response an optional response object to check
      */
-    protected function check_response($response = NULL)
+    protected function check_response()
     {
-        if (is_null($response)) $response = $this->response;
-        $response = array_key($response, $this->class, $response);
+        $class = $this->get_class();
+        $response = array_key($this->response, $class, $this->response);
         foreach ($this->object->data() as $key => $value)
         {
             $found = first(array_key($response, $key), ''); // no NULL values
             if ((string)$found !== (string)$value) // XML data is all strings
             {
-                $class = $this->class;
                 $message = "Check response \"$key\" for class \"$class\" - expected \"$value\" but received \"$found\"";
                 Log::warn($message);
             }
@@ -385,7 +379,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     private function get_id_from_response()
     {
         assert('is_array($this->response)');
-        if ($data = array_key($this->response, $this->class))
+        if ($data = array_key($this->response, $this->get_class()))
         {
             assert('is_object($this->object)');
             $id_field = $this->object->get_id_field();
@@ -397,14 +391,14 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     /**
      * Cast this remote model object into another model class
      *
-     * @param String $class a model class name into which to cast this object
+     * @param String $new_class a model class into which to cast this object
      * @param Boolean $has_changed whether the new object has changed or not
      * @return Remote_model this remote model object
      */
-    public function cast_into($class, $has_changed = NULL)
+    public function cast_into($new_class, $has_changed = NULL)
     {
         if (!is_object($this->object)) return $this;
-        $this->object = $this->object->cast_into($class, $has_changed);
+        $this->object = $this->object->cast_into($new_class, $has_changed);
         $this->data =& $this->object->data;
         $this->changed =& $this->object->changed;
         return $this;
@@ -417,7 +411,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
      */
     public function get_class()
     {
-        if (!is_object($this->object)) return NULL;
+        if (!is_object($this->object)) throw new Exception('No remote object');
         return get_class($this->object);
     }
 }

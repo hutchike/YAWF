@@ -80,7 +80,7 @@ interface Modelled
     /**
      * Cast this model object into another model class
      *
-     * @param String $class a model class name into which to cast this object
+     * @param String $new_class a model class into which to cast this object
      * @param Boolean $has_changed whether the new object has changed or not
      * @return Simple_model a new model object of the new class
      */

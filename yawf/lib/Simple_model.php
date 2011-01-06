@@ -161,14 +161,14 @@ class Simple_model extends YAWF implements Modelled
     /**
      * Cast this model object into another model class
      *
-     * @param String $class a model class name into which to cast this object
+     * @param String $new_class a model class into which to cast this object
      * @param Boolean $has_changed whether the new object has changed or not
      * @return Simple_model a new model object of the new class
      */
-    public function cast_into($class, $has_changed = NULL)
+    public function cast_into($new_class, $has_changed = NULL)
     {
         if (is_null($has_changed)) $has_changed = $this->has_changed();
-        return new $class($this->data(), $has_changed);
+        return new $new_class($this->data(), $has_changed);
     }
 
     /**

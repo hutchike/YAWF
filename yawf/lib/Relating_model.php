@@ -212,7 +212,6 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
                     $join = $model['join'] = $model['cast'] = $model['model'];
                     $model['model'] = $through;
                     $model['as'] = array_key($model, 'as', Text::tableize($join));
-                    
                 }
 
                 // Extract model arrays into relation options
