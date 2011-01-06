@@ -31,6 +31,7 @@
         <li><a href="http://www.akelos.org/">Akelos</a></li>
         <li><a href="http://cakephp.org/">CakePHP</a></li>
         <li><a href="http://codeigniter.com/">CodeIgniter</a> (recommended)</li>
+        <li><a href="http://kohanaframework.org/">Kohana</a> (recommended)</li>
         <li><a href="http://www.symfony-project.org/">Symfony</a></li>
         <li><a href="http://www.zend.com/en/">Zend</a></li>
     </ul>
