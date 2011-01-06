@@ -19,6 +19,7 @@
 class Symbol extends YAWF
 {
     const ALERT = 'alert';
+    const ALL = 'all';
     const APP = 'app';
     const ARROW = '->';
     const CHECKED = 'checked';
@@ -44,6 +45,7 @@ class Symbol extends YAWF
     const JSONP = 'jsonp';
     const MAILER = 'mailer';
     const MINUTE = 'minute';
+    const ONE = 'one';
     const PARAMS = 'params';
     const PASSWORD = 'password';
     const PATH_CONFIG = 'path_config';

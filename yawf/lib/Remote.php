@@ -197,11 +197,14 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     public function update()
     {
         if (!is_object($this->object) || !$this->has_changed()) return NULL;
-        return $this->update_all_fields();
+        $this->update_all_fields(array_keys($this->changed));
     }
 
     /**
-     * Perform a remote update request using the REST "put" method
+     * Perform a remote update request using the REST "put" method.
+     * Note that this method will update *all* this model object's fields
+     * that are included in this model object's data array - see fields().
+     * You can override this by providing an arg list of fields to update.
      *
      * @return Remote this object for method chaining, or NULL on failure
      */
@@ -210,8 +213,14 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         if (!is_object($this->object)) return NULL;
         if (!$this->object->id) return NULL;
         if (!$this->is_validated()) return NULL;
+
+        $fields = func_get_args();
+        $count = count($fields);
+        if ($count == 0) $fields = $this->fields(); // the most usual case
+        elseif ($count == 1 && is_array($fields[0])) $fields = $fields[0];
+
         $url = $this->secure_url() . '/' . $this->object->id;
-        $data = array($this->class => $this->object->data());
+        $data = array($this->class => $this->object->data($fields));
         if ($this->response = REST::put($url, $data, $this->type)) $this->check_response();
         $this->object->changed = array();
         return $this;
@@ -229,26 +238,6 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         $url = $this->secure_url() . '/' . $this->object->id;
         if ($this->response = REST::delete($url, $this->type)) $this->check_response();
         return $this;
-    }
-
-    /**
-     * Get the remoted object's data
-     *
-     * @return Array the remoted object data array, or an empty array
-     */
-    public function data()
-    {
-        return is_object($this->object) ? $this->object->data() : array();
-    }
-
-    /**
-     * Return the modelled object's table
-     *
-     * @return String the modelled object's table
-     */
-    public function get_table()
-    {
-        return is_object($this->object) ? $this->object->get_table() : NULL;
     }
 
     /**
@@ -403,6 +392,33 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
             if (is_array($data) && $id = array_key($data, $id_field)) return $id;
         }
         return 0;
+    }
+
+    /**
+     * Cast this remote model object into another model class
+     *
+     * @param String $class a model class name into which to cast this object
+     * @param Boolean $has_changed whether the new object has changed or not
+     * @return Remote_model this remote model object
+     */
+    public function cast_into($class, $has_changed = NULL)
+    {
+        if (!is_object($this->object)) return $this;
+        $this->object = $this->object->cast_into($class, $has_changed);
+        $this->data =& $this->object->data;
+        $this->changed =& $this->object->changed;
+        return $this;
+    }
+
+    /**
+     * Return this remote model object's class name
+     *
+     * @return String the remote model object's class name
+     */
+    public function get_class()
+    {
+        if (!is_object($this->object)) return NULL;
+        return get_class($this->object);
     }
 }
 

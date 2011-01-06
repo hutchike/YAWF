@@ -113,11 +113,14 @@ class Simple_model extends YAWF implements Modelled
      * Get an assoc array of data stored in this model object.
      * This method may be overriden in subclasses, e.g. Remote.
      *
+     * @param Array an optional list of fields to return
      * @return Array the assoc array of data stored in this model object
      */
-    public function data()
+    public function data($fields = array())
     {
-        return $this->data;
+        $keys = array();
+        foreach ($fields as $field) $keys[$field] = TRUE;
+        return $keys ? array_intersect_key($this->data, $keys) : $this->data;
     }
 
     /**
@@ -138,6 +141,44 @@ class Simple_model extends YAWF implements Modelled
     public function has_changed()
     {
         return count($this->changed) ? TRUE : FALSE;
+    }
+
+    /**
+     * Return an assoc array of changed data
+     *
+     * @return Array an assoc array of changed data
+     */
+    public function get_changed()
+    {
+        $data = array();
+        foreach ($this->changed as $field => $has_changed)
+        {
+            if ($has_changed) $data[$field] = $this->$field;
+        }
+        return $data;
+    }
+
+    /**
+     * Cast this model object into another model class
+     *
+     * @param String $class a model class name into which to cast this object
+     * @param Boolean $has_changed whether the new object has changed or not
+     * @return Simple_model a new model object of the new class
+     */
+    public function cast_into($class, $has_changed = NULL)
+    {
+        if (is_null($has_changed)) $has_changed = $this->has_changed();
+        return new $class($this->data(), $has_changed);
+    }
+
+    /**
+     * Return this model object's class name
+     *
+     * @return String the model object's class name
+     */
+    public function get_class()
+    {
+        return get_class($this);
     }
 }
 

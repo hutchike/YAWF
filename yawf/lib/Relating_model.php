@@ -87,10 +87,11 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
 
         if (is_array($relation))
         {
-            $join_model = $relation['join_model'];
+            $join_model = array_key($relation, 'join_model');
+            $cast_model = array_key($relation, 'cast_model');
             $relation = $relation['relation'];
         }
-        else $join_model = NULL;
+        else $join_model = $cast_model = NULL;
 
         // Perform the relation
 
@@ -99,17 +100,17 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
             case self::BELONGS_TO:
                 $model_id = $field_or_model . '_id';
                 if ($id = $this->$model_id)
-                    return $this->$cached_field = $this->find_one_related($field_or_model, "id = $id");
+                    return $this->$cached_field = $this->find_related(Symbol::ONE, $field_or_model, "id = $id");
                 else
                     return new SQL_model();
 
             case self::HAS_A:
                 $id_field = $this->get_related_id_field();
-                return $this->$cached_field = $this->find_one_related($field_or_model, "$id_field = " . $this->id, $join_model);
+                return $this->$cached_field = $this->find_related(Symbol::ONE, $field_or_model, "$id_field = " . $this->id, $join_model, $cast_model);
 
             case self::HAS_MANY:
                 $id_field = $this->get_related_id_field();
-                return $this->$cached_field = $this->find_all_related($field_or_model, "$id_field = " . $this->id, $join_model);
+                return $this->$cached_field = $this->find_related(Symbol::ALL, $field_or_model, "$id_field = " . $this->id, $join_model, $cast_model);
                 break;
 
             default:
@@ -118,36 +119,43 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
     }
 
     /**
-     * Find one related model object given an SQL "where" clause
+     * Find related model object(s) given an SQL "where" clause
      *
+     * @param String $how_many how many objects to return ("one" or "all")
      * @param String $model the name of the model
      * @param String $clause the SQL "where" clause
      * @param String $join_model an optional model name to join onto
-     * @return SQL_model the related model object that was found, or a blank
+     * @param String $cast_model an optional model name to cast into
+     * @return Array/SQL_model the found related model object(s)
      */
-    private function find_one_related($model, $clause, $join_model = NULL)
+    private function find_related($how_many, $model, $clause, $join_model = NULL, $cast_model = NULL)
     {
         $model = first($this->get_renaming_for($model), $model);
         $object = $this->new_model_object_for($model);
         $conditions = $this->get_conditions($model, $join_model);
-        $found = $object->set_limit(1)->find_where($clause, $conditions);
-        return count($found) ? $found[0] : new SQL_model();
+        $found = $how_many == Symbol::ALL ?
+                 $object->find_where($clause, $conditions) :
+                 $object->set_limit(1)->find_where($clause, $conditions);
+        if ($cast_model) $found = $this->cast_model_objects($found, $cast_model);
+        return $how_many == Symbol::ALL ? $found :
+               (count($found) ? $found[0] : new SQL_model());
     }
 
     /**
-     * Find all related model objects given an SQL "where" clause
+     * Cast an array of model objects into an alternative model class
      *
-     * @param String $model the name of the model
-     * @param String $clause the SQL "where" clause
-     * @param String $join_model an optional model name to join onto
+     * @param Array $objects the array of model objects to cast
+     * @param String $cast_model the name of the new model class
      * @return Array the related model objects that were found, or NULL
      */
-    private function find_all_related($model, $clause, $join_model = NULL)
+    private function cast_model_objects($objects, $cast_model)
     {
-        $model = first($this->get_renaming_for($model), $model);
-        $object = $this->new_model_object_for($model);
-        $conditions = $this->get_conditions($model, $join_model);
-        return $object->find_where($clause, $conditions);
+        $cast_objects = array();
+        foreach ($objects as $object)
+        {
+            $cast_objects[] = $object->cast_into($cast_model, FALSE);
+        }
+        return $cast_objects;
     }
 
     /**
@@ -201,7 +209,7 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
 
                 if ($through = array_key($model, 'through'))
                 {
-                    $join = $model['join'] = $model['model'];
+                    $join = $model['join'] = $model['cast'] = $model['model'];
                     $model['model'] = $through;
                     $model['as'] = array_key($model, 'as', Text::tableize($join));
                     
@@ -210,9 +218,11 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
                 // Extract model arrays into relation options
 
                 $options['join'] = array_key($model, 'join');
+                $options['cast'] = array_key($model, 'cast');
                 $options['as'] = array_key($model, 'as');
                 $model = $model['model'];
                 if ($join_model = $options['join']) load_model($join_model);
+                if ($cast_model = $options['cast']) load_model($cast_model);
             }
             $this->set_relation($model, $relation, $options);
             load_model($model);
@@ -232,6 +242,10 @@ class Relating_model extends SQL_model implements Modelled, Persisted, Validated
         if ($join = array_key($options, 'join'))
         {
             $relation = array('relation' => $relation, 'join_model' => $join);
+            if ($cast = array_key($options, 'cast'))
+            {
+                $relation['cast_model'] = $cast;
+            }
         }
 
         $table = $this->get_table();

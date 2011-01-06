@@ -48,11 +48,13 @@ interface Modelled
     public function copy_to($other);
 
     /**
-     * Get an assoc array of data stored in the model object
+     * Get an assoc array of data stored in this model object.
+     * This method may be overriden in subclasses, e.g. Remote.
      *
-     * @return Array the assoc array of data stored in the model object
+     * @param Array an optional list of fields to return
+     * @return Array the assoc array of data stored in this model object
      */
-    public function data();
+    public function data($fields = array());
 
     /**
      * Get a list array of data fields for the model object
@@ -67,6 +69,29 @@ interface Modelled
      * @return Boolean whether the model object has changed
      */
     public function has_changed();
+
+    /**
+     * Return an assoc array of changed data
+     *
+     * @return Array an assoc array of changed data
+     */
+    public function get_changed();
+
+    /**
+     * Cast this model object into another model class
+     *
+     * @param String $class a model class name into which to cast this object
+     * @param Boolean $has_changed whether the new object has changed or not
+     * @return Simple_model a new model object of the new class
+     */
+    public function cast_into($class, $has_changed = NULL);
+
+    /**
+     * Return this model object's class name
+     *
+     * @return String the model object's class name
+     */
+    public function get_class();
 }
 
 // End of Modelled.php

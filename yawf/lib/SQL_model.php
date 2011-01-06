@@ -635,7 +635,8 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
     /**
      * Update this model object's data in the database via the connector.
      * Note that this method will update *all* this model object's fields
-     * that are included in this model object's data array - see data().
+     * that are included in this model object's data array - see fields().
+     * You can override this by providing an arg list of fields to update.
      *
      * @param Array optional list of fields to update (updates all by default)
      * @return SQL_model this model object for chaining, or NULL on failure
