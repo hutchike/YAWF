@@ -215,6 +215,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         $count = count($fields);
         if ($count == 0) $fields = $this->fields(); // the most usual case
         elseif ($count == 1 && is_array($fields[0])) $fields = $fields[0];
+        $fields[] = $this->object->get_id_field(); // can't update without
 
         $url = $this->secure_url() . '/' . $this->object->id;
         $data = array($this->get_class() => $this->object->data($fields));
@@ -401,6 +402,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         $this->object = $this->object->cast_into($new_class, $has_changed);
         $this->data =& $this->object->data;
         $this->changed =& $this->object->changed;
+        $this->url = $this->default_url($this->get_class());
         return $this;
     }
 

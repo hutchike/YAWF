@@ -28,11 +28,12 @@ class Valid_model extends Simple_model implements Modelled, Validated
      * Create a new model object
      *
      * @param Array $data the data to initialize the object (may be an object)
+     * @param Boolean $has_changed whether the new object has changed (optional)
      */
-    public function __construct($data = array())
+    public function __construct($data = array(), $has_changed = NULL)
     {
         $this->validation_messages = array();
-        parent::__construct($data);
+        parent::__construct($data, $has_changed);
     }
 
     /**
