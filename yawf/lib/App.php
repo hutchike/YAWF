@@ -76,8 +76,7 @@ class App extends YAWF implements Mailer
         require_once 'lib/Model.php';
         $model = new Model();
         $database = $this->is_testing ? DB_DATABASE_TEST : DB_DATABASE_LIVE;
-        $model->set_connector(DB_CONNECTOR,
-                              array(Symbol::DATABASE => $database));
+        $model->set_database($database);
 
         // Setup the language translations
 

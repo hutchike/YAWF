@@ -78,6 +78,7 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
     {
         $table = $this->get_table();
         $this->database = self::$databases[$table] = $database;
+        $this->set_connector(DB_CONNECTOR);
         return $this;
     }
 
