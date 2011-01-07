@@ -178,13 +178,15 @@ class Yet_another_shell extends Command
         $model = new Model();
         $result = $model->query($sql);
         if (!is_object($result)) return;
+        $output = '';
         while ($object = $result->fetch_object())
         {
             foreach ($object as $field => $value)
             {
-                print "$field:\t$value\n";
+                $output .= "$field:\t$value\n";
             }
         }
+        return $output;
     }
 
     // Create a mock params object for tests
