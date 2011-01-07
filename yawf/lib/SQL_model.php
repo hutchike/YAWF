@@ -72,13 +72,14 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
      * Set the database used by this model object
      *
      * @param String $database the database name
+     * @param String $connector the database connector class name (e.g. MySQLi)
      * @return Object this model object for method chaining
      */
-    public function set_database($database)
+    public function set_database($database, $connector = DB_CONNECTOR)
     {
         $table = $this->get_table();
         $this->database = self::$databases[$table] = $database;
-        $this->set_connector(DB_CONNECTOR);
+        $this->set_connector($connector);
         return $this;
     }
 
