@@ -28,11 +28,12 @@ class Log extends YAWF
     const ERROR = 3;
     const ALERT = 4;
     const TEST = 5;
+    const QUIET = 6;
 
     /**
      * The logging level names are all symbols from the Symbol library class
      */
-    private static $level_names = array(Symbol::DEBUG, Symbol::INFO, Symbol::WARN, Symbol::ERROR, Symbol::ALERT, Symbol::TEST);
+    private static $level_names = array(Symbol::DEBUG, Symbol::INFO, Symbol::WARN, Symbol::ERROR, Symbol::ALERT, Symbol::TEST, Symbol::QUIET);
 
     /**
      * Logging happens at or above a logging level e.g. Log::DEBUG or Log::INFO

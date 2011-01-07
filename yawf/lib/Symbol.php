@@ -50,6 +50,7 @@ class Symbol extends YAWF
     const PASSWORD = 'password';
     const PATH_CONFIG = 'path_config';
     const PATH_METHOD = 'path_method';
+    const QUIET = 'quiet';
     const ROOT = 'root';
     const SERIALIZED = 'serialized';
     const SERVER = 'server';

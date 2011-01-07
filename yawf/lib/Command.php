@@ -67,6 +67,10 @@ class Command // cannot extend YAWF coz "utils" not yet loaded
         $type = $this->opts->test ? 'command.test' : 'command';
         Log::type($type);
 
+        // Allow commands to run quietly by not logging
+
+        if ($this->opts->quiet) Log::level(Log::QUIET);
+
         return $this;
     }
 

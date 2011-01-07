@@ -14,6 +14,16 @@
 class Time
 {
     /**
+     * Return the Unix epoch time now in milliseconds
+     *
+     * @return Integer the Unix epoch time now in milliseconds
+     */
+    public static function msecs()
+    {
+        return intval(microtime(TRUE)*1000);
+    }
+
+    /**
      * Return the number of seconds in a period e.g. "day", "week", "month"
      *
      * @return Integer the number of seconds in a period, or zero if confused
