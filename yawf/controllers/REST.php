@@ -28,6 +28,18 @@ class REST_controller extends App_controller
     protected $service;
 
     /**
+     * Call the controller parent's before method, before making a new service
+     * then checking that the service has authorization and setting its params.
+     */
+    public function before()
+    {
+        parent::before();
+        $this->service = $this->app->new_service();
+        if (!$this->service->auth()) YAWF::finish();
+        $this->setup_REST_params();
+    }
+
+    /**
      * Call a REST method if authorized, then render the REST service view
      *
      * @param String $view the view to render (ignored)
@@ -36,9 +48,6 @@ class REST_controller extends App_controller
      */
     public function render($view = NULL, $options = array())
     {
-        $this->service = $this->app->new_service();
-        if (!$this->service->auth()) return NULL;
-        $this->setup_REST_params();
         $method = $this->request_method();
         $options['type'] = $this->request_type();
         $options['folder'] = 'REST'; // to use the "yawf/views/en/REST" folder
