@@ -63,26 +63,37 @@ class BasicAuth extends YAWF
 
     /**
      * Require the web user to login using basic auth.
+     *
+     * Either pass the required username and password,
+     * or pass an object in place of the username, and
+     * have the object provide a "basic_auth()" method
+     * with username and password parameters, returning
+     * TRUE if the username and password are authorized.
+     *
      * Note that this method will call YAWF::finish()
      * by default, to cause the web request to finish.
      *
-     * @param String $username the username required
-     * @param String $password the password required
+     * @param String/Object $username the username or object with "basic_auth()"
+     * @param String $password the required password (when username is a string)
      * @param Boolean $do_return whether to always return (default is FALSE)
      * @return Boolean whether the login succeeded
      */
-    public static function login($username, $password, $do_return = FALSE)
+    public static function login($username, $password = '', $do_return = FALSE)
     {
-        if (self::username() == $username && self::password() == $password)
+        if (is_object($username))
         {
-            return TRUE;
+            if ($username->basic_auth(self::username(), self::password())) return TRUE;
         }
-        else // wrong username and/or password
+        elseif (is_string($username))
         {
-            self::challenge();
-            if ($do_return) return FALSE;
-            YAWF::finish(); // this exits
+            if (self::username() == $username && self::password() == $password) return TRUE;
         }
+
+        // Wrong username and/or password
+
+        self::challenge();
+        if ($do_return) return FALSE;
+        YAWF::finish(); // this exits
     }
 
     /**
