@@ -44,22 +44,22 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         if (is_string($class_or_object))
         {
             $this->object = new $class_or_object();
+            assert('$this->object instanceof SQL_model');
         }
-        elseif (is_object($class_or_object))
+        elseif (is_object($class_or_object) && $class_or_object instanceof SQL_model)
         {
             $this->object = $class_or_object;
+        }
+        else
+        {
+            throw new Exception('Cannot create Remote object for class ' .
+                                get_class($class_or_object));
         }
         $this->data =& $this->object->data;
         $this->changed =& $this->object->changed;
         $this->type = array_key(self::$defaults, 'type', self::DEFAULT_TYPE);
         $this->url = $url ? $url : $this->default_url($this->get_class());
         $this->response = NULL;
-
-        // Assert some postconditions
-
-        assert('$this->object instanceof Modelled');
-        assert('$this->object instanceof Persisted');
-        assert('$this->object instanceof Validated');
     }
 
     /**
@@ -163,8 +163,8 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
      */
     public function update()
     {
-        if (!is_object($this->object) || !$this->has_changed()) return NULL;
-        $this->update_all_fields(array_keys($this->changed));
+        if (!$this->has_changed()) return $this;
+        return $this->update_all_fields(array_keys($this->changed));
     }
 
     /**
