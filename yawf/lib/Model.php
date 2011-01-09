@@ -14,13 +14,12 @@
 load_interfaces('Modelled', 'Persisted', 'Validated');
 
 /**
- * The Model class is just a simple alias for the SQL_model class.
- * If you'd like a different kind of model, then just add your own
+ * The Model class is just a simple alias for the Relating_model class.
+ * If you would like a different kind of model, then just add your own
  * "Model" class in your own "app" directory et voila - easy huh?
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
-
 class Model extends Relating_model implements Modelled, Persisted, Validated
 {
     // Don't add anything here!
