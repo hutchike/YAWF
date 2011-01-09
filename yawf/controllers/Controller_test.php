@@ -131,7 +131,7 @@ class Controller_test_controller extends Controller
 
     // Test that the default "before()" method doesn't change our state
 
-    public function before() {}
+    protected function before() {}
     public function before_test()
     {
         $vars_before_before = $this->get_state();
@@ -142,7 +142,7 @@ class Controller_test_controller extends Controller
 
     // Test that the fefault "after()" method doesn't change our state
 
-    public function after() {}
+    protected function after() {}
     public function after_test()
     {
         $vars_before_after = $this->get_state();

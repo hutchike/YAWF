@@ -31,7 +31,7 @@ class REST_controller extends App_controller
      * Call the controller parent's before method, before making a new service
      * then checking that the service has authorization and setting its params.
      */
-    public function before()
+    protected function before()
     {
         parent::before();
         $this->service = $this->app->new_service();
