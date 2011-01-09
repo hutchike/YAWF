@@ -427,7 +427,7 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
      * @param Array $conditions an optional array of conditions to match
      * @return Array a list of model objects that match the conditions or fields
      */
-    public function find_all($conditions = NULL)
+    public function find_all($conditions = array())
     {
         // Query the database
 
@@ -471,7 +471,7 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
      * @param Array $conditions an array of conditions to match (optional)
      * @return SQL_model the first matching model object, or NULL if none found
      */
-    public function find_first($conditions = NULL)
+    public function find_first($conditions = array())
     {
         $old_limit = $this->get_limit();
         $objects = $this->set_limit(1)->find_all($conditions);
@@ -485,7 +485,7 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
      * @param Array $conditions an array of conditions to match (optional)
      * @return SQL_model the last matching model object (may take some time!)
      */
-    public function find_last($conditions = NULL)
+    public function find_last($conditions = array())
     {
         $objects = $this->find_all($conditions);
         return count($objects) ? $objects[count($objects) - 1] : NULL;
@@ -510,9 +510,9 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
      * @param Array $conditions an array of conditions (optional)
      * @return String a SQL "where" clause from the conditions or field values
      */
-    protected function join_clause($conditions = NULL)
+    protected function join_clause($conditions = array())
     {
-        if (!is_array($conditions)) return '';
+        if (!$conditions) return '';
         if ($join = array_key($conditions, 'join')) return "left join $join";
         return '';
     }
@@ -523,9 +523,9 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
      * @param Array $conditions an array of conditions (optional)
      * @return String a SQL "where" clause from the conditions or field values
      */
-    protected function where_clause($conditions = NULL)
+    protected function where_clause($conditions = array())
     {
-        $conditions = is_null($conditions) ? $this->data : (array)$conditions;
+        $conditions = $conditions ? $conditions : $this->data;
         if ($clause = array_key($conditions, 'where')) return "where $clause";
         foreach ($conditions as $field => $condition)
         {

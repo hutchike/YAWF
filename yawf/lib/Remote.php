@@ -136,36 +136,6 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     }
 
     /**
-     * Perform a remote load request
-     *
-     * @param Integer $id the ID of the model object to load (default is 0)
-     * @return Integer the ID of the loaded model object, or zero on failure
-     */
-    public function load($id = 0)
-    {
-        $class = $this->get_class();
-        $url = $this->secure_url() . '/' . $id;
-        $data = REST::get($url, $this->type);
-        if (!array_key($data, $class)) return 0;
-        $this->object = new $class($data[$class]);
-        $this->data =& $this->object->data;
-        $this->changed =& $this->object->changed;
-        return $this->object->id;
-    }
-
-    /**
-     * Perform a remote save request
-     *
-     * @return Boolean whether the object was remotely saved
-     */
-    public function save() // returns true if the object saved or false if not
-    {
-        if (!$this->has_changed()) return FALSE;
-        $saved = $this->object->id ? $this->update() : $this->insert();
-        return $saved ? TRUE : FALSE;
-    }
-
-    /**
      * Perform a remote insert request using the REST "post" method
      *
      * @return Integer the ID of the inserted model object, or zero on failure
