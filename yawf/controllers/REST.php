@@ -28,7 +28,7 @@ class REST_controller extends App_controller
     protected $service;
 
     /**
-     * Call a REST method, then render the REST service view
+     * Call a REST method if authorized, then render the REST service view
      *
      * @param String $view the view to render (ignored)
      * @param Array $options an array of rendering options (ignored)
