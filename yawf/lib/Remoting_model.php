@@ -20,7 +20,7 @@
  */
 class Remoting_model extends Relating_model implements Modelled, Persisted, Validated
 {
-    private static $is_remoted = array();
+    private static $is_remote = array();
 
     /**
      * Set a model as a remote model
@@ -33,8 +33,29 @@ class Remoting_model extends Relating_model implements Modelled, Persisted, Vali
         $models = is_array($model) ? $model : array($model);
         foreach ($models as $model)
         {
-            self::$is_remoted[$model] = $is_remote;
+            self::$is_remote[$model] = $is_remote;
         }
+    }
+
+    /**
+     * Set a list of models to be remote models
+     *
+     * @param Array a list of model names to set as remote models
+     */
+    public static function set_remotes()
+    {
+        foreach (func_get_args() as $model) self::set_remote($model);
+    }
+
+    /**
+     * Get whether a model is a remote model
+     *
+     * @param String $model model name to check
+     * @return Boolean whether the model is a remote model
+     */
+    public static function is_remote($model)
+    {
+        return array_key(self::$is_remote, $model, FALSE);
     }
 
     /**
@@ -48,8 +69,8 @@ class Remoting_model extends Relating_model implements Modelled, Persisted, Vali
     public static function make($model, $data = array(), $has_changed = TRUE)
     {
         $object = new $model($data, $has_changed);
-        if (array_key(self::$is_remoted, Symbol::ALL) ||
-            array_key(self::$is_remoted, $model)) $object = new Remote($object);
+        if (array_key(self::$is_remote, Symbol::ALL) ||
+            array_key(self::$is_remote, $model)) $object = new Remote($object);
         return $object;
     }
 }
