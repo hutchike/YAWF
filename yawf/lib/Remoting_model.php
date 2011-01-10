@@ -15,6 +15,12 @@
  * The Remoting_model adds remote-ability to models via methods
  * "set_remote" to setup which models will be remote, and "make"
  * to create a new model object, which may or may not be remote.
+ * This way, models may be configured to be remoted or not, and
+ * this configuration may be kept separate from object creation.
+ *
+ * Additional methods "set_remotes" to setup a list of models as
+ * remote models, and "is_remote" to check whether a particular
+ * model is remoting, are provided to make the class friendlier.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
