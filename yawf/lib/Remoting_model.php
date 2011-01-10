@@ -63,8 +63,8 @@ class Remoting_model extends Relating_model implements Modelled, Persisted, Vali
      *
      * @param String $model the name of the model class to make
      * @param Array $data an optional array of initialization data
-     * @param Boolean $has_changed has the new object has changed (default TRUE)
-     * @return Remote/SQL_model the newly made model object
+     * @param Boolean $has_changed whether the newly made object has changed
+     * @return SQL_model/Remote the newly made model object or its remote object
      */
     public static function make($model, $data = array(), $has_changed = TRUE)
     {
