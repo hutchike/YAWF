@@ -144,7 +144,7 @@
 										<a href="#set_default" title="details" class="method-name">set_default</a>
 											(<span class="var-type">String</span>&nbsp;<span class="var-name">$field</span>, [<span class="var-type">String</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">NULL</span>])
 									</div>
-																																																												<div class="method-definition">
+																																																																				<div class="method-definition">
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">Remote</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
@@ -251,6 +251,12 @@
 											<span class="method-result">Array</span>
 										<a href="#validation_messages" title="details" class="method-name">validation_messages</a>
 										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+										<a href="#__call" title="details" class="method-name">__call</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">Array</span>&nbsp;<span class="var-name">$args</span>)
 									</div>
 											</div>
 		</div>
@@ -1000,6 +1006,46 @@
 					</dl>
 			
 	</div>
+<a name="method__call" id="__call"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">__call</span> (line <span class="line-number">398</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Forward all other method calls to the model object that is being remoted</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> whatever the model object returns from its method call</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
+		<span class="method-name">
+			__call
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">Array</span>&nbsp;<span class="var-name">$args</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$method</span><span class="var-description">: the method name that was called</span>			</li>
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$args</span><span class="var-description">: an array of arguments passed to the called method</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../YAWF/YAWF.html#method__call">YAWF::__call()</a></dt>
+						<dd>Catch all undefined methods calls by calling a hooked method</dd>
+					</dl>
+			
+	</div>
 							<h4>Inherited Methods</h4>
 				<a name='inherited_methods'><!-- --></a>	
 									<!-- =========== Summary =========== -->
@@ -1200,7 +1246,7 @@
 					</div>
 		<div class="info-box-body">
 			<a name="constDEFAULT_TYPE" id="DEFAULT_TYPE"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
@@ -1237,7 +1283,7 @@
 	</div>
 	
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 10 Jan 2011 22:32:41 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 10 Jan 2011 23:00:26 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
