@@ -387,6 +387,29 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         if (!is_object($this->object)) throw new Exception('No remote object');
         return get_class($this->object);
     }
+
+    /**
+     * Forward all other method calls to the model object that is being remoted
+     *
+     * @param String $method the method name that was called
+     * @param Array $args an array of arguments passed to the called method
+     * @return Object whatever the model object returns from its method call
+     */
+    public function __call($method, $args)
+    {
+        if (is_object($this->object))
+        {
+            switch (count($args))
+            {
+                case 1: return $this->object->$method($args[0]);
+                case 2: return $this->object->$method($args[0], $args[1]);
+                case 3: return $this->object->$method($args[0], $args[1], $args[2]);
+                case 4: return $this->object->$method($args[0], $args[1], $args[2], $args[3]);
+                case 5: return $this->object->$method($args[0], $args[1], $args[2], $args[3], $args[4]);
+                default: return $this->object->$method();
+            }
+        }
+    }
 }
 
 // End of Remote.php
