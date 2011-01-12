@@ -69,7 +69,7 @@ class Valid_model extends Simple_model implements Modelled, Validated
      */
     public function validation_messages_for($field)
     {
-        return array_key($this->validation_messages, $field, array());
+        return array_key($this->validation_messages(), $field, array());
     }
 
     /**
