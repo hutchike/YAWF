@@ -1,5 +1,6 @@
 # English translations
 en:
+    valid_cannot_be_blank: Cannot be blank
     valid_email_needs_an_at: Email should include "@"
     valid_email_cannot_start_with_at: Email cannot start with "@"
     valid_email_cannot_end_with_at: Email cannot end with "@"
@@ -9,9 +10,11 @@ en:
     valid_length_too_short: Too short
     valid_length_too_long: Too long
     valid_name_can_only_include_words: Name can only include words
+    valid_passwords_do_not_match: Passwords do not match
 
 # Spanish translations
 es:
+    valid_cannot_be_blank: Cannot be blank
     valid_email_needs_an_at: Email should include "@"
     valid_email_cannot_start_with_at: Email cannot start with "@"
     valid_email_cannot_end_with_at: Email cannot end with "@"
@@ -21,3 +24,4 @@ es:
     valid_length_too_short: Too short
     valid_length_too_long: Too long
     valid_name_can_only_include_words: Name can only include words
+    valid_passwords_do_not_match: Passwords do not match

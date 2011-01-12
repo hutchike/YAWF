@@ -1,5 +1,6 @@
 # English translations
 en:
+    valid_cannot_be_blank: Cannot be blank
     valid_email_needs_an_at: Email should include "@"
     valid_email_cannot_start_with_at: Email cannot start with "@"
     valid_email_cannot_end_with_at: Email cannot end with "@"
@@ -13,6 +14,7 @@ en:
 
 # Spanish translations
 es:
+    valid_cannot_be_blank: Cannot be blank
     valid_email_needs_an_at: Email should include "@"
     valid_email_cannot_start_with_at: Email cannot start with "@"
     valid_email_cannot_end_with_at: Email cannot end with "@"

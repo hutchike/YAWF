@@ -123,6 +123,7 @@ class Valid_model extends Simple_model implements Modelled, Validated
      */
     protected function is_valid_person_name($name)
     {
+        if (strlen($name) == 0) return 'VALID_CANNOT_BE_BLANK';
         if (preg_match('/^[\w\s,\.\'\-]+$/', $name)) return NULL;
         return 'VALID_NAME_CAN_ONLY_INCLUDE_WORDS';
     }
@@ -135,6 +136,7 @@ class Valid_model extends Simple_model implements Modelled, Validated
      */
     protected function is_valid_email($email)
     {
+        if (strlen($email) == 0) return 'VALID_CANNOT_BE_BLANK';
         $at = strpos($email, '@');
         if ($at === FALSE) return 'VALID_EMAIL_NEEDS_AN_AT';
         if ($at === 0) return 'VALID_EMAIL_CANNOT_START_WITH_AT';
@@ -169,6 +171,7 @@ class Valid_model extends Simple_model implements Modelled, Validated
      */
     protected function is_valid_password($value, $password_confirm_field)
     {
+        if (strlen($value) == 0) return 'VALID_CANNOT_BE_BLANK';
         if ($value != $this->$password_confirm_field) return 'VALID_PASSWORDS_DO_NOT_MATCH';
     }
 }
