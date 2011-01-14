@@ -61,7 +61,7 @@ class App extends YAWF implements Mailer
         $content_type = preg_match('/\.(\w+)$/', $uri, $matches) ? $matches[1] : DEFAULT_CONTENT_TYPE;
         if ($content_type === Symbol::TEST && !TESTING_ENABLED) $content_type = DEFAULT_CONTENT_TYPE;
         $uri = $this->set_lang_and_remove_prefix($uri);
-        $this->parts = explode('/', $uri . '//');
+        $this->parts = explode('/', $uri);
         $folder = $this->get_part(0, TRUE); // remove any extension
         $file = $this->get_part(1, TRUE);   // remove any extension
 
