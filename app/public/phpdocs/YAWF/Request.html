@@ -147,7 +147,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																																																																																<div class="method-definition">
+																																																																																																																																																																								<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">String</span>
 										<a href="#cookie" title="details" class="method-name">cookie</a>
@@ -176,6 +176,12 @@
 											<span class="method-result"><a href="../YAWF/Object.html">Object</a></span>
 										<a href="#params_object" title="details" class="method-name">params_object</a>
 											([<span class="var-type">Array</span>&nbsp;<span class="var-name">$request</span> = <span class="var-default">array()</span>], [<span class="var-type">Array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">String</span>
+										<a href="#part" title="details" class="method-name">part</a>
+											(<span class="var-type">Integer</span>&nbsp;<span class="var-name">$position</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$remove_extn</span> = <span class="var-default">FALSE</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -405,7 +411,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">cookie</span> (line <span class="line-number">129</span>)
+		<span class="method-title">cookie</span> (line <span class="line-number">141</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -454,7 +460,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">cookie_object</span> (line <span class="line-number">265</span>)
+		<span class="method-title">cookie_object</span> (line <span class="line-number">277</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -480,7 +486,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">lang</span> (line <span class="line-number">100</span>)
+		<span class="method-title">lang</span> (line <span class="line-number">112</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -506,7 +512,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">params</span> (line <span class="line-number">112</span>)
+		<span class="method-title">params</span> (line <span class="line-number">124</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -543,7 +549,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">params_object</span> (line <span class="line-number">232</span>)
+		<span class="method-title">params_object</span> (line <span class="line-number">244</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -572,12 +578,46 @@
 		
 			
 	</div>
-<a name="methodredirect" id="redirect"><!-- --></a>
+<a name="methodpart" id="part"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">redirect</span> (line <span class="line-number">167</span>)
+		<span class="method-title">part</span> (line <span class="line-number">102</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return part of the path</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the requested part of the path</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			part
+		</span>
+					(<span class="var-type">Integer</span>&nbsp;<span class="var-name">$position</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$remove_extn</span> = <span class="var-default">FALSE</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Integer</span>
+				<span class="var-name">$position</span><span class="var-description">: the position in the path, starting at zero</span>			</li>
+					<li>
+				<span class="var-type">Boolean</span>
+				<span class="var-name">$remove_extn</span><span class="var-description">: whether to remove the file extension or not</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodredirect" id="redirect"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">redirect</span> (line <span class="line-number">179</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -606,11 +646,11 @@
 			
 	</div>
 <a name="methodreport_errors" id="report_errors"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">report_errors</span> (line <span class="line-number">177</span>)
+		<span class="method-title">report_errors</span> (line <span class="line-number">189</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -632,7 +672,7 @@
 			
 	</div>
 <a name="methodrequest_method" id="request_method"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -658,7 +698,7 @@
 			
 	</div>
 <a name="methodrequest_type" id="request_type"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -684,11 +724,11 @@
 			
 	</div>
 <a name="methodsend_mail" id="send_mail"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">send_mail</span> (line <span class="line-number">203</span>)
+		<span class="method-title">send_mail</span> (line <span class="line-number">215</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -724,11 +764,11 @@
 			
 	</div>
 <a name="methodserver" id="server"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">server</span> (line <span class="line-number">142</span>)
+		<span class="method-title">server</span> (line <span class="line-number">154</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -761,11 +801,11 @@
 			
 	</div>
 <a name="methodserver_object" id="server_object"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">server_object</span> (line <span class="line-number">276</span>)
+		<span class="method-title">server_object</span> (line <span class="line-number">288</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -787,11 +827,11 @@
 			
 	</div>
 <a name="methodsession" id="session"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">session</span> (line <span class="line-number">155</span>)
+		<span class="method-title">session</span> (line <span class="line-number">167</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -824,11 +864,11 @@
 			
 	</div>
 <a name="methodsession_object" id="session_object"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">session_object</span> (line <span class="line-number">287</span>)
+		<span class="method-title">session_object</span> (line <span class="line-number">299</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -850,7 +890,7 @@
 			
 	</div>
 <a name="methodsetup_request" id="setup_request"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -880,11 +920,11 @@
 			
 	</div>
 <a name="methodset_params" id="set_params"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">set_params</span> (line <span class="line-number">219</span>)
+		<span class="method-title">set_params</span> (line <span class="line-number">231</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -914,11 +954,11 @@
 			
 	</div>
 <a name="methodshould" id="should"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">should</span> (line <span class="line-number">300</span>)
+		<span class="method-title">should</span> (line <span class="line-number">312</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -950,11 +990,11 @@
 			
 	</div>
 <a name="methodshould_not" id="should_not"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">should_not</span> (line <span class="line-number">312</span>)
+		<span class="method-title">should_not</span> (line <span class="line-number">324</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1017,7 +1057,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 10 Jan 2011 23:00:27 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sat, 15 Jan 2011 01:03:27 +0800 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
