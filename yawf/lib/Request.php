@@ -93,6 +93,18 @@ class Request extends YAWF implements Mailer
     }
 
     /**
+     * Return part of the path
+     *
+     * @param Integer $position the position in the path, starting at zero
+     * @param Boolean $remove_extn whether to remove the file extension or not
+     * @return String the requested part of the path
+     */
+    public function part($position, $remove_extn = FALSE)
+    {
+        return $this->app->get_part($position, $remove_extn);
+    }
+
+    /**
      * Return the language
      *
      * @return String the language setting (as a two-letter language code)

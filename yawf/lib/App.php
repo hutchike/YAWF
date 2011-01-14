@@ -31,6 +31,7 @@ class App extends YAWF implements Mailer
     protected $controller;  // a controller to render the view
     protected $service;     // a service to enable web services
     protected $folder;      // views folder name e.g. "default"
+    protected $parts;       // parts of the path divided by "/"
     protected $file;        // the view file name e.g. "index"
     protected $lang;        // the language code (two letters)
     protected $is_silent;   // "TRUE" after we've redirected
@@ -60,9 +61,9 @@ class App extends YAWF implements Mailer
         $content_type = preg_match('/\.(\w+)$/', $uri, $matches) ? $matches[1] : DEFAULT_CONTENT_TYPE;
         if ($content_type === Symbol::TEST && !TESTING_ENABLED) $content_type = DEFAULT_CONTENT_TYPE;
         $uri = $this->set_lang_and_remove_prefix($uri);
-        list($folder, $file) = explode('/', $uri . '//');
-        $folder = preg_replace('/\.\w+$/', '', $folder);
-        $file = preg_replace('/\.\w+$/', '', $file);
+        $this->parts = explode('/', $uri . '//');
+        $folder = $this->get_part(0, TRUE); // remove any extension
+        $file = $this->get_part(1, TRUE);   // remove any extension
 
         // Setup the application request environment
 
@@ -201,7 +202,20 @@ class App extends YAWF implements Mailer
      */
     public function get_path()
     {
-        return $this->get_folder() . '/' . $this->get_file();
+        return join('/', $this->parts);
+    }
+
+    /**
+     * Get a part of the path
+     *
+     * @param Integer $position the position in the path, starting at zero
+     * @param Boolean $remove_extn whether to remove the file extension or not
+     * @return String the requested part of the path
+     */
+    public function get_part($position, $remove_extn = FALSE)
+    {
+        $part = array_key($this->parts, $position, '');
+        return $remove_extn ? preg_replace('/\.\w+$/', '', $part) : $part;
     }
 
     /**
@@ -284,6 +298,7 @@ class App extends YAWF implements Mailer
         // Read any options that were passed, e.g. extension
 
         $must_find = array_key($options, 'must_find', FALSE);
+        $has_slash = (strpos($file, '/') !== FALSE);
         $lang = array_key($options, 'lang', $this->lang);
         $folder = array_key($options, Symbol::FOLDER, $this->folder);
         $type = array_key($options, 'type', $this->content_type);
@@ -294,6 +309,7 @@ class App extends YAWF implements Mailer
         $lang_folder = 'views/' . $lang . '/';
         $paths = array();
         if ($type !== DEFAULT_CONTENT_TYPE) $paths[] = "$lang_folder$folder/$file.$type$ext";
+        if ($has_slash) $paths[] = $lang_folder . '/' . $file . $ext;
         $paths[] = $lang_folder . $folder . '/' . $file . $ext;
         $paths[] = $lang_folder . DEFAULT_FOLDER . '/' . $file . $ext;
         if (!$must_find) $paths[] = $lang_folder . DEFAULT_FOLDER . '/' . FILE_NOT_FOUND . DEFAULT_EXTENSION;
