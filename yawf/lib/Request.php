@@ -247,10 +247,16 @@ class Request extends YAWF implements Mailer
         $position = 0;
         foreach ($params as $param)
         {
-            if ($param && is_null($this->param->$param))
+            if ($param && is_null($this->params->$param)) // we don't overwrite
             {
-                $this->params->$param = $this->part($position);
+                $value = $this->part($position, TRUE);
+                if ($param == 'id' || preg_match('/_id$/', $param))
+                {
+                    if (!is_numeric($value)) $value = NULL; // ID's are numbers
+                }
+                if (!is_null($value)) $this->params->$param = $value;
             }
+            $position++;
         }
         return $this;
     }

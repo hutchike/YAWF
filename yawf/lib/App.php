@@ -68,8 +68,8 @@ class App extends YAWF implements Mailer
         // Setup the application request environment
 
         $this->content_type = strtolower($content_type); // e.g. "html", "test"
-        $this->folder = ($folder ? $folder : DEFAULT_FOLDER);
-        $this->file = ($file ? $file : DEFAULT_FILE);
+        $this->folder = (strlen($folder) > 0 ? $folder : DEFAULT_FOLDER);
+        $this->file = (strlen($file) > 0 ? $file : DEFAULT_FILE);
         $this->is_testing = array_key($_REQUEST, Symbol::TEST) || $content_type === Symbol::TEST;
 
         // If we're testing then use a test database
@@ -206,11 +206,11 @@ class App extends YAWF implements Mailer
     }
 
     /**
-     * Get a part of the path
+     * Get a part of the path, or the empty string if the part does not exist
      *
      * @param Integer $position the position in the path, starting at zero
      * @param Boolean $remove_extn whether to remove the file extension or not
-     * @return String the requested part of the path
+     * @return String the requested part of the path, or the empty string
      */
     public function get_part($position, $remove_extn = FALSE)
     {
