@@ -309,8 +309,8 @@ class App extends YAWF implements Mailer
         $lang_folder = 'views/' . $lang . '/';
         $paths = array();
         if ($type !== DEFAULT_CONTENT_TYPE) $paths[] = "$lang_folder$folder/$file.$type$ext";
-        if ($has_slash) $paths[] = $lang_folder . '/' . $file . $ext;
         $paths[] = $lang_folder . $folder . '/' . $file . $ext;
+        if ($has_slash) $paths[] = $lang_folder . '/' . $file . $ext;
         $paths[] = $lang_folder . DEFAULT_FOLDER . '/' . $file . $ext;
         if (!$must_find) $paths[] = $lang_folder . DEFAULT_FOLDER . '/' . FILE_NOT_FOUND . DEFAULT_EXTENSION;
 
