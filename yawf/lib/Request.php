@@ -208,8 +208,8 @@ class Request extends YAWF implements Mailer
     /**
      * Send some mail as text & HTML multipart (depends on the Mail helper)
      *
-     * @param String $file The file name of the mail view to render
-     * @param Object $render Render data to include in the mai view
+     * @param String $file the file name of the mail view to render
+     * @param Object $render render data to include in the mai view
      * @return String the mail message that was sent
      */
     public function send_mail($file, $render = NULL)
@@ -224,8 +224,8 @@ class Request extends YAWF implements Mailer
     /**
      * Set the request parameters that we use to create the params object
      *
-     * @param Array $request An array of request params (get, post, put, etc.)
-     * @param Array $options An array of options to use when parsing the params
+     * @param Array $request an array of request params (get, post, put, etc.)
+     * @param Array $options an array of options to use when parsing the params
      * @return Request this object
      */
     public function set_params($request = array(), $options = array())
@@ -235,10 +235,31 @@ class Request extends YAWF implements Mailer
     }
 
     /**
+     * Set some parameters by reading parts of the URI
+     *
+     * @param Array a list of parameters to read from the parts of the URI
+     * @return Request this object
+     */
+    public function set_params_from_parts()
+    {
+        $params = func_get_args();
+        if (is_array($params[0])) $params = $params[0];
+        $position = 0;
+        foreach ($params as $param)
+        {
+            if ($param && is_null($this->param->$param))
+            {
+                $this->params->$param = $this->part($position);
+            }
+        }
+        return $this;
+    }
+
+    /**
      * Return a request params object, using the $_REQUEST array by default
      *
-     * @param Array $request An array of request params (get, post, put, etc.)
-     * @param Array $options An array of options to use when parsing the params
+     * @param Array $request an array of request params (get, post, put, etc.)
+     * @param Array $options an array of options to use when parsing the params
      * @return Object an object holding all the parameter values after parsing
      */
     protected function params_object($request = array(), $options = array())

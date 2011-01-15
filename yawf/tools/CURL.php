@@ -90,7 +90,7 @@ class CURL extends YAWF
 
         $protocol = '';
         $auth = '';
-        if (preg_match('/^(https?:\/\/)?(\w+:\w+)@(.+)$/', $url, $matches))
+        if (preg_match('/^(https?:\/\/)?([^:]+:[^@]+)@(.+)$/', $url, $matches))
         {
             list($all, $protocol, $auth, $url) = $matches;
         }

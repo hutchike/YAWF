@@ -36,7 +36,7 @@ class REST_controller extends App_controller
         parent::before();
         $this->service = $this->app->new_service();
         if (!$this->service->auth()) YAWF::finish();
-        $this->setup_REST_params();
+        $this->set_params_from_parts(NULL, 'id');
     }
 
     /**
@@ -52,15 +52,6 @@ class REST_controller extends App_controller
         $options['type'] = $this->request_type();
         $options['folder'] = 'REST'; // to use the "yawf/views/en/REST" folder
         return parent::render($method, $options);
-    }
-
-    /**
-     * Setup the request parameters by looking for ID fields
-     */
-    protected function setup_REST_params()
-    {
-        $file = $this->app->get_file();
-        if (is_numeric($file)) $this->params->id = $file;
     }
 
     /**

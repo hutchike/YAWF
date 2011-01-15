@@ -105,7 +105,8 @@ class REST_service extends Web_service
 
             return $object->load($params->id) ?
                     array($model_name => $object->data()) :
-                    $this->error("id $params->id not found");
+                    $this->error($params->id ? "id $params->id not found"
+                                             : "id missing");
         }
     }
 

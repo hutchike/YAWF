@@ -138,21 +138,19 @@ class Yet_another_shell extends Command
 
     public function http($method, $url, $params = array())
     {
-        $curl = curl_init();
-        if ($method == 'get' && $params)
+        load_tool('CURL');
+        $headers = array();
+        $data = NULL;
+        if ($params && ($method == 'get' || $method == 'delete'))
         {
-            $url .= '?' . urlencode_array($params);
+            $q = (strpos($url, '?') === FALSE ? '?' : '&');
+            $url .= $q . urlencode_array($params);
         }
-        elseif ($method == 'post')
+        elseif ($method == 'post' || $method == 'put')
         {
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+            $data = $params;
         }
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, strtoupper($method));
-        $content = curl_exec($curl);
-        curl_close($curl);
-        return $content;
+        return CURL::method($method, $url, $headers, $data);
     }
 
     // Parse "should", "should_not" and similar commands
