@@ -216,7 +216,7 @@ class Controller_test_controller extends Controller
         $type = $this->app->get_content_type();
 
         $this->should('get the first part of the URI',
-                      $this->part(0) === 'controller_test.' . $type, $this->part(0));
+                      $this->part(0) === 'controller_test.' . $type, $this->part(0) . " but content type is $type");
 
         $this->should('get the first part of the URI with no extension',
                       $this->part(0, TRUE) === 'controller_test', $this->part(0, TRUE));
