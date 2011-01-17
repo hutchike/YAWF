@@ -540,22 +540,49 @@ class AppConfig extends YAWF
     public static function configure()
     {
         require_once 'lib/Config.php';
-        $config = Config::load(Symbol::APP);
-        foreach ($config['ini'] as $field => $value) ini_set($field, $value);
-        date_default_timezone_set(ini_get('date.timezone'));
 
-        // Define config sections beginning with any host-specific constants
+        // Load any local config settings before loading any generic settings
 
-        Config::define_constants(array_key($config, hostname(), array()));
+        self::load(hostname());
+        self::load('app');
+
+        // Return an array with all the user-defined constants
+
+        return Config::get_constants();
+    }
+
+    /**
+     * Load a config file by defining constants in selected sections, namely:
+     * "ini", "testing", "settings", "database" and "content" (in that order)
+     *
+     * @param String $file the file name (without any ".yaml" extension)
+     */
+    public static function load($file)
+    {
+        try // to load the file
+        {
+            $config = Config::load($file);
+        }
+        catch (Exception $e) // if file not found
+        {
+            return;
+        }
+
+        // Set any ini values by reading the "ini" section of the config file
+
+        if ($ini = array_key($config, 'ini'))
+        {
+            foreach ($ini as $field => $value) ini_set($field, $value);
+            date_default_timezone_set(ini_get('date.timezone'));
+        }
+
+        // Define config constants beginning with any test-specific constants
+
         Config::define_constants(array_key($config, 'testing', array()));
         Config::define_constants(array_key($config, 'settings', array()));
         Config::define_constants(array_key($config, 'database', array()),
                                  array('prefix' => 'db_'));
         Config::define_constants(array_key($config, 'content', array()));
-
-        // Return an array with all the user-defined constants
-
-        return Config::get_constants();
     }
 }
 

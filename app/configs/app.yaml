@@ -24,6 +24,7 @@ settings:
     cache_expiry_secs: 3600
 
 testing:
+    domain_name: yawf.org
     contact_email: kevin.hutchinson@guanoo.com  # PLEASE CHANGE THIS
     webmaster_email: webmaster@yawf.org         # PLEASE CHANGE THIS
     app_name: YAWF - Yet Another Web Framework
