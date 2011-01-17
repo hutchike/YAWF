@@ -389,7 +389,7 @@ class App extends YAWF implements Mailer
     {
         // Set flash messages to be shown on the next view page
 
-        foreach (array('notice', 'warning', 'error') as $level)
+        foreach (array('notice', 'warning', 'alert') as $level)
         {
             if ($message = array_key($options, $level)) $this->controller->flash($level, $message);
         }

@@ -15,6 +15,9 @@ load_tool('YAML');
 
 /**
  * The Config class reads and parses config files written in YAML.
+ * It provides services to define constants, get defined constants
+ * and cache any parsed YAML files that have been loaded previously.
+ * The defined constants are also available as regular PHP constants.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
