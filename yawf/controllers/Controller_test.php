@@ -209,6 +209,17 @@ class Controller_test_controller extends Controller
                       $this->lang() === DEFAULT_LANGUAGE);
     }
 
+    // Test that we can get the URI parts
+
+    public function get_parts_of_the_uri_test()
+    {
+        $this->should('get the first part of the URI',
+                      $this->part(0) === 'controller_test.html', $this->part(0));
+
+        $this->should('get the first part of the URI with no extension',
+                      $this->part(0, TRUE) === 'controller_test', $this->part(0, TRUE));
+    }
+
     // Test that we cannot redirect when testing
 
     public function redirect_test()

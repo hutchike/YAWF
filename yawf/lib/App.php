@@ -59,7 +59,7 @@ class App extends YAWF implements Mailer
 
         $uri = preg_replace('/[\?#].*/', '', $uri);
         $content_type = preg_match('/\.(\w+)$/', $uri, $matches) ? $matches[1] : DEFAULT_CONTENT_TYPE;
-        if ($content_type === Symbol::TEST && !TESTING_ENABLED) $content_type = DEFAULT_CONTENT_TYPE;
+        if ($content_type === Symbol::TEST && !Config::get('TESTING_ENABLED')) $content_type = DEFAULT_CONTENT_TYPE;
         $uri = $this->set_lang_and_remove_prefix($uri);
         $this->parts = explode('/', $uri);
         $folder = $this->get_part(0, TRUE); // remove any extension
@@ -76,7 +76,9 @@ class App extends YAWF implements Mailer
 
         require_once 'lib/Model.php';
         $model = new Model();
-        $database = $this->is_testing ? DB_DATABASE_TEST : DB_DATABASE_LIVE;
+        $db_test = Config::get('DB_DATABASE_TEST', TRUE);
+        $db_live = Config::get('DB_DATABASE_LIVE', TRUE);
+        $database = $this->is_testing ? $db_test : $db_live;
         $model->set_database($database);
 
         // Setup the language translations
@@ -549,7 +551,7 @@ class AppConfig extends YAWF
 
         // Return an array with all the user-defined constants
 
-        return array_key(get_defined_constants(TRUE), 'user');
+        return Config::get_constants();
     }
 }
 
