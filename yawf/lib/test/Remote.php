@@ -29,21 +29,21 @@ class Remote_test extends Remote
         // Test that we don't add empty username and password
 
         $url = 'http://blah.com/whatever';
-        $this->auth('', '');
+        $this->set_auth('', '');
         $secure_url = $this->secure_url($url);
-        $this->should('leave the URL unchanged when no username and password provided', $secure_url === 'http://blah.com/whatever', $secure_url);
+        $this->should('leave the URL unchanged when no username and password provided', $secure_url === $url, $secure_url);
 
         // Test that we do add non-empty username and password to HTTPS URLs
 
         $url = 'http://blah.com/whatever';
-        $this->auth('user1', 'pass1');
+        $this->set_auth('user1', 'pass1');
         $secure_url = $this->secure_url($url);
         $this->should('add a username and password when they are provided for HTTP URLs', $secure_url === 'http://user1:pass1@blah.com/whatever', $secure_url);
 
         // Test that we do add non-empty username and password to HTTPS URLs
 
         $url = 'https://blah.com/whatever';
-        $this->auth('user2', 'pass2');
+        $this->set_auth('user2', 'pass2');
         $secure_url = $this->secure_url($url);
         $this->should('add a username and password when they are provided for HTTPS URLs', $secure_url === 'https://user2:pass2@blah.com/whatever', $secure_url);
     }

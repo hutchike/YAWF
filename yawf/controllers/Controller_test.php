@@ -213,8 +213,10 @@ class Controller_test_controller extends Controller
 
     public function get_parts_of_the_uri_test()
     {
+        $type = $this->app->get_content_type();
+
         $this->should('get the first part of the URI',
-                      $this->part(0) === 'controller_test.html', $this->part(0));
+                      $this->part(0) === 'controller_test.' . $type, $this->part(0));
 
         $this->should('get the first part of the URI with no extension',
                       $this->part(0, TRUE) === 'controller_test', $this->part(0, TRUE));

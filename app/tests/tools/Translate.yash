@@ -1,3 +1,4 @@
+<?
 load_tool('Translate')
 $app->set_lang('en')
 should 'translate welcome to "welcome" in English', t('welcome') === 'welcome'

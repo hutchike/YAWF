@@ -529,6 +529,19 @@ function dump($object)
 }
 
 /**
+ * Get information from a stack trace about the caller of the current function
+ *
+ * @param $levels_up how many levels up to look
+ * @param $info info to return - php.net/manual/en/function.debug-backtrace.php
+ * @return String the requested info from the requested level up the stack trace
+ */
+function caller($levels_up = 1, $info = 'object')
+{
+    $trace = debug_backtrace();
+    return array_key($trace[$levels_up + 1], $info);
+}
+
+/**
  * Return some highlighted code
  *
  * @param String $code the code to highlight

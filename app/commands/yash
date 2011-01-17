@@ -39,14 +39,45 @@ class Yet_another_shell extends Command
         $this->fails = 0;
         YAWF::hook('should', 'Yet_another_shell::hook');
         YAWF::hook('should_not', 'Yet_another_shell::hook');
+        YAWF::hook('default', 'Yet_another_shell::hook');
+    }
+
+    // Handle undefined calls by adding a failed test, or displaying an error
+
+    public function __call($method, $args)
+    {
+        $error = "call undefined method \"$method\" in yash";
+        if ($this->opts->test)
+            $this->should_not($error);
+        else
+            print "should not $error\n";
     }
 
     // Hook the "should" and "should_not" calls
 
     public static function hook($method, $args)
     {
-        list($test, $passed, $test_data) = $args;
-        $method($test, $passed, $test_data);
+        global $yash;
+        if (method_exists($yash, $method))
+        {
+            // Call the YASH hooked method on $this
+
+            list($test, $passed, $test_data) = $args;
+            $yash->$method($test, $passed, $test_data);
+        }
+        else
+        {
+            // Catch thte unknown method call and add a failed test with info
+
+            $stack_level = 1;
+            do
+            {
+                $func = caller($stack_level, 'function');
+                if ($func == $method) break; // found it!
+            } while ($stack_level++);
+            $class = get_class(caller($stack_level));
+            $yash->should("call method \"$method\" on $class object", FALSE);
+        }
     }
 
     // Run the YAWF shell

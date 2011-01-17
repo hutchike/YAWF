@@ -123,8 +123,7 @@ class App_test extends App
 
         if (!$method)
         {
-            $trace = debug_backtrace();
-            $method = $trace[2]['function'];
+            $method = caller(2, 'function');
         }
 
         $this->test_run->add_test_case($desc, $passed, $test_data, $method);

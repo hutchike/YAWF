@@ -1,0 +1,5 @@
+<?
+$domain = Config::get('DOMAIN_NAME', TRUE)
+$tests = get("$domain/REST_test.txt")
+should 'find passes in test output', strpos($tests, 'passed'), $tests
+should_not 'find failures in test output', strpos($tests, 'failed'), $tests
