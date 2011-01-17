@@ -542,6 +542,18 @@ function caller($levels_up = 1, $info = 'object')
 }
 
 /**
+ * Return this computer's hostname by reading the "/etc/hostname" file or
+ * other file specified as a parameter. Return "localhost" if file not found.
+ *
+ * @param $file the file containing the hostname ("/etc/hostname" by default)
+ * @return String this computer's hostname
+ */
+function hostname($file = '/etc/hostname')
+{
+    return file_exists($file) ? trim(file_get_contents($file)) : 'localhost';
+}
+
+/**
  * Return some highlighted code
  *
  * @param String $code the code to highlight

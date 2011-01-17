@@ -544,10 +544,14 @@ class AppConfig extends YAWF
         foreach ($config['ini'] as $field => $value) ini_set($field, $value);
         date_default_timezone_set(ini_get('date.timezone'));
 
-        Config::define_constants($config['settings']);
-        Config::define_constants($config['testing']);
-        Config::define_constants($config['database'], array('prefix' => 'db_'));
-        Config::define_constants($config['content']);
+        // Define config sections beginning with any host-specific constants
+
+        Config::define_constants(array_key($config, hostname(), array()));
+        Config::define_constants(array_key($config, 'testing', array()));
+        Config::define_constants(array_key($config, 'settings', array()));
+        Config::define_constants(array_key($config, 'database', array()),
+                                 array('prefix' => 'db_'));
+        Config::define_constants(array_key($config, 'content', array()));
 
         // Return an array with all the user-defined constants
 
