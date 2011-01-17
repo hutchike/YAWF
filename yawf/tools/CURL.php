@@ -109,7 +109,14 @@ class CURL extends YAWF
             $headers[] = 'Content-Length: ' . strlen($data);
         }
         if ($headers) curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+
+        // Set our default CURL web browser settings
+
+        $cookies = tempnam('/tmp', 'curl_cookies_');
+        curl_setopt($c, CURLOPT_COOKIEJAR, $cookies);
+        curl_setopt($c, CURLOPT_MAXREDIRS, 10);
+        curl_setopt($c, CURLOPT_FOLLOWLOCATION, TRUE);
+        curl_setopt($c, CURLOPT_RETURNTRANSFER, TRUE);
 
         // Set the method type
 
@@ -121,6 +128,10 @@ class CURL extends YAWF
         // Send the request and receive the response to return as a string
 
         $received_data = curl_exec($c);
+
+        // Remove the cookies, throw errors as excptions, then return data
+
+        unlink($cookies);
         if ($received_data === FALSE) throw new Exception(curl_error($c));
         return $received_data;
     }
