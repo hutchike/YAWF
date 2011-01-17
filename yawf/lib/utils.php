@@ -262,14 +262,15 @@ function urlencode_array($array)
 }
 
 /**
- * Split a comma-separated list
+ * Split a (usually) comma-separated list into an array list using a regex 
  *
- * @param String $text_list a comma-separated list (e.g. "this, that,other");
+ * @param String $text_list a comma-separated list (e.g. "this, that,other")
+ * @param String $regex the regex to use (it's ",\s*" by default)
  * @return Array an array of list items
  */
-function split_list($text_list)
+function split_list($text_list, $regex = ',\s*')
 {
-    $list = preg_split('/,\s*/', $text_list);
+    $list = preg_split('/' . $regex . '/', $text_list);
     return count($list) == 1 && $list[0] == '' ? array() : $list;
 }
 

@@ -273,9 +273,9 @@ class Request extends YAWF implements Mailer
         if (!count($request) && $params = YAWF::prop(Symbol::PARAMS)) return $params;
         else $params = new Object();
 
-        $trim_whitespace = array_key($options, 'trim_whitespace', PARAMS_TRIM_WHITESPACE);
-        $format_as_html = array_key($options, 'format_as_html', PARAMS_FORMAT_AS_HTML);
-        $strip_slashes = array_key($options, 'strip_slashes', PARAMS_STRIP_SLASHES);
+        $trim_whitespace = array_key($options, 'trim_whitespace', Config::get('PARAMS_TRIM_WHITESPACE'));
+        $format_as_html = array_key($options, 'format_as_html', Config::get('PARAMS_FORMAT_AS_HTML'));
+        $strip_slashes = array_key($options, 'strip_slashes', Config::get('PARAMS_STRIP_SLASHES'));
         if (!count($request)) $request =& $_REQUEST;
         foreach ($request as $field => $value)
         {

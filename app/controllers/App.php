@@ -22,7 +22,7 @@ class App_controller extends Controller
 
     // Before the controller's view method runs...
 
-    public function before()
+    protected function before()
     {
         // Put code here that should be performed by every controller
 
@@ -34,7 +34,7 @@ class App_controller extends Controller
 
     // After the controller's view method runs...
 
-    public function after()
+    protected function after()
     {
         // Put code here that should be performed by every controller
     }

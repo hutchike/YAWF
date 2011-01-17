@@ -21,46 +21,51 @@ load_tool('YAML');
 class Config extends YAWF
 {
     protected static $configs = array();
+    protected static $constants = array();
 
     /**
      * Load a config file, and optionally force a file reload
      *
-     * @param String $config_name the name of the config to load (excl ".yaml")
+     * @param String $config_file the name of the config to load (excl ".yaml")
      * @param Boolean $reload whether to reload a file that's already loaded
      * @return Array the config data as an assoc array
      */
-    public static function load($config_name, $reload = FALSE)
+    public static function load($config_file, $reload = FALSE)
     {
         // Return a matching loaded config (unless reloading)
 
-        if ($reload) self::$configs[$config_name] = NULL;
-        if ($config = array_key(self::$configs, $config_name)) return $config;
+        if ($reload) self::$configs[$config_file] = NULL;
+        if ($config = array_key(self::$configs, $config_file)) return $config;
 
         // Load a config file by looking in "app" and "yawf"
 
-        $file = '/configs/' . $config_name . '.yaml';
+        $file = '/configs/' . $config_file . '.yaml';
         if (file_exists(Symbol::APP . $file))
-            self::$configs[$config_name] = YAML::parse_file(Symbol::APP . $file);
+            self::$configs[$config_file] = YAML::parse_file(Symbol::APP . $file);
         elseif (file_exists(Symbol::YAWF . $file))
-            self::$configs[$config_name] = YAML::parse_file(Symbol::YAWF . $file);
+            self::$configs[$config_file] = YAML::parse_file(Symbol::YAWF . $file);
         else
-            throw new Exception("Config file \"$config_name.yaml\" not found");
+            throw new Exception("Config file \"$config_file.yaml\" not found");
 
         // Return the loaded config file as a PHP data array
 
-        return self::$configs[$config_name];
+        return self::$configs[$config_file];
     }
 
     /**
      * Define some constants by reading a PHP array of keys and values.
      * Note that the constant names will always be uppercase.
      * By setting a "prefix" option, constant names can be "DB_*" for example.
+     * If you've defined your own constants, you should call this function
+     * without any parameters to update the cache of user-defined constants.
      *
-     * @param Array $array the array of constant names and values
+     * @param Array $array optional array of constant names and values
      * @param Array $options optional settings such as "prefix" and "suffix"
      */
-    public static function define_constants($array, $options = array())
+    public static function define_constants($array = array(), $options = array())
     {
+        // Define some new constants
+
         foreach ($array as $key => $value)
         {
             $prefix = array_key($options, 'prefix', '');
@@ -69,6 +74,38 @@ class Config extends YAWF
             $name = strtoupper($prefix . $key . $suffix);
             if (!defined($name)) define($name, $value);
         }
+
+        // Update the cache of user-defined constants, and return it
+
+        self::$constants = array_key(get_defined_constants(TRUE), 'user');
+        return self::get_constants();
+    }
+
+    /**
+     * Get an assoc array of all the user-defined constants
+     *
+     * @return Array user-defined constants as an assoc array
+     */
+    public static function get_constants()
+    {
+        return self::$constants;
+    }
+
+    /**
+     * Get a config setting by looking for the name of a user-defined constant
+     *
+     * @param String $name the name of the user-defined constant to get
+     * @param Boolean $is_required whether the constant is required or not
+     * @return Integer/String the value of the user-defined constant
+     */
+    public static function get($name, $is_required = FALSE)
+    {
+        $value = array_key(self::$constants, strtoupper($name));
+        if ($is_required && is_null($value))
+        {
+            throw new Exception("Constant \"$name\" is not defined");
+        }
+        return $value;
     }
 }
 

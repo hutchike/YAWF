@@ -29,17 +29,13 @@ class REST_test_controller extends Rest_controller
     );
 
     /**
-     * Create a test service with test methods to run checks
-     *
-     * @param String $view the view to render (ignored)
-     * @param Array $options the render options (ignored)
-     * @return String the contents to render as test results
+     * Ensure that the service we're testing is a "test" service
      */
-    public function render($view = NULL, $options = array())
+    protected function before()
     {
+        parent::before();
         $service = ucfirst($this->app->get_folder()) . '_test';
         $this->service = $this->app->new_service($service);
-        return App_controller::render(); // to show test results
     }
 
     /**

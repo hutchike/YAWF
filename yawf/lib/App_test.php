@@ -31,14 +31,15 @@ class App_test extends App
     public function __construct($uri = NULL)
     {
         parent::__construct($uri);
-        if (TESTING_ENABLED !== TRUE) parent::redirect('', array('exit' => TRUE));
+        if (Config::get('TESTING_ENABLED') !== TRUE) parent::redirect('', array('exit' => TRUE));
         $this->reset_folder();
         $this->test_run = NULL;
 
         // Models connect to the test database
 
         $model = new Model();
-        $model->set_database(DB_DATABASE_TEST);
+        $db_test = Config::get('DB_DATABASE_TEST', TRUE);
+        $model->set_database($db_test);
         $this->is_testing = TRUE;
         Log::type(Symbol::TEST);
 
@@ -92,7 +93,8 @@ class App_test extends App
     protected function render_test_run($render)
     {
         if ($this->test_run) return; // so we don't repeat the tests
-        $testee = (defined('REST_SERVICE_LIST') && in_array($this->folder, split_list(REST_SERVICE_LIST)) ? $this->service : $this->controller);
+        $service_list = Config::get('REST_SERVICE_LIST');
+        $testee = (in_array($this->folder, split_list($service_list)) ? $this->service : $this->controller);
         $test_run = $this->test_run = new TestRun($testee);
         $test_run->run_tests();
         $render->test_run_output = $test_run->get_output();

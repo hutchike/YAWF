@@ -19,6 +19,8 @@
  */
 class Cache_controller extends App_controller
 {
+    const DEFAULT_EXPIRY_SECS = 900; // 15 minutes
+
     protected $cache_path;
     protected $cache_secs;
     protected $cache_options;
@@ -149,8 +151,11 @@ class Cache_controller extends App_controller
      *
      * @param Integer $expiry_secs the maximum age of a cached file in the cache
      */
-    protected function clean_cache($expiry_secs = CACHE_EXPIRY_SECS)
+    protected function clean_cache($expiry_secs = NULL)
     {
+        $expiry_secs = first($expiry_secs,
+                             Config::get('CACHE_EXPIRY_SECS'),
+                             self::DEFAULT_EXPIRY_SECS);
         $time_now = time();
         $cache_dir = preg_replace('/\w+$/', '', $this->cache_path);
         $dir = opendir($cache_dir);

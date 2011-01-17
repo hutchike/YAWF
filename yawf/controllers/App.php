@@ -23,7 +23,7 @@ class App_controller extends Controller
     /**
      * This is an example of a method to include in your "App_controller" class
      */
-    function before()
+    protected function before()
     {
         $this->render->title = 'Welcome to YAWF';
     }
