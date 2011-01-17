@@ -143,7 +143,7 @@ class Data extends YAWF
      */
     public static function to_json($data)
     {
-        return json_encode($data, TRUE);
+        return json_encode($data);
     }
 
     /**
