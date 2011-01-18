@@ -506,12 +506,14 @@ class AppView extends YAWF
      * Render a partial view from inside the "partials" folder
      *
      * @param String $view the partial view to render
+     * @param Array $data any additional data to be rendered
      * @return String the rendered partial view
      */
-    public static function partial($view)
+    public static function partial($view, $data = NULL)
     {
         $render = self::$render;
-        assert('is_object($render)');
+        assert('$render instanceof Object');
+        if (!is_null($data)) $render->merge(new Object($data));
         assert('$render->app instanceof App');
         return $render->app->render_view('partials/' . $view, $render);
     }
