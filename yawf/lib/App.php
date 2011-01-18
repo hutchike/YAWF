@@ -503,6 +503,20 @@ class AppView extends YAWF
     }
 
     /**
+     * Render a partial view from inside the "partials" folder
+     *
+     * @param String $view the partial view to render
+     * @return String the rendered partial view
+     */
+    public static function partial($view)
+    {
+        $render = self::$render;
+        assert('is_object($render)');
+        assert('$render->app instanceof App');
+        return $render->app->render_view('partials/' . $view, $render);
+    }
+
+    /**
      * Modify a view URI by adding an optional prefix
      *
      * @param String $uri the URI to modify by applying the prefix
