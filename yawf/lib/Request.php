@@ -507,11 +507,12 @@ class Request_session extends YAWF
     }
 
     /**
-     * Destroy the session
+     * Restart the session
      */
-    public function destroy()
+    public function restart()
     {
         @session_destroy();
+        @session_start();
         $this->session = array();
     }
 }
