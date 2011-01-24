@@ -94,7 +94,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																								<div class="method-definition">
+																																																																																																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">Boolean</span>
 										<a href="#auth" title="details" class="method-name">auth</a>
@@ -121,8 +121,14 @@
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">String</span>
-										<a href="#get_model_name" title="details" class="method-name">get_model_name</a>
+										<a href="#get_model_class" title="details" class="method-name">get_model_class</a>
 										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../YAWF/Model.html">Model</a></span>
+										<a href="#make" title="details" class="method-name">make</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$model_class</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">array()</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -209,7 +215,7 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodauth" id="auth"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -236,7 +242,7 @@
 			
 	</div>
 <a name="methodbasic_auth" id="basic_auth"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -271,7 +277,7 @@
 			
 	</div>
 <a name="methoddelete" id="delete"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -310,7 +316,7 @@
 				</ul>
 	</div>
 <a name="methodget" id="get"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -348,29 +354,63 @@
 							</li>
 				</ul>
 	</div>
-<a name="methodget_model_name" id="get_model_name"><!-- --></a>
-<div class="oddrow">
+<a name="methodget_model_class" id="get_model_class"><!-- --></a>
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get_model_name</span> (line <span class="line-number">180</span>)
+		<span class="method-title">get_model_class</span> (line <span class="line-number">182</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Return the data model class name (and ensure it has been loaded)</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> the name of the model (e.g. &quot;User&quot;)</li>
+				<li><span class="field">return:</span> the name of the model class (e.g. &quot;User&quot;)</li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
 		<span class="method-result">String</span>
 		<span class="method-name">
-			get_model_name
+			get_model_class
 		</span>
 				()
 			</div>
 	
+		
+			
+	</div>
+<a name="methodmake" id="make"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">make</span> (line <span class="line-number">197</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Make a new model object and set its database by looking for any  database name in the query string parameters or the object data.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a newly made model with its database set</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../YAWF/Model.html">Model</a></span>
+		<span class="method-name">
+			make
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$model_class</span>, [<span class="var-type">Array</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$model_class</span><span class="var-description">: the name of the model class</span>			</li>
+					<li>
+				<span class="var-type">Array</span>
+				<span class="var-name">$data</span><span class="var-description">: data to use to construct the model object</span>			</li>
+				</ul>
 		
 			
 	</div>
@@ -496,7 +536,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">put</span> (line <span class="line-number">162</span>)
+		<span class="method-title">put</span> (line <span class="line-number">163</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -614,7 +654,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 24 Jan 2011 18:09:21 +0800 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 25 Jan 2011 03:04:27 +0800 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
