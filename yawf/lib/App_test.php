@@ -116,17 +116,12 @@ class App_test extends App
      */
     public function test_case($desc, $passed, $test_data = NULL, $method = NULL)
     {
-        if (!is_bool($passed))
-        {
-            throw new Exception("Test case $desc needs a TRUE/FALSE assertion");
-        }
-
         if (!$method)
         {
             $method = caller(2, 'function');
         }
 
-        $this->test_run->add_test_case($desc, $passed, $test_data, $method);
+        $this->test_run->add_test_case($desc, !!$passed, $test_data, $method);
     }
 
     /**

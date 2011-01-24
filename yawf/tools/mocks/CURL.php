@@ -18,14 +18,92 @@
  */
 class CURL extends YAWF
 {
+    /**
+     * The $method, $url, $headers and $data are passed into the CURL mock
+     * by the CURL mock user when it makes calls into the regular CURL API.
+     */
+    private static $method;
+    private static $url;
+    private static $headers;
+    private static $data;
+    private static $auth;
+
+    /**
+     * The $returned_content is content returned to the user of the CURL mock.
+     */
     private static $returned_content = array();
+
+    /**
+     * Reset the data to get after the next call to a CURL method, e.g. "get"
+     *
+     * @param Boolean $do_reset_returned_content reset returned content too?
+     */
+    public static function reset($do_reset_returned_content = FALSE)
+    {
+        self::$method = NULL;
+        self::$url = NULL;
+        self::$headers = NULL;
+        self::$data = NULL;
+        self::$auth = NULL;
+        if ($do_reset_returned_content) self::$returned_content = NULL;
+    }
+
+    /**
+     * Get the method called by the CURL mock user
+     *
+     * @return String the method called by the CURL mock user
+     */
+    public static function get_mock_method()
+    {
+        return self::$method;
+    }
+
+    /**
+     * Get the URL passed by the CURL mock user
+     *
+     * @return String the URL passed by the CURL mock user
+     */
+    public static function get_mock_url()
+    {
+        return self::$url;
+    }
+
+    /**
+     * Get the headers passed by the CURL mock user
+     *
+     * @return Array the headers passed by the CURL mock user
+     */
+    public static function get_mock_headers()
+    {
+        return self::$headers;
+    }
+
+    /**
+     * Get the data passed by the CURL mock user
+     *
+     * @return String/Array the data passed by the CURL mock user
+     */
+    public static function get_mock_data()
+    {
+        return self::$data;
+    }
+
+    /**
+     * Get any auth passed by the CURL mock user via the URL (e.g. "user:pass")
+     *
+     * @return String any auth passed by the CURL mock user via the URL
+     */
+    public static function get_mock_auth()
+    {
+        return self::$auth;
+    }
 
     /**
      * Set the content to be returned by CURL method calls
      *
      * @param Array $content the content to be returned by CURL method calls
      */
-    public static function set_returned_content($content)
+    public static function set_mock_returned_content($content)
     {
         assert('is_string($content)');
         self::$returned_content = $content;
@@ -101,6 +179,14 @@ class CURL extends YAWF
             list($all, $protocol, $auth, $url) = $matches;
         }
         $url = $protocol . $url;
+
+        // Set the static properties to return test data to the mock client
+
+        self::$method = $method;
+        self::$url = $url;
+        self::$headers = $headers;
+        self::$data = $data;
+        self::$auth = $auth;
 
         // Return data that has been set by "CURL::set_returned_content()"
 

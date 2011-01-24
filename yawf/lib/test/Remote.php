@@ -67,20 +67,32 @@ class Remote_test extends Remote
      */
     public function insert_test()
     {
-        $this->set_returned_data(array(
+        $this->set_mock_returned_data(array(
             'Model' => array('id' => 123),
-            'response' => 'ok',
         ));
         $id = $this->insert();
         $this->should('insert with ID 123', $id == 123);
     }
 
     /**
-     * Set the data returned by the CURL mock object
+     * Test the update() method
      */
-    private function set_returned_data($data)
+    public function save_test()
     {
-        CURL::set_returned_content(json_encode($data));
+        $this->set_mock_returned_data(array(
+            'Model' => array('id' => 123, 'color' => 'green'),
+        ));
+        $this->color = 'green';
+        $object = $this->update();
+        $this->should('save with new data', $object);
+    }
+
+    /**
+     * Set the data returned by the CURL mock object when called by REST
+     */
+    private function set_mock_returned_data($data)
+    {
+        CURL::set_mock_returned_content(json_encode($data));
     }
 }
 
