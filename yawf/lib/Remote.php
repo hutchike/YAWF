@@ -209,6 +209,18 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     }
 
     /**
+     * Perform a remote "delete all" request using the REST "delete" method
+     *
+     * @return Remote this object for method chaining, or NULL on failure
+     */
+    public function delete_all()
+    {
+        $url = $this->secure_url() . '/-1'; // can be any negative number
+        if ($this->response = REST::delete($url, $this->type)) $this->check_response();
+        return $this;
+    }
+
+    /**
      * Find all remote model objects that match some conditions
      *
      * @param Array $conditions an array of conditions, e.g. a "join" clause

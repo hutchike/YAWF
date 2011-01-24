@@ -60,6 +60,8 @@ class REST_service extends Web_service
 
     /**
      * The default "delete" method behavior is to delete the model object
+     * if the "id" param is positive, and delete all model objects if the
+     * "id" param is negative. See the "Remote" class "delete_all" method.
      *
      * @param Object $params the HTTP params
      * @return Array the "data" HTTP param containing all the REST data
@@ -68,7 +70,8 @@ class REST_service extends Web_service
     {
         $model_name = $this->get_model_name();
         $object = new $model_name();
-        if ($object->load($params->id)) $object->delete();
+        if ($params->id < 0) $object->delete_all();
+        elseif ($object->load($params->id)) $object->delete();
         return $params->data;
     }
 
