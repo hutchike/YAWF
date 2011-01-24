@@ -20,6 +20,7 @@
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
 load_mock('tools', 'CURL');
+load_tool('Data');
 
 class Remote_test extends Remote
 {
@@ -77,14 +78,47 @@ class Remote_test extends Remote
     /**
      * Test the update() method
      */
-    public function save_test()
+    public function update_test()
     {
         $this->set_mock_returned_data(array(
-            'Model' => array('id' => 123, 'color' => 'green'),
+            'Model' => array('id' => 123, 'color' => 'purple'),
         ));
-        $this->color = 'green';
+
+        CURL::reset();
         $object = $this->update();
-        $this->should('save with new data', $object);
+        $data = CURL::get_mock_data();
+        $this->should_not('update with the same data', $data);
+
+        $this->color = 'purple';
+
+        CURL::reset();
+        $object = $this->update();
+        $data = CURL::get_mock_data();
+        $this->should('update with new data', $data);
+        $data = Data::from_json(CURL::get_mock_data());
+        $this->should('use the correct database',
+                      $this->get_database() == $data[Remote::DB]);
+
+        CURL::reset();
+        $object = $this->update();
+        $data = CURL::get_mock_data();
+        $this->should_not('update with the same data', $data);
+    }
+
+    /**
+     * Test the delete() method
+     */
+    public function delete_test()
+    {
+        // TODO
+    }
+
+    /**
+     * Test the find_all() method
+     */
+    public function find_all_test()
+    {
+        // TODO
     }
 
     /**
