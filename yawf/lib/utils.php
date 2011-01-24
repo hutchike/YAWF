@@ -279,9 +279,10 @@ function split_list($text_list, $regex = ',\s*')
  *
  * @param String $dir the directory from which to load the files
  * @param Array $files a list of files to load from the directory
+ * @param Boolean $is_mock whether to load a mock version of the file
  * @return Array a list of the files that were loaded with "require_once"
  */
-function load_files($dir, $files)
+function load_files($dir, $files, $is_mock = FALSE)
 {
     static $loaded = array();   // to skip loading files that were loaded before
     $required_files = array();  // to return a list of files that are now loaded
@@ -289,15 +290,28 @@ function load_files($dir, $files)
     {
         $path = $dir . '/' . $file . '.php';
         if (array_key($loaded, $path)) continue;
-        if (!file_found($path)) // to prevent fatal YAWF errors
+        $real_path = $is_mock ? $dir . '/mocks/' . $file . '.php' : $path;
+        if (!file_found($real_path)) // to prevent fatal YAWF errors
         {
-            throw new Exception("File \"$path\" not found");
+            throw new Exception("File \"$real_path\" not found");
         }
-        require_once $path;
+        require_once $real_path;
         $loaded[$path] = TRUE;
         $required_files[] = $file;
     }
     return $required_files;
+}
+
+/**
+ * Load a mock file
+ *
+ * @param String $dir the directory to find the mock (e.g. "tools")
+ * @param String/Array $file the mock to load (e.g. "CURL")
+ */
+function load_mock($dir, $file)
+{
+    if (is_string($file)) $file = array($file);
+    load_files($dir, $file, TRUE);
 }
 
 /**

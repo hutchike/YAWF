@@ -62,6 +62,7 @@ class Yet_another_shell extends Command
         {
             // Call the YASH hooked method on $this
 
+            $args[] = NULL; // in case not provided
             list($test, $passed, $test_data) = $args;
             $yash->$method($test, $passed, $test_data);
         }

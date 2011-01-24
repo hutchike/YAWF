@@ -19,8 +19,22 @@
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
+load_mock('tools', 'CURL');
+
 class Remote_test extends Remote
 {
+    /**
+     * Test we can set and get default values
+     */
+    public function get_and_set_defaults_test()
+    {
+        Remote::set_default('pickle', 'gherkin');
+        $this->should('set a default value', Remote::get_default('pickle') == 'gherkin');
+
+        Remote::set_default(array('one' => 1, 'two' => 2));
+        $this->should('set an array of default values', Remote::get_default('one') == 1 && Remote::get_default('two') == 2);
+    }
+
     /**
      * Test the secure_url() method of the Remote class
      */
@@ -46,6 +60,27 @@ class Remote_test extends Remote
         $this->set_auth('user2', 'pass2');
         $secure_url = $this->secure_url($url);
         $this->should('add a username and password when they are provided for HTTPS URLs', $secure_url === 'https://user2:pass2@blah.com/whatever', $secure_url);
+    }
+
+    /**
+     * Test the insert() method
+     */
+    public function insert_test()
+    {
+        $this->set_returned_data(array(
+            'Model' => array('id' => 123),
+            'response' => 'ok',
+        ));
+        $id = $this->insert();
+        $this->should('insert with ID 123', $id == 123);
+    }
+
+    /**
+     * Set the data returned by the CURL mock object
+     */
+    private function set_returned_data($data)
+    {
+        CURL::set_returned_content(json_encode($data));
     }
 }
 
