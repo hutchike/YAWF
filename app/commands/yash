@@ -88,10 +88,12 @@ class Yet_another_shell extends Command
         global $app;
         $stdin = fopen('php://stdin', 'r');
         $this->say('> ');
+        $last = '';
         while ($line = fgets($stdin))
         {
             $line = rtrim(trim($line), ';');
             if (substr($line, 0, 2) == '<?') continue; // ignore PHP open syntax
+            if (substr($line, 0, 2) == '!!') $line = $last; else $last = $line;
 
             // Parse "if", "else", "endif" logical constructs
 

@@ -68,8 +68,8 @@ class REST_service extends Web_service
      */
     public function delete($params)
     {
-        $model_name = $this->get_model_name();
-        $object = new $model_name();
+        $model_class = $this->get_model_class();
+        $object = $this->make($model_class);
         if ($params->id < 0) $object->delete_all();
         elseif ($object->load($params->id)) $object->delete();
         return $params->data;
@@ -84,8 +84,8 @@ class REST_service extends Web_service
      */
     public function get($params)
     {
-        $model_name = $this->get_model_name();
-        $object = new $model_name();
+        $model_class = $this->get_model_class();
+        $object = $this->make($model_class);
         if ($where = $this->params->where)
         {
             // Run the "find_where" query using the params
@@ -100,14 +100,14 @@ class REST_service extends Web_service
 
             $data = array();
             foreach ($objects as $object) $data[] = $object->data();
-            return array($model_name => $data);
+            return array($model_class => $data);
         }
         else
         {
             // Return a single model object matching an ID, or an error message
 
             return $object->load($params->id) ?
-                    array($model_name => $object->data()) :
+                    array($model_class => $object->data()) :
                     $this->error($params->id ? "id $params->id not found"
                                              : "id missing");
         }
@@ -143,10 +143,11 @@ class REST_service extends Web_service
      */
     public function post($params)
     {
-        $model_name = $this->get_model_name();
-        $object = new $model_name($params->data[$model_name]);
+        assert('is_array($params->data)');
+        $model_class = $this->get_model_class();
+        $object = $this->make($model_class, $params->data[$model_class]);
         if ($object->is_validated())
-            $params->data[$model_name][$object->get_id_field()] = $object->insert();
+            $params->data[$model_class][$object->get_id_field()] = $object->insert();
         else
             $params->data[Symbol::VALIDATION_MESSAGES] = $object->validation_messages();
 
@@ -161,8 +162,9 @@ class REST_service extends Web_service
      */
     public function put($params)
     {
-        $model_name = $this->get_model_name();
-        $object = new $model_name($params->data[$model_name]);
+        assert('is_array($params->data)');
+        $model_class = $this->get_model_class();
+        $object = $this->make($model_class, $params->data[$model_class]);
         if ($params->id) $object->id = $params->id;
         if ($object->is_validated())
             $object->update_all_fields();
@@ -175,13 +177,27 @@ class REST_service extends Web_service
     /**
      * Return the data model class name (and ensure it has been loaded)
      *
-     * @return String the name of the model (e.g. "User")
+     * @return String the name of the model class (e.g. "User")
      */
-    protected function get_model_name()
+    protected function get_model_class()
     {
-        $model_name = preg_replace('/(_test)?_service$/', '', get_class($this));
-        load_model($model_name); // in case we haven't loaded it already
-        return $model_name;
+        $model_class = preg_replace('/(_test)?_service$/', '', get_class($this));
+        load_model($model_class); // in case we haven't loaded it already
+        return $model_class;
+    }
+
+    /**
+     * Make a new model object and set its database
+     *
+     * @param String $model_class the name of the model class
+     * @return Model a newly made model with its database set
+     */
+    protected function make($model_class, $data = NULL)
+    {
+        $object = new $model_class($data);
+        $param = Remote::DB;
+        if ($db = $this->params->$param) $object->set_database($db);
+        return $object;
     }
 }
 

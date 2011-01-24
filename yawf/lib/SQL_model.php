@@ -22,8 +22,8 @@ load_interfaces('Modelled', 'Persisted', 'Validated');
  */
 class SQL_model extends Valid_model implements Modelled, Persisted, Validated
 {
-    private static $connectors;
-    private static $databases;
+    private static $connectors = array();
+    private static $databases = array();
     private static $tables = array();
     private static $id_fields = array();
     private static $timestamp = array();
@@ -50,7 +50,15 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
         require_once 'lib/connectors/' . $connector_class . '.php';
         $connector_class = "Data_$connector_class";
         $database = $this->get_database();
-        self::$connectors[$database] = new $connector_class($options);
+        $found = array_key(self::$connectors, $database);
+        if ($found instanceof $connector_class)
+        {
+            // We're already using the right database connector
+        }
+        else
+        {
+            self::$connectors[$database] = new $connector_class($options);
+        }
         return $this;
     }
 

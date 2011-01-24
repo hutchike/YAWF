@@ -24,6 +24,7 @@ load_tool('REST');
 class Remote extends Relating_model implements Modelled, Persisted, Validated
 {
     const DEFAULT_TYPE = Symbol::JSON; // (it's built into PHP)
+    const DB = '__db';
 
     private static $defaults = array();
     private $username;      // Do we need a username too?
@@ -147,6 +148,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         if (!$this->is_validated()) return 0;
         $url = $this->secure_url();
         $data = array($this->get_class() => $this->object->data());
+        $data[self::DB] = $this->get_database();
         $this->response = REST::post($url, $data, $this->type);
         if (is_null($this->response)) return 0;
         $id = $this->get_id_from_response();
@@ -189,6 +191,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
 
         $url = $this->secure_url() . '/' . $this->object->id;
         $data = array($this->get_class() => $this->object->data($fields));
+        $data[self::DB] = $this->get_database();
         if ($this->response = REST::put($url, $data, $this->type)) $this->check_response();
         $this->object->changed = array();
         return $this;
@@ -204,6 +207,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         if (!is_object($this->object)) return NULL;
         if (!$this->object->id) return NULL;
         $url = $this->secure_url() . '/' . $this->object->id;
+        $url .= $this->db_in_url();
         if ($this->response = REST::delete($url, $this->type)) $this->check_response();
         return $this;
     }
@@ -215,7 +219,8 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
      */
     public function delete_all()
     {
-        $url = $this->secure_url() . '/-1'; // can be any negative number
+        $url = $this->secure_url() . '/-1';
+        $url .= $this->db_in_url();
         if ($this->response = REST::delete($url, $this->type)) $this->check_response();
         return $this;
     }
@@ -238,7 +243,9 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         $params['order'] = $this->get_order();
         $params['limit'] = $this->get_limit();
         $params['offset'] = $this->get_offset();
-        $url = $this->secure_url() . '?' . http_build_query($params);
+        $url = $this->secure_url();
+        $url .= $this->db_in_url();
+        $url .= '&' . http_build_query($params);
         $data = REST::get($url, $this->type);
         if (!is_array($data)) return array();
 
@@ -335,6 +342,16 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         $password = first($this->password, self::get_default('password'));
         if ($username && $password) $url = "$username:$password" . '@' . $url;
         return $protocol . $url;
+    }
+
+    /**
+     * Return a database to be included in a URL, e.g "?db=mydata_live"
+     *
+     * @return String a database to be included in a URL
+     */
+    protected function db_in_url()
+    {
+        return '?' . self::DB . '=' . urlencode($this->get_database());
     }
 
     /**
