@@ -152,7 +152,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
         $this->response = REST::post($url, $data, $this->type);
         if (is_null($this->response)) return 0;
         $id = $this->get_id_from_response();
-        if ($id) $this->object->id = $id;
+        if (is_numeric($id)) $this->object->id = $id;
         $this->check_response();
         $this->object->changed = array();
         return $id;
@@ -237,7 +237,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
 
         $params = array();
         if ($where = array_key($conditions, 'where')) $params['where'] = $where;
-        else $params['where'] = $this->where_clause();
+        else $params['where'] = $this->where_clause($conditions);
         if (!$params['where']) $params['where'] = '1=1'; // coz can't be blank
         $params['join'] = array_key($conditions, 'join');
         $params['order'] = $this->get_order();

@@ -145,7 +145,7 @@ class REST_service extends Web_service
     {
         assert('is_array($params->data)');
         $model_class = $this->get_model_class();
-        $object = $this->make($model_class, $params->data[$model_class]);
+        $object = $this->make($model_class, $params->data);
         if ($object->is_validated())
             $params->data[$model_class][$object->get_id_field()] = $object->insert();
         else
@@ -164,7 +164,7 @@ class REST_service extends Web_service
     {
         assert('is_array($params->data)');
         $model_class = $this->get_model_class();
-        $object = $this->make($model_class, $params->data[$model_class]);
+        $object = $this->make($model_class, $params->data);
         if ($params->id) $object->id = $params->id;
         if ($object->is_validated())
             $object->update_all_fields();
@@ -187,16 +187,19 @@ class REST_service extends Web_service
     }
 
     /**
-     * Make a new model object and set its database
+     * Make a new model object and set its database by looking for any
+     * database name in the query string parameters or the object data.
      *
      * @param String $model_class the name of the model class
+     * @param Array $data data to use to construct the model object
      * @return Model a newly made model with its database set
      */
-    protected function make($model_class, $data = NULL)
+    protected function make($model_class, $data = array())
     {
-        $object = new $model_class($data);
-        $param = Remote::DB;
-        if ($db = $this->params->$param) $object->set_database($db);
+        $object = new $model_class(array_key($data, $model_class));
+        $param = Remote::DB; // what's the database parameter called?
+        $db = first($this->params->$param, array_key($data, $param));
+        if (is_string($db)) $object->set_database($db);
         return $object;
     }
 }
