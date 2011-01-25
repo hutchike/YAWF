@@ -74,6 +74,7 @@ class Remoting_model extends Relating_model implements Modelled, Persisted, Vali
      */
     public static function make($model, $data = array(), $has_changed = TRUE)
     {
+        load_model($model);
         $object = new $model($data, $has_changed);
         if (array_key(self::$is_remote, Symbol::ALL) ||
             array_key(self::$is_remote, $model)) $object = new Remote($object);
