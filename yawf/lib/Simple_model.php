@@ -101,7 +101,7 @@ class Simple_model extends YAWF implements Modelled
      *
      * @param Simple_model $other the other model object
      * @param Array $fields_to_copy a list of fields to copy (optional)
-     * @return Simple_model this object for method chaining
+     * @return Modelled this object for method chaining
      */
     public function copy_to($other, $fields_to_copy = array())
     {

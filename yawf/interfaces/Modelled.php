@@ -44,8 +44,10 @@ interface Modelled
      * Copy the model object's data to another object
      *
      * @param Object $other the other object receiving the model object's data
+     * @param Array $fields_to_copy a list of fields to copy (optional)
+     * @return Modelled this object for method chaining
      */
-    public function copy_to($other);
+    public function copy_to($other, $fields_to_copy = array());
 
     /**
      * Get an assoc array of data stored in this model object.
