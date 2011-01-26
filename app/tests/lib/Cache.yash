@@ -1,5 +1,8 @@
 <?
-$domain = Config::get('DOMAIN_NAME', TRUE)
-$tests = get("$domain/cache_test.txt")
-should 'find passes in test output', strpos($tests, 'passed'), $tests
-should_not 'find failures in test output', strpos($tests, 'failed'), $tests
+$tester = Config::get('TESTER_NAME', TRUE)
+if hostname() == $tester:
+    $domain = Config::get('DOMAIN_NAME', TRUE)
+    $tests = get("$domain/cache_test.txt")
+    should 'find passes in test output', strpos($tests, 'passed'), $tests
+    should_not 'find failures in test output', strpos($tests, 'failed'), $tests
+endif
