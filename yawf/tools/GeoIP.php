@@ -71,11 +71,10 @@ class GeoIP
     public function country_name($client_ip = NULL)
     {
         if (is_null($client_ip)) $client_ip = $this->ip();
-        $name = NULL;
-        try {
-            $name = $this->location_field('countryName', $client_ip);
+        $name = $this->location_field('countryName', $client_ip);
+        if (is_null($name)) try {
+            $name = $this->geoip->lookupCountryName($client_ip);
         } catch (Exception $e) {}
-        if (is_null($name)) $name = $this->geoip->lookupCountryName($client_ip);
         return $name;
     }
 
@@ -88,11 +87,10 @@ class GeoIP
     public function country_code($client_ip = NULL)
     {
         if (is_null($client_ip)) $client_ip = $this->ip();
-        $code = NULL;
-        try {
-            $code = $this->location_field('countryCode', $client_ip);
+        $code = $this->location_field('countryCode', $client_ip);
+        if (is_null($code)) try {
+            $code = $this->geoip->lookupCountryCode($client_ip);
         } catch (Exception $e) {}
-        if (is_null($code)) $code = $this->geoip->lookupCountryCode($client_ip);
         return $code;
     }
 
