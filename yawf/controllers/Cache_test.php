@@ -56,7 +56,7 @@ class Cache_test_controller extends Cache_controller
         $this->should_not('call the view method because it is cached',
                       $this->counter > 1);
 
-        sleep(self::TEST_CACHE_SECS);
+        sleep(self::TEST_CACHE_SECS + 1);
         $this->render();
         $this->should('call the view method this time because the cache has expired',
                       $this->counter === 2);
