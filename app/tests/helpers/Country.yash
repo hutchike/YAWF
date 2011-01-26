@@ -1,0 +1,17 @@
+<?
+load_helper 'Country'
+
+$tz = Country::time_zone('uk')
+should "find timezone 0 for the UK", $tz == 0, $tz
+
+$tz = Country::time_zone('fr')
+should "find timezone 1 for France", $tz == 1, $tz
+
+$tz = Country::time_zone('usa', 'ny')
+should "find timezone -5 for NY", $tz == -5, $tz
+
+$tz = Country::time_zone('usa', 'ca')
+should "find timezone -8 for CA", $tz == -8, $tz
+
+$tz = Country::time_zone('bra', 'ny')
+should_not "find timezone -8 for CA outside the USA", $tz == -8, $tz
