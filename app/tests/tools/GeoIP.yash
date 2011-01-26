@@ -1,0 +1,11 @@
+<?
+load_tool 'GeoIP'
+
+$ip = '208.43.194.115';
+$geo = new GeoIP('/usr/share/GeoIP/GeoIP.dat')
+
+$country = $geo->country_name($ip)
+should "find IP in the United States", $country == 'United States', $country
+
+$code = $geo->country_code($ip)
+should "find IP in the US", $code == 'US', $code
