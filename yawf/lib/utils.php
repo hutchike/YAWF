@@ -180,6 +180,26 @@ function array_key($array, $key, $default = NULL)
 }
 
 /**
+ * Truncate the keys of an array so they are no longer than a maximum length
+ *
+ * @param Array $array the array with keys to truncate
+ * @param Integer $max_length the maximum length of an array key
+ * @param String $append any text to append, e.g. "..."
+ * @return Array an copy of the array with its keys truncated
+ */
+function array_keys_truncate($array, $max_length, $append = '')
+{
+    $truncated = array();
+    foreach ($array as $key => $value)
+    {
+        $new_key = substr($key, 0, $max_length);
+        if ($new_key != $key) $new_key .= $append;
+        $truncated[$new_key] = $value;
+    }
+    return $truncated;
+}
+
+/**
  * Return a random value from an array
  *
  * @param Array $array the array

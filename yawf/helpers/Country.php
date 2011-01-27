@@ -30,7 +30,18 @@ class Country extends YAWF
     public static function name($code, $language = 'en')
     {
         $code = self::parse_code($code);
-        return array_key(self::$names[$language], $code);
+        return array_key(self::$codes[$language], $code);
+    }
+
+    /**
+     * Return an array of country names and codes in a language
+     *
+     * @param String $language the language to use (default is "en")
+     * @return Array the array of country names and codes in the language
+     */
+    public static function names($language = 'en')
+    {
+        return array_flip(array_key(self::$codes, $language));
     }
 
     /**
@@ -39,9 +50,9 @@ class Country extends YAWF
      * @param String $language the language to use (default is "en")
      * @return Array the array of country codes and names in the language
      */
-    public static function names($language = 'en')
+    public static function codes($language = 'en')
     {
-        return array_key(self::$names, $language);
+        return array_key(self::$codes, $language);
     }
 
     /**
@@ -75,7 +86,7 @@ class Country extends YAWF
 /**
  * Code list from http://www.iso.org/iso/english_country_names_and_code_elements
  */
-private static $names = array('en' => array(
+private static $codes = array('en' => array(
 'AF' => 'Afghanistan',
 'AX' => 'Åland Islands',
 'AL' => 'Albania',
@@ -575,7 +586,7 @@ private static $names = array('en' => array(
 'ZR' => 'Zaire',
 'ZM' => 'Zambia',
 'ZW' => 'Zimbabwe',
-));
+)); // End of self::$codes
 
 private static $trans = array(
 'AFG' => 'AF',
