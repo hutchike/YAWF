@@ -527,8 +527,8 @@ class AppView extends YAWF
      */
     public static function uri($uri, $prefix = NULL)
     {
-        if (preg_match('/^\w+:/', $uri)) return $uri; // coz it's absolute
-        return first($prefix, self::$prefix) . $uri; // or it's local
+        if (preg_match('/^(#|\w+:)/', $uri)) return $uri;
+        return first($prefix, self::$prefix) . $uri;
     }
 
     /**
