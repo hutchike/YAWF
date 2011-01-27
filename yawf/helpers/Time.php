@@ -41,6 +41,19 @@ class Time
         }
         return $secs > 1 ? $secs : 0;
     }
+
+    /**
+     * Given an hour, return a time zone in a format for display, e.g. "GMT+1"
+     *
+     * @param Integer $hour the hour from -12 to 12
+     * @return String the time zone formatted to display, e.g. "GMT+1"
+     */
+    public static function zone($hour)
+    {
+        if ($hour > 0) $hour = '+' . $hour;
+        elseif ($hour == 0) $hour = '';
+        return 'GMT' . $hour;
+    }
 }
 
 // End of Time.php

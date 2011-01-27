@@ -1,0 +1,4 @@
+load_helper 'Time'
+should "have GMT for hour 0", Time::zone(0) == 'GMT', Time::zone(0)
+should "have GMT-6 for hour -6", Time::zone(-6) == 'GMT-6', Time::zone(-6)
+should "have GMT+1 for hour 1", Time::zone(1) == 'GMT+1', Time::zone(1)
