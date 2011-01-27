@@ -129,6 +129,44 @@ function object_fields($objects, $field1, $field2 = NULL)
 }
 
 /**
+ * Sort an array of objects on a field
+ *
+ * @param String $field the field to compare
+ * @param Array $array the array of objects to sort
+ * @return Array the sorted array
+ */
+$object_sort_field = 'undefined';
+function objects_sort_by($field, $array)
+{
+    global $object_sort_field;
+    assert('is_array($array)');
+    if (count($array) == 0) return $array;
+    $object_sort_field = $field;
+    usort($array, 'object_cmp');
+    return $array;
+}
+
+/**
+ * Compare two objects by comparing the same field in each object
+ *
+ * @param Object $left the left object to compare
+ * @param Object $right the right object to compare
+ * @param String $field the field to compare (defaults to $object_sort_field)
+ * @return Integer 0 if the same, -1 if $left is less, 1 if $left is greater
+ */
+function object_cmp($left, $right, $field = NULL)
+{
+    global $object_sort_field;
+    $field = first($field, $object_sort_field);
+    $value1 = $left->$field;
+    $value2 = $right->$field;
+    if ($value1 == $value2) return 0;
+    return (is_numeric($value1) ?
+            ($value1 < $value2 ? -1 : 1) :
+            strcmp($value1, $value2));
+}
+
+/**
  * Return a key from an array or the default value (NULL by default)
  *
  * @param Array $array the array to lookup

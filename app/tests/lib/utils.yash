@@ -1,0 +1,9 @@
+<?
+$a = new Object(array('name' => 'object a'));
+$b = new Object(array('name' => 'object b'));
+$c = new Object(array('name' => 'object c'));
+$x = array($c, $b, $a);
+$sorted = objects_sort_by('name', $x);
+should "have object a first", $sorted[0]->name == 'object a', $sorted[0]
+should "have object b second", $sorted[1]->name == 'object b', $sorted[1]
+should "have object c third", $sorted[2]->name == 'object c', $sorted[2]
