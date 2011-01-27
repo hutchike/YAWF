@@ -50,9 +50,26 @@ class Time
      */
     public static function zone($hour)
     {
+        $hour += 0; // coz must be a number
         if ($hour > 0) $hour = '+' . $hour;
         elseif ($hour == 0) $hour = '';
         return 'GMT' . $hour;
+    }
+
+    /**
+     * Return an assoc array of time zone labels and their hour numbers
+     *
+     * @return Array an assoc array of time zone labels and their hour numbers
+     */
+    public static function zone_list()
+    {
+        $list = array();
+        for ($hour = -12; $hour <= 12; $hour++)
+        {
+            $label = self::zone($hour);
+            $list[$label] = $hour;
+        }
+        return $list;
     }
 }
 
