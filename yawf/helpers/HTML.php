@@ -198,12 +198,13 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
      * NOTE: The name can be an object property like "user->name"
      *
      * @param String $name the field name (required)
-     * @param String $value the field value (required)
+     * @param String $value the field value (defaults to the object property)
      * @param Array $attrs the input tag's attributes (optional)
      * @return String the HTML input tag for a hidden field
      */
-    public static function hidden($name, $value, $attrs = array())
+    public static function hidden($name, $value = NULL, $attrs = array())
     {
+        if (is_null($value)) $value = self::object_value_for($name);
         return self::input_type('hidden', $name, $value, $attrs);
     }
 
