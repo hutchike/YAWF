@@ -196,19 +196,6 @@ class App_command extends Command
      */
     private function data()
     {
-        // Load the app config files
-
-        try {
-            $config = Config::load(hostname());
-            Config::define_constants(array_key($config, 'database', array()),
-                                     array('prefix' => 'DB_'));
-        } catch (Exception $e) {
-            // It's ok when there's no host config
-        }
-        $config = Config::load('app');
-        $database = array_key($config, 'database', array());
-        Config::define_constants($database, array('prefix' => 'DB_'));
-
         // Configure the database
 
         $app_name = $this->name;
