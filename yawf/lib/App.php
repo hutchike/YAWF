@@ -70,7 +70,10 @@ class App extends YAWF implements Mailer
         $this->content_type = strtolower($content_type); // e.g. "html", "test"
         $this->folder = (strlen($folder) > 0 ? $folder : DEFAULT_FOLDER);
         $this->file = (strlen($file) > 0 ? $file : DEFAULT_FILE);
-        $this->is_testing = array_key($_REQUEST, Symbol::TEST) || $content_type === Symbol::TEST;
+        $this->is_testing = $this->is_testing ||
+                            array_key($_REQUEST, Symbol::TEST) ||
+                            $content_type === Symbol::TEST;
+        if ($this->is_testing) Log::type(Symbol::TEST);
 
         // If we're testing then use a test database
 

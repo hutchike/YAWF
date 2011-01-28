@@ -30,18 +30,11 @@ class App_test extends App
      */
     public function __construct($uri = NULL)
     {
+        $this->is_testing = TRUE;
         parent::__construct($uri);
         if (Config::get('TESTING_ENABLED') !== TRUE) parent::redirect('', array('exit' => TRUE));
         $this->reset_folder();
         $this->test_run = NULL;
-
-        // Models connect to the test database
-
-        $model = new Model();
-        $db_test = Config::get('DB_DATABASE_TEST', TRUE);
-        $model->set_database($db_test);
-        $this->is_testing = TRUE;
-        Log::type(Symbol::TEST);
 
         // Translations need validating
 

@@ -50,12 +50,17 @@ class YAWF // Yet Another Web Framework
     {
         self::start();
         error_reporting(E_ALL | E_STRICT);
-        $uri = array_key($_SERVER, 'REQUEST_URI');
 
-        $app_class = preg_match('/_test($|[^\w])/', $uri) ? 'App_test' : 'App';
+        // Select the App class by looking for "_test" in the path
+
+        $uri = array_key($_SERVER, 'REQUEST_URI');
+        $app_class = preg_match('/^[^\?]+_test($|[\?&])/', $uri) ?
+                                                'App_test' : 'App';
         require_once "lib/$app_class.php";
         $app = new $app_class();
         $controller = $app->new_controller();
+
+        // Try to render the view, and catch exceptions and errors
 
         try { echo $controller->render(); }
         catch (Exception $e) { self::handle_exception($app, $e); }
