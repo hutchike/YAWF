@@ -54,7 +54,7 @@ class YAWF // Yet Another Web Framework
         // Select the App class by looking for "_test" in the path
 
         $uri = array_key($_SERVER, 'REQUEST_URI');
-        $app_class = preg_match('/^[^\?]+_test($|[\?&])/', $uri) ?
+        $app_class = preg_match('/^[^\?]+_test($|[\.\?&])/', $uri) ?
                                                 'App_test' : 'App';
         require_once "lib/$app_class.php";
         $app = new $app_class();
