@@ -39,7 +39,8 @@ class Simple_model extends YAWF implements Modelled
      */
     public function __construct($data = array(), $has_changed = TRUE)
     {
-        $this->data = (array)$data;
+        $this->data = $data instanceof Simple_model ? $data->data()
+                                                    : (array)$data;
         $this->changed = array();
         if ($has_changed)
         {
