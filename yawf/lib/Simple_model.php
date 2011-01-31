@@ -32,7 +32,9 @@ class Simple_model extends YAWF implements Modelled
     protected $changed;
 
     /**
-     * Create a new simple model object
+     * Create a new simple model object from nothing, from an array of data,
+     * from an "Object" object or from another "Simple_model" object, and
+     * optionally set whether the data has changed (default is TRUE) or not.
      *
      * @param Array $data the data to initialize the object (may be an object)
      * @param Boolean $has_changed whether the new object has changed (optional)
