@@ -587,17 +587,17 @@ function indent($chars, $text)
     $spaces = '                                                '; // enough?
     $indent = substr($spaces, 0, $chars);
     $text = $indent . join("\n$indent", explode("\n", trim($text))) . "\n";
-    $text = preg_replace('/(<textarea[^>]*>)(.+)(<\/textarea>)/ise', "stripslashes('\\1'.undent('\\2').'\\3')", $text);
+    $text = preg_replace('/(<textarea[^>]*>)(.+)(<\/textarea>)/ise', "stripslashes('\\1'.unindent('\\2').'\\3')", $text);
     return $text;
 }
 
 /**
- * The "undent" function removes indentation whitespace added by "indent"
+ * Remove indentation whitespace added by "indent"
  *
- * @param String $text the indented text to "undented"
+ * @param String $text the indented text to unindent
  * @return String the text with indentations removed
  */
-function undent($text)
+function unindent($text)
 {
     return preg_replace('/\n +/s', "\n", trim($text));
 }
