@@ -586,7 +586,20 @@ function indent($chars, $text)
     assert('is_string($text)');
     $spaces = '                                                '; // enough?
     $indent = substr($spaces, 0, $chars);
-    return $indent . join("\n$indent", explode("\n", trim($text))) . "\n";
+    $text = $indent . join("\n$indent", explode("\n", trim($text))) . "\n";
+    $text = preg_replace('/(<textarea[^>]*>)(.+)(<\/textarea>)/ise', "stripslashes('\\1'.undent('\\2').'\\3')", $text);
+    return $text;
+}
+
+/**
+ * The "undent" function removes indentation whitespace added by "indent"
+ *
+ * @param String $text the indented text to "undented"
+ * @return String the text with indentations removed
+ */
+function undent($text)
+{
+    return preg_replace('/\n +/s', "\n", trim($text));
 }
 
 /**
