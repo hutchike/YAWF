@@ -110,6 +110,22 @@ class Config extends YAWF
         }
         return $value;
     }
+
+    /**
+     * Set a config setting and its constant, but only if not already set
+     *
+     * @param String $name the name of the user-defined constant to set
+     * @param String $value the value of the user-defined constant to set
+     * @return Boolean whether we successfully set the user-defined constant
+     */
+    public static function set($name, $value)
+    {
+        assert('is_string($name)');
+        if (defined($name)) return FALSE;
+        self::$constants[$name] = $value;
+        define($name, $value);
+        return TRUE;
+    }
 }
 
 //End of Config.php

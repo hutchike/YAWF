@@ -83,10 +83,10 @@ class Yet_another_shell extends Command
 
     // Run the YAWF shell
 
-    public function run()
+    public function run($file = 'php://stdin')
     {
         global $app;
-        $stdin = fopen('php://stdin', 'r');
+        $stdin = fopen($file, 'r');
         $this->say('> ');
         $last = '';
         while ($line = fgets($stdin))
@@ -308,6 +308,7 @@ function should_not($test, $failed = TRUE, $test_data = NULL) { global $yash; re
 
 // Useful functions
 
+function run($file) { global $yash; return $yash->run($file); }
 function say($text) { global $yash; return $yash->say($text); }
 function sql($sql) { global $yash; return $yash->sql($sql); }
 function env($key, $value = NULL) { global $yash; return $yash->env($key, $value); }
