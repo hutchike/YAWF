@@ -45,8 +45,8 @@ class Valid_model extends Simple_model implements Modelled, Validated
      */
     protected function validates($field, $rule, $args = NULL)
     {
-        $table = $this->get_table();
-        $key = "$table.$field";
+        $model = $this->get_class();
+        $key = "$model.$field";
         if (!array_key(self::$validators, $key)) self::$validators[$key] = array();
         self::$validators[$key][] = array($rule, $args);
     }
@@ -92,10 +92,10 @@ class Valid_model extends Simple_model implements Modelled, Validated
     public function is_validated()
     {
         $messages = array();
-        $table = $this->get_table();
+        $model = $this->get_class();
         foreach ($this->data() as $field => $value)
         {
-            $rules = array_key(self::$validators, "$table.$field", array());
+            $rules = array_key(self::$validators, "$model.$field", array());
             foreach ($rules as $rule_and_args)
             {
                 list($rule, $args) = $rule_and_args;
