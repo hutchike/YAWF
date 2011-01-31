@@ -166,7 +166,8 @@ class App_command extends Command
             if (is_dir("$test_dir/$test")) $this->test("$test_dir/$test", FALSE);
             if (!preg_match('/\.yash$/', $test)) continue; // must be yash
             print "Running test file \"$test_dir/$test\":\n";
-            system("yash -quiet -test < $test_dir/$test");
+            $highlight = "perl -pe 's/failed/\e[1;31;43m$&\e[0m/gi'";
+            system("yash -quiet -test < $test_dir/$test | $highlight");
             print "\n";
         }
 
