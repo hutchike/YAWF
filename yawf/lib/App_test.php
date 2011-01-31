@@ -189,7 +189,13 @@ class TestRun
             if (!preg_match('/_test$/', $test_method)) continue;
             try
             {
-                $this->testee->set_params(array()); // to reset params
+                if ($this->testee instanceof Request)
+                {
+                    $this->testee->set_params(array()); // Reset params,
+                    // but keep cookies, session and flash between tests
+                    // - this is just a judgment call based on experience.
+                }
+
                 $this->add_method( $test_method );
                 $this->add_output( $this->testee->$test_method() );
             }
