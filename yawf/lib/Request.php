@@ -228,7 +228,7 @@ class Request extends YAWF implements Mailer
      * @param Array $options an array of options to use when parsing the params
      * @return Request this object
      */
-    public function set_params($request = array(), $options = array())
+    public function set_params($request = NULL, $options = array())
     {
         $this->params = $this->params_object($request, $options);
         return $this;
@@ -268,15 +268,26 @@ class Request extends YAWF implements Mailer
      * @param Array $options an array of options to use when parsing the params
      * @return Object an object holding all the parameter values after parsing
      */
-    protected function params_object($request = array(), $options = array())
+    protected function params_object($request = NULL, $options = array())
     {
-        if (!count($request) && $params = YAWF::prop(Symbol::PARAMS)) return $params;
+        // Return the params YAWF prop if it's setup
+
+        if (is_null($request) && $params = YAWF::prop(Symbol::PARAMS)) return $params;
         else $params = new Object();
+        $request = (array)$request;
+
+        // Get the params config options
 
         $trim_whitespace = array_key($options, 'trim_whitespace', Config::get('PARAMS_TRIM_WHITESPACE'));
         $format_as_html = array_key($options, 'format_as_html', Config::get('PARAMS_FORMAT_AS_HTML'));
         $strip_slashes = array_key($options, 'strip_slashes', Config::get('PARAMS_STRIP_SLASHES'));
+
+        // Use the $_REQUEST system array by default
+
         if (!count($request)) $request =& $_REQUEST;
+
+        // Setup the params object, applying options
+
         foreach ($request as $field => $value)
         {
             if ($trim_whitespace) $value = trim($value);
@@ -293,6 +304,9 @@ class Request extends YAWF implements Mailer
                 $params->$field = $value;
             }
         }
+
+        // Return the params object as a YAWF prop
+
         return YAWF::prop(Symbol::PARAMS, $params);
     }
 

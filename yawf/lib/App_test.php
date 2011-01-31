@@ -189,6 +189,7 @@ class TestRun
             if (!preg_match('/_test$/', $test_method)) continue;
             try
             {
+                $this->testee->set_params(array()); // to reset params
                 $this->add_method( $test_method );
                 $this->add_output( $this->testee->$test_method() );
             }
