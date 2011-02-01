@@ -86,10 +86,10 @@ class Yet_another_shell extends Command
     public function run($file = 'php://stdin')
     {
         global $app;
-        $stdin = fopen($file, 'r');
+        $__fh = fopen($file, 'r');
         $this->say('> ');
         $__last = '';
-        while ($__line = fgets($stdin))
+        while ($__line = fgets($__fh))
         {
             $__line = rtrim(trim($__line), ';');
             if (substr($__line, 0, 2) == '<?') continue; // ignore PHP open tags
@@ -98,10 +98,10 @@ class Yet_another_shell extends Command
 
             // Parse "if", "else", "endif" logical constructs
 
-            if (preg_match('/if\s+(.*):$/', $__line, $matches))
+            if (preg_match('/if\s+(.*):$/', $__line, $__matches))
             {
-                eval('$bool = ' . $matches[1] . ' ;');
-                array_unshift($this->if_conds, $bool);
+                eval('$__bool = ' . $__matches[1] . ' ;');
+                array_unshift($this->if_conds, $__bool);
                 $__line = '';
             }
             elseif (preg_match('/^else:/', $__line))
@@ -127,11 +127,14 @@ class Yet_another_shell extends Command
             $__line = $this->parse($__line);
             try
             {
-                $result = NULL;
-                $command_regexp = '/^[a-z]\w*\s+/';
-                eval(preg_match($command_regexp, $__line) ?
-                        "$__line;" : "\$result=($__line);");
-                if (!is_null($result)) $this->say(print_r($result, TRUE)."\n");
+                $__result = NULL;
+                $__command_regexp = '/^[a-z]\w*\s+/';
+                eval(preg_match($__command_regexp, $__line) ?
+                        "$__line;" : "\$__result=($__line);");
+                if (!is_null($__result))
+                {
+                    $this->say(print_r($__result, TRUE)."\n");
+                }
             }
             catch (Exception $e)
             {
