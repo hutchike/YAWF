@@ -20,7 +20,7 @@ class Time
      */
     public static function msecs()
     {
-        return intval(microtime(TRUE)*1000);
+        return round(microtime(TRUE)*1000);
     }
 
     /**
