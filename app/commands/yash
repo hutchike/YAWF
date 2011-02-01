@@ -88,48 +88,49 @@ class Yet_another_shell extends Command
         global $app;
         $stdin = fopen($file, 'r');
         $this->say('> ');
-        $last = '';
-        while ($line = fgets($stdin))
+        $__last = '';
+        while ($__line = fgets($stdin))
         {
-            $line = rtrim(trim($line), ';');
-            if (substr($line, 0, 2) == '<?') continue; // ignore PHP open syntax
-            if (substr($line, 0, 2) == '!!') $line = $last; else $last = $line;
+            $__line = rtrim(trim($__line), ';');
+            if (substr($__line, 0, 2) == '<?') continue; // ignore PHP open tags
+            if (substr($__line, 0, 2) == '!!') $__line = $__last;
+            else $__last = $__line;
 
             // Parse "if", "else", "endif" logical constructs
 
-            if (preg_match('/if\s+(.*):$/', $line, $matches))
+            if (preg_match('/if\s+(.*):$/', $__line, $matches))
             {
                 eval('$bool = ' . $matches[1] . ' ;');
                 array_unshift($this->if_conds, $bool);
-                $line = '';
+                $__line = '';
             }
-            elseif (preg_match('/^else:/', $line))
+            elseif (preg_match('/^else:/', $__line))
             {
                 if ($this->if_conds) $this->if_conds[0] = !$this->if_conds[0];
-                $line = '';
+                $__line = '';
             }
-            elseif (preg_match('/^endif/', $line))
+            elseif (preg_match('/^endif/', $__line))
             {
                 array_shift($this->if_conds);
-                $line = '';
+                $__line = '';
             }
 
             // Parse special cases e.g. if, quit and comments
 
-            if (in_array(FALSE, $this->if_conds)) $line = '';
-            if ($line == 'quit') exit;
-            if ($line === '') $line = 'NULL'; // so we can eval a line
-            if (preg_match('/^(#|\/\/)/', $line)) continue; # comments
+            if (in_array(FALSE, $this->if_conds)) $__line = '';
+            if ($__line == 'quit') exit;
+            if ($__line === '') $__line = 'NULL'; // so we can eval a line
+            if (preg_match('/^(#|\/\/)/', $__line)) continue; # comments
 
             // Parse regular shell lines
 
-            $line = $this->parse($line);
+            $__line = $this->parse($__line);
             try
             {
                 $result = NULL;
                 $command_regexp = '/^[a-z]\w*\s+/';
-                eval(preg_match($command_regexp, $line) ? "$line;"
-                                                        : "\$result=($line);");
+                eval(preg_match($command_regexp, $__line) ?
+                        "$__line;" : "\$result=($__line);");
                 if (!is_null($result)) $this->say(print_r($result, TRUE)."\n");
             }
             catch (Exception $e)
