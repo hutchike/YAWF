@@ -266,6 +266,24 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
     }
 
     /**
+     * Execute a database query and return the result set data fetcher object.
+     *
+     * Note that Remote objects CANNOT run remote queries because the returned
+     * "fetcher" object is persistent so that multiple objects may be returned.
+     *
+     * @param String $sql the SQL to execute in the database query
+     * @return Object a result set data fetcher object
+     */
+    public function query($sql)
+    {
+        // Log a warning then call the "query" method to return a local fetcher
+
+        $class = $this->get_class();
+        Log::warn("Remote \"$class\" object running SQL query locally: $sql");
+        return parent::query($sql);
+    }
+
+    /**
      * Return a new model object, given a model name like "user_config"
      *
      * @param String $model the model name, normally with underscores
