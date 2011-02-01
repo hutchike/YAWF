@@ -50,7 +50,7 @@ class Spam extends YAWF // and depends on "HTML"
     public static function field()
     {
         $field = self::$field_name;
-        $addr = array_key($_SERVER, 'HTTP_X_FORWARDED_FOR', $_SERVER['REMOTE_ADDR']);
+        $addr = hostaddr();
         return "<input type=\"hidden\" name=\"$field\" value=\"$addr\"/>\n";
     }
 

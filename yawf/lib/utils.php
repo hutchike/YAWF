@@ -639,6 +639,19 @@ function hostname($file = '/etc/hostname')
 }
 
 /**
+ * Return the host IP address of the client by checking "HTTP_X_FORWARDED_FOR"
+ * and "REMOTE_ADDR" on the $_SERVER global array, or returning a default addr.
+ *
+ * @param String $default the default address to return if none is found
+ * @return String the client's host IP address
+ */
+function hostaddr($default = '')
+{
+    return array_key($_SERVER, 'HTTP_X_FORWARDED_FOR',
+                                array_key($_SERVER, 'REMOTE_ADDR', $default));
+}
+
+/**
  * Return some highlighted code
  *
  * @param String $code the code to highlight
