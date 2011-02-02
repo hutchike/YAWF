@@ -524,7 +524,6 @@ function h($text)
     return htmlentities($text);
 }
 
-load_tool('Translate');
 /**
  * Copy the Ruby on Rails "t()" translate function to translate some text
  *
@@ -534,6 +533,9 @@ load_tool('Translate');
  */
 function t($lookup, $replacements = array())
 {
+    static $is_loaded = FALSE; // for speed
+    if (!$is_loaded) load_tool('Translate');
+    $is_loaded = TRUE;
     $app = YAWF::prop(Symbol::APP);
     return $app ? Translate::into($app->get_lang(), $lookup, $replacements)
                 : NULL;
