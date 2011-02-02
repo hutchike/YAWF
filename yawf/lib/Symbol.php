@@ -45,6 +45,7 @@ class Symbol extends YAWF
     const JSONP = 'jsonp';
     const MAILER = 'mailer';
     const MINUTE = 'minute';
+    const NONE = 'none';
     const ONE = 'one';
     const PARAMS = 'params';
     const PASSWORD = 'password';

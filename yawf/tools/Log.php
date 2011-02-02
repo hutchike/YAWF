@@ -20,20 +20,20 @@
 class Log extends YAWF
 {
     /**
-     * The logging levels 0 thru 5 all have class constant names
+     * The logging levels 1 thru 7 all have class constant names
      */
-    const DEBUG = 0;
-    const INFO = 1;
-    const WARN = 2;
-    const ERROR = 3;
-    const ALERT = 4;
-    const TEST = 5;
-    const QUIET = 6;
+    const DEBUG = 1;
+    const INFO = 2;
+    const WARN = 3;
+    const ERROR = 4;
+    const ALERT = 5;
+    const TEST = 6;
+    const QUIET = 7;
 
     /**
      * The logging level names are all symbols from the Symbol library class
      */
-    private static $level_names = array(Symbol::DEBUG, Symbol::INFO, Symbol::WARN, Symbol::ERROR, Symbol::ALERT, Symbol::TEST, Symbol::QUIET);
+    private static $level_names = array(Symbol::NONE, Symbol::DEBUG, Symbol::INFO, Symbol::WARN, Symbol::ERROR, Symbol::ALERT, Symbol::TEST, Symbol::QUIET);
 
     /**
      * Logging happens at or above a logging level e.g. Log::DEBUG or Log::INFO
