@@ -225,6 +225,15 @@ class Yet_another_shell extends Command
         return $output;
     }
 
+    // Set a timeout after some secs, then call YAWF::finish by default
+
+    public function timeout($secs, $callback = 'YAWF::finish')
+    {
+        declare(ticks = 1);
+        pcntl_signal(SIGALRM, $callback, TRUE);
+        pcntl_alarm($secs);
+    }
+
     // Create a mock params object for tests
 
     public function params($array = array())
@@ -316,7 +325,7 @@ function run($file) { global $yash; return $yash->run($file); }
 function say($text) { global $yash; return $yash->say($text); }
 function sql($sql) { global $yash; return $yash->sql($sql); }
 function env($key, $value = NULL) { global $yash; return $yash->env($key, $value); }
-function setenv($key, $value) { putenv("$key=$value"); }
+function timeout($secs) { global $yash; return $yash->timeout($secs); }
 
 // HTTP functions
 

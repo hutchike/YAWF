@@ -668,4 +668,16 @@ function highlight($code)
     return '<div class="highlight">' . $pretty . '</div>';// wrap up in a <div>
 }
 
+/**
+ * This is a convenience function that calls the PHP "putenv" function.
+ * It seems to be a far better complement to the PHP "getenv" function?
+ *
+ * @param String $key the environment variable key to set
+ * @param String $value the environment variable value to set
+ */
+function setenv($key, $value)
+{
+    putenv("$key=$value");
+}
+
 // End of utils.php
