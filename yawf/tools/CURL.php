@@ -131,6 +131,7 @@ class CURL extends YAWF
 
         // Remove the cookies, throw errors as excptions, then return data
 
+        curl_close($c);
         unlink($cookies);
         if ($received_data === FALSE) throw new Exception(curl_error($c));
         return $received_data;
