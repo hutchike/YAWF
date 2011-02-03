@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Browscap</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> Browscap</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Browscap.ini parsing class with caching and update capabilities</p>
+<p class="description"><p>PHP version 5</p><p>LICENSE: This library is free software; you can redistribute it and/or  modify it under the terms of the GNU Lesser General Public  License as published by the Free Software Foundation; either  version 2.1 of the License, or (at your option) any later version.</p><p>This library is distributed in the hope that it will be useful,  but WITHOUT ANY WARRANTY; without even the implied warranty of  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU  Lesser General Public License for more details.</p><p>You should have received a copy of the GNU Lesser General Public  License along with this library; if not, write to the Free Software  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Jonathan Stoppani &lt;<a href="mailto:st.jonathan@gmail.com">st.jonathan@gmail.com</a>&gt;</li>
+				<li><span class="field">version:</span> 0.7</li>
+				<li><span class="field">copyright:</span> Copyright (c) 2006-2008 Jonathan Stoppani</li>
+				<li><span class="field">link:</span> <a href="http://garetjax.info/projects/browscap/">http://garetjax.info/projects/browscap/</a></li>
+				<li><span class="field">license:</span> <a href="http://www.gnu.org/licenses/lgpl.html">GNU Lesser General Public License</a></li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_plugins---Net---Browscap.php.html">/plugins/Net/Browscap.php</a> (line <span class="field">29</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#ORDER_FUNC_ARGS" title="details" class="const-name">ORDER_FUNC_ARGS</a> = 					<span class="var-type"> '$a, $b'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#ORDER_FUNC_LOGIC" title="details" class="const-name">ORDER_FUNC_LOGIC</a> = 					<span class="var-type"> '$a=strlen($a);$b=strlen($b);return$a==$b?0:($a&lt;$b?1:-1);'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#REGEX_DELIMITER" title="details" class="const-name">REGEX_DELIMITER</a> = 					<span class="var-type"> '@'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#REGEX_MODIFIERS" title="details" class="const-name">REGEX_MODIFIERS</a> = 					<span class="var-type"> 'i'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#REQUEST_HEADERS" title="details" class="const-name">REQUEST_HEADERS</a> = 					<span class="var-type"> &quot;GET %s HTTP/1.0\r\nHost: %s\r\nUser-Agent: %s\r\nConnection: Close\r\n\r\n&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#UPDATE_CURL" title="details" class="const-name">UPDATE_CURL</a> = 					<span class="var-type"> 'cURL'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#UPDATE_FOPEN" title="details" class="const-name">UPDATE_FOPEN</a> = 					<span class="var-type"> 'URL-wrapper'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#UPDATE_FSOCKOPEN" title="details" class="const-name">UPDATE_FSOCKOPEN</a> = 					<span class="var-type"> 'socket'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#UPDATE_LOCAL" title="details" class="const-name">UPDATE_LOCAL</a> = 					<span class="var-type"> 'local'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#VALUES_TO_QUOTE" title="details" class="const-name">VALUES_TO_QUOTE</a> = 					<span class="var-type"> 'Browser|Parent'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#VERSION" title="details" class="const-name">VERSION</a> = 					<span class="var-type"> '0.7'</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																																																																																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$cacheDir" title="details" class="var-name">$cacheDir</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$cacheFilename" title="details" class="var-name">$cacheFilename</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">mixed</span>
+					<a href="#$doAutoUpdate" title="details" class="var-name">$doAutoUpdate</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">mixed</span>
+					<a href="#$errorInterval" title="details" class="var-name">$errorInterval</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$iniFilename" title="details" class="var-name">$iniFilename</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$localFile" title="details" class="var-name">$localFile</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">bool</span>
+					<a href="#$lowercase" title="details" class="var-name">$lowercase</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">mixed</span>
+					<a href="#$remoteIniUrl" title="details" class="var-name">$remoteIniUrl</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">mixed</span>
+					<a href="#$remoteVerUrl" title="details" class="var-name">$remoteVerUrl</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">bool</span>
+					<a href="#$silent" title="details" class="var-name">$silent</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">mixed</span>
+					<a href="#$timeout" title="details" class="var-name">$timeout</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">mixed</span>
+					<a href="#$updateInterval" title="details" class="var-name">$updateInterval</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">mixed</span>
+					<a href="#$updateMethod" title="details" class="var-name">$updateMethod</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$userAgent" title="details" class="var-name">$userAgent</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																								<div class="method-definition">
+					<img src="../media/images/Constructor.png" alt=" "/>
+											<span class="method-result">Browscap</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$cache_dir</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">stdObject</span>
+										<a href="#getBrowser" title="details" class="method-name">getBrowser</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$user_agent</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$return_array</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">bool</span>
+										<a href="#updateCache" title="details" class="method-name">updateCache</a>
+										()
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$cacheDir" id="$cacheDir"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$cacheDir</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">153</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Path to the cache directory</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$cacheFilename" id="$cacheFilename"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$cacheFilename</span>
+			 = <span class="var-default"> 'cache.php'</span>			(line <span class="line-number">139</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Where to store the cached PHP arrays.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$doAutoUpdate" id="$doAutoUpdate"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$doAutoUpdate</span>
+			 = <span class="var-default"> true</span>			(line <span class="line-number">97</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$errorInterval" id="$errorInterval"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$errorInterval</span>
+			 = <span class="var-default"> 7200</span>			(line <span class="line-number">96</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$iniFilename" id="$iniFilename"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$iniFilename</span>
+			 = <span class="var-default"> 'browscap.ini'</span>			(line <span class="line-number">146</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Where to store the downloaded ini file.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$localFile" id="$localFile"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$localFile</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">106</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The path of the local version of the browscap.ini file from which to  update (to be set only if used).</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$lowercase" id="$lowercase"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">bool</span>
+			<span class="var-name">$lowercase</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">122</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Flag to enable only lowercase indexes in the result.</p>
+<p class="description"><p>The cache has to be rebuilt in order to apply this option.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$remoteIniUrl" id="$remoteIniUrl"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$remoteIniUrl</span>
+			 = <span class="var-default"> 'http://browsers.garykeith.com/stream.asp?BrowsCapINI'</span>			(line <span class="line-number">92</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Options for auto update capabilities</p>
+<p class="description"><p>$remoteVerUrl:	The location to use to check out if a new version of the 					browscap.ini file is available.  $remoteIniUrl:	The location from which download the ini file. 					The placeholder for the file should be represented by a %s.  $timeout:		The timeout for the requests.  $updateInterval: The update interval in seconds.  $errorInterval:	The next update interval in seconds in case of an error.  $doAutoUpdate:	Flag to disable the automatic interval based update.  $updateMethod:	The method to use to update the file, has to be a value of 					an UPDATE_* constant, null or false.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$remoteVerUrl" id="$remoteVerUrl"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$remoteVerUrl</span>
+			 = <span class="var-default"> 'http://updates.browserproject.com/version-date.asp'</span>			(line <span class="line-number">93</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$silent" id="$silent"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">bool</span>
+			<span class="var-name">$silent</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">132</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Flag to enable/disable silent error management.</p>
+<p class="description"><p>In case of an error during the update process the class returns an empty  array/object if the update process can't take place and the browscap.ini  file does not exist.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$timeout" id="$timeout"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$timeout</span>
+			 = <span class="var-default"> 5</span>			(line <span class="line-number">94</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$updateInterval" id="$updateInterval"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$updateInterval</span>
+			 = <span class="var-default"> 432000</span>			(line <span class="line-number">95</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$updateMethod" id="$updateMethod"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$updateMethod</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">98</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$userAgent" id="$userAgent"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$userAgent</span>
+			 = <span class="var-default"> 'Browser Capabilities Project - PHP Browscap/%v %m'</span>			(line <span class="line-number">114</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The useragent to include in the requests made by the class during the  update process.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Constructor.png" />
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">178</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor class, checks for the existence of (and loads) the cache and  if needed updated the definitions</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Browscap</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$cache_dir</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$cache_dir</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetBrowser" id="getBrowser"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">getBrowser</span> (line <span class="line-number">211</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets the information about the browser by User Agent</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the object containing the browsers details. Array if                      $return_array is set to true.</li>
+				<li><span class="field">throws:</span> Browscap_Exception</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">stdObject</span>
+		<span class="method-name">
+			getBrowser
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$user_agent</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$return_array</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$user_agent</span><span class="var-description">: the user agent string</span>			</li>
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$return_array</span><span class="var-description">: whether return an array or an object</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodupdateCache" id="updateCache"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">updateCache</span> (line <span class="line-number">300</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parses the ini file and updates the cache files</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> whether the file was correctly written to the disk</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			updateCache
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constORDER_FUNC_ARGS" id="ORDER_FUNC_ARGS"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">ORDER_FUNC_ARGS</span>
+			 = <span class="const-default"> '$a, $b'</span>
+			(line <span class="line-number">70</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Definitions of the function used by the uasort() function to order the  userAgents array.</p>
+<p class="description"><p>ORDER_FUNC_ARGS:	 Arguments that the function will take.  ORDER_FUNC_LOGIC: Internal logic of the function.</p></p>
+	
+	
+</div>
+<a name="constORDER_FUNC_LOGIC" id="ORDER_FUNC_LOGIC"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">ORDER_FUNC_LOGIC</span>
+			 = <span class="const-default"> '$a=strlen($a);$b=strlen($b);return$a==$b?0:($a&lt;$b?1:-1);'</span>
+			(line <span class="line-number">71</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constREGEX_DELIMITER" id="REGEX_DELIMITER"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">REGEX_DELIMITER</span>
+			 = <span class="const-default"> '@'</span>
+			(line <span class="line-number">55</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Options for regex patterns.</p>
+<p class="description"><p>REGEX_DELIMITER:	 Delimiter of all the regex patterns in the whole class.  REGEX_MODIFIERS:	 Regex modifiers.</p></p>
+	
+	
+</div>
+<a name="constREGEX_MODIFIERS" id="REGEX_MODIFIERS"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">REGEX_MODIFIERS</span>
+			 = <span class="const-default"> 'i'</span>
+			(line <span class="line-number">56</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constREQUEST_HEADERS" id="REQUEST_HEADERS"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">REQUEST_HEADERS</span>
+			 = <span class="const-default"> &quot;GET %s HTTP/1.0\r\nHost: %s\r\nUser-Agent: %s\r\nConnection: Close\r\n\r\n&quot;</span>
+			(line <span class="line-number">76</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The headers to be sent for checking the version and requesting the file.</p>
+	
+	
+</div>
+<a name="constUPDATE_CURL" id="UPDATE_CURL"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">UPDATE_CURL</span>
+			 = <span class="const-default"> 'cURL'</span>
+			(line <span class="line-number">46</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constUPDATE_FOPEN" id="UPDATE_FOPEN"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">UPDATE_FOPEN</span>
+			 = <span class="const-default"> 'URL-wrapper'</span>
+			(line <span class="line-number">44</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Different ways to access remote and local files.</p>
+<p class="description"><p>UPDATE_FOPEN:	 Uses the fopen url wrapper (use file_get_contents).  UPDATE_FSOCKOPEN: Uses the socket functions (fsockopen).  UPDATE_CURL:		 Uses the cURL extension.  UPDATE_LOCAL:	 Updates from a local file (file_get_contents).</p></p>
+	
+	
+</div>
+<a name="constUPDATE_FSOCKOPEN" id="UPDATE_FSOCKOPEN"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">UPDATE_FSOCKOPEN</span>
+			 = <span class="const-default"> 'socket'</span>
+			(line <span class="line-number">45</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constUPDATE_LOCAL" id="UPDATE_LOCAL"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">UPDATE_LOCAL</span>
+			 = <span class="const-default"> 'local'</span>
+			(line <span class="line-number">47</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constVALUES_TO_QUOTE" id="VALUES_TO_QUOTE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">VALUES_TO_QUOTE</span>
+			 = <span class="const-default"> 'Browser|Parent'</span>
+			(line <span class="line-number">61</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The values to quote in the ini file</p>
+	
+	
+</div>
+<a name="constVERSION" id="VERSION"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">VERSION</span>
+			 = <span class="const-default"> '0.7'</span>
+			(line <span class="line-number">34</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Current version of the class.</p>
+	
+	
+</div>
+						
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 03 Feb 2011 22:51:39 +0800 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>
