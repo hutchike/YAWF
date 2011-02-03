@@ -105,6 +105,17 @@ class Request extends YAWF implements Mailer
     }
 
     /**
+     * Return the whole path
+     *
+     * @return String the requested part of the path
+     * @return String the whole path
+     */
+    public function path($remove_extn = FALSE)
+    {
+        return $this->app->get_path($remove_extn);
+    }
+
+    /**
      * Return the language
      *
      * @return String the language setting (as a two-letter language code)

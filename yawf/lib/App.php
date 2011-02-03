@@ -203,11 +203,13 @@ class App extends YAWF implements Mailer
     /**
      * Get the path (i.e. "folder/file")
      *
+     * @param Boolean $remove_extn whether to remove the file extension or not
      * @return String the path in the URI
      */
-    public function get_path()
+    public function get_path($remove_extn = FALSE)
     {
-        return join('/', $this->parts);
+        $path = join('/', $this->parts);
+        return $remove_extn ? preg_replace('/\.\w+$/', '', $path) : $path;
     }
 
     /**
