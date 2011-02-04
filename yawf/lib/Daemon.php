@@ -38,6 +38,11 @@ class Daemon extends Command
         parent::__construct($dir);
         if ($pid = $this->is_running()) $this->quit();
         $this->write_pid_to_file();
+
+        // Log output to a log file named "YYYYMMDD.daemon[.test].log"
+
+        $type = $this->opts->test ? 'daemon.test' : 'daemon';
+        Log::type($type);
     }
 
     /**
