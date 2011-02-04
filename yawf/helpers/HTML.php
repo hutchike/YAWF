@@ -45,12 +45,23 @@ class HTML extends YAWF // and depends on "AppView" class in "App.php"
      */
     public static function attrs($attrs)
     {
+        // Apply a class for an HTML element "type" attribute (e.g. "input")
+
+        $type = array_key($attrs, 'type');
+        if ($type && ($class_for_type = array_key(self::$class_for_type, $type)))
+        {
+            $class = array_key($attrs, 'class');
+            $attrs['class'] = $class ? $class . ' ' . $class_for_type
+                                     : $class_for_type;
+        }
+
+        // Turn an assoc array of attributes into a string of HTML attributes
+
         $pairs = array();
         foreach ($attrs as $attr => $value)
         {
             if (strlen($value) == 0) continue;
             $pairs[] = $attr . '="' . $value . '"';
-            if ($attr == 'type' && $class = array_key(self::$class_for_type, $value)) $pairs[] = 'class="' . $class . '"';
         }
         return join(' ', $pairs);
     }
