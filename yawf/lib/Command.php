@@ -61,6 +61,7 @@ class Command // cannot extend YAWF coz "utils" not yet loaded
 
         $this->app = $this->opts->test ? new App_test($this->path)
                                        : new App($this->path);
+        $this->app->new_controller('Controller'); // for email
 
         // Log output to a log file named "YYYYMMDD.command[.test].log"
 
