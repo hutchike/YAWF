@@ -518,7 +518,7 @@ class AppView extends YAWF
     {
         $render = self::$render;
         assert('$render instanceof Object');
-        if (!is_null($data)) $render->merge(new Object($data));
+        if (!is_null($data)) $render->merge(new Object($data), TRUE);
         assert('$render->app instanceof App');
         return $render->app->render_view('partials/' . $view, $render);
     }
