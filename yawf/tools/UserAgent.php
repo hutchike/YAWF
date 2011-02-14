@@ -39,15 +39,12 @@ class UserAgent
         $version = ($version && $browser && strpos($version, $browser) === 0) ?
                                 substr($version, strlen($browser)+1) : $version;
         $op_sys = array_key($browscap, 'Platform');
-        $server = YAWF::prop(Symbol::SERVER);
-        $languages = strtolower($server->http_accept_language);
         $is_mobile = array_key($browscap, 'isMobileDevice');
         $details = array(
             'op_sys' => $op_sys,
             'browser' => $browser,
             'version' => $version,
             'browser_version' => $browser . ($version ? " $version" : ''),
-            'languages' => $languages,
             'is_mobile' => $is_mobile,
         );
         return self::$user_agents[$user_agent] = new Object($details);
