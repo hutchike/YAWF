@@ -132,6 +132,7 @@ class App_command extends Command
         // Which directory holds the YASH test files?
 
         if (!is_dir($test_dir)) $this->quit("Test directory \"$test_dir\" does not exist");
+        $app_test_dir = basename(getcwd()) . '/' . $test_dir;
 
         // Create an array of YASH test files to run
 
@@ -142,7 +143,7 @@ class App_command extends Command
             {
                 if (file_exists("$test_dir/$test")) $tests[] = $test;
                 elseif (file_exists("$test_dir/$test.yash")) $tests[] = "$test.yash";
-                else $this->quit("Test file \"$test_dir/$test\" does not exist");
+                else $this->quit("Test file \"$app_test_dir/$test\" does not exist");
             }
         }
         else // find all test folders and files in the directory
@@ -165,13 +166,13 @@ class App_command extends Command
         {
             if (is_dir("$test_dir/$test")) $this->test("$test_dir/$test", FALSE);
             if (!preg_match('/\.yash$/', $test)) continue; // must be yash
-            print "Running test file \"$test_dir/$test\":\n";
+            print "Running test file \"$app_test_dir/$test\":\n";
             $highlight = "perl -pe 's/failed/\e[1;31;43m$&\e[0m/gi'";
             system("yash -quiet -test < $test_dir/$test | $highlight");
             print "\n";
         }
 
-        if (!$this->args && !$tests) print "No test files found in \"$test_dir\"\n\n";
+        if (!$this->args && !$tests) print "No test files found in \"$app_test_dir\"\n\n";
     }
 
     /**
