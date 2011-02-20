@@ -1,6 +1,5 @@
 <?
 load_tool 'UserAgent'
-server(array('HTTP_ACCEPT_LANGUAGE' => 'en-us'))
 
 // Google Chrome on Linux
 $ua1 = UserAgent::details('Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/534.13 (KHTML, like Gecko) Chrome/9.0.597.19 Safari/534.13')
@@ -8,5 +7,4 @@ $ua1 = UserAgent::details('Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit
 // Chrome tests
 should "be Linux op sys", $ua1->op_sys == 'Linux', $ua1->op_sys
 should "be Chrome browser", $ua1->browser_version == 'Chrome 9.0', $ua1->browser_version
-should "be en-us languages", $ua1->languages == 'en-us', $ua1->languages
 should_not "be mobile", $ua1->is_mobile == TRUE, $ua1->is_mobile
