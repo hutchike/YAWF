@@ -680,4 +680,14 @@ function setenv($key, $value)
     putenv("$key=$value");
 }
 
+/**
+ * Return the current user, for example "www-data"
+ *
+ * @return String the current user
+ */
+function user()
+{
+    return first(getenv('USER'), getenv('APACHE_RUN_USER'));
+}
+
 // End of utils.php
