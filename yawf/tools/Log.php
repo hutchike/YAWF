@@ -95,11 +95,13 @@ class Log extends YAWF
         $path = file_exists('app/logs') ? 'app/logs' : 'yawf/logs';
         $date = date('Ymd');
         $type = self::$type ? '.' . self::$type : '';
-        $fh = fopen("$path/$date$type.log", 'a'); // append
+        $mask = umask(0002); // allowing both cmd line and web server to write
+        $fh = fopen("$path/$date$type.log", 'a'); // append and create if nec.
         $time = date('H:i:s');
         $level = self::level_name($level);
         fwrite($fh, "$time $level $line\n");
         fclose($fh);
+        umask($mask);
     }
 
     /**
