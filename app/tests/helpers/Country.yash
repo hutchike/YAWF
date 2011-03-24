@@ -13,5 +13,8 @@ should "find timezone -5 for NY", $tz == -5, $tz
 $tz = Country::time_zone('usa', 'ca')
 should "find timezone -8 for CA", $tz == -8, $tz
 
-$tz = Country::time_zone('bra', 'ny')
+$tz = Country::time_zone('bra', 'ca')
 should_not "find timezone -8 for CA outside the USA", $tz == -8, $tz
+
+$tz = Country::time_zone('MX')
+should "find timezone -6 for Mexico", $tz == -6, $tz
