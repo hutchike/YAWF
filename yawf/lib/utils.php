@@ -393,7 +393,7 @@ function load_controllers() // list of controllers
 /**
  * Load a helper
  *
- * @param String $controller the controller to load
+ * @param String $helper the helper to load
  */
 function load_helper($helper) { load_helpers($helper); }
 
@@ -411,7 +411,7 @@ function load_helpers() // list of helpers
 /**
  * Load an interface
  *
- * @param String $controller the controller to load
+ * @param String $interface the interface to load
  */
 function load_interface($interface) { load_interfaces($interface); }
 
@@ -429,7 +429,7 @@ function load_interfaces() // list of interfaces
 /**
  * Load a model
  *
- * @param String $controller the controller to load
+ * @param String $model the model to load
  */
 function load_model($model) { load_models($model); }
 
@@ -452,7 +452,7 @@ function load_models() // list of models
 /**
  * Load a plugin
  *
- * @param String $controller the controller to load
+ * @param String $plugin the plugin to load
  */
 function load_plugin($plugin) { load_plugins($plugin); }
 
@@ -470,7 +470,7 @@ function load_plugins() // list of plugins
 /**
  * Load a service
  *
- * @param String $controller the controller to load
+ * @param String $service the service to load
  */
 function load_service($service) { load_services($service); }
 
@@ -488,7 +488,7 @@ function load_services() // list of services
 /**
  * Load a tool
  *
- * @param String $controller the controller to load
+ * @param String $tool the tool to load
  */
 function load_tool($tool) { load_tools($tool); }
 
