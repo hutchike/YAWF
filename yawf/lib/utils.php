@@ -105,6 +105,20 @@ function object_to_array($object)
 }
 
 /**
+ * Return an array of data from an array of objects, e.g. models
+ *
+ * @param Array $array the array of objects
+ * @return Array the array of data
+ */
+function object_data($objects)
+{
+    assert('is_array($objects)');
+    $data = array();
+    foreach ($objects as $object) $data[] = $object->data();
+    return $data;
+}
+
+/**
  * Return a list of field values from a list of objects.
  * If a single field is passed, then a list is returned.
  * If two fields are passed, an assoc array is returned,
