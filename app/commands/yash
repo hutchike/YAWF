@@ -231,7 +231,7 @@ class Yet_another_shell extends Command
     {
         if (!function_exists('pcntl_signal'))
         {
-            puts('Warning: PCNTL functions do not exist in this PHP command');
+            puts('Warning: Cannot timeout because no PCNTL functions compiled');
             return;
         }
 
