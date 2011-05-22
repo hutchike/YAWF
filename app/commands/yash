@@ -229,6 +229,12 @@ class Yet_another_shell extends Command
 
     public function timeout($secs, $callback = 'YAWF::finish')
     {
+        if (!function_exists('pcntl_signal'))
+        {
+            puts('Warning: PCNTL functions do not exist in this PHP command');
+            return;
+        }
+
         declare(ticks = 1);
         pcntl_signal(SIGALRM, $callback, TRUE);
         pcntl_alarm($secs);
