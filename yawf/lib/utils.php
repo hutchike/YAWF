@@ -107,8 +107,8 @@ function object_to_array($object)
 /**
  * Return an array of data from an array of objects, e.g. models
  *
- * @param Array $array the array of objects
- * @return Array the array of data
+ * @param Array $array the array of objects whose data is to be extracted
+ * @return Array the array of arrays of object data
  */
 function object_data($objects)
 {
