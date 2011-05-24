@@ -122,6 +122,7 @@ class Cache_service extends REST_service
         if (array_key($options, 'no_query')) $uri = preg_replace('/\?.*$/', '', $uri);
         if (array_key($options, 'no_anchor')) $uri = preg_replace('/#.*$/', '', $uri);
         $path = file_exists('app/tmp/cache') ? 'app/tmp/cache' : 'yawf/tmp/cache';
+        if (!is_dir($path)) Log::error('No cache folder to write cache data');
         $this->cache_path = $path . '/' . md5($uri);
         return $this->cache_path; // for testing
     }
