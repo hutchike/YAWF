@@ -154,7 +154,8 @@ class Cache_service extends REST_service
     {
         $expires = time() + $this->cache_secs;
         $contents = $expires . "\n" . json_encode($data);
-        file_put_contents($this->cache_path, $contents);
+        @file_put_contents($this->cache_path, $contents);
+        if (isset($php_errormsg)) $this->app->add_error_message($php_errormsg);
     }
 
     /**

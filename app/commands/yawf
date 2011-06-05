@@ -162,7 +162,8 @@ End_of_usage;
         foreach ($writable_dirs as $dir)
         {
             $writeable_dir = "$app_dir/$dir";
-            if (is_dir($writeable_dir)) chmod($writeable_dir, 0777);
+            if (!is_dir($writeable_dir)) mkdir($writeable_dir, 0755, TRUE);
+            chmod($writeable_dir, 0777);
         }
     }
 
