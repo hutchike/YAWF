@@ -16,14 +16,18 @@ load_service('REST');
 /**
  * The Cache_service class allows app services to implement
  * caching by calling a method like "$this->cache_secs(10)".
+ * Cached data is stored in the cache directory after being
+ * encrypted according to its service subclass and object ID
+ * which together enable the data to be decrypted to be read.
+ *
+ * Note: For encryption, please install the Mcrypt extension.
  *
  * @author Kevin Hutchinson <kevin@guanoo.com>
  */
 class Cache_service extends REST_service
 {
-    const DEFAULT_EXPIRY_SECS = 5; // 5 seconds
+    const DEFAULT_EXPIRY_SECS = 10; // 10 seconds
 
-    protected $cache_path;
     protected $cache_secs;
 
     /**
@@ -50,7 +54,6 @@ class Cache_service extends REST_service
 
         // First look for cached contents
 
-        $this->set_cache_path($id);
         $data = $this->read_cache($id);
         if ($data) return $data;
 
@@ -75,7 +78,6 @@ class Cache_service extends REST_service
 
         // Found the ID, so clean the cache
 
-        $this->set_cache_path($params->id);
         $this->write_cache(NULL, $params->id);
         return parent::put($params);
     }
@@ -121,17 +123,16 @@ class Cache_service extends REST_service
     }
 
     /**
-     * Set the cache path by taking the checksum of the passed iddentifier
+     * Get the cache path by taking the checksum of the passed iddentifier
      *
      * @param Integer $id the ID of the object being cached by the service
      * @return String the cache path (used for testing only)
      */
-    protected function set_cache_path($id)
+    protected function get_cache_path_for($id)
     {
         $path = file_exists('app/tmp/cache') ? 'app/tmp/cache' : 'yawf/tmp/cache';
         if (!is_dir($path)) Log::error('No cache folder to write cache data');
-        $this->cache_path = $path . '/' . md5(get_class($this) . '_' . $id);
-        return $this->cache_path; // for testing
+        return $path . '/' . md5(get_class($this) . '_' . $id);
     }
 
     /**
@@ -142,8 +143,9 @@ class Cache_service extends REST_service
      */
     protected function read_cache($id)
     {
-        if (!file_exists($this->cache_path)) return NULL;
-        $contents = $this->decrypt(file_get_contents($this->cache_path), $id);
+        $cache_path = $this->get_cache_path_for($id);
+        if (!file_exists($cache_path)) return NULL;
+        $contents = $this->decrypt(file_get_contents($cache_path), $id);
         if (preg_match('/^(\d+)\n(.+)$/s', $contents, $matches))
         {
             $expires = $matches[1];
@@ -161,9 +163,10 @@ class Cache_service extends REST_service
      */
     protected function write_cache($data, $id)
     {
+        $cache_path = $this->get_cache_path_for($id);
         $expires = time() + $this->cache_secs;
         $contents = $expires . "\n" . json_encode($data);
-        @file_put_contents($this->cache_path, $this->encrypt($contents, $id));
+        @file_put_contents($cache_path, $this->encrypt($contents, $id));
         if (isset($php_errormsg)) $this->app->add_error_message($php_errormsg);
     }
 
