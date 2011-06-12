@@ -42,23 +42,22 @@ class Cache_service extends REST_service
      */
     public function get($params)
     {
-        // Look for the service object ID
+        // Look for the service object ID - without it we can't cache
 
         $id = preg_match('/ id = "(\d+)"/', $params->where, $matches)
             ? $matches[1] : 0;
         if (!$id) return parent::get($params);
-Log::alert('GET ' . get_class($this) . ':' . $id);
 
         // First look for cached contents
 
         $this->set_cache_path($id);
-        $data = $this->read_cache();
+        $data = $this->read_cache($id);
         if ($data) return $data;
 
         // If not found or expired, write new cached data
 
         $data = parent::get($params);
-        if ($this->cache_secs) $this->write_cache($data);
+        if ($this->cache_secs) $this->write_cache($data, $id);
         return $data;
     }
 
@@ -70,11 +69,14 @@ Log::alert('GET ' . get_class($this) . ':' . $id);
      */
     public function put($params)
     {
+        // We can only cache when there's an object ID
+
         if (!$params->id) return parent::put($params);
 
-Log::alert('PUT ' . get_class($this) . ':' . $params->id);
+        // Found the ID, so clean the cache
+
         $this->set_cache_path($params->id);
-        $this->write_cache(NULL);
+        $this->write_cache(NULL, $params->id);
         return parent::put($params);
     }
 
@@ -128,19 +130,20 @@ Log::alert('PUT ' . get_class($this) . ':' . $params->id);
     {
         $path = file_exists('app/tmp/cache') ? 'app/tmp/cache' : 'yawf/tmp/cache';
         if (!is_dir($path)) Log::error('No cache folder to write cache data');
-        $this->cache_path = $path . '/' . get_class($this) . '_' . $id;
+        $this->cache_path = $path . '/' . md5(get_class($this) . '_' . $id);
         return $this->cache_path; // for testing
     }
 
     /**
      * Read some contents from the cache, using the first line as an expiry time
      *
+     * @param Integer $id the ID of the object being cached by the service
      * @return Array the cached data, or NULL if not found or expired
      */
-    protected function read_cache()
+    protected function read_cache($id)
     {
         if (!file_exists($this->cache_path)) return NULL;
-        $contents = file_get_contents($this->cache_path);
+        $contents = $this->decrypt(file_get_contents($this->cache_path), $id);
         if (preg_match('/^(\d+)\n(.+)$/s', $contents, $matches))
         {
             $expires = $matches[1];
@@ -154,42 +157,51 @@ Log::alert('PUT ' . get_class($this) . ':' . $params->id);
      * Write some contents to the cache, using the first line as an expiry time
      *
      * @param Array $data the data to write to the cache
+     * @param Integer $id the ID of the object being cached by the service
      */
-    protected function write_cache($data)
+    protected function write_cache($data, $id)
     {
         $expires = time() + $this->cache_secs;
         $contents = $expires . "\n" . json_encode($data);
-        @file_put_contents($this->cache_path, $contents);
+        @file_put_contents($this->cache_path, $this->encrypt($contents, $id));
         if (isset($php_errormsg)) $this->app->add_error_message($php_errormsg);
     }
 
     /**
-     * Clean the cache every hour with a crontab entry like this:
-     * 0 * * * * /usr/bin/curl -s www.website.com/folder/clean_cache > /dev/null
+     * Encrypt some data to write to a cache file
      *
-     * @param Integer $expiry_secs the maximum age of a cached file in the cache
+     * @param Array $data the data to write to the cache
+     * @param Integer $id the ID of the object being cached by the service
+     * @return String the encrypted data
      */
-    protected function clean_cache($expiry_secs = NULL)
+    protected function encrypt($data, $id)
     {
-        $expiry_secs = first($expiry_secs,
-                             Config::get('CACHE_EXPIRY_SECS'),
-                             self::DEFAULT_EXPIRY_SECS);
-        $time_now = time();
-        $cache_dir = preg_replace('/\w+$/', '', $this->cache_path);
-        $dir = opendir($cache_dir);
-        while ($cache_file = readdir($dir))
-        {
-            if (substr($cache_file, 0, 1) === '.') continue;
-            $cache_path = $cache_dir . $cache_file;
-            $mod_time = filemtime($cache_path);
-            $age_secs = $time_now - $mod_time;
-            if ($age_secs >= $expiry_secs)
-            {
-                unlink($cache_path);
-                Log::info("Deleted cache file $cache_path at age $age_secs seconds");
-            }
-        }
-        closedir($dir);
+        if (!function_exists('mcrypt_encrypt')) return $data;
+        return trim(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $this->salt($id), $data, MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)))); 
+    }
+
+    /**
+     * Decrypt some data that has been read from a cache file
+     *
+     * @param Array $data the data to write to the cache
+     * @param Integer $id the ID of the object being cached by the service
+     * @return String the decrypted data
+     */
+    protected function decrypt($data, $id)
+    {
+        if (!function_exists('mcrypt_decrypt')) return $data;
+        return trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $this->salt($id), base64_decode($data), MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND))); 
+    }
+
+    /**
+     * Get an encryption salt from an ID nunmber for this service subclass
+     *
+     * @param Integer $id the ID of the object being cached by the service
+     * @return Data the encryption salt
+     */
+    protected function salt($id)
+    {
+        return hash("SHA256", get_class($this) . $id, TRUE);
     }
 }
 
