@@ -538,7 +538,7 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
         foreach ($conditions as $field => $condition)
         {
             if ($this->is_virtual($field)) continue;
-            $op = ($condition !== trim($condition, '%') ? ' like ' : '=');
+            $op = ($condition != trim($condition, '%') ? 'like' : '=');
             if (preg_match('/^([<>]=?)\s*(.*)$/', $condition, $matches))
             {
                 $op = $matches[1];

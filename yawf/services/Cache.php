@@ -25,7 +25,6 @@ class Cache_service extends REST_service
 
     protected $cache_path;
     protected $cache_secs;
-    protected $cache_options;
 
     /**
      * Set the default cache seconds to store cached sevice data
@@ -43,9 +42,16 @@ class Cache_service extends REST_service
      */
     public function get($params)
     {
+        // Look for the service object ID
+
+        $id = preg_match('/ id = "(\d+)"/', $params->where, $matches)
+            ? $matches[1] : 0;
+        if (!$id) return parent::get($params);
+Log::alert('GET ' . get_class($this) . ':' . $id);
+
         // First look for cached contents
 
-        $this->set_cache_path();
+        $this->set_cache_path($id);
         $data = $this->read_cache();
         if ($data) return $data;
 
@@ -54,6 +60,22 @@ class Cache_service extends REST_service
         $data = parent::get($params);
         if ($this->cache_secs) $this->write_cache($data);
         return $data;
+    }
+
+    /**
+     * Uncache the data returned by the "PUT" REST method
+     *
+     * @param Object $params any parameters passed to the service
+     * @return Array data to return to the service client
+     */
+    public function put($params)
+    {
+        if (!$params->id) return parent::put($params);
+
+Log::alert('PUT ' . get_class($this) . ':' . $params->id);
+        $this->set_cache_path($params->id);
+        $this->write_cache(NULL);
+        return parent::put($params);
     }
 
     /**
@@ -97,33 +119,16 @@ class Cache_service extends REST_service
     }
 
     /**
-     * Get/set the cache options
+     * Set the cache path by taking the checksum of the passed iddentifier
      *
-     * @param Array $options caching options such as "no_query" and "no_anchor"
-     * @return Array the cache options
-     */
-    protected function cache_options($options = NULL)
-    {
-        if (is_array($options)) $this->cache_options = $options;
-        elseif (!is_array($this->cache_options)) $this->cache_options = array();
-        return $this->cache_options;
-    }
-
-    /**
-     * Set the cache path by taking the checksum of the full request URI
-     *
-     * @param String $uri the URI to transform into a path to a cached file
+     * @param Integer $id the ID of the object being cached by the service
      * @return String the cache path (used for testing only)
      */
-    protected function set_cache_path($uri = NULL)
+    protected function set_cache_path($id)
     {
-        $options = $this->cache_options();
-        if (!$uri) $uri = $_SERVER['REQUEST_URI'];
-        if (array_key($options, 'no_query')) $uri = preg_replace('/\?.*$/', '', $uri);
-        if (array_key($options, 'no_anchor')) $uri = preg_replace('/#.*$/', '', $uri);
         $path = file_exists('app/tmp/cache') ? 'app/tmp/cache' : 'yawf/tmp/cache';
         if (!is_dir($path)) Log::error('No cache folder to write cache data');
-        $this->cache_path = $path . '/' . md5($uri);
+        $this->cache_path = $path . '/' . get_class($this) . '_' . $id;
         return $this->cache_path; // for testing
     }
 
