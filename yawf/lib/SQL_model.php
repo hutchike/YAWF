@@ -529,12 +529,14 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
      * Return a SQL "where" clause for an array of conditions, or field values
      *
      * @param Array $conditions an array of conditions (optional)
+     * @param Boolean $inc_where whether to include the word "where" or not
      * @return String a SQL "where" clause from the conditions or field values
      */
-    protected function where_clause($conditions = array())
+    protected function where_clause($conditions = array(), $inc_where = TRUE)
     {
+        $where = $inc_where ? 'where ' : '';
         $conditions = $conditions ? $conditions : $this->data;
-        if ($clause = array_key($conditions, 'where')) return "where $clause";
+        if ($clause = array_key($conditions, 'where')) return $where . $clause;
         foreach ($conditions as $field => $condition)
         {
             if ($this->is_virtual($field)) continue;
@@ -554,7 +556,7 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
             if ($op != 'in') $condition = $this->quote($condition);
             $clause .= "$field $op $condition";
         }
-        return $clause ? "where $clause" : '';
+        return $clause ? $where . $clause : '';
     }
 
     /**

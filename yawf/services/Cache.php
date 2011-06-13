@@ -46,10 +46,10 @@ class Cache_service extends REST_service
      */
     public function get($params)
     {
-        // Look for the service object ID - without it we can't cache
+        // Look for a solo object ID param - we cannot cache with conditions
 
-        $id = preg_match('/ id = "(\d+)"/', $params->where, $matches)
-            ? $matches[1] : 0;
+        $id = preg_match('/^id = "(\d+)"$/', $params->where, $matches)
+            ? $matches[1] : intval($params->id);
         if (!$id) return parent::get($params);
 
         // First look for cached contents

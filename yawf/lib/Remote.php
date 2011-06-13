@@ -237,7 +237,7 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
 
         $params = array();
         if ($where = array_key($conditions, 'where')) $params['where'] = $where;
-        else $params['where'] = $this->where_clause($conditions);
+        else $params['where'] = $this->where_clause($conditions, FALSE);
         if (!$params['where']) $params['where'] = 'true'; // coz can't be blank
         $params['join'] = array_key($conditions, 'join');
         $params['order'] = $this->get_order();
