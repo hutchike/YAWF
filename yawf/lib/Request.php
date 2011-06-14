@@ -516,7 +516,8 @@ class Request_session extends YAWF
      */
     public function __get($key)
     {
-        return array_key($this->session, $key);
+        if (is_null($value = array_key($this->session, $key))) return NULL;
+        return $this->is_serialized($key) ? unserialize($value) : $value;
     }
 
     /**
@@ -528,7 +529,34 @@ class Request_session extends YAWF
      */
     public function __set($key, $value)
     {
+        $is_serialized = FALSE;
+        if (is_array($value) || is_object($value))
+        {
+            $value = serialize($value);
+            $is_serialized = TRUE;
+        }
+        $this->is_serialized($key, $is_serialized);
         return $this->session[$key] = $value;
+    }
+
+    /**
+     * Return whether a session key is serialized (and optionally set this flag)
+     *
+     * @param String $key the session key
+     * @param Boolean $is_serialized the flag's setting (optional)
+     * @return Boolean whether or not the session key is serialized
+     */
+    public function is_serialized($key, $is_serialized = NULL)
+    {
+        $flag = '__' . $key;
+        if (is_bool($is_serialized)) // we're setting the flag
+        {
+            return $this->session[$flag] = $is_serialized;
+        }
+        else // we're getting the flag value for a session key
+        {
+            return array_key($this->session, $flag) ? TRUE : FALSE;
+        }
     }
 
     /**
