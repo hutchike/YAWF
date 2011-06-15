@@ -145,12 +145,12 @@ class Cache_service extends REST_service
     {
         $cache_path = $this->get_cache_path_for($id);
         if (!file_exists($cache_path)) return NULL;
-        $contents = $this->decrypt(file_get_contents($cache_path), $id);
+        $contents = file_get_contents($cache_path);
         if (preg_match('/^(\d+)\n(.+)$/s', $contents, $matches))
         {
             $expires = $matches[1];
             $contents = $matches[2];
-            if ($expires > time()) return json_decode($contents);
+            if ($expires > time()) return json_decode($this->decrypt($contents, $id));
         }
         return NULL;
     }
@@ -165,8 +165,8 @@ class Cache_service extends REST_service
     {
         $cache_path = $this->get_cache_path_for($id);
         $expires = time() + $this->cache_secs;
-        $contents = $expires . "\n" . json_encode($data);
-        @file_put_contents($cache_path, $this->encrypt($contents, $id));
+        $contents = $expires . "\n" . $this->encrypt(json_encode($data), $id);
+        @file_put_contents($cache_path, $contents);
         if (isset($php_errormsg)) $this->app->add_error_message($php_errormsg);
     }
 
