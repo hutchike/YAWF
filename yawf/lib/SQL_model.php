@@ -540,16 +540,23 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
         foreach ($conditions as $field => $condition)
         {
             if ($this->is_virtual($field)) continue;
-            $op = ($condition != trim($condition, '%') ? 'like' : '=');
-            if (preg_match('/^([<>]=?)\s*(.*)$/', $condition, $matches))
+            if (is_array($condition) ||
+                preg_match('/^in \((.*)\)$/', $condition, $matches))
+            {
+                $op = 'in';
+                if (is_array($condition))
+                    $condition = $this->quote_in(join(',', $condition));
+                else
+                    $condition = $this->quote_in($matches[1]);
+            }
+            elseif (preg_match('/^([<>]=?)\s*(.*)$/', $condition, $matches))
             {
                 $op = $matches[1];
                 $condition = $matches[2];
             }
-            elseif (preg_match('/^in \((.*)\)$/', $condition, $matches))
+            else
             {
-                $op = 'in';
-                $condition = $this->quote_in($matches[1]);
+                $op = ($condition != trim($condition, '%') ? 'like' : '=');
             }
             if ($clause) $clause .= ' and ';
             if ($field === 'password') $condition = $this->password($condition);
