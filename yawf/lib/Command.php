@@ -163,7 +163,7 @@ class Command // cannot extend YAWF coz "utils" not yet loaded
      */
     protected function quit($message = NULL)
     {
-        if (!is_null($message)) print "\n$message\n\n";
+        if (!is_null($message)) puts(trim($message));
         exit;
     }
 }
