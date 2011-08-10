@@ -219,7 +219,7 @@ class Controller_flash extends YAWF
         $this->session = YAWF::prop(Symbol::SESSION);
         $var = self::SESSION_VAR;
         if (!is_object($this->session->$var)) $this->session->$var = new Object();
-        $this->flash_now = is_null($array) ? $this->session->$var // a reference
+        $this->flash_now = is_null($array) ? $this->session->$var
                                            : new Object($array);
         $this->session->$var = $this->flash_next = new Object();
     }
@@ -251,7 +251,10 @@ class Controller_flash extends YAWF
         }
         else
         {
-            return $this->flash_next->$key = $value;
+            $this->flash_next->$key = $value;
+            $var = self::SESSION_VAR;
+            $this->session->$var = $this->flash_next;
+            return $value;
         }
     }
 
