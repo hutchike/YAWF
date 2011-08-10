@@ -565,10 +565,7 @@ class Request_session extends YAWF
     public function restart()
     {
         $keys_to_remove = array();
-        foreach ($this->session as $key => $value)
-        {
-            if (substr($key, 0, 2) != '__') $keys_to_remove[] = $key;
-        }
+        foreach ($this->session as $key => $value) $keys_to_remove[] = $key;
         foreach ($keys_to_remove as $key) unset($this->session[$key]);
     }
 }
