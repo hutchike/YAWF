@@ -407,7 +407,12 @@ class SQL_model extends Valid_model implements Modelled, Persisted, Validated
     public function load($id = 0)
     {
         if (is_null($id)) return 0; // to catch NULL parameters
-        if ($id) $this->id = $id;
+        if ($id > 0)
+        {
+            $this->data = array();
+            $this->id = $id;
+        }
+
         if ($found = $this->find_first())
         {
             $this->changed = array();
