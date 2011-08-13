@@ -212,7 +212,7 @@ class App_command extends Command
         $database_live = first($this->opts->database, $database_live);
         $database_test = first($this->opts->database, $database_test);
         $schema_file = "app/data/" . first($this->opts->schema, $schema_file);
-        if (!is_file($schema_file)) $this->usage($usage, "No schema file found here: $schema_file");
+        if (!is_file($schema_file)) $this->quit("No schema file found here: $schema_file");
         $migrate_file = "app/data/" . first($this->opts->migrate, $migrate_file);
 
         // Check we're using MySQL
