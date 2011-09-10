@@ -580,6 +580,30 @@ function nl($line = '')
 }
 
 /**
+ * Postfix some text with some other text, but only if it's not empty
+ *
+ * @param String $text the text to modify if it's not empty
+ * @param String $postfix something to add to the end of the text
+ * @return String the modified text
+ */
+function postfix($text, $postfix)
+{
+    return $text ? $text . $postfix : '';
+}
+
+/**
+ * Prefix some text with some other text, but only if it's not empty
+ *
+ * @param String $text the text to modify if it's not empty
+ * @param String $prefix something to add to the start of the text
+ * @return String the modified text
+ */
+function prefix($text, $prefix)
+{
+    return $text ? $prefix . $text : '';
+}
+
+/**
  * Copy the Ruby "puts()" function by writing a line of text
  *
  * @param String $text the text to print out with a newline
