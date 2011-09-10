@@ -340,8 +340,8 @@ class App extends YAWF implements Mailer
      */
     public function render_view($view, $render = NULL, $options = array())
     {
-        if ($this->is_silent) return ''; // if redirect
-        $render = new Object($render); // Object needed
+        if ($this->is_silent) return ''; // e.g. if redirecting
+        if (!is_object($render)) $render = new Object($render);
 
         // Setup the render data and the view file path
 
@@ -545,6 +545,18 @@ class AppView extends YAWF
     public static function get($field)
     {
         return self::$render->$field;
+    }
+
+    /**
+     * Set data on the render object
+     *
+     * @param String $field the render object field to write
+     * @param String $value the render object value to write
+     * @return String the new value of the render object field
+     */
+    public static function set($field, $value)
+    {
+        return self::$render->$field = $value;
     }
 }
 
