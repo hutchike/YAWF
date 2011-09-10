@@ -65,10 +65,12 @@ class Valid_model extends Simple_model implements Modelled, Validated
      * Return all the validation messages for a model object data field
      *
      * @param String $field the model object data field to check
+     * @param Array $messages an optional array of messages to set
      * @return Array an array of validation messages for the data field
      */
-    public function validation_messages_for($field)
+    public function validation_messages_for($field, $messages = NULL)
     {
+        if (is_array($messages)) $this->validation_messages[$field] = $messages;
         return array_key($this->validation_messages(), $field, array());
     }
 
@@ -76,11 +78,13 @@ class Valid_model extends Simple_model implements Modelled, Validated
      * Return the first validation message for a model object data field
      *
      * @param String $field the model object data field to check
+     * @param String $message an optional message to set
      * @return String the first validation message for the data field (or NULL)
      */
-    public function validation_message_for($field)
+    public function validation_message_for($field, $message = NULL)
     {
-        $messages = $this->validation_messages_for($field);
+        if (is_string($message)) $message = array($message);
+        $messages = $this->validation_messages_for($field, $message);
         return (count($messages) ? $messages[0] : NULL);
     }
 
