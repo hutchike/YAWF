@@ -181,23 +181,6 @@ function object_cmp($left, $right, $field = NULL)
 }
 
 /**
- * Prune an object by removing empty fields (i.e. fields of string length zero)
- *
- * @param Object $obj the object to prune
- * @return Object a pruned object which is a copy of the original object
- */
-function object_prune($obj)
-{
-    $arry = object_to_array($obj);
-    $pruned = new Object();
-    foreach ($arry as $field => $value)
-    {
-        if (strlen($value)) $pruned->$field = $value;
-    }
-    return $pruned;
-}
-
-/**
  * Return a key from an array or the default value (NULL by default)
  *
  * @param Array $array the array to lookup
@@ -228,6 +211,25 @@ function array_keys_truncate($array, $max_length, $append = '')
         $truncated[$new_key] = $value;
     }
     return $truncated;
+}
+
+/**
+ * Prune an object or array by removing empty fields (i.e. string length zero)
+ *
+ * @param Object/Array $obj_or_array the object or array to prune
+ * @return Array a pruned array which is a copy of the original object or array
+ */
+function array_prune($obj_or_array)
+{
+    if (!$obj_or_array) $obj_or_array = array();
+    $arry = is_array($obj_or_array) ? $obj_or_array
+                                    : object_to_array($obj_or_array);
+    $pruned = array();
+    foreach ($arry as $field => $value)
+    {
+        if (strlen($value)) $pruned[$field] = $value;
+    }
+    return $pruned;
 }
 
 /**
