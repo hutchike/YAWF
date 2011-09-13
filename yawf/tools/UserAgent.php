@@ -45,6 +45,7 @@ class UserAgent
             'browser' => $browser,
             'version' => $version,
             'browser_version' => $browser . ($version ? " $version" : ''),
+            'is_robot' => ($op_sys == 'unknown' ? TRUE : FALSE),
             'is_mobile' => $is_mobile,
         );
         return self::$user_agents[$user_agent] = new Object($details);
