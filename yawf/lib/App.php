@@ -50,7 +50,7 @@ class App extends YAWF implements Mailer
         // Setup the config, prefix and assert checks
 
         $config = AppConfig::configure();
-        load_helper('HTML'); // for views
+        load_helper('HTML', 'Text');
         load_tools('Log', 'Translate');
         $this->error_messages = array();
         $this->assert_checking($config);
@@ -133,10 +133,9 @@ class App extends YAWF implements Mailer
 
         // Require the controller's subclass
 
-        if (!$class) $class = $this->folder;
+        if (!$class) $class = Text::camelize($this->folder);
         if (defined('REST_SERVICE_LIST') && in_array($class, split_list(REST_SERVICE_LIST))) $class = 'REST';
         if ($this->is_testing && FALSE === strpos($class, '_test')) $class .= '_test';
-        $class = ucfirst($class);
         $path = "controllers/$class.php";
         if (!file_found($path))
         {
@@ -169,7 +168,7 @@ class App extends YAWF implements Mailer
 
         // Require the service's subclass
 
-        if (!$class) $class = $this->folder;
+        if (!$class) $class = Text::camelize($this->folder);
         load_service($class);
 
         // Create and return a new Service object
