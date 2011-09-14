@@ -145,7 +145,7 @@ class Valid_model extends Simple_model implements Modelled, Validated
         if ($at === FALSE) return 'VALID_EMAIL_NEEDS_AN_AT';
         if ($at === 0) return 'VALID_EMAIL_CANNOT_START_WITH_AT';
         if ($at === strlen($email)-1) return 'VALID_EMAIL_CANNOT_END_WITH_AT';
-        $dot = strpos($email, '.');
+        $dot = strpos($email, '.', $at);
         if ($dot === FALSE) return 'VALID_EMAIL_NEEDS_A_DOT';
         if ($dot === 0) return 'VALID_EMAIL_CANNOT_START_WITH_DOT';
         if ($dot === strlen($email)-1) return 'VALID_EMAIL_CANNOT_END_WITH_DOT';
