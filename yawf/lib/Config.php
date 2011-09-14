@@ -33,7 +33,7 @@ class Config extends YAWF
      * @param Boolean $reload whether to reload a file that's already loaded
      * @return Array the config data as an assoc array
      */
-    public static function load($config_file, $reload = FALSE)
+    public static function load($config_file = 'app', $reload = FALSE)
     {
         // Return a matching loaded config (unless reloading)
 
