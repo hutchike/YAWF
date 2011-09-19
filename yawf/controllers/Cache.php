@@ -122,6 +122,19 @@ class Cache_controller extends App_controller
     }
 
     /**
+      * Get/set the cache content type for a file type
+      *
+      * @param String $file_type the file type
+      * @param String $content_type the content type
+      * @return String the content type for the file type
+      */
+    public static function content_type($file_type, $content_type = NULL)
+    {
+        if ($content_type) self::$content_types[$file_type] = $content_type;
+        return array_key(self::$content_types, $file_type);
+    }
+
+    /**
      * Set the cache path by taking the checksum of the full request URI
      *
      * @param String $uri the URI to transform into a path to a cached file
