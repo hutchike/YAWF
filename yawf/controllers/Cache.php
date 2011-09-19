@@ -24,6 +24,18 @@ class Cache_controller extends App_controller
     protected $cache_path;
     protected $cache_secs;
     protected $cache_options;
+    protected $content_types = array(
+        'csv' => 'text/plain',
+        'jsn' => 'text/javascript',
+        'json' => 'text/javascript',
+        'jsonp' => 'text/javascript',
+        'tsv' => 'text/plain',
+        'txt' => 'text/plain',
+        'text' => 'text/plain',
+        'xml' => 'text/xml',
+        'yml' => 'text/plain',
+        'yaml' => 'text/plain',
+    );
 
     /**
      * Render the requested view by using the cache
@@ -40,7 +52,10 @@ class Cache_controller extends App_controller
         {
             if ($type = $this->request_type())
             {
-                header("Content-Type: text/$type");
+                if ($content_type = array_key(self::$content_types, $type))
+                {
+                    header("Content-Type: $content_type");
+                }
             }
             return $contents;
         }
