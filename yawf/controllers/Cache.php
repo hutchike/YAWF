@@ -21,10 +21,7 @@ class Cache_controller extends App_controller
 {
     const DEFAULT_EXPIRY_SECS = 900; // 15 minutes
 
-    protected $cache_path;
-    protected $cache_secs;
-    protected $cache_options;
-    protected $content_types = array(
+    public static $content_types = array(
         'csv' => 'text/plain',
         'jsn' => 'text/javascript',
         'json' => 'text/javascript',
@@ -36,6 +33,10 @@ class Cache_controller extends App_controller
         'yml' => 'text/plain',
         'yaml' => 'text/plain',
     );
+
+    protected $cache_path;
+    protected $cache_secs;
+    protected $cache_options;
 
     /**
      * Render the requested view by using the cache
