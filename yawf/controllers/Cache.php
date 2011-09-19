@@ -36,7 +36,14 @@ class Cache_controller extends App_controller
 
         $this->set_cache_path();
         $contents = $this->read_cache();
-        if ($contents) return $contents;
+        if ($contents)
+        {
+            if ($type = $this->request_type())
+            {
+                header("Content-Type: text/$type");
+            }
+            return $contents;
+        }
 
         // If not found or expired, write new cached contents
 
