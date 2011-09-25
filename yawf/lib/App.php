@@ -159,7 +159,7 @@ class App extends YAWF implements Mailer
      * @param Integer $version the service version
      * @return Service the new service
      */
-    public function new_service($class = NULL, $version = 1)
+    public function new_service($class = NULL, $version = NULL)
     {
         // Require the Web_service base class
         // ...and the Application web service
@@ -170,6 +170,7 @@ class App extends YAWF implements Mailer
         // Require the service's subclass
 
         if (!$class) $class = Text::camelize(Text::singularize($this->file));
+        if (!$version) $version = $this->folder + 0;
         load_service($class, $version);
 
         // Create and return a new Service object
