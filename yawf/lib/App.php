@@ -171,7 +171,15 @@ class App extends YAWF implements Mailer
 
         if (!$class) $class = Text::camelize(Text::singularize($this->file));
         if (!$version) $version = $this->folder + 0;
-        load_service($class, $version);
+        try { load_service($class, $version); }
+        catch (Exception $e) {
+            $render = new Object();
+            $render->data = array(
+                'error' => "Cannot load \"$class\" service version $version",
+            );
+            echo $this->render_type($this->content_type, $render);
+            exit;
+        }
 
         // Create and return a new Service object
 
