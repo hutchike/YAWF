@@ -133,7 +133,7 @@ class App extends YAWF implements Mailer
 
         // Require the controller's subclass
 
-        if (!$class) $class = Text::camelize($this->folder);
+        if (!$class) $class = Text::camelize(Text::singularize($this->folder));
         if (preg_match('/^\d+$/', $class)) $class = 'REST';
         if ($this->is_testing && FALSE === strpos($class, '_test')) $class .= '_test';
         $path = "controllers/$class.php";
@@ -169,7 +169,7 @@ class App extends YAWF implements Mailer
 
         // Require the service's subclass
 
-        if (!$class) $class = Text::camelize($this->file);
+        if (!$class) $class = Text::camelize(Text::singularize($this->file));
         load_service($class, $version);
 
         // Create and return a new Service object
