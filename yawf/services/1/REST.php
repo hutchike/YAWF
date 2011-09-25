@@ -182,6 +182,7 @@ class REST_service extends Web_service
     protected function get_model_class()
     {
         $model_class = preg_replace('/(_test)?_service$/', '', get_class($this));
+        $model_class = Text::singularize($model_class); // services may use plurals
         load_model($model_class); // in case we haven't loaded it already
         return $model_class;
     }

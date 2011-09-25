@@ -134,7 +134,7 @@ class App extends YAWF implements Mailer
         // Require the controller's subclass
 
         if (!$class) $class = Text::camelize($this->folder);
-        if (defined('REST_SERVICE_LIST') && in_array($class, split_list(REST_SERVICE_LIST))) $class = 'REST';
+        if (preg_match('/^\d+$/', $class)) $class = 'REST';
         if ($this->is_testing && FALSE === strpos($class, '_test')) $class .= '_test';
         $path = "controllers/$class.php";
         if (!file_found($path))
@@ -156,20 +156,21 @@ class App extends YAWF implements Mailer
      * Create a new service and return it
      *
      * @param String $class an optional class name
+     * @param Integer $version the service version
      * @return Service the new service
      */
-    public function new_service($class = NULL)
+    public function new_service($class = NULL, $version = 1)
     {
         // Require the Web_service base class
         // ...and the Application web service
 
         require_once 'lib/Web_service.php';
-        require_once 'services/App.php';
+        load_service('App');
 
         // Require the service's subclass
 
-        if (!$class) $class = Text::camelize($this->folder);
-        load_service($class);
+        if (!$class) $class = Text::camelize($this->file);
+        load_service($class, $version);
 
         // Create and return a new Service object
 

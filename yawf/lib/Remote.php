@@ -336,8 +336,9 @@ class Remote extends Relating_model implements Modelled, Persisted, Validated
      */
     protected function default_url($class = NULL)
     {
+        $version = defined('API_VERSION') ? API_VERSION : 1;
         $default_url = array_key(self::$defaults, 'server', '');
-        if ($default_url && is_string($class)) $default_url .= "/$class";
+        if ($default_url && is_string($class)) $default_url .= "/$version/$class";
         return $default_url;
     }
 

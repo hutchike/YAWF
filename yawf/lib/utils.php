@@ -505,7 +505,7 @@ function load_plugins() // list of plugins
  *
  * @param String $service the service to load
  */
-function load_service($service) { load_services($service); }
+function load_service($service, $version = 1) { load_services($service, $version); }
 
 /**
  * Load a list of services, passed as function arguments
@@ -515,7 +515,8 @@ function load_service($service) { load_services($service); }
 function load_services() // list of services
 {
     $services = func_get_args();
-    load_files('services', $services);
+    $version = array_pop($services);
+    load_files("services/$version", $services);
 }
 
 /**

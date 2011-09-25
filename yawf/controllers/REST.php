@@ -36,7 +36,7 @@ class REST_controller extends App_controller
         parent::before();
         $this->service = $this->app->new_service();
         if (!$this->service->auth()) YAWF::finish();
-        $this->set_params_from_parts(NULL, 'id');
+        $this->set_params_from_parts('api_version', NULL, 'id');
     }
 
     /**
