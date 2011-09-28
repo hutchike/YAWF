@@ -268,15 +268,44 @@ class Controller_flash extends YAWF
      */
     public function now($key, $value = NULL)
     {
+        return $this->get_or_set('flash_now', $key, $value);
+    }
+
+    /**
+     * Get/set a flash message (or messages) to display in the next web request.
+     * If an array is passed then all its key/value pairs will setup the flash.
+     *
+     * @param String $key the flash key to get or set (may be an Array instead)
+     * @param Object $value the flash value to set (optional)
+     * @return String the flash value corresponding to the key
+     */
+    public function next($key, $value = NULL)
+    {
+        return $this->get_or_set('flash_next', $key, $value);
+    }
+
+    /**
+     * Get/set a flash message (or messages) to display in a request (now/next).
+     * If an array is passed then all its key/value pairs will setup the flash.
+     *
+     * @param String $key the flash key to get or set (may be an Array instead)
+     * @param Object $value the flash value to set (optional)
+     * @return String the flash value corresponding to the key
+     */
+    private function get_or_set($var, $key, $value = NULL)
+    {
+        assert('$var == "flash_now" || $var == "flash_next"');
+        assert('is_string($key)');
+
         if (is_array($key)) // allow arrays to set key/value pairs
         {
-            foreach ($key as $k => $v) $this->flash_now->$k = $v;
+            foreach ($key as $k => $v) $this->$var->$k = $v;
             return ''; // it doesn't make sense to return a value
         }
         else // either set a new value or return the current value
         {
-            return is_null($value) ? $this->flash_now->$key
-                                   : $this->flash_now->$key = $value;
+            return is_null($value) ? $this->$var->$key
+                                   : $this->$var->$key = $value;
         }
     }
 }
