@@ -100,7 +100,8 @@ function array_to_object($array, $lists_too = FALSE)
 function object_to_array($object)
 {
     if (!is_object($object) && !is_array($object)) return $object;
-    if (is_object($object)) $object = get_object_vars($object);
+    if (is_a($object, 'Model')) $object = $object->data();
+    elseif (is_object($object)) $object = get_object_vars($object);
     return count($object) ? array_map('object_to_array', $object) : NULL;
 }
 
