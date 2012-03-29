@@ -29,7 +29,7 @@
  * @author   Hans Lellelid <hans@xmpl.org>
  * @license  LGPL http://www.gnu.org/licenses/lgpl.txt
  * @link     http://pear.php.net/package/Net_GeoIp
- * $Id: DMA.php 296755 2010-03-24 22:22:06Z clockwerx $
+ * $Id: DMA.php 288474 2009-09-20 13:47:13Z saltybeagle $
  */
 
 /**
@@ -46,7 +46,7 @@
  * @author   Hans Lellelid <hans@xmpl.org>
  * @author   Dmitri Snytkine <d.snytkine@gmail.com>
  * @license  LGPL http://www.gnu.org/licenses/lgpl.txt
- * @version  $Revision: 296755 $
+ * @version  $Revision: 288474 $
  * @link     http://pear.php.net/package/Net_GeoIp
  */
 class Net_GeoIP_DMA
