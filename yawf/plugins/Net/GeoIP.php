@@ -38,6 +38,7 @@ class PEAR_Exception extends Exception
 {
     public function __construct($message = '')
     {
+        print "ERROR in yawf/plugins/Net/GeoIP.pm: $message\n";
         parent::__construct($message);
     }
 }
