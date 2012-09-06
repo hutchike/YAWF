@@ -1,11 +1,11 @@
 <?
 // Copyright (c) 2010 Guanoo, Inc.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
 // as published by the Free Software Foundation; either version 3
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
@@ -163,7 +163,7 @@ class Command // cannot extend YAWF coz "utils" not yet loaded
      */
     protected function quit($message = NULL)
     {
-        if (!is_null($message)) puts(trim($message));
+        if (!is_null($message)) print(trim($message) . "\n");
         exit;
     }
 }
